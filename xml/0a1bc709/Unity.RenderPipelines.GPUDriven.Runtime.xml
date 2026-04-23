@@ -1,0 +1,437 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Unity.RenderPipelines.GPUDriven.Runtime</name>
+    </assembly>
+    <members>
+        <member name="T:UnityEngine.Rendering.GPUResidentDrawer">
+            <summary>
+            Static utility class for updating data post cull in begin camera rendering
+            </summary>
+        </member>
+        <member name="M:UnityEngine.Rendering.GPUResidentDrawer.IsInstanceOcclusionCullingEnabled">
+            <summary>
+            Utility function to test if instance occlusion culling is enabled
+            </summary>
+            <returns>True if instance occlusion culling is enabled</returns>
+        </member>
+        <member name="M:UnityEngine.Rendering.GPUResidentDrawer.PostCullBeginCameraRendering(UnityEngine.Rendering.RenderRequestBatcherContext)">
+            <summary>
+            Utility function for updating data post cull in begin camera rendering
+            </summary>
+            <param name="context">
+            Context containing the data to be set
+            </param>
+        </member>
+        <member name="M:UnityEngine.Rendering.GPUResidentDrawer.OnSetupAmbientProbe">
+            <summary>
+            Utility function for updating probe data after global ambient probe is set up
+            </summary>
+        </member>
+        <member name="M:UnityEngine.Rendering.GPUResidentDrawer.InstanceOcclusionTest(UnityEngine.Rendering.RenderGraphModule.RenderGraph,UnityEngine.Rendering.OcclusionCullingSettings@,System.ReadOnlySpan{UnityEngine.Rendering.SubviewOcclusionTest})">
+            <summary>
+            Utility function to run an occlusion test in compute to update indirect draws.
+            This function will dispatch compute shaders to run the given occlusion test and
+            update all indirect draws in the culling output for the given view.
+            The next time a renderer list that uses this culling output is drawn, these
+            indirect draw commands will contain only the instances that passed the given
+            occlusion test.
+            </summary>
+            <param name="renderGraph">Render graph that will have a compute pass added.</param>
+            <param name="settings">The view to update and occlusion test to use.</param>
+            <param name="subviewOcclusionTests">Specifies the occluder subviews to use with each culling split index.</param>
+        </member>
+        <member name="M:UnityEngine.Rendering.GPUResidentDrawer.UpdateInstanceOccluders(UnityEngine.Rendering.RenderGraphModule.RenderGraph,UnityEngine.Rendering.OccluderParameters@,System.ReadOnlySpan{UnityEngine.Rendering.OccluderSubviewUpdate})">
+            <summary>
+            Utility function used to update occluders using a depth buffer.
+            This function will dispatch compute shaders to read the given depth buffer
+            and build a mip pyramid of closest depths for use during occlusion culling.
+            The next time an occlusion test is issed for this view, instances will be
+            tested against the updated occluders.
+            </summary>
+            <param name="renderGraph">Render graph that will have a compute pass added.</param>
+            <param name="occluderParameters">Parameter to specify the view and depth buffer to read.</param>
+            <param name="occluderSubviewUpdates">Specifies which occluder subviews to update from slices of the input depth buffer.</param>
+        </member>
+        <member name="M:UnityEngine.Rendering.GPUResidentDrawer.ReinitializeIfNeeded">
+            <summary>
+            Enable or disable GPUResidentDrawer based on the project settings.
+            We call this every frame because GPUResidentDrawer can be enabled/disabled by the settings outside the render pipeline asset.
+            </summary>
+        </member>
+        <member name="M:UnityEngine.Rendering.GPUResidentDrawer.RenderDebugOcclusionTestOverlay(UnityEngine.Rendering.RenderGraphModule.RenderGraph,UnityEngine.Rendering.DebugDisplayGPUResidentDrawer,UnityEngine.EntityId,UnityEngine.Rendering.RenderGraphModule.TextureHandle)">
+            <summary>
+            Utility function to render an occlusion test heatmap debug overlay.
+            </summary>
+            <param name="renderGraph">Render graph that will have a compute pass added.</param>
+            <param name="debugSettings">The rendering debugger debug settings to read parameters from.</param>
+            <param name="viewInstanceID">The instance ID of the camera using a GPU occlusion test.</param>
+            <param name="colorBuffer">The color buffer to render the overlay on.</param>
+        </member>
+        <member name="M:UnityEngine.Rendering.GPUResidentDrawer.RenderDebugOccluderOverlay(UnityEngine.Rendering.RenderGraphModule.RenderGraph,UnityEngine.Rendering.DebugDisplayGPUResidentDrawer,UnityEngine.Vector2,System.Single,UnityEngine.Rendering.RenderGraphModule.TextureHandle)">
+            <summary>
+            Utility function visualise the occluder pyramid in a debug overlay.
+            </summary>
+            <param name="renderGraph">Render graph that will have a compute pass added.</param>
+            <param name="debugSettings">The rendering debugger debug settings to read parameters from.</param>
+            <param name="screenPos">The screen position to render the overlay at.</param>
+            <param name="maxHeight">The maximum screen height of the overlay.</param>
+            <param name="colorBuffer">The color buffer to render the overlay on.</param>
+        </member>
+        <member name="M:UnityEngine.Rendering.GPUResidentDrawer.IsForcedOnViaCommandLine">
+            <summary>
+            Is GRD forced on via the command line via -force-gpuresidentdrawer. Editor only.
+            </summary>
+            <returns>true if forced on</returns>
+        </member>
+        <member name="M:UnityEngine.Rendering.GPUResidentDrawer.IsOcclusionForcedOnViaCommandLine">
+            <summary>
+            Is occlusion culling forced on via the command line via -force-gpuocclusion. Editor only.
+            </summary>
+            <returns>true if forced on</returns>
+        </member>
+        <member name="T:UnityEngine.Rendering.GPUResidentDrawerResources">
+            <summary> Class for tracking resources used by the GPUResidentDrawer </summary>
+        </member>
+        <member name="P:UnityEngine.Rendering.GPUResidentDrawerResources.instanceDataBufferCopyKernels">
+            <summary> InstanceDataBufferCopyKernels compute shader reference </summary>
+        </member>
+        <member name="P:UnityEngine.Rendering.GPUResidentDrawerResources.instanceDataBufferUploadKernels">
+            <summary> InstanceDataBufferUploadKernels compute shader reference </summary>
+        </member>
+        <member name="P:UnityEngine.Rendering.GPUResidentDrawerResources.transformUpdaterKernels">
+            <summary> TransformUpdaterKernels compute shader reference </summary>
+        </member>
+        <member name="P:UnityEngine.Rendering.GPUResidentDrawerResources.windDataUpdaterKernels">
+            <summary>
+            InstanceWindDataUpdateKernels compute shader reference
+            </summary>
+        </member>
+        <member name="P:UnityEngine.Rendering.GPUResidentDrawerResources.occluderDepthPyramidKernels">
+            <summary>
+            OccluderDepthPyramidKernels compute shader reference
+            </summary>
+        </member>
+        <member name="P:UnityEngine.Rendering.GPUResidentDrawerResources.instanceOcclusionCullingKernels">
+            <summary>
+            InstanceOcclusionCullingKernels compute shader reference
+            </summary>
+        </member>
+        <member name="P:UnityEngine.Rendering.GPUResidentDrawerResources.occlusionCullingDebugKernels">
+            <summary>
+            OcclusionCullingDebugKernels compute shader reference
+            </summary>
+        </member>
+        <member name="P:UnityEngine.Rendering.GPUResidentDrawerResources.debugOcclusionTestPS">
+            <summary>
+            DebugOcclusionTestPS pixel shader reference
+            </summary>
+        </member>
+        <member name="P:UnityEngine.Rendering.GPUResidentDrawerResources.debugOccluderPS">
+            <summary>
+            DebugOccluderPS pixel shader reference
+            </summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.OccluderDerivedData.viewProjMatrix">
+            <summary></summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.OccluderDerivedData.viewOriginWorldSpace">
+            <summary></summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.OccluderDerivedData.radialDirWorldSpace">
+            <summary></summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.OccluderDerivedData.facingDirWorldSpace">
+            <summary></summary>
+        </member>
+        <member name="T:UnityEngine.Rendering.GPUResidentDrawerMode">
+            <summary>
+            Modes for improved draw submission.
+            </summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.GPUResidentDrawerMode.Disabled">
+            <summary>
+            Default mode, GPU resident drawer will be disabled.
+            </summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.GPUResidentDrawerMode.InstancedDrawing">
+            <summary>
+            If used, the BatchRendererGroup will be used for draw submission whenever possible.
+            </summary>
+        </member>
+        <member name="T:UnityEngine.Rendering.GPUResidentDrawerSettings">
+            <summary>
+            Utility struct to pass GPU resident drawer settings together
+            </summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.GPUResidentDrawerSettings.mode">
+            <summary>
+            Serialized settings of GPUResidentDrawer
+            </summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.GPUResidentDrawerSettings.supportDitheringCrossFade">
+            <summary>
+            Does the implementor support dithered crossfade
+            </summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.GPUResidentDrawerSettings.enableOcclusionCulling">
+            <summary>
+            Enable GPU data for occlusion culling
+            </summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.GPUResidentDrawerSettings.allowInEditMode">
+            <summary>
+            Allows the GPU Resident Drawer to run in edit mode
+            </summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.GPUResidentDrawerSettings.smallMeshScreenPercentage">
+            <summary>
+            Default minimum screen percentage (0-20%) gpu-driven Renderers can cover before getting culled.
+            </summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.GPUResidentDrawerSettings.pickingShader">
+            <summary>
+            Shader used if no custom picking pass has been implemented
+            </summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.GPUResidentDrawerSettings.errorShader">
+            <summary>
+            Shader used when an error is detected
+            </summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.GPUResidentDrawerSettings.loadingShader">
+            <summary>
+            Shader used while compiling shaders
+            </summary>
+        </member>
+        <member name="T:UnityEngine.Rendering.IGPUResidentRenderPipeline">
+            <summary>
+            Interface that can be added to a RenderPipelineAsset
+            which indicates that it can support the GPUResidentDrawer.
+            </summary>
+        </member>
+        <member name="P:UnityEngine.Rendering.IGPUResidentRenderPipeline.gpuResidentDrawerSettings">
+            <summary>
+            Gets the GPU resident drawer settings
+            </summary>
+        </member>
+        <member name="P:UnityEngine.Rendering.IGPUResidentRenderPipeline.gpuResidentDrawerMode">
+            <summary>
+            The mode the GPUResidentDrawer is configured for on this RenderPipeline
+            </summary>
+        </member>
+        <member name="M:UnityEngine.Rendering.IGPUResidentRenderPipeline.ReinitializeGPUResidentDrawer">
+            <summary>
+            Callback for use when the GPUResidentDrawer needs to be reinitialized.
+            </summary>
+        </member>
+        <member name="M:UnityEngine.Rendering.IGPUResidentRenderPipeline.IsGPUResidentDrawerSupportedBySRP(System.Boolean)">
+            <summary>
+            Is the GPU resident drawer supported on this render pipeline.
+            </summary>
+            <param name="logReason">Should the reason for non support be logged?</param>
+            <returns>true if supported</returns>
+        </member>
+        <member name="M:UnityEngine.Rendering.IGPUResidentRenderPipeline.IsGPUResidentDrawerSupportedBySRP(System.String@,UnityEngine.LogType@)">
+            <summary>
+            Is the GPU resident drawer supported on this render pipeline.
+            </summary>
+            <param name="message">Why the system is not supported</param>
+            <param name="severity">The severity of the message</param>
+            <returns>true if supported</returns>
+        </member>
+        <member name="M:UnityEngine.Rendering.IGPUResidentRenderPipeline.IsGPUResidentDrawerSupportedByProjectConfiguration(System.Boolean)">
+            <summary>
+            Is GPUResidentDrawer supported on this current configuration?
+            </summary>
+            <param name="logReason">Should the reason for non support be logged?</param>
+            <returns>true if supported</returns>
+        </member>
+        <member name="M:UnityEngine.Rendering.IGPUResidentRenderPipeline.IsGPUResidentDrawerEnabled">
+            <summary>
+            Is GPUResidentDrawer currently enabled
+            </summary>
+            <returns>true if enabled</returns>
+        </member>
+        <member name="M:UnityEngine.Rendering.AABB.ToString">
+            <summary>Returns a string representation of the AABB.</summary>
+        </member>
+        <member name="T:UnityEngine.Rendering.BatchLayer">
+            <summary>
+            Predefined batch layer values used by the GPU Resident Drawer.
+            </summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.BatchLayer.InstanceCullingDirect">
+            <summary>
+            Batch layer for BatchRendererGroup direct draw commands produced by the GPU Resident Drawer.
+            </summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.BatchLayer.InstanceCullingIndirect">
+            <summary>
+            Batch layer for BatchRendererGroup indirect draw commands produced by the GPU Resident Drawer.
+            </summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.BatchLayer.InstanceCullingDirectMask">
+            <summary>
+            A batch layer mask to include BatchRendererGroup direct draw commands produced by the GPU Resident Drawer.
+            Batch layer masks can be used to filter the set of draw calls in a renderer list.
+            </summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.BatchLayer.InstanceCullingIndirectMask">
+            <summary>
+            A batch layer mask to include BatchRendererGroup indirect draw commands produced by the GPU Resident Drawer.
+            Batch layer masks can be used to filter the set of draw calls in a renderer list.
+            </summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.BatchLayer.InstanceCullingMask">
+            <summary>
+            A batch layer mask to include BatchRendererGroup direct and indirect draw commands produced by the GPU Resident Drawer.
+            Batch layer masks can be used to filter the set of draw calls in a renderer list.
+            </summary>
+        </member>
+        <member name="T:UnityEngine.Rendering.RenderRequestBatcherContext">
+            <summary>
+            Context struct for passing into GPUResidentDrawer.PostCullBeginCameraRendering
+            </summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.RenderRequestBatcherContext.commandBuffer">
+            <summary>
+            CommandBuffer that will be used for resulting commands
+            </summary>
+        </member>
+        <member name="T:UnityEngine.Rendering.OcclusionTest">
+            <summary>
+            The type of occlusion test
+            </summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.OcclusionTest.None">
+            <summary>No occlusion test, all instances are visible.</summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.OcclusionTest.TestAll">
+            <summary>Test all instances against the latest occluders.</summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.OcclusionTest.TestCulled">
+            <summary>Only test the culled objects from the previous pass.</summary>
+        </member>
+        <member name="T:UnityEngine.Rendering.OcclusionTestMethods">
+            <summary>Extension methods for OcclusionTest.</summary>
+        </member>
+        <member name="M:UnityEngine.Rendering.OcclusionTestMethods.GetBatchLayerMask(UnityEngine.Rendering.OcclusionTest)">
+            <summary>
+            Converts this occlusion test into a batch layer mask for rendering.
+            This helper function is used to limit the second rendering pass when building
+            occluders to only indirect draw calls, so that only false positives from
+            the first rendering pass are rendered.
+            </summary>
+            <param name="occlusionTest">The occlusion test.</param>
+            <returns>The batch layer mask that should be used to render the results of this occlusion test.</returns>
+        </member>
+        <member name="T:UnityEngine.Rendering.SubviewOcclusionTest">
+            <summary>Parameter structure for passing to GPUResidentDrawer.InstanceOcclusionTest.</summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.SubviewOcclusionTest.cullingSplitIndex">
+            <summary>The split index to read from the CPU culling output.</summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.SubviewOcclusionTest.occluderSubviewIndex">
+            <summary>The occluder subview to occlusion test against.</summary>
+        </member>
+        <member name="T:UnityEngine.Rendering.OcclusionCullingSettings">
+            <summary>Parameter structure for passing to GPUResidentDrawer.InstanceOcclusionTest.</summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.OcclusionCullingSettings.viewInstanceID">
+            <summary>The instance ID of the camera, to identify the culling output and occluders to use.</summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.OcclusionCullingSettings.occlusionTest">
+            <summary>The occlusion test to use.</summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.OcclusionCullingSettings.instanceMultiplier">
+            <summary>An instance multiplier to use for the generated indirect draw calls.</summary>
+        </member>
+        <member name="M:UnityEngine.Rendering.OcclusionCullingSettings.#ctor(UnityEngine.EntityId,UnityEngine.Rendering.OcclusionTest)">
+            <summary>Creates a new structure using the given parameters.</summary>
+            <param name="viewInstanceID">The instance ID of the camera to find culling output and occluders for.</param>
+            <param name="occlusionTest">The occlusion test to use.</param>
+        </member>
+        <member name="T:UnityEngine.Rendering.OccluderSubviewUpdate">
+            <summary>Parameters structure for passing to GPUResidentDrawer.UpdateInstanceOccluders.</summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.OccluderSubviewUpdate.subviewIndex">
+            <summary>
+            The subview index within this camera or light, used to identify these occluders for the occlusion test.
+            </summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.OccluderSubviewUpdate.depthSliceIndex">
+            <summary>The slice index of the depth data to read.</summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.OccluderSubviewUpdate.depthOffset">
+            <summary>The offset in pixels to the start of the depth data to read.</summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.OccluderSubviewUpdate.viewMatrix">
+            <summary>The transform from world space to view space when rendering the depth buffer.</summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.OccluderSubviewUpdate.invViewMatrix">
+            <summary>The transform from view space to world space when rendering the depth buffer.</summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.OccluderSubviewUpdate.gpuProjMatrix">
+            <summary>The GPU projection matrix when rendering the depth buffer.</summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.OccluderSubviewUpdate.viewOffsetWorldSpace">
+            <summary>An additional world space offset to apply when moving between world space and view space.</summary>
+        </member>
+        <member name="M:UnityEngine.Rendering.OccluderSubviewUpdate.#ctor(System.Int32)">
+            <summary>Creates a new structure using the given parameters.</summary>
+            <param name="subviewIndex">The index of the subview within this occluder.</param>
+        </member>
+        <member name="T:UnityEngine.Rendering.OccluderParameters">
+            <summary>Parameters structure for passing to GPUResidentDrawer.UpdateInstanceOccluders.</summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.OccluderParameters.viewInstanceID">
+            <summary>The instance ID of the camera, used to identify these occluders for the occlusion test.</summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.OccluderParameters.subviewCount">
+            <summary>The total number of subviews for this occluder.</summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.OccluderParameters.depthTexture">
+            <summary>The depth texture to read.</summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.OccluderParameters.depthSize">
+            <summary>The size in pixels of the area of the depth data to read.</summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.OccluderParameters.depthIsArray">
+            <summary>True if the depth texture is a texture array, false otherwise.</summary>
+        </member>
+        <member name="M:UnityEngine.Rendering.OccluderParameters.#ctor(UnityEngine.EntityId)">
+            <summary>Creates a new structure using the given parameters.</summary>
+            <param name="viewInstanceID">The instance ID of the camera to associate with these occluders.</param>
+        </member>
+        <member name="T:UnityEngine.Rendering.DebugDisplayGPUResidentDrawer">
+            <summary>
+            GPU Resident Drawer Rendering Debugger settings.
+            </summary>
+        </member>
+        <member name="M:UnityEngine.Rendering.DebugDisplayGPUResidentDrawer.GetOccluderViewInstanceID(UnityEngine.EntityId@)">
+            <summary>Returns the view instances id for the selected occluder debug view index, or 0 if not valid.</summary>
+        </member>
+        <member name="P:UnityEngine.Rendering.DebugDisplayGPUResidentDrawer.occlusionTestOverlayEnable">
+            <summary>Returns if the occlusion test heatmap debug overlay is enabled.</summary>
+        </member>
+        <member name="F:UnityEngine.Rendering.DebugDisplayGPUResidentDrawer.occluderDebugViewEnable">
+            <summary>Returns true if the occluder debug overlay is enabled.</summary>
+        </member>
+        <member name="P:UnityEngine.Rendering.DebugDisplayGPUResidentDrawer.AreAnySettingsActive">
+            <inheritdoc/>
+        </member>
+        <member name="P:UnityEngine.Rendering.DebugDisplayGPUResidentDrawer.IsPostProcessingAllowed">
+            <inheritdoc/>
+        </member>
+        <member name="P:UnityEngine.Rendering.DebugDisplayGPUResidentDrawer.IsLightingActive">
+            <inheritdoc/>
+        </member>
+        <member name="M:UnityEngine.Rendering.DebugDisplayGPUResidentDrawer.TryGetScreenClearColor(UnityEngine.Color@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:UnityEngine.Rendering.DebugDisplayGPUResidentDrawer.UnityEngine#Rendering#IDebugDisplaySettingsData#CreatePanel">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>

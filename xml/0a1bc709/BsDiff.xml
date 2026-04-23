@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BsDiff</name>
+    </assembly>
+    <members>
+        <member name="M:BsDiff.BinaryPatchUtility.Create(System.Byte[],System.Byte[],System.IO.Stream)">
+            <summary>
+            Creates a binary patch (in <a href="http://www.daemonology.net/bsdiff/">bsdiff</a> format) that can be used
+            (by <see cref="M:BsDiff.BinaryPatchUtility.Apply(System.IO.Stream,System.Func{System.IO.Stream},System.IO.Stream)"/>) to transform <paramref name="oldData"/> into <paramref name="newData"/>.
+            </summary>
+            <param name="oldData">The original binary data.</param>
+            <param name="newData">The new binary data.</param>
+            <param name="output">A <see cref="T:System.IO.Stream"/> to which the patch will be written.</param>
+        </member>
+        <member name="M:BsDiff.BinaryPatchUtility.Apply(System.IO.Stream,System.Func{System.IO.Stream},System.IO.Stream)">
+            <summary>
+            Applies a binary patch (in <a href="http://www.daemonology.net/bsdiff/">bsdiff</a> format) to the data in
+            <paramref name="input"/> and writes the results of patching to <paramref name="output"/>.
+            </summary>
+            <param name="input">A <see cref="T:System.IO.Stream"/> containing the input data.</param>
+            <param name="openPatchStream">A func that can open a <see cref="T:System.IO.Stream"/> positioned at the start of the patch data.
+            This stream must support reading and seeking, and <paramref name="openPatchStream"/> must allow multiple streams on
+            the patch to be opened concurrently.</param>
+            <param name="output">A <see cref="T:System.IO.Stream"/> to which the patched data is written.</param>
+        </member>
+        <member name="M:BsDiff.BinaryPatchUtility.ReadExactly(System.IO.Stream,System.Int32)">
+            <summary>
+            Reads exactly <paramref name="count"/> bytes from <paramref name="stream"/>.
+            </summary>
+            <param name="stream">The stream to read from.</param>
+            <param name="count">The count of bytes to read.</param>
+            <returns>A new byte array containing the data read from the stream.</returns>
+        </member>
+        <member name="M:BsDiff.BinaryPatchUtility.ReadExactly(System.IO.Stream,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Reads exactly <paramref name="count"/> bytes from <paramref name="stream"/> into
+            <paramref name="buffer"/>, starting at the byte given by <paramref name="offset"/>.
+            </summary>
+            <param name="stream">The stream to read from.</param>
+            <param name="buffer">The buffer to read data into.</param>
+            <param name="offset">The offset within the buffer at which data is first written.</param>
+            <param name="count">The count of bytes to read.</param>
+        </member>
+        <member name="M:BsDiff.BsTool.Patch(System.String,System.String,System.String)">
+            <summary>
+            Apply a Diff from <paramref name="patchFile"/> to <paramref name="oldFile"/> resulting in the creation of <paramref name="newFile"/>
+            </summary>
+            <param name="oldFile">File to be patched using <paramref name="patchFile"/></param>
+            <param name="newFile">File to be created from patching <paramref name="oldFile"/> with <paramref name="patchFile"/></param>
+            <param name="patchFile">Diff file used for transforming <paramref name="oldFile"/> into <paramref name="newFile"/></param>
+        </member>
+        <member name="M:BsDiff.BsTool.CreateDiff(System.String,System.String,System.String)">
+            <summary>
+            Create a Diff from <paramref name="oldFile"/> to <paramref name="newFile"/> resulting in the creation of <paramref name="patchFile"/>
+            </summary>
+            <param name="oldFile">File that <paramref name="patchFile"/> will transform into <paramref name="newFile"/></param>
+            <param name="newFile">File that is compared to <paramref name="oldFile"/> to create <paramref name="patchFile"/></param>
+            <param name="patchFile">Diff file to be created for transforming <paramref name="oldFile"/> into <paramref name="newFile"/></param>
+        </member>
+    </members>
+</doc>

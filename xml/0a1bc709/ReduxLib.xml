@@ -1,0 +1,804 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ReduxLib</name>
+    </assembly>
+    <members>
+        <member name="T:ReduxLib.Configuration.IConfigEntry">
+            <summary>
+            Represents a config entry
+            </summary>
+        </member>
+        <member name="P:ReduxLib.Configuration.IConfigEntry.Value">
+            <summary>
+            The value of the config entry
+            </summary>
+        </member>
+        <member name="P:ReduxLib.Configuration.IConfigEntry.Default">
+            <summary>
+            The default value of the config entry
+            </summary>
+        </member>
+        <member name="P:ReduxLib.Configuration.IConfigEntry.ValueType">
+            <summary>
+            The type of the value of the config entry
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Configuration.IConfigEntry.Get``1">
+            <summary>
+            Gets the value of the config entry as a specific type
+            </summary>
+            <typeparam name="T">The type to cast to</typeparam>
+            <returns>The value as the specified type</returns>
+        </member>
+        <member name="M:ReduxLib.Configuration.IConfigEntry.Set``1(``0)">
+            <summary>
+            Sets the value of the config entry
+            </summary>
+            <param name="value">The value to set</param>
+            <typeparam name="T">The type of the value</typeparam>
+        </member>
+        <member name="P:ReduxLib.Configuration.IConfigEntry.Description">
+            <summary>
+            The description of the config entry
+            </summary>
+        </member>
+        <member name="P:ReduxLib.Configuration.IConfigEntry.Constraint">
+            <summary>
+            The value constraint of the config entry
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Configuration.IConfigEntry.RegisterCallback(System.Action{System.Object,System.Object})">
+            <summary>
+            Registers a callback to be called when setting the value on a config file
+            </summary>
+            <param name="valueChangedCallback">
+            An action that takes the old value and the new value and calls a callback
+            </param>
+        </member>
+        <member name="F:ReduxLib.Configuration.ListConstraint`1.AcceptableValues">
+            <summary>
+            The list of acceptable values.
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Configuration.ListConstraint`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Creates a new list constraint.
+            </summary>
+            <param name="acceptableValues">The list of acceptable values.</param>
+        </member>
+        <member name="M:ReduxLib.Configuration.ListConstraint`1.#ctor(`0[])">
+            <summary>
+            Creates a new list constraint.
+            </summary>
+            <param name="acceptableValues">The list of acceptable values.</param>
+        </member>
+        <member name="T:ReduxLib.Configuration.JsonConfigEntry">
+            <summary>
+            A config entry that is stored in a JSON file.
+            </summary>
+        </member>
+        <member name="E:ReduxLib.Configuration.JsonConfigEntry.Callbacks">
+            <summary>
+            The callbacks that are invoked when the value of this entry changes.
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Configuration.JsonConfigEntry.#ctor(ReduxLib.Configuration.JsonConfigFile,System.Type,System.String,System.Object,ReduxLib.Configuration.IValueConstraint)">
+            <summary>
+            Creates a new config entry.
+            </summary>
+            <param name="configFile">Config file that this entry belongs to.</param>
+            <param name="type">Type of the value.</param>
+            <param name="description">Description of the value.</param>
+            <param name="value">Value of the entry.</param>
+            <param name="constraint">Constraint of the value.</param>
+        </member>
+        <member name="P:ReduxLib.Configuration.JsonConfigEntry.Value">
+            <inheritdoc />
+        </member>
+        <member name="P:ReduxLib.Configuration.JsonConfigEntry.ValueType">
+            <inheritdoc />
+        </member>
+        <member name="M:ReduxLib.Configuration.JsonConfigEntry.Get``1">
+            <inheritdoc />
+        </member>
+        <member name="M:ReduxLib.Configuration.JsonConfigEntry.Set``1(``0)">
+            <inheritdoc />
+        </member>
+        <member name="P:ReduxLib.Configuration.JsonConfigEntry.Description">
+            <inheritdoc />
+        </member>
+        <member name="P:ReduxLib.Configuration.JsonConfigEntry.Constraint">
+            <inheritdoc />
+        </member>
+        <member name="M:ReduxLib.Configuration.JsonConfigEntry.RegisterCallback(System.Action{System.Object,System.Object})">
+            <inheritdoc />
+        </member>
+        <member name="T:ReduxLib.Configuration.IConfigFile">
+            <summary>
+            Represents a configuration file.
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Configuration.IConfigFile.Save">
+            <summary>
+            Saves the configuration file.
+            </summary>
+        </member>
+        <member name="P:ReduxLib.Configuration.IConfigFile.Item(System.String,System.String)">
+            <summary>
+            Gets the <see cref="T:ReduxLib.Configuration.IConfigEntry" /> with the specified section and key.
+            </summary>
+            <param name="section">Section of the entry.</param>
+            <param name="key">Key of the entry.</param>
+        </member>
+        <member name="M:ReduxLib.Configuration.IConfigFile.Bind``1(System.String,System.String,``0,System.String,ReduxLib.Configuration.IValueConstraint)">
+            <summary>
+            Binds a new <see cref="T:ReduxLib.Configuration.IConfigEntry" /> to the specified section and key.
+            </summary>
+            <param name="section">Section of the entry.</param>
+            <param name="key">Key of the entry.</param>
+            <param name="defaultValue">Default value of the entry.</param>
+            <param name="description">Description of the entry.</param>
+            <param name="constraint">The initial constraint of the entry.</param>
+            <typeparam name="T">Type of the entry.</typeparam>
+            <returns>The bound <see cref="T:ReduxLib.Configuration.IConfigEntry" />.</returns>
+        </member>
+        <member name="P:ReduxLib.Configuration.IConfigFile.Sections">
+            <summary>
+            A list of all sections in the configuration file.
+            </summary>
+        </member>
+        <member name="P:ReduxLib.Configuration.IConfigFile.Item(System.String)">
+            <summary>
+            A list of all keys in the specified section.
+            </summary>
+            <param name="section"></param>
+        </member>
+        <member name="T:ReduxLib.Configuration.IValueConstraint">
+            <summary>
+            A constraint that can be applied to a <see cref="!:ConfigEntry&lt;T&gt;"/> to limit the values it can take.
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Configuration.IValueConstraint.IsConstrained(System.Object)">
+            <summary>
+            Checks if the given object is constrained by this constraint.
+            </summary>
+            <param name="o">Object to check.</param>
+            <returns>True if the object is constrained, false otherwise.</returns>
+        </member>
+        <member name="P:ReduxLib.Configuration.IValueConstraint.ConstraintDescription">
+            <summary>
+            Gets a description of the constraint to put into a comment
+            </summary>
+        </member>
+        <member name="T:ReduxLib.Configuration.ConfigValue`1">
+            <summary>
+            A wrapper around <see cref="T:ReduxLib.Configuration.IConfigEntry"/> that provides type safety.
+            </summary>
+            <typeparam name="T">The type of the value.</typeparam>
+        </member>
+        <member name="F:ReduxLib.Configuration.ConfigValue`1.Entry">
+            <summary>
+            The underlying <see cref="T:ReduxLib.Configuration.IConfigEntry"/>.
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Configuration.ConfigValue`1.#ctor(ReduxLib.Configuration.IConfigEntry)">
+            <summary>
+            Creates a new <see cref="T:ReduxLib.Configuration.ConfigValue`1"/> from an <see cref="T:ReduxLib.Configuration.IConfigEntry"/>.
+            </summary>
+            <param name="entry">The entry to wrap.</param>
+            <exception cref="T:System.ArgumentException">
+            If the type of <paramref name="entry"/> does not match <typeparamref name="T"/>.
+            </exception>
+        </member>
+        <member name="P:ReduxLib.Configuration.ConfigValue`1.Value">
+            <summary>
+            The value of the entry.
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Configuration.ConfigValue`1.RegisterCallback(System.Action{`0,`0})">
+            <summary>
+            Registers a callback that will be invoked when the value changes.
+            </summary>
+            <param name="callback">The callback to invoke.</param>
+        </member>
+        <member name="T:ReduxLib.Configuration.JsonConfigFile">
+            <summary>
+            A config file that uses JSON to store its data.
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Configuration.JsonConfigFile.#ctor(System.String)">
+            <summary>
+            Creates a new JSON config file object.
+            </summary>
+            <param name="file">The file path to use.</param>
+        </member>
+        <member name="M:ReduxLib.Configuration.JsonConfigFile.Save">
+            <inheritdoc />
+        </member>
+        <member name="P:ReduxLib.Configuration.JsonConfigFile.DefaultConverters">
+            <summary>
+            The default converters to use when serializing/deserializing JSON.
+            </summary>
+        </member>
+        <member name="P:ReduxLib.Configuration.JsonConfigFile.Item(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:ReduxLib.Configuration.JsonConfigFile.Bind``1(System.String,System.String,``0,System.String,ReduxLib.Configuration.IValueConstraint)">
+            <inheritdoc />
+        </member>
+        <member name="P:ReduxLib.Configuration.JsonConfigFile.Sections">
+            <inheritdoc />
+        </member>
+        <member name="P:ReduxLib.Configuration.JsonConfigFile.Item(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:ReduxLib.Configuration.ValueConstraint`1">
+            <summary>
+            Base class for value constraints.
+            </summary>
+            <typeparam name="T">Type of the value.</typeparam>
+        </member>
+        <member name="M:ReduxLib.Configuration.ValueConstraint`1.IsValid(`0)">
+            <summary>
+            Returns true if the given value is valid for this constraint.
+            </summary>
+            <param name="o">Value to check.</param>
+            <returns>True if the value is valid, false otherwise.</returns>
+        </member>
+        <member name="F:ReduxLib.Configuration.RangeConstraint`1.Minimum">
+            <summary>
+            The minimum value.
+            </summary>
+        </member>
+        <member name="F:ReduxLib.Configuration.RangeConstraint`1.Maximum">
+            <summary>
+            The maximum value.
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Configuration.RangeConstraint`1.#ctor(`0,`0,System.Int32,System.String)">
+            <summary>
+            Creates a new range constraint.
+            </summary>
+            <param name="minimum">The minimum value.</param>
+            <param name="maximum">The maximum value.</param>
+            <param name="configSteps">The amount of steps on the slider in the config screen</param>
+            <param name="configFormat">The format that the config slider prints the number</param>
+        </member>
+        <member name="T:ReduxLib.Messaging.MessageBus">
+            <summary>
+            MessageBus that can be used to publish messages with no arguments to subscribers.
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus.Subscribe(System.Action)">
+            <summary>
+            Subscribes a handler to the MessageBus.
+            </summary>
+            <param name="handler">The handler to subscribe.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when the handler is null.</exception>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus.Unsubscribe(System.Action)">
+            <summary>
+            Unsubscribes a handler from the MessageBus.
+            </summary>
+            <param name="handler">The handler to unsubscribe.</param>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus.Publish">
+            <summary>
+            Publishes a message to all subscribers.
+            </summary>
+            <summary>
+            Publishes a message to all subscribers.
+            </summary>
+        </member>
+        <member name="T:ReduxLib.Messaging.MessageBus`1">
+            <summary>
+            MessageBus that can be used to publish messages with 1 argument to subscribers.
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`1.Subscribe(System.Action{`0})">
+            <summary>
+            Subscribes a handler to the MessageBus.
+            </summary>
+            <param name="handler">The handler to subscribe.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when the handler is null.</exception>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`1.Unsubscribe(System.Action{`0})">
+            <summary>
+            Unsubscribes a handler from the MessageBus.
+            </summary>
+            <param name="handler">The handler to unsubscribe.</param>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`1.Publish(`0)">
+            <summary>
+            Publishes a message to all subscribers.
+            </summary>
+        </member>
+        <member name="T:ReduxLib.Messaging.MessageBus`2">
+            <summary>
+            MessageBus that can be used to publish messages with 2 argument to subscribers.
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`2.Subscribe(System.Action{`0,`1})">
+            <summary>
+            Subscribes a handler to the MessageBus.
+            </summary>
+            <param name="handler">The handler to subscribe.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when the handler is null.</exception>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`2.Unsubscribe(System.Action{`0,`1})">
+            <summary>
+            Unsubscribes a handler from the MessageBus.
+            </summary>
+            <param name="handler">The handler to unsubscribe.</param>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`2.Publish(`0,`1)">
+            <summary>
+            Publishes a message to all subscribers.
+            </summary>
+        </member>
+        <member name="T:ReduxLib.Messaging.MessageBus`3">
+            <summary>
+            MessageBus that can be used to publish messages with 3 arguments to subscribers.
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`3.Subscribe(System.Action{`0,`1,`2})">
+            <summary>
+            Subscribes a handler to the MessageBus.
+            </summary>
+            <param name="handler">The handler to subscribe.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when the handler is null.</exception>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`3.Unsubscribe(System.Action{`0,`1,`2})">
+            <summary>
+            Unsubscribes a handler from the MessageBus.
+            </summary>
+            <param name="handler">The handler to unsubscribe.</param>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`3.Publish(`0,`1,`2)">
+            <summary>
+            Publishes a message to all subscribers.
+            </summary>
+        </member>
+        <member name="T:ReduxLib.Messaging.MessageBus`4">
+            <summary>
+            MessageBus that can be used to publish messages with 4 arguments to subscribers.
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`4.Subscribe(System.Action{`0,`1,`2,`3})">
+            <summary>
+            Subscribes a handler to the MessageBus.
+            </summary>
+            <param name="handler">The handler to subscribe.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when the handler is null.</exception>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`4.Unsubscribe(System.Action{`0,`1,`2,`3})">
+            <summary>
+            Unsubscribes a handler from the MessageBus.
+            </summary>
+            <param name="handler">The handler to unsubscribe.</param>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`4.Publish(`0,`1,`2,`3)">
+            <summary>
+            Publishes a message to all subscribers.
+            </summary>
+        </member>
+        <member name="T:ReduxLib.Messaging.MessageBus`5">
+            <summary>
+            MessageBus that can be used to publish messages with 5 arguments to subscribers.
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`5.Subscribe(System.Action{`0,`1,`2,`3,`4})">
+            <summary>
+            Subscribes a handler to the MessageBus.
+            </summary>
+            <param name="handler">The handler to subscribe.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when the handler is null.</exception>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`5.Unsubscribe(System.Action{`0,`1,`2,`3,`4})">
+            <summary>
+            Unsubscribes a handler from the MessageBus.
+            </summary>
+            <param name="handler">The handler to unsubscribe.</param>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`5.Publish(`0,`1,`2,`3,`4)">
+            <summary>
+            Publishes a message to all subscribers.
+            </summary>
+        </member>
+        <member name="T:ReduxLib.Messaging.MessageBus`6">
+            <summary>
+            MessageBus that can be used to publish messages with 6 arguments to subscribers.
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`6.Subscribe(System.Action{`0,`1,`2,`3,`4,`5})">
+            <summary>
+            Subscribes a handler to the MessageBus.
+            </summary>
+            <param name="handler">The handler to subscribe.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when the handler is null.</exception>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`6.Unsubscribe(System.Action{`0,`1,`2,`3,`4,`5})">
+            <summary>
+            Unsubscribes a handler from the MessageBus.
+            </summary>
+            <param name="handler">The handler to unsubscribe.</param>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`6.Publish(`0,`1,`2,`3,`4,`5)">
+            <summary>
+            Publishes a message to all subscribers.
+            </summary>
+        </member>
+        <member name="T:ReduxLib.Messaging.MessageBus`7">
+            <summary>
+            MessageBus that can be used to publish messages with 7 arguments to subscribers.
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`7.Subscribe(System.Action{`0,`1,`2,`3,`4,`5,`6})">
+            <summary>
+            Subscribes a handler to the MessageBus.
+            </summary>
+            <param name="handler">The handler to subscribe.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when the handler is null.</exception>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`7.Unsubscribe(System.Action{`0,`1,`2,`3,`4,`5,`6})">
+            <summary>
+            Unsubscribes a handler from the MessageBus.
+            </summary>
+            <param name="handler">The handler to unsubscribe.</param>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`7.Publish(`0,`1,`2,`3,`4,`5,`6)">
+            <summary>
+            Publishes a message to all subscribers.
+            </summary>
+        </member>
+        <member name="T:ReduxLib.Messaging.MessageBus`8">
+            <summary>
+            MessageBus that can be used to publish messages with 8 arguments to subscribers.
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`8.Subscribe(System.Action{`0,`1,`2,`3,`4,`5,`6,`7})">
+            <summary>
+            Subscribes a handler to the MessageBus.
+            </summary>
+            <param name="handler">The handler to subscribe.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when the handler is null.</exception>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`8.Unsubscribe(System.Action{`0,`1,`2,`3,`4,`5,`6,`7})">
+            <summary>
+            Unsubscribes a handler from the MessageBus.
+            </summary>
+            <param name="handler">The handler to unsubscribe.</param>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`8.Publish(`0,`1,`2,`3,`4,`5,`6,`7)">
+            <summary>
+            Publishes a message to all subscribers.
+            </summary>
+        </member>
+        <member name="T:ReduxLib.Messaging.MessageBus`9">
+            <summary>
+            MessageBus that can be used to publish messages with 9 arguments to subscribers.
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`9.Subscribe(System.Action{`0,`1,`2,`3,`4,`5,`6,`7,`8})">
+            <summary>
+            Subscribes a handler to the MessageBus.
+            </summary>
+            <param name="handler">The handler to subscribe.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when the handler is null.</exception>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`9.Unsubscribe(System.Action{`0,`1,`2,`3,`4,`5,`6,`7,`8})">
+            <summary>
+            Unsubscribes a handler from the MessageBus.
+            </summary>
+            <param name="handler">The handler to unsubscribe.</param>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`9.Publish(`0,`1,`2,`3,`4,`5,`6,`7,`8)">
+            <summary>
+            Publishes a message to all subscribers.
+            </summary>
+        </member>
+        <member name="T:ReduxLib.Messaging.MessageBus`10">
+            <summary>
+            MessageBus that can be used to publish messages with 10 arguments to subscribers.
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`10.Subscribe(System.Action{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9})">
+            <summary>
+            Subscribes a handler to the MessageBus.
+            </summary>
+            <param name="handler">The handler to subscribe.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when the handler is null.</exception>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`10.Unsubscribe(System.Action{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9})">
+            <summary>
+            Unsubscribes a handler from the MessageBus.
+            </summary>
+            <param name="handler">The handler to unsubscribe.</param>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`10.Publish(`0,`1,`2,`3,`4,`5,`6,`7,`8,`9)">
+            <summary>
+            Publishes a message to all subscribers.
+            </summary>
+        </member>
+        <member name="T:ReduxLib.Messaging.MessageBus`11">
+            <summary>
+            MessageBus that can be used to publish messages with 11 arguments to subscribers.
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`11.Subscribe(System.Action{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10})">
+            <summary>
+            Subscribes a handler to the MessageBus.
+            </summary>
+            <param name="handler">The handler to subscribe.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when the handler is null.</exception>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`11.Unsubscribe(System.Action{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10})">
+            <summary>
+            Unsubscribes a handler from the MessageBus.
+            </summary>
+            <param name="handler">The handler to unsubscribe.</param>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`11.Publish(`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10)">
+            <summary>
+            Publishes a message to all subscribers.
+            </summary>
+        </member>
+        <member name="T:ReduxLib.Messaging.MessageBus`12">
+            <summary>
+            MessageBus that can be used to publish messages with 12 arguments to subscribers.
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`12.Subscribe(System.Action{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11})">
+            <summary>
+            Subscribes a handler to the MessageBus.
+            </summary>
+            <param name="handler">The handler to subscribe.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when the handler is null.</exception>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`12.Unsubscribe(System.Action{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11})">
+            <summary>
+            Unsubscribes a handler from the MessageBus.
+            </summary>
+            <param name="handler">The handler to unsubscribe.</param>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`12.Publish(`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11)">
+            <summary>
+            Publishes a message to all subscribers.
+            </summary>
+        </member>
+        <member name="T:ReduxLib.Messaging.MessageBus`13">
+            <summary>
+            MessageBus that can be used to publish messages with 13 arguments to subscribers.
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`13.Subscribe(System.Action{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12})">
+            <summary>
+            Subscribes a handler to the MessageBus.
+            </summary>
+            <param name="handler">The handler to subscribe.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when the handler is null.</exception>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`13.Unsubscribe(System.Action{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12})">
+            <summary>
+            Unsubscribes a handler from the MessageBus.
+            </summary>
+            <param name="handler">The handler to unsubscribe.</param>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`13.Publish(`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12)">
+            <summary>
+            Publishes a message to all subscribers.
+            </summary>
+        </member>
+        <member name="T:ReduxLib.Messaging.MessageBus`14">
+            <summary>
+            MessageBus that can be used to publish messages with 14 arguments to subscribers.
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`14.Subscribe(System.Action{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13})">
+            <summary>
+            Subscribes a handler to the MessageBus.
+            </summary>
+            <param name="handler">The handler to subscribe.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when the handler is null.</exception>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`14.Unsubscribe(System.Action{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13})">
+            <summary>
+            Unsubscribes a handler from the MessageBus.
+            </summary>
+            <param name="handler">The handler to unsubscribe.</param>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`14.Publish(`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13)">
+            <summary>
+            Publishes a message to all subscribers.
+            </summary>
+        </member>
+        <member name="T:ReduxLib.Messaging.MessageBus`15">
+            <summary>
+            MessageBus that can be used to publish messages with 15 arguments to subscribers.
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`15.Subscribe(System.Action{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13,`14})">
+            <summary>
+            Subscribes a handler to the MessageBus.
+            </summary>
+            <param name="handler">The handler to subscribe.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when the handler is null.</exception>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`15.Unsubscribe(System.Action{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13,`14})">
+            <summary>
+            Unsubscribes a handler from the MessageBus.
+            </summary>
+            <param name="handler">The handler to unsubscribe.</param>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`15.Publish(`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13,`14)">
+            <summary>
+            Publishes a message to all subscribers.
+            </summary>
+        </member>
+        <member name="T:ReduxLib.Messaging.MessageBus`16">
+            <summary>
+            MessageBus that can be used to publish messages with 16 arguments to subscribers.
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`16.Subscribe(System.Action{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13,`14,`15})">
+            <summary>
+            Subscribes a handler to the MessageBus.
+            </summary>
+            <param name="handler">The handler to subscribe.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when the handler is null.</exception>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`16.Unsubscribe(System.Action{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13,`14,`15})">
+            <summary>
+            Unsubscribes a handler from the MessageBus.
+            </summary>
+            <param name="handler">The handler to unsubscribe.</param>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBus`16.Publish(`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13,`14,`15)">
+            <summary>
+            Publishes a message to all subscribers.
+            </summary>
+        </member>
+        <member name="T:ReduxLib.Messaging.MessageBusBase">
+            <summary>
+            A base class for MessageBus instances.
+            </summary>
+        </member>
+        <member name="P:ReduxLib.Messaging.MessageBusBase.Name">
+            <summary>
+            The name of the MessageBus.
+            </summary>
+        </member>
+        <member name="T:ReduxLib.Messaging.MessageBusManager">
+            <summary>
+            A static class that manages the creation and retrieval of MessageBus instances.
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBusManager.Add``1(System.String)">
+            <summary>
+            Creates a new MessageBus instance with the given name.
+            </summary>
+            <param name="name">The name of the MessageBus to create.</param>
+            <typeparam name="T">The type of the MessageBus to create.</typeparam>
+            <returns>The created MessageBus instance.</returns>
+            <exception cref="T:System.Exception">Thrown when the given name is null or empty.</exception>
+            <exception cref="T:System.ArgumentException">Thrown when a MessageBus with the given name already exists.</exception>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBusManager.Exists(System.String)">
+            <summary>
+            Does a MessageBus with the given name exist?
+            </summary>
+            <param name="messageBusName">The name of the MessageBus to check.</param>
+            <returns>True if a MessageBus with the given name exists, false otherwise.</returns>
+        </member>
+        <member name="M:ReduxLib.Messaging.MessageBusManager.TryGet``1(System.String,``0@)">
+            <summary>
+            Gets a MessageBus instance with the given name.
+            </summary>
+            <param name="messageBusName"></param>
+            <param name="messageBus"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="T:ReduxLib.Logging.LogLevel">
+            <summary>
+            The log level.
+            </summary>
+        </member>
+        <member name="F:ReduxLib.Logging.LogLevel.None">
+            <summary>
+            No logging.
+            </summary>
+        </member>
+        <member name="F:ReduxLib.Logging.LogLevel.Fatal">
+            <summary>
+            Fatal errors.
+            </summary>
+        </member>
+        <member name="F:ReduxLib.Logging.LogLevel.Error">
+            <summary>
+            Errors.
+            </summary>
+        </member>
+        <member name="F:ReduxLib.Logging.LogLevel.Warning">
+            <summary>
+            Warnings.
+            </summary>
+        </member>
+        <member name="F:ReduxLib.Logging.LogLevel.Message">
+            <summary>
+            Messages.
+            </summary>
+        </member>
+        <member name="F:ReduxLib.Logging.LogLevel.Info">
+            <summary>
+            Information.
+            </summary>
+        </member>
+        <member name="F:ReduxLib.Logging.LogLevel.Debug">
+            <summary>
+            Debug information.
+            </summary>
+        </member>
+        <member name="F:ReduxLib.Logging.LogLevel.All">
+            <summary>
+            All logging.
+            </summary>
+        </member>
+        <member name="T:ReduxLib.Logging.ILogger">
+            <summary>
+            Interface for loggers.
+            </summary>
+        </member>
+        <member name="M:ReduxLib.Logging.ILogger.Log(ReduxLib.Logging.LogLevel,System.Object)">
+            <summary>
+            Logs the given object with the given log level.
+            </summary>
+            <param name="level">Log level.</param>
+            <param name="x">Object to log.</param>
+        </member>
+        <member name="M:ReduxLib.Logging.ILogger.LogFatal(System.Object)">
+            <summary>
+            Logs the given object with the log level <see cref="F:ReduxLib.Logging.LogLevel.Fatal"/>.
+            </summary>
+            <param name="x">Object to log.</param>
+        </member>
+        <member name="M:ReduxLib.Logging.ILogger.LogError(System.Object)">
+            <summary>
+            Logs the given object with the log level <see cref="F:ReduxLib.Logging.LogLevel.Error"/>.
+            </summary>
+            <param name="x">Object to log.</param>
+        </member>
+        <member name="M:ReduxLib.Logging.ILogger.LogWarning(System.Object)">
+            <summary>
+            Logs the given object with the log level <see cref="F:ReduxLib.Logging.LogLevel.Warning"/>.
+            </summary>
+            <param name="x">Object to log.</param>
+        </member>
+        <member name="M:ReduxLib.Logging.ILogger.LogMessage(System.Object)">
+            <summary>
+            Logs the given object with the log level <see cref="F:ReduxLib.Logging.LogLevel.Message"/>.
+            </summary>
+            <param name="x">Object to log.</param>
+        </member>
+        <member name="M:ReduxLib.Logging.ILogger.LogInfo(System.Object)">
+            <summary>
+            Logs the given object with the log level <see cref="F:ReduxLib.Logging.LogLevel.Info"/>.
+            </summary>
+            <param name="x">Object to log.</param>
+        </member>
+        <member name="M:ReduxLib.Logging.ILogger.LogDebug(System.Object)">
+            <summary>
+            Logs the given object with the log level <see cref="F:ReduxLib.Logging.LogLevel.Debug"/>.
+            </summary>
+            <param name="x">Object to log.</param>
+        </member>
+        <member name="T:ReduxLib.Engine.Layers">
+            <summary>
+            Contains constants for Unity layers of KSP2.
+            </summary>
+        </member>
+    </members>
+</doc>

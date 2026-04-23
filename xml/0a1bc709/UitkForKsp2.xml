@@ -1,0 +1,758 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UitkForKsp2</name>
+    </assembly>
+    <members>
+        <member name="T:UitkForKsp2.MVVM.Commands.ICommand`1">
+            <summary>
+            Generic command that receives a parameter of type T.
+            T can be a UI event type (e.g. KeyDownEvent) or a value type
+            extracted from ChangeEvent&lt;T&gt; by EventBinding.
+            </summary>
+        </member>
+        <member name="T:UitkForKsp2.MVVM.Commands.RelayCommand`1">
+            <summary>
+            Concrete parameterized command backed by delegates.
+            T is typically a UI event type or a value extracted from ChangeEvent&lt;T&gt;.
+            </summary>
+        </member>
+        <member name="T:UitkForKsp2.MVVM.Commands.RelayCommand">
+            <summary>
+            Concrete parameterless command backed by delegates.
+            </summary>
+        </member>
+        <member name="T:UitkForKsp2.MVVM.Commands.ICommand">
+            <summary>
+            Parameterless command interface. Use for actions where no event data is needed:
+            button clicks, pointer enter/leave, focus/blur, submit, etc.
+            </summary>
+        </member>
+        <member name="T:UitkForKsp2.MVVM.Bindings.EventBinding">
+             <summary>
+             Binds any UI Toolkit event on any VisualElement to an ICommand or ICommand&lt;TEvent&gt;
+             on the data source. Works with every EventBase subclass - clicks, pointer, keyboard,
+             focus, change, drag, navigation, and more.
+            
+             UXML usage:
+             <code>
+               &lt;!-- Parameterless: event fires command, data discarded --&gt;
+               &lt;EventBinding property="name" data-source-path="HoverCommand" event-type="PointerEnterEvent" /&gt;
+            
+               &lt;!-- Typed: ViewModel receives full event object --&gt;
+               &lt;EventBinding property="value" data-source-path="KeyDownCommand" event-type="KeyDownEvent" /&gt;
+            
+               &lt;!-- ChangeEvent special case: extracts newValue automatically --&gt;
+               &lt;EventBinding property="value" data-source-path="VolumeCommand" event-type="ChangeEvent&amp;lt;System.Single&amp;gt;" /&gt;
+             </code>
+            
+             The "property" attribute is required by the infrastructure but unused - set it to any valid property (e.g. "name").
+             Reflection runs only once per command instance - subsequent updates only sync enabled state.
+             </summary>
+        </member>
+        <member name="P:UitkForKsp2.MVVM.Bindings.EventBinding.DataSourcePath">
+            <summary>Path to the ICommand property on the data source, e.g. "VolumeChangedCommand".</summary>
+        </member>
+        <member name="P:UitkForKsp2.MVVM.Bindings.EventBinding.EventType">
+            <summary>UI Toolkit event class name. E.g. "ClickEvent", "KeyDownEvent", "ChangeEvent&lt;System.Single&gt;".</summary>
+        </member>
+        <member name="T:UitkForKsp2.MVVM.Bindings.EventTypeResolver">
+            <summary>
+            Resolves event type name strings from UXML attributes to System.Type objects.
+            Supports simple names ("KeyDownEvent") and generic names ("ChangeEvent&lt;System.Single&gt;").
+            Results are cached so reflection runs only once per unique type string.
+            </summary>
+        </member>
+        <member name="T:UitkForKsp2.MVVM.Bindings.CommandBinding">
+             <summary>
+             Convenience binding for Button.clicked -> ICommand. Wires the button's
+             clicked event and enable state to a parameterless command on the data source.
+            
+             UXML usage:
+             <code>
+               &lt;ui:Button name="buy-btn" text="Buy"&gt;
+                   &lt;Bindings&gt;
+                       &lt;CommandBinding property="text" data-source-path="BuyCommand" /&gt;
+                   &lt;/Bindings&gt;
+               &lt;/ui:Button&gt;
+             </code>
+             The "property" attribute is required by the infrastructure but unused - set it
+             to any valid property (by convention "name"). For non-Button elements, use EventBinding.
+             </summary>
+        </member>
+        <member name="P:UitkForKsp2.MVVM.Bindings.CommandBinding.DataSourcePath">
+            <summary>Path to the ICommand property on the data source, e.g. "BuyCommand".</summary>
+        </member>
+        <member name="T:UitkForKsp2.MVVM.Core.ViewModelBase">
+            <summary>
+            Optional base class for ViewModels. Provides SetField to notify the
+            binding system on change, eliminating per-property boilerplate.
+            ViewModels only need to inherit this, not INotifyBindablePropertyChanged directly.
+            </summary>
+        </member>
+        <member name="M:UitkForKsp2.MVVM.Core.ViewModelBase.SetField``1(``0@,``0,System.String)">
+            <summary>
+            Sets a backing field and notifies the binding system if the value changed.
+            Uses [CallerMemberName], never pass the property name manually.
+            Returns true if the value changed.
+            </summary>
+        </member>
+        <member name="M:UitkForKsp2.MVVM.Core.ViewModelBase.Notify(System.String)">
+            <summary>
+            Manually raises propertyChanged for computed or derived properties.
+            </summary>
+        </member>
+        <member name="T:UitkForKsp2.API.Manipulator.HideManipulator">
+            <summary>
+            Allows hiding a VisualElement with the F2 key.
+            </summary>
+        </member>
+        <member name="P:UitkForKsp2.API.Manipulator.HideManipulator.target">
+            <summary>
+            The target element that will be hidden.
+            </summary>
+        </member>
+        <member name="T:UitkForKsp2.API.Manipulator.DragManipulator">
+            <summary>
+            A manipulator to make UI Toolkit elements draggable within the screen bounds.
+            </summary>
+        </member>
+        <member name="P:UitkForKsp2.API.Manipulator.DragManipulator.IsDragging">
+            <summary>
+            Indicates whether the element is currently being dragged.
+            </summary>
+        </member>
+        <member name="P:UitkForKsp2.API.Manipulator.DragManipulator.IsEnabled">
+            <summary>
+            Enables or disables the dragging functionality.
+            </summary>
+        </member>
+        <member name="P:UitkForKsp2.API.Manipulator.DragManipulator.AllowDraggingOffScreen">
+            <summary>
+            Indicates whether the element can be dragged off screen.
+            </summary>
+        </member>
+        <member name="P:UitkForKsp2.API.Manipulator.DragManipulator.target">
+            <summary>
+            The target element that will be made draggable.
+            </summary>
+        </member>
+        <member name="M:UitkForKsp2.API.Manipulator.DragManipulator.#ctor(System.Boolean)">
+            <summary>
+            Creates a new instance of the <see cref="T:UitkForKsp2.API.Manipulator.DragManipulator"/> class.
+            </summary>
+            <param name="allowDraggingOffScreen">Allow dragging off screen?</param>
+        </member>
+        <member name="M:UitkForKsp2.API.Manipulator.DragManipulator.OnPointerDown(UnityEngine.UIElements.PointerDownEvent)">
+            <summary>
+            Handles the initiation of the dragging process.
+            </summary>
+        </member>
+        <member name="M:UitkForKsp2.API.Manipulator.DragManipulator.OnPointerMove(UnityEngine.UIElements.PointerMoveEvent)">
+            <summary>
+            Handles the movement of the draggable element.
+            </summary>
+        </member>
+        <member name="M:UitkForKsp2.API.Manipulator.DragManipulator.OnPointerUp(UnityEngine.UIElements.PointerUpEvent)">
+            <summary>
+            Handles the end of the dragging process.
+            </summary>
+        </member>
+        <member name="T:UitkForKsp2.API.Manipulator.OrderManipulator">
+            <summary>
+            Allows bringing a UITK panel to the front when clicked.
+            </summary>
+        </member>
+        <member name="M:UitkForKsp2.API.Manipulator.OrderManipulator.#ctor(UnityEngine.UIElements.PanelSettings)">
+            <summary>
+            Creates a new <see cref="T:UitkForKsp2.API.Manipulator.OrderManipulator"/> instance for the given panel.
+            </summary>
+            <param name="panel">The panel to manage the order for.</param>
+        </member>
+        <member name="M:UitkForKsp2.API.Manipulator.OrderManipulator.RegisterCallbacksOnTarget">
+            <summary>
+            Registers the necessary callbacks on the target element.
+            </summary>
+        </member>
+        <member name="M:UitkForKsp2.API.Manipulator.OrderManipulator.UnregisterCallbacksFromTarget">
+            <summary>
+            Unregisters the callbacks from the target element.
+            </summary>
+        </member>
+        <member name="T:UitkForKsp2.API.Window">
+            <summary>
+            Contains methods for creating UIDocument windows.
+            </summary>
+        </member>
+        <member name="M:UitkForKsp2.API.Window.Create(UitkForKsp2.API.WindowOptions,UnityEngine.UIElements.VisualElement)">
+            <summary>
+            Creates an empty UIDocument.
+            </summary>
+            <param name="options">Options for creating the window.</param>
+            <param name="root">Root element of the UIDocument. If null, a new empty VisualElement is created.</param>
+            <returns>New empty UIDocument.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.Window.Create(UitkForKsp2.API.WindowOptions,UnityEngine.UIElements.VisualTreeAsset)">
+            <summary>
+            Creates a new UIDocument from a UXML asset.
+            </summary>
+            <param name="options">Options for creating the window.</param>
+            <param name="uxml">UXML asset containing the UI.</param>
+            <returns>UIDocument with the UI defined in UXML.</returns>
+        </member>
+        <member name="T:UitkForKsp2.API.Order.OrderManager">
+            <summary>
+            Provides functionality to manage and maintain the sorting order of PanelSettings
+            instances, allowing them to be registered, brought to the front, and unregistered.
+            </summary>
+        </member>
+        <member name="M:UitkForKsp2.API.Order.OrderManager.Register(UnityEngine.UIElements.PanelSettings)">
+            <summary>
+            Registers a PanelSettings instance to the SortManager.
+            </summary>
+            <param name="panelSettings">The PanelSettings instance to register. If null, no action is taken.</param>
+        </member>
+        <member name="M:UitkForKsp2.API.Order.OrderManager.Register(UnityEngine.Canvas)">
+            <summary>
+            Registers a Canvas instance to the SortManager.
+            </summary>
+            <param name="canvas">
+            The Canvas instance to register. If null, or if it is already registered, no action is taken.
+            </param>
+        </member>
+        <member name="M:UitkForKsp2.API.Order.OrderManager.BringToFront(UnityEngine.UIElements.PanelSettings)">
+            <summary>
+            Brings a registered PanelSettings instance to the front by assigning it the highest sorting order.
+            </summary>
+            <param name="panelSettings">
+            The PanelSettings instance to bring to the front. If null or not registered, no action is taken.
+            </param>
+        </member>
+        <member name="M:UitkForKsp2.API.Order.OrderManager.BringToFront(UnityEngine.Canvas)">
+            <summary>
+            Brings a registered Canvas instance to the front by assigning it the highest sorting order.
+            </summary>
+            <param name="canvas">
+            The Canvas instance to bring to the front. If null or not registered, no action is taken.
+            </param>
+        </member>
+        <member name="M:UitkForKsp2.API.Order.OrderManager.Unregister(UnityEngine.UIElements.PanelSettings)">
+            <summary>
+            Unregisters a PanelSettings instance from the SortManager.
+            </summary>
+            <param name="panelSettings">
+            The PanelSettings instance to unregister. If null or not registered, no action is taken.
+            </param>
+        </member>
+        <member name="M:UitkForKsp2.API.Order.OrderManager.Unregister(UnityEngine.Canvas)">
+            <summary>
+            Unregisters a Canvas instance from the SortManager.
+            </summary>
+            <param name="canvas">
+            The Canvas instance to unregister. If null or not registered, no action is taken.
+            </param>
+        </member>
+        <member name="T:UitkForKsp2.API.MoveOptions">
+            <summary>
+            Options for allowing an element to be dragged.
+            </summary>
+        </member>
+        <member name="P:UitkForKsp2.API.MoveOptions.IsMovingEnabled">
+            <summary>
+            Should the element be moved by dragging?
+            </summary>
+        </member>
+        <member name="P:UitkForKsp2.API.MoveOptions.CheckScreenBounds">
+            <summary>
+            Should the element be moved only within the screen bounds?
+            </summary>
+        </member>
+        <member name="P:UitkForKsp2.API.MoveOptions.Default">
+            <summary>
+            Default options for dragging an element.
+            </summary>
+        </member>
+        <member name="T:UitkForKsp2.API.Extensions">
+            <summary>
+            Extension methods for UIDocument and VisualElements.
+            </summary>
+        </member>
+        <member name="M:UitkForKsp2.API.Extensions.EnableLocalization(UnityEngine.UIElements.UIDocument)">
+            <summary>
+            Automatically localize elements in a document. Only elements with a string property "text" whose value is a
+            localization key starting with '#' will be localized.
+            </summary>
+            <param name="document">The document in which to localize all localizable elements.</param>
+            <returns>The DocumentLocalization component which was added to the document.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.Extensions.EnableUiSounds(UnityEngine.UIElements.UIDocument)">
+            <summary>
+            Enable delegated UI sounds for elements marked with sound USS classes.
+            </summary>
+            <param name="document">The document whose root element should listen for UI sound events.</param>
+            <returns>The document with delegated UI sounds enabled.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.Extensions.Show(UnityEngine.UIElements.UIDocument)">
+            <summary>
+            Show a UIDocument by setting its root VisualElement's display style to DisplayStyle.Flex.
+            </summary>
+            <param name="document">The document to show.</param>
+        </member>
+        <member name="M:UitkForKsp2.API.Extensions.Hide(UnityEngine.UIElements.UIDocument)">
+            <summary>
+            Hide a UIDocument by setting its root VisualElement's display style to DisplayStyle.None.
+            </summary>
+            <param name="document">The document to hide.</param>
+        </member>
+        <member name="M:UitkForKsp2.API.Extensions.ToggleDisplay(UnityEngine.UIElements.UIDocument)">
+            <summary>
+            Toggle the display of a UIDocument between DisplayStyle.Flex and DisplayStyle.None.
+            </summary>
+            <param name="document">The document to toggle the display of.</param>
+        </member>
+        <member name="M:UitkForKsp2.API.Extensions.Set``1(``0,System.String,System.Object)">
+            <summary>
+            Set a property on a VisualElement.
+            </summary>
+            <param name="element">The element on which to set the property.</param>
+            <param name="name">The name of the property to set.</param>
+            <param name="value">The value to set the property to.</param>
+            <typeparam name="T">The type of the element which must be a subclass of VisualElement.</typeparam>
+            <returns>The element on which the property was set.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.Extensions.Text``1(``0,System.String)">
+            <summary>
+            Set the text of a TextElement.
+            </summary>
+            <param name="element">The element on which to set the text property.</param>
+            <param name="text">The text to set.</param>
+            <typeparam name="T">The type of the element which must be a subclass of TextElement.</typeparam>
+            <returns>The element on which the text property was set.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.Extensions.AddChildren``1(``0,System.Collections.Generic.IEnumerable{UnityEngine.UIElements.VisualElement})">
+            <summary>
+            Add children to a VisualElement.
+            </summary>
+            <param name="element">The element to which to add the children.</param>
+            <param name="children">The children VisualElements to add.</param>
+            <typeparam name="T">The type of the parent element which must be a subclass of VisualElement.</typeparam>
+            <returns>The parent element to which the children were added.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.Extensions.Show``1(``0)">
+            <summary>
+            Show a VisualElement by setting its display style to DisplayStyle.Flex.
+            </summary>
+            <param name="element">The element to show.</param>
+            <typeparam name="T">The type of the element which must be a subclass of VisualElement.</typeparam>
+            <returns>The element which was shown.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.Extensions.Hide``1(``0)">
+            <summary>
+            Hide a VisualElement by setting its display style to DisplayStyle.None.
+            </summary>
+            <param name="element">The element to hide.</param>
+            <typeparam name="T">The type of the element which must be a subclass of VisualElement.</typeparam>
+            <returns>The element which was hidden.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.Extensions.ToggleDisplay``1(``0)">
+            <summary>
+            Toggle the display of a VisualElement between DisplayStyle.Flex and DisplayStyle.None.
+            </summary>
+            <param name="element">The element to toggle the display of.</param>
+            <typeparam name="T">The type of the element which must be a subclass of VisualElement.</typeparam>
+            <returns>The element which was toggled.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.Extensions.MakeDraggable``1(``0,System.Boolean)">
+            <summary>
+            Make a VisualElement draggable by adding a DragManipulator.
+            </summary>
+            <param name="element">The element to make draggable.</param>
+            <param name="checkScreenBounds">Should the element be draggable only within the screen bounds?</param>
+            <typeparam name="T">The type of the element which must be a subclass of VisualElement.</typeparam>
+            <returns>The element which was made draggable.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.Extensions.MakeDraggable``1(``0)">
+            <summary>
+            Make a VisualElement draggable by adding a DragManipulator.
+            </summary>
+            <param name="element">The element to make draggable.</param>
+            <typeparam name="T">The type of the element which must be a subclass of VisualElement.</typeparam>
+            <returns>The element which was made draggable.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.Extensions.EnableHiding``1(``0)">
+            <summary>
+            Enables the F2 hiding functionality for a visual element.
+            </summary>
+            <param name="element">The visual element to enable hiding for.</param>
+            <typeparam name="T">The type of the visual element.</typeparam>
+            <returns>The visual element with the hiding functionality enabled.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.Extensions.EnableUiSounds``1(``0)">
+            <summary>
+            Enable delegated UI sounds for child elements marked with sound USS classes.
+            </summary>
+            <param name="element">The root element that should listen for child sound events.</param>
+            <typeparam name="T">The type of the root visual element.</typeparam>
+            <returns>The root element with delegated UI sounds enabled.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.Extensions.SetDefaultPosition(UnityEngine.UIElements.VisualElement,System.Func{UnityEngine.Vector2,UnityEngine.Vector2})">
+            <summary>
+            Set the default position of an element using a callback to calculate the position.
+            </summary>
+            <param name="element">The element to position.</param>
+            <param name="calculatePosition">
+            The callback which will be called when the element is resized. The callback will be passed the size of the
+            element and should return the position to set the element to in the reference resolution.
+            </param>
+        </member>
+        <member name="M:UitkForKsp2.API.Extensions.CenterByDefault(UnityEngine.UIElements.VisualElement)">
+            <summary>
+            Set the default position of an element to the center of the screen.
+            </summary>
+            <param name="element">The element to center.</param>
+        </member>
+        <member name="M:UitkForKsp2.API.Extensions.DisableDragging(UnityEngine.UIElements.VisualElement)">
+            <summary>
+            Disable dragging on a specific element.
+            </summary>
+            <param name="element">The element to disable dragging on.</param>
+        </member>
+        <member name="M:UitkForKsp2.API.Extensions.DisableGameInputOnFocus(UnityEngine.UIElements.VisualElement)">
+            <summary>
+            Disable game input when an element is focused.
+            </summary>
+            <param name="element">The element to disable game input on focus for.</param>
+        </member>
+        <member name="M:UitkForKsp2.API.Extensions.Log(System.String)">
+            <summary>
+            Log a message to the console only in debug builds.
+            </summary>
+            <param name="message">The message to log.</param>
+        </member>
+        <member name="F:UitkForKsp2.API.Extensions._inputStatuses">
+            <summary>
+            The statuses of all input definitions before they were disabled.
+            </summary>
+        </member>
+        <member name="M:UitkForKsp2.API.Extensions.SetGameInputDisabled(System.Boolean)">
+            <summary>
+            Disable or enable the game input.
+            </summary>
+            <param name="isDisabled">True to disable the game input, false to enable it.</param>
+        </member>
+        <member name="M:UitkForKsp2.API.Extensions.GeometryChangedHandler(UnityEngine.UIElements.GeometryChangedEvent,UnityEngine.UIElements.VisualElement,System.Func{UnityEngine.Vector2,UnityEngine.Vector2},UnityEngine.UIElements.EventCallback{UnityEngine.UIElements.GeometryChangedEvent})">
+            <summary>
+            Callback to recalculate element position when the geometry of an element changes.
+            </summary>
+            <param name="evt">The geometry changed event.</param>
+            <param name="element">The element to position.</param>
+            <param name="calculatePosition">The callback to calculate the position.</param>
+            <param name="geometryChanged">The handler itself.</param>
+        </member>
+        <member name="T:UitkForKsp2.API.ReferenceResolution">
+            <summary>
+            Reference resolution for UI elements. All UI elements should be designed for this resolution, they will
+            automatically scale to the user's real resolution.
+            </summary>
+        </member>
+        <member name="F:UitkForKsp2.API.ReferenceResolution.Width">
+            <summary>
+            The width of the reference resolution.
+            </summary>
+        </member>
+        <member name="F:UitkForKsp2.API.ReferenceResolution.Height">
+            <summary>
+            The height of the reference resolution.
+            </summary>
+        </member>
+        <member name="M:UitkForKsp2.API.ReferenceResolution.ConvertFromScreenPercentage(UnityEngine.Vector2)">
+            <summary>
+            Converts percentage of screen width and height to reference resolution pixels.
+            </summary>
+            <param name="screenPercent">Vector with width and height in percentage of screen size.</param>
+            <returns>Vector with corresponding width and height in the reference resolution.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.ReferenceResolution.ConvertFromScreenPixels(UnityEngine.Vector2)">
+            <summary>
+            Converts absolute pixels to reference resolution pixels.
+            </summary>
+            <param name="absolutePixels">Vector with screen size based width and height in pixels.</param>
+            <returns>Vector with corresponding width and height in the reference resolution.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.ReferenceResolution.GetReferenceMousePosition">
+            <summary>
+            Gets mouse position converted to reference resolution pixels.
+            </summary>
+            <returns>Mouse position with corresponding x and flipped y in the reference resolution.</returns>
+        </member>
+        <member name="T:UitkForKsp2.API.WindowOptions">
+            <summary>
+            Options for creating a window.
+            </summary>
+        </member>
+        <member name="P:UitkForKsp2.API.WindowOptions.WindowId">
+            <summary>
+            Unique ID for the game object. Autogenerated if null.
+            </summary>
+        </member>
+        <member name="P:UitkForKsp2.API.WindowOptions.Parent">
+            <summary>
+            Parent game object transform. Uses "UI Manager(Clone)/Main Canvas" if null.
+            </summary>
+        </member>
+        <member name="P:UitkForKsp2.API.WindowOptions.IsHidingEnabled">
+            <summary>
+            Should window hiding with F2 be enabled?
+            </summary>
+        </member>
+        <member name="P:UitkForKsp2.API.WindowOptions.UseStockScale">
+            <summary>
+            Should it use the UI scale setting?
+            </summary>
+        </member>
+        <member name="P:UitkForKsp2.API.WindowOptions.DisableGameInputForTextFields">
+            <summary>
+            Should the game input be disabled when a text field is focused? This will only affect text fields
+            </summary>
+        </member>
+        <member name="P:UitkForKsp2.API.WindowOptions.BringToFrontOnPointerDown">
+            <summary>
+            Should the window be brought to front when clicked?
+            </summary>
+        </member>
+        <member name="P:UitkForKsp2.API.WindowOptions.MoveOptions">
+            <summary>
+            Options for moving the window by dragging.
+            </summary>
+        </member>
+        <member name="P:UitkForKsp2.API.WindowOptions.Default">
+            <summary>
+            Default options for creating a window.
+            </summary>
+        </member>
+        <member name="T:UitkForKsp2.API.Element">
+            <summary>
+            Contains methods for creating UI elements.
+            </summary>
+        </member>
+        <member name="M:UitkForKsp2.API.Element.Create``1(System.String,System.String,System.Collections.Generic.IEnumerable{UnityEngine.UIElements.VisualElement})">
+            <summary>
+            Creates a new UI element.
+            </summary>
+            <param name="name">Element name.</param>
+            <param name="classes">Element classes separated by spaces.</param>
+            <param name="children">Children elements.</param>
+            <typeparam name="T">Element type.</typeparam>
+            <returns>New UI element.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.Element.CreateText``1(System.String,System.String,System.String,System.Collections.Generic.IEnumerable{UnityEngine.UIElements.VisualElement})">
+            <summary>
+            Creates a new TextElement-based UI element.
+            </summary>
+            <param name="name">Element name.</param>
+            <param name="text">Text inside the element.</param>
+            <param name="classes">Element classes separated by spaces.</param>
+            <param name="children">Children elements.</param>
+            <typeparam name="T">Element type.</typeparam>
+            <returns>New TextElement-based UI element.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.Element.VisualElement(System.String,System.String,System.Collections.Generic.IEnumerable{UnityEngine.UIElements.VisualElement})">
+            <summary>
+            Creates a new VisualElement.
+            </summary>
+            <param name="name">Element name.</param>
+            <param name="classes">Element classes separated by spaces.</param>
+            <param name="children">Children elements.</param>
+            <returns>New VisualElement.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.Element.ScrollView(System.String,System.String,System.Collections.Generic.IEnumerable{UnityEngine.UIElements.VisualElement})">
+            <summary>
+            Creates a new ScrollView element.
+            </summary>
+            <param name="name">Element name.</param>
+            <param name="classes">Element classes separated by spaces.</param>
+            <param name="children">Children elements.</param>
+            <returns>New ScrollView element.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.Element.ListView(System.String,System.String,System.Collections.Generic.IEnumerable{UnityEngine.UIElements.VisualElement})">
+            <summary>
+            Creates a new ListView element.
+            </summary>
+            <param name="name">Element name.</param>
+            <param name="classes">Element classes separated by spaces.</param>
+            <param name="children">Children elements.</param>
+            <returns>New ListView element.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.Element.IMGUIContainer(System.String,System.String,System.Collections.Generic.IEnumerable{UnityEngine.UIElements.VisualElement})">
+            <summary>
+            Creates a new IMGUIContainer element.
+            </summary>
+            <param name="name">Element name.</param>
+            <param name="classes">Element classes separated by spaces.</param>
+            <param name="children">Children elements.</param>
+            <returns>New IMGUIContainer element.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.Element.Label(System.String,System.String,System.String,System.Collections.Generic.IEnumerable{UnityEngine.UIElements.VisualElement})">
+            <summary>
+            Creates a new Label element.
+            </summary>
+            <param name="name">Element name.</param>
+            <param name="text">Label text.</param>
+            <param name="classes">Element classes separated by spaces.</param>
+            <param name="children">Children elements.</param>
+            <returns>New Label element.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.Element.Button(System.String,System.String,System.String,System.Collections.Generic.IEnumerable{UnityEngine.UIElements.VisualElement})">
+            <summary>
+            Creates a new Button element.
+            </summary>
+            <param name="name">Element name.</param>
+            <param name="text">Button label text.</param>
+            <param name="classes">Element classes separated by spaces.</param>
+            <param name="children">Children elements.</param>
+            <returns>New Button element.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.Element.Toggle(System.String,System.String,System.Boolean,System.String,System.Collections.Generic.IEnumerable{UnityEngine.UIElements.VisualElement})">
+            <summary>
+            Creates a new Toggle element.
+            </summary>
+            <param name="name">Element name.</param>
+            <param name="label">Toggle label text.</param>
+            <param name="isActive">Toggle status.</param>
+            <param name="classes">Element classes separated by spaces.</param>
+            <param name="children">Children elements.</param>
+            <returns>New Toggle element.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.Element.Scroller(System.String,System.String,System.Collections.Generic.IEnumerable{UnityEngine.UIElements.VisualElement})">
+            <summary>
+            Creates a new Scroller element.
+            </summary>
+            <param name="name">Element name.</param>
+            <param name="classes">Element classes separated by spaces.</param>
+            <param name="children">Children elements.</param>
+            <returns>New Scroller element.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.Element.TextField(System.String,System.String,System.Boolean,System.String,System.Collections.Generic.IEnumerable{UnityEngine.UIElements.VisualElement})">
+            <summary>
+            Creates a new TextField element.
+            </summary>
+            <param name="name">Element name.</param>
+            <param name="value">TextField value.</param>
+            <param name="multiline">Is TextField multiline?</param>
+            <param name="classes">Element classes separated by spaces.</param>
+            <param name="children">Children elements.</param>
+            <returns>New TextField element.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.Element.Foldout(System.String,System.String,System.Boolean,System.String,System.Collections.Generic.IEnumerable{UnityEngine.UIElements.VisualElement})">
+            <summary>
+            Creates a new Foldout element.
+            </summary>
+            <param name="name">Element name.</param>
+            <param name="label">Foldout label text.</param>
+            <param name="isOpen">Foldout status.</param>
+            <param name="classes">Element classes separated by spaces.</param>
+            <param name="children">Children elements.</param>
+            <returns>New Foldout element.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.Element.Slider(System.String,System.Nullable{System.Single},System.Nullable{System.Single},System.Nullable{System.Single},System.String,System.Collections.Generic.IEnumerable{UnityEngine.UIElements.VisualElement})">
+            <summary>
+            Creates a new Slider element.
+            </summary>
+            <param name="name">Element name.</param>
+            <param name="min">Slider minimum value with 0 being default.</param>
+            <param name="max">Slider maximum value with 10 being default.</param>
+            <param name="value">Slider default value.</param>
+            <param name="classes">Element classes separated by spaces.</param>
+            <param name="children">Children elements.</param>
+            <returns>New Slider element.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.Element.SliderInt(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Collections.Generic.IEnumerable{UnityEngine.UIElements.VisualElement})">
+            <summary>
+            Creates a new SliderInt element.
+            </summary>
+            <param name="name">Element name.</param>
+            <param name="min">SliderInt minimum value with 0 being default.</param>
+            <param name="max">SliderInt maximum value with 10 being default.</param>
+            <param name="value">SliderInt default value.</param>
+            <param name="classes">Element classes separated by spaces.</param>
+            <param name="children">Children elements.</param>
+            <returns>New SliderInt element.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.Element.MinMaxSlider(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Collections.Generic.IEnumerable{UnityEngine.UIElements.VisualElement})">
+            <summary>
+            Creates a new MinMaxSlider element.
+            </summary>
+            <param name="name">Element name.</param>
+            <param name="minLimit">MinMaxSlider minimum limit.</param>
+            <param name="maxLimit">MinMaxSlider maximum limit.</param>
+            <param name="minValue">MinMaxSlider default low value.</param>
+            <param name="maxValue">MinMaxSlider default high value.</param>
+            <param name="classes">Element classes separated by spaces.</param>
+            <param name="children">Children elements.</param>
+            <returns>New MinMaxSlider element.</returns>
+        </member>
+        <member name="M:UitkForKsp2.API.Element.Root(System.String,System.String,System.Collections.Generic.IEnumerable{UnityEngine.UIElements.VisualElement})">
+            <summary>
+            Creates a new root VisualElement with default styling.
+            </summary>
+            <param name="name">Element name.</param>
+            <param name="classes">Element classes separated by spaces.</param>
+            <param name="children">Children elements.</param>
+            <returns>New root VisualElement with default styling.</returns>
+        </member>
+        <member name="T:UitkForKsp2.UitkForKsp2Plugin">
+            <summary>
+            UITK for KSP 2 main plugin class.
+            </summary>
+        </member>
+        <member name="P:UitkForKsp2.UitkForKsp2Plugin.PanelSettings">
+            <summary>
+            The default UITK for KSP 2 panel settings with the KerbalUI theme. Do not modify this, as all mods using UITK
+            will be affected. It is also strongly discouraged to create your own instance of the PanelSettings class,
+            as having multiple panels in use will negatively impact performance.
+            </summary>
+        </member>
+        <member name="T:UitkForKsp2.Configuration">
+            <summary>
+            Configuration class for the UITK for KSP 2 plugin.
+            </summary>
+        </member>
+        <member name="P:UitkForKsp2.Configuration.CurrentScreenWidth">
+            <summary>
+            The current UITK screen width, taking into account whether automatic UI scaling is enabled.
+            </summary>
+        </member>
+        <member name="P:UitkForKsp2.Configuration.CurrentScreenHeight">
+            <summary>
+            The current UITK screen height, taking into account whether automatic UI scaling is enabled.
+            </summary>
+        </member>
+        <member name="T:DocumentLocalization">
+            <summary>
+            <para>A component which automatically localizes all elements in a document. Only elements with a string property
+            "text" whose value is a localization key starting with '#' will be localized.</para>
+            <para>The <c>LocalizationManager.OnLocalizeEvent</c> is handled to automatically update the localization of all
+            registered elements when the game language is changed.</para>
+            </summary>
+        </member>
+        <member name="M:DocumentLocalization.RegisterElement(UnityEngine.UIElements.VisualElement)">
+            <summary>
+            Register or update an element to be localized. The element must have a property named "text" of type string,
+            and the value of the property must be a localization key starting with '#'.
+            </summary>
+            <param name="element">The element to register.</param>
+        </member>
+        <member name="M:DocumentLocalization.RegisterDocument(UnityEngine.UIElements.UIDocument)">
+            <summary>
+            Register all elements in the document to be localized. Only elements with a string property "text" whose value
+            is a localization key starting with '#' will be registered.
+            </summary>
+            <param name="document">The document in which to register all localizable elements.</param>
+        </member>
+        <member name="M:DocumentLocalization.Localize">
+            <summary>
+            Update the localization of all registered elements.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,303 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AK.Wwise.Unity.MonoBehaviour</name>
+    </assembly>
+    <members>
+        <member name="T:AkMemBankLoader">
+            @brief This class is an example of how to load banks in Wwise, if the bank data was preloaded in memory.  
+            This would be useful for situations where you use the WWW class
+        </member>
+        <member name="F:AkMemBankLoader.bankName">
+            Name of the bank to load
+        </member>
+        <member name="F:AkMemBankLoader.isLocalizedBank">
+            Is the bank localized (situated in the language-specific folders)
+        </member>
+        <member name="M:AkMemBankLoader.LoadNonLocalizedBank(System.String)">
+            Load a SoundBank from WWW object
+        </member>
+        <member name="M:AkMemBankLoader.LoadLocalizedBank(System.String)">
+            Load a language-specific bank from WWW object
+        </member>
+        <member name="T:AkRoomManager">
+            @brief This manager tracks AkRoomPortals and the rooms that they connect (front and back room).
+            @details At the end of the frame, the AkRoomPortals which rooms might have changed are updated and sent to Spatial Audio.
+        </member>
+        <member name="F:AkRoom.reverbAuxBus">
+            The reverb auxiliary bus.
+        </member>
+        <member name="F:AkRoom.roomToneEvent">
+            Wwise Event to be posted on the room game object.
+        </member>
+        <member name="F:AkRoom.roomAwareObjectsEntered">
+            This is the list of AkRoomAwareObjects that have entered this AkRoom
+        </member>
+        <member name="F:AkRoom.roomAwareObjectsDetectedWhileDisabled">
+            This is the list of AkRoomAwareObjects that have entered this AkRoom while it was inactive or disabled.
+        </member>
+        <member name="M:AkRoom.GetID">
+            Access the room's ID
+        </member>
+        <member name="F:AkRoom.PriorityList.rooms">
+            Contains all active rooms sorted by priority.
+        </member>
+        <member name="T:AkAmbientLargeModePositioner">
+            @brief Use this component to add a Large Mode position to any AkAmbient in a Scene.
+            \sa
+            - \ref unity_use_AkEvent_AkAmbient
+            - \ref AkAmbient
+        </member>
+        <member name="P:AkSpatialAudioListener.TheSpatialAudioListener">
+            <summary>
+                Returns the "single" spatial audio listener.
+            </summary>
+        </member>
+        <member name="P:AkSpatialAudioListener.SpatialAudioListeners">
+            <summary>
+                Returns the list of active Unity Game Objects that are designated to be spatial audio listeners.
+            </summary>
+        </member>
+        <member name="T:AkSpatialAudioListener.SpatialAudioListenerList">
+            <summary>
+                This class represents the list of active Unity Game Objects that are designated to be spatial audio listeners.
+                Currently, only one spatial audio listener can be active at a time.
+            </summary>
+        </member>
+        <member name="M:AkSpatialAudioListener.SpatialAudioListenerList.Add(AkSpatialAudioListener)">
+            <summary>
+                Uniquely adds listeners to the list
+            </summary>
+            <param name="listener"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AkSpatialAudioListener.SpatialAudioListenerList.Remove(AkSpatialAudioListener)">
+            <summary>
+                Removes listeners from the list
+            </summary>
+            <param name="listener"></param>
+            <returns></returns>
+        </member>
+        <member name="F:AkSpatialAudioDebugDraw.drawFirstOrderReflections">
+            This allows you to visualize first order reflection sound paths.
+        </member>
+        <member name="F:AkSpatialAudioDebugDraw.drawSecondOrderReflections">
+            This allows you to visualize second order reflection sound paths.
+        </member>
+        <member name="F:AkSpatialAudioDebugDraw.drawHigherOrderReflections">
+            This allows you to visualize third or higher order reflection sound paths.
+        </member>
+        <member name="F:AkSpatialAudioDebugDraw.drawDiffractionPaths">
+            This allows you to visualize geometric diffraction sound paths between an obstructed emitter and the listener.
+        </member>
+        <member name="F:AkGameObj.isEnvironmentAware">
+            Is this object affected by Environment changes?  Set to false if not affected in order to save some useless calls.  Default is true.
+        </member>
+        <member name="F:AkGameObj.isStaticObject">
+            Maintains and persists the Static setting of the gameobject, which is available only in the editor.
+        </member>
+        <member name="F:AkGameObj.m_Collider">
+            Cache the bounds to avoid calls to GetComponent()
+        </member>
+        <member name="F:AkGameObj.m_positionOffsetData">
+            When not set to null, the position will be offset relative to the Game Object position by the Position Offset
+        </member>
+        <member name="M:AkGameObj.GetPosition">
+            Gets the position including the position offset, if applyPositionOffset is enabled. User can also override this method to calculate an arbitrary position.
+            \return  The position.
+        </member>
+        <member name="M:AkGameObj.GetForward">
+            Gets the orientation forward vector. User can also override this method to calculate an arbitrary vector.
+            \return  The forward vector of orientation.
+        </member>
+        <member name="M:AkGameObj.GetUpward">
+            Gets the orientation upward vector. User can also override this method to calculate an arbitrary vector.
+            \return  The upward vector of orientation.
+        </member>
+        <member name="F:AkRoomPortal.MAX_ROOMS_PER_PORTAL">
+            AkRoomPortals can only connect a maximum of 2 rooms.
+        </member>
+        <member name="F:AkRoomPortal.rooms">
+            The front and back rooms connected by the portal.
+            The first room is on the negative side of the portal(opposite to the direction of the local Z axis)
+            The second room is on the positive side of the portal.
+        </member>
+        <member name="F:AkRoomPortal.roomList">
+            The list of rooms sorted by priority in front and in the back of the portal
+        </member>
+        <member name="M:AkRoomPortal.GetID">
+            Access the portal's ID
+        </member>
+        <member name="M:AkRoomPortal.HandleEvent(UnityEngine.GameObject)">
+            Opens the portal on trigger event
+        </member>
+        <member name="M:AkRoomPortal.ClosePortal(UnityEngine.GameObject)">
+            Closes the portal on trigger event
+        </member>
+        <member name="T:AkTriggerBase">
+            @brief Base class for the generic triggering mechanism for Wwise Integration.
+            All Wwise components will use this mechanism to drive their behavior.
+            Derive from this class to add your own triggering condition, as described in \ref unity_add_triggers
+        </member>
+        <member name="T:AkTriggerBase.Trigger">
+            Delegate declaration for all Wwise Triggers.
+        </member>
+        <member name="F:AkTriggerBase.triggerDelegate">
+            All components reacting to the trigger will be registered in this delegate.
+        </member>
+        <member name="T:AkRoomAwareManager">
+            @brief This manager tracks the AkRoomAwareObjects and the AkRooms in which they enter and exit.
+            @details At the end of the frame, the AkRoomAwareObject is set in the highest priority AkRoom in Spatial Audio.
+        </member>
+        <member name="T:AkEnvironmentPortal">
+            @brief Use this component to define an area that straddles two different AkEnvironment's zones and allow mixing between both zones. \ref unity_use_AkEnvironment_AkEnvironmentPortal
+        </member>
+        <member name="F:AkEnvironmentPortal.axis">
+            The axis used to find the contribution of each environment
+        </member>
+        <member name="F:AkEnvironmentPortal.environments">
+            The array is already sorted by position.
+            The first environment is on the negative side of the portal(opposite to the direction of the chosen axis)
+            The second environment is on the positive side of the portal
+        </member>
+        <member name="T:AkEnvironmentPortal.EnvListWrapper">
+            This enables us to detect intersections between portals and environments in the editor
+        </member>
+        <member name="F:AkEnvironmentPortal.envList">
+            Unity can't serialize an array of list so we wrap the list in a serializable class 
+        </member>
+        <member name="M:AkSurfaceReflector.SetGeometry">
+            <summary>
+                Sends the mesh's triangles and their acoustic texture to Spatial Audio
+            </summary>
+        </member>
+        <member name="M:AkSurfaceReflector.UpdateGeometry">
+            <summary>
+                Update the surface reflector's geometry in Spatial Audio.
+            </summary>
+        </member>
+        <member name="M:AkSurfaceReflector.RemoveGeometry">
+            <summary>
+                Remove the surface reflector's geometry from Spatial Audio.
+            </summary>
+        </member>
+        <member name="T:AkEventCallbackMsg">
+            <summary>
+                Event callback information.
+                Event callback functions can receive this structure as a parameter
+            </summary>
+        </member>
+        <member name="F:AkEventCallbackMsg.info">
+            For more information about the event callback, see the classes derived from AkCallbackInfo.
+        </member>
+        <member name="F:AkEventCallbackMsg.sender">
+            GameObject from whom the callback function was called
+        </member>
+        <member name="F:AkEventCallbackMsg.type">
+            AkSoundEngine.PostEvent callback flags. See the AkCallbackType enumeration for a list of all callbacks
+        </member>
+        <member name="F:AkEvent.actionOnEventType">
+            Replacement action.  See AK::SoundEngine::ExecuteEventOnAction()
+        </member>
+        <member name="F:AkEvent.curveInterpolation">
+            Fade curve to use with the new Action.  See AK::SoundEngine::ExecuteEventOnAction()
+        </member>
+        <member name="F:AkEvent.enableActionOnEvent">
+            Enables additional options to reuse existing events.  Use it to transform a Play event into a Stop event without having to define one in the Wwise Project.
+        </member>
+        <member name="F:AkEvent.soundEmitterObject">
+            Game object onto which the Event will be posted.  By default, when empty, it is posted on the same object on which the component was added.
+        </member>
+        <member name="F:AkEvent.transitionDuration">
+            Duration of the fade.  See AK::SoundEngine::ExecuteEventOnAction()
+        </member>
+        <member name="F:AkBank.decodeBank">
+            Decode this SoundBank upon load
+        </member>
+        <member name="F:AkBank.loadAsynchronous">
+            Check this to load the SoundBank in the background. Be careful, if Events are triggered and the SoundBank hasn't finished loading, you'll have "Event not found" errors.
+        </member>
+        <member name="F:AkBank.saveDecodedBank">
+            Save the decoded SoundBank to disk for faster loads in the future
+        </member>
+        <member name="F:AkBank.unloadTriggerList">
+            Reserved.
+        </member>
+        <member name="M:AkBank.HandleEvent(UnityEngine.GameObject)">
+            Loads the SoundBank
+        </member>
+        <member name="M:AkBank.UnloadBank(UnityEngine.GameObject)">
+            Unloads a SoundBank
+        </member>
+        <member name="M:AkAudioListener.BaseListenerList.Add(AkAudioListener)">
+            <summary>
+                Uniquely adds listeners to the list
+            </summary>
+            <param name="listener"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AkAudioListener.BaseListenerList.Remove(AkAudioListener)">
+            <summary>
+                Removes listeners from the list
+            </summary>
+            <param name="listener"></param>
+            <returns></returns>
+        </member>
+        <member name="F:AkTriggerHandler.MAX_NB_TRIGGERS">
+            Since our mask is a 32 bits integer, we can't have more than 32 triggers
+        </member>
+        <member name="F:AkTriggerHandler.triggerTypes">
+            Will contain the types of all the triggers derived from AkTriggerBase at runtime
+        </member>
+        <member name="F:AkTriggerHandler.triggerList">
+            List containing the enabled triggers.
+        </member>
+        <member name="F:AkTriggerHandler.useOtherObject">
+            This property is usefull only when used with colliders.  When enabled, the target of the action will be the other colliding object.  When disabled, it will be the current object.
+        </member>
+        <member name="F:AkGameObjEnvironmentData.activeEnvironments">
+            Contains all active environments sorted by default, excludeOthers and priority, even those inside a portal.
+        </member>
+        <member name="F:AkGameObjEnvironmentData.activeEnvironmentsFromPortals">
+            Contains all active environments sorted by priority, even those inside a portal.
+        </member>
+        <member name="F:AkGameObjEnvironmentData.activePortals">
+            Contains all active portals.
+        </member>
+        <member name="T:AkRoomAwareObject">
+            <summary>
+                This component makes a GameObject aware of AkRoom components.
+                When using Spatial Audio rooms, all emitters and the spatial audio listener should have this component.
+            </summary>
+        </member>
+        <member name="M:AkRoomAwareObject.EnteredRoom(AkRoom)">
+            <summary>
+                Called when entering a room.
+            </summary>
+            <param name="room">The room.</param>
+        </member>
+        <member name="M:AkRoomAwareObject.ExitedRoom(AkRoom)">
+            <summary>
+                Called when exiting a room.
+            </summary>
+            <param name="room">The room.</param>
+        </member>
+        <member name="T:AkEnvironment.AkEnvironment_CompareByPriority">
+            @brief Sorts AkEnvironments based on their priorities.
+        </member>
+        <member name="T:AkEnvironment.AkEnvironment_CompareBySelectionAlgorithm">
+            @brief Sorts AkEnvironments based on the selection algorithm.
+            The selection algorithm is as follows: 
+            -# Environments have priorities.
+            -# Environments have a "Default" flag. This flag effectively says that this environment will be bumped out if any other is present.
+            -# Environments have an "Exclude Other" flag. This flag will tell that this env is not overlappable with others. So, only one (the highest priority) should be selected.
+        </member>
+        <member name="M:AkSoundEngineController.IsTheSingleOwningInitializer(AkInitializer)">
+            <summary>
+            Determines whether this AkInitializer is the single one responsible for initializing the sound engine.
+            </summary>
+            <param name="akInitializer"></param>
+            <returns>Returns true when called on the first AkInitializer and false otherwise.</returns>
+        </member>
+    </members>
+</doc>

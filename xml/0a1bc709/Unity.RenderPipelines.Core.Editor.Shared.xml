@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Unity.RenderPipelines.Core.Editor.Shared</name>
+    </assembly>
+    <members>
+        <member name="T:UnityEditor.Rendering.Converter.Status">
+            <summary>
+            Represents the conversion state of a render pipeline converter item.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.Converter.Status.Pending">
+            <summary>
+            The item is waiting to be processed.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.Converter.Status.Warning">
+            <summary>
+            The item has a potential issue that may require attention.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.Converter.Status.Error">
+            <summary>
+            The item encountered an error during processing.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.Converter.Status.Success">
+            <summary>
+            The item was successfully processed without issues.
+            </summary>
+        </member>
+        <member name="T:UnityEditor.Rendering.Converter.IRenderPipelineConverter">
+            <summary>
+            Represents a converter that processes render pipeline conversion items.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Rendering.Converter.IRenderPipelineConverter.isEnabled">
+            <summary>
+            Gets a value indicating whether the converter is enabled and can be used.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Rendering.Converter.IRenderPipelineConverter.isDisabledMessage">
+            <summary>
+            Gets or sets the reason message shown when the converter item is disabled.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Rendering.Converter.IRenderPipelineConverter.Scan(System.Action{System.Collections.Generic.List{UnityEditor.Rendering.Converter.IRenderPipelineConverterItem}})">
+            <summary>
+            Scans for available render pipeline converter items.
+            </summary>
+            <param name="onScanFinish">
+            A callback invoked when the scan is complete, providing the list of converter items.
+            </param>
+        </member>
+        <member name="M:UnityEditor.Rendering.Converter.IRenderPipelineConverter.BeforeConvert">
+            <summary>
+            Called before the conversion process begins.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Rendering.Converter.IRenderPipelineConverter.Convert(UnityEditor.Rendering.Converter.IRenderPipelineConverterItem,System.String@)">
+            <summary>
+            Performs the conversion on a given converter item.
+            </summary>
+            <param name="item">The converter item to be processed.</param>
+            <param name="message">
+            An output message providing additional details about the conversion result.
+            </param>
+            <returns>
+            A <see cref="T:UnityEditor.Rendering.Converter.Status"/> value representing the outcome of the conversion.
+            </returns>
+        </member>
+        <member name="M:UnityEditor.Rendering.Converter.IRenderPipelineConverter.AfterConvert">
+            <summary>
+            Called after the conversion process is completed.
+            </summary>
+        </member>
+        <member name="T:UnityEditor.Rendering.Converter.IRenderPipelineConverterItem">
+            <summary>
+            Represents a converter item used within a render pipeline conversion process.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Rendering.Converter.IRenderPipelineConverterItem.name">
+            <summary>
+            Gets the display name of the converter item.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Rendering.Converter.IRenderPipelineConverterItem.info">
+            <summary>
+            Gets a description or additional information about the converter item.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Rendering.Converter.IRenderPipelineConverterItem.isEnabled">
+            <summary>
+            Gets or sets a value indicating whether the converter item is enabled.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Rendering.Converter.IRenderPipelineConverterItem.isDisabledMessage">
+            <summary>
+            Gets or sets the reason message shown when the converter item is disabled.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Rendering.Converter.IRenderPipelineConverterItem.OnClicked">
+            <summary>
+            Invoked when the converter item is clicked or activated.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Rendering.Converter.RenderPipelineConverterMaterialUpgrader.upgraders">
+            <summary>
+            List of material upgraders to use for this converter.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.RenderPipelines.Core.AssetCreationUtil.CreateShaderAndMaterial(System.String,System.Action{UnityEngine.Material},System.String)">
+            <summary>
+            Prompts the user to save a new <seealso cref="T:UnityEngine.Shader"/> asset created from the shader template, and creates and <seealso cref="T:UnityEngine.Material"/> with it.
+            </summary>
+            <param name="name">Default material name.</param>
+            <param name="callback">A delegate (callback) that will be invoked with the <see cref="T:UnityEngine.Material"/>.</param>
+            <param name="shaderTemplateAssetPath">Path of the Shader Template file.</param>
+        </member>
+        <member name="M:UnityEditor.RenderPipelines.Core.AssetCreationUtil.CreateMaterial(System.String,System.Action{UnityEngine.Material},UnityEngine.Shader)">
+            <summary>
+            Prompts the user to save a new <seealso cref="T:UnityEngine.Material"/> asset created using the <paramref name="shader"/>.
+            </summary>
+            <param name="name">Default material name.</param>
+            <param name="callback">A delegate (callback) that will be invoked with the <see cref="T:UnityEngine.Material"/>.</param>
+            <param name="shader"><seealso cref="T:UnityEngine.Shader"/> to create the new <seealso cref="T:UnityEngine.Material"/> with.</param>
+        </member>
+    </members>
+</doc>

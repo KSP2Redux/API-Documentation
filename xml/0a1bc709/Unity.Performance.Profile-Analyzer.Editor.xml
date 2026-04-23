@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Unity.Performance.Profile-Analyzer.Editor</name>
+    </assembly>
+    <members>
+        <member name="M:UnityEditor.Performance.ProfileAnalyzer.MarkerData.CompareTo(UnityEditor.Performance.ProfileAnalyzer.MarkerData)">
+            <summary>Compare the time duration between the marker median times. Used for sorting in descending order</summary>
+            <param name="other"> The other MarkerData to compare </param>
+            <returns>-1 if this is larger, 0 if the same, 1 if this is smaller</returns>
+        </member>
+        <member name="F:UnityEditor.Performance.ProfileAnalyzer.FrameTime.ms">
+            <summary>Duration in the frame in milliseconds</summary>
+        </member>
+        <member name="F:UnityEditor.Performance.ProfileAnalyzer.FrameTime.frameIndex">
+            <summary>Index of which frame this time duration occured on. A zero based frame index</summary>
+        </member>
+        <member name="F:UnityEditor.Performance.ProfileAnalyzer.FrameTime.count">
+            <summary>Number of occurrences</summary>
+        </member>
+        <member name="M:UnityEditor.Performance.ProfileAnalyzer.FrameTime.#ctor(System.Int32,System.Single,System.Int32)">
+            <summary>Initialise FrameTime</summary>
+            <param name="index"> The frame index</param>
+            <param name="msTime"> The duration of the frame in milliseconds</param>
+            <param name="_count"> The number of occurrences</param>
+        </member>
+        <member name="M:UnityEditor.Performance.ProfileAnalyzer.FrameTime.#ctor(UnityEditor.Performance.ProfileAnalyzer.FrameTime)">
+            <summary>Initialise from another FrameTime</summary>
+            <param name="t"> The FrameTime to assign</param>
+        </member>
+        <member name="M:UnityEditor.Performance.ProfileAnalyzer.FrameTime.CompareTo(UnityEditor.Performance.ProfileAnalyzer.FrameTime)">
+            <summary>Compare the time duration between the frames. Used for sorting in ascending order</summary>
+            <param name="other"> The other FrameTime to compare </param>
+            <returns>-1 if this is smaller, 0 if the same, 1 if this is larger</returns>
+        </member>
+        <member name="M:UnityEditor.Performance.ProfileAnalyzer.FrameTime.CompareMs(UnityEditor.Performance.ProfileAnalyzer.FrameTime,UnityEditor.Performance.ProfileAnalyzer.FrameTime)">
+            <summary>Compare the time duration between two FrameTimes. Used for sorting in ascending order</summary>
+            <param name="a"> The first FrameTime to compare </param>
+            <param name="b"> The second FrameTime to compare </param>
+            <returns>-1 if a is smaller, 0 if the same, 1 if a is larger</returns>
+        </member>
+        <member name="M:UnityEditor.Performance.ProfileAnalyzer.FrameTime.CompareCount(UnityEditor.Performance.ProfileAnalyzer.FrameTime,UnityEditor.Performance.ProfileAnalyzer.FrameTime)">
+            <summary>Compare the instance count between two FrameTimes. Used for sorting in ascending order</summary>
+            <param name="a"> The first FrameTime to compare </param>
+            <param name="b"> The second FrameTime to compare </param>
+            <returns>-1 if a is smaller, 0 if the same, 1 if a is larger</returns>
+        </member>
+        <member name="M:UnityEditor.Performance.ProfileAnalyzer.FrameTime.CompareMsDescending(UnityEditor.Performance.ProfileAnalyzer.FrameTime,UnityEditor.Performance.ProfileAnalyzer.FrameTime)">
+            <summary>Compare the time duration between two FrameTimes. Used for sorting in descending order</summary>
+            <param name="a"> The first FrameTime to compare </param>
+            <param name="b"> The second FrameTime to compare </param>
+            <returns>-1 if a is larger, 0 if the same, 1 if a is smaller</returns>
+        </member>
+        <member name="M:UnityEditor.Performance.ProfileAnalyzer.FrameTime.CompareCountDescending(UnityEditor.Performance.ProfileAnalyzer.FrameTime,UnityEditor.Performance.ProfileAnalyzer.FrameTime)">
+            <summary>Compare the instance count between two FrameTimes. Used for sorting in descending order</summary>
+            <param name="a"> The first FrameTime to compare </param>
+            <param name="b"> The second FrameTime to compare </param>
+            <returns>-1 if a is larger, 0 if the same, 1 if a is smaller</returns>
+        </member>
+        <member name="T:UnityEditor.Performance.ProfileAnalyzer.ThreadIdentifier">
+            <summary>
+            Individual Thread details
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Performance.ProfileAnalyzer.ThreadIdentifier.threadNameWithIndex">
+            <summary>Thread name with index combined. A profiler analyzer specific unique thread representation</summary>
+        </member>
+        <member name="P:UnityEditor.Performance.ProfileAnalyzer.ThreadIdentifier.name">
+            <summary>Thread name (may not be unique)</summary>
+        </member>
+        <member name="P:UnityEditor.Performance.ProfileAnalyzer.ThreadIdentifier.index">
+            <summary>Thread index. A 1 based id for threads with matching names. -1 indicates all threads with the same name, 0 if there is only one thread with this name</summary>
+        </member>
+        <member name="F:UnityEditor.Performance.ProfileAnalyzer.ThreadIdentifier.kAll">
+            <summary>Thread index id which means all threads of the same name</summary>
+        </member>
+        <member name="F:UnityEditor.Performance.ProfileAnalyzer.ThreadIdentifier.kSingle">
+            <summary>Thread index id use when there is only one thread with this name</summary>
+        </member>
+        <member name="M:UnityEditor.Performance.ProfileAnalyzer.ThreadIdentifier.#ctor(System.String,System.Int32)">
+            <summary>Initialise ThreadIdentifier</summary>
+            <param name="name">The thread name</param>
+            <param name="index">The thread index</param>
+        </member>
+        <member name="M:UnityEditor.Performance.ProfileAnalyzer.ThreadIdentifier.#ctor(UnityEditor.Performance.ProfileAnalyzer.ThreadIdentifier)">
+            <summary>Initialise ThreadIdentifier from another ThreadIdentifier</summary>
+            <param name="threadIdentifier">The other ThreadIdentifier</param>
+        </member>
+        <member name="M:UnityEditor.Performance.ProfileAnalyzer.ThreadIdentifier.#ctor(System.String)">
+            <summary>Initialise ThreadIdentifier from a unique name</summary>
+            <param name="threadNameWithIndex">The unique name string (name with index)</param>
+        </member>
+        <member name="M:UnityEditor.Performance.ProfileAnalyzer.ThreadIdentifier.SetName(System.String)">
+            <summary>Set the name of the thread</summary>
+            <param name="newName">The name (without index)</param>
+        </member>
+        <member name="M:UnityEditor.Performance.ProfileAnalyzer.ThreadIdentifier.SetIndex(System.Int32)">
+            <summary>Set the index of the thread name</summary>
+            <param name="newIndex">The index of the thread with the same name</param>
+        </member>
+        <member name="M:UnityEditor.Performance.ProfileAnalyzer.ThreadIdentifier.SetAll">
+            <summary>Sets the index to indicate we want all threads (used for filtering against other ThreadIdentifiers)</summary>
+        </member>
+        <member name="T:UnityEditor.Performance.ProfileAnalyzer.ProfileAnalyzerWindow">
+            <summary>
+            Main profile Analyzer UI window
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Performance.ProfileAnalyzer.ProfileAnalyzerWindow.OpenProfileAnalyzer">
+            <summary>
+            Open profile analyzer window
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Performance.ProfileAnalyzer.ProfileAnalyzerWindow.SelectMarker(System.String)">
+            <summary>
+            Select marker to focus on
+            </summary>
+            <param name="name">Name of the marker</param>
+        </member>
+        <member name="M:UnityEditor.Performance.ProfileAnalyzer.ProfileAnalyzerWindow.GetSelectedMarkerName">
+            <summary>
+            Get currently selected marker
+            </summary>
+            <returns>Name of currently selected marker, or null if none selected</returns>
+        </member>
+        <member name="M:UnityEditor.Performance.ProfileAnalyzer.ProfileAnalyzerWindow.RemapFrameIndex(System.Int32,System.Int32)">
+            <summary>
+            Used to remap frame indices when the loaded range in the profiler does not match the range present in the Profile Analyzer capture.
+            This happens when we reload data into the Profiler Window as the index range becomes 1 -> n+1
+            </summary>
+            <param name="frameIndex">target frame index</param>
+            <param name="frameIndexOffset">capture frameIndex offset</param>
+            <returns></returns>
+        </member>
+        <member name="T:UnityEditor.Performance.ProfileAnalyzer.Units">
+            <summary>Unit type identifier</summary>
+        </member>
+        <member name="F:UnityEditor.Performance.ProfileAnalyzer.Units.Milliseconds">
+            <summary>Time in milliseconds</summary>
+        </member>
+        <member name="F:UnityEditor.Performance.ProfileAnalyzer.Units.Microseconds">
+            <summary>Time in microseconds</summary>
+        </member>
+        <member name="F:UnityEditor.Performance.ProfileAnalyzer.Units.Count">
+            <summary>Count of number of instances</summary>
+        </member>
+    </members>
+</doc>

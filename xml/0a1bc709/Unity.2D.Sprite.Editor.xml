@@ -1,0 +1,967 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Unity.2D.Sprite.Editor</name>
+    </assembly>
+    <members>
+        <member name="T:UnityEditor.U2D.Sprites.ISpriteDataProviderFactory`1">
+            <summary>
+            Interface for providing a ISpriteEditorDataProvider instance.
+            </summary>
+            <typeparam name="T">The object type the implemented interface is interested in.</typeparam>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteDataProviderFactory`1.CreateDataProvider(`0)">
+            <summary>
+            Implement the method to provide an instance of ISpriteEditorDataProvider for a given object.
+            </summary>
+            <param name="obj">The object that requires an instance of ISpriteEditorDataProvider.</param>
+            <returns>An instance of ISpriteEditorDataProvider or null if not supported by the interface.</returns>
+        </member>
+        <member name="T:UnityEditor.U2D.Sprites.SpriteDataProviderFactories">
+            <summary>
+            Utility class that collects methods with SpriteDataProviderFactoryAttribute and SpriteDataProviderAssetPathProviderAttribute.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.SpriteDataProviderFactories.Init">
+            <summary>
+            Initialized and collect methods with SpriteDataProviderFactoryAttribute and SpriteDataProviderAssetPathProviderAttribute.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.SpriteDataProviderFactories.GetSpriteEditorDataProviderFromObject(UnityEngine.Object)">
+            <summary>
+            Given a UnityEngine.Object, determine the ISpriteEditorDataProvider associate with the object by going
+            going through the methods with SpriteDataProviderFactoryAttribute.
+            </summary>
+            <remarks>When none of the methods is able to provide ISpriteEditorDataProvider for the object, the method will
+            try to cast the AssetImporter of the object to ISpriteEditorDataProvider.</remarks>
+            <param name="obj">The UnityEngine.Object to query.</param>
+            <returns>The ISpriteEditorDataProvider associated with the object.</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.SpriteDataProviderFactories.GetAssetPath(UnityEngine.Object)">
+            <summary>
+            Given a UnityEngine.Object, determine the asset path associate with the object by going
+            going through the methods with SpriteDataProviderAssetPathProviderAttribute.
+            </summary>
+            <remarks>When none of the methods is able to provide the asset path for the object, the method will return null</remarks>
+            <param name="obj">The UnityEngine.Object to query</param>
+            <returns>The asset path for the object</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.SpriteDataProviderFactories.GetSpriteObject(UnityEngine.Object)">
+            <summary>
+            Given a UnityEngine.Object, determine the Sprite object associate with the object by going
+            going through the methods with SpriteObjectProviderAttribute.
+            </summary>
+            <remarks>When none of the methods is able to provide a Sprite object, the method will return null</remarks>
+            <param name="obj">The UnityEngine.Object to query</param>
+            <returns>The Sprite object</returns>
+        </member>
+        <member name="T:UnityEditor.U2D.Sprites.SpriteEditorModuleBase">
+            <summary>Base class the Sprite Editor Window custom module inherits from.</summary>
+            <remarks>Sprite Editor Window functionality can be extended by providing custom module. By inheriting from SpriteEditorModuleBase, user will be able to activate the module's functionality from Sprite Editor Window.
+            </remarks>
+        </member>
+        <member name="P:UnityEditor.U2D.Sprites.SpriteEditorModuleBase.spriteEditor">
+            <summary>The ISpriteEditor instance that instantiated the module.</summary>
+            <value>An instance of ISpriteEditor</value>
+        </member>
+        <member name="P:UnityEditor.U2D.Sprites.SpriteEditorModuleBase.moduleName">
+            <summary>The module name to display in Sprite Editor Window.</summary>
+            <value>String to represent the name of the module</value>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.SpriteEditorModuleBase.CanBeActivated">
+            <summary>Indicates if the module can be activated with the current ISpriteEditor state.</summary>
+            <returns>Return true if the module can be activated.</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.SpriteEditorModuleBase.DoMainGUI">
+            <summary>Implement this to draw on the Sprite Editor Window.</summary>
+            <remarks>Called after Sprite Editor Window draws texture preview of the Asset.Use this to draw gizmos for Sprite data.</remarks>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.SpriteEditorModuleBase.DoToolbarGUI(UnityEngine.Rect)">
+            <summary>Implement this to create a custom toolbar.</summary>
+            <param name = "drawArea" > Area for drawing tool bar.</param>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.SpriteEditorModuleBase.OnModuleActivate">
+            <summary>This is called when the user activates the module.</summary>
+            <remarks>When user switches to the module via Sprite Editor Window, this method will be called for the module to setup.</remarks>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.SpriteEditorModuleBase.OnModuleDeactivate">
+            <summary>This is called when user switches to another module.</summary>
+            <remarks>When user switches to the another module in Sprite Editor Window, this method will be called for the module to clean up.</remarks>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.SpriteEditorModuleBase.DoPostGUI">
+            <summary>Implement this to draw widgets in Sprite Editor Window.</summary>
+            <remarks>This method is called last to allow drawing of widgets.</remarks>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.SpriteEditorModuleBase.ApplyRevert(System.Boolean)">
+            <summary>This is called when user clicks on the Apply or Revert button in Sprite Editor Window.</summary>
+            <param name="apply">True when user wants to apply the data, false when user wants to revert.</param>
+            <returns>Return true to trigger a reimport.</returns>
+        </member>
+        <member name="T:UnityEditor.U2D.Sprites.SpriteEditorModuleModeSupportBase">
+            <summary>
+            Base class for having SpriteEditorModule use as a mode in another SpriteEditorModuleBase
+            </summary>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.SpriteEditorModuleModeSupportBase.SetModuleModes(System.Collections.Generic.IEnumerable{System.Type})">
+            <summary>
+            Modes that the module can be activated as.
+            </summary>
+            <param name="modes">Enumerable list of mode Type that can be activated</param>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditorModuleMode.ActivateMode">
+            <summary>
+            This is called when a SpriteEditorModeBase is activated as a mode.
+            </summary>
+            <returns>Return true if the mode is activated</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditorModuleMode.DeactivateMode">
+            <summary>
+            This is called when SpriteEditorModeBase is deactivated as a mode.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditorModuleMode.OnAddToModule(UnityEditor.U2D.Sprites.SpriteEditorModuleModeSupportBase)">
+            <summary>
+            This is called SpriteEditorModeBase is added to a module.
+            </summary>
+            <param name="module">The module that added this mode</param>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditorModuleMode.OnRemoveFromModule(UnityEditor.U2D.Sprites.SpriteEditorModuleModeSupportBase)">
+            <summary>
+            This is called SpriteEditorModeBase is removed from a module.
+            </summary>
+            <param name="module">The module that removed this mode</param>
+        </member>
+        <member name="E:UnityEditor.U2D.Sprites.ISpriteEditorModuleMode.onModeRequestActivate">
+            <summary>
+            Register a callback to be called when the mode is activated.
+            </summary>
+            <param name="onActivate">Callback delegate</param>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditorModuleMode.ApplyModeData(System.Boolean,System.Collections.Generic.HashSet{System.Type})">
+            <summary>
+            Inform the mode to apply or revert data changes.
+            </summary>
+            <param name="apply">True when data needs to be apply.</param>
+            <param name="dataProviderTypes">List of data provider type that has data applied before. Append to the list if new data type has changed.</param>
+            /// <returns>Return true to trigger a reimport.</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditorModuleMode.CanBeActivated">
+            <summary>The module name to display in Sprite Editor Window.</summary>
+            <value>String to represent the name of the module</value>
+            <summary>Indicates if the module can be activated with the current ISpriteEditor state.</summary>
+            <returns>Return true if the module can be activated.</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditorModuleMode.DoMainGUI">
+            <summary>Implement this to draw on the Sprite Editor Window.</summary>
+            <remarks>Called after Sprite Editor Window draws texture preview of the Asset.Use this to draw gizmos for Sprite data.</remarks>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditorModuleMode.DoToolbarGUI(UnityEngine.Rect)">
+            <summary>Implement this to create a custom toolbar.</summary>
+            <param name = "drawArea" > Area for drawing tool bar.</param>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditorModuleMode.DoPostGUI">
+            <summary>Implement this to draw widgets in Sprite Editor Window.</summary>
+            <remarks>This method is called last to allow drawing of widgets.</remarks>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditorModuleMode.RequestModeToActivate">
+            <summary>
+            Request mode to be activated,
+            </summary>
+        </member>
+        <member name="P:UnityEditor.U2D.Sprites.ISpriteEditorModuleMode.spriteEditor">
+            <summary>
+            ISpriteEditor context for the mode.
+            </summary>
+        </member>
+        <member name="T:UnityEditor.U2D.Sprites.SpriteEditorModeBase">
+            <summary>
+            Base class for having SpriteEditorModuleBase use as a mode in another SpriteEditorModuleBase
+            </summary>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.SpriteEditorModeBase.ActivateMode">
+            <summary>
+            This is called when a SpriteEditorModeBase is activated as a mode.
+            </summary>
+            <returns>Return true if the mode is activated</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.SpriteEditorModeBase.DeactivateMode">
+            <summary>
+            This is called when SpriteEditorModeBase is deactivated as a mode.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.SpriteEditorModeBase.OnAddToModule(UnityEditor.U2D.Sprites.SpriteEditorModuleModeSupportBase)">
+            <summary>
+            This is called SpriteEditorModeBase is added to a module.
+            </summary>
+            <param name="module">The module that added this mode</param>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.SpriteEditorModeBase.OnRemoveFromModule(UnityEditor.U2D.Sprites.SpriteEditorModuleModeSupportBase)">
+            <summary>
+            This is called SpriteEditorModeBase is removed from a module.
+            </summary>
+            <param name="module">The module that removed this mode</param>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.SpriteEditorModeBase.RegisterOnModeRequestActivate(System.Action{UnityEditor.U2D.Sprites.SpriteEditorModeBase})">
+            <summary>
+            Register a callback to be called when the mode is activated.
+            </summary>
+            <param name="onActivate">Callback delegate</param>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.SpriteEditorModeBase.UnregisterOnModeRequestActivate(System.Action{UnityEditor.U2D.Sprites.SpriteEditorModeBase})">
+            <summary>
+            Unregister a previously registered callback.
+            </summary>
+            <param name="onActivate">Callback delegate</param>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.SpriteEditorModeBase.ApplyModeData(System.Boolean,System.Collections.Generic.HashSet{System.Type})">
+            <summary>
+            Inform the mode to apply or revert data changes.
+            </summary>
+            <param name="apply">True when data needs to be apply.</param>
+            <param name="dataProviderTypes">List of data provider type that has data applied before. Append to the list if new data type has changed.</param>
+            /// <returns>Return true to trigger a reimport.</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.SpriteEditorModeBase.RequestModeToActivate">
+            <summary>
+            Request Mode to be activated
+            </summary>
+        </member>
+        <member name="T:UnityEditor.U2D.Sprites.ISpriteEditor">
+            <summary>Interface that defines the functionality available for classes that inherits SpriteEditorModuleBase.</summary>
+            <remarks>Used by Sprite Editor Window to encapsulate functionality accessible for Sprite Editor modules when editing Sprite data.</remarks>
+        </member>
+        <member name="P:UnityEditor.U2D.Sprites.ISpriteEditor.spriteRects">
+            <summary>Sets current available Sprite rects.</summary>
+        </member>
+        <member name="P:UnityEditor.U2D.Sprites.ISpriteEditor.selectedSpriteRect">
+            <summary>The current selected Sprite rect data.</summary>
+        </member>
+        <member name="P:UnityEditor.U2D.Sprites.ISpriteEditor.enableMouseMoveEvent">
+            <summary>Indicates if ISpriteEditor should be interested in mouse move events.</summary>
+        </member>
+        <member name="P:UnityEditor.U2D.Sprites.ISpriteEditor.editingDisabled">
+            <summary>Indicates that if Sprite data editing should be disabled; for example when the Editor is in Play Mode.</summary>
+        </member>
+        <member name="P:UnityEditor.U2D.Sprites.ISpriteEditor.windowDimension">
+            <summary>Property that defines the window's current screen position and size.</summary>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditor.GetDataProvider``1">
+            <summary>
+            Gets data provider that is supported by the current selected object.
+            </summary>
+            <typeparam name="T">Data provider type</typeparam>
+            <returns>Instance of the data provider</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditor.HandleSpriteSelection">
+            <summary>The method updates ISpriteEditor.selectedSpriteRect based on current mouse down event and ISpriteEditor.spriteRects available.</summary>
+            <returns>Returns true when ISpriteEditor.selectedSpriteRect is changed.</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditor.RequestRepaint">
+            <summary>Request to repaint the current view.</summary>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditor.SetDataModified">
+            <summary>Indicates that there has been a change of data. In Sprite Editor Window, this enables the 'Apply' and 'Revert' button.</summary>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditor.ApplyOrRevertModification(System.Boolean)">
+            <summary>The method will inform current active SpriteEditorModuleBase to apply or revert any data changes.</summary>
+            <param name="apply">True if applying. False otherwise.</param>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditor.GetMainVisualContainer">
+            <summary>
+            Returns a VisualElement for attaching child VisualElement onto the main view of a ISpriteEditor.
+            </summary>
+            <returns>Root VisualElement for the main view.</returns>
+            <remarks>This method returns the root VisualElement for SpriteEditorModuleBase which uses the UIElement instead of IMGUI for its UI.A VisualElement that is added to this container has the same draw order as SpriteEditorModuleBase.DoPostGUI.</remarks>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditor.GetToolbarRootElement">
+            <summary>
+            Returns a VisualElement for attaching child Toolbar onto the toolbar of a ISpriteEditor.
+            </summary>
+            <returns>Root VisualElement for the toolbar.</returns>
+            <remarks>This method returns the root VisualElement for SpriteEditorModuleBase which uses the UIElement instead of IMGUI for its UI.</remarks>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditor.SetPreviewTexture(UnityEngine.Texture2D,System.Int32,System.Int32)">
+            <summary>Sets a custom texture to be used by the ISpriteEditor during setup of the editing space.</summary>
+            <param name = "texture" > The custom preview texture.</param>
+            <param name = "width" > The width dimension to render the preview texture.</param>
+            <param name = "height" > The height dimension to render the preview texture.</param>
+            <remarks>When the method is called, the editing space's dimensions are set to the width and height values, affecting operations such as Zoom and Pan in the ISpriteEditor view. The preview texture is rendered as the background of the editing space.</remarks>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditor.GetPreviewTexture(UnityEngine.Texture2D@,System.Int32@,System.Int32@)">
+            <summary>
+            Get the current preview texture used by the ISpriteEditor
+            </summary>
+            <param name="texture">The texture that is used.</param>
+            <param name="width">The width dimension used render the preview texture.</param>
+            <param name="height">The height dimension to render the preview texture.</param>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditor.ResetZoomAndScroll">
+            <summary> Resets the zoom and scroll of the Sprite Editor Windows.</summary>
+        </member>
+        <member name="P:UnityEditor.U2D.Sprites.ISpriteEditor.zoomLevel">
+            <summary>Current zoom level of the ISpriteEditor view. </summary>
+        </member>
+        <member name="P:UnityEditor.U2D.Sprites.ISpriteEditor.scrollPosition">
+            <summary>Current scroll position of the ISpriteEditor view. Determines the viewing location of the Texture displayed</summary>
+        </member>
+        <member name="P:UnityEditor.U2D.Sprites.ISpriteEditor.showAlpha">
+            <summary>Whether the ISpriteEditor view is visualizing the Alpha of the Texture displayed</summary>
+        </member>
+        <member name="P:UnityEditor.U2D.Sprites.ISpriteEditor.mipLevel">
+            <summary>The current Mip Level of the Texture displayed in ISpriteEditor view</summary>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditor.GetOverlay``1(System.String)">
+            <summary>
+            Get the Overlay that is registered for the ISpriteEditor.
+            </summary>
+            <param name="overlayID">String ID that identifies the Overlay.</param>
+            <typeparam name="T">The Overlay type.</typeparam>
+            <returns>The Overlay that is associated with the ISpriteEditor.</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditor.SetScenePreviewCallback(System.Action{UnityEngine.GameObject[]})">
+            <summary>
+            Set a callback method to be called when the ISpriteEditor has GameObjects that needs to be preview in the SceneView.
+            </summary>
+            <param name="callback">The callback method to be called.</param>
+        </member>
+        <member name="T:UnityEditor.U2D.Sprites.RequireSpriteDataProviderAttribute">
+             <summary>Use this attribute on a class that inherits from SpriteEditorModuleBase to indicate what data provider it needs.</summary>
+             <remarks>When you use this attribute, Sprite Editor Window will only make the module available for selection if ISpriteEditorDataProvider.HasDataProvider returns true for all the data providers the module needs.
+             <code>
+             using UnityEditor.U2D;
+             using UnityEngine;
+            
+             [RequireSpriteDataProvider(typeof(ISpriteOutlineDataProvider), typeof(ITextureDataProvider))]
+             public class MySpriteEditorCustomModule : SpriteEditorModuleBase
+             {
+                 public override string moduleName
+                 {
+                     get { return "MySpriteEditorCustomModule"; }
+                 }
+                 public override bool ApplyRevert(bool apply)
+                 {
+                     return true;
+                 }
+                 public override bool CanBeActivated()
+                 {
+                     return true;
+                 }
+                 public override void DoMainGUI() { }
+                 public override void DoToolbarGUI(Rect drawArea) { }
+                 public override void OnModuleActivate()
+                 {
+                     var outlineProvider = spriteEditor.GetDataProvider&lt;ISpriteOutlineDataProvider&gt;();
+                     var spriteRects = spriteEditor.GetDataProvider&lt;ISpriteEditorDataProvider&gt;().GetSpriteRects();
+                     foreach (var spriteRect in spriteRects)
+                     {
+                         // Access outline data
+                         Debug.Log(outlineProvider.GetOutlines(spriteRect.spriteID));
+                     }
+                 }
+                 public override void OnModuleDeactivate() { }
+                 public override void DoPostGUI() { }
+             }
+             </code>
+             </remarks>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.RequireSpriteDataProviderAttribute.#ctor(System.Type[])">
+            <summary>Use the attribute to indicate the custom data provider that SpriteEditorBaseModule needs.</summary>
+            <param name="types">Data provider type.</param>
+        </member>
+        <member name="T:UnityEditor.U2D.Sprites.SpriteEditorModuleModeAttribute">
+            <summary>
+            Attribute to indicate the module that this module can be activated as a mode in.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.SpriteEditorModuleModeAttribute.#ctor(System.Boolean,System.Type[])">
+            <summary>Use the attribute to indicate the custom data provider that SpriteEditorBaseModule needs.</summary>
+            <param name="showAsModule">Indicate if this module should still be listed as a module.</param>
+            <param name="types">Type of module this can be activated as mode</param>
+        </member>
+        <member name="P:UnityEditor.U2D.Sprites.SpriteEditorModuleModeAttribute.showAsModule">
+            <summary>
+            Indicate if this module should still be listed as a module.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.SpriteEditorModuleModeAttribute.GetModuleTypes">
+            <summary>
+            Modules that this module can be activated as a mode.
+            </summary>
+            <returns>List of module Type.</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.Overlay.SpriteFrameModeToolStripBase.OnToolStripToggled">
+            <summary>
+            Call to inform the rest of the tool strips that this tool strip has been toggled.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.Overlay.SpriteFrameModeToolStripBase.NotifyModeToolStripToggled(UnityEditor.U2D.Sprites.Overlay.SpriteFrameModeToolStripBase)">
+            <summary>
+            Notify this toolstrip when a toolstrip SpriteFrameModeToolStripBase has been toggled.
+            </summary>
+            <param name="value">The tool strip that is toggled.</param>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.Overlay.SpriteFrameModeToolStripBase.GetUIContent(UnityEditor.Overlays.Layout)">
+            <summary>
+            Get the UI content for the tool strip.
+            </summary>
+            <param name="overlayLayout">Desired overlay layout.</param>
+            <returns>VisualElements to be added to the tool strip.</returns>
+        </member>
+        <member name="P:UnityEditor.U2D.Sprites.Overlay.SpriteFrameModeToolStripBase.order">
+            <summary>
+            Order of the visual element should be placed.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.Overlay.SpriteFrameModeToolStripBase.OverlayActivated(UnityEditor.U2D.Sprites.ISpriteEditorModuleMode)">
+            <summary>
+            Called when the SpriteFrame overlay tool strip is ready.
+            </summary>
+            <param name="spriteEditorModule">The mode that is associated to this toolstrip as indicated in GetSpriteFrameModeType.</param>
+            <returns>Returns true if the overlay can be activated. False otherwise.</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.Overlay.SpriteFrameModeToolStripBase.OverlayDeactivated">
+            <summary>
+            Called when the SpriteFrame overlay toolstrip is deactivated.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.Overlay.SpriteFrameModeToolStripBase.GetSpriteFrameModeType">
+            <summary>
+            The type of the SpriteFrame mode that is associated with this toolstrip.
+            </summary>
+            <returns>Type of the mode.</returns>
+        </member>
+        <member name="P:UnityEditor.U2D.Sprites.SpriteFrameModuleBase.spriteRects">
+            <summary>
+            Mimics ISpriteEditor for SpriteEditorMode. Calls are route back to SpriteEditor
+            but can be override by if SpriteEditorModuleModeSupportBase it wants specific behaviour.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.SpriteFrameModule.RegisterSourceTextureOverride(System.Action{System.String})">
+            <summary>
+            Registers a callback to override the source texture.
+            </summary>
+            <param name="action">Callback that will write to the source texture with the path of the source texture.</param>
+        </member>
+        <member name="T:UnityEditor.U2D.Sprites.EditCapability">
+            <summary>
+            Structure to hold the edit capability of a sprite in Sprite Editor Window.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.U2D.Sprites.EditCapability.defaultCapability">
+            <summary>
+            Default editing capability where all capability is allowed.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.EditCapability.#ctor(UnityEditor.U2D.Sprites.EEditCapability[])">
+            <summary>
+            Constructor to create EditCapability with specific capabilities.
+            </summary>
+            <param name="capabilities">Capabilities allowed.</param>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.EditCapability.HasCapability(UnityEditor.U2D.Sprites.EEditCapability)">
+            <summary>
+            Check if the capability is enabled.
+            </summary>
+            <param name="hasCapability">Capability to check.</param>
+            <returns>True if capability is enabled. False otherwise.</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.EditCapability.SetCapability(UnityEditor.U2D.Sprites.EEditCapability,System.Boolean)">
+            <summary>
+            Enable or disable a capability.
+            </summary>
+            <param name="capability">Capability to modify.</param>
+            <param name="on">True to enable. False otherwise.</param>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.EditCapability.Equals(UnityEditor.U2D.Sprites.EditCapability)">
+            <summary>
+            Equality operator.
+            </summary>
+            <param name="other">Value to compare</param>
+            <returns>True if equal, false otherwise.</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.EditCapability.Equals(System.Object)">
+            <summary>
+            Equality operator.
+            </summary>
+            <param name="obj">Value to compare</param>
+            <returns>True if equal, false otherwise.</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.EditCapability.GetHashCode">
+            <summary>
+            Get the hash code of the capability.
+            </summary>
+            <returns>Hash value for the data.</returns>
+        </member>
+        <member name="T:UnityEditor.U2D.Sprites.EEditCapability">
+            <summary>
+            Edit capability flags.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.U2D.Sprites.EEditCapability.None">
+            <summary> No capability. </summary>
+        </member>
+        <member name="F:UnityEditor.U2D.Sprites.EEditCapability.EditSpriteName">
+            <summary> Edit sprite's name capability. </summary>
+        </member>
+        <member name="F:UnityEditor.U2D.Sprites.EEditCapability.EditSpriteRect">
+            <summary> Edit sprite's rect capability. </summary>
+        </member>
+        <member name="F:UnityEditor.U2D.Sprites.EEditCapability.EditBorder">
+            <summary> Edit sprite's border capability. </summary>
+        </member>
+        <member name="F:UnityEditor.U2D.Sprites.EEditCapability.EditPivot">
+            <summary> Edit sprite's pivot capability. </summary>
+        </member>
+        <member name="F:UnityEditor.U2D.Sprites.EEditCapability.CreateAndDeleteSprite">
+            <summary> Allow creation and deletion of sprite.</summary>
+        </member>
+        <member name="F:UnityEditor.U2D.Sprites.EEditCapability.SliceOnImport">
+            <summary>Allow slicing of Sprites on import of asset.</summary>
+        </member>
+        <member name="F:UnityEditor.U2D.Sprites.EEditCapability.All">
+            <summary> All capabilities are enabled.</summary>
+        </member>
+        <member name="T:UnityEditor.U2D.Sprites.ISpriteEditorDataProvider">
+             <summary>An interface that allows Sprite Editor Window to edit Sprite data for user custom importer.</summary>
+             <remarks> Use this interface to edit Sprite data.
+             <code>
+             using UnityEditor;
+             using UnityEditor.U2D.Sprites;
+             using UnityEngine;
+            
+             public class PivotUpdater : AssetPostprocessor
+             {
+                 private void OnPreprocessTexture()
+                 {
+                     var factory = new SpriteDataProviderFactories();
+                     factory.Init();
+                     var dataProvider = factory.GetSpriteEditorDataProviderFromObject(assetImporter);
+                     dataProvider.InitSpriteEditorDataProvider();
+            
+                     SetPivot(dataProvider, new Vector2(0.5f, 0.5f));
+            
+                     dataProvider.Apply();
+                 }
+            
+                 static void SetPivot(ISpriteEditorDataProvider dataProvider, Vector2 pivot)
+                 {
+                     var spriteRects = dataProvider.GetSpriteRects();
+                     foreach (var rect in spriteRects)
+                     {
+                         rect.pivot = pivot;
+                         rect.alignment = SpriteAlignment.Custom;
+                     }
+                     dataProvider.SetSpriteRects(spriteRects);
+                 }
+             }
+             </code>
+             </remarks>
+        </member>
+        <member name="P:UnityEditor.U2D.Sprites.ISpriteEditorDataProvider.spriteImportMode">
+            <summary>SpriteImportMode to indicate how Sprite data will be imported.</summary>
+        </member>
+        <member name="P:UnityEditor.U2D.Sprites.ISpriteEditorDataProvider.pixelsPerUnit">
+            <summary>The number of pixels in the sprite that correspond to one unit in world space.</summary>
+        </member>
+        <member name="P:UnityEditor.U2D.Sprites.ISpriteEditorDataProvider.targetObject">
+            <summary>The object that this data provider is acquiring its data from.</summary>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditorDataProvider.GetSpriteRects">
+            <summary>Returns an array of SpriteRect representing Sprite data the provider has.</summary>
+            <returns>Array of SpriteRect.</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditorDataProvider.SetSpriteRects(UnityEditor.SpriteRect[])">
+            <summary>Sets the data provider's current SpriteRect.</summary>
+            <param name="spriteRects">Updated array of SpriteRect.</param>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditorDataProvider.Apply">
+            <summary>Applying any changed data.</summary>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditorDataProvider.InitSpriteEditorDataProvider">
+            <summary>Allows the data provider to initialize any data if needed.</summary>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditorDataProvider.GetDataProvider``1">
+            <summary>Gets other data providers that might be supported by ISpriteEditorDataProvider.targetObject.</summary>
+            <typeparam name="T">The data provider type to acquire.</typeparam>
+            <returns>Data provider type.</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditorDataProvider.HasDataProvider(System.Type)">
+            <summary>Queries if ISpriteEditorDataProvider.targetObject supports the data provider type.</summary>
+            <param name="type">Data provider type.</param>
+            <returns>True if supports, false otherwise.</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditorDataProvider.RegisterDataChangeCallback(System.Action{UnityEditor.U2D.Sprites.ISpriteEditorDataProvider})">
+            <summary>
+            Register callback for data change.
+            </summary>
+            <param name="action">Callback delegate.</param>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteEditorDataProvider.UnregisterDataChangeCallback(System.Action{UnityEditor.U2D.Sprites.ISpriteEditorDataProvider})">
+            <summary>
+            Unregister callback for data change.
+            </summary>
+            <param name="action">Callback delegate.</param>
+        </member>
+        <member name="T:UnityEditor.U2D.Sprites.ISpriteBoneDataProvider">
+            <summary>
+            Data Provider interface that deals with Sprite Bone data.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteBoneDataProvider.GetBones(UnityEngine.GUID)">
+            <summary>
+            Returns the list of SpriteBone for the corresponding Sprite ID.
+            </summary>
+            <param name="guid">Sprite ID.</param>
+            <returns>The list of SpriteBone associated with the Sprite</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteBoneDataProvider.SetBones(UnityEngine.GUID,System.Collections.Generic.List{UnityEngine.U2D.SpriteBone})">
+            <summary>Sets a new set of SpriteBone for the corresponding Sprite ID.</summary>
+            <param name = "guid" > Sprite ID.</param>
+            <param name = "bones" > List of SpriteBone to associate with the Sprite.</param>
+        </member>
+        <member name="T:UnityEditor.U2D.Sprites.ISpriteNameFileIdDataProvider">
+            <summary>
+            Data provider that provides data for ID to be used given a SpriteRect's name.
+            </summary>
+            <remarks>
+            The name and ID pair is used to allow mapping back a previous created SpriteRect.
+            </remarks>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteNameFileIdDataProvider.GetNameFileIdPairs">
+            <summary>Returns an IEnumerable of SpriteNameFileIdPair representing the name and file id pairs the provider has.</summary>
+            <returns>Name and file id pairs.</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteNameFileIdDataProvider.SetNameFileIdPairs(System.Collections.Generic.IEnumerable{UnityEditor.SpriteNameFileIdPair})">
+            <summary>Sets the data provider's current NameFileIdPair.</summary>
+            <param name="nameFileIdPairs">Updated IEnumerable of SpriteNameFileIdPair.</param>
+        </member>
+        <member name="T:UnityEditor.U2D.Sprites.ISpriteOutlineDataProvider">
+            <summary>Data provider that provides the outline data for SpriteRect.</summary>
+            <remarks>The outline data is used to tessellate a Sprite's mesh.</remarks>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteOutlineDataProvider.GetOutlines(UnityEngine.GUID)">
+            <summary>Given a GUID, returns the outline data used for tessellating the SpriteRect.</summary>
+            <param name="guid">GUID of the SpriteRect.</param>
+            <returns>Outline data for theSpriteRect.</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteOutlineDataProvider.SetOutlines(UnityEngine.GUID,System.Collections.Generic.List{UnityEngine.Vector2[]})">
+            <summary>Given a GUID, sets the outline data used for tessellating the SpriteRect.</summary>
+            <param name="guid">GUID of the SpriteRect.</param>
+            <param name="data">Outline data for theSpriteRect.</param>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteOutlineDataProvider.GetTessellationDetail(UnityEngine.GUID)">
+            <summary>Given a GUID, returns the tessellation detail.Tessellation value should be between 0 to 1.</summary>
+            <param name = "guid" > GUID of the SpriteRect.</param>
+            <returns>The tessellation value.</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteOutlineDataProvider.SetTessellationDetail(UnityEngine.GUID,System.Single)">
+            <summary>Given a GUID, sets the tessellation detail.Tessellation value should be between 0 to 1.</summary>
+            <param name = "guid" > GUID of the SpriteRect.</param>
+            <param name="value">The tessellation value.</param>
+        </member>
+        <member name="T:UnityEditor.U2D.Sprites.ISpritePhysicsOutlineDataProvider">
+            <summary>Data provider that provides the Physics outline data for SpriteRect.</summary>
+            <remarks>Uses the outline data to generate the Sprite's Physics shape for Polygon Collider 2D.</remarks>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpritePhysicsOutlineDataProvider.GetOutlines(UnityEngine.GUID)">
+            <summary>Given a GUID, returns the Physics outline data used for the SpriteRect.</summary>
+            <param name="guid">GUID of the SpriteRect.</param>
+            <returns>Physics outline data for the SpriteRect.</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpritePhysicsOutlineDataProvider.SetOutlines(UnityEngine.GUID,System.Collections.Generic.List{UnityEngine.Vector2[]})">
+            <summary>Given a GUID, sets the Physics outline data used for the SpriteRect.</summary>
+            <param name="guid">GUID of the SpriteRect.</param>
+            <param name="data">Physics outline data for the SpriteRect.</param>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpritePhysicsOutlineDataProvider.GetTessellationDetail(UnityEngine.GUID)">
+            <summary>Given a GUID, returns the tessellation detail.Tessellation value should be between 0 to 1.</summary>
+            <param name = "guid" > GUID of the SpriteRect.</param>
+            <returns>The tessellation value.</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpritePhysicsOutlineDataProvider.SetTessellationDetail(UnityEngine.GUID,System.Single)">
+            <summary>Given a GUID, sets the tessellation detail.Tessellation value should be between 0 to 1.</summary>
+            <param name = "guid" > GUID of the SpriteRect.</param>
+            <param name="value">The tessellation value.</param>
+        </member>
+        <member name="T:UnityEditor.U2D.Sprites.ITextureDataProvider">
+            <summary>Data provider that provides texture data needed for Sprite Editor Window.</summary>
+        </member>
+        <member name="P:UnityEditor.U2D.Sprites.ITextureDataProvider.texture">
+            <summary>Texture2D representation of the data provider.</summary>
+        </member>
+        <member name="P:UnityEditor.U2D.Sprites.ITextureDataProvider.previewTexture">
+            <summary>Texture2D that represents the preview for ITextureDataProvider.texture.</summary>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ITextureDataProvider.GetTextureActualWidthAndHeight(System.Int32@,System.Int32@)">
+            <summary>The actual width and height of the texture data.</summary>
+            <param name="width">Out value for width.</param>
+            <param name="height">Out value for height.</param>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ITextureDataProvider.GetReadableTexture2D">
+            <summary>Readable version of ITextureProvider.texture.</summary>
+            <returns>Texture2D that is readable.</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ITextureDataProvider.OverrideTextures(UnityEngine.Texture2D,UnityEngine.Texture2D,System.Int32,System.Int32)">
+            <summary>
+            Overrides the texture data with the given textures.
+            </summary>
+            <param name="mainTexture">Main texture data to override.</param>
+            <param name="previewTexture">Preview texture data to override.</param>
+            <param name="width">Width of the override source texture.</param>
+            <param name="height">Height of the override source texture.</param>
+            <returns>Returns true if override is successful, false otherwise</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ITextureDataProvider.ClearOverrideTextures">
+            <summary>
+            Remove override textures previously set by OverrideTextures.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ITextureDataProvider.RegisterSourceTextureOverride(System.Action{System.String})">
+            <summary>
+            Registers a callback to override the source texture.
+            </summary>
+            <param name="action">Callback that will write to the source texture with the path of the source texture.</param>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ITextureDataProvider.UnregisterSourceTextureOverride(System.Action{System.String})">
+            <summary>
+            Unregister a callback to override the source texture.
+            </summary>
+            <param name="action">Callback that was registered to write to the source texture with the path of the source texture.</param>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ITextureDataProvider.RegisterDataChangeCallback(System.Action{UnityEditor.U2D.Sprites.ITextureDataProvider})">
+            <summary>
+            Register callback for data change.
+            </summary>
+            <param name="action">Callback delegate.</param>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ITextureDataProvider.UnregisterDataChangeCallback(System.Action{UnityEditor.U2D.Sprites.ITextureDataProvider})">
+            <summary>
+            Unregister callback for data change.
+            </summary>
+            <param name="action">Callback delegate.</param>
+        </member>
+        <member name="T:UnityEditor.U2D.Sprites.ISecondaryTextureDataProvider">
+            <summary>Data provider that provides secoondary texture data needed for Sprite Editor Window.</summary>
+        </member>
+        <member name="P:UnityEditor.U2D.Sprites.ISecondaryTextureDataProvider.textures">
+            <summary>
+            Get set method for an array of SecondarySpriteTexture in the Data Provider
+            </summary>
+        </member>
+        <member name="T:UnityEditor.U2D.Sprites.Vertex2DMetaData">
+            <summary>A structure that contains meta data about vertices in a Sprite.</summary>
+        </member>
+        <member name="F:UnityEditor.U2D.Sprites.Vertex2DMetaData.position">
+            <summary>The position of the vertex.</summary>
+        </member>
+        <member name="F:UnityEditor.U2D.Sprites.Vertex2DMetaData.boneWeight">
+            <summary>The BoneWeight of the vertex.</summary>
+        </member>
+        <member name="T:UnityEditor.U2D.Sprites.ISpriteMeshDataProvider">
+            <summary>Data Provider interface that deals with Sprite mesh data.</summary>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteMeshDataProvider.GetVertices(UnityEngine.GUID)">
+            <summary>
+            Returns the list of vertex datas for the corresponding Sprite ID.
+            </summary>
+            <param name="guid">Sprite ID.</param>
+            <returns>Returns the vertices for the given Sprite ID.</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteMeshDataProvider.SetVertices(UnityEngine.GUID,UnityEditor.U2D.Sprites.Vertex2DMetaData[])">
+            <summary>Sets a new list of vertices for the corresponding Sprite ID.</summary>
+            <param name = "guid" > Sprite ID.</param>
+            <param name = "vertices" > The vertices to set for the Sprite ID.</param>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteMeshDataProvider.GetIndices(UnityEngine.GUID)">
+            <summary>Returns the list of mesh index for the corresponding Sprite ID.</summary>
+            <param name = "guid" > Sprite ID.</param>
+            <returns>Returns the indices for the given Sprite ID.</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteMeshDataProvider.SetIndices(UnityEngine.GUID,System.Int32[])">
+            <summary>Sets a new list of indices for the corresponding Sprite ID.</summary>
+            <param name = "guid" > Sprite ID.</param>
+            <param name = "indices" > The indices to set for the Sprite ID.</param>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteMeshDataProvider.GetEdges(UnityEngine.GUID)">
+            <summary>Returns the list of mesh edges for the corresponding Sprite ID.</summary>
+            <param name = "guid" > Sprite ID.</param>
+            <returns>Returns the edges for the given Sprite ID.</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteMeshDataProvider.SetEdges(UnityEngine.GUID,UnityEngine.Vector2Int[])">
+            <summary>Sets a new list of edges for the corresponding Sprite ID.</summary>
+            <param name = "guid" > Sprite ID.</param>
+            <param name = "edges" > An array of Vector2Int representing the edges for the Sprite ID.</param>
+        </member>
+        <member name="T:UnityEditor.U2D.Sprites.ISpriteCustomDataProvider">
+            <summary>
+            Data Provider interface that allows to get and set custom Sprite data.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteCustomDataProvider.GetKeys">
+            <summary>
+            Gets all available keys.
+            </summary>
+            <returns>Collection of all available keys.</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteCustomDataProvider.SetData(System.String,System.String)">
+            <summary>
+            Sets the custom data at the given key.
+            </summary>
+            <param name="key">Name of the key.</param>
+            <param name="data">Value.</param>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteCustomDataProvider.RemoveData(System.String)">
+            <summary>
+            Removes the custom data at the given key.
+            </summary>
+            <param name="key">Name of the key.</param>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteCustomDataProvider.GetData(System.String,System.String@)">
+            <summary>
+            Gets the custom data at the given key.
+            </summary>
+            <param name="key">Name of the key.</param>
+            <param name="data">Value.</param>
+            <returns>True if the value retrieved successfully.</returns>
+        </member>
+        <member name="T:UnityEditor.U2D.Sprites.ISpriteFrameEditCapability">
+            <summary>
+            Data Provider interface that allows to get and editing capability of Sprite Frame.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteFrameEditCapability.GetEditCapability">
+            <summary>
+            Gets the current editing capability.
+            </summary>
+            <returns>Editing capabilities allowed</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.ISpriteFrameEditCapability.SetEditCapability(UnityEditor.U2D.Sprites.EditCapability)">
+            <summary>
+            Sets the editing capability.
+            </summary>
+            <param name="editCapability">New editing capability.</param>
+        </member>
+        <member name="F:UnityEditor.U2D.Sprites.SpriteRectModel.m_SpriteRects">
+            <summary>
+            List of all SpriteRects
+            </summary>
+        </member>
+        <member name="F:UnityEditor.U2D.Sprites.SpriteRectModel.m_SpriteNames">
+            <summary>
+            List of all names in the Name-FileId Table
+            </summary>
+        </member>
+        <member name="F:UnityEditor.U2D.Sprites.SpriteRectModel.m_SpriteFileIds">
+            <summary>
+            List of all FileIds in the Name-FileId Table
+            </summary>
+        </member>
+        <member name="F:UnityEditor.U2D.Sprites.SpriteRectModel.m_NamesInUse">
+            <summary>
+            HashSet of all names currently in use by SpriteRects
+            </summary>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.SpriteRectModel.IsNameUsed(System.String)">
+            <summary>
+            Checks whether or not the name is currently in use by any of the SpriteRects in the texture.
+            </summary>
+            <param name="rectName">The name to check for</param>
+            <returns>True if the name is currently in use</returns>
+        </member>
+        <member name="M:UnityEditor.U2D.Sprites.SpriteRectModel.IsInternalIdInUsed(UnityEngine.GUID)">
+            <summary>
+            Checks whether or not the id is currently in use by any of the SpriteRects in the texture.
+            </summary>
+            <param name="rectName">The id to check for</param>
+            <returns>True if the name is currently in use</returns>
+        </member>
+        <member name="T:UnityEditor.SpriteRect">
+            <summary>Abstract class that is used by systems to encapsulate Sprite data representation. Currently this is used by Sprite Editor Window.</summary>
+        </member>
+        <member name="P:UnityEditor.SpriteRect.name">
+            <summary>The name of the Sprite data.</summary>
+        </member>
+        <member name="P:UnityEditor.SpriteRect.pivot">
+            <summary>Vector2value representing the pivot for the Sprite data.</summary>
+        </member>
+        <member name="P:UnityEditor.SpriteRect.alignment">
+            <summary>SpriteAlignment that represents the pivot value for the Sprite data.</summary>
+        </member>
+        <member name="P:UnityEditor.SpriteRect.border">
+            <summary>Returns a Vector4 that represents the border of the Sprite data.</summary>
+        </member>
+        <member name="P:UnityEditor.SpriteRect.customData">
+            <summary>Gets and sets the custom sprite data.</summary>
+        </member>
+        <member name="P:UnityEditor.SpriteRect.rect">
+            <summary>Rect value that represents the position and size of the Sprite data.</summary>
+        </member>
+        <member name="P:UnityEditor.SpriteRect.spriteID">
+            <summary>GUID to uniquely identify the SpriteRect data. This will be populated to Sprite.spriteID to identify the SpriteRect used to generate the Sprite.</summary>
+        </member>
+        <member name="M:UnityEditor.SpriteRect.GetSpriteIDFromSerializedProperty(UnityEditor.SerializedProperty)">
+            <summary>Helper method to get SpriteRect.spriteID from a SerializedProperty.</summary>
+            <param name="sp">The SerializedProperty to acquire from.</param>
+            <returns>GUID for the SpriteRect.</returns>
+        </member>
+        <member name="T:UnityEditor.SpriteNameFileIdPair">
+            <summary>
+            Data structure to hold Name ID pair.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.SpriteNameFileIdPair.name">
+            <summary>
+            Name property.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.SpriteNameFileIdPair.fileId">
+            <summary>
+            FileId property. This property is obsolete. Please use GetFileGUID and SetFileGUID instead.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.SpriteNameFileIdPair.GetFileGUID">
+            <summary>
+            Returns the ID used for the name.
+            </summary>
+            <returns>GUID value.</returns>
+        </member>
+        <member name="M:UnityEditor.SpriteNameFileIdPair.SetFileGUID(UnityEngine.GUID)">
+            <summary>
+            Sets the ID used for the name.
+            </summary>
+            <param name="value">GUID value to set.</param>
+        </member>
+        <member name="M:UnityEditor.SpriteNameFileIdPair.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.SpriteNameFileIdPair.#ctor(System.String,UnityEngine.GUID)">
+            <summary>
+            Constructor to initialize name and fileID.
+            </summary>
+            <param name="name">The name of the Sprite to record.</param>
+            <param name="fileId">The GUID of the Sprite to record.</param>
+        </member>
+        <member name="M:UnityEditor.SpriteNameFileIdPair.GetHashCode">
+            <summary>
+            Custom hashcode generation.
+            </summary>
+            <returns>Int value representing the hash value.</returns>
+        </member>
+        <member name="M:UnityEditor.SpriteNameFileIdPair.Equals(System.Object)">
+            <summary>
+            Override Equal operator.
+            </summary>
+            <param name="obj">Object to compare.</param>
+            <returns>True if the same. False otherwise.</returns>
+        </member>
+        <member name="M:UnityEditor.SpriteNameFileIdPair.Equals(UnityEditor.SpriteNameFileIdPair)">
+            <summary>
+            Override Equal operator.
+            </summary>
+            <param name="pair">Object to compare.</param>
+            <returns>True if the same. False otherwise.</returns>
+        </member>
+    </members>
+</doc>
