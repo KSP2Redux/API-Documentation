@@ -1,0 +1,1171 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Unity.Multiplayer.Center.Editor</name>
+    </assembly>
+    <members>
+        <member name="T:Unity.Multiplayer.Center.Recommendations.RecommenderSystemDataObject">
+            <summary>
+            Current way to fetch recommendation data from disk. Will probably change to fetching something from a server.
+            </summary>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Recommendations.RecommendationUtils.GetSelectedSolution(Unity.Multiplayer.Center.Recommendations.RecommendedSolutionViewData[])">
+            <summary>
+            Finds the first selected solution in the input array.
+            </summary>
+            <param name="availableSolutions">The available solutions.</param>
+            <returns>Returns the first selected solution. If no solution is selected, it returns null.</returns>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Recommendations.RecommendationUtils.GetPackagesWithAdditionalPackages(System.Collections.Generic.List{Unity.Multiplayer.Center.Recommendations.RecommendedPackageViewData},System.Collections.Generic.List{System.String}@,System.Collections.Generic.List{System.String}@,System.String@)">
+            <summary>
+            Returns all the packages passed via packageIds and their informal dependencies (stored in AdditionalPackages)
+            </summary>
+            <returns>List of PackageDetails</returns>
+            <param name="packages">List of package id</param>
+            <param name="toolTip">tooltip text</param>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Recommendations.RecommendationUtils.ApplyPreviousSelection(Unity.Multiplayer.Center.Recommendations.RecommendationViewData,Unity.Multiplayer.Center.Common.SelectedSolutionsData)">
+            <summary>
+            Reapplies the previous selection on the view data
+            </summary>
+            <param name="recommendation">The recommendation view data to update</param>
+            <param name="data">The previous selection data</param>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Recommendations.RecommendationUtils.FilterByType(System.Collections.Generic.IEnumerable{Unity.Multiplayer.Center.Recommendations.RecommendedPackageViewData},Unity.Multiplayer.Center.Recommendations.RecommendationType)">
+            <summary>
+            Returns the packages that are of the given recommendation type
+            </summary>
+            <param name="packages">All the package view data as returned by the recommender system</param>
+            <param name="type">The target recommendation type</param>
+            <returns>The filtered list</returns>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Recommendations.RecommendationUtils.FindRecommendedSolution(System.ValueTuple{Unity.Multiplayer.Center.Questionnaire.PossibleSolution,Unity.Multiplayer.Center.Recommendations.Scoring}[])">
+            <summary>
+            Finds the recommended solution among the scored solutions.
+            </summary>
+            <param name="scoredSolutions">An array of tuples, where each tuple contains a PossibleSolution and its corresponding Scoring.</param>
+            <returns>Returns the recommended solution with the maximum total score.</returns>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Recommendations.RecommendationUtils.MarkIncompatibleHostingModels(Unity.Multiplayer.Center.Recommendations.RecommendationViewData)">
+            <summary>
+            Looks through the hosting models and marks them incompatible if necessary (deselected and recommendation
+            type incompatible).
+            Note that this might leave the recommendation in an invalid state (no hosting model selected)
+            </summary>
+            <param name="recommendation">The recommendation data to modify.</param>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Recommendations.RecommendationUtils.FindRecommendedPackageViewById(System.Collections.Generic.List{Unity.Multiplayer.Center.Recommendations.RecommendedPackageViewData},System.String)">
+            <summary>
+            Finds a recommended package view by its ID from a list.
+            </summary>
+            <param name="packages">A list of Recommended Package ViewData representing the packages.</param>
+            <param name="id">The ID of the package to find.</param>
+            <returns>Returns the RecommendedPackageViewData object with the matching ID. If none is found, it returns null.</returns>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Recommendations.RecommendationUtils.IsQuestionAnswered(Unity.Multiplayer.Center.Questionnaire.Question)">
+            <summary>
+            Checks if the specific question has been answered.
+            </summary>
+            <param name="question">The question to check.</param>
+            <returns>Returns true if the question has been answered by the user, otherwise returns false.</returns>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Recommendations.RecommendationUtils.AreArraysEqual``1(``0[],``0[])">
+            <summary>
+            Compares two arrays of type <typeparamref name="T"/> for equality.
+            </summary>
+            <typeparam name="T">The type of the elements in the arrays.</typeparam>
+            <param name="a">The first array to compare.</param>
+            <param name="b">The second array to compare.</param>
+            <returns>
+            <c>true</c> if all elements are equal and they are in the same order,
+            <c>false</c> otherwise.
+            </returns>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Recommendations.RecommendationUtils.GetSectionTypeNamesInOrder(System.Collections.Generic.Dictionary{Unity.Multiplayer.Center.Common.OnboardingSectionCategory,System.Type[]})">
+            <summary>
+            Gets the section type names in order from the provided section mapping.
+            </summary>
+            <param name="sectionMapping">A dictionary mapping OnboardingSectionCategory to SectionList types.</param>
+            <returns>A list of section type names sorted in ascending order.</returns>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Recommendations.RecommendationType">
+            <summary>
+            Types of recommendation that are both used in ViewData and in the ground truth data for the recommendation.
+            Architecture choices must be made. Packages are typically optional.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendationType.None">
+            <summary>
+            Invalid value, indicates error.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendationType.MainArchitectureChoice">
+            <summary>
+            Featured option (e.g. NGO if NGO is the recommended architecture)
+            Note that in the case of architecture choice, the user should select something.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendationType.SecondArchitectureChoice">
+            <summary>
+            Non-featured option (e.g. N4E if NGO is the recommended architecture)
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendationType.NetcodeFeatured">
+            <summary>
+            Associated feature in the Netcode section
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendationType.HostingFeatured">
+            <summary>
+            Associated feature in the Hosting Model section
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendationType.OptionalStandard">
+            <summary>
+            Optional but not highlighted
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendationType.NotRecommended">
+            <summary>
+            Not recommended, but not incompatible with the user intent.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendationType.Incompatible">
+            <summary>
+            Incompatible with the user intent. Might even break something, we need to warn the user
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendationType.Hidden">
+            <summary>
+            Packages that are not visible for the User but useful for the analytics
+            </summary>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Recommendations.Scoring">
+            <summary>
+            Aggregates scores for a given solution and fetches the reasons for the highest score
+            </summary>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Recommendations.Scoring.GetReasonString">
+            <summary>
+            Gets the reason for increased scores
+            </summary>
+            <returns>The explanatory string</returns>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Recommendations.RecommenderSystem">
+            <summary>
+            Builds recommendation views based on Questionnaire data and Answer data.
+            The recommendation is based on the scoring of the answers, which is controlled by the RecommenderSystemData.
+            </summary>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Recommendations.RecommenderSystem.GetRecommendation(Unity.Multiplayer.Center.Questionnaire.QuestionnaireData,Unity.Multiplayer.Center.Common.AnswerData)">
+            <summary>
+            Main entry point for the recommender system: computes the recommendation based on the questionnaire data and
+            the answers.
+            If no answer has been given or the questionnaire does not match the answers, this returns null.
+            </summary>
+            <param name="questionnaireData">The questionnaire that the user filled.</param>
+            <param name="answerData">The answers the user gave.</param>
+            <returns>The recommendation view data.</returns>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Recommendations.RecommenderSystem.GetSolutionsToRecommendedPackageViewData">
+            <summary>
+            Get the view data for all possible solution selections.
+            </summary>
+            <returns>The constructed set of views</returns>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Recommendations.RecommendationViewData">
+            <summary>
+            Contains all the architectural options that we offer to users, with a score specific to their answers.
+            This is the data that we show in the UI.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendationViewData.NetcodeOptions">
+            <summary>
+            NGO or N4E or Other
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendationViewData.ServerArchitectureOptions">
+            <summary>
+            Client hosted / dedicated server.
+            It comes with UGS services that we might or might not recommend
+            </summary>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Recommendations.SolutionsToRecommendedPackageViewData">
+            <summary>
+            For each selection (netcode, hosting) model, there is a specific set of recommended packages
+            This class stores this information and provides access to it.
+            </summary>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Recommendations.RecommendedItemViewData">
+            <summary>
+            Base fields for things that we can recommend (typically a package or a solution).
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendedItemViewData.RecommendationType">
+            <summary>
+            How much we want to recommend this item. With the score, this is what is modified by the recommender system.
+            The architecture option with the best score will be marked as MainArchitectureChoice, the other as SecondArchitectureChoice,
+            which enables us to highlight the recommended option.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendedItemViewData.Selected">
+            <summary>
+            Item is part of the selection, because it was preselected or user selected it.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendedItemViewData.Reason">
+            <summary>
+            Optional: reason why this recommendation was made
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendedItemViewData.DocsUrl">
+            <summary>
+            Url to feature documentation
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendedItemViewData.IsInstalledAsProjectDependency">
+            <summary>
+            Recommendation is installed and direct dependency
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendedItemViewData.InstalledVersion">
+            <summary>
+            Installed version number of a package
+            </summary>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Recommendations.RecommendedSolutionViewData">
+            <summary>
+            Architectural solution (netcode or server architecture) that we offer. It comes with an optional main package and
+            associated recommended packages.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendedSolutionViewData.Score">
+            <summary>
+            How much of a match is this item. Computed by recommender system based on answers.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendedSolutionViewData.MainPackage">
+            <summary>
+            The main package to install for this solution (note that this might be null, e.g. for client hosted game)
+            </summary>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Recommendations.RecommendedPackageViewData">
+            <summary>
+            Single package that is part of a recommendation.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendedPackageViewData.ShortDescription">
+            <summary>
+            A short description of the feature.
+            </summary>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Recommendations.RecommenderSystemData">
+            <summary>
+            The source of data for the recommender system. Based on scoring and this data, the recommender system will
+            populate the recommendation view data. 
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommenderSystemData.TargetUnityVersion">
+            <summary>
+            The Unity version for which this recommendation data is valid.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommenderSystemData.RecommendedSolutions">
+            <summary>
+            Stores all the recommended solutions. This is serialized.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommenderSystemData.Packages">
+            <summary>
+            Stores all the package details.
+            This is serialized.
+            </summary>
+        </member>
+        <member name="P:Unity.Multiplayer.Center.Recommendations.RecommenderSystemData.PackageDetailsById">
+            <summary>
+            Provides convenient access to the package details by package id.
+            </summary>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Recommendations.RecommenderSystemData.IsHostingModelCompatibleWithNetcode(Unity.Multiplayer.Center.Questionnaire.PossibleSolution,Unity.Multiplayer.Center.Questionnaire.PossibleSolution,System.String@)">
+            <summary>
+            Checks for incompatibility between the netcode and hosting model.
+            </summary>
+            <param name="netcode">The netcode type</param>
+            <param name="hostingModel">The hosting model</param>
+            <param name="reason">The reason for the incompatibility, filled when this function returns false.</param>
+            <returns>True if compatible (default), False otherwise</returns>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Recommendations.RecommenderSystemData.UpdateIncompatibility(Unity.Multiplayer.Center.Questionnaire.PossibleSolution,Unity.Multiplayer.Center.Questionnaire.PossibleSolution,System.Boolean,System.String)">
+            <summary>
+            Patch incompatibility values.
+            </summary>
+            <param name="netcode">Netcode solution</param>
+            <param name="hostingModel">Hosting model solution</param>
+            <param name="newIsCompatible">Whether we should now consider the two solutions compatible</param>
+            <param name="reason">If incompatible, why it is incompatible.</param>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Recommendations.RecommendedSolution">
+            <summary>
+            A possible solution and whether packages are recommended or not
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendedSolution.Type">
+            <summary>
+            The type of solution
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendedSolution.Title">
+            <summary>
+             The name of the solution as shown in the UI.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendedSolution.MainPackageId">
+            <summary>
+            Optional package ID associated with that solution (e.g. a netcode package or the cloud code package).
+            Use this field if the package has to mandatorily be installed when the solution is selected. 
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendedSolution.DocUrl">
+            <summary>
+            Url to documentation describing the solution.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendedSolution.ShortDescription">
+            <summary>
+            Short description of the solution.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendedSolution.RecommendedPackages">
+            <summary>
+            The packages and the associated recommendation type.
+            If the Type is a netcode Type, all the possible packages should be in this array.
+            If the Type is a hosting model, this will contain only overrides in case a package is incompatible or
+            featured for the hosting model.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendedSolution.IncompatibleSolutions">
+            <summary>
+            Solutions that are incompatible with this solution.
+            Typically used for netcode solutions.
+            </summary>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Recommendations.IncompatibleSolution">
+            <summary>
+            Stores why a solution is incompatible with something and why.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.IncompatibleSolution.Solution">
+            <summary>
+            What is incompatible.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.IncompatibleSolution.Reason">
+            <summary>
+            Why it is incompatible.
+            </summary>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Recommendations.RecommendedPackage">
+            <summary>
+            A package, whether it is recommended or not (context dependent), and why.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendedPackage.PackageId">
+            <summary>
+            The package id (e.g. com.unity.netcode)
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendedPackage.Type">
+            <summary>
+            Whether it is recommended or not.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.RecommendedPackage.Reason">
+            <summary>
+            Why it is recommended or not.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.PackageDetails.PreReleaseVersion">
+            <summary>
+            In case we want to promote a specific pre-release version, this is set (by default, this is null
+            and the default package manager version is used).
+            </summary>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Recommendations.PackageDetails.#ctor(System.String,System.String,System.String,System.String,System.String[])">
+            <summary>
+            Details about the package.
+            </summary>
+            <param name="id">Package ID</param>
+            <param name="name">Package Name (for display)</param>
+            <param name="shortDescription">Short description.</param>
+            <param name="docsUrl">Link to Docs</param>
+            <param name="additionalPackages">Ids of packages that should be installed along this one, but are not formal dependencies.</param>
+        </member>
+        <member name="P:Unity.Multiplayer.Center.Recommendations.PreReleaseHandlingBase.IsReady">
+            <summary>
+            Whether the versions data is ready to be used.
+            </summary>
+        </member>
+        <member name="E:Unity.Multiplayer.Center.Recommendations.PreReleaseHandlingBase.OnCheckFinished">
+            <summary>
+            Triggered when this instance is ready
+            </summary>
+        </member>
+        <member name="P:Unity.Multiplayer.Center.Recommendations.PreReleaseHandlingBase.PackageId">
+            <summary>
+            The package id e.g. com.unity.netcode
+            </summary>
+        </member>
+        <member name="P:Unity.Multiplayer.Center.Recommendations.PreReleaseHandlingBase.MinVersion">
+            <summary>
+            The minimum version that we target.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.PreReleaseHandlingBase.m_VersionsInfo">
+            <summary>
+            The cached versions of the package.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Recommendations.PreReleaseHandlingBase.m_DefaultVersion">
+            <summary>
+            version which would be installed by package manager 
+            </summary>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Recommendations.PreReleaseHandlingBase.CheckForUpdates">
+            <summary>
+            Start (online) request to check for available versions.
+            </summary>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Recommendations.PreReleaseHandlingBase.PatchPackages(Unity.Multiplayer.Center.Recommendations.RecommendationViewData)">
+            <summary>
+            Patch the recommendation view data directly.
+            </summary>
+            <param name="toPatch">The view data to patch</param>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Recommendations.PreReleaseHandlingBase.PatchRecommenderSystemData">
+            <summary>
+            Patch the recommender system data, which will be used for every use of the recommendation.
+            </summary>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Recommendations.SimplePreReleaseHandling">
+            <summary>
+            Implementation that fetches unconditionally the version starting with a prefix for a given package, even if it
+            is an experimental package
+            </summary>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Window.UI.RecommendationView.SectionHeader.GenerateChoices(Unity.Multiplayer.Center.Recommendations.RecommendedSolutionViewData[],Unity.Multiplayer.Center.Recommendations.RecommendedSolutionViewData@,System.String@)">
+            <summary>
+            Returns a list of choices for the dropdown and appends k_ItemIsRecommendedAppend to the recommended choice.
+            </summary>
+            <param name="availableSolutions">All available Solutions</param>
+            <param name="selectedSolution"> The solution that is selected.</param>
+            <param name="selectedSolutionTitleAppended">The title of the selection solution with appended k_ItemIsRecommendedAppend</param>
+            <returns>List of Choices to be used with Dropdown</returns>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Window.UI.RecommendationView.RecommendationItemView">
+            <summary>
+            View to show one option to the user
+            Option can be shown as a radio button or as a checkbox.
+            </summary>
+        </member>
+        <member name="P:Unity.Multiplayer.Center.Window.UI.RecommendationView.RecommendationItemView.FeatureId">
+            <summary>
+            Feature Id stores a unique identifier that identifies the feature.
+            Usually this is the title of the solution or the package id.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Window.UI.RecommendationView.RecommendationItemView.OnUserChangedSelection">
+            <summary>
+            Triggered when the user changes the selection.
+            </summary>
+        </member>
+        <member name="E:Unity.Multiplayer.Center.Window.UI.RecommendationView.SolutionSelectionView.OnUserChangedSolution">
+            <summary>
+            Gets fired when the user changes the solution.
+            </summary>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Window.UI.QuestionSection">
+            <summary>
+            Questions that go together in the Questionnaire view.
+            Example: mandatory questions in "Game Specs" section, optional questions in "Advanced" section.
+            </summary>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Window.UI.QuestionViewFactory">
+            <summary>
+            Creates visual elements that represent a question / the overview of the questionnaire
+            </summary>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Window.UI.StyleClasses">
+            <summary>
+            Style common to the multiplayer center, excepted for the getting started tab (which needs shared style)
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Window.UI.StyleClasses.QuestionView">
+            <summary> Game spec standard question </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Window.UI.StyleClasses.MandatoryQuestion">
+            <summary> Game spec mandatory question, highlighted </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Window.UI.StyleClasses.QuestionText">
+            <summary> Description of game spec section </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Window.UI.StyleClasses.QuestionSection">
+            <summary> Part of game spec questionnaire that contains several questions </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Window.UI.StyleClasses.QuestionSectionNoScrollbar">
+            <summary> Part of game spec questionnaire that contains several questions </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Window.UI.StyleClasses.NextStepButton">
+            <summary> Thicker button to go to a next step; e.g. Install packages </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Window.UI.StyleClasses.MainSplitView">
+            <summary> The splitview that is used in Recommendation and Getting Started Tab </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Window.UI.StyleClasses.MainSplitViewRight">
+            <summary> The right container of the main split view </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Window.UI.StyleClasses.MainSplitViewLeft">
+            <summary> The left container of the main split view </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Window.UI.StyleClasses.ViewHeadline">
+            <summary> The style for the Headline that is used in the main views </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Window.MultiplayerCenterWindow.m_MainContainer">
+            <summary>
+            Nest the main container in a VisualElement to allow for easy enabling/disabling of the entire window but
+            without the spinning icon.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Window.MultiplayerCenterWindow.m_MultiplayerCenterAnalytics">
+            <summary>
+            This is the reference Multiplayer Center analytics implementation. This class owns it.
+            </summary>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Window.MultiplayerCenterWindow.RequestShowGettingStartedTabAfterDomainReload">
+            <summary>
+            Changes Tab from Recommendation to the Quickstart tab.
+            </summary>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Window.GettingStartedTabView">
+            <summary>
+            This is the main view for the Quickstart tab.
+            Note that in the code, the Quickstart tab is referred to as the Getting Started tab.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Window.GettingStartedTabView.m_LastFoundSectionTypes">
+            <summary>
+            To find out if new section appeared, we need to keep track of the last section types we found.
+            </summary>
+        </member>
+        <member name="P:Unity.Multiplayer.Center.Window.ITabView.Name">
+            <summary>
+            The name as displayed in the tab button
+            Should be serialized.
+            </summary>
+        </member>
+        <member name="P:Unity.Multiplayer.Center.Window.ITabView.RootVisualElement">
+            <summary>
+            The root visual element of the tab view.
+            The setter will only be used if the root visual element is null when the tab is created.
+            </summary>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Window.ITabView.SetVisible(System.Boolean)">
+            <summary>
+            Sets the tab view visible or not.
+            </summary>
+            <param name="visible">If true, visible.</param>
+        </member>
+        <member name="P:Unity.Multiplayer.Center.Window.ITabView.IsEnabled">
+            <summary>
+            If true the Tab can be selected by the user.
+            </summary>
+        </member>
+        <member name="P:Unity.Multiplayer.Center.Window.ITabView.ToolTip">
+            <summary>
+            Tooltip which will be shown on the Tab Button. 
+            </summary>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Window.ITabView.Refresh">
+            <summary>
+            Refreshes the UI Elements according to latest data.
+            If the UI is not created yet, it does it.
+            </summary>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Window.ITabView.Clear">
+            <summary>
+            Unregister all events and clear UI Elements
+            </summary>
+        </member>
+        <member name="P:Unity.Multiplayer.Center.Window.ITabView.MultiplayerCenterAnalytics">
+            <summary>
+            The Multiplayer Center Analytics provider.
+            </summary>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Window.TabGroup.CreateTabs">
+            <summary>
+            Instantiates the visual elements for all the tabs.
+            Use this to create the tabs for the first time the UI is shown or after a domain reload.
+            </summary>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Questionnaire.UserChoicesObject">
+            <summary>
+            The unity object that contains the current choices of the user.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.UserChoicesObject.QuestionnaireVersion">
+            <summary>
+            The version of the questionnaire the answers correspond to.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.UserChoicesObject.UserAnswers">
+            <summary>
+            The answers of the user in the Game specs questionnaire.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.UserChoicesObject.Preset">
+            <summary>
+            Current preset selected by the user.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.UserChoicesObject.SelectedSolutions">
+            <summary>
+            The main selections made by the user in the recommendation tab.
+            </summary>
+        </member>
+        <member name="E:Unity.Multiplayer.Center.Questionnaire.UserChoicesObject.OnSolutionSelectionChanged">
+            <summary>
+            Raised when the SelectedSolutions changes
+            </summary>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Questionnaire.UserChoicesObject.SetUserSelection(Unity.Multiplayer.Center.Common.SelectedSolutionsData.HostingModel,Unity.Multiplayer.Center.Common.SelectedSolutionsData.NetcodeSolution)">
+            <summary>
+            Set the user selection and calls OnSelectionChanged if needed
+            </summary>
+            <param name="hostingModel">The selected hosting model</param>
+            <param name="netcodeSolution">The selected netcode solution</param>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Questionnaire.UserChoicesObject.Save">
+            <summary>
+            Save to disk (see filepath)
+            </summary>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Questionnaire.Logic">
+            <summary>
+            Question and answer logic manipulations.
+            </summary>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Questionnaire.Logic.ValidateAnswers(Unity.Multiplayer.Center.Questionnaire.QuestionnaireData,Unity.Multiplayer.Center.Common.AnswerData)">
+            <summary>
+            Checks if the answers make sense and correspond to the questions.
+            </summary>
+            <param name="questions">The reference questionnaire</param>
+            <param name="currentAnswers">The validated answers.</param>
+            <returns>A list of problems or an empty list.</returns>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Questionnaire.Logic.FindFirstUnansweredQuestion(Unity.Multiplayer.Center.Questionnaire.QuestionnaireData,Unity.Multiplayer.Center.Common.AnswerData)">
+            <summary>
+            Finds the first unanswered question index, aka the first question to display.
+            If all questions have been answered, the index is the length of the questions array.
+            </summary>
+            <param name="questions">The questionnaire</param>
+            <param name="currentAnswers">the answers so far</param>
+            <returns>The index in the questions array or the size of the questions array</returns>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Questionnaire.Logic.AnswersToDictionary(Unity.Multiplayer.Center.Questionnaire.QuestionnaireData,Unity.Multiplayer.Center.Common.AnswerData)">
+            <summary>
+            Conversion to a dictionary for easier manipulation.
+            </summary>
+            <param name="questions">the questionnaire</param>
+            <param name="currentAnswers">the answers so far</param>
+            <returns>The dictionary containing (id, list of answer id) </returns>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Questionnaire.Logic.TryGetQuestionByQuestionId(Unity.Multiplayer.Center.Questionnaire.QuestionnaireData,System.String,Unity.Multiplayer.Center.Questionnaire.Question@)">
+            <summary>
+            Checks if the question id exists in the questionnaire and return it.
+            </summary>
+            <param name="questions">The questionnaire</param>
+            <param name="questionId">The id to find</param>
+            <param name="foundQuestion">The found question or null</param>
+            <returns>True if found, else false</returns>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Questionnaire.Logic.ApplyPresetToAnswerData(Unity.Multiplayer.Center.Common.AnswerData,Unity.Multiplayer.Center.Common.Preset,Unity.Multiplayer.Center.Questionnaire.QuestionnaireData)">
+            <summary>
+            Applies the preset to the current answers and returns the new answers and the recommendation.
+            It skips all the mandatory questions, which have to be answered separately.
+            </summary>
+            <param name="currentAnswers">The answers the user selected so far</param>
+            <param name="preset">The preset to apply</param>
+            <param name="questionnaire">All the available questions</param>
+            <returns>The new answer data and the associated recommendation(might be null).</returns>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Questionnaire.Logic.IsVersionLower(System.String,System.String)">
+            <summary>
+            Compares two versions and returns true if the versionToTest is lower than the currentVersion.
+            </summary>
+            <param name="versionToTest">The version number that gets tested</param>
+            <param name="currentVersion">The version number to test against</param>
+            <returns>True if versionToTest is lower than currentVersion</returns>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Questionnaire.PresetData">
+            <summary>
+            The predefined answers for presets. This is meant to be read only and saved with the questionnaire
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.PresetData.Presets">
+            <summary>
+            The list of presets for which we have predefined answers (hopefully all possible values except None)
+            This should contain as many values as the <see cref="F:Unity.Multiplayer.Center.Questionnaire.PresetData.Answers"/> array.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.PresetData.Answers">
+            <summary>
+            The predefined answers for each preset, in the same order as <see cref="F:Unity.Multiplayer.Center.Questionnaire.PresetData.Presets"/>.
+            This should contain as many values as the <see cref="F:Unity.Multiplayer.Center.Questionnaire.PresetData.Presets"/> array.
+            </summary>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Questionnaire.QuestionnaireObject">
+            <summary>
+            The questionnaire scriptable object, used to store and edit the data
+            </summary>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Questionnaire.QuestionnaireEditor">
+            <summary>
+            Because of the "questionnaire" extension, the default inspector is not shown.
+            Double clicking on the asset will open this custom inspector (in debug mode), which has a way to force saving
+            the asset.
+            </summary>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Questionnaire.QuestionnaireData">
+            <summary>
+            The serializable data of the questionnaire
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.QuestionnaireData.FormatVersion">
+            <summary> The version of the format to serialize/deserialize data </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.QuestionnaireData.Version">
+            <summary> The version of the questionnaire itself (different questions, answer choice) </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.QuestionnaireData.Questions">
+            <summary> All the questions in the right order (some might be hidden though) </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.QuestionnaireData.PresetData">
+            <summary> The predefined answers for presets. The content should match the questions.</summary>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Questionnaire.PossibleSolution">
+            <summary>
+            Possible multiplayer solution that needs to be scored in order to assess a match. Some are mutually exclusive,
+            some are not.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.PossibleSolution.NGO">
+            <summary> Netcode for GameObject, incompatible with N4E </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.PossibleSolution.N4E">
+            <summary> Netcode for Entities, incompatible with NGO </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.PossibleSolution.LS">
+            <summary> Client Hosted Architecture (also called "Listen server"; using a host and not a dedicated server) </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.PossibleSolution.DS">
+            <summary> Dedicated server architecture (using a dedicated server and not a host) </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.PossibleSolution.DA">
+            <summary> Distributed authority (Authority will be distributed across different players)</summary> 
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.PossibleSolution.CustomNetcode">
+            <summary> Not using Netcode for GameObjects nor Netcode for Entities </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.PossibleSolution.NoNetcode">
+            <summary> Works asynchronously, with a database </summary> 
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.PossibleSolution.CloudCode">
+            <summary> Recommended backend for async games, without a Netcode (goes with <see cref="F:Unity.Multiplayer.Center.Questionnaire.PossibleSolution.NoNetcode"/>) </summary> 
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.ViewType.Toggle">
+            <summary> Yes or No type of question best represented by a toggle</summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.ViewType.Radio">
+            <summary> A question with multiple choices and where you can select only one answer</summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.ViewType.Checkboxes">
+            <summary> A question with multiple choices and where you can select multiple answers</summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.ViewType.DropDown">
+            <summary> A question with a Drop Down</summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.Question.Id">
+            <summary> Id (unique across questions) </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.Question.Title">
+            <summary> Short string to refer to the question (e.g. "Player Count") </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.Question.Description">
+            <summary> Longer string to describe the question, which will be displayed in the tooltip </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.Question.GlobalWeight">
+            <summary> Optional weight to increase/decrease importance of this question, applied to all answers.</summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.Question.ViewType">
+            <summary> The type of view to use to display the question </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.Question.Choices">
+            <summary> The possible answers to the question </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.Question.IsMandatory">
+            <summary> If the question is mandatory or not. Not overwritten by presets </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.Answer.Id">
+            <summary> Id (unique across answers) </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.Answer.Title">
+            <summary> What is displayed to the user </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.Answer.Description">
+            <summary> Optional description that will be shown in a tooltip </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.Answer.ScoreImpacts">
+            <summary> How picking this answer will impact the score of a given solution </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.ScoreImpact.Solution">
+            <summary> Which score is impacted </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.ScoreImpact.Score">
+            <summary> Absolute value to add or subtract from the target score</summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Questionnaire.ScoreImpact.Comment">
+            <summary> A comment displayed to the user as for why this score is impacted </summary> 
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Analytics.OnboardingSectionAnalyticsProvider">
+            <summary>
+            The concrete implementation of the IOnboardingSectionAnalyticsProvider interface.
+            It shall be created by the GettingStarted tab with the knowledge of the target package and the section id
+            provided by the attribute of the onboarding section, so that the section implementer does not have to worry
+            about it.
+            </summary>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Analytics.AnalyticsUtils.GetPackagesWithAnalyticsFormat(Unity.Multiplayer.Center.Recommendations.RecommendationViewData,Unity.Multiplayer.Center.Recommendations.SolutionsToRecommendedPackageViewData)">
+            <summary>
+            From the recommendation view data (which contains the packages that the user sees and the user's selection),
+            create the list of packages that will be sent to the analytics backend.
+            </summary>
+            <param name="data">The recommendation view data as shown in the recommendation tab</param>
+            <param name="solutionToPackageData">The packages views</param>
+            <returns>The list of packages to be sent along with the installation event.</returns>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Analytics.AnalyticsUtils.GetPresetFullNames">
+            <summary>
+            Fetches all the inspector name attributes of the Preset enum and returns the displayNames
+            Important! It assumes the enum values are 0, ... , N 
+            </summary>
+            <returns>The array of preset names. The index in the array is the integer value of the enum value</returns>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Analytics.AnalyticsUtils.ToGameSpecs(Unity.Multiplayer.Center.Common.AnswerData,System.Collections.Generic.IReadOnlyDictionary{System.String,System.String},System.Collections.Generic.IReadOnlyDictionary{System.String,System.String})">
+            <summary>
+            Converts AnswerData to game specs, providing the knowledge of the display names.
+            It assumes there is exactly one answer in the answer list at this point.
+            </summary>
+            <param name="data">The answer data of the user</param>
+            <param name="answerIdToAnswerName">Mapping answer id to display name</param>
+            <param name="questionIdToQuestionName">Mapping question id to display name</param>
+            <returns>The list of game spec that will be consumed by the analytics backend</returns>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Analytics.AnalyticsUtils.GetQuestionDisplayNames(Unity.Multiplayer.Center.Questionnaire.QuestionnaireData)">
+            <summary>
+            Creates the mapping from question id to question display name
+            </summary>
+            <param name="questionnaireData">The questionnaire data</param>
+            <returns>The mapping</returns>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Analytics.AnalyticsUtils.GetAnswerDisplayNames(Unity.Multiplayer.Center.Questionnaire.QuestionnaireData)">
+            <summary>
+            Creates the mapping from answer id to answer display name
+            </summary>
+            <param name="questionnaireData">The questionnaire data</param>
+            <returns>The mapping</returns>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Analytics.DebugAnalytics">
+            <summary>
+            Does the same as the MultiplayerCenterAnalytics, but logs the events to the console instead of sending them.
+            It is useful to debug fast, without the EditorAnalytics Debugger package (but it does not replace it).
+            </summary>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Analytics.IMultiplayerCenterAnalytics">
+            <summary>
+            The interface for the Multiplayer Center Analytics provider (only one functional implementation, but the
+            interface is needed for testing purposes)
+            </summary>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Analytics.MultiplayerCenterAnalytics">
+            <summary>
+            The concrete implementation of the multiplayer center analytics provider.
+            It convert 
+            </summary>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Analytics.MultiplayerCenterAnalytics.InstallationEventAnalytic.TryGatherData(UnityEngine.Analytics.IAnalytic.IData@,System.Exception@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Unity.Multiplayer.Center.Analytics.MultiplayerCenterAnalytics.GetStartedInteractionEventAnalytic.TryGatherData(UnityEngine.Analytics.IAnalytic.IData@,System.Exception@)">
+            <inheritdoc />
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Analytics.Package">
+            <summary>
+            Package representation in the analytics data.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Analytics.Package.PackageId">
+            <summary>
+            The identifier of the package.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Analytics.Package.SelectedForInstall">
+            <summary>
+            Whether the user has selected this package for installation.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Analytics.Package.IsRecommended">
+            <summary>
+            Whether the package was recommended.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Analytics.Package.IsAlreadyInstalled">
+            <summary>
+            Whether the package was already installed when the installation attempt event occured
+            </summary>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Analytics.GameSpec">
+            <summary>
+            A single Answer to the GameSpecs questionnaire.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Analytics.GameSpec.QuestionId">
+            <summary>
+            The identifier of the answered question (does not change).
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Analytics.GameSpec.QuestionText">
+            <summary>
+            The text of the question as displayed in the UI (may change with versions).
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Analytics.GameSpec.AcceptsMultipleAnswers">
+            <summary>
+            Whether the question accepts multiple answers.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Analytics.GameSpec.AnswerId">
+            <summary>
+            The identifier of the answered question (does not change).
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Analytics.GameSpec.AnswerText">
+            <summary>
+            The text of the answer as displayed in the UI (may change with versions).
+            </summary>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Analytics.RecommendationData">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Analytics.RecommendationData.Preset">
+            <summary>
+            The preset selected by the user.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Analytics.RecommendationData.PresetName">
+            <summary>
+            The preset selected by the user (game genre) as displayed in the UI.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Analytics.RecommendationData.QuestionnaireVersion">
+            <summary>
+            The version defined in the Questionnaire data.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Analytics.RecommendationData.GameSpecs">
+            <summary>
+            All the selected answers to the questions of the game specs questionnaire.
+            </summary>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Analytics.InteractionData">
+            <summary>
+            What type of content the user Interacted with (buttons).
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Analytics.InteractionData.SectionId">
+            <summary>
+            The identifier of the section that contains the button.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Analytics.InteractionData.Type">
+            <summary>
+            Whether it is a call to action or a link.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Analytics.InteractionData.DisplayName">
+            <summary>
+            The name of the button in the UI.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Analytics.InteractionData.TargetPackageId">
+            <summary>
+            The target package for which the section is helpful.
+            </summary>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Analytics.InstallData">
+            <summary>
+            Payload of the installation event.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Analytics.InstallData.Preset">
+            <summary>
+            The preset selected by the user.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Analytics.InstallData.PresetName">
+            <summary>
+            The preset selected by the user (game genre) as displayed in the UI.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Analytics.InstallData.QuestionnaireVersion">
+            <summary>
+            The version defined in the Questionnaire data.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Analytics.InstallData.GamesSpecs">
+            <summary>
+            All the selected answers to the questions of the game specs questionnaire.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Analytics.InstallData.Packages">
+            <summary>
+            The packages that were in the recommendation tab of the multiplayer center
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Analytics.InstallData.hostingModelName">
+            <summary>
+            The hosting model selected by the user as displayed in the UI.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Analytics.InstallData.hostingModelRecommended">
+            <summary>
+            The hosting model is the recommended solution.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Analytics.InstallData.netcodeSolutionName">
+            <summary>
+            The netcode solution selected by the user as displayed in the UI.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Analytics.InstallData.netcodeSolutionRecommended">
+            <summary>
+            The netcode solution is the recommended solution.
+            </summary>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.PackageManagement.OpenPackageManager(System.String)">
+            <summary>
+            Opens the package manager window with selected package name and hides error
+            </summary>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.PackageManagement.IsDirectDependency(System.String)">
+            <summary>
+            Checks if the package is a direct dependency of the project
+            </summary>
+            <param name="packageId">The package name/id e.g. com.unity.netcode</param>
+            <returns>True if the package is a direct dependency</returns>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.PackageManagement.IsInstalled(System.String)">
+            <summary>
+            Checks if a package is installed.
+            </summary>
+            <param name="packageId">The package name, e.g. com.unity.netcode</param>
+            <returns>True if the package is installed, false otherwise</returns>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.PackageManagement.IsLinkedLocallyOrEmbeddedOrViaGit(System.String)">
+            <summary>
+            Checks if a package is embedded, linked locally, installed via Git or local Tarball.
+            </summary>
+            <param name="packageId">The package name, e.g. com.unity.netcode</param>
+            <returns>True if the package is linked locally, false otherwise</returns>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.PackageManagement.GetInstalledPackage(System.String)">
+            <summary>
+            Finds the installed package with the given packageId or returns null.
+            </summary>
+            <param name="packageId">The package name/id e.g. com.unity.netcode</param>
+            <returns>The package info</returns>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.PackageManagement.RemoveLocallyLinkedOrEmbeddedOrViaGitPackagesFromList(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Filters out the packages that are already embedded, linked locally, installed via Git or local Tarball and returns this new list.
+            </summary>
+            <param name="installCandidates">A list of package IDs that are candidates for installation.</param>
+            <returns>A new filtered list of packages.</returns>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.PackageManagement.IsAnyPackageInstalled(System.String[])">
+            <summary>
+            Returns true if any of the given packageIds is installed.
+            </summary>
+            <param name="packageIds">List of package is e.g com.unity.netcode</param>
+            <returns>True if any package is installed, false otherwise</returns>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.PackageManagement.InstallPackage(System.String,System.Action{System.Boolean})">
+            <summary>
+            Installs a single package and invokes the callback when the package is installed/when the install failed.
+            </summary>
+            <param name="packageId">The package name/id e.g. com.unity.netcode</param>
+            <param name="onInstalled">The callback</param>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.PackageManagement.RegisterToExistingInstaller(System.Action{System.Boolean})">
+            <summary>
+            Register to an existing installation callback. This has no effect if no installation is ongoing (check
+            <see cref="M:Unity.Multiplayer.Center.PackageManagement.IsInstallationFinished"/> to see if that is the case).
+            </summary>
+            <param name="onInstalled">The callback</param>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.PackageManagement.InstallPackages(System.Collections.Generic.IEnumerable{System.String},System.Action{System.Boolean},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Installs several packages and invokes the callback when all packages are installed/when the installation failed.
+            </summary>
+            <param name="packageIds">The package names/ids e.g. com.unity.netcode</param>
+            <param name="onAllInstalled">The callback</param>
+            <param name="packageIdsToRemove">Optional package name/ids to remove</param>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.PackageManagement.InstalledPackageDictionary">
+            <summary>
+            Create a dictionary with package names as keys and versions as values    
+            </summary>
+            <returns>The mapping (package id, installed version) </returns>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.PackageManagement.IsAnyMultiplayerPackageInstalled">
+            <summary>
+            Detects if any multiplayer package is installed by checking for services and Netcode installed packages.
+            </summary>
+            <returns>True if any package was detected, False otherwise</returns>
+        </member>
+        <member name="M:Unity.Multiplayer.Center.PackageManagement.IsInstallationFinished">
+            <summary>
+            Checks if the installation process has finished.
+            </summary>
+            <returns>True if there is no current installer instance or installation is finished on the installer</returns>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Onboarding.QuickstartIsMissingView">
+            <summary>
+            A lot of the getting started content is in the package com.unity.multiplayer.center.quickstart
+            This class is responsible for handling the package and its installation
+            </summary>
+        </member>
+        <member name="T:Unity.Multiplayer.Center.Onboarding.AvailableSectionTypes">
+            <summary>
+            Stores the available section types in a serializable way, but for comparison purposes only.
+            Only the assembly qualified names are serialized in a sorted array.
+            </summary>
+        </member>
+        <member name="F:Unity.Multiplayer.Center.Onboarding.SectionsFinder.k_TargetPackages">
+            <summary>
+            The target packages that are used to determine if "nothing is installed", which results in sections with
+            the display condition "NoPackageInstalled" to be displayed.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Unity.TestTools.CodeCoverage.Editor</name>
+    </assembly>
+    <members>
+        <member name="T:UnityEditor.TestTools.CodeCoverage.CodeCoverage">
+             <summary>
+             Utility class for the CodeCoverage API.
+             </summary>
+             <example>
+             <para>
+             The following example loads a scene, starts coverage recording, initializes a number of instances of a prefab, then pauses the recording to load another scene, unpauses the recording, initializes a number of instances of a different prefab and finally stops the recording.
+             It also sets the verbosity level to Verbose, so all logs are printed to the editor log.
+             </para>
+             
+             <code>
+             using UnityEngine;
+             using UnityEditor;
+             using UnityEditor.TestTools.CodeCoverage;
+             using UnityEditor.SceneManagement;
+            
+             public class CoverageApiTest : MonoBehaviour
+             {
+                 [MenuItem("CodeCoverage/Run Recording")]
+                 static void RunRecording()
+                 {
+                     CodeCoverage.VerbosityLevel = LogVerbosityLevel.Verbose;
+            
+                     int i;
+            
+                     EditorSceneManager.OpenScene("Assets/Scenes/Scene1.unity");
+            
+                     CodeCoverage.StartRecording();
+            
+                     for (i = 0; i &lt; 1000; ++i)
+                     {
+                         Instantiate(Resources.Load("ComplexPrefab1"));
+                     }
+            
+                     CodeCoverage.PauseRecording();
+            
+                     EditorSceneManager.OpenScene("Assets/Scenes/Scene2.unity");
+            
+                     CodeCoverage.UnpauseRecording();
+            
+                     for (i = 0; i &lt; 1000; ++i)
+                     {
+                         Instantiate(Resources.Load("ComplexPrefab2"));
+                     }
+            
+                     CodeCoverage.StopRecording();
+                 }
+             }
+             </code>
+             </example>
+        </member>
+        <member name="P:UnityEditor.TestTools.CodeCoverage.CodeCoverage.VerbosityLevel">
+            <summary>
+            Sets the verbosity level used in editor and console logs. The default level is <see cref="F:UnityEditor.TestTools.CodeCoverage.LogVerbosityLevel.Info"/>.
+            </summary>
+            <value>
+            The verbosity level used in editor and console logs.
+            </value>
+        </member>
+        <member name="M:UnityEditor.TestTools.CodeCoverage.CodeCoverage.StartRecording">
+            <summary>
+            Call this to start a new coverage recording session.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.TestTools.CodeCoverage.CodeCoverage.PauseRecording">
+            <summary>
+            Call this to pause the recording on the current coverage recording session.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.TestTools.CodeCoverage.CodeCoverage.UnpauseRecording">
+            <summary>
+            Call this to continue recording on the current coverage recording session, after having paused the recording.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.TestTools.CodeCoverage.CodeCoverage.StopRecording">
+            <summary>
+            Call this to end the current coverage recording session.
+            </summary>
+        </member>
+        <member name="T:UnityEditor.TestTools.CodeCoverage.Events">
+             <summary>
+             Events invoked during a code coverage session. A code coverage session is the period between starting and finishing capturing code coverage data.
+             </summary>
+             <example>
+             <para>
+             In the following example we create event handler methods which subscribe to the <see cref="E:UnityEditor.TestTools.CodeCoverage.Events.onCoverageSessionStarted"/>, <see cref="E:UnityEditor.TestTools.CodeCoverage.Events.onCoverageSessionFinished"/>, <see cref="E:UnityEditor.TestTools.CodeCoverage.Events.onCoverageSessionPaused"/> and <see cref="E:UnityEditor.TestTools.CodeCoverage.Events.onCoverageSessionUnpaused"/> events.
+             We use the <a href="https://docs.unity3d.com/ScriptReference/InitializeOnLoadAttribute.html">InitializeOnLoad</a> attribute to make sure that they will resubscribe on Domain Reload, when we enter Play Mode for example.
+             </para>
+             
+             <code>
+             using UnityEngine;
+             using UnityEditor;
+             using UnityEditor.TestTools.CodeCoverage;
+            
+             [InitializeOnLoad]
+             public class CoverageSessionListener
+             {
+                 static CoverageSessionListener()
+                 {
+                     Events.onCoverageSessionStarted += OnSessionStarted;
+                     Events.onCoverageSessionFinished += OnSessionFinished;
+                     Events.onCoverageSessionPaused += OnSessionPaused;
+                     Events.onCoverageSessionUnpaused += OnSessionUnpaused;
+                 }
+            
+                 static void OnSessionStarted(SessionEventInfo args)
+                 {
+                     Debug.Log($"{args.SessionMode} Code Coverage Session Started");
+                 }
+                 static void OnSessionFinished(SessionEventInfo args)
+                 {
+                     Debug.Log($"{args.SessionMode} Code Coverage Session Finished");
+            
+                     string paths = string.Empty;
+                     foreach (string path in args.SessionResultPaths)
+                         paths = string.Concat(paths, "\n", path);
+            
+                     Debug.Log($"Code Coverage Results were saved in: {paths}");
+                 }
+            
+                 static void OnSessionPaused(SessionEventInfo args)
+                 {
+                     Debug.Log($"{args.SessionMode} Code Coverage Session Paused");
+                 }
+            
+                 static void OnSessionUnpaused(SessionEventInfo args)
+                 {
+                     Debug.Log($"{args.SessionMode} Code Coverage Session Unpaused");
+                 }
+             }
+             </code>
+             </example>
+        </member>
+        <member name="E:UnityEditor.TestTools.CodeCoverage.Events.onCoverageSessionStarted">
+            <summary>
+            This event is invoked when a code coverage session is started.
+            </summary>
+        </member>
+        <member name="E:UnityEditor.TestTools.CodeCoverage.Events.onCoverageSessionFinished">
+            <summary>
+            This event is invoked when a code coverage session is finished.
+            </summary>
+        </member>
+        <member name="E:UnityEditor.TestTools.CodeCoverage.Events.onCoverageSessionPaused">
+            <summary>
+            This event is invoked when a code coverage session is paused.
+            </summary>
+        </member>
+        <member name="E:UnityEditor.TestTools.CodeCoverage.Events.onCoverageSessionUnpaused">
+            <summary>
+            This event is invoked when a code coverage session is unpaused.
+            </summary>
+        </member>
+        <member name="T:UnityEditor.TestTools.CodeCoverage.SessionEventInfo">
+            <summary>
+            The code coverage session information retuned by the coverage session <see cref="T:UnityEditor.TestTools.CodeCoverage.Events"/>.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.TestTools.CodeCoverage.SessionEventInfo.SessionMode">
+            <summary>
+            The code coverage session mode.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.TestTools.CodeCoverage.SessionEventInfo.SessionResultPaths">
+            <summary>
+            The coverage results paths of the files or folders created during the code coverage session.
+            </summary>
+        </member>
+        <member name="T:UnityEditor.TestTools.CodeCoverage.LogVerbosityLevel">
+            <summary>
+            The verbosity level used in editor and console logs.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.TestTools.CodeCoverage.LogVerbosityLevel.Verbose">
+            <summary>
+            All logs will be printed in Verbose.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.TestTools.CodeCoverage.LogVerbosityLevel.Info">
+            <summary>
+            Logs, Warnings and Errors will be printed in Info.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.TestTools.CodeCoverage.LogVerbosityLevel.Warning">
+            <summary>
+            Warnings and Errors will be printed in Warning.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.TestTools.CodeCoverage.LogVerbosityLevel.Error">
+            <summary>
+            Only Errors will be printed in Error.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.TestTools.CodeCoverage.LogVerbosityLevel.Off">
+            <summary>
+            No logs will be printed in Off.
+            </summary>
+        </member>
+        <member name="T:UnityEditor.TestTools.CodeCoverage.SessionMode">
+            <summary>
+            The code coverage session mode.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.TestTools.CodeCoverage.SessionMode.TestRunner">
+            <summary>
+            Describes a code coverage session triggered by automated testing, using the Test Runner.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.TestTools.CodeCoverage.SessionMode.Recording">
+            <summary>
+            Describes a code coverage session triggered by Coverage Recording.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,237 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ThunderKit.Core</name>
+    </assembly>
+    <members>
+        <member name="T:ThunderKit.Core.Config.ImportExtension">
+            <summary>
+            Base ImportExtension for building GameImport extension points
+            </summary>
+        </member>
+        <member name="P:ThunderKit.Core.Config.ImportExtension.Name">
+            <summary>
+            Name of ImportExtension, Displayed on the Import Configuration page
+            </summary>
+        </member>
+        <member name="P:ThunderKit.Core.Config.ImportExtension.Priority">
+            <summary>
+            Integer which indicates the priority at which this extension will 
+            run. Import Extensions are ordered by their priority in descending 
+            order.
+            </summary>
+        </member>
+        <member name="T:ThunderKit.Core.Config.BlacklistProcessor">
+            <summary>
+            Modify or provide assembly blacklist of filenames
+            The blacklist is overriden by the whitelist
+            </summary>
+        </member>
+        <member name="M:ThunderKit.Core.Config.BlacklistProcessor.Process(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Modify or provide assembly blacklist of filenames
+            The blacklist is overriden by the whitelist
+            </summary>
+            <param name="blacklist">enumeration of current blacklist before processing</param>
+            <returns>true if assembly should be blacklisted, otherwise false</returns>
+        </member>
+        <member name="T:ThunderKit.Core.Config.AssemblyProcessor">
+            <summary>
+            Redirect where assemblies source path
+            </summary>
+        </member>
+        <member name="M:ThunderKit.Core.Config.AssemblyProcessor.Process(System.String)">
+            <summary>
+            Redirect where an assembly should be imported from
+            </summary>
+            <param name="path">Path to assembly currently being imported</param>
+            <returns>new path that replaces the path passed as parameter</returns>
+        </member>
+        <member name="M:ThunderKit.Core.Config.ImportAssemblies.BuildAssemblyBlacklist(System.Boolean)">
+            <summary>
+            Collect list of Assemblies that should not be imported from the game.
+            These are assemblies that would be automatically provided by Unity to the environment
+            </summary>
+            <param name="byEditorFiles"></param>
+        </member>
+        <member name="M:ThunderKit.Core.Config.WhitelistProcessor.Process(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Modify or provide assembly whitelist of filenames
+            The blacklist is overriden by the whitelist
+            </summary>
+            <param name="whitelist">enumeration of current whitelist before processing</param>
+            <returns>true if assembly should be whitelisted, otherwise false</returns>
+        </member>
+        <member name="M:ThunderKit.Core.Config.OptionalExecutor.Execute">
+            <summary>
+            Executed after the last files and data have been imported into the project, but before 
+            </summary>
+        </member>
+        <member name="T:ThunderKit.Core.Pipelines.PipelineToolbar">
+            <summary>
+            Unity 6.3+ implementation using the native Extensible Toolbar API
+            </summary>
+        </member>
+        <member name="M:ThunderKit.Core.Utilities.PackageHelper.WriteAssemblyMetaData(System.String,System.String)">
+            <summary>
+            Generate a unity meta file for an assembly with ThunderKit managed Guid
+            </summary>
+            <param name="assemblyPath">Path to assembly to generate meta file for</param>
+            <param name="metadataPath">Path to write meta file to</param>
+        </member>
+        <member name="M:ThunderKit.Core.Utilities.PackageHelper.WriteAssetMetaData(System.String,System.String)">
+            <summary>
+            Generate a unity meta file for an asset with ThunderKit managed Guid
+            </summary>
+            <param name="assemblyPath">Path to asset to generate meta file for</param>
+            <param name="metadataPath">Path to write meta file to</param>
+        </member>
+        <member name="M:ThunderKit.Core.Utilities.ScriptEditorHelper.GenerateAndLoadScript(System.String,System.String)">
+            <summary>
+            Generates a new script at the specified path.
+            Type will generate with a namespace equal to the given path
+            </summary>
+            <param name="template"></param>
+            <param name="newScriptPath">Path relative to the project's Assets folder</param>
+        </member>
+        <member name="M:ThunderKit.Core.Utilities.ScriptableHelper.SelectNewAsset``1(System.Action{``0})">
+            <summary>
+            Creates and Saves a ScriptableObject of Type T allowing the user the input the name of the new asset, or cancel by pressing escape
+            The asset will be created in one of the folowing:
+                The selected folder
+                The containing folder of a selected asset
+                The Assets folder if there is no selection in the Project window
+            </summary>
+            <typeparam name="T">Type of ScriptableObject to create</typeparam>
+            <param name="afterCreated">Delegate to run after asset creation process has completed</param>
+        </member>
+        <member name="M:ThunderKit.Core.Utilities.ScriptableHelper.AssignIcon(UnityEngine.Object,UnityEngine.Texture2D)">
+            <summary>
+            Assign a Texture2d as the icon for a UnityEngine.Object in the Unity Editor
+            </summary>
+            <param name="g">Object to assign icon to</param>
+            <param name="tex">icon to assign to Object</param>
+        </member>
+        <member name="M:ThunderKit.Core.Utilities.ScriptableHelper.SelectNewAsset(System.Type,System.Func{System.String})">
+            <summary>
+            Creates and Saves a ScriptableObject of Type t
+            The asset will be created in one of the folowing:
+                The selected folder
+                The containing folder of a selected asset
+                The Assets folder if there is no selection in the Project window
+            </summary>
+            <param name="t">Type of ScriptableObject to create</param>
+            <param name="overrideName">Delegate which returns a string to be assigned as the name of the new asset</param>
+        </member>
+        <member name="M:ThunderKit.Core.Utilities.ScriptableHelper.EnsureAsset``1(System.String,System.Action{``0})">
+            <summary>
+            if an Asset of Type T does not exist at assetPath, creates and saves a new asset of Type T
+            </summary>
+            <typeparam name="T">Type of ScriptableObject to create</typeparam>
+            <param name="assetPath">Path to ScriptableObject</param>
+            <param name="initializer">Delegate to run after asset creation process has completed</param>
+            <returns>Created ScriptableObject</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:ThunderKit.Core.Utilities.ScriptableHelper.EnsureAsset(System.String,System.Type,System.Action{System.Object})" -->
+        <member name="M:ThunderKit.Core.Utilities.ScriptableHelper.FixMissingScriptSubAssets(UnityEngine.Object)">
+            <summary>
+            Function used to remove a sub-asset that is missing the script reference
+            </summary>
+            <param name="toDelete">The main asset that holds the sub-asset</param>
+        </member>
+        <member name="M:ThunderKit.Core.Data.PackageSource.AddPackageGroup(ThunderKit.Core.Data.PackageSource.PackageGroupInfo)">
+            <summary>
+            Generates a new PackageGroup for this PackageSource
+            </summary>
+            <param name="author"></param>
+            <param name="name"></param>
+            <param name="description"></param>
+            <param name="dependencyId">DependencyId for PackageGroup, this is used for mapping dependencies</param>
+            <param name="tags"></param>
+            <param name="versions">Collection of version numbers, DependencyIds and dependencies as an array of versioned DependencyIds</param>
+        </member>
+        <member name="M:ThunderKit.Core.Data.PackageSource.OnLoadPackages">
+            <summary>
+            Loads data from data source into the current PackageSource via AddPackageGroup
+            </summary>
+        </member>
+        <member name="M:ThunderKit.Core.Data.PackageSource.VersionIdToGroupId(System.String)">
+            <summary>
+            Provides a conversion of versioned dependencyIds to group dependencyIds
+            </summary>
+            <param name="dependencyId">Versioned Dependency Id</param>
+            <returns>Group DependencyId which dependencyId is mapped to</returns>
+        </member>
+        <member name="M:ThunderKit.Core.Data.PackageSource.OnInstallPackageFiles(ThunderKit.Core.Data.PackageVersion,System.String)">
+            <summary>
+            Executes the downloading, unpacking, and placing of package files.
+            </summary>
+            <param name="version">The version of the Package which should be installed</param>
+            <param name="packageDirectory">Root directory which files should be extracted into</param>
+            <returns></returns>
+        </member>
+        <member name="M:ThunderKit.Core.UIElements.TemplateHelpers.AddEnvironmentAwareSheets(UnityEngine.UIElements.VisualElement,System.String)">
+            <summary>
+            Selectively adds a set of predetermined style sheets based upon the environment
+            Variations:
+            templatePath
+            </summary>
+            <param name="instance"></param>
+            <param name="templatePath">Path to UXML template file</param>
+        </member>
+        <member name="M:SolutionPostProcessor.#cctor">
+            <summary>
+            Generate a dictionary with information necessary to clean up project file
+            Paths
+            </summary>
+        </member>
+        <member name="M:SolutionPostProcessor.GenerateSlnProjectEntry(System.String)">
+            <summary>
+            Hashes a name into a GUID to identify a project and creates an Entry that can be injectred into an Sln file to represent a new project
+            </summary>
+            <param name="name">Name of assembly / project to be added</param>
+            <returns>A string representing a Solution Project entry</returns>
+        </member>
+        <member name="M:SolutionPostProcessor.GenerateProjectFile(System.Collections.Generic.IEnumerable{System.ValueTuple{System.String,System.String}})">
+            <summary>
+            Creates a simple CSProj file with the most basic requirements and a single ItemGroup containing None entries for each member of <paramref name="files"/>
+            </summary>
+            <param name="files">A collection of FilePaths and their Project Display Paths (linkPath)</param>
+            <returns>A String with the contents for a CSProj file as described</returns>
+        </member>
+        <member name="M:SolutionPostProcessor.GetDistinctMarkdownDocuments(System.ValueTuple{System.String,ThunderKit.Core.Data.DocumentationRoot})">
+            <summary>
+            Returns an enumeration of Markdown Documents managed by a DocumentationRoot asset.
+            </summary>
+            <param name="root">A tuple containing the path to a DocumentationRoot asset and the corresponding loaded Asset</param>
+            <returns>An enumeration of link and file paths where the link is relative to the DocumentationRoot path</returns>
+        </member>
+        <member name="M:SolutionPostProcessor.OnGeneratedSlnSolution(System.String,System.String)">
+            <summary>
+            Process Unity generation Solution files to add a project for ThunderKit
+            non-code assets
+            </summary>
+            <param name="path">Path to generated Solution File</param>
+            <param name="content">Content of solution file generated by unity</param>
+            <returns>Modified Solution file content</returns>
+        </member>
+        <member name="M:SolutionPostProcessor.OnGeneratedCSProject(System.String,System.String)">
+            <summary>
+            Process CSProj files generated by Unity to fix local disk packages not
+            having their folder structure
+            </summary>
+            <param name="path">Path to generated CSProj File</param>
+            <param name="content">Content of CSProj file generated by unity</param>
+            <returns>Modified CSProj file content</returns>
+        </member>
+        <member name="M:SolutionPostProcessor.AdjustDocument(System.Xml.Linq.XDocument,System.String)">
+            <summary>
+            Adjusts a CSProj file so that its Compile and None elements will use a 
+            link path which represents their lcoation relative to the AsmRef they
+            are managed by
+            </summary>
+            <param name="document">A Parsed CSProj file in XDocument format</param>
+            <param name="assemblyName">The name of the CSProj file / assembly</param>
+        </member>
+    </members>
+</doc>

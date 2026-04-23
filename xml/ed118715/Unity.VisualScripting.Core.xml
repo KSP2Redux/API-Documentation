@@ -1,0 +1,1838 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Unity.VisualScripting.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Unity.VisualScripting.Variables">
+             <summary>
+                Component that handles the variables that you can use in the Script Graphs of your project.
+             </summary>
+             <remarks>
+                <para>This component is automatically added to a GameObject when a <see cref="!:ScriptMachine"/> is
+                added, or when <see cref="T:Unity.VisualScripting.SceneVariables"/> (Script) are created using the “Visual Scripting Scene Variables”
+                menu in the Hierarchy.</para>
+            
+                <para>The <see cref="T:Unity.VisualScripting.Variables"/> component manages the object variables for any GameObject
+                that you add it to. You can access these variables from the Object Variables section of the Blackboard
+                of any <see cref="!:ScriptMachine"/> associated with the GameObject.</para>
+            
+                <para>The <see cref="T:Unity.VisualScripting.Variables"/> component also manages the scene variables for any “VisualScripting SceneVariables”
+                GameObject that you add it to. You can access these scene variables from the Scene Variables
+                section of the Blackboard of any <see cref="!:ScriptMachine"/> you add to this same scene.
+                </para>
+            
+                <para><b>Note</b>: It's best not to add a <see cref="!:ScriptMachine"/> component to a GameObject that also
+                includes the <see cref="T:Unity.VisualScripting.SceneVariables"/> (Script). If you do this, the Blackboard displays Scene
+                Variables that are also present in Object Variables and this can cause confusion.</para>
+            
+                <para>For more information on how to interact with Variables, refer to the <a href="../manual/vs-variables.html">User Manual</a>.</para>
+             </remarks>
+             <example>
+                 <para>The following example shows how to programmatically change the value of a variable used in a Visual Scripting graph.
+                 Every time you press the Space key, we double the value of the velocity variable.
+                 <b>Note</b>: You can try this example in a Script Graph.</para>
+            
+                 <code source="../../../DocCodeExamples/VariableExamples.cs" region="PlayerController" title="PlayerController"/>
+             </example>
+        </member>
+        <member name="P:Unity.VisualScripting.Variables.declarations">
+            <summary>
+               Retrieves a collection of the variables set in the Variables component.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.Variables.Graph(Unity.VisualScripting.GraphPointer)">
+            <summary>
+               Retrieves a collection of graph variables for a given graph.
+            </summary>
+            <param name="pointer">The reference to a graph.</param>
+            <returns>If the graph is instantiated, returns the graph variables of that instantiated graph.
+            Otherwise, returns the graph variables from the definition of the given graph (i.e.: from the graph asset definition)</returns>
+            <exception cref="T:System.ArgumentNullException">
+            If <paramref name="pointer" /> is <c>null</c>.
+            </exception>
+        </member>
+        <member name="M:Unity.VisualScripting.Variables.GraphInstance(Unity.VisualScripting.GraphPointer)">
+            <summary>
+               Retrieves a collection of graph variables of an instantiated graph.
+            </summary>
+            <param name="pointer">The reference to a graph.</param>
+            <returns>A collection of graph variables of an instantiated graph.</returns>
+            <exception cref="T:Unity.VisualScripting.GraphPointerException">
+            If the graph data cannot be read. Which probably means that the graph is not instantiated.
+            </exception>
+        </member>
+        <member name="M:Unity.VisualScripting.Variables.GraphDefinition(Unity.VisualScripting.GraphPointer)">
+            <summary>
+               Retrieves a collection of graph variables from the definition of a graph.
+            </summary>
+            <param name="pointer">The reference to a graph.</param>
+            <returns>A collection of graph variables of a given graph.</returns>
+        </member>
+        <member name="M:Unity.VisualScripting.Variables.GraphDefinition(Unity.VisualScripting.IGraphWithVariables)">
+            <summary>
+               Retrieves a collection of graph variables from the definition of a graph.
+            </summary>
+            <param name="graph">The reference of a graph</param>
+            <returns>A collection of graph variables of a given graph.</returns>
+        </member>
+        <member name="M:Unity.VisualScripting.Variables.Object(UnityEngine.GameObject)">
+            <summary>
+               Retrieves a collection of the object variables of a given <see cref="T:UnityEngine.GameObject"/>.
+            </summary>
+            <param name="go">The <see cref="T:UnityEngine.GameObject"/> whose object variables will be returned.</param>
+            <returns>A collection of the object variables contained in the Variables component of the <see cref="T:UnityEngine.GameObject"/> that was passed as a parameter.</returns>
+            <remarks>If the <see cref="T:UnityEngine.GameObject"/> doesn't have a Variables component, it is supplied with one by default and the returned collection is empty.</remarks>
+        </member>
+        <member name="M:Unity.VisualScripting.Variables.Object(UnityEngine.Component)">
+            <summary>
+               Retrieves a collection of the object variables of a given <see cref="T:UnityEngine.GameObject"/>.
+            </summary>
+            <param name="component">The <see cref="T:UnityEngine.Component"/> whose <see cref="T:UnityEngine.GameObject"/>'s object variables are returned.</param>
+            <returns>A collection of object variables contained in the Variables component of the <see cref="T:UnityEngine.Component"/>'s <see cref="T:UnityEngine.GameObject"/>.</returns>
+            <remarks>If the GameObject does not have a Variables component, a Variables component is added to the <see cref="T:UnityEngine.GameObject"/> and the returned collection is empty</remarks>
+        </member>
+        <member name="M:Unity.VisualScripting.Variables.Scene(System.Nullable{UnityEngine.SceneManagement.Scene})">
+            <summary>
+               Retrieves a collection of scene variables for a given <see cref="T:UnityEngine.SceneManagement.Scene">Scene</see>.
+            </summary>
+            <param name="scene">The <see cref="T:UnityEngine.SceneManagement.Scene">Scene</see> whose scene variables are returned.</param>
+            <returns>A collection of scene variables contained in the Variables component associated with the <see cref="T:Unity.VisualScripting.SceneVariables"/> (Script).</returns>
+            <exception cref="T:System.ArgumentNullException">
+            If <paramref name="scene" /> is <c>null</c>.
+            </exception>
+        </member>
+        <member name="M:Unity.VisualScripting.Variables.Scene(UnityEngine.GameObject)">
+            <summary>
+               Retrieves a collection of scene variables for a given <see cref="T:UnityEngine.SceneManagement.Scene">Scene</see>.
+            </summary>
+            <param name="go">A <see cref="T:UnityEngine.GameObject"/> whose <see cref="T:UnityEngine.SceneManagement.Scene">Scene</see> will be accessed to get its variables.</param>
+            <returns>A collection of scene variables contained in the Variables component associated with the <see cref="T:Unity.VisualScripting.SceneVariables"/> (Script).</returns>
+            <exception cref="T:System.ArgumentNullException">
+            If the `go.scene` is <c>null</c>.
+            </exception>
+        </member>
+        <member name="M:Unity.VisualScripting.Variables.Scene(UnityEngine.Component)">
+            <summary>
+               Retrieves a collection of scene variables for a given <see cref="T:UnityEngine.SceneManagement.Scene">Scene</see>.
+            </summary>
+            <param name="component">A <see cref="T:UnityEngine.Component"/> whose <see cref="T:UnityEngine.GameObject"/>'s <see cref="T:UnityEngine.SceneManagement.Scene">Scene</see>'s scene variables will be returned.</param>
+            <returns>A collection of scene variables contained in the Variables component associated with the <see cref="T:Unity.VisualScripting.SceneVariables"/> (Script).</returns>
+            <exception cref="T:System.ArgumentNullException">
+            If the `component.go` or `component.go.scene` is <c>null</c>.
+            </exception>
+        </member>
+        <member name="P:Unity.VisualScripting.Variables.ActiveScene">
+            <summary>
+               Retrieve a collection of the scene variables of the active scene.
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.Variables.Application">
+            <summary>
+               Retrieve a collection of the application variables.
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.Variables.Saved">
+            <summary>
+               Retrieve a collection of the saved variables.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.Variables.ExistOnObject(UnityEngine.GameObject)">
+            <summary>
+               Check if a Variables component exists on the <see cref="T:UnityEngine.GameObject"/> passed as a parameter.
+            </summary>
+            <param name="go">The <see cref="T:UnityEngine.GameObject"/> we want to check for the Variables component.</param>
+            <returns>True if the <see cref="T:UnityEngine.GameObject"/> has a Variables component. Otherwise, returns false.</returns>
+        </member>
+        <member name="M:Unity.VisualScripting.Variables.ExistOnObject(UnityEngine.Component)">
+            <summary>
+               Check if a Variables component exists on the <see cref="T:UnityEngine.Component"/>'s <see cref="T:UnityEngine.GameObject"/> passed as a parameter.
+            </summary>
+            <param name="component">A <see cref="T:UnityEngine.Component"/> for which we want to know if the <see cref="T:UnityEngine.GameObject"/> has a Variables component.</param>
+            <returns>True if the <see cref="T:UnityEngine.Component"/>'s <see cref="T:UnityEngine.GameObject"/> has a Variables component. Otherwise, returns false.</returns>
+        </member>
+        <member name="M:Unity.VisualScripting.Variables.ExistInScene(System.Nullable{UnityEngine.SceneManagement.Scene})">
+            <summary>
+               Check if there is a SceneVariables component instantiated to find out if the scene contains scene variables.
+            </summary>
+            <param name="scene">A <see cref="T:UnityEngine.SceneManagement.Scene">Scene</see> we want to check for scene variables.</param>
+            <returns>True if the <see cref="T:UnityEngine.SceneManagement.Scene">Scene</see> is not null and contains scene variables. Otherwise, returns false.</returns>
+        </member>
+        <member name="P:Unity.VisualScripting.Variables.ExistInActiveScene">
+            <summary>
+               Check if there is a SceneVariables component instantiated to find out if the active scene contains scene variables.
+            </summary>
+            <remarks>Returns true if the active scene contains scene variables. Otherwise, returns false.</remarks>
+        </member>
+        <member name="M:Unity.VisualScripting.Variables.GetAotStubs(System.Collections.Generic.HashSet{System.Object})">
+            <summary>
+               Don't use this method. It is for Unity Visual Scripting internal usage only.
+            </summary>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.Internal.fsPortableReflection">
+            <summary>
+            This wraps reflection types so that it is portable across different Unity
+            runtimes.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.Internal.fsPortableReflection.HasAttribute``1(System.Reflection.MemberInfo)">
+            <summary>
+            Returns true if the given attribute is defined on the given element.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.Internal.fsPortableReflection.HasAttribute``1(System.Reflection.MemberInfo,System.Boolean)">
+            <summary>
+            Returns true if the given attribute is defined on the given element.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.Internal.fsPortableReflection.HasAttribute(System.Reflection.MemberInfo,System.Type)">
+            <summary>
+            Returns true if the given attribute is defined on the given element.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.Internal.fsPortableReflection.HasAttribute(System.Reflection.MemberInfo,System.Type,System.Boolean)">
+            <summary>
+            Returns true if the given attribute is defined on the given element.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.Internal.fsPortableReflection.GetAttribute(System.Reflection.MemberInfo,System.Type,System.Boolean)">
+            <summary>
+            Fetches the given attribute from the given MemberInfo. This method
+            applies caching and is allocation free (after caching has been
+            performed).
+            </summary>
+            <param name="element">
+            The MemberInfo the get the attribute from.
+            </param>
+            <param name="attributeType">The type of attribute to fetch.</param>
+            <returns>The attribute or null.</returns>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.Internal.fsPortableReflection.GetAttribute``1(System.Reflection.MemberInfo,System.Boolean)">
+            <summary>
+            Fetches the given attribute from the given MemberInfo.
+            </summary>
+            <typeparam name="TAttribute">
+            The type of attribute to fetch.
+            </typeparam>
+            <param name="element">
+            The MemberInfo to get the attribute from.
+            </param>
+            <param name="shouldCache">
+            Should this computation be cached? If this is the only time it will
+            ever be done, don't bother caching.
+            </param>
+            <returns>The attribute or null.</returns>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.Internal.fsVersionedType.Ancestors">
+            <summary>
+            The direct ancestors that this type can import.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.Internal.fsVersionedType.VersionString">
+            <summary>
+            The identifying string that is unique among all ancestors.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.Internal.fsVersionedType.ModelType">
+            <summary>
+            The modeling type that this versioned type maps back to.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.Internal.fsVersionedType.Migrate(System.Object)">
+            <summary>
+            Migrate from an instance of an ancestor.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.Internal.fsVersionManager.VerifyConstructors(Unity.VisualScripting.FullSerializer.Internal.fsVersionedType)">
+            <summary>
+            Verifies that the given type has constructors to migrate from all
+            ancestor types.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.Internal.fsVersionManager.VerifyUniqueVersionStrings(Unity.VisualScripting.FullSerializer.Internal.fsVersionedType)">
+            <summary>
+            Verifies that the given version graph contains only unique versions.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.Internal.fsTypeExtensions.CSharpName(System.Type)">
+            <summary>
+            Returns a pretty name for the type in the style of one that you'd see
+            in C# without the namespace.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.Internal.fsTypeExtensions.CSharpName(System.Type,System.Boolean)">
+            <summary>
+            Returns a pretty name for the type in the style of one that you'd see
+            in C#.
+            </summary>
+            <param name="includeNamespace">
+            Should the name include namespaces?
+            </param>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.Internal.fsOption`1">
+            <summary>
+            Simple option type. This is akin to nullable types.
+            </summary>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.fsPropertyAttribute">
+            <summary>
+            Explicitly mark a property to be serialized. This can also be used to
+            give the name that the property should use during serialization.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsPropertyAttribute.Name">
+            <summary>
+            The name of that the property will use in JSON serialization.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsPropertyAttribute.Converter">
+            <summary>
+            Use a custom converter for the given type. Specify the converter to
+            use using typeof.
+            </summary>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.fsDataType">
+            <summary>
+            The actual type that a JsonData instance can store.
+            </summary>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.fsData">
+            <summary>
+            A union type that stores a serialized value. The stored type can be one
+            of six different
+            types: null, boolean, double, Int64, string, Dictionary, or List.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsData._value">
+            <summary>
+            The raw value that this serialized data stores. It can be one of six
+            different types; a boolean, a double, Int64, a string, a Dictionary,
+            or a List.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsData.#ctor">
+            <summary>
+            Creates a fsData instance that holds null.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsData.#ctor(System.Boolean)">
+            <summary>
+            Creates a fsData instance that holds a boolean.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsData.#ctor(System.Double)">
+            <summary>
+            Creates a fsData instance that holds a double.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsData.#ctor(System.Int64)">
+            <summary>
+            Creates a new fsData instance that holds an integer.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsData.#ctor(System.String)">
+            <summary>
+            Creates a fsData instance that holds a string.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsData.#ctor(System.Collections.Generic.Dictionary{System.String,Unity.VisualScripting.FullSerializer.fsData})">
+            <summary>
+            Creates a fsData instance that holds a dictionary of values.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsData.#ctor(System.Collections.Generic.List{Unity.VisualScripting.FullSerializer.fsData})">
+            <summary>
+            Creates a fsData instance that holds a list of values.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsData.CreateDictionary">
+            <summary>
+            Helper method to create a fsData instance that holds a dictionary.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsData.CreateList">
+            <summary>
+            Helper method to create a fsData instance that holds a list.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsData.CreateList(System.Int32)">
+            <summary>
+            Helper method to create a fsData instance that holds a list with the
+            initial capacity.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsData.BecomeDictionary">
+            <summary>
+            Transforms the internal fsData instance into a dictionary.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsData.Clone">
+            <summary>
+            Returns a shallow clone of this data instance.
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.FullSerializer.fsData.IsNull">
+            <summary>
+            Returns true if this fsData instance maps back to null.
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.FullSerializer.fsData.IsDouble">
+            <summary>
+            Returns true if this fsData instance maps back to a double.
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.FullSerializer.fsData.IsInt64">
+            <summary>
+            Returns true if this fsData instance maps back to an Int64.
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.FullSerializer.fsData.IsBool">
+            <summary>
+            Returns true if this fsData instance maps back to a boolean.
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.FullSerializer.fsData.IsString">
+            <summary>
+            Returns true if this fsData instance maps back to a string.
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.FullSerializer.fsData.IsDictionary">
+            <summary>
+            Returns true if this fsData instance maps back to a Dictionary.
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.FullSerializer.fsData.IsList">
+            <summary>
+            Returns true if this fsData instance maps back to a List.
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.FullSerializer.fsData.AsDouble">
+            <summary>
+            Casts this fsData to a double. Throws an exception if it is not a
+            double.
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.FullSerializer.fsData.AsInt64">
+            <summary>
+            Casts this fsData to an Int64. Throws an exception if it is not an
+            Int64.
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.FullSerializer.fsData.AsBool">
+            <summary>
+            Casts this fsData to a boolean. Throws an exception if it is not a
+            boolean.
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.FullSerializer.fsData.AsString">
+            <summary>
+            Casts this fsData to a string. Throws an exception if it is not a
+            string.
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.FullSerializer.fsData.AsDictionary">
+            <summary>
+            Casts this fsData to a Dictionary. Throws an exception if it is not a
+            Dictionary.
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.FullSerializer.fsData.AsList">
+            <summary>
+            Casts this fsData to a List. Throws an exception if it is not a List.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsData.Cast``1">
+            <summary>
+            Internal helper method to cast the underlying storage to the given
+            type or throw a pretty printed exception on failure.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsData.Equals(System.Object)">
+            <summary>
+            Determines whether the specified object is equal to the current
+            object.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsData.Equals(Unity.VisualScripting.FullSerializer.fsData)">
+            <summary>
+            Determines whether the specified object is equal to the current
+            object.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsData.op_Equality(Unity.VisualScripting.FullSerializer.fsData,Unity.VisualScripting.FullSerializer.fsData)">
+            <summary>
+            Returns true iff a == b.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsData.op_Inequality(Unity.VisualScripting.FullSerializer.fsData,Unity.VisualScripting.FullSerializer.fsData)">
+            <summary>
+            Returns true iff a != b.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsData.GetHashCode">
+            <summary>
+            Returns a hash code for this instance.
+            </summary>
+            <returns>
+            A hash code for this instance, suitable for use in hashing algorithms
+            and data structures like a hash table.
+            </returns>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.fsTypeCache">
+            <summary>
+            Caches type name to type lookups. Type lookups occur in all loaded
+            assemblies.
+            </summary>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.fsBaseConverter">
+            <summary>
+            The serialization converter allows for customization of the serialization
+            process.
+            </summary>
+            <remarks>
+            You do not want to derive from this class - there is no way to actually
+            use it within the serializer.. Instead, derive from either fsConverter or
+            fsDirectConverter
+            </remarks>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsBaseConverter.Serializer">
+            <summary>
+            The serializer that was owns this converter.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsBaseConverter.CreateInstance(Unity.VisualScripting.FullSerializer.fsData,System.Type)">
+            <summary>
+            Construct an object instance that will be passed to TryDeserialize.
+            This should **not** deserialize the object.
+            </summary>
+            <param name="data">The data the object was serialized with.</param>
+            <param name="storageType">
+            The field/property type that is storing the instance.
+            </param>
+            <returns>An object instance</returns>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsBaseConverter.RequestCycleSupport(System.Type)">
+            <summary>
+            If true, then the serializer will support cyclic references with the
+            given converted type.
+            </summary>
+            <param name="storageType">
+            The field/property type that is currently storing the object that is
+            being serialized.
+            </param>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsBaseConverter.RequestInheritanceSupport(System.Type)">
+            <summary>
+            If true, then the serializer will include inheritance data for the
+            given converter.
+            </summary>
+            <param name="storageType">
+            The field/property type that is currently storing the object that is
+            being serialized.
+            </param>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsBaseConverter.TrySerialize(System.Object,Unity.VisualScripting.FullSerializer.fsData@,System.Type)">
+            <summary>
+            Serialize the actual object into the given data storage.
+            </summary>
+            <param name="instance">
+            The object instance to serialize. This will never be null.
+            </param>
+            <param name="serialized">The serialized state.</param>
+            <param name="storageType">
+            The field/property type that is storing this instance.
+            </param>
+            <returns>If serialization was successful.</returns>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsBaseConverter.TryDeserialize(Unity.VisualScripting.FullSerializer.fsData,System.Object@,System.Type)">
+            <summary>
+            Deserialize data into the object instance.
+            </summary>
+            <param name="data">Serialization data to deserialize from.</param>
+            <param name="instance">
+            The object instance to deserialize into.
+            </param>
+            <param name="storageType">
+            The field/property type that is storing the instance.
+            </param>
+            <returns>
+            True if serialization was successful, false otherwise.
+            </returns>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsJsonPrinter.InsertSpacing(System.IO.TextWriter,System.Int32)">
+            <summary>
+            Inserts the given number of indents into the builder.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsJsonPrinter.EscapeString(System.String)">
+            <summary>
+            Escapes a string.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsJsonPrinter.BuildPrettyString(Unity.VisualScripting.FullSerializer.fsData,System.IO.TextWriter,System.Int32)">
+            <summary>
+            Formats this data into the given builder.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsJsonPrinter.PrettyJson(Unity.VisualScripting.FullSerializer.fsData,System.IO.TextWriter)">
+            <summary>
+            Writes the pretty JSON output data to the given stream.
+            </summary>
+            <param name="data">The data to print.</param>
+            <param name="outputStream">Where to write the printed data.</param>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsJsonPrinter.PrettyJson(Unity.VisualScripting.FullSerializer.fsData)">
+            <summary>
+            Returns the data in a pretty printed JSON format.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsJsonPrinter.CompressedJson(Unity.VisualScripting.FullSerializer.fsData,System.IO.StreamWriter)">
+            <summary>
+            Writes the compressed JSON output data to the given stream.
+            </summary>
+            <param name="data">The data to print.</param>
+            <param name="outputStream">Where to write the printed data.</param>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsJsonPrinter.CompressedJson(Unity.VisualScripting.FullSerializer.fsData)">
+            <summary>
+            Returns the data in a relatively compressed JSON format.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsJsonPrinter.ConvertDoubleToString(System.Double)">
+            <summary>
+            Utility method that converts a double to a string.
+            </summary>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.fsGuidConverter">
+            <summary>
+            Serializes and deserializes guids.
+            </summary>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.fsConverterRegistrar">
+            <summary>
+            This class allows arbitrary code to easily register global converters. To
+            add a converter, simply declare a new field called "Register_*" that
+            stores the type of converter you would like to add. Alternatively, you
+            can do the same with a method called "Register_*"; just add the converter
+            type to the `Converters` list.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.InputAction_DirectConverter.MakeInputActionWithId(System.String,System.String,System.String,UnityEngine.InputSystem.InputActionType)">
+            <summary>
+            Creates a fake InputAction. Ports with an editor MUST serialize a value of the port's type, even if a GUID
+            would suffice in that case
+            </summary>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.fsObjectProcessor">
+            <summary>
+                <para>
+                Enables injecting code before/after an object has been serialized. This
+                is most useful if you want to run the default serialization process but
+                apply a pre/post processing step.
+                </para>
+                <para>
+                Multiple object processors can be active at the same time. When running
+                they are called in a "nested" fashion - if we have processor1 and
+                process2 added to the serializer in that order (p1 then p2), then the
+                execution order will be p1#Before p2#Before /serialization/ p2#After
+                p1#After.
+                </para>
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsObjectProcessor.CanProcess(System.Type)">
+            <summary>
+            Is the processor interested in objects of the given type?
+            </summary>
+            <param name="type">The given type.</param>
+            <returns>
+            True if the processor should be applied, false otherwise.
+            </returns>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsObjectProcessor.OnBeforeSerialize(System.Type,System.Object)">
+            <summary>
+            Called before serialization.
+            </summary>
+            <param name="storageType">
+            The field/property type that is storing the instance.
+            </param>
+            <param name="instance">The type of the instance.</param>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsObjectProcessor.OnAfterSerialize(System.Type,System.Object,Unity.VisualScripting.FullSerializer.fsData@)">
+            <summary>
+            Called after serialization.
+            </summary>
+            <param name="storageType">
+            The field/property type that is storing the instance.
+            </param>
+            <param name="instance">The type of the instance.</param>
+            <param name="data">The data that was serialized.</param>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsObjectProcessor.OnBeforeDeserialize(System.Type,Unity.VisualScripting.FullSerializer.fsData@)">
+            <summary>
+            Called before deserialization.
+            </summary>
+            <param name="storageType">
+            The field/property type that is storing the instance.
+            </param>
+            <param name="data">
+            The data that will be used for deserialization.
+            </param>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsObjectProcessor.OnBeforeDeserializeAfterInstanceCreation(System.Type,System.Object,Unity.VisualScripting.FullSerializer.fsData@)">
+            <summary>
+            Called before deserialization has begun but *after* the object
+            instance has been created. This will get invoked even if the user
+            passed in an existing instance.
+            </summary>
+            <remarks>
+            **IMPORTANT**: The actual instance that gets passed here is *not*
+            guaranteed to be an a subtype of storageType, since the value for
+            instance is whatever the active converter returned for
+            CreateInstance() - ie, some converters will return dummy types in
+            CreateInstance() if instance creation cannot be separated from
+            deserialization (ie, KeyValuePair).
+            </remarks>
+            <param name="storageType">
+            The field/property type that is storing the instance.
+            </param>
+            <param name="instance">
+            The created object instance. No deserialization has been applied to
+            it.
+            </param>
+            <param name="data">
+            The data that will be used for deserialization.
+            </param>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsObjectProcessor.OnAfterDeserialize(System.Type,System.Object)">
+            <summary>
+            Called after deserialization.
+            </summary>
+            <param name="storageType">
+            The field/property type that is storing the instance.
+            </param>
+            <param name="instance">The type of the instance.</param>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.fsJsonParser">
+            <summary>
+            A simple recursive descent parser for JSON.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsJsonParser.SkipSpace">
+            <summary>
+            Skips input such that Character() will return a non-whitespace
+            character
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsJsonParser.TryParseNumber(Unity.VisualScripting.FullSerializer.fsData@)">
+            <summary>
+            Parses numbers that follow the regular expression [-+](\d+|\d*\.\d*)
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsJsonParser.TryParseString(System.String@)">
+            <summary>
+            Parses a string
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsJsonParser.TryParseArray(Unity.VisualScripting.FullSerializer.fsData@)">
+            <summary>
+            Parses an array
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsJsonParser.Parse(System.String,Unity.VisualScripting.FullSerializer.fsData@)">
+            <summary>
+            Parses the specified input. Returns a failure state if parsing
+            failed.
+            </summary>
+            <param name="input">The input to parse.</param>
+            <param name="data">
+            The parsed data. This is undefined if parsing fails.
+            </param>
+            <returns>The parsed input.</returns>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsJsonParser.Parse(System.String)">
+            <summary>
+            Helper method for Parse that does not allow the error information to
+            be recovered.
+            </summary>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.fsForwardAttribute">
+            <summary>
+            This allows you to forward serialization of an object to one of its
+            members. For example,
+            [fsForward("Values")]
+            struct Wrapper {
+            public int[] Values;
+            }
+            Then `Wrapper` will be serialized into a JSON array of integers. It will
+            be as if `Wrapper` doesn't exist.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsForwardAttribute.#ctor(System.String)">
+            <summary>
+            Forward object serialization to an instance member. See class
+            comment.
+            </summary>
+            <param name="memberName">
+            The name of the member that we should serialize this object as.
+            </param>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsForwardAttribute.MemberName">
+            <summary>
+            The name of the member we should serialize as.
+            </summary>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.fsIgnoreAttribute">
+            <summary>
+            The given property or field annotated with [JsonIgnore] will not be
+            serialized.
+            </summary>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.fsConverter">
+            <summary>
+            The serialization converter allows for customization of the serialization
+            process.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsConverter.CanProcess(System.Type)">
+            <summary>
+            Can this converter serialize and deserialize the given object type?
+            </summary>
+            <param name="type">The given object type.</param>
+            <returns>
+            True if the converter can serialize it, false otherwise.
+            </returns>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.fsDirectConverter">
+            <summary>
+            The direct converter is similar to a regular converter, except that it
+            targets specifically only one type. This means that it can be used
+            without performance impact when discovering converters. It is strongly
+            recommended that you derive from fsDirectConverter{TModel}.
+            </summary>
+            <remarks>
+            Due to the way that direct converters operate, inheritance is *not*
+            supported. Direct converters will only be used with the exact ModelType
+            object.
+            </remarks>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.fsISerializationCallbacks">
+            <summary>
+            Extend this interface on your type to receive notifications about
+            serialization/deserialization events. If you don't have access to the
+            type itself, then you can write an fsObjectProcessor instead.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsISerializationCallbacks.OnBeforeSerialize(System.Type)">
+            <summary>
+            Called before serialization.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsISerializationCallbacks.OnAfterSerialize(System.Type,Unity.VisualScripting.FullSerializer.fsData@)">
+            <summary>
+            Called after serialization.
+            </summary>
+            <param name="storageType">
+            The field/property type that is storing the instance.
+            </param>
+            <param name="data">The data that was serialized.</param>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsISerializationCallbacks.OnBeforeDeserialize(System.Type,Unity.VisualScripting.FullSerializer.fsData@)">
+            <summary>
+            Called before deserialization.
+            </summary>
+            <param name="storageType">
+            The field/property type that is storing the instance.
+            </param>
+            <param name="data">
+            The data that will be used for deserialization.
+            </param>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsISerializationCallbacks.OnAfterDeserialize(System.Type)">
+            <summary>
+            Called after deserialization.
+            </summary>
+            <param name="storageType">
+            The field/property type that is storing the instance.
+            </param>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.fsMetaProperty">
+            <summary>
+            A property or field on a MetaType. This unifies the FieldInfo and
+            PropertyInfo classes.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsMetaProperty._memberInfo">
+            <summary>
+            Internal handle to the reflected member.
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.FullSerializer.fsMetaProperty.StorageType">
+            <summary>
+            The type of value that is stored inside of the property. For example,
+            for an int field, StorageType will be typeof(int).
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.FullSerializer.fsMetaProperty.OverrideConverterType">
+            <summary>
+            A custom fsBaseConverter instance to use for this field/property, if
+            requested. This will be null if the default converter selection
+            algorithm should be used. This is specified using the [fsObject]
+            annotation with the Converter field.
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.FullSerializer.fsMetaProperty.CanRead">
+            <summary>
+            Can this property be read?
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.FullSerializer.fsMetaProperty.CanWrite">
+            <summary>
+            Can this property be written to?
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.FullSerializer.fsMetaProperty.JsonName">
+            <summary>
+            The serialized name of the property, as it should appear in JSON.
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.FullSerializer.fsMetaProperty.MemberName">
+            <summary>
+            The name of the actual member.
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.FullSerializer.fsMetaProperty.IsPublic">
+            <summary>
+            Is this member public?
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.FullSerializer.fsMetaProperty.IsReadOnly">
+            <summary>
+            Is this type readonly? We can modify readonly properties using
+            reflection, but not using generated C#.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsMetaProperty.Write(System.Object,System.Object)">
+            <summary>
+            Writes a value to the property that this MetaProperty represents,
+            using given object instance as the context.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsMetaProperty.Read(System.Object)">
+            <summary>
+            Reads a value from the property that this MetaProperty represents,
+            using the given object instance as the context.
+            </summary>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.fsEnumConverter">
+            <summary>
+            Serializes and deserializes enums by their current name.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsEnumConverter.ArrayContains``1(``0[],``0)">
+            <summary>
+            Returns true if the given value is contained within the specified
+            array.
+            </summary>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.fsObjectAttribute">
+            <summary>
+            This attribute controls some serialization behavior for a type. See the
+            comments on each of the fields for more information.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsObjectAttribute.PreviousModels">
+            <summary>
+            The previous model that should be used if an old version of this
+            object is encountered. Using this attribute also requires that the
+            type have a public constructor that takes only one parameter, an
+            object instance of the given type. Use of this parameter *requires*
+            that the VersionString parameter is also set.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsObjectAttribute.VersionString">
+            <summary>
+            The version string to use for this model. This should be unique among
+            all prior versions of this model that is supported for importation.
+            If PreviousModel is set, then this attribute must also be set. A good
+            valid example for this is "v1", "v2", "v3", ...
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsObjectAttribute.MemberSerialization">
+            <summary>
+            This controls the behavior for member serialization. The default
+            behavior is fsMemberSerialization.Default.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsObjectAttribute.Converter">
+            <summary>
+            Specify a custom converter to use for serialization. The converter
+            type needs to derive from fsBaseConverter. This defaults to null.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsObjectAttribute.Processor">
+            <summary>
+            Specify a custom processor to use during serialization. The processor
+            type needs to derive from fsObjectProcessor and the call to
+            CanProcess is not invoked. This defaults to null.
+            </summary>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.fsAotCompilationManager">
+            <summary>
+            The AOT compilation manager
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.FullSerializer.fsAotCompilationManager.AvailableAotCompilations">
+             <summary>
+             Ahead of time compilations that are available. The type maps to the
+             object type the generated converter will serialize/deserialize, and
+             the string is the text content for a converter that will do the
+             serialization.
+            
+             The generated serializer is completely independent and you don't need
+             to do anything. Simply add the file to your project and it'll get
+             used instead of the reflection based one.
+             </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsAotCompilationManager.TryToPerformAotCompilation(Unity.VisualScripting.FullSerializer.fsConfig,System.Type,System.String@)">
+            <summary>
+            This is a helper method that makes it simple to run an AOT
+            compilation on the given type.
+            </summary>
+            <param name="config">
+            The configuration to use when running AOT compilation.
+            </param>
+            <param name="type">
+            The type to perform the AOT compilation on.
+            </param>
+            <param name="aotCompiledClassInCSharp">
+            The AOT class. Add this C# code to your project.
+            </param>
+            <returns>True if AOT compilation was successful.</returns>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsAotCompilationManager.AddAotCompilation(System.Type,Unity.VisualScripting.FullSerializer.fsMetaProperty[],System.Boolean)">
+            <summary>
+            Adds a new AOT compilation unit.
+            </summary>
+            <param name="type">The type of object we are AOT compiling.</param>
+            <param name="members">
+            The members on the object which will be serialized/deserialized.
+            </param>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsAotCompilationManager.GenerateDirectConverterForTypeInCSharp(System.Type,Unity.VisualScripting.FullSerializer.fsMetaProperty[],System.Boolean)">
+            <summary>
+            AOT compiles the object (in C#).
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsReflectionUtility.GetInterface(System.Type,System.Type)">
+            <summary>
+            Searches for a particular implementation of the given interface type
+            inside of the type. This is particularly useful if the interface type
+            is an open type, ie, typeof(IFace{}), because this method will then
+            return IFace{} but with appropriate type parameters inserted.
+            </summary>
+            <param name="type">The base type to search for interface</param>
+            <param name="interfaceType">
+            The interface type to search for. Can be an open generic type.
+            </param>
+            <returns>
+            The actual interface type that the type contains, or null if there is
+            no implementation of the given interfaceType on type.
+            </returns>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.fsWeakReferenceConverter">
+            <summary>
+            Serializes and deserializes WeakReferences.
+            </summary>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.fsMetaType">
+            <summary>
+            MetaType contains metadata about a type. This is used by the reflection
+            serializer.
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.FullSerializer.fsMetaType.HasDefaultConstructor">
+            <summary>
+            Returns true if the type represented by this metadata contains a
+            default constructor.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsMetaType.EmitAotData">
+            <summary>
+            Attempt to emit an AOT compiled direct converter for this type.
+            </summary>
+            <returns>True if AOT data was emitted, false otherwise.</returns>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsMetaType.CreateInstance">
+            <summary>
+            Creates a new instance of the type that this metadata points back to.
+            If this type has a default constructor, then Activator.CreateInstance
+            will be used to construct the type (or Array.CreateInstance if it an
+            array). Otherwise, an uninitialized object created via
+            FormatterServices.GetSafeUninitializedObject is used to construct the
+            instance.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsMetaType.ClearCache">
+            <summary>
+            Clears out the cached type results. Useful if some prior assumptions
+            become invalid, ie, the default member serialization mode.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsMetaType.CanSerializeProperty(Unity.VisualScripting.FullSerializer.fsConfig,System.Reflection.PropertyInfo,System.Reflection.MemberInfo[],System.Boolean)">
+            <summary>
+            Returns if the given property should be serialized.
+            </summary>
+            <param name="annotationFreeValue">
+            Should a property without any annotations be serialized?
+            </param>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.fsResult">
+            <summary>
+            The result of some sort of operation. A result is either successful or
+            not, but if it is successful then there may be a set of warnings/messages
+            associated with it. These warnings describe the performed error recovery
+            operations.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsResult._success">
+            <summary>
+            Is this result successful?
+            </summary>
+            <remarks>
+            This is intentionally a `success` state so that when the object is
+            default constructed it defaults to a failure state.
+            </remarks>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsResult._messages">
+            <summary>
+            The warning or error messages associated with the result. This may be
+            null if there are no messages.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsResult.AddMessage(System.String)">
+            <summary>
+            Adds a new message to this result.
+            </summary>
+            <param name="message">The new message to be added.</param>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsResult.AddMessages(Unity.VisualScripting.FullSerializer.fsResult)">
+            <summary>
+            Adds only the messages from the other result into this result,
+            ignoring the success/failure status of the other result.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsResult.Merge(Unity.VisualScripting.FullSerializer.fsResult)">
+            <summary>
+            Merges the other result into this one. If the other result failed,
+            then this one too will have failed.
+            </summary>
+            <remarks>
+            Note that you can use += instead of this method so that you don't
+            bury the actual method call that is generating the other fsResult.
+            </remarks>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsResult.Success">
+            <summary>
+            A successful result.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsResult.Warn(System.String)">
+            <summary>
+            Create a result that is successful but contains the given warning
+            message.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsResult.Fail(System.String)">
+            <summary>
+            Create a result that failed.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsResult.op_Addition(Unity.VisualScripting.FullSerializer.fsResult,Unity.VisualScripting.FullSerializer.fsResult)">
+            <summary>
+            Only use this as +=!
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.FullSerializer.fsResult.Failed">
+            <summary>
+            Did this result fail? If so, you can see the reasons why in
+            `RawMessages`.
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.FullSerializer.fsResult.Succeeded">
+            <summary>
+            Was the result a success? Note that even successful operations may
+            have warning messages (`RawMessages`) associated with them.
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.FullSerializer.fsResult.HasWarnings">
+            <summary>
+            Does this result have any warnings? This says nothing about if it
+            failed or succeeded, just if it has warning messages associated with
+            it.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsResult.AssertSuccess">
+            <summary>
+            A simply utility method that will assert that this result is
+            successful. If it is not, then an exception is thrown.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsResult.AssertSuccessWithoutWarnings">
+            <summary>
+            A simple utility method that will assert that this result is
+            successful and that there are no warning messages. This throws an
+            exception if either of those asserts are false.
+            </summary>
+        </member>
+        <member name="P:Unity.VisualScripting.FullSerializer.fsResult.AsException">
+            <summary>
+            Utility method to convert the result to an exception. This method is
+            only defined is `Failed` returns true.
+            </summary>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.fsIEnumerableConverter">
+            <summary>
+            Provides serialization support for anything which extends from
+            `IEnumerable` and has an `Add` method.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsIEnumerableConverter.GetElementType(System.Type)">
+            <summary>
+            Fetches the element type for objects inside of the collection.
+            </summary>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.fsNullableConverter">
+            <summary>
+            The reflected converter will properly serialize nullable types. However,
+            we do it here instead as we can emit less serialization data.
+            </summary>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.fsDateConverter">
+            <summary>
+            Supports serialization for DateTime, DateTimeOffset, and TimeSpan.
+            </summary>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.fsMemberSerialization">
+            <summary>
+            Controls how the reflected converter handles member serialization.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsMemberSerialization.OptIn">
+            <summary>
+            Only members with [SerializeField] or [fsProperty] attributes are
+            serialized.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsMemberSerialization.OptOut">
+            <summary>
+            Only members with [NotSerialized] or [fsIgnore] will not be
+            serialized.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsMemberSerialization.Default">
+            <summary>
+            The default member serialization behavior is applied.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsGlobalConfig.IsCaseSensitive">
+            <summary>
+            Should deserialization be case sensitive? If this is false and the
+            JSON has multiple members with the same keys only separated by case,
+            then this results in undefined behavior.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsGlobalConfig.AllowInternalExceptions">
+            <summary>
+            If exceptions are allowed internally, then additional date formats
+            can be deserialized. Note that the Full Serializer public API will
+            *not* throw exceptions with this enabled; errors will still be
+            returned in a fsResult instance.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsGlobalConfig.InternalFieldPrefix">
+            <summary>
+            This string will be used to prefix fields used internally by
+            FullSerializer.
+            </summary>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.fsConfig">
+            <summary>
+            Enables some top-level customization of Full Serializer.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsConfig.SerializeAttributes">
+            <summary>
+            The attributes that will force a field or property to be serialized.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsConfig.IgnoreSerializeAttributes">
+            <summary>
+            The attributes that will force a field or property to *not* be
+            serialized.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsConfig.DefaultMemberSerialization">
+            <summary>
+            The default member serialization.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsConfig.GetJsonNameFromMemberName">
+            <summary>
+            Convert a C# field/property name into the key used for the JSON
+            object. For example, you could force all JSON names to lowercase
+            with:
+            fsConfig.GetJsonNameFromMemberName = (name, info) =&gt;
+            name.ToLower();
+            This will only be used when the name is not explicitly specified with
+            fsProperty.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsConfig.EnablePropertySerialization">
+            <summary>
+            If false, then *all* property serialization support will be disabled
+            - even properties explicitly annotated with fsProperty or any other
+            opt-in annotation.
+            Setting this to false means that SerializeNonAutoProperties and
+            SerializeNonPublicSetProperties will be completely ignored.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsConfig.SerializeNonAutoProperties">
+            <summary>
+            Should the default serialization behaviour include non-auto
+            properties?
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsConfig.SerializeNonPublicSetProperties">
+            <summary>
+            Should the default serialization behaviour include properties with
+            non-public setters?
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsConfig.CustomDateTimeFormatString">
+            <summary>
+            If not null, this string format will be used for DateTime instead of
+            the default one.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsConfig.Serialize64BitIntegerAsString">
+            <summary>
+            Int64 and UInt64 will be serialized and deserialized as string for
+            compatibility
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsConfig.SerializeEnumsAsInteger">
+            <summary>
+            Enums are serialized using their names by default. Setting this to
+            true will serialize them as integers instead.
+            </summary>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.fsContext">
+            <summary>
+            fsContext stores global metadata that can be used to customize how
+            fsConverters operate during serialization.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsContext._contextObjects">
+            <summary>
+            All of the context objects.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsContext.Reset">
+            <summary>
+            Removes all context objects from the context.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsContext.Set``1(``0)">
+            <summary>
+            Sets the context object for the given type with the given value.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsContext.Has``1">
+            <summary>
+            Returns true if there is a context object for the given type.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsContext.Get``1">
+            <summary>
+            Fetches the context object for the given type.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsSerializer._availableConverters">
+            <summary>
+            Converters that can be used for type registration.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsSerializer._availableDirectConverters">
+            <summary>
+            Direct converters (optimized _converters). We use these so we don't
+            have to perform a scan through every item in _converters and can
+            instead just do an O(1) lookup. This is potentially important to perf
+            when there are a ton of direct converters.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsSerializer._processors">
+            <summary>
+            Processors that are available.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsSerializer._references">
+            <summary>
+            Reference manager for cycle detection.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsSerializer._abstractTypeRemap">
+            <summary>
+            Allow the user to provide default storage types for interfaces and abstract
+            classes. For example, a model could have IList{int} as a parameter, but the
+            serialization data does not specify a List{int} type. A IList{} -> List{}
+            remapping will cause List{} to be used as the default storage type. see
+            https://github.com/jacobdufault/fullserializer/issues/120 for additional
+            context.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsSerializer._cachedConverterTypeInstances">
+            <summary>
+            Converter type to converter instance lookup table. This
+            could likely be stored inside
+            from serialized type to converter.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsSerializer._cachedConverters">
+            <summary>
+            A cache from type to it's converter.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsSerializer._cachedProcessors">
+            <summary>
+            A cache from type to the set of processors that are interested in it.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsSerializer.Context">
+            <summary>
+            A context object that fsConverters can use to customize how they
+            operate.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsSerializer.Config">
+            <summary>
+            Configuration options. Also see fsGlobalConfig.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsSerializer.AddProcessor(Unity.VisualScripting.FullSerializer.fsObjectProcessor)">
+            <summary>
+            Add a new processor to the serializer. Multiple processors can run at
+            the same time in the same order they were added in.
+            </summary>
+            <param name="processor">The processor to add.</param>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsSerializer.RemoveProcessor``1">
+            <summary>
+            Remove all processors which derive from TProcessor.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsSerializer.SetDefaultStorageType(System.Type,System.Type)">
+            <summary>
+            Provide a default storage type for the given abstract or interface type. If
+            a type is deserialized which contains an interface/abstract field type and a
+            mapping is provided, the mapped type will be used by default. For example,
+            IList{T} => List{T} or IDictionary{TKey, TValue} => Dictionary{TKey, TValue}.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsSerializer.GetProcessors(System.Type)">
+            <summary>
+            Fetches all of the processors for the given type.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsSerializer.AddConverter(Unity.VisualScripting.FullSerializer.fsBaseConverter)">
+            <summary>
+            Adds a new converter that can be used to customize how an object is
+            serialized and deserialized.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsSerializer.GetConverter(System.Type,System.Type)">
+            <summary>
+            Fetches a converter that can serialize/deserialize the given type.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsSerializer.TrySerialize``1(``0,Unity.VisualScripting.FullSerializer.fsData@)">
+            <summary>
+            Helper method that simply forwards the call to
+            TrySerialize(typeof(T), instance, out data);
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsSerializer.TryDeserialize``1(Unity.VisualScripting.FullSerializer.fsData,``0@)">
+            <summary>
+            Generic wrapper around TryDeserialize that simply forwards the call.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsSerializer.TrySerialize(System.Type,System.Object,Unity.VisualScripting.FullSerializer.fsData@)">
+            <summary>
+            Serialize the given value.
+            </summary>
+            <param name="storageType">
+            The type of field/property that stores the object instance. This is
+            important particularly for inheritance, as a field storing an
+            IInterface instance should have type information included.
+            </param>
+            <param name="instance">
+            The actual object instance to serialize.
+            </param>
+            <param name="data">The serialized state of the object.</param>
+            <returns>If serialization was successful.</returns>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsSerializer.TrySerialize(System.Type,System.Type,System.Object,Unity.VisualScripting.FullSerializer.fsData@)">
+            <summary>
+            Serialize the given value.
+            </summary>
+            <param name="storageType">
+            The type of field/property that stores the object instance. This is
+            important particularly for inheritance, as a field storing an
+            IInterface instance should have type information included.
+            </param>
+            <param name="overrideConverterType">
+            An fsBaseConverter derived type that will be used to serialize the
+            object instead of the converter found via the normal discovery
+            mechanisms.
+            </param>
+            <param name="instance">
+            The actual object instance to serialize.
+            </param>
+            <param name="data">The serialized state of the object.</param>
+            <returns>If serialization was successful.</returns>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsSerializer.TryDeserialize(Unity.VisualScripting.FullSerializer.fsData,System.Type,System.Object@)">
+            <summary>
+            Attempts to deserialize a value from a serialized state.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsSerializer.TryDeserialize(Unity.VisualScripting.FullSerializer.fsData,System.Type,System.Type,System.Object@)">
+            <summary>
+            Attempts to deserialize a value from a serialized state.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsSerializer.EnsureDictionary(Unity.VisualScripting.FullSerializer.fsData)">
+            <summary>
+            Ensures that the data is a dictionary. If it is not, then it is
+            wrapped inside of one.
+            </summary>
+        </member>
+        <member name="T:Unity.VisualScripting.FullSerializer.fsSerializer.fsLazyCycleDefinitionWriter">
+            <summary>
+            This manages instance writing so that we do not write unnecessary $id
+            fields. We only need to write out an $id field when there is a
+            corresponding $ref field. This is able to write $id references lazily
+            because the fsData instance is not actually written out to text until
+            we have entirely finished serializing it.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsSerializer.IsReservedKeyword(System.String)">
+            <summary>
+            Returns true if the given key is a special keyword that full
+            serializer uses to add additional metadata on top of the emitted
+            JSON.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsSerializer.Key_ObjectReference">
+            <summary>
+            This is an object reference in part of a cyclic graph.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsSerializer.Key_ObjectDefinition">
+            <summary>
+            This is an object definition, as part of a cyclic graph.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsSerializer.Key_InstanceType">
+            <summary>
+            This specifies the actual type of an object (the instance type was
+            different from the field type).
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsSerializer.Key_Version">
+            <summary>
+            The version string for the serialized data.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsSerializer.Key_Content">
+            <summary>
+            If we have to add metadata but the original serialized state was not
+            a dictionary, then this will contain the original data.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsSerializer.Key_UnitDefault">
+            <summary>
+            Dictionary for the default values of each of the unit's value port.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsSerializer.Key_UnitPosition">
+            <summary>
+            Specifies the position of a unit in its respective graph.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsSerializer.Key_UnitGuid">
+            <summary>
+            Unique guid of the unit instance.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsSerializer.Key_UnitFormerType">
+            <summary>
+            Meant for 'missing type' units to remember the type of node they are supposed to be.
+            This will allow us to try and convert back if the correct type becomes available again.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsSerializer.Key_UnitFormerValue">
+            <summary>
+            Meant for 'missing type' units to remember the state of the node they are supposed to be.
+            This will allow to preserve the serialized instance values of the node when its type was lost.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsSerializer.TypeName_Unit">
+            <summary>
+            Hard-coded fully qualified name of the 'unit' type.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsSerializer.Type_Unit">
+            <summary>
+            The 'Unit' type defined in VS.
+            Made static as to only be deserialized once and potentially used multiple times.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsSerializer.TypeName_MissingType">
+            <summary>
+            Hard-coded fully qualified name of the 'missing type unit' type.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.FullSerializer.fsSerializer.Type_MissingType">
+            <summary>
+            The 'MissingType' type defined in VS.
+            Made static as to only be deserialized once and potentially used multiple times.
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsSerializer.IsVisualScriptingUnit(Unity.VisualScripting.FullSerializer.fsData)">
+             <summary>
+             Makes a guess as to if the data represents a VS unit.
+            
+             If this turns out to be too general and objects that are not meant to be units get
+             converted to MissingType units, consider adding a dedicated serialized field exclusive to units
+             as to be able to check against it. (Something named like "isVisualScriptingUnit")
+             </summary>
+             <param name="data"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsSerializer.StripDeserializationMetadata(Unity.VisualScripting.FullSerializer.fsData@)">
+            <summary>
+            Strips all deserialization metadata from the object, like $type and
+            $content fields.
+            </summary>
+            <remarks>
+            After making this call, you will *not* be able to deserialize the
+            same object instance. The metadata is strictly necessary for
+            deserialization!
+            </remarks>
+        </member>
+        <member name="M:Unity.VisualScripting.FullSerializer.fsSerializer.ConvertLegacyData(Unity.VisualScripting.FullSerializer.fsData@)">
+            <summary>
+            This function converts legacy serialization data into the new format,
+            so that the import process can be unified and ignore the old format.
+            </summary>
+        </member>
+        <member name="T:Unity.VisualScripting.EventBus">
+             <summary>
+             A global container that maps Event names and Component references to actions for registered listeners.
+             </summary>
+             <remarks>
+             <para>It is the EventMachine base class for ScriptMachine and StateMachine that triggers events.
+             This overrides almost all Unity callbacks (such as Awake, OnEnable, Update, etc.) and triggers an event
+             on the EventBus.</para>
+             </remarks>
+             <example>
+             <para>The following example shows how to use the EventBus to send a custom event from a script to a node in
+             a graph. It also shows how to use the EventBus as a global event manager by executing a callback in a
+             script, not just a node.
+            
+             For more information on how to create custom event nodes refer to the
+             <a href="../manual/vs-create-own-custom-event-node.html">User Manual</a>.
+            
+             In this example we've added some code to a GameObject. This code checks for when the user presses a sequence of
+             keys to enable a cheat code, then triggers the <c>CheatCodeActivated</c> event. We register the
+             <c>CheatCodeActivated</c> event in the <c>Start</c> method. The <c>Update</c> method triggers the event twice
+             with 2 different targets: one for the <c>CheatCodeActivated</c> callback and the other to trigger the
+             CheatCodeEnabled Node.</para>
+            
+             <code source="../../../DocCodeExamples/EventBusExamples.cs" region="CheatCodeController" title="CheatCodeController"/>
+            
+             <para>The CheatCodeEnabled Node:</para>
+            
+             <code source="../../../DocCodeExamples/EventBusExamples.cs" region="CheatCodeEnabled" title="CheatCodeEnabled"/>
+             </example>
+        </member>
+        <member name="T:Unity.VisualScripting.MemberInfoComparer">
+            <summary>
+            A member info comparer that will ignore the ReflectedType
+            property by relying on the metadata token for comparison.
+            </summary>
+        </member>
+        <member name="T:Unity.VisualScripting.TypeFilter">
+            <summary>
+            Filters the list of types displayed in the inspector drawer.
+            </summary>
+        </member>
+        <member name="T:Unity.VisualScripting.ValueAttribute">
+            <summary>
+            Allows the customisation of the SystemObjectInspector by displaying just the value
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.AttributeUtility.GetAttributeOfEnumMember``1(System.Enum)">
+            <summary>
+            Gets attributes on an enum member, eg. enum E { [Attr] A }
+            </summary>
+        </member>
+        <member name="M:Unity.VisualScripting.MemberUtility.MakeGenericMethodVia(System.Reflection.MethodInfo,System.Type[])">
+            <remarks>This may return an open-constructed method as well.</remarks>
+        </member>
+        <member name="T:Unity.VisualScripting.Singleton`1">
+            <remarks>
+            Does not support objects hidden with hide flags.
+            </remarks>
+        </member>
+        <member name="T:Unity.VisualScripting.VariablesSaver">
+            <summary>
+            Listens to the OnApplicationQuit on OnApplicationPause
+            hooks to trigger the serialization of saved variables into PlayerPrefs.
+            </summary>
+        </member>
+        <member name="T:Unity.VisualScripting.SceneSingleton`1">
+            <remarks>
+            Does not support objects hidden with hide flags.
+            </remarks>
+        </member>
+        <member name="T:Unity.VisualScripting.ISet`1">
+            <summary>
+            Generic collection that guarantees the uniqueness of its elements, as defined
+            by a comparer. It also supports basic set operations such as Union, Intersection,
+            Difference, and Symmetric Difference.
+            </summary>
+            <typeparam name="T">The type of elements contained in the set.</typeparam>
+        </member>
+        <member name="M:Unity.VisualScripting.ISet`1.Add(`0)">
+            <summary>
+            Adds the specified item to the set.
+            </summary>
+            <param name="item">The item to add to the set.</param>
+            <returns>
+            <c>true</c> if the item was added to the set (i.e., it was not already present);
+            otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Unity.VisualScripting.ISet`1.UnionWith(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Modifies the current set to contain all elements that are present in either the current set or the specified collection.
+            </summary>
+            <param name="other">The collection to compare to the current set.</param>
+        </member>
+        <member name="M:Unity.VisualScripting.ISet`1.IntersectWith(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Modifies the current set to contain only elements that are present in both the current set and the specified collection.
+            </summary>
+            <param name="other">The collection to compare to the current set.</param>
+        </member>
+        <member name="M:Unity.VisualScripting.ISet`1.ExceptWith(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Modifies the current set to contain only elements that are not present in the specified collection.
+            </summary>
+            <param name="other">The collection to compare to the current set.</param>
+        </member>
+        <member name="M:Unity.VisualScripting.ISet`1.SymmetricExceptWith(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Modifies the current set to contain only elements that are present either in the current set or in the specified collection, but not both.
+            </summary>
+            <param name="other">The collection to compare to the current set.</param>
+        </member>
+        <member name="M:Unity.VisualScripting.ISet`1.IsSubsetOf(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Determines whether the current set is a subset of the specified collection.
+            </summary>
+            <param name="other">The collection to compare to the current set.</param>
+            <returns>
+            <c>true</c> if the current set is a subset of the specified collection; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Unity.VisualScripting.ISet`1.IsSupersetOf(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Determines whether the current set is a superset of the specified collection.
+            </summary>
+            <param name="other">The collection to compare to the current set.</param>
+            <returns>
+            <c>true</c> if the current set is a superset of the specified collection; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Unity.VisualScripting.ISet`1.IsProperSubsetOf(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Determines whether the current set is a proper subset of the specified collection. A proper subset is a subset that is not equal to the other set.
+            </summary>
+            <param name="other">The collection to compare to the current set.</param>
+            <returns>
+            <c>true</c> if the current set is a proper subset of the specified collection; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Unity.VisualScripting.ISet`1.IsProperSupersetOf(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Determines whether the current set is a proper superset of the specified collection. A proper superset is a superset that is not equal to the other set.
+            </summary>
+            <param name="other">The collection to compare to the current set.</param>
+            <returns>
+            <c>true</c> if the current set is a proper superset of the specified collection; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Unity.VisualScripting.ISet`1.Overlaps(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Determines whether the current set has any elements in common with the specified collection.
+            </summary>
+            <param name="other">The collection to compare to the current set.</param>
+            <returns>
+            <c>true</c> if the current set and the specified collection share at least one common element; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Unity.VisualScripting.ISet`1.SetEquals(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Determines whether the current set and the specified collection contain the same elements.
+            </summary>
+            <param name="other">The collection to compare to the current set.</param>
+            <returns>
+            <c>true</c> if the current set and the specified collection contain the same elements; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="F:Unity.VisualScripting.VariableKind.Flow">
+            <summary>
+            Temporary variables local to the execution flow.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.VariableKind.Graph">
+            <summary>
+            Variables local to the current graph.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.VariableKind.Object">
+            <summary>
+            Variables shared across the current game object.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.VariableKind.Scene">
+            <summary>
+            Variables shared across the current scene.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.VariableKind.Application">
+            <summary>
+            Variables shared across scenes.
+            These will be reset when the application quits.
+            </summary>
+        </member>
+        <member name="F:Unity.VisualScripting.VariableKind.Saved">
+            <summary>
+            Variables that persist even after the application quits.
+            Unity object references are not supported.
+            </summary>
+        </member>
+    </members>
+</doc>

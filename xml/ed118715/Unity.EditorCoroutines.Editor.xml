@@ -1,0 +1,215 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Unity.EditorCoroutines.Editor</name>
+    </assembly>
+    <members>
+        <member name="T:Unity.EditorCoroutines.Editor.EditorCoroutine">
+            <summary>
+            A handle to an EditorCoroutine, can be passed to <see cref="T:Unity.EditorCoroutines.Editor.EditorCoroutineUtility">EditorCoroutineUtility</see> methods to control lifetime.
+            </summary>
+        </member>
+        <member name="M:Unity.EditorCoroutines.Editor.EditorWindowCoroutineExtension.StartCoroutine(UnityEditor.EditorWindow,System.Collections.IEnumerator)">
+             <summary>
+             Start an <see cref="T:Unity.EditorCoroutines.Editor.EditorCoroutine">EditorCoroutine</see>, owned by the calling <see cref="T:UnityEditor.EditorWindow">EditorWindow</see> instance.
+             <code> 
+             using System.Collections;
+             using Unity.EditorCoroutines.Editor;
+             using UnityEditor;
+            
+             public class ExampleWindow : EditorWindow
+             {
+                 void OnEnable()
+                 {
+                     this.StartCoroutine(CloseWindowDelayed());
+                 }
+            
+                 IEnumerator CloseWindowDelayed() //close the window after 1000 frames have elapsed
+                 {
+                     int count = 1000;
+                     while (count > 0)
+                     {
+                         yield return null;
+                     }
+                     Close();
+                 }
+             }
+             </code>
+             </summary>
+             <param name="routine"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Unity.EditorCoroutines.Editor.EditorWindowCoroutineExtension.StopCoroutine(UnityEditor.EditorWindow,Unity.EditorCoroutines.Editor.EditorCoroutine)">
+             <summary>
+             Immediately stop an <see cref="T:Unity.EditorCoroutines.Editor.EditorCoroutine">EditorCoroutine</see> that was started by the calling <see cref="T:UnityEditor.EditorWindow"/> instance. This method is safe to call on an already completed <see cref="T:Unity.EditorCoroutines.Editor.EditorCoroutine">EditorCoroutine</see>.
+             <code>
+             using System.Collections;
+             using Unity.EditorCoroutines.Editor;
+             using UnityEditor;
+             using UnityEngine;
+            
+             public class ExampleWindow : EditorWindow
+             {
+                 EditorCoroutine coroutine;
+                 void OnEnable()
+                 {
+                     coroutine = this.StartCoroutine(CloseWindowDelayed());
+                 }
+            
+                 private void OnDisable()
+                 {
+                     this.StopCoroutine(coroutine);
+                 }
+            
+                 IEnumerator CloseWindowDelayed()
+                 {
+                     while (true)
+                     {
+                         Debug.Log("Running");
+                         yield return null;
+                     }
+                 }
+             }
+             </code>
+             </summary>
+             <param name="coroutine"></param>
+        </member>
+        <member name="M:Unity.EditorCoroutines.Editor.EditorCoroutineUtility.StartCoroutine(System.Collections.IEnumerator,System.Object)">
+             <summary>
+             Starts an <see cref ="T:Unity.EditorCoroutines.Editor.EditorCoroutine">EditorCoroutine</see> with the specified owner object. 
+             If the garbage collector collects the owner object, while the resulting coroutine is still executing, the coroutine will stop running.
+             <code>
+             using System.Collections;
+             using Unity.EditorCoroutines.Editor;
+             using UnityEditor;
+            
+             public class ExampleWindow : EditorWindow
+             {
+                 int m_Updates = 0;
+                 void OnEnable()
+                 {
+                     EditorCoroutineUtility.StartCoroutine(CountEditorUpdates(), this);
+                 }
+            
+                 IEnumerator CountEditorUpdates()
+                 {
+                     while (true)
+                     {
+                         ++m_Updates;
+                         yield return null;
+                     }
+                 }
+             }
+             </code>
+             </summary>
+             <param name="routine"> IEnumerator to iterate over. </param>
+             <param name="owner">Object owning the coroutine. </param>
+             <remarks>
+             Only types that don't inherit from <see cref="T:UnityEngine.Object">UnityEngine.Object</see> will get collected the next time the GC runs instead of getting null-ed immediately.
+             </remarks>
+             <returns>A handle to an <see cref="T:Unity.EditorCoroutines.Editor.EditorCoroutine">EditorCoroutine</see>.</returns>
+        </member>
+        <member name="M:Unity.EditorCoroutines.Editor.EditorCoroutineUtility.StartCoroutineOwnerless(System.Collections.IEnumerator)">
+             <summary>
+             This method starts an <see cref="T:Unity.EditorCoroutines.Editor.EditorCoroutine">EditorCoroutine</see> without an owning object. The <see cref="T:Unity.EditorCoroutines.Editor.EditorCoroutine">EditorCoroutine</see> runs until it completes or is canceled using <see cref="M:Unity.EditorCoroutines.Editor.EditorCoroutineUtility.StopCoroutine(Unity.EditorCoroutines.Editor.EditorCoroutine)">StopCoroutine</see>.
+             <code>
+             using System.Collections;
+             using Unity.EditorCoroutines.Editor;
+             using UnityEditor;
+             using UnityEngine;
+            
+             public class ExampleWindow : EditorWindow
+             {
+                 void OnEnable()
+                 {
+                     EditorCoroutineUtility.StartCoroutineOwnerless(LogTimeSinceStartup());
+                 }
+            
+                 IEnumerator LogTimeSinceStartup()
+                 {
+                     while (true)
+                     {
+                         Debug.LogFormat("Time since startup: {0} s", Time.realtimeSinceStartup);
+                         yield return null;
+                     }
+                 }
+             }
+             </code>
+             </summary>
+             <param name="routine"> Generator function to execute. </param>
+             <returns>A handle to an <see cref="T:Unity.EditorCoroutines.Editor.EditorCoroutine">EditorCoroutine.</see></returns>
+        </member>
+        <member name="M:Unity.EditorCoroutines.Editor.EditorCoroutineUtility.StopCoroutine(Unity.EditorCoroutines.Editor.EditorCoroutine)">
+             <summary>
+             Immediately stop an <see cref="T:Unity.EditorCoroutines.Editor.EditorCoroutine">EditorCoroutine</see>. This method is safe to call on an already completed <see cref="T:Unity.EditorCoroutines.Editor.EditorCoroutine">EditorCoroutine</see>.
+             <code>
+             using System.Collections;
+             using Unity.EditorCoroutines.Editor;
+             using UnityEditor;
+             using UnityEngine;
+            
+             public class ExampleWindow : EditorWindow
+             {
+                 EditorCoroutine m_LoggerCoroutine;
+                 void OnEnable()
+                 {
+                     m_LoggerCoroutine = EditorCoroutineUtility.StartCoroutineOwnerless(LogRunning());
+                 }
+                 
+                 void OnDisable()
+                 {
+                     EditorCoroutineUtility.StopCoroutine(m_LoggerCoroutine);
+                 }
+            
+                 IEnumerator LogRunning()
+                 {
+                     while (true)
+                     {
+                         Debug.Log("Running");
+                         yield return null;
+                     }
+                 }
+             }
+             </code>
+             </summary>
+             <param name="coroutine">A handle to an <see cref="T:Unity.EditorCoroutines.Editor.EditorCoroutine">EditorCoroutine.</see></param>
+        </member>
+        <member name="T:Unity.EditorCoroutines.Editor.EditorWaitForSeconds">
+             <summary>
+             Suspends the <see cref="T:Unity.EditorCoroutines.Editor.EditorCoroutine">EditorCoroutine</see> execution for the given amount of seconds, using unscaled time. 
+             The coroutine execution continues after the specified time has elapsed.
+             <code>
+             using System.Collections;
+             using UnityEngine;
+             using Unity.EditorCoroutines.Editor;
+             using UnityEditor;
+            
+             public class MyEditorWindow : EditorWindow
+             {
+                 IEnumerator PrintEachSecond()
+                 {
+                     var waitForOneSecond = new EditorWaitForSeconds(1.0f);
+            
+                     while (true)
+                     {
+                         yield return waitForOneSecond;
+                         Debug.Log("Printing each second");
+                     }
+                 }
+             }
+             </code>
+             </summary>
+        </member>
+        <member name="P:Unity.EditorCoroutines.Editor.EditorWaitForSeconds.WaitTime">
+            <summary>
+            The time to wait in seconds.
+            </summary>
+        </member>
+        <member name="M:Unity.EditorCoroutines.Editor.EditorWaitForSeconds.#ctor(System.Single)">
+            <summary>
+            Creates a instruction object for yielding inside a generator function.
+            </summary>
+            <param name="time">The amount of time to wait in seconds.</param>
+        </member>
+    </members>
+</doc>

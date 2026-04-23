@@ -1,0 +1,1295 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Unity.AutoGroupGenerator.Editor</name>
+    </assembly>
+    <members>
+        <member name="T:AutoGroupGenerator.Subgraph">
+            <summary>
+            Represents a subset of a larger <see cref="T:AutoGroupGenerator.DependencyGraph"/> instance.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.Subgraph.Nodes">
+            <summary>
+            Nodes contained in this subgraph.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.Subgraph.Sources">
+            <summary>
+            Source nodes that lead into this subgraph.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.Subgraph.HashOfSources">
+            <summary>
+            Hash representing the sources set.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.InputAssetsCommandQueue">
+            <summary>
+            Command queue that aggregates input assets from configured rules.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.AddressableCleanupCommandQueue">
+            <summary>
+            Command queue that synchronizes Addressables data with AutoGroupGenerator definitions.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.DependencyGraphCommandQueue">
+            <summary>
+            Command queue that generates the dependency graph of project assets.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.SuperNode">
+             <summary>
+             Represents a strongly connected component (SCC) in the AutoGroupGenerator asset dependency graph.
+            
+             A SuperNode is an abstraction that groups together asset nodes which are
+             mutually dependent on each other, forming a dependency cycle. In graph terms,
+             a set of nodes is considered <em>strongly connected</em> if every node in the set
+             can be reached from every other node by following dependency edges.
+            
+             SuperNodes are used internally by AutoGroupGenerator to resolve cyclic dependencies by
+             collapsing such cycles into a single logical node during graph analysis.
+             This allows the system to reason about dependencies, ordering, and grouping
+             in a deterministic way without being blocked by dependency loops.
+            
+             SuperNodes are not user-facing and are not intended to be created or manipulated
+             directly. They exist solely as an implementation detail of AutoGroupGenerator’s graph processing
+             pipeline and are handled automatically by the system.
+             </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.SuperNode.FromSingle(AutoGroupGenerator.AssetNode)">
+            <summary>
+            Creates a <see cref="T:AutoGroupGenerator.SuperNode"/> containing a single asset node.
+            </summary>
+            <param name="node">The asset node that will be the only member of the super node.</param>
+            <returns>A super node containing the provided node as its sole entry.</returns>
+        </member>
+        <member name="P:AutoGroupGenerator.SuperNode.Nodes">
+            <summary>
+            Gets the asset nodes contained in this super node.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.SuperNode.#ctor(System.Collections.Generic.IEnumerable{AutoGroupGenerator.AssetNode})">
+            <summary>
+            Initializes a new instance of the <see cref="T:AutoGroupGenerator.SuperNode"/> class.
+            </summary>
+            <param name="nodes">The asset nodes to include in the strongly connected component.</param>
+        </member>
+        <member name="M:AutoGroupGenerator.SuperNode.Equals(AutoGroupGenerator.SuperNode)">
+            <summary>
+            Determines whether another super node has the same member nodes.
+            </summary>
+            <param name="other">The other super node.</param>
+            <returns>True when both super nodes contain the same nodes.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.SuperNode.Equals(System.Object)">
+            <summary>
+            Determines whether another object is equal to this super node.
+            </summary>
+            <param name="obj">The other object.</param>
+            <returns>True when the object is an equal <see cref="T:AutoGroupGenerator.SuperNode"/>.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.SuperNode.GetHashCode">
+            <summary>
+            Returns a hash code for this super node.
+            </summary>
+            <returns>The hash code.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.SuperNode.ToString">
+            <summary>
+            Returns a string representation of the super node.
+            </summary>
+            <returns>A human-readable string of contained nodes.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.SuperNode.Contains(AutoGroupGenerator.AssetNode)">
+            <summary>
+            Determines whether the super node contains the specified asset node.
+            </summary>
+            <param name="node">The asset node to look for within the super node membership.</param>
+            <returns>True when the node is present in the super node collection.</returns>
+        </member>
+        <member name="T:AutoGroupGenerator.AssetDatabaseUtil">
+            <summary>
+            Helpers for querying the Unity asset database.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.AssetDatabaseUtil.FindAssetsOfType``1">
+            <summary>
+            Finds and loads assets of the specified type.
+            </summary>
+            <typeparam name="T">Asset type to search for.</typeparam>
+            <returns>Loaded assets of the requested type.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.AssetDatabaseUtil.FindAssetPathsForType``1">
+            <summary>
+            Finds asset paths for assets of the specified type.
+            </summary>
+            <typeparam name="T">Asset type to search for.</typeparam>
+            <returns>Project-relative asset paths.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.AssetDatabaseUtil.FindAssetGuidsForType``1">
+            <summary>
+            Finds asset GUIDs for assets of the specified type.
+            </summary>
+            <typeparam name="T">Asset type to search for.</typeparam>
+            <returns>Array of GUID strings.</returns>
+        </member>
+        <member name="T:AutoGroupGenerator.DefaultOutputRule">
+            <summary>
+            Output rule that accepts every group layout unchanged.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.DefaultOutputRule.DoesMatchSelectionCriteria(AutoGroupGenerator.GroupLayout)">
+            <inheritdoc />
+        </member>
+        <member name="T:AutoGroupGenerator.CommandQueue">
+            <summary>
+            Queue wrapper that executes commands in sequence.
+            </summary>
+        </member>
+        <member name="P:AutoGroupGenerator.CommandQueue.Title">
+            <summary>
+            Gets or sets a title describing the queue.
+            </summary>
+        </member>
+        <member name="P:AutoGroupGenerator.CommandQueue.RemainingCommandCount">
+            <summary>
+            Gets the number of commands remaining in the queue.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.CommandQueue.#ctor">
+            <summary>
+            Initializes an empty command queue.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.CommandQueue.#ctor(System.Action,System.String)">
+            <summary>
+            Initializes a queue with a single command.
+            </summary>
+            <param name="action">Action to execute.</param>
+            <param name="info">Description of the action.</param>
+        </member>
+        <member name="M:AutoGroupGenerator.CommandQueue.ClearQueue">
+            <summary>
+            Removes all queued commands.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.CommandQueue.PreExecute">
+            <summary>
+            Hook executed before command processing begins.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.CommandQueue.PostExecute">
+            <summary>
+            Hook executed after command processing ends.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.CommandQueue.ExecuteNextCommand">
+            <summary>
+            Executes the next command in the queue.
+            </summary>
+            <returns>The informational label for the executed command.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.CommandQueue.AddCommand(System.Action,System.String)">
+            <summary>
+            Adds a command to the queue.
+            </summary>
+            <param name="action">Action to execute.</param>
+            <param name="info">Optional description for the action.</param>
+        </member>
+        <member name="M:AutoGroupGenerator.CommandQueue.AddCommand(AutoGroupGenerator.Command)">
+            <summary>
+            Adds a preconstructed command to the queue.
+            </summary>
+            <param name="command">The command to enqueue.</param>
+        </member>
+        <member name="T:AutoGroupGenerator.FileUtils">
+            <summary>
+            File system helpers for synchronous and coroutine-based IO.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.FileUtils.LoadFromFile(System.String)">
+            <summary>
+            Loads all text from a file.
+            </summary>
+            <param name="filePath">Path to the file to read.</param>
+            <returns>The file contents as text.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.FileUtils.SaveToFile(System.String,System.String)">
+            <summary>
+            Saves text to a file, creating directories as needed.
+            </summary>
+            <param name="filePath">Path to the file to write.</param>
+            <param name="data">Text to write.</param>
+        </member>
+        <member name="M:AutoGroupGenerator.FileUtils.LoadFromFileAsync``1(System.String,System.Action{``0},System.Int32)">
+            <summary>
+            Loads JSON data from a file asynchronously as a coroutine.
+            </summary>
+            <typeparam name="T">Type to deserialize.</typeparam>
+            <param name="filePath">Path to the file to read.</param>
+            <param name="onComplete">Callback invoked with the deserialized data.</param>
+            <param name="bytesPerStep">Maximum characters read per frame.</param>
+            <returns>An enumerator for coroutine execution.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.FileUtils.SaveToFileAsync(System.String,System.String,System.Action{System.Boolean},System.Int32)">
+            <summary>
+            Saves text to a file asynchronously as a coroutine.
+            </summary>
+            <param name="serializedData">Text to write.</param>
+            <param name="filePath">Path to the file to write.</param>
+            <param name="onComplete">Callback invoked with success state.</param>
+            <param name="bytesPerStep">Maximum characters written per frame.</param>
+            <returns>An enumerator for coroutine execution.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.FileUtils.EnsureDirectoryExist(System.String)">
+            <summary>
+            Ensures the directory for the specified file path exists.
+            </summary>
+            <param name="filePath">File path whose directory should exist.</param>
+        </member>
+        <member name="T:AutoGroupGenerator.AddressableUtil">
+            <summary>
+            Utility helpers for interacting with the Addressables configuration.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.AddressableUtil.FindDefaultAddressableGroupTemplate">
+            <summary>
+            Finds the default Addressable group template from the project settings.
+            </summary>
+            <returns>The default group template.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.AddressableUtil.GetAddressableEntries">
+            <summary>
+            Gets all Addressable asset entries from non-read-only groups.
+            </summary>
+            <returns>A list of addressable asset entries.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.AddressableUtil.GetExtendedAddressableEntries(System.Boolean)">
+            <summary>
+            Gets addressable asset paths, expanding folders into their contained assets.
+            </summary>
+            <param name="includeFolderEntries">If true, include folder paths in the result.</param>
+            <returns>A set of asset paths referenced by Addressables.</returns>
+        </member>
+        <member name="T:AutoGroupGenerator.GroupLayout">
+            <summary>
+            Serializable description of a generated group layout.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.GroupLayout.TemplateName">
+            <summary>
+            Name of the Addressable group template applied to this layout.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.GroupLayout.Name">
+            <summary>
+            Display name for the group layout.
+            </summary>
+        </member>
+        <member name="P:AutoGroupGenerator.GroupLayout.IsShared">
+            <summary>
+            Gets a value indicating whether the layout is shared by multiple sources.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.StringExtensions">
+            <summary>
+            String helpers for formatting identifiers and file names.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.StringExtensions.ToReadableFormat(System.String)">
+            <summary>
+            Converts a string to a more readable, spaced format.
+            </summary>
+            <param name="input">The source string.</param>
+            <returns>A readable representation of the string.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.StringExtensions.RemoveExtension(System.String)">
+            <summary>
+            Removes the extension from a file name.
+            </summary>
+            <param name="fileName">File name to process.</param>
+            <returns>The file name without its extension.</returns>
+        </member>
+        <member name="T:AutoGroupGenerator.AssetNode">
+            <summary>
+            Represents an asset in the dependency graph via its GUID.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.AssetNode.FromAssetPath(System.String)">
+            <summary>
+            Creates an <see cref="T:AutoGroupGenerator.AssetNode"/> from an asset path.
+            </summary>
+            <param name="assetPath">The project-relative asset path used to resolve a GUID.</param>
+            <returns>The created node, or null if the path is invalid.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.AssetNode.FromString(System.String)">
+            <summary>
+            Creates an <see cref="T:AutoGroupGenerator.AssetNode"/> from a serialized string representation.
+            </summary>
+            <param name="value">The serialized value containing a GUID string to parse.</param>
+            <returns>The created node, or null if parsing fails.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.AssetNode.FromGuidString(System.String)">
+            <summary>
+            Creates an <see cref="T:AutoGroupGenerator.AssetNode"/> from a GUID string.
+            </summary>
+            <param name="guidString">The GUID string representation used to create the node.</param>
+            <returns>The created node, or null if parsing fails.</returns>
+        </member>
+        <member name="F:AutoGroupGenerator.AssetNode.Guid">
+            <summary>
+            The GUID backing this node.
+            </summary>
+        </member>
+        <member name="P:AutoGroupGenerator.AssetNode.AssetPath">
+            <summary>
+            Gets the asset path represented by this node.
+            </summary>
+        </member>
+        <member name="P:AutoGroupGenerator.AssetNode.FileName">
+            <summary>
+            Gets the asset file name without the directory path.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.AssetNode.#ctor(UnityEngine.GUID)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AutoGroupGenerator.AssetNode"/> class.
+            </summary>
+            <param name="guid">The GUID that uniquely identifies the asset in the project.</param>
+        </member>
+        <member name="M:AutoGroupGenerator.AssetNode.ToString">
+            <summary>
+            Returns the GUID string for this node.
+            </summary>
+            <returns>The GUID string.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.AssetNode.Equals(AutoGroupGenerator.AssetNode)">
+            <summary>
+            Determines whether another node is equal to this node.
+            </summary>
+            <param name="other">The other node.</param>
+            <returns>True when the GUIDs are equal.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.AssetNode.Equals(System.Object)">
+            <summary>
+            Determines whether another object is equal to this node.
+            </summary>
+            <param name="obj">The other object.</param>
+            <returns>True when the object is an equal <see cref="T:AutoGroupGenerator.AssetNode"/>.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.AssetNode.GetHashCode">
+            <summary>
+            Returns a hash code for this node.
+            </summary>
+            <returns>The hash code.</returns>
+        </member>
+        <member name="T:AutoGroupGenerator.OutputRule">
+            <summary>
+            Base class for output rules that filter or transform group layouts.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.OutputRule.m_Template">
+            <summary>
+            Template applied to generated group layouts.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.OutputRule.m_DataContainer">
+            <summary>
+            Data container providing input, output, and settings.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.OutputRule.m_Selection">
+            <summary>
+            Cached selection of group layouts targeted by this rule.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.OutputRule.Initialize(AutoGroupGenerator.DataContainer)">
+            <summary>
+            Initializes the rule with the shared data container.
+            </summary>
+            <param name="dataContainer">The data container to use.</param>
+        </member>
+        <member name="M:AutoGroupGenerator.OutputRule.Select">
+            <summary>
+            Selects group layouts that match this rule's criteria.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.OutputRule.Refine">
+            <summary>
+            Applies rule-specific refinements to the selected layouts.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.OutputRule.UnInit">
+            <summary>
+            Clears cached state after execution.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.OutputRule.DoesMatchSelectionCriteria(AutoGroupGenerator.GroupLayout)">
+            <summary>
+            Determines whether a group layout matches this rule.
+            </summary>
+            <param name="groupLayout">The layout to evaluate.</param>
+            <returns>True if the layout matches.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.OutputRule.Merge(System.Collections.Generic.List{AutoGroupGenerator.GroupLayout},System.String)">
+            <summary>
+            Merges multiple group layouts into a single layout.
+            </summary>
+            <param name="groupLayouts">Group layouts to merge.</param>
+            <param name="mergedGroupName">Optional name for the merged layout.</param>
+        </member>
+        <member name="M:AutoGroupGenerator.OutputRule.ApplyTemplate(System.Collections.Generic.List{AutoGroupGenerator.GroupLayout})">
+            <summary>
+            Applies the configured template to the provided group layouts.
+            </summary>
+            <param name="groupLayouts">Layouts to update.</param>
+        </member>
+        <member name="M:AutoGroupGenerator.OutputRule.Rename(AutoGroupGenerator.GroupLayout,System.String)">
+            <summary>
+            Renames a group layout in the data container.
+            </summary>
+            <param name="groupLayout">Layout to rename.</param>
+            <param name="newName">New name to apply.</param>
+        </member>
+        <member name="T:AutoGroupGenerator.ImprovedNamesOutputRule">
+            <summary>
+            Output rule that renames group layouts using simple heuristics.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.ImprovedNamesOutputRule.DoesMatchSelectionCriteria(AutoGroupGenerator.GroupLayout)">
+            <inheritdoc />
+        </member>
+        <member name="M:AutoGroupGenerator.ImprovedNamesOutputRule.Refine">
+            <summary>
+            Renames group layouts based on heuristics derived from their contents.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.EditorUtil">
+            <summary>
+            Utility methods for editor-specific operations.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.EditorUtil.LocatePersistentDataFolder">
+            <summary>
+            Reveals the persistent data folder in the OS file explorer.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.EditorUtil.UnloadUnusedEditorMemory">
+            <summary>
+            Forces a garbage collection and unloads unused editor assets.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.DataContainer">
+            <summary>
+            Shared data used across AutoGroupGenerator editor workflows.
+            </summary>
+            <seealso cref="T:AutoGroupGenerator.AutoGroupGeneratorWindow"/>
+            <seealso cref="T:AutoGroupGenerator.AutoGroupGeneratorSettings"/>
+            <seealso cref="F:AutoGroupGenerator.DataContainer.DependencyGraph"/>
+        </member>
+        <member name="F:AutoGroupGenerator.DataContainer.InputAssets">
+            <summary>
+            Set of input asset paths gathered from input rules.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.DataContainer.DependencyGraph">
+            <summary>
+            Dependency graph generated for the project assets.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.DataContainer.SettingsFilePath">
+            <summary>
+            File path for the active settings asset.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.DataContainer.Settings">
+            <summary>
+            Loaded settings instance controlling the workflow.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.DataContainer.ExcludedAssets">
+            <summary>
+            Assets excluded by exclusion rules.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.DataContainer.Subgraphs">
+            <summary>
+            Subgraph data keyed by hash.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.DataContainer.GroupLayout">
+            <summary>
+            Group layout data keyed by group name.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.DataContainer.AssetEditingInProgress">
+            <summary>
+            Indicates whether Addressable asset editing is currently in progress.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.DataContainer.Logger">
+            <summary>
+            Logger used for workflow messages.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.SubgraphCommandQueue">
+            <summary>
+            Command queue that identifies subgraphs within the dependency graph.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.AssetSelectionInputRuleEditor">
+            <summary>
+            Custom inspector for configuring <see cref="T:AutoGroupGenerator.AssetSelectionInputRule"/> assets.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.AssetSelectionInputRuleEditor.OnInspectorGUI">
+            <summary>
+            Draws the custom inspector UI for the asset selection rule.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.AddressableGroupCommandQueue">
+            <summary>
+            Command queue that converts group layouts into Addressables groups.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.Logger">
+            <summary>
+            Logger that filters editor messages by configured verbosity.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.Logger.#ctor(AutoGroupGenerator.DataContainer)">
+            <summary>
+            Initializes a new logger for the provided data container.
+            </summary>
+            <param name="dataContainer">The data container that supplies settings.</param>
+        </member>
+        <member name="M:AutoGroupGenerator.Logger.Log(System.Object,AutoGroupGenerator.LogLevelID,System.String)">
+            <summary>
+            Logs a message at the specified log level.
+            </summary>
+            <param name="invoker">The object issuing the log.</param>
+            <param name="logLevel">The log level for the message.</param>
+            <param name="message">The message to log.</param>
+        </member>
+        <member name="M:AutoGroupGenerator.Logger.LogError(System.Object,System.String)">
+            <summary>
+            Logs an error message.
+            </summary>
+            <param name="invoker">The object issuing the log.</param>
+            <param name="message">The message to log.</param>
+        </member>
+        <member name="M:AutoGroupGenerator.Logger.LogInfo(System.Object,System.String)">
+            <summary>
+            Logs an informational message.
+            </summary>
+            <param name="invoker">The object issuing the log.</param>
+            <param name="message">The message to log.</param>
+        </member>
+        <member name="M:AutoGroupGenerator.Logger.LogDev(System.Object,System.String)">
+            <summary>
+            Logs a developer-level diagnostic message.
+            </summary>
+            <param name="invoker">The object issuing the log.</param>
+            <param name="message">The message to log.</param>
+        </member>
+        <member name="T:AutoGroupGenerator.NamingUtil">
+            <summary>
+            Helpers for deriving common names and asset types.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.NamingUtil.MostMatch(System.Collections.Generic.IEnumerable{System.String},System.Func{System.String,System.Boolean},System.Single)">
+            <summary>
+            Determines whether most items satisfy a predicate.
+            </summary>
+            <param name="paths">Items to evaluate.</param>
+            <param name="predicate">Predicate used for matching.</param>
+            <param name="minRatio">Minimum ratio of matches required.</param>
+            <returns>True when the ratio of matches meets or exceeds the threshold.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.NamingUtil.GetMajorityElement(System.Collections.Generic.IEnumerable{System.String},System.Single)">
+            <summary>
+            Returns the most common element if it meets the ratio threshold.
+            </summary>
+            <param name="items">Items to analyze.</param>
+            <param name="minRatio">Minimum ratio of occurrences required.</param>
+            <returns>The most common element or null if the threshold is not met.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.NamingUtil.GetMajorityAssetType(System.Collections.Generic.IEnumerable{System.String},System.Single)">
+            <summary>
+            Returns the most common asset type based on file extensions.
+            </summary>
+            <param name="filePaths">File paths to inspect.</param>
+            <param name="minRatio">Minimum ratio of occurrences required.</param>
+            <returns>The most common asset type or null if the threshold is not met.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.NamingUtil.FindMostCommonWord(System.Collections.Generic.IEnumerable{System.String},System.Single)">
+            <summary>
+            Finds the most common word across a set of names.
+            </summary>
+            <param name="names">Names to analyze.</param>
+            <param name="minRatio">Minimum ratio of occurrences required.</param>
+            <returns>The most common word or null if the threshold is not met.</returns>
+        </member>
+        <member name="T:AutoGroupGenerator.AssetSelectionInputRule">
+            <summary>
+            Input rule that aggregates assets selected directly or via JSON lists.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.AssetSelectionInputRule.m_SelectedAssets">
+            <summary>
+            Assets explicitly selected for inclusion in the addressables groups.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.AssetSelectionInputRule.m_JsonAssetLists">
+            <summary>
+            JSON list of assets containing additional asset paths.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.AssetSelectionInputRule.m_IncludeCurrentAddressables">
+            <summary>
+            When true, include the current addressable assets in the input list.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.AssetSelectionInputRule.GetIncludedAssets">
+            <summary>
+            Returns a set of asset paths based on selected assets and JSON lists.
+            </summary>
+            <returns>Asset paths to include.</returns>
+        </member>
+        <member name="T:AutoGroupGenerator.InputRule">
+            <summary>
+            Base class for rules that provide input asset paths.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.InputRule.GetIncludedAssets">
+            <summary>
+            Returns the set of asset paths that this rule includes.
+            </summary>
+            <returns>A set of asset paths to include.</returns>
+        </member>
+        <member name="T:AutoGroupGenerator.SubgraphTopologyUtil">
+            <summary>
+            Extension helpers for classifying subgraph topology.
+            </summary>
+            <seealso cref="T:AutoGroupGenerator.Subgraph"/>
+            <seealso cref="T:AutoGroupGenerator.DependencyGraph"/>
+        </member>
+        <member name="M:AutoGroupGenerator.SubgraphTopologyUtil.IsShared(AutoGroupGenerator.Subgraph)">
+            <summary>
+            Determines whether a subgraph is shared by multiple sources.
+            </summary>
+            <param name="subgraph">The subgraph instance to evaluate for shared source ownership.</param>
+            <returns>True when the subgraph has more than one source.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.SubgraphTopologyUtil.IsHierarchy(AutoGroupGenerator.Subgraph,AutoGroupGenerator.DependencyGraph)">
+            <summary>
+            Determines whether a subgraph forms a hierarchy rooted at its sources.
+            </summary>
+            <param name="subgraph">The subgraph instance to evaluate for hierarchical structure.</param>
+            <param name="dependencyGraph">The dependency graph that contains the subgraph nodes.</param>
+            <returns>True when the subgraph is hierarchical.</returns>
+        </member>
+        <member name="T:AutoGroupGenerator.LoadDependencyGraphCommandQueue">
+            <summary>
+            Command queue that loads a serialized dependency graph from disk.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.JsonReport">
+            <summary>
+            Serializable container for diagnostic summaries saved to disk.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.JsonReport.Summary">
+            <summary>
+            Summary text for the report.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.JsonReport.Data">
+            <summary>
+            Serialized report payload data.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.JsonReport.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AutoGroupGenerator.JsonReport"/> class.
+            </summary>
+            <param name="summary">Summary text for the report.</param>
+            <param name="data">Serialized data payload.</param>
+        </member>
+        <member name="M:AutoGroupGenerator.JsonReport.SaveJsonReport(System.Type,System.String,System.String,System.Object)">
+            <summary>
+            Saves a JSON report to disk with a custom filename.
+            </summary>
+            <param name="reporter">Type generating the report.</param>
+            <param name="filename">File name to use for the report.</param>
+            <param name="summary">Summary information to include.</param>
+            <param name="data">Data payload to serialize.</param>
+        </member>
+        <member name="M:AutoGroupGenerator.JsonReport.SaveJsonReport(System.Type,System.String,System.Object)">
+            <summary>
+            Saves a JSON report to disk using the reporter name as the filename.
+            </summary>
+            <param name="reporter">Type generating the report.</param>
+            <param name="summary">Summary information to include.</param>
+            <param name="data">Data payload to serialize.</param>
+        </member>
+        <member name="T:AutoGroupGenerator.DependencyGraph">
+            <summary>
+            Graph of asset dependencies used by AutoGroupGenerator.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.DependencyGraph.SerializedData">
+            <summary>
+            Serializable payload for persisting dependency graphs.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.DependencyGraph.SerializedData.Graph">
+            <summary>
+            The serialized graph representation.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.DependencyGraph.SerializedData.IndexEntries">
+            <summary>
+            Mapping of GUID strings to serialized indices.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.DependencyGraph.SerializableKeyValue">
+            <summary>
+            Serializable mapping entry for GUID indices.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.DependencyGraph.SerializableKeyValue.Key">
+            <summary>
+            GUID key string.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.DependencyGraph.SerializableKeyValue.Value">
+            <summary>
+            Integer index assigned to the GUID.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.DependencyGraph.Deserialize(AutoGroupGenerator.DependencyGraph.SerializedData)">
+            <summary>
+            Rehydrates a <see cref="T:AutoGroupGenerator.DependencyGraph"/> from serialized data.
+            </summary>
+            <param name="serializedData">Serialized graph payload.</param>
+            <returns>The deserialized dependency graph.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.DependencyGraph.#ctor">
+            <summary>
+            Initializes an empty dependency graph.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.DependencyGraph.#ctor(AutoGroupGenerator.Graph{AutoGroupGenerator.AssetNode})">
+            <summary>
+            Initializes the graph from an existing <see cref="T:AutoGroupGenerator.Graph`1"/>.
+            </summary>
+            <param name="graph">Source graph to copy.</param>
+        </member>
+        <member name="M:AutoGroupGenerator.DependencyGraph.AddEdge(System.String,System.String)">
+            <summary>
+            Adds a dependency edge between two asset paths.
+            </summary>
+            <param name="pathA">Source asset path.</param>
+            <param name="pathB">Dependent asset path.</param>
+        </member>
+        <member name="M:AutoGroupGenerator.DependencyGraph.AddNode(System.String)">
+            <summary>
+            Adds a node for the asset path.
+            </summary>
+            <param name="path">Asset path to add.</param>
+        </member>
+        <member name="M:AutoGroupGenerator.DependencyGraph.CountOutgoingEdges(AutoGroupGenerator.AssetNode)">
+            <summary>
+            Counts outgoing edges from the specified node.
+            </summary>
+            <param name="node">Node to count edges for.</param>
+            <returns>The number of outgoing edges.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.DependencyGraph.Serialize">
+            <summary>
+            Serializes the graph into a persistable payload.
+            </summary>
+            <returns>The serialized graph data.</returns>
+        </member>
+        <member name="T:AutoGroupGenerator.Graph`1">
+            <summary>
+            Generic directed graph with traversal and analysis helpers.
+            </summary>
+            <typeparam name="T">The node value type stored in the graph.</typeparam>
+        </member>
+        <member name="T:AutoGroupGenerator.Graph`1.SerializableNode">
+            <summary>
+            Serializable representation of a node and its neighbors.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.Graph`1.SerializableNode.Node">
+            <summary>
+            The node value.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.Graph`1.SerializableNode.Neighbors">
+            <summary>
+            The neighboring node values.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.Graph`1.SerializableData">
+            <summary>
+            Serializable payload for an entire graph.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.Graph`1.SerializableData.Nodes">
+            <summary>
+            Collection of serialized nodes.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.Graph`1._adjacencyList">
+            <summary>
+            Adjacency list mapping nodes to outgoing neighbors.
+            </summary>
+        </member>
+        <member name="P:AutoGroupGenerator.Graph`1.NodeCount">
+            <summary>
+            Gets the number of nodes in the graph.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.Graph`1.#ctor">
+            <summary>
+            Initializes an empty graph.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.Graph`1.AddEdge(`0,`0)">
+            <summary>
+            Adds an edge between two nodes, adding missing nodes as needed.
+            </summary>
+            <param name="fromNode">The source node.</param>
+            <param name="toNode">The destination node.</param>
+        </member>
+        <member name="M:AutoGroupGenerator.Graph`1.AddNode(`0)">
+            <summary>
+            Adds a node to the graph if it does not already exist.
+            </summary>
+            <param name="node">The node to add.</param>
+        </member>
+        <member name="M:AutoGroupGenerator.Graph`1.GetNeighbors(`0)">
+            <summary>
+            Gets the neighbors for the specified node.
+            </summary>
+            <param name="node">The node to query.</param>
+            <returns>A list of neighboring nodes.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.Graph`1.GetAllNodes">
+            <summary>
+            Gets all nodes in the graph.
+            </summary>
+            <returns>A list of all nodes.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.Graph`1.GetTransposedGraph">
+            <summary>
+            Builds the transposed graph with all edges reversed.
+            </summary>
+            <returns>The transposed graph.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.Graph`1.ToSerializableData">
+            <summary>
+            Serializes the graph into a data transfer object.
+            </summary>
+            <returns>The serializable data.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.Graph`1.FromSerializableData(AutoGroupGenerator.Graph{`0}.SerializableData)">
+            <summary>
+            Rehydrates a graph from serialized data.
+            </summary>
+            <param name="data">The serialized graph data.</param>
+            <returns>The reconstructed graph.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.Graph`1.FindLeafNodes(`0)">
+            <summary>
+            Finds all leaf nodes reachable from the given node.
+            </summary>
+            <param name="node">The node to start from.</param>
+            <returns>The set of reachable leaf nodes.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.Graph`1.FindPathConeToLeaves(`0)">
+            <summary>
+            Finds every node along paths from the starting node to leaves.
+            </summary>
+            <param name="node">The node to start from.</param>
+            <returns>All nodes encountered along paths to leaves.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.Graph`1.FindPathAndLeaves(`0,System.Collections.Generic.HashSet{`0}@,System.Collections.Generic.HashSet{`0}@)">
+            <summary>
+            Finds nodes along paths from the starting node and the leaf nodes reached.
+            </summary>
+            <param name="node">The node to start from.</param>
+            <param name="path">Outputs the nodes along the traversed paths.</param>
+            <param name="leaves">Outputs the leaf nodes that were reached.</param>
+        </member>
+        <member name="M:AutoGroupGenerator.Graph`1.FindAllPathsToLeafNodes(`0)">
+            <summary>
+            Finds all paths from the start node to any leaf node.
+            </summary>
+            <param name="startNode">The node to start from.</param>
+            <returns>A list of paths, where each path is a list of nodes.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.Graph`1.DepthFirstSearch(`0,System.Action{`0})">
+            <summary>
+            Performs a depth-first traversal starting at the given node.
+            </summary>
+            <param name="startNode">The node to start from.</param>
+            <param name="onVisit">Callback invoked when a node is visited.</param>
+        </member>
+        <member name="M:AutoGroupGenerator.Graph`1.DepthFirstSearchIterative(`0,System.Collections.Generic.HashSet{`0},System.Action{`0})">
+            <summary>
+            Performs a depth-first traversal with a provided visited set.
+            </summary>
+            <param name="startNode">The node to start from.</param>
+            <param name="visited">Set of already-visited nodes.</param>
+            <param name="onVisit">Callback invoked when a node is visited.</param>
+        </member>
+        <member name="M:AutoGroupGenerator.Graph`1.DepthFirstSearchForAllPaths(`0,`0)">
+            <summary>
+            Finds all paths between a start and end node using DFS.
+            </summary>
+            <param name="startNode">The node to start from.</param>
+            <param name="endNode">The node to end at.</param>
+            <returns>A list of paths between the nodes.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.Graph`1.DepthFirstSearchForAllPaths(`0,System.Predicate{`0})">
+            <summary>
+            Finds all paths from a start node to nodes matching a condition.
+            </summary>
+            <param name="startNode">The node to start from.</param>
+            <param name="endNodeCondition">Predicate identifying acceptable end nodes.</param>
+            <returns>A list of matching paths.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.Graph`1.BreadthFirstSearch(`0,System.Action{`0})">
+            <summary>
+            Performs a breadth-first traversal starting at the given node.
+            </summary>
+            <param name="startNode">The node to start from.</param>
+            <param name="onVisit">Callback invoked when a node is visited.</param>
+        </member>
+        <member name="M:AutoGroupGenerator.Graph`1.ConvertNodeType``1(System.Func{`0,``0})">
+            <summary>
+            Converts the graph to use a different node type.
+            </summary>
+            <typeparam name="TResult">The destination node type.</typeparam>
+            <param name="converter">Converter from the source node type to the destination type.</param>
+            <returns>A graph with converted node values.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.Graph`1.GetSubgraph(System.Collections.Generic.List{`0})">
+            <summary>
+            Creates a subgraph containing only the specified nodes.
+            </summary>
+            <param name="subgraphNodes">Nodes to include in the subgraph.</param>
+            <returns>The resulting subgraph.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.Graph`1.ToUndirected(AutoGroupGenerator.Graph{`0})">
+            <summary>
+            Converts a directed graph into an undirected graph by mirroring edges.
+            </summary>
+            <param name="directedGraph">The directed graph to convert.</param>
+            <returns>An undirected graph.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.Graph`1.RemoveNodeFromUndirectedGraph(AutoGroupGenerator.Graph{`0},`0)">
+            <summary>
+            Removes a node and its edges from an undirected graph.
+            </summary>
+            <param name="undirectedGraph">The graph to modify.</param>
+            <param name="targetNode">The node to remove.</param>
+        </member>
+        <member name="M:AutoGroupGenerator.Graph`1.GetConnectedComponentsOfUndirectedGraph(AutoGroupGenerator.Graph{`0})">
+            <summary>
+            Returns the connected components of an undirected graph.
+            </summary>
+            <param name="undirectedGraph">The undirected graph to analyze.</param>
+            <returns>A list of connected components.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.Graph`1.CollapseToSCCs">
+            <summary>
+            Collapses strongly connected components into a DAG of <see cref="T:AutoGroupGenerator.SuperNode"/> instances.
+            </summary>
+            <returns>A graph whose nodes represent strongly connected components.</returns>
+        </member>
+        <member name="T:AutoGroupGenerator.AutoGroupGeneratorWindow">
+            <summary>
+            Editor window that orchestrates AutoGroupGenerator processing workflows.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.EditorPersistentValue`1">
+            <summary>
+            Wrapper for EditorPrefs-backed values that survive domain reloads.
+            </summary>
+            <typeparam name="T">A type that can be serialized by the <see cref="T:UnityEngine.JsonUtility"/> class.</typeparam>
+        </member>
+        <member name="P:AutoGroupGenerator.EditorPersistentValue`1.Value">
+            <summary>
+            Gets or sets the persisted value.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.EditorPersistentValue`1.#ctor(`0,System.String,System.Action)">
+            <summary>
+            Initializes a new persisted value.
+            </summary>
+            <param name="defaultValue">Default value used when no data is stored.</param>
+            <param name="persistenceKey">EditorPrefs key used for persistence.</param>
+            <param name="onValueChanged">Callback invoked when the value changes.</param>
+        </member>
+        <member name="M:AutoGroupGenerator.EditorPersistentValue`1.ClearPersistentData">
+            <summary>
+            Removes the persisted data from EditorPrefs.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.SettingsFilesCommandQueue">
+            <summary>
+            Command queue that ensures required settings assets exist and are configured.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.ExclusionRule">
+            <summary>
+            Base class for rules that exclude assets from the input pipeline.
+            </summary>
+            <seealso cref="T:AutoGroupGenerator.DataContainer"/>
+            <seealso cref="T:AutoGroupGenerator.AssetNode"/>
+        </member>
+        <member name="F:AutoGroupGenerator.ExclusionRule.m_DataContainer">
+            <summary>
+            Data container used to evaluate exclusion rules.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.ExclusionRule.Initialize(AutoGroupGenerator.DataContainer)">
+            <summary>
+            Initializes the rule with shared data.
+            </summary>
+            <param name="dataContainer">The shared data container that provides context for the rule.</param>
+        </member>
+        <member name="M:AutoGroupGenerator.ExclusionRule.ShouldIgnoreNode(AutoGroupGenerator.AssetNode)">
+            <summary>
+            Determines whether a node should be ignored.
+            </summary>
+            <param name="node">The asset node to evaluate for exclusion during processing.</param>
+            <returns>True if the node should be excluded.</returns>
+        </member>
+        <member name="M:AutoGroupGenerator.ExclusionRule.UnInitialize">
+            <summary>
+            Clears cached data when the rule is no longer needed.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.OutputRuleCommandQueue">
+            <summary>
+            Command queue that executes configured output rules.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.Command">
+            <summary>
+            Describes an action queued for execution.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.Command.Action">
+            <summary>
+            Action to invoke when the command is executed.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.Command.Info">
+            <summary>
+            Human-readable description of the command.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.LastProcessingStep">
+            <summary>
+            Identifies the last processing step to execute.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.LastProcessingStep.None">
+            <summary>
+            No processing steps are executed.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.LastProcessingStep.InputAssets">
+            <summary>
+            Stops after collecting input assets.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.LastProcessingStep.GenerateDependencyGraph">
+            <summary>
+            Stops after generating the dependency graph.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.LastProcessingStep.GenerateSubGraphs">
+            <summary>
+            Stops after identifying subgraphs and their source relationships.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.LastProcessingStep.GenerateGroupLayout">
+            <summary>
+            Stops after generating group layouts.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.LastProcessingStep.GenerateAddressableGroups">
+            <summary>
+            Stops after creating addressable groups.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.LastProcessingStep.Cleanup">
+            <summary>
+            Stops after cleanup operations that refine addressable output.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.LastProcessingStep.All">
+            <summary>
+            Executes all steps in the pipeline.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.ProcessStepReport">
+            <summary>
+            Flags controlling which processing steps emit reports.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.ProcessStepReport.InputAssets">
+            <summary>
+            Write a report for the input assets step.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.ProcessStepReport.DependencyGraph">
+            <summary>
+            Write a report for the dependency graph step.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.ProcessStepReport.SubGraphs">
+            <summary>
+            Write a report for the subgraph step.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.ProcessStepReport.GroupLayout">
+            <summary>
+            Write a report for the group layout step.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.ProcessStepReport.AddressableGroups">
+            <summary>
+            Write a report for the addressable groups step.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.ProcessStepReport.Cleanup">
+            <summary>
+            Write a report for cleanup operations.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.LogLevelID">
+            <summary>
+            Defines verbosity levels for logging output.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.LogLevelID.OnlyErrors">
+            <summary>
+            Log only errors to reduce output during batch runs.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.LogLevelID.Info">
+            <summary>
+            Log informational messages for normal pipeline monitoring.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.LogLevelID.Developer">
+            <summary>
+            Log developer-focused diagnostics.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.AutoGroupGeneratorSettings">
+            <summary>
+            ScriptableObject containing configuration for the AutoGroupGenerator workflows.
+            </summary>
+            <seealso cref="T:AutoGroupGenerator.AutoGroupGeneratorWindow"/>
+            <seealso cref="T:AutoGroupGenerator.InputRule"/>
+            <seealso cref="T:AutoGroupGenerator.OutputRule"/>
+        </member>
+        <member name="F:AutoGroupGenerator.AutoGroupGeneratorSettings.InputRules">
+            <summary>
+            Input rules used to select assets to process.
+            </summary>
+        </member>
+        <member name="F:AutoGroupGenerator.AutoGroupGeneratorSettings.OutputRules">
+            <summary>
+            Output rules used to post-process generated layouts.
+            </summary>
+        </member>
+        <member name="P:AutoGroupGenerator.AutoGroupGeneratorSettings.LastProcessingStep">
+            <summary>
+            Gets the last processing step to execute.
+            </summary>
+        </member>
+        <member name="P:AutoGroupGenerator.AutoGroupGeneratorSettings.LogLevel">
+            <summary>
+            Gets the configured logging verbosity.
+            </summary>
+        </member>
+        <member name="P:AutoGroupGenerator.AutoGroupGeneratorSettings.SaveGraphOnDisk">
+            <summary>
+            Gets a value indicating whether to persist the dependency graph to disk.
+            </summary>
+        </member>
+        <member name="P:AutoGroupGenerator.AutoGroupGeneratorSettings.RemoveEmptyGroups">
+            <summary>
+            Gets a value indicating whether to remove empty addressable groups.
+            </summary>
+        </member>
+        <member name="P:AutoGroupGenerator.AutoGroupGeneratorSettings.RemoveUnnecessaryEntries">
+            <summary>
+            Gets a value indicating whether to remove Addressable entries that are no longer needed.
+            </summary>
+        </member>
+        <member name="P:AutoGroupGenerator.AutoGroupGeneratorSettings.RemoveAddressableScenesFromBuildProfile">
+            <summary>
+            Gets a value indicating whether to remove Addressable scenes from the build profile.
+            </summary>
+        </member>
+        <member name="P:AutoGroupGenerator.AutoGroupGeneratorSettings.SortAddressableGroups">
+            <summary>
+            Gets a value indicating whether addressable groups should be sorted.
+            </summary>
+        </member>
+        <member name="P:AutoGroupGenerator.AutoGroupGeneratorSettings.ScanForUnsupportedFiles">
+            <summary>
+            Gets a value indicating whether to scan assets for unsupported file types.
+            </summary>
+        </member>
+        <member name="P:AutoGroupGenerator.AutoGroupGeneratorSettings.ProcessReport">
+            <summary>
+            Gets the report flags for processing steps.
+            </summary>
+        </member>
+        <member name="M:AutoGroupGenerator.AutoGroupGeneratorSettings.Validate">
+            <summary>
+            Validates the current settings configuration.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.GroupLayoutCommandQueue">
+            <summary>
+            Command queue that creates group layout definitions from subgraphs.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.Constants">
+            <summary>
+            Centralized constants shared across the editor tooling.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.Constants.Menus">
+            <summary>
+            Menu definitions for the editor UI.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.Constants.ContextMenus">
+            <summary>
+            Context menu definitions for asset creation.
+            </summary>
+        </member>
+        <member name="T:AutoGroupGenerator.Constants.FilePaths">
+            <summary>
+            Paths used for report persistence.
+            </summary>
+        </member>
+    </members>
+</doc>
