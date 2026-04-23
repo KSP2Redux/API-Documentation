@@ -1,0 +1,750 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Unity.Transforms</name>
+    </assembly>
+    <members>
+        <member name="T:Unity.Transforms.ParentSystem">
+            <summary>
+            This system maintains parent/child relationships between entities within a transform hierarchy.
+            </summary>
+            <remarks>
+            The system guarantees the following invariants after each update:
+            * If an entity has the <see cref="T:Unity.Transforms.Parent"/> component, it refers to a valid entity.
+            * If an entity has the <see cref="T:Unity.Transforms.Parent"/> component, the specified parent entity must have a <see cref="T:Unity.Transforms.Child"/> buffer component,
+               and this entity must be an element of that buffer.
+            * If an entity has the <see cref="T:Unity.Transforms.Parent"/> component, it also has the <see cref="T:Unity.Transforms.PreviousParent"/> component which refers to the same valid entity.
+            * If an entity does not have the <see cref="T:Unity.Transforms.Parent"/> component, it is not a member of any entity's <see cref="T:Unity.Transforms.Child"/> buffer.
+            * If an entity does not have the <see cref="T:Unity.Transforms.Parent"/> component, it does not have the <see cref="T:Unity.Transforms.PreviousParent"/> component.
+            </remarks>
+        </member>
+        <member name="M:Unity.Transforms.ParentSystem.OnCreate(Unity.Entities.SystemState@)">
+            <inheritdoc cref="M:Unity.Entities.ISystem.OnCreate(Unity.Entities.SystemState@)"/>
+        </member>
+        <member name="M:Unity.Transforms.ParentSystem.UpdateNewParents(Unity.Entities.SystemState@)">
+            <inheritdoc cref="M:Unity.Entities.ISystem.OnDestroy(Unity.Entities.SystemState@)"/>
+        </member>
+        <member name="M:Unity.Transforms.ParentSystem.OnUpdate(Unity.Entities.SystemState@)">
+            <inheritdoc cref="M:Unity.Entities.ISystem.OnUpdate(Unity.Entities.SystemState@)"/>
+        </member>
+        <member name="T:Unity.Transforms.TransformHelpers">
+            <summary>
+            Helper functions to manipulate and decompose transformation matrices.
+            </summary>
+        </member>
+        <member name="M:Unity.Transforms.TransformHelpers.Forward(Unity.Mathematics.float4x4@)">
+            <summary>Computes the "forward" direction in a transformation matrix's reference frame.</summary>
+            <remarks>
+            This method assumes that <paramref name="m"/> is an affine transformation matrix without shear.
+            </remarks>
+            <param name="m">A transformation matrix</param>
+            <returns>
+            A vector pointing in the "forward" direction of <paramref name="m"/>'s reference frame. By Unity's convention,
+            this is positive Z axis. This vector does not necessarily have unit length.
+            </returns>
+        </member>
+        <member name="M:Unity.Transforms.TransformHelpers.Back(Unity.Mathematics.float4x4@)">
+            <summary>Computes the "back" direction in a transformation matrix's reference frame.</summary>
+            <remarks>
+            This method assumes that <paramref name="m"/> is an affine transformation matrix without shear.
+            </remarks>
+            <param name="m">A transformation matrix</param>
+            <returns>
+            A vector pointing in the "back" direction of <paramref name="m"/>'s reference frame. By Unity's convention,
+            this is negative Z axis. This vector does not necessarily have unit length.
+            </returns>
+        </member>
+        <member name="M:Unity.Transforms.TransformHelpers.Up(Unity.Mathematics.float4x4@)">
+            <summary>Computes the "up" direction in a transformation matrix's reference frame.</summary>
+            <remarks>
+            This method assumes that <paramref name="m"/> is an affine transformation matrix without shear.
+            </remarks>
+            <param name="m">A transformation matrix</param>
+            <returns>
+            A vector pointing in the "up" direction of <paramref name="m"/>'s reference frame. By Unity's convention,
+            this is positive Y axis. This vector does not necessarily have unit length.
+            </returns>
+        </member>
+        <member name="M:Unity.Transforms.TransformHelpers.Down(Unity.Mathematics.float4x4@)">
+            <summary>Computes the "down" direction in a transformation matrix's reference frame.</summary>
+            <remarks>
+            This method assumes that <paramref name="m"/> is an affine transformation matrix without shear.
+            </remarks>
+            <param name="m">A transformation matrix</param>
+            <returns>
+            A vector pointing in the "down" direction of <paramref name="m"/>'s reference frame. By Unity's convention,
+            this is negative Y axis. This vector does not necessarily have unit length.
+            </returns>
+        </member>
+        <member name="M:Unity.Transforms.TransformHelpers.Right(Unity.Mathematics.float4x4@)">
+            <summary>Computes the "right" direction in a transformation matrix's reference frame.</summary>
+            <remarks>
+            This method assumes that <paramref name="m"/> is an affine transformation matrix without shear.
+            </remarks>
+            <param name="m">A transformation matrix</param>
+            <returns>
+            A vector pointing in the "right" direction of <paramref name="m"/>'s reference frame. By Unity's convention,
+            this is positive X axis. This vector does not necessarily have unit length.
+            </returns>
+        </member>
+        <member name="M:Unity.Transforms.TransformHelpers.Left(Unity.Mathematics.float4x4@)">
+            <summary>Computes the "left" direction in a transformation matrix's reference frame.</summary>
+            <remarks>
+            This method assumes that <paramref name="m"/> is an affine transformation matrix without shear.
+            </remarks>
+            <param name="m">A transformation matrix</param>
+            <returns>
+            A vector pointing in the "left" direction of <paramref name="m"/>'s reference frame. By Unity's convention,
+            this is negative X axis. This vector does not necessarily have unit length.
+            </returns>
+        </member>
+        <member name="M:Unity.Transforms.TransformHelpers.Translation(Unity.Mathematics.float4x4@)">
+            <summary>Extracts the translation from a transformation matrix</summary>
+            <remarks>
+            This method assumes that <paramref name="m"/> is an affine transformation matrix without shear.
+            </remarks>
+            <param name="m">A transformation matrix</param>
+            <returns>
+            A vector containing the translation applied by the provided transformation matrix.
+            </returns>
+        </member>
+        <member name="M:Unity.Transforms.TransformHelpers.Rotation(Unity.Mathematics.float4x4@)">
+            <summary>Extracts the rotation from a transformation matrix</summary>
+            <remarks>
+            This method assumes that <paramref name="m"/> is an affine transformation matrix without shear.
+            </remarks>
+            <param name="m">A transformation matrix</param>
+            <returns>
+            A normalized quaternion containing the rotation applied by the provided transformation matrix.
+            </returns>
+        </member>
+        <member name="M:Unity.Transforms.TransformHelpers.Scale(Unity.Mathematics.float4x4@)">
+            <summary>Extracts the scale from a transformation matrix</summary>
+            <remarks>
+            This method assumes that <paramref name="m"/> is an affine transformation matrix without shear.
+            </remarks>
+            <param name="m">A transformation matrix</param>
+            <returns>
+            A vector containing the scale applied by the provided transformation matrix.
+            </returns>
+        </member>
+        <member name="M:Unity.Transforms.TransformHelpers.TransformPoint(Unity.Mathematics.float4x4@,Unity.Mathematics.float3@)">
+            <summary>Transforms a 3D point by a 4x4 transformation matrix.</summary>
+            <remarks>
+            This method assumes that <paramref name="m"/> is an affine transformation matrix.
+            </remarks>
+            <param name="m">A transformation matrix</param>
+            <param name="p">A 3D position</param>
+            <returns>
+            A vector containing the transformed point.
+            </returns>
+        </member>
+        <member name="M:Unity.Transforms.TransformHelpers.TransformDirection(Unity.Mathematics.float4x4@,Unity.Mathematics.float3@)">
+            <summary>Transforms a 3D direction by a 4x4 transformation matrix.</summary>
+            <remarks>
+            This method assumes that <paramref name="m"/> is an affine transformation matrix.
+            </remarks>
+            <param name="m">A transformation matrix</param>
+            <param name="d">A vector representing a direction in 3D space. This vector does not need to be normalized.</param>
+            <returns>
+            A vector containing the transformed direction. This vector will not necessarily be unit-length.
+            </returns>
+        </member>
+        <member name="M:Unity.Transforms.TransformHelpers.TransformRotation(Unity.Mathematics.float4x4@,Unity.Mathematics.quaternion@)">
+            <summary>Transforms a 3D rotation by a 4x4 transformation matrix.</summary>
+            <remarks>
+            This method assumes that <paramref name="m"/> is an affine transformation matrix without shear.
+            </remarks>
+            <param name="m">A transformation matrix</param>
+            <param name="q">A quaternion representing a 3D rotation. This quaternion does not need to be normalized.</param>
+            <returns>
+            A quaternion containing the transformed rotation. This quaternion will normalized if the input quaternion is normalized.
+            </returns>
+        </member>
+        <member name="M:Unity.Transforms.TransformHelpers.InverseTransformPoint(Unity.Mathematics.float4x4@,Unity.Mathematics.float3@)">
+            <summary>Transforms a 3D point by the inverse of a 4x4 transformation matrix.</summary>
+            <remarks>
+            This method assumes that <paramref name="m"/> is an affine transformation matrix.
+            </remarks>
+            <param name="m">A transformation matrix</param>
+            <param name="p">A 3D position</param>
+            <returns>
+            A vector containing the transformed point.
+            </returns>
+        </member>
+        <member name="M:Unity.Transforms.TransformHelpers.InverseTransformDirection(Unity.Mathematics.float4x4@,Unity.Mathematics.float3@)">
+            <summary>Transforms a 3D direction by the inverse of a 4x4 transformation matrix.</summary>
+            <remarks>
+            This method assumes that <paramref name="m"/> is an affine transformation matrix.
+            </remarks>
+            <param name="m">A transformation matrix</param>
+            <param name="d">A vector representing a direction in 3D space. This vector does not need to be normalized.</param>
+            <returns>
+            A vector containing the transformed direction. This vector will not necessarily be unit-length.
+            </returns>
+        </member>
+        <member name="M:Unity.Transforms.TransformHelpers.InverseTransformRotation(Unity.Mathematics.float4x4@,Unity.Mathematics.quaternion@)">
+            <summary>Transforms a 3D rotation by the inverse of a 4x4 transformation matrix.</summary>
+            <remarks>
+            This method assumes that <paramref name="m"/> is an affine transformation matrix without shear.
+            </remarks>
+            <param name="m">A transformation matrix</param>
+            <param name="q">A quaternion representing a 3D rotation. This quaternion does not need to be normalized.</param>
+            <returns>
+            A quaternion containing the transformed rotation. This quaternion will be normalized if the input quaternion is normalized.
+            </returns>
+        </member>
+        <member name="M:Unity.Transforms.TransformHelpers.LookAtRotation(Unity.Mathematics.float3@,Unity.Mathematics.float3,Unity.Mathematics.float3)">
+            <summary>Computes a rotation so that "forward" points to the target.</summary>
+            <param name="eyeWorldPosition">The 3D position of the viewer (the "eye"), in world-space.</param>
+            <param name="targetWorldPosition">The 3D position the viewer wants to rotate to face, in world-space</param>
+            <param name="worldUp">The direction in world-space to represent the up direction. If you don't want to set a
+            custom value, use `Unity.Mathematics.math.up`.</param>
+            <remarks>
+            Note that the viewer's existing orientation is ignored; the quaternion returned by this function should replace
+            the viewer's rotation, not be added to it.
+            </remarks>
+            <returns>
+            A quaternion containing the rotation which would cause a viewer at <paramref name="eyeWorldPosition"/> to face
+            <paramref name="targetWorldPosition"/>, with the "up" direction in the resulting reference frame corresponding
+            as closely as possible to <typeparam name="worldUp"></typeparam>.
+            </returns>
+        </member>
+        <member name="M:Unity.Transforms.TransformHelpers.ComputeWorldTransformMatrix(Unity.Entities.Entity@,Unity.Mathematics.float4x4@,Unity.Entities.ComponentLookup{Unity.Transforms.LocalTransform}@,Unity.Entities.ComponentLookup{Unity.Transforms.Parent}@,Unity.Entities.ComponentLookup{Unity.Transforms.PostTransformMatrix}@)">
+             <summary>
+             Synchronously compute a local-to-world transformation matrix for an entity, using the current values
+             of LocalTransform and PostTransformMatrix for the target entity and its hierarchy ancestors.
+             </summary>
+             <remarks>
+             This method is intended for the relatively uncommon cases where an entity's accurate world-space
+             transformation matrix is needed immediately. For example:
+             - When performing a raycast from an entity which may be part of an entity hierarchy, such as the wheel of a
+               car object. The ray origin must be in world-space, but the entity's <see cref="T:Unity.Transforms.LocalTransform"/> may be
+               relative to its parent.
+             - When one entity's transform needs to "track" another in world-space, and the targeting entity and/or the
+               targeted entity are in a transform hierarchy.
+             - When an entity's transform is modified in the <see cref="T:Unity.Entities.LateSimulationSystemGroup"/> (after the
+               <see cref="T:Unity.Transforms.TransformSystemGroup"/> has updated, but before the <see cref="T:Unity.Entities.PresentationSystemGroup"/> runs),
+               this method can be used to compute a new <see cref="T:Unity.Transforms.LocalToWorld"/> value for the affected entity.
+            
+             For an entity that is not part of an entity hierarchy, the <see cref="T:Unity.Transforms.LocalTransform"/> component already
+             stores the world-space transform (since the two spaces are identical). In his case, reading <see cref="T:Unity.Transforms.LocalTransform"/>
+             directly is more efficient than calling this method.
+            
+             The <see cref="T:Unity.Transforms.LocalToWorld"/> component also contains a world-space transformation matrix. However,
+             this value may be out of date or invalid; it is only updated when the <see cref="T:Unity.Transforms.TransformSystemGroup"/> runs).
+             It may also contain additional offsets applied for graphical smoothing purposes.
+             Therefore, while the <see cref="T:Unity.Transforms.LocalToWorld"/> component may be useful as a fast approximation when its latency
+             is acceptable, it should not be relied one when an accurate, up-to-date world transform is needed for
+             simulation purposes.
+            
+             This method's running time scales with the depth of the target <paramref name="entity"/> is in its hierarchy.
+             </remarks>
+             <param name="entity">The entity whose world-space transform should be computed.</param>
+             <param name="outputMatrix">If successful, the output world-space transformation matrix will be stored here.</param>
+             <param name="localTransformLookup">Required to access the current transform values for <paramref name="entity"/>
+             and its ancestors in the transform hierarchy. This method only requires read-only access.</param>
+             <param name="parentLookup">Required to access the current parent for <paramref name="entity"/>
+             and its ancestors in the transform hierarchy. This method only requires read-only access.</param>
+             <param name="scaleLookup">Required to access the current non-uniform scale values for <paramref name="entity"/>
+             and its ancestors in the transform hierarchy. This method only requires read-only access.</param>
+             <exception cref="T:System.InvalidOperationException">Thrown if <paramref name="entity"/> or one if its ancestors are invalid,
+             or are missing the required <see cref="T:Unity.Transforms.LocalTransform"/> component.</exception>
+        </member>
+        <member name="T:Unity.Transforms.LocalTransform">
+            <summary>
+            Position, rotation and scale of this entity, relative to the parent, or in world space, if no parent exists.
+            </summary>
+            <remarks>
+            If the entity has a <see cref="T:Unity.Transforms.Parent"/> component, LocalTransform is relative to that parent.
+            Otherwise, it is in world space.
+            </remarks>
+        </member>
+        <member name="F:Unity.Transforms.LocalTransform.Position">
+            <summary>
+            The position of this transform.
+            </summary>
+        </member>
+        <member name="F:Unity.Transforms.LocalTransform.Scale">
+            <summary>
+            The uniform scale of this transform.
+            </summary>
+        </member>
+        <member name="F:Unity.Transforms.LocalTransform.Rotation">
+            <summary>
+            The rotation of this transform.
+            </summary>
+        </member>
+        <member name="F:Unity.Transforms.LocalTransform.Identity">
+            <summary>
+            The identity transform.
+            </summary>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.FromMatrix(Unity.Mathematics.float4x4)">
+            <summary>
+            Returns the Transform equivalent of a float4x4 matrix.
+            </summary>
+            <param name="matrix">The orthogonal matrix to convert.</param>
+            <remarks>
+            If the input matrix contains non-uniform scale, the largest value will be used.
+            Any shear in the input matrix will be ignored.
+            </remarks>
+            <seealso cref="M:Unity.Transforms.LocalTransform.FromMatrixSafe(Unity.Mathematics.float4x4)"/>
+            <returns>The Transform.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.FromMatrixSafe(Unity.Mathematics.float4x4)">
+            <summary>
+            Returns the Transform equivalent of a float4x4 matrix. Throws and exception if the matrix contains
+            nonuniform scale or shear.
+            </summary>
+            <param name="matrix">The orthogonal matrix to convert.</param>
+            <remarks>
+            If the input matrix contains non-uniform scale, this will throw an exception.
+            If the input matrix contains shear, this will throw an exception.
+            </remarks>
+            <seealso cref="M:Unity.Transforms.LocalTransform.FromMatrix(Unity.Mathematics.float4x4)"/>
+            <returns>The Transform.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.FromPositionRotation(Unity.Mathematics.float3,Unity.Mathematics.quaternion)">
+            <summary>
+            Returns a Transform initialized with the given position and rotation. Scale will be 1.
+            </summary>
+            <param name="position">The position.</param>
+            <param name="rotation">The rotation.</param>
+            <returns>The Transform.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.FromPositionRotationScale(Unity.Mathematics.float3,Unity.Mathematics.quaternion,System.Single)">
+            <summary>
+            Returns a Transform initialized with the given position, rotation and scale.
+            </summary>
+            <param name="position">The position.</param>
+            <param name="rotation">The rotation.</param>
+            <param name="scale">The scale.</param>
+            <returns>The Transform.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.FromPosition(Unity.Mathematics.float3)">
+            <summary>
+            Returns a Transform initialized with the given position. Rotation will be identity, and scale will be 1.
+            </summary>
+            <param name="position">The position.</param>
+            <returns>The Transform.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.FromPosition(System.Single,System.Single,System.Single)">
+            <summary>
+            Returns a Transform initialized with the given position. Rotation will be identity, and scale will be 1.
+            </summary>
+            <param name="x">The x coordinate of the position.</param>
+            <param name="y">The y coordinate of the position.</param>
+            <param name="z">The z coordinate of the position.</param>
+            <returns>The Transform.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.FromRotation(Unity.Mathematics.quaternion)">
+            <summary>
+            Returns a Transform initialized with the given rotation. Position will be 0,0,0, and scale will be 1.
+            </summary>
+            <param name="rotation">The rotation.</param>
+            <returns>The Transform.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.FromScale(System.Single)">
+            <summary>
+            Returns a Transform initialized with the given scale. Position will be 0,0,0, and rotation will be identity.
+            </summary>
+            <param name="scale">The scale.</param>
+            <returns>The Transform.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.ToString">
+            <summary>
+            Convert transformation data to a human-readable string
+            </summary>
+            <returns>The transform value as a human-readable string</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.Right">
+            <summary>
+            Gets the right vector of unit length.
+            </summary>
+            <returns>The right vector.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.Up">
+            <summary>
+            Gets the up vector of unit length.
+            </summary>
+            <returns>The up vector.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.Forward">
+            <summary>
+            Gets the forward vector of unit length.
+            </summary>
+            <returns>The forward vector.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.TransformPoint(Unity.Mathematics.float3)">
+            <summary>
+            Transforms a point by this transform.
+            </summary>
+            <remarks>
+            To transform a directional vector, use <see cref="M:Unity.Transforms.LocalTransform.TransformDirection(Unity.Mathematics.float3)"/>.
+            To apply the inverse transform instead, use <see cref="M:Unity.Transforms.LocalTransform.InverseTransformDirection(Unity.Mathematics.float3)"/>.
+            </remarks>
+            <example>
+            <code lang="csharp" source="../../DocCodeSamples.Tests/TransformHelperExamples.cs" region="transform-point-example" title="TransformPoint Example"/>
+            </example>
+            <param name="point">The point to be transformed.</param>
+            <returns>The result of applying this transform to the input point.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.InverseTransformPoint(Unity.Mathematics.float3)">
+            <summary>
+            Transforms a point by the inverse of this transform.
+            </summary>
+            <remarks>
+            Throws if the <see cref="F:Unity.Transforms.LocalTransform.Scale"/> field is zero.
+            To inverse-transform a directional vector, use <see cref="M:Unity.Transforms.LocalTransform.InverseTransformDirection(Unity.Mathematics.float3)"/>.
+            To apply the forward transform instead, use <see cref="M:Unity.Transforms.LocalTransform.TransformPoint(Unity.Mathematics.float3)"/>.
+            </remarks>
+            <example>
+            <code lang="csharp" source="../../DocCodeSamples.Tests/TransformHelperExamples.cs" region="transform-point-example" title="TransformPoint Example"/>
+            </example>
+            <param name="point">The point to be transformed.</param>
+            <returns>The result of applying the inverse of this transform to the input point.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.TransformDirection(Unity.Mathematics.float3)">
+            <summary>
+            Transforms a direction by this transform.
+            </summary>
+            <remarks>
+            To transform a directional vector, use <see cref="M:Unity.Transforms.LocalTransform.TransformDirection(Unity.Mathematics.float3)"/>.
+            To apply the inverse transform instead, use <see cref="M:Unity.Transforms.LocalTransform.InverseTransformDirection(Unity.Mathematics.float3)"/>.
+            </remarks>
+            <example>
+            <code lang="csharp" source="../../DocCodeSamples.Tests/TransformHelperExamples.cs" region="transform-direction-example" title="TransformDirection Example"/>
+            </example>
+            <param name="direction">The direction vector to be transformed. This vector does not need to be unit-length.</param>
+            <returns>The direction after transformation.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.InverseTransformDirection(Unity.Mathematics.float3)">
+            <summary>
+            Transforms a direction by the inverse of this transform.
+            </summary>
+            <remarks>
+            To apply a forward transform instead, use <see cref="M:Unity.Transforms.LocalTransform.TransformDirection(Unity.Mathematics.float3)"/>.
+            To inverse-transform a point instead, use <see cref="M:Unity.Transforms.LocalTransform.InverseTransformPoint(Unity.Mathematics.float3)"/>.
+            </remarks>
+            <example>
+            <code lang="csharp" source="../../DocCodeSamples.Tests/TransformHelperExamples.cs" region="transform-direction-example" title="TransformDirection Example"/>
+            </example>
+            <param name="direction">The direction to be transformed.</param>
+            <returns>The direction after transformation.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.TransformRotation(Unity.Mathematics.quaternion)">
+            <summary>
+            Transforms a rotation by this transform.
+            </summary>
+            <param name="rotation">The rotation to be transformed.</param>
+            <returns>The rotation after transformation.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.InverseTransformRotation(Unity.Mathematics.quaternion)">
+            <summary>
+            Transforms a rotation by the inverse of this transform.
+            </summary>
+            <param name="rotation">The rotation to be transformed.</param>
+            <returns>The rotation after transformation.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.TransformScale(System.Single)">
+            <summary>
+            Transforms a scale by this transform.
+            </summary>
+            <param name="scale">The scale to be transformed.</param>
+            <returns>The scale after transformation.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.InverseTransformScale(System.Single)">
+            <summary>
+            Transforms a scale by the inverse of this transform.
+            </summary>
+            <remarks>
+            Throws if the <see cref="F:Unity.Transforms.LocalTransform.Scale"/> field is zero.
+            </remarks>
+            <param name="scale">The scale to be transformed.</param>
+            <returns>The scale after transformation.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.TransformTransform(Unity.Transforms.LocalTransform@)">
+            <summary>
+            Transforms a Transform by this transform.
+            </summary>
+            <param name="transformData">The Transform to be transformed.</param>
+            <returns>The Transform after transformation.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.InverseTransformTransform(Unity.Transforms.LocalTransform@)">
+            <summary>
+            Transforms a <see cref="T:Unity.Transforms.LocalTransform"/> by the inverse of this transform.
+            </summary>
+            <param name="transformData">The <see cref="T:Unity.Transforms.LocalTransform"/> to be transformed.</param>
+            <returns>The <see cref="T:Unity.Transforms.LocalTransform"/> after transformation.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.Inverse">
+            <summary>
+            Gets the inverse of this transform.
+            </summary>
+            <remarks>
+            This method will throw if the <see cref="F:Unity.Transforms.LocalTransform.Scale"/> field is zero.
+            </remarks>
+            <returns>The inverse of the transform.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.ToMatrix">
+            <summary>
+            Gets the float4x4 equivalent of this transform.
+            </summary>
+            <returns>The float4x4 matrix.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.ToInverseMatrix">
+            <summary>
+            Gets the float4x4 equivalent of the inverse of this transform.
+            </summary>
+            <returns>The inverse float4x4 matrix.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.WithPosition(Unity.Mathematics.float3)">
+            <summary>
+            Gets an identical transform with a new position value.
+            </summary>
+            <param name="position">The position.</param>
+            <returns>The transform.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.WithPosition(System.Single,System.Single,System.Single)">
+            <summary>
+            Creates a transform that is identical but with a new position value.
+            </summary>
+            <param name="x">The x coordinate of the new position.</param>
+            <param name="y">The y coordinate of the new position.</param>
+            <param name="z">The z coordinate of the new position.</param>
+            <returns>The new transform.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.WithRotation(Unity.Mathematics.quaternion)">
+            <summary>
+            Gets an identical transform with a new rotation value.
+            </summary>
+            <param name="rotation">The rotation.</param>
+            <returns>The transform.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.WithScale(System.Single)">
+            <summary>
+            Gets an identical transform with a new scale value.
+            </summary>
+            <param name="scale">The scale.</param>
+            <returns>The T.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.Translate(Unity.Mathematics.float3)">
+            <summary>
+            Translates this transform by the specified vector.
+            </summary>
+            <remarks>
+            Note that this doesn't modify the original transform. Rather it returns a new one.
+            </remarks>
+            <param name="translation">The translation vector.</param>
+            <returns>A new, translated Transform.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.ApplyScale(System.Single)">
+            <summary>
+            Scales this transform by the specified factor.
+            </summary>
+            <remarks>
+            Note that this doesn't modify the original transform. Rather it returns a new one.
+            </remarks>
+            <param name="scale">The scaling factor.</param>
+            <returns>A new, scaled Transform.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.Rotate(Unity.Mathematics.quaternion)">
+            <summary>
+            Rotates this Transform by the specified quaternion.
+            </summary>
+            <remarks>
+            Note that this doesn't modify the original transform. Rather it returns a new one.
+            </remarks>
+            <param name="rotation">The rotation quaternion of unit length.</param>
+            <returns>A new, rotated Transform.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.RotateX(System.Single)">
+            <summary>
+            Rotates this Transform around the X axis.
+            </summary>
+            <remarks>
+            Note that this doesn't modify the original transform. Rather it returns a new one.
+            </remarks>
+            <param name="angle">The X rotation.</param>
+            <returns>A new, rotated Transform.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.RotateY(System.Single)">
+            <summary>
+            Rotates this Transform around the Y axis.
+            </summary>
+            <remarks>
+            Note that this doesn't modify the original transform. Rather it returns a new one.
+            </remarks>
+            <param name="angle">The Y rotation.</param>
+            <returns>A new, rotated Transform.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.RotateZ(System.Single)">
+            <summary>
+            Rotates this Transform around the Z axis.
+            </summary>
+            <remarks>
+            Note that this doesn't modify the original transform. Rather it returns a new one.
+            </remarks>
+            <param name="angle">The Z rotation.</param>
+            <returns>A new, rotated Transform.</returns>
+        </member>
+        <member name="M:Unity.Transforms.LocalTransform.Equals(Unity.Transforms.LocalTransform@)">
+            <summary>Checks if a transform has equal position, rotation, and scale to another.</summary>
+            <param name="other">The TransformData to compare.</param>
+            <returns>Returns true if the position, rotation, and scale are equal.</returns>
+        </member>
+        <member name="T:Unity.Transforms.LocalToWorldSystem">
+             <summary>
+             This system computes a <see cref="T:Unity.Transforms.LocalToWorld"/> matrix for each entity
+             </summary>
+             <remarks>
+             Entity transformation hierarchies are created using the <see cref="T:Unity.Transforms.Parent"/> and <see cref="T:Unity.Transforms.LocalTransform"/>
+             components, and maintained by the <see cref="T:Unity.Transforms.ParentSystem"/>.
+            
+             For root-level / world-space entities with no <see cref="T:Unity.Transforms.Parent"/>, the <see cref="T:Unity.Transforms.LocalToWorld"/> can be
+             computed directly from the entity's <see cref="T:Unity.Transforms.LocalTransform"/>.
+            
+             For child entities, each unique hierarchy is traversed recursively, computing each child's <see cref="T:Unity.Transforms.LocalToWorld"/>
+             by composing its <see cref="T:Unity.Transforms.LocalTransform"/> with its parent's world-space transform.
+             </remarks>
+        </member>
+        <member name="M:Unity.Transforms.LocalToWorldSystem.OnCreate(Unity.Entities.SystemState@)">
+            <inheritdoc cref="M:Unity.Entities.ISystem.OnCreate(Unity.Entities.SystemState@)"/>
+        </member>
+        <member name="M:Unity.Transforms.LocalToWorldSystem.OnUpdate(Unity.Entities.SystemState@)">
+            <inheritdoc cref="M:Unity.Entities.ISystem.OnUpdate(Unity.Entities.SystemState@)"/>
+        </member>
+        <member name="T:Unity.Transforms.LocalToWorld">
+             <summary>
+             The local-to-world transformation matrix for an entity
+             </summary>
+             <remarks>
+             This matrix is primarily intended for consumption by the rendering systems.
+            
+             The matrix value is generally updated automatically by <see cref="T:Unity.Transforms.LocalToWorldSystem"/> based on the entity's
+             <see cref="T:Unity.Transforms.LocalTransform"/>.
+            
+             This component value may be out of date or invalid while the <see cref="T:Unity.Entities.SimulationSystemGroup"/> is running; it
+             is only updated when the <see cref="T:Unity.Transforms.TransformSystemGroup"/> runs).
+             It may also contain additional offsets applied for graphical smoothing purposes.
+             Therefore, while the <see cref="T:Unity.Transforms.LocalToWorld"/> component may be useful as a fast approximation of an entity's
+             world-space transformation when its latency is acceptable, it should not be relied one when an accurate,
+             up-to-date world transform is needed for simulation purposes. In those cases, use the
+             <see cref="M:Unity.Transforms.TransformHelpers.ComputeWorldTransformMatrix(Unity.Entities.Entity@,Unity.Mathematics.float4x4@,Unity.Entities.ComponentLookup{Unity.Transforms.LocalTransform}@,Unity.Entities.ComponentLookup{Unity.Transforms.Parent}@,Unity.Entities.ComponentLookup{Unity.Transforms.PostTransformMatrix}@)"/> method.
+            
+             If a system writes to this component directly outside of the Entities transform systems using a <see cref="T:Unity.Entities.WriteGroupAttribute"/>,
+             <see cref="T:Unity.Transforms.LocalToWorldSystem"/> will not overwrite this entity's matrix. In this case, the writing system is
+             also responsible for applying the entity's <see cref="T:Unity.Transforms.PostTransformMatrix"/> component (if present).
+             </remarks>
+        </member>
+        <member name="F:Unity.Transforms.LocalToWorld.Value">
+            <summary>
+            The transformation matrix
+            </summary>
+        </member>
+        <member name="P:Unity.Transforms.LocalToWorld.Right">
+            <summary>
+            The "right" vector, in the entity's world-space.
+            </summary>
+        </member>
+        <member name="P:Unity.Transforms.LocalToWorld.Up">
+            <summary>
+            The "up" vector, in the entity's world-space.
+            </summary>
+        </member>
+        <member name="P:Unity.Transforms.LocalToWorld.Forward">
+            <summary>
+            The "forward" vector, in the entity's world-space.
+            </summary>
+        </member>
+        <member name="P:Unity.Transforms.LocalToWorld.Position">
+            <summary>
+            The "entity's" position in world-space.
+            </summary>
+        </member>
+        <member name="P:Unity.Transforms.LocalToWorld.Rotation">
+            <summary>
+            The "entity's" orientation in world-space.
+            </summary>
+        </member>
+        <member name="T:Unity.Transforms.PostTransformMatrix">
+             <summary>
+             An optional transformation matrix used to implement non-affine
+             transformation effects such as non-uniform scale.
+             </summary>
+             <remarks>
+             If this component is present, it is applied to the entity's <see cref="T:Unity.Transforms.LocalToWorld"/> matrix
+             by the <see cref="T:Unity.Transforms.LocalToWorldSystem"/>.
+            
+             If a system writes to an entity's <see cref="T:Unity.Transforms.LocalToWorld"/> using a <see cref="T:Unity.Entities.WriteGroupAttribute"/>,
+             it is also responsible for applying this matrix if it is present.
+             </remarks>
+        </member>
+        <member name="F:Unity.Transforms.PostTransformMatrix.Value">
+            <summary>
+            The post-transform scale matrix
+            </summary>
+        </member>
+        <member name="T:Unity.Transforms.Parent">
+             <summary>
+             This component specifies the parent entity in a transform hierarchy.
+             </summary>
+             <remarks>
+             If present, this entity's transform is implicitly specified relative to the parent's transform rather than in world-space.
+            
+             Add or remove this attribute to your code in order to add, change, or remove a parent/child
+             relationship. The corresponding <see cref="T:Unity.Transforms.Child"/> component is automatically added by the <see cref="T:Unity.Transforms.ParentSystem"/>.
+            
+             When adding or modifying this component, add and update the corresponding <see cref="T:Unity.Transforms.LocalTransform"/> component.
+             </remarks>
+             <seealso cref="T:Unity.Transforms.Child"/>
+        </member>
+        <member name="F:Unity.Transforms.Parent.Value">
+            <summary>
+            The parent entity.
+            </summary>
+            <remarks>This field must refer to a valid entity. Root level entities should not use <see cref="P:Unity.Entities.Entity.Null"/>;
+            rather, they should not have the <see cref="T:Unity.Transforms.Parent"/> component at all.</remarks>
+        </member>
+        <member name="T:Unity.Transforms.PreviousParent">
+            <summary>
+            Utility component used by the <see cref="T:Unity.Transforms.ParentSystem"/> to detect changes to an entity's <see cref="T:Unity.Transforms.Parent"/>.
+            </summary>
+            <remarks>
+            The <see cref="T:Unity.Transforms.ParentSystem"/> automatically adds and manages this component.  You shouldn't
+            add, remove, or modify it in your code.
+            </remarks>
+        </member>
+        <member name="F:Unity.Transforms.PreviousParent.Value">
+            <summary>
+            The previous parent entity
+            </summary>
+        </member>
+        <member name="T:Unity.Transforms.Child">
+             <summary>
+             Contains a buffer of all elements which have assigned this entity as their <see cref="T:Unity.Transforms.Parent"/>.
+             </summary>
+             <remarks>
+             The <see cref="T:Unity.Transforms.ParentSystem"/> automatically adds and manages this component and its contents. You can read this
+             list, but you shouldn't add or remove buffer elements.
+            
+             When an entity with this component is destroyed, the <see cref="T:Unity.Transforms.ParentSystem"/> will automatically remove the
+             <see cref="T:Unity.Transforms.Parent"/> components from each child entity.
+             </remarks>
+        </member>
+        <member name="F:Unity.Transforms.Child.Value">
+            <summary>
+            A child entity
+            </summary>
+        </member>
+        <member name="T:Unity.Transforms.TransformSystemGroup">
+            <summary>
+            A system group containing systems that process entity transformation data.
+            </summary>
+            <remarks>
+            This group includes systems that update any entity transformation hierarchies, compute an up-to-date <see cref="T:Unity.Transforms.LocalToWorld"/> matrix.
+            </remarks>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,389 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AK.Wwise.Unity.API</name>
+    </assembly>
+    <members>
+        <member name="T:AkUtilities.MigrationStep">
+            <summary>
+            These values represent the maximum value of the "Unity Integration Version" number in the Version.txt file that will migrated.
+            For example, in Wwise v2019.1.0, "Unity Integration Version" is 18 which means that all migrations up until this version are required.
+            </summary>
+        </member>
+        <member name="F:AkUtilities.MigrationStep.Current">
+            <summary>
+            The value that is currently in the Version.txt file.
+            </summary>
+        </member>
+        <member name="M:AkUtilities.ExecuteCommandLine(System.String,System.String)">
+            Executes a command-line. Blocks the calling thread until the new process has completed. Returns the logged stdout in one big string.
+        </member>
+        <member name="M:AkUtilities.IsSoundbankOverrideEnabled(System.String)">
+            Reads the user settings (not the project settings) to check if there is an override currently defined for the SoundBank generation folders.
+        </member>
+        <member name="M:AkUtilities.MoveFolder(System.String,System.String)">
+            <summary>
+            Renames or moves a folder using UnityEditor.Database API.
+            </summary>
+            <param name="oldPath"></param>
+            <param name="newPath"></param>
+            <returns>Returns true if the operation was successful.</returns>
+        </member>
+        <member name="M:AkUtilities.GetLastRectAbsolute(UnityEngine.Rect)">
+            This function returns the absolute position and the width and height of the last drawn GuiLayout(or EditorGuiLayout) element in the inspector window.
+            This function must be called in the OnInspectorGUI function
+             
+            The inspector must be in repaint mode in order to get the correct position 
+            Example => if(Event.current.type == EventType.Repaint) Rect pos = AkUtilities.GetLastRectAbsolute();
+        </member>
+        <member name="T:AkUtilities.ShortIDGenerator">
+            <summary>
+                This is based on FNVHash as used by the DataManager
+                to assign short IDs to objects. Be sure to keep them both in sync
+                when making changes!
+            </summary>
+        </member>
+        <member name="T:AkBasePathGetter">
+            <summary>
+                This class is responsible for determining the path where sound banks are located. When using custom platforms, this
+                class needs to be extended.
+            </summary>
+        </member>
+        <member name="T:AkBasePathGetter.CustomPlatformNameGetter">
+            <summary>
+                User hook called to retrieve the custom platform name used to determine the base path. Do not modify platformName
+                to use default platform names.
+            </summary>
+            <param name="platformName">The custom platform name. Leave unaffected if the default location is acceptable.</param>
+        </member>
+        <member name="M:AkBasePathGetter.GetPlatformName">
+            <summary>
+                Determines the platform name which is also the sub-folder within the base path where sound banks are located for
+                this platform.
+            </summary>
+            <returns>The platform name.</returns>
+        </member>
+        <member name="M:AkBasePathGetter.GetPlatformBasePath">
+            <summary>
+                Returns the absolute path to the platform specific sound banks.
+            </summary>
+            <returns>The absolute path to the platform specific sound banks.</returns>
+        </member>
+        <member name="M:AkBasePathGetter.GetFullSoundBankPathEditor">
+            <summary>
+                Returns the absolute path to the folder above the platform specific sound banks sub-folders.
+            </summary>
+            <returns>The absolute sound bank base path.</returns>
+        </member>
+        <member name="M:AkBasePathGetter.GetPlatformBasePathEditor(System.String)">
+            <summary>
+                Determines the platform base path for use within the Editor.
+            </summary>
+            <param name="platformName">The platform name.</param>
+            <returns>The full path to the sound banks for use within the Editor.</returns>
+        </member>
+        <member name="F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.FRONT_LEFT">
+            Standard speakers (channel mask):
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.FRONT_RIGHT" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.FRONT_CENTER" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.LOW_FREQUENCY" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.BACK_LEFT" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.BACK_RIGHT" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.BACK_CENTER" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SIDE_LEFT" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SIDE_RIGHT" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.TOP" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.HEIGHT_FRONT_LEFT" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.HEIGHT_FRONT_CENTER" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.HEIGHT_FRONT_RIGHT" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.HEIGHT_BACK_LEFT" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.HEIGHT_BACK_CENTER" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.HEIGHT_BACK_RIGHT" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_MONO" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_0POINT1" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_1POINT1" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_STEREO" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_2POINT1" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_3STEREO" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_3POINT1" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_4" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_4POINT1" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_5" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_5POINT1" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_6" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_6POINT1" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_7" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_7POINT1" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_SURROUND" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_DPL2" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_HEIGHT_4" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_HEIGHT_5" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_HEIGHT_ALL" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_AURO_222" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_AURO_8" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_AURO_9" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_AURO_9POINT1" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_AURO_10" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_AURO_10POINT1" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_AURO_11" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_AURO_11POINT1" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_AURO_11_740" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_AURO_11POINT1_740" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_AURO_13_751" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_AURO_13POINT1_751" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_DOLBY_5_0_2" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_DOLBY_5_1_2" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_DOLBY_6_0_2" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_DOLBY_6_1_2" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_DOLBY_6_0_4" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_DOLBY_6_1_4" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_DOLBY_7_0_2" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_DOLBY_7_1_2" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_DOLBY_7_0_4" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_DOLBY_7_1_4" -->
+        <!-- Badly formed XML comment ignored for member "F:AkCommonOutputSettings.ChannelConfiguration.ChannelMask.SETUP_ALL_SPEAKERS" -->
+        <member name="T:AkSoundEngine">
+            @brief Contains C# functions exposed from the Wwise C++ API.
+            
+            The AkSoundEngine class contains functions converted to C# from the following C++ namespaces: 
+            - AK::Monitor
+            - AK::MusicEngine
+            - AK::SoundEngine
+            - AK::SoundEngine::DynamicDialogue
+            - AK::SoundEngine::Query
+            - AK::SpatialAudio
+        </member>
+        <member name="M:AkSoundEngine.StringFromIntPtrString(System.IntPtr)">
+            <summary>
+                Converts "char*" C-strings to C# strings.
+            </summary>
+            <param name="ptr">"char*" memory pointer passed to C# as an IntPtr.</param>
+            <returns>Converted string.</returns>
+        </member>
+        <member name="M:AkSoundEngine.StringFromIntPtrWString(System.IntPtr)">
+            <summary>
+                Converts "wchar_t*" C-strings to C# strings.
+            </summary>
+            <param name="ptr">"wchar_t*" memory pointer passed to C# as an IntPtr.</param>
+            <returns>Converted string.</returns>
+        </member>
+        <member name="T:AkSoundEngine.GameObjectHashFunction">
+            <summary>
+                The type for hash functions used to convert a Unity Game Object into an integer.
+            </summary>
+            <param name="gameObject">The Unity Game Object.</param>
+            <returns>The AkGameObjectID used by the sound engine.</returns>
+        </member>
+        <member name="P:AkSoundEngine.GameObjectHash">
+            <summary>
+                The user assignable hash function used to convert a Unity Game Object into an AkGameObjectID used by the sound
+                engine. Used by GetAkGameObjectID().
+            </summary>
+        </member>
+        <member name="M:AkSoundEngine.GetAkGameObjectID(UnityEngine.GameObject)">
+            <summary>
+                The hash function used to convert a Unity Game Object into an AkGameObjectID used by the sound engine.
+            </summary>
+        </member>
+        <member name="M:AkSoundEngine.RegisterGameObj(UnityEngine.GameObject)">
+            <summary>
+                Registers a Unity Game Object with an ID obtained from GetAkGameObjectID().
+            </summary>
+            <param name="gameObject">The Unity Game Object.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AkSoundEngine.RegisterGameObj(UnityEngine.GameObject,System.String)">
+            <summary>
+                Registers a Unity Game Object with an ID obtained from GetAkGameObjectID().
+            </summary>
+            <param name="gameObject">The Unity Game Object.</param>
+            <param name="name">The name that is visible in the Wwise Profiler.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AkSoundEngine.UnregisterGameObj(UnityEngine.GameObject)">
+            <summary>
+                Unregisters a Unity Game Object with an ID obtained from GetAkGameObjectID().
+            </summary>
+            <param name="gameObject">The Unity Game Object.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AkSoundEngine.PreGameObjectAPICallUserHook(UnityEngine.GameObject,System.UInt64)">
+            <summary>
+                User hook called within all Wwise integration functions that receive GameObjects and do not perform
+                (un)registration. This is called
+                before values are sent to the native plugin code. An example use could be to register game objects that were not
+                previously registered.
+            </summary>
+            <param name="gameObject">The GameObject being processed.</param>
+            <param name="id">The ulong returned from GameObjectHash that represents this GameObject in Wwise.</param>
+        </member>
+        <member name="M:AkSoundEngine.PostRegisterGameObjUserHook(AKRESULT,UnityEngine.GameObject,System.UInt64)">
+            <summary>
+                User hook called after RegisterGameObj(). An example use could be to add the id and gameObject to a dictionary upon
+                AK_Success.
+            </summary>
+            <param name="result">The result from calling RegisterGameObj() on gameObject.</param>
+            <param name="gameObject">The GameObject that RegisterGameObj() was called on.</param>
+            <param name="id">The ulong returned from GameObjectHash that represents this GameObject in Wwise.</param>
+        </member>
+        <member name="M:AkSoundEngine.PostUnregisterGameObjUserHook(AKRESULT,UnityEngine.GameObject,System.UInt64)">
+            <summary>
+                User hook called after UnregisterGameObj(). An example use could be to remove the id and gameObject from a
+                dictionary upon AK_Success.
+            </summary>
+            <param name="result">The result from calling UnregisterGameObj() on gameObject.</param>
+            <param name="gameObject">The GameObject that UnregisterGameObj() was called on.</param>
+            <param name="id">The ulong returned from GameObjectHash that represents this GameObject in Wwise.</param>
+        </member>
+        <member name="M:AkSoundEngine.StringFromIntPtrOSString(System.IntPtr)">
+            <summary>
+                Converts "AkOSChar*" C-strings to C# strings.
+            </summary>
+            <param name="ptr">"AkOSChar*" memory pointer passed to C# as an IntPtr.</param>
+            <returns>Converted string.</returns>
+        </member>
+        <member name="T:AkCallbackManager">
+            <summary>
+                This class manages the callback queue.  All callbacks from the native Wwise SDK go through this queue.
+                The queue needs to be driven by regular calls to PostCallbacks().  This is currently done in AkInitializer.cs, in
+                LateUpdate().
+            </summary>
+        </member>
+        <member name="T:AkCallbackManager.EventCallback">
+            <summary>
+            Event callback used when posting events.
+            </summary>
+        </member>
+        <member name="T:AkCallbackManager.MonitoringCallback">
+            <summary>
+            Monitoring callback called when Wwise reports errors.
+            </summary>
+        </member>
+        <member name="T:AkCallbackManager.BankCallback">
+            <summary>
+            Bank callback called upon bank load and unload and when errors occur.
+            </summary>
+        </member>
+        <member name="T:AkCallbackManager.EventCallbackPackage">
+            <summary>
+            This class holds the data associated with an event callback.
+            </summary>
+        </member>
+        <member name="T:AkCallbackManager.BankCallbackPackage">
+            <summary>
+            This class holds the data associated with a bank load or unload callback.
+            </summary>
+        </member>
+        <member name="M:AkCallbackManager.SetMonitoringCallback(AkMonitorErrorLevel,AkCallbackManager.MonitoringCallback)">
+            Call this to set a function to call whenever Wwise prints a message (warnings or errors).
+        </member>
+        <member name="M:AkCallbackManager.SetBGMCallback(AkCallbackManager.BGMCallback,System.Object)">
+            Call this to set a background music callback function. By default this callback is not defined.
+        </member>
+        <member name="M:AkCallbackManager.PostCallbacks">
+            This function dispatches all the accumulated callbacks from the native sound engine. 
+            It must be called regularly.  By default this is called in AkInitializer.cs.
+        </member>
+        <member name="M:AkBaseArray`1.DefaultConstructAtIntPtr(System.IntPtr)">
+            <summary>
+            This method is called for each element of the array when the array is constructed. It should be used to clear the memory associated with an element so that it will be seen as if it had been default constructed.
+            </summary>
+            <param name="address">The address of the element</param>
+        </member>
+        <member name="M:AkBaseArray`1.ReleaseAllocatedMemoryFromReferenceAtIntPtr(System.IntPtr)">
+            <summary>
+            This method is called for each element of the array when the array is disposed. It should be used to delete memory allocated by elements.
+            </summary>
+            <param name="address">The address of the element</param>
+        </member>
+        <member name="T:AkBankManager">
+            @brief Maintains the list of loaded SoundBanks loaded. This is currently used only with AkAmbient objects.
+        </member>
+        <member name="M:AkBankManager.LoadBank(System.String,System.Boolean,System.Boolean)">
+            Loads a SoundBank. This version blocks until the bank is loaded. See AK::SoundEngine::LoadBank for more information.
+        </member>
+        <member name="M:AkBankManager.LoadBankAsync(System.String,AkCallbackManager.BankCallback)">
+            Loads a SoundBank. This version returns right away and loads in background. See AK::SoundEngine::LoadBank for more information.
+        </member>
+        <member name="M:AkBankManager.UnloadBank(System.String)">
+            Unloads a SoundBank. See AK::SoundEngine::UnloadBank for more information.
+        </member>
+        <member name="M:AkBankManager.BankHandle.DoLoadBank">
+            Loads a bank. This version blocks until the bank is loaded. See AK::SoundEngine::LoadBank for more information.
+        </member>
+        <member name="M:AkBankManager.BankHandle.UnloadBank(System.Boolean)">
+            Unloads a bank.
+        </member>
+        <member name="M:AkBankManager.AsyncBankHandle.DoLoadBank">
+            Loads a bank.  This version returns right away and loads in background. See AK::SoundEngine::LoadBank for more information
+        </member>
+        <member name="M:AkBankManager.DecodableBankHandle.DoLoadBank">
+            Loads a bank. This version blocks until the bank is loaded. See AK::SoundEngine::LoadBank for more information.
+        </member>
+        <member name="M:AkBankManager.DecodableBankHandle.UnloadBank(System.Boolean)">
+            Unloads a bank.
+        </member>
+        <member name="T:AkAudioInputManager">
+            <summary>
+                This class represents an example audio input manager and is responsible for managing the audio sample and format
+                callbacks provided to the Wwise Audio Input plug-in.
+            </summary>
+        </member>
+        <member name="T:AkAudioInputManager.AudioFormatDelegate">
+            <summary>
+                Sanitized audio format delegate to be used by classes that implement audio input plug-ins. The samples are ALWAYS
+                set to be non-interleaved 32-bit float.
+            </summary>
+            <param name="playingID">The playingID of a sound that uses the audio input plug-in.</param>
+            <param name="format">The C# analog of the C++ AkAudioFormat class.</param>
+        </member>
+        <member name="T:AkAudioInputManager.AudioFormatInteropDelegate">
+            <summary>
+                Audio format delegate that is sent to C++.
+            </summary>
+        </member>
+        <member name="T:AkAudioInputManager.AudioSamplesDelegate">
+            <summary>
+                Sanitized audio sample delegate to be used by classes that implement audio input plug-ins. For every event posted,
+                this delegate is called once per audio frame for each channel until the delegates for all the channels associated
+                with this event return false.
+            </summary>
+            <param name="playingID">The playingID of a sound that uses the audio input plug-in.</param>
+            <param name="channelIndex">The number of the channel associated with this specific invocation of the delegate.</param>
+            <param name="samples">The sample array that MUST be filled even when returning false.</param>
+            <returns>Return true when more sample frames are require and false when complete.</returns>
+        </member>
+        <member name="T:AkAudioInputManager.AudioSamplesInteropDelegate">
+            <summary>
+                Audio sample delegate that is sent to C++.
+            </summary>
+        </member>
+        <member name="M:AkAudioInputManager.PostAudioInputEvent(System.UInt32,UnityEngine.GameObject,AkAudioInputManager.AudioSamplesDelegate,AkAudioInputManager.AudioFormatDelegate)">
+            <summary>
+                This method is used to post events that use the Wwise Audio Input plug-in.
+            </summary>
+            <param name="akEventID">The ID of the event to post.</param>
+            <param name="gameObject">The GameObject that the event will be posted on.</param>
+            <param name="sampleDelegate">The C# audio sample delegate.</param>
+            <param name="formatDelegate">
+                The C# audio format delegate. If not specified, defaults to a mono source running at the
+                sample rate of the sound engine.
+            </param>
+            <returns>The playingID of the newly instantiated sound associated with the posted event.</returns>
+        </member>
+        <member name="M:AkAudioInputManager.PostAudioInputEvent(System.String,UnityEngine.GameObject,AkAudioInputManager.AudioSamplesDelegate,AkAudioInputManager.AudioFormatDelegate)">
+            <summary>
+                This method is used to post events that use the Wwise Audio Input plug-in.
+            </summary>
+            <param name="akEventName">The name of the event to post.</param>
+            <param name="gameObject">The GameObject that the event will be posted on.</param>
+            <param name="sampleDelegate">The C# audio sample delegate.</param>
+            <param name="formatDelegate">
+                The C# audio format delegate. If not specified, defaults to a mono source running at the
+                sample rate of the sound engine.
+            </param>
+            <returns>The playingID of the newly instantiated sound associated with the posted event.</returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,1065 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>glTFast.Export</name>
+    </assembly>
+    <members>
+        <member name="T:GLTFast.Export.ImageFormat">
+            <summary>
+            Exported image file format
+            </summary>
+        </member>
+        <member name="F:GLTFast.Export.ImageFormat.Unknown">
+            <summary>
+            Unknown, no preferred file format
+            </summary>
+        </member>
+        <member name="F:GLTFast.Export.ImageFormat.Jpg">
+            <summary>
+            Jpeg file format
+            </summary>
+        </member>
+        <member name="F:GLTFast.Export.ImageFormat.Png">
+            <summary>
+            PNG (Portable Network Graphics) file format
+            </summary>
+        </member>
+        <member name="T:GLTFast.Export.GltfFormat">
+            <summary>
+            glTF format
+            </summary>
+        </member>
+        <member name="F:GLTFast.Export.GltfFormat.Json">
+            <summary>
+            JSON-based glTF (.gltf file extension)
+            </summary>
+        </member>
+        <member name="F:GLTFast.Export.GltfFormat.Binary">
+            <summary>
+            glTF-binary (.glb file extension)
+            </summary>
+        </member>
+        <member name="T:GLTFast.Export.ImageDestination">
+            <summary>
+            Destination for image files
+            </summary>
+        </member>
+        <member name="F:GLTFast.Export.ImageDestination.Automatic">
+            <summary>
+            Automatic decision. Main buffer for glTF-binary, separate files for JSON-based glTFs.
+            </summary>
+        </member>
+        <member name="F:GLTFast.Export.ImageDestination.MainBuffer">
+            <summary>
+            Embeds images in main buffer
+            </summary>
+        </member>
+        <member name="F:GLTFast.Export.ImageDestination.SeparateFile">
+            <summary>
+            Saves images as separate files relative to glTF file
+            </summary>
+        </member>
+        <member name="T:GLTFast.Export.FileConflictResolution">
+            <summary>
+            Resolutions to existing file conflicts
+            </summary>
+        </member>
+        <member name="F:GLTFast.Export.FileConflictResolution.Abort">
+            <summary>
+            Abort and keep existing files
+            </summary>
+        </member>
+        <member name="F:GLTFast.Export.FileConflictResolution.Overwrite">
+            <summary>
+            Replace existing files with newly created ones
+            </summary>
+        </member>
+        <member name="T:GLTFast.Export.Compression">
+            <summary>
+            glTF compression method.
+            </summary>
+        </member>
+        <member name="F:GLTFast.Export.Compression.Uncompressed">
+            <summary>No compression</summary>
+        </member>
+        <member name="F:GLTFast.Export.Compression.MeshOpt">
+            <summary><a href="https://meshoptimizer.org/#vertexindex-buffer-compression">Meshopt compression</a>
+            via <see cref="F:GLTFast.Extension.MeshoptCompression"/></summary>
+        </member>
+        <member name="F:GLTFast.Export.Compression.Draco">
+            <summary><a href="https://google.github.io/draco/">Draco 3D Data compression</a>
+            via <see cref="F:GLTFast.Extension.DracoMeshCompression"/></summary>
+        </member>
+        <member name="T:GLTFast.Export.ExportSettings">
+            <summary>
+            glTF export settings
+            </summary>
+        </member>
+        <member name="P:GLTFast.Export.ExportSettings.Format">
+            <summary>
+            Export to JSON-based or binary format glTF files
+            </summary>
+        </member>
+        <member name="P:GLTFast.Export.ExportSettings.ImageDestination">
+            <inheritdoc cref="T:GLTFast.Export.ImageDestination"/>
+        </member>
+        <member name="P:GLTFast.Export.ExportSettings.FileConflictResolution">
+            <inheritdoc cref="T:GLTFast.Export.FileConflictResolution"/>
+        </member>
+        <member name="P:GLTFast.Export.ExportSettings.LightIntensityFactor">
+            <summary>
+            Light intensity values are multiplied by this factor.
+            </summary>
+        </member>
+        <member name="P:GLTFast.Export.ExportSettings.ComponentMask">
+            <summary>
+            Component type flags to include or exclude components from export
+            based on type.
+            </summary>
+        </member>
+        <member name="P:GLTFast.Export.ExportSettings.Compression">
+            <summary>
+            Type of compression to apply
+            </summary>
+        </member>
+        <member name="P:GLTFast.Export.ExportSettings.DracoSettings">
+            <summary>
+            Draco compression export settings
+            </summary>
+        </member>
+        <member name="P:GLTFast.Export.ExportSettings.Deterministic">
+            <summary>
+            If true, the export results will not differ on repeated exports. This comes at the cost of potentially
+            longer export times on scenes with multiple, large meshes.
+            This can be a requirement for certain asset pipelines or automated tests.
+            </summary>
+        </member>
+        <member name="P:GLTFast.Export.ExportSettings.PreservedVertexAttributes">
+            <summary>
+            Controls which vertex attributes are preserved during export, regardless whether they are used/referenced
+            or not. By default, unused attributes are discarded.
+            </summary>
+        </member>
+        <member name="P:GLTFast.Export.ExportSettings.JpgQuality">
+            <summary>
+            [1-100] quality for JPG images
+            </summary>
+        </member>
+        <member name="T:GLTFast.Export.ImageExportBase">
+            <summary>
+            Wrapper to export a glTF image from one or more Unity textures
+            </summary>
+        </member>
+        <member name="P:GLTFast.Export.ImageExportBase.FileName">
+            <summary>
+            Exported texture's file name
+            </summary>
+        </member>
+        <member name="P:GLTFast.Export.ImageExportBase.MimeType">
+            <summary>
+            Exported texture's mime type
+            </summary>
+        </member>
+        <member name="P:GLTFast.Export.ImageExportBase.FilterMode">
+            <summary>
+            Source texture's filter mode
+            </summary>
+        </member>
+        <member name="P:GLTFast.Export.ImageExportBase.WrapModeU">
+            <summary>
+            Source texture's wrap mode (U direction)
+            </summary>
+        </member>
+        <member name="P:GLTFast.Export.ImageExportBase.WrapModeV">
+            <summary>
+            Source texture's wrap mode (V direction)
+            </summary>
+        </member>
+        <member name="M:GLTFast.Export.ImageExportBase.Write(System.String,System.Boolean)">
+            <summary>
+            Writes image file
+            </summary>
+            <param name="filePath">Destination file path</param>
+            <param name="overwrite">If true, existing files will be overwritten</param>
+            <returns>True if writing succeeded, false otherwise</returns>
+        </member>
+        <member name="M:GLTFast.Export.ImageExportBase.GetData">
+            <summary>
+            Returns the exported and encoded texture data
+            </summary>
+            <returns>Encoded texture data.</returns>
+        </member>
+        <member name="P:GLTFast.Export.ImageExportBase.JpgQuality">
+            <summary>
+            [1-100] quality for JPG images
+            </summary>
+        </member>
+        <member name="M:GLTFast.Export.ImageExportBase.EncodeTexture(UnityEngine.Texture2D,GLTFast.Export.ImageFormat,System.Int32,System.Boolean,UnityEngine.Material)">
+            <summary>
+            Encodes the export texture
+            </summary>
+            <param name="texture">Main texture to encode</param>
+            <param name="format">Image format</param>
+            <param name="jpgQuality">[1-100] quality for JPG images</param>
+            <param name="hasAlpha">True if the texture has an alpha channel</param>
+            <param name="blitMaterial">Custom blit material</param>
+            <returns>Encoded texture data</returns>
+        </member>
+        <member name="T:GLTFast.Export.ImageExport">
+            <inheritdoc />
+        </member>
+        <member name="F:GLTFast.Export.ImageExport.m_Texture">
+            <summary>
+            Main source texture
+            </summary>
+        </member>
+        <member name="F:GLTFast.Export.ImageExport.m_ImageFormat">
+            <summary>
+            Preferred image format
+            </summary>
+        </member>
+        <member name="F:GLTFast.Export.ImageExport.m_AssetPath">
+            <summary>
+            Asset's path
+            </summary>
+        </member>
+        <member name="P:GLTFast.Export.ImageExport.ValidAssetPath">
+            <summary>
+            True if <seealso cref="F:GLTFast.Export.ImageExport.m_AssetPath"/> is a valid path
+            </summary>
+        </member>
+        <member name="M:GLTFast.Export.ImageExport.#ctor(UnityEngine.Texture2D,GLTFast.Export.ImageFormat)">
+            <summary>
+            Default constructor
+            </summary>
+            <param name="texture">Main source texture</param>
+            <param name="imageFormat">Export image format</param>
+        </member>
+        <member name="P:GLTFast.Export.ImageExport.ImageFormat">
+            <summary>
+            Final export imageFormat
+            </summary>
+        </member>
+        <member name="P:GLTFast.Export.ImageExport.FileName">
+            <inheritdoc />
+        </member>
+        <member name="P:GLTFast.Export.ImageExport.FilterMode">
+            <inheritdoc />
+        </member>
+        <member name="P:GLTFast.Export.ImageExport.WrapModeU">
+            <inheritdoc />
+        </member>
+        <member name="P:GLTFast.Export.ImageExport.WrapModeV">
+            <inheritdoc />
+        </member>
+        <member name="P:GLTFast.Export.ImageExport.MimeType">
+            <inheritdoc />
+        </member>
+        <member name="P:GLTFast.Export.ImageExport.FileExtension">
+            <summary>
+            File extension according to image format
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:GLTFast.Export.ImageExport.GenerateTexture(System.Byte[]@)">
+            <summary>
+            Encodes the export texture
+            </summary>
+            <param name="imageData">Destination buffer</param>
+            <returns>True if encoding succeeded, false otherwise</returns>
+        </member>
+        <member name="M:GLTFast.Export.ImageExport.Write(System.String,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:GLTFast.Export.ImageExport.GetData">
+            <inheritdoc />
+        </member>
+        <member name="M:GLTFast.Export.ImageExport.GetHashCode">
+            <summary>
+            Default hash function.
+            </summary>
+            <returns>A hash code for the current object.</returns>
+        </member>
+        <member name="M:GLTFast.Export.ImageExport.Equals(System.Object)">
+            <summary>
+            Determines whether two object instances are equal.
+            </summary>
+            <param name="obj">The object to compare with the current object.</param>
+            <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
+        </member>
+        <member name="M:GLTFast.Export.ImageExport.LoadBlitMaterial(System.String)">
+            <summary>
+            Creates a blit material from a shader name
+            </summary>
+            <param name="shaderName">Name of the shader to be used (without the "Hidden/" prefix)</param>
+            <returns>Blit material with requested Shader or null, if Shader wasn't found</returns>
+        </member>
+        <member name="T:GLTFast.Export.GltfMaterialExporter">
+            <summary>
+            Converts Unity Materials that use a glTFast shader to glTF materials
+            </summary>
+        </member>
+        <member name="M:GLTFast.Export.GltfMaterialExporter.ConvertMaterial(UnityEngine.Material,GLTFast.Schema.Material@,GLTFast.Export.IGltfWritable,GLTFast.Logging.ICodeLogger)">
+            <inheritdoc />
+        </member>
+        <member name="M:GLTFast.Export.GltfMaterialExporter.GetAlphaMode(UnityEngine.Material)">
+            <summary>
+            Extracts the glTF alpha mode from a Unity material.
+            </summary>
+            <seealso href="https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html#_material_alphamode"/>
+            <param name="material">Unity material.</param>
+            <returns>glTF alpha mode.</returns>
+        </member>
+        <member name="M:GLTFast.Export.GltfMaterialExporter.GetAlphaCutoff(UnityEngine.Material)">
+            <summary>
+            Returns that material's alpha cutoff threshold.
+            </summary>
+            <param name="material">Unity material.</param>
+            <seealso href="https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html#_material_alphacutoff"/>
+            <returns>Alpha cutoff threshold value.</returns>
+        </member>
+        <member name="M:GLTFast.Export.GltfMaterialExporter.IsDoubleSided(UnityEngine.Material)">
+            <summary>
+            Indicates whether (back-face) culling should be disabled.
+            </summary>
+            <seealso href="https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html#_material_doublesided"/>
+            <param name="material">Unity material.</param>
+            <returns>True if material does not do back-face culling. False otherwise.</returns>
+        </member>
+        <member name="T:GLTFast.Export.GltfBuiltInShaderMaterialExporter">
+            <summary>
+            Converts Unity Materials that use a glTFast Built-In shader to glTF materials
+            </summary>
+        </member>
+        <member name="M:GLTFast.Export.GltfBuiltInShaderMaterialExporter.GetAlphaMode(UnityEngine.Material)">
+            <inheritdoc />
+        </member>
+        <member name="M:GLTFast.Export.GltfBuiltInShaderMaterialExporter.GetAlphaCutoff(UnityEngine.Material)">
+            <inheritdoc />
+        </member>
+        <member name="M:GLTFast.Export.GltfBuiltInShaderMaterialExporter.IsDoubleSided(UnityEngine.Material)">
+            <inheritdoc />
+        </member>
+        <member name="T:GLTFast.Export.MetaMaterialExport`2">
+            <inheritdoc cref="T:GLTFast.Export.MetaMaterialExportShaderGraphs`2"/>
+        </member>
+        <member name="M:GLTFast.Export.MetaMaterialExport`2.ConvertMaterial(UnityEngine.Material,GLTFast.Schema.Material@,GLTFast.Export.IGltfWritable,GLTFast.Logging.ICodeLogger)">
+            <inheritdoc />
+        </member>
+        <member name="T:GLTFast.Export.MetaMaterialExportShaderGraphs`2">
+            <summary>
+            Picks a fitting material exporter, based on the used shader.
+            </summary>
+            <typeparam name="TLitExport">Fallback material exporter for Unity Standard/Lit shaders.</typeparam>
+            <typeparam name="TGltfShaderGraphExport">Material exporter for glTFast shader graphs.</typeparam>
+        </member>
+        <member name="M:GLTFast.Export.MetaMaterialExportShaderGraphs`2.ConvertMaterial(UnityEngine.Material,GLTFast.Schema.Material@,GLTFast.Export.IGltfWritable,GLTFast.Logging.ICodeLogger)">
+            <inheritdoc />
+        </member>
+        <member name="M:GLTFast.Export.TextureComparer.Equals(GLTFast.Schema.TextureBase,GLTFast.Schema.TextureBase)">
+            <summary>
+            Compares two textures based on their source and sampler only.
+            </summary>
+            <param name="x">First texture.</param>
+            <param name="y">Second texture.</param>
+            <returns>True if textures have identical source and sampler, false otherwise.</returns>
+        </member>
+        <member name="T:GLTFast.Export.GameObjectExportSettings">
+            <summary>
+            GameObject hierarchies related glTF export settings
+            </summary>
+        </member>
+        <member name="P:GLTFast.Export.GameObjectExportSettings.OnlyActiveInHierarchy">
+            <summary>
+            When true, only GameObjects that are active (in a hierarchy) are exported
+            </summary>
+        </member>
+        <member name="P:GLTFast.Export.GameObjectExportSettings.DisabledComponents">
+            <summary>
+            When true, components will get exported regardless whether they're
+            enabled or not.
+            </summary>
+        </member>
+        <member name="P:GLTFast.Export.GameObjectExportSettings.LayerMask">
+            <summary>
+            Only GameObjects on layers contained in this mask are going to get exported.
+            </summary>
+        </member>
+        <member name="T:GLTFast.Export.MaterialExport">
+            <summary>
+            Provides the default material export
+            </summary>
+        </member>
+        <member name="M:GLTFast.Export.MaterialExport.GetDefaultMaterialExport">
+            <summary>
+            Provides the default material exporter
+            </summary>
+            <returns>Default material export</returns>
+            <exception cref="T:System.InvalidOperationException">Is thrown when the default material export couldn't be determined based on the current render pipeline.</exception>
+        </member>
+        <member name="M:GLTFast.Export.MaterialExport.AddImageExport(GLTFast.Export.IGltfWritable,GLTFast.Export.ImageExportBase,System.Int32@)">
+            <summary>
+            Adds an ImageExport to the glTF.
+            No conversions or channel swizzling
+            </summary>
+            <param name="gltf">glTF to add the image to.</param>
+            <param name="imageExport">Texture generator to be added</param>
+            <param name="textureId">Resulting texture index.</param>
+            <returns>True if the texture was added, false otherwise.</returns>
+        </member>
+        <member name="T:GLTFast.Export.GltfWriter">
+            <summary>
+            Provides glTF export independent of workflow (GameObjects/Entities)
+            </summary>
+        </member>
+        <member name="M:GLTFast.Export.GltfWriter.#ctor(GLTFast.Export.ExportSettings,GLTFast.IDeferAgent,GLTFast.Logging.ICodeLogger)">
+            <summary>
+            Provides glTF export independent of workflow (GameObjects/Entities)
+            </summary>
+            <param name="exportSettings">Export settings</param>
+            <param name="deferAgent">Defer agent (<see cref="T:GLTFast.IDeferAgent"/>); decides when/if to preempt
+            export to preserve a stable frame rate.</param>
+            <param name="logger">Interface for logging (error) messages.</param>
+        </member>
+        <member name="M:GLTFast.Export.GltfWriter.AddNode(System.Nullable{Unity.Mathematics.float3},System.Nullable{Unity.Mathematics.quaternion},System.Nullable{Unity.Mathematics.float3},System.UInt32[],System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:GLTFast.Export.GltfWriter.AddMeshToNode(System.Int32,UnityEngine.Mesh,System.Int32[])">
+            <inheritdoc />
+        </member>
+        <member name="M:GLTFast.Export.GltfWriter.AddMeshToNode(System.Int32,UnityEngine.Mesh,System.Int32[],System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:GLTFast.Export.GltfWriter.AddMeshToNode(System.Int32,UnityEngine.Mesh,System.Int32[],System.UInt32[])">
+            <inheritdoc />
+        </member>
+        <member name="M:GLTFast.Export.GltfWriter.AddCamera(UnityEngine.Camera,System.Int32@)">
+            <inheritdoc />
+        </member>
+        <member name="M:GLTFast.Export.GltfWriter.AddLight(UnityEngine.Light,System.Int32@)">
+            <inheritdoc />
+        </member>
+        <member name="M:GLTFast.Export.GltfWriter.AddCameraToNode(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GLTFast.Export.GltfWriter.AddLightToNode(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GLTFast.Export.GltfWriter.AddScene(System.UInt32[],System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:GLTFast.Export.GltfWriter.AddMaterial(UnityEngine.Material,System.Int32@,GLTFast.Export.IMaterialExport)">
+            <inheritdoc />
+        </member>
+        <member name="M:GLTFast.Export.GltfWriter.AddImage(GLTFast.Export.ImageExportBase)">
+            <inheritdoc />
+        </member>
+        <member name="M:GLTFast.Export.GltfWriter.AddTexture(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GLTFast.Export.GltfWriter.AddSampler(UnityEngine.FilterMode,UnityEngine.TextureWrapMode,UnityEngine.TextureWrapMode)">
+            <inheritdoc />
+        </member>
+        <member name="M:GLTFast.Export.GltfWriter.RegisterExtensionUsage(GLTFast.Extension,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:GLTFast.Export.GltfWriter.SaveToFileAndDispose(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:GLTFast.Export.GltfWriter.SaveToStreamAndDispose(System.IO.Stream)">
+            <inheritdoc />
+        </member>
+        <member name="M:GLTFast.Export.GltfWriter.WriteBufferViewToBuffer(Unity.Collections.NativeArray{System.Byte},GLTFast.Schema.BufferViewTarget,System.Nullable{System.Int32},System.Int32)">
+            <summary>
+            Writes the given data to the main buffer, creates a bufferView and returns its index
+            </summary>
+            <param name="bufferViewData">Content to write to buffer</param>
+            <param name="bufferViewTarget">Target of the bufferView</param>
+            <param name="byteStride">The byte size of an element. Provide it,
+            if it cannot be inferred from the accessor</param>
+            <param name="byteAlignment">If not zero, the offsets of the bufferView
+            will be multiple of it to please alignment rules (padding bytes will be added,
+            if required; see https://www.khronos.org/registry/glTF/specs/2.0/glTF-2.0.html#data-alignment )
+            </param>
+            <returns>Buffer view index</returns>
+        </member>
+        <member name="T:GLTFast.Export.VertexAttributeUsage">
+            <summary>
+            Vertex attribute mask.
+            </summary>
+        </member>
+        <member name="F:GLTFast.Export.VertexAttributeUsage.None">
+            <summary>No attribute.</summary>
+        </member>
+        <member name="F:GLTFast.Export.VertexAttributeUsage.Position">
+            <inheritdoc cref="F:UnityEngine.Rendering.VertexAttribute.Position"/>
+        </member>
+        <member name="F:GLTFast.Export.VertexAttributeUsage.Normal">
+            <inheritdoc cref="F:UnityEngine.Rendering.VertexAttribute.Normal"/>
+        </member>
+        <member name="F:GLTFast.Export.VertexAttributeUsage.Tangent">
+            <inheritdoc cref="F:UnityEngine.Rendering.VertexAttribute.Tangent"/>
+        </member>
+        <member name="F:GLTFast.Export.VertexAttributeUsage.Color">
+            <inheritdoc cref="F:UnityEngine.Rendering.VertexAttribute.Color"/>
+        </member>
+        <member name="F:GLTFast.Export.VertexAttributeUsage.TexCoord0">
+            <inheritdoc cref="F:UnityEngine.Rendering.VertexAttribute.TexCoord0"/>
+        </member>
+        <member name="F:GLTFast.Export.VertexAttributeUsage.TexCoord1">
+            <inheritdoc cref="F:UnityEngine.Rendering.VertexAttribute.TexCoord1"/>
+        </member>
+        <member name="F:GLTFast.Export.VertexAttributeUsage.TexCoord2">
+            <inheritdoc cref="F:UnityEngine.Rendering.VertexAttribute.TexCoord2"/>
+        </member>
+        <member name="F:GLTFast.Export.VertexAttributeUsage.TexCoord3">
+            <inheritdoc cref="F:UnityEngine.Rendering.VertexAttribute.TexCoord3"/>
+        </member>
+        <member name="F:GLTFast.Export.VertexAttributeUsage.TexCoord4">
+            <inheritdoc cref="F:UnityEngine.Rendering.VertexAttribute.TexCoord4"/>
+        </member>
+        <member name="F:GLTFast.Export.VertexAttributeUsage.TexCoord5">
+            <inheritdoc cref="F:UnityEngine.Rendering.VertexAttribute.TexCoord5"/>
+        </member>
+        <member name="F:GLTFast.Export.VertexAttributeUsage.TexCoord6">
+            <inheritdoc cref="F:UnityEngine.Rendering.VertexAttribute.TexCoord6"/>
+        </member>
+        <member name="F:GLTFast.Export.VertexAttributeUsage.TexCoord7">
+            <inheritdoc cref="F:UnityEngine.Rendering.VertexAttribute.TexCoord7"/>
+        </member>
+        <member name="F:GLTFast.Export.VertexAttributeUsage.BlendWeight">
+            <inheritdoc cref="F:UnityEngine.Rendering.VertexAttribute.BlendWeight"/>
+        </member>
+        <member name="F:GLTFast.Export.VertexAttributeUsage.BlendIndices">
+            <inheritdoc cref="F:UnityEngine.Rendering.VertexAttribute.BlendIndices"/>
+        </member>
+        <member name="F:GLTFast.Export.VertexAttributeUsage.TwoTexCoords">
+            <summary>The first two texture coordinate channels.</summary>
+        </member>
+        <member name="F:GLTFast.Export.VertexAttributeUsage.AllTexCoords">
+            <summary>All eight texture coordinate channels.</summary>
+        </member>
+        <member name="F:GLTFast.Export.VertexAttributeUsage.Skinning">
+            <summary>Blend indices and weights, required for skinning/morph targets.</summary>
+        </member>
+        <member name="T:GLTFast.Export.VertexAttributeUsageExtension">
+            <summary>
+            Extension methods for <see cref="T:UnityEngine.Rendering.VertexAttribute"/>.
+            </summary>
+        </member>
+        <member name="M:GLTFast.Export.VertexAttributeUsageExtension.ToVertexAttributeUsage(UnityEngine.Rendering.VertexAttribute)">
+            <summary>
+            Converts a <see cref="T:UnityEngine.Rendering.VertexAttribute"/> to a <see cref="T:GLTFast.Export.VertexAttributeUsage"/> mask with corresponding
+            flag enabled.
+            </summary>
+            <param name="attr">Vertex attribute.</param>
+            <returns>Vertex attribute mask with corresponding flag enabled.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when an unknown VertexAttribute is detected.</exception>
+        </member>
+        <member name="T:GLTFast.Export.IMaterialExport">
+            <summary>
+            Converts a Unity Material into a glTF material
+            </summary>
+        </member>
+        <member name="M:GLTFast.Export.IMaterialExport.ConvertMaterial(UnityEngine.Material,GLTFast.Schema.Material@,GLTFast.Export.IGltfWritable,GLTFast.Logging.ICodeLogger)">
+            <summary>
+            Converts a Unity material to a glTF material.
+            </summary>
+            <param name="uMaterial">Source material</param>
+            <param name="material">Resulting material</param>
+            <param name="gltf">Associated IGltfWriter. Is used for adding images and textures.</param>
+            <param name="logger">Logger used for reporting</param>
+            <returns>True if no errors occured, false otherwise</returns>
+        </member>
+        <member name="T:GLTFast.Export.StandardMaterialExport">
+            <summary>
+            Converts URP/HDRP Lit and Built-In Standard shader based materials to glTF materials
+            </summary>
+        </member>
+        <member name="M:GLTFast.Export.StandardMaterialExport.ConvertMaterial(UnityEngine.Material,GLTFast.Schema.Material@,GLTFast.Export.IGltfWritable,GLTFast.Logging.ICodeLogger)">
+            <summary>
+            Converts a Unity material to a glTF material.
+            </summary>
+            <param name="uMaterial">Source material</param>
+            <param name="material">Resulting material</param>
+            <param name="gltf">Associated IGltfWriter. Is used for adding images and textures.</param>
+            <param name="logger">Logger used for reporting</param>
+            <returns>True if no errors occured, false otherwise</returns>
+        </member>
+        <member name="T:GLTFast.Export.ManagedNativeArray`2">
+            <summary>
+            Wraps a managed TIn[] in a NativeArray&lt;TOut&gt;without copying memory.
+            </summary>
+            <typeparam name="TIn">Type of items in the input array.</typeparam>
+            <typeparam name="TOut">Type of items in output NativeArray (might differ from input type TIn).</typeparam>
+        </member>
+        <member name="M:GLTFast.Export.ManagedNativeArray`2.#ctor(`0[])">
+            <summary>
+            Wraps a managed TIn[] in a NativeArray&lt;TOut&gt;without copying memory.
+            </summary>
+            <param name="original">The original TIn[] to convert into a NativeArray&lt;TOut&gt;</param>
+        </member>
+        <member name="P:GLTFast.Export.ManagedNativeArray`2.nativeArray">
+            <summary>
+            Points to the managed NativeArray&lt;TOut&gt;.
+            </summary>
+        </member>
+        <member name="M:GLTFast.Export.ManagedNativeArray`2.Dispose">
+            <summary>
+            Disposes the managed NativeArray&lt;TOut&gt;.
+            </summary>
+        </member>
+        <member name="M:GLTFast.Export.ManagedNativeArray`2.Dispose(System.Boolean)">
+            <summary>
+            Disposes the managed NativeArray&lt;TOut&gt; and unpins the underlying managed array.
+            </summary>
+            <param name="disposing">Indicates whether the method call comes from a Dispose method (its value is true)
+            or from a finalizer (its value is false).</param>
+        </member>
+        <member name="T:GLTFast.Export.GltfUnlitMaterialExporter">
+            <summary>
+            Converts Unity Materials that use the glTFast shader `glTF/Unlit` to glTF materials
+            </summary>
+        </member>
+        <member name="M:GLTFast.Export.GltfUnlitMaterialExporter.ConvertMaterial(UnityEngine.Material,GLTFast.Schema.Material@,GLTFast.Export.IGltfWritable,GLTFast.Logging.ICodeLogger)">
+            <inheritdoc />
+        </member>
+        <member name="M:GLTFast.Export.MetaMaterialExportBuiltIn.ConvertMaterial(UnityEngine.Material,GLTFast.Schema.Material@,GLTFast.Export.IGltfWritable,GLTFast.Logging.ICodeLogger)">
+            <inheritdoc />
+        </member>
+        <member name="T:GLTFast.Export.GameObjectExport">
+            <summary>
+            Creates glTF files from GameObject hierarchies
+            </summary>
+        </member>
+        <member name="M:GLTFast.Export.GameObjectExport.#ctor(GLTFast.Export.ExportSettings,GLTFast.Export.GameObjectExportSettings,GLTFast.Export.IMaterialExport,GLTFast.IDeferAgent,GLTFast.Logging.ICodeLogger)">
+            <summary>
+            Provides glTF export of GameObject based scenes and hierarchies.
+            </summary>
+            <param name="exportSettings">Export settings</param>
+            <param name="gameObjectExportSettings">GameObject export settings</param>
+            <param name="materialExport">Provides material conversion</param>
+            <param name="deferAgent">Defer agent (&lt;see cref="IDeferAgent"/&gt;); decides when/if to preempt
+            export to preserve a stable frame rate.</param>
+            <param name="logger">Interface for logging (error) messages.</param>
+        </member>
+        <member name="M:GLTFast.Export.GameObjectExport.AddScene(UnityEngine.GameObject[],System.String)">
+            <summary>
+            Adds a scene to the glTF which consists of a collection of GameObjects.
+            </summary>
+            <param name="gameObjects">GameObjects to be added (recursively) as root level nodes.</param>
+            <param name="name">Name of the scene</param>
+            <returns>True, if the scene was added flawlessly. False, otherwise</returns>
+        </member>
+        <member name="M:GLTFast.Export.GameObjectExport.AddScene(System.Collections.Generic.ICollection{UnityEngine.GameObject},Unity.Mathematics.float4x4,System.String)">
+            <summary>
+            Creates a glTF scene from a collection of GameObjects. The GameObjects will be converted into glTF nodes.
+            The nodes' positions within the glTF scene will be their GameObjects' world position transformed by the
+            <see cref="!:origin"/> matrix, essentially allowing you to set an arbitrary scene center.
+            </summary>
+            <param name="gameObjects">Root level GameObjects (will get added recursively)</param>
+            <param name="origin">Inverse scene origin matrix. This transform will be applied to all nodes.</param>
+            <param name="name">Name of the scene</param>
+            <returns>True if the scene was added successfully, false otherwise</returns>
+        </member>
+        <member name="M:GLTFast.Export.GameObjectExport.SaveToFileAndDispose(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Exports the collected scenes/content as glTF, writes it to a file
+            and disposes this object.
+            After the export this instance cannot be re-used!
+            </summary>
+            <param name="path">glTF destination file path</param>
+            <param name="cancellationToken">Token to submit cancellation requests. The default value is None.</param>
+            <returns>True if the glTF file was created successfully, false otherwise</returns>
+        </member>
+        <member name="M:GLTFast.Export.GameObjectExport.SaveToStreamAndDispose(System.IO.Stream,System.Threading.CancellationToken)">
+            <summary>
+            Exports the collected scenes/content as glTF, writes it to a Stream
+            and disposes this object. Only works for self-contained glTF-Binary.
+            After the export this instance cannot be re-used!
+            </summary>
+            <param name="stream">glTF destination stream</param>
+            <param name="cancellationToken">Token to submit cancellation requests. The default value is None.</param>
+            <returns>True if the glTF file was written successfully, false otherwise</returns>
+        </member>
+        <member name="T:GLTFast.Export.DracoExportSettings">
+            <summary>
+            Settings for Draco mesh compression
+            </summary>
+        </member>
+        <member name="F:GLTFast.Export.DracoExportSettings.encodingSpeed">
+            <summary>Encoding speed level. 0 means slow and small. 10 is fastest.</summary>
+        </member>
+        <member name="F:GLTFast.Export.DracoExportSettings.decodingSpeed">
+            <summary>Decoding speed level. 0 means slow and small. 10 is fastest.</summary>
+        </member>
+        <member name="F:GLTFast.Export.DracoExportSettings.positionQuantization">
+            <summary>Positional quantization.</summary>
+        </member>
+        <member name="F:GLTFast.Export.DracoExportSettings.normalQuantization">
+            <summary>Normal quantization.</summary>
+        </member>
+        <member name="F:GLTFast.Export.DracoExportSettings.texCoordQuantization">
+            <summary>Texture coordinate quantization.</summary>
+        </member>
+        <member name="F:GLTFast.Export.DracoExportSettings.colorQuantization">
+            <summary>Color quantization.</summary>
+        </member>
+        <member name="T:GLTFast.Export.NormalImageExport">
+            <summary>
+            Wrapper to export a glTF image normal map
+            </summary>
+        </member>
+        <member name="M:GLTFast.Export.NormalImageExport.#ctor(UnityEngine.Texture2D)">
+            <summary>
+            Default constructor
+            </summary>
+            <param name="texture">Main source texture</param>
+        </member>
+        <member name="M:GLTFast.Export.NormalImageExport.GenerateTexture(System.Byte[]@)">
+            <inheritdoc />
+        </member>
+        <member name="T:GLTFast.Export.GltfShaderGraphMaterialExporter">
+            <summary>
+            Converts Unity Materials that use a glTFast Built-In shader to glTF materials
+            </summary>
+        </member>
+        <member name="T:GLTFast.Export.KhrLightsPunctual">
+            <summary>
+            Provides conversion from Unity light components to glTF lights.
+            </summary>
+        </member>
+        <member name="M:GLTFast.Export.KhrLightsPunctual.ConvertToLight(UnityEngine.Light)">
+            <summary>
+            Converts a Unity light component to a glTF light.
+            </summary>
+            <param name="uLight">Unity light component.</param>
+            <returns>glTF light.</returns>
+        </member>
+        <member name="M:GLTFast.Export.KhrLightsPunctual.GetLightRange(UnityEngine.Light,UnityEngine.LightType)">
+            <summary>
+            Retrieves the light's range.
+            In Unity 2023.1 and older `Light.range` would return what now is <see cref="P:UnityEngine.Light.dilatedRange"/>, which is
+            the range extended by a certain area light size factor. This method removes that addition in that case to
+            get the original value that's shown in the inspector.
+            </summary>
+            <param name="light">Unity Light</param>
+            <param name="lightType">Actual light type (might differ from light.type in HDRP).</param>
+            <returns>The light's range.</returns>
+        </member>
+        <member name="T:GLTFast.Export.OrmImageExport">
+            <summary>
+            Exports a glTF ORM (occlusion/roughness/metallic) image map
+            </summary>
+        </member>
+        <member name="M:GLTFast.Export.OrmImageExport.#ctor(UnityEngine.Texture2D,UnityEngine.Texture2D,UnityEngine.Texture2D,GLTFast.Export.ImageFormat)">
+            <summary>
+            Default constructor
+            </summary>
+            <param name="metalGlossTexture">Metal/Gloss texture, as used by Unity Lit/Standard materials</param>
+            <param name="occlusionTexture">Occlusion texture, as used by Unity Lit/Standard materials</param>
+            <param name="smoothnessTexture">Smoothness texture, as used by Unity Lit/Standard materials</param>
+            <param name="imageFormat">Export image format</param>
+        </member>
+        <member name="P:GLTFast.Export.OrmImageExport.FileName">
+            <inheritdoc />
+        </member>
+        <member name="P:GLTFast.Export.OrmImageExport.ImageFormat">
+            <inheritdoc />
+        </member>
+        <member name="P:GLTFast.Export.OrmImageExport.FilterMode">
+            <inheritdoc />
+        </member>
+        <member name="P:GLTFast.Export.OrmImageExport.WrapModeU">
+            <inheritdoc />
+        </member>
+        <member name="P:GLTFast.Export.OrmImageExport.WrapModeV">
+            <inheritdoc />
+        </member>
+        <member name="P:GLTFast.Export.OrmImageExport.HasOcclusion">
+            <summary>
+            True if occlusion texture was set
+            </summary>
+        </member>
+        <member name="M:GLTFast.Export.OrmImageExport.Write(System.String,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:GLTFast.Export.OrmImageExport.GenerateTexture(System.Byte[]@)">
+            <inheritdoc />
+        </member>
+        <member name="M:GLTFast.Export.OrmImageExport.EncodeOrmTexture(UnityEngine.Texture2D,UnityEngine.Texture2D,UnityEngine.Texture2D,GLTFast.Export.ImageFormat,System.Int32)">
+            <summary>
+            Encodes ORM texture
+            </summary>
+            <param name="metalGlossTexture">Metal/Gloss texture</param>
+            <param name="occlusionTexture">Occlusion texture</param>
+            <param name="smoothnessTexture">Smoothness texture</param>
+            <param name="format">Export image format</param>
+            <param name="jpgQuality">[1-100] quality for JPG images</param>
+            <returns></returns>
+        </member>
+        <member name="M:GLTFast.Export.OrmImageExport.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="M:GLTFast.Export.OrmImageExport.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="T:GLTFast.Export.MaterialExportBase">
+            <inheritdoc cref="T:GLTFast.Export.IMaterialExport"/>
+        </member>
+        <member name="F:GLTFast.Export.MaterialExportBase.BaseColorProperty">
+            <summary>
+            _BaseColor shader property identifier
+            </summary>
+        </member>
+        <member name="F:GLTFast.Export.MaterialExportBase.MainTexProperty">
+            <summary>
+            _MainTex shader property identifier
+            </summary>
+        </member>
+        <member name="F:GLTFast.Export.MaterialExportBase.ColorProperty">
+            <summary>
+            _Color shader property identifier
+            </summary>
+        </member>
+        <member name="F:GLTFast.Export.MaterialExportBase.MetallicProperty">
+            <summary>
+            _Metallic shader property identifier
+            </summary>
+        </member>
+        <member name="F:GLTFast.Export.MaterialExportBase.SmoothnessProperty">
+            <summary>
+            _Smoothness shader property identifier
+            </summary>
+        </member>
+        <member name="F:GLTFast.Export.MaterialExportBase.CutoffProperty">
+            <summary>
+            _Cutoff shader property identifier
+            </summary>
+        </member>
+        <member name="M:GLTFast.Export.MaterialExportBase.ConvertMaterial(UnityEngine.Material,GLTFast.Schema.Material@,GLTFast.Export.IGltfWritable,GLTFast.Logging.ICodeLogger)">
+            <summary>
+            Converts a Unity material into a glTF material
+            </summary>
+            <param name="uMaterial">Source material</param>
+            <param name="material">Resulting glTF material</param>
+            <param name="gltf">glTF to export material to. Will be used to add required texture images</param>
+            <param name="logger">Custom logger</param>
+            <returns>True if material was converted successfully, false otherwise</returns>
+        </member>
+        <member name="M:GLTFast.Export.MaterialExportBase.SetAlphaModeAndCutoff(UnityEngine.Material,GLTFast.Schema.Material)">
+            <summary>
+            Applies alpha mode and cutoff
+            </summary>
+            <param name="uMaterial">Source Unity Material</param>
+            <param name="material">glTF material to apply settings on</param>
+        </member>
+        <member name="M:GLTFast.Export.MaterialExportBase.IsDoubleSided(UnityEngine.Material,System.Int32)">
+            <summary>
+            Retrieves whether material is double-sided.
+            </summary>
+            <param name="uMaterial">Material to analyze.</param>
+            <param name="cullPropId">CullMode property id.</param>
+            <returns>True if material is double-sided, false otherwise.</returns>
+        </member>
+        <member name="M:GLTFast.Export.MaterialExportBase.IsUnlit(UnityEngine.Material)">
+            <summary>
+            Retrieves whether material is unlit
+            </summary>
+            <param name="material">Material to analyze</param>
+            <returns>True if material uses unlit shader, false otherwise</returns>
+        </member>
+        <member name="M:GLTFast.Export.MaterialExportBase.ExportUnlit(GLTFast.Schema.Material,UnityEngine.Material,System.Int32,GLTFast.Export.IGltfWritable,GLTFast.Logging.ICodeLogger)">
+            <summary>
+            Converts an unlit Unity material into a glTF material
+            </summary>
+            <param name="material">Destination glTF material</param>
+            <param name="uMaterial">Source Unity material</param>
+            <param name="mainTexProperty">Main texture property ID</param>
+            <param name="gltf">Context glTF to export to</param>
+            <param name="logger">Custom logger</param>
+        </member>
+        <member name="M:GLTFast.Export.MaterialExportBase.GetUnlitColor(UnityEngine.Material,UnityEngine.Color@)">
+            <summary>
+            Returns the color of an unlit material
+            </summary>
+            <param name="uMaterial">Unity material</param>
+            <param name="baseColor">Resulting unlit color</param>
+            <returns>True if the unlit color was retrieved, false otherwise</returns>
+        </member>
+        <member name="M:GLTFast.Export.MaterialExportBase.ExportTextureInfo(UnityEngine.Texture,GLTFast.Export.IGltfWritable,GLTFast.Export.ImageFormat)">
+            <summary>
+            Export a Unity texture to a glTF.
+            </summary>
+            <param name="texture">Texture to export.</param>
+            <param name="gltf">Context glTF to export to</param>
+            <param name="format">Desired image format</param>
+            <returns>glTF texture info</returns>
+        </member>
+        <member name="M:GLTFast.Export.MaterialExportBase.ExportNormalTextureInfo(UnityEngine.Texture,UnityEngine.Material,GLTFast.Export.IGltfWritable,System.Int32)">
+            <summary>
+            Export a normal texture from Unity to glTF.
+            </summary>
+            <param name="texture">Normal texture to export</param>
+            <param name="material">Material the normal is used on</param>
+            <param name="gltf">Context glTF to export to</param>
+            <param name="normalScalePropId">Normal scale property ID</param>
+            <returns>glTF texture info</returns>
+        </member>
+        <member name="M:GLTFast.Export.MaterialExportBase.AddImageExport(GLTFast.Export.IGltfWritable,GLTFast.Export.ImageExportBase,System.Int32@)">
+            <inheritdoc cref="M:GLTFast.Export.MaterialExport.AddImageExport(GLTFast.Export.IGltfWritable,GLTFast.Export.ImageExportBase,System.Int32@)"/>
+        </member>
+        <member name="M:GLTFast.Export.MaterialExportBase.ExportTextureTransform(GLTFast.Schema.TextureInfoBase,UnityEngine.Material,System.Int32,GLTFast.Export.IGltfWritable)">
+            <summary>
+            Calculates a texture's transform and adds a KHR_texture_transform glTF extension, if required
+            </summary>
+            <param name="def">glTF TextureInfo to edit</param>
+            <param name="mat">Source Material</param>
+            <param name="texPropertyId">Texture property to fetch transformation from</param>
+            <param name="gltf">Context glTF to export to (for registering extension usage)</param>
+        </member>
+        <member name="T:GLTFast.Export.IGltfWritable">
+            <summary>
+            Is able to receive asset resources and export them to glTF
+            </summary>
+        </member>
+        <member name="M:GLTFast.Export.IGltfWritable.AddNode(System.Nullable{Unity.Mathematics.float3},System.Nullable{Unity.Mathematics.quaternion},System.Nullable{Unity.Mathematics.float3},System.UInt32[],System.String)">
+            <summary>
+            Adds a node to the glTF
+            </summary>
+            <param name="translation">Local translation of the node (in Unity-space)</param>
+            <param name="rotation">Local rotation of the node (in Unity-space)</param>
+            <param name="scale">Local scale of the node (in Unity-space)</param>
+            <param name="children">Array of node indices that are parented to
+            this newly created node</param>
+            <param name="name">Name of the node</param>
+            <returns>glTF node index</returns>
+        </member>
+        <member name="M:GLTFast.Export.IGltfWritable.AddMeshToNode(System.Int32,UnityEngine.Mesh,System.Int32[])">
+            <summary>
+            Assigns a mesh to a previously added node
+            </summary>
+            <param name="nodeId">Index of the node to add the mesh to</param>
+            <param name="uMesh">Unity mesh to be assigned and exported</param>
+            <param name="materialIds">glTF materials IDs to be assigned
+            (multiple in case of sub-meshes)</param>
+        </member>
+        <member name="M:GLTFast.Export.IGltfWritable.AddMeshToNode(System.Int32,UnityEngine.Mesh,System.Int32[],System.Boolean)">
+            <summary>
+            Assigns a mesh to a previously added node
+            </summary>
+            <param name="nodeId">Index of the node to add the mesh to</param>
+            <param name="uMesh">Unity mesh to be assigned and exported</param>
+            <param name="materialIds">glTF materials IDs to be assigned
+            (multiple in case of sub-meshes)</param>
+            <param name="skinning">Skinning has been applied (e.g. <see cref="T:UnityEngine.SkinnedMeshRenderer"/>).</param>
+        </member>
+        <member name="M:GLTFast.Export.IGltfWritable.AddMeshToNode(System.Int32,UnityEngine.Mesh,System.Int32[],System.UInt32[])">
+            <summary>
+            Assigns a mesh to a previously added node
+            </summary>
+            <param name="nodeId">Index of the node to add the mesh to</param>
+            <param name="uMesh">Unity mesh to be assigned and exported</param>
+            <param name="materialIds">glTF materials IDs to be assigned
+            (multiple in case of sub-meshes)</param>
+            <param name="joints">Node indices representing the joints of a skin.</param>
+        </member>
+        <member name="M:GLTFast.Export.IGltfWritable.AddCameraToNode(System.Int32,System.Int32)">
+            <summary>
+            Assigns a camera to a previously added node
+            </summary>
+            <param name="nodeId">Index of the node to add the mesh to</param>
+            <param name="cameraId">glTF camera ID to be assigned</param>
+        </member>
+        <member name="M:GLTFast.Export.IGltfWritable.AddLightToNode(System.Int32,System.Int32)">
+            <summary>
+            Assigns a light to a previously added node
+            </summary>
+            <param name="nodeId">Index of the node to add the mesh to</param>
+            <param name="lightId">glTF light ID to be assigned</param>
+        </member>
+        <member name="M:GLTFast.Export.IGltfWritable.AddMaterial(UnityEngine.Material,System.Int32@,GLTFast.Export.IMaterialExport)">
+            <summary>
+            Adds a Unity material
+            </summary>
+            <param name="uMaterial">Unity material</param>
+            <param name="materialId">glTF material index</param>
+            <param name="materialExport">Material converter</param>
+            <returns>True if converting and adding material was successful, false otherwise</returns>
+        </member>
+        <member name="M:GLTFast.Export.IGltfWritable.AddImage(GLTFast.Export.ImageExportBase)">
+            <summary>
+            Adds an ImageExport to the glTF and returns the resulting image index
+            </summary>
+            <param name="imageExport">Image to be exported</param>
+            <returns>glTF image index</returns>
+        </member>
+        <member name="M:GLTFast.Export.IGltfWritable.AddTexture(System.Int32,System.Int32)">
+            <summary>
+            Creates a glTF texture from with a given image index
+            </summary>
+            <param name="imageId">glTF image index returned by <see cref="M:GLTFast.Export.IGltfWritable.AddImage(GLTFast.Export.ImageExportBase)"/></param>
+            <param name="samplerId">glTF sampler index returned by <see cref="M:GLTFast.Export.IGltfWritable.AddSampler(UnityEngine.FilterMode,UnityEngine.TextureWrapMode,UnityEngine.TextureWrapMode)"/></param>
+            <returns>glTF texture index</returns>
+        </member>
+        <member name="M:GLTFast.Export.IGltfWritable.AddSampler(UnityEngine.FilterMode,UnityEngine.TextureWrapMode,UnityEngine.TextureWrapMode)">
+            <summary>
+            Creates a glTF sampler based on Unity filter and wrap settings
+            </summary>
+            <param name="filterMode">Texture filter mode</param>
+            <param name="wrapModeU">Texture wrap mode in U direction</param>
+            <param name="wrapModeV">Texture wrap mode in V direction</param>
+            <returns>glTF sampler index or -1 if no sampler is required</returns>
+        </member>
+        <member name="M:GLTFast.Export.IGltfWritable.AddCamera(UnityEngine.Camera,System.Int32@)">
+            <summary>
+            Creates a glTF camera based on a Unity camera
+            </summary>
+            <param name="uCamera">Unity camera</param>
+            <param name="cameraId">glTF camera index</param>
+            <returns>True if camera was successfully created, false otherwise</returns>
+        </member>
+        <member name="M:GLTFast.Export.IGltfWritable.AddLight(UnityEngine.Light,System.Int32@)">
+            <summary>
+            Creates a glTF light based on a Unity light
+            Uses the KHR_lights_punctual extension.
+            </summary>
+            <param name="uLight">Unity light</param>
+            <param name="lightId">glTF light index</param>
+            <returns>True if light was successfully created, false otherwise</returns>
+        </member>
+        <member name="M:GLTFast.Export.IGltfWritable.AddScene(System.UInt32[],System.String)">
+            <summary>
+            Adds a scene to the glTF
+            </summary>
+            <param name="nodes">Root level nodes</param>
+            <param name="name">Name of the scene</param>
+            <returns>glTF scene index</returns>
+        </member>
+        <member name="M:GLTFast.Export.IGltfWritable.RegisterExtensionUsage(GLTFast.Extension,System.Boolean)">
+            <summary>
+            Registers the use of a glTF extension
+            </summary>
+            <param name="extension">Extension's name</param>
+            <param name="required">True if extension is required and used. False if it's used only</param>
+        </member>
+        <member name="M:GLTFast.Export.IGltfWritable.SaveToFileAndDispose(System.String)">
+            <summary>
+            Exports the collected scenes/content as glTF, writes it to a file
+            and disposes this object.
+            After the export this instance cannot be re-used!
+            </summary>
+            <param name="path">glTF destination file path</param>
+            <returns>True if the glTF file was created successfully, false otherwise</returns>
+        </member>
+        <member name="M:GLTFast.Export.IGltfWritable.SaveToStreamAndDispose(System.IO.Stream)">
+            <summary>
+            Exports the collected scenes/content as glTF, writes it to a Stream
+            and disposes this object. Only works for self-contained glTF-Binary.
+            After the export this instance cannot be re-used!
+            </summary>
+            <param name="stream">glTF destination stream</param>
+            <returns>True if the glTF file was created successfully, false otherwise</returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,470 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Unity.Postprocessing.Editor</name>
+    </assembly>
+    <members>
+        <member name="T:UnityEditor.Rendering.PostProcessing.ProfileFactory">
+            <summary>
+            An utility class to help the creation of new post-processing profile assets.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Rendering.PostProcessing.ProfileFactory.CreatePostProcessProfileAtPath(System.String)">
+            <summary>
+            Creates a post-processing profile asset at the given location.
+            </summary>
+            <param name="path">The path to use relative to the project folder</param>
+            <returns>The newly created profile</returns>
+        </member>
+        <member name="M:UnityEditor.Rendering.PostProcessing.ProfileFactory.CreatePostProcessProfile(UnityEngine.SceneManagement.Scene,System.String)">
+            <summary>
+            Creates a post-processing profile asset and automatically put it in a sub folder next
+            to the given scene.
+            </summary>
+            <param name="scene">A scene</param>
+            <param name="targetName">A name for the new profile</param>
+            <returns>The newly created profile</returns>
+        </member>
+        <member name="T:UnityEditor.Rendering.PostProcessing.BaseEditor`1">
+             <summary>
+             Small wrapper on top of <see cref="T:UnityEditor.Editor"/> to ease the access of the underlying component
+             and its serialized fields.
+             </summary>
+             <typeparam name="T">The type of the target component to make an editor for</typeparam>
+             <example>
+             <code>
+             public class MyMonoBehaviour : MonoBehaviour
+             {
+                 public float myProperty = 1.0f;
+             }
+            
+             [CustomEditor(typeof(MyMonoBehaviour))]
+             public sealed class MyMonoBehaviourEditor : BaseEditor&lt;MyMonoBehaviour&gt;
+             {
+                 SerializedProperty m_MyProperty;
+            
+                 void OnEnable()
+                 {
+                     m_MyProperty = FindProperty(x => x.myProperty);
+                 }
+            
+                 public override void OnInspectorGUI()
+                 {
+                     EditorGUILayout.PropertyField(m_MyProperty);
+                 }
+             }
+             </code>
+             </example>
+        </member>
+        <member name="P:UnityEditor.Rendering.PostProcessing.BaseEditor`1.m_Target">
+            <summary>
+            The target component.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Rendering.PostProcessing.BaseEditor`1.FindProperty``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Find a serialized property using an expression instead of a string. This is safer as it
+            helps avoiding typos and make code refactoring easier.
+            </summary>
+            <typeparam name="TValue">The serialized value type</typeparam>
+            <param name="expr">The expression to parse to reach the property</param>
+            <returns>A <see cref="T:UnityEditor.SerializedProperty"/> or <c>null</c> if none was found</returns>
+        </member>
+        <member name="T:UnityEditor.Rendering.PostProcessing.EffectListEditor">
+            <summary>
+            This class is used to draw the user interface in the inspector for all the settings
+            contained in a <see cref="T:UnityEngine.Rendering.PostProcessing.PostProcessProfile"/>.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Rendering.PostProcessing.EffectListEditor.asset">
+            <summary>
+            A reference to the <see cref="T:UnityEngine.Rendering.PostProcessing.PostProcessProfile"/> being displayed by this editor.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Rendering.PostProcessing.EffectListEditor.#ctor(UnityEditor.Editor)">
+            <summary>
+            Creates a new instance to be used inside an existing <see cref="T:UnityEditor.Editor"/>.
+            </summary>
+            <param name="editor">A reference to the parent editor instance.</param>
+        </member>
+        <member name="M:UnityEditor.Rendering.PostProcessing.EffectListEditor.Init(UnityEngine.Rendering.PostProcessing.PostProcessProfile,UnityEditor.SerializedObject)">
+            <summary>
+            Initializes the editor. This method should be called before <see cref="M:UnityEditor.Rendering.PostProcessing.EffectListEditor.OnGUI"/> is
+            called.
+            </summary>
+            <param name="asset">A reference to the <see cref="T:UnityEngine.Rendering.PostProcessing.PostProcessProfile"/> that will be
+            displayed.</param>
+            <param name="serializedObject">A <see cref="T:UnityEditor.SerializedObject"/> of the given <paramref
+            name="asset"/> instance.</param>
+        </member>
+        <member name="M:UnityEditor.Rendering.PostProcessing.EffectListEditor.Clear">
+            <summary>
+            This method should be called when the editor is destroyed or disabled.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Rendering.PostProcessing.EffectListEditor.OnGUI">
+            <summary>
+            Draws the settings for the <see cref="T:UnityEngine.Rendering.PostProcessing.PostProcessProfile"/> referenced in the editor.
+            </summary>
+        </member>
+        <member name="T:UnityEditor.Rendering.PostProcessing.EditorUtilities">
+            <summary>
+            A set of editor utilities used in post-processing editors.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Rendering.PostProcessing.EditorUtilities.isTargetingConsoles">
+            <summary>
+            Returns <c>true</c> if the current target is a console, <c>false</c> otherwise.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Rendering.PostProcessing.EditorUtilities.isTargetingMobiles">
+            <summary>
+            Returns <c>true</c> if the current target is a mobile, <c>false</c> otherwise.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Rendering.PostProcessing.EditorUtilities.isTargetingAndroid">
+            <summary>
+            Returns <c>true</c> if the current target is Android, <c>false</c> otherwise.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Rendering.PostProcessing.EditorUtilities.isTargetingOpenGLES">
+            <summary>
+            Returns <c>true</c> if the current build targets OpenGLES, <c>false</c> otherwise.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Rendering.PostProcessing.EditorUtilities.isTargetingWebGL">
+            <summary>
+            Returns <c>true</c> if the current target is WebGL, <c>false</c> otherwise.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Rendering.PostProcessing.EditorUtilities.isTargetingConsolesOrMobiles">
+            <summary>
+            Returns <c>true</c> if the current target is a console or a mobile, <c>false</c>
+            otherwise.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Rendering.PostProcessing.EditorUtilities.GetContent(System.String)">
+            <summary>
+            Gets a <see cref="T:UnityEngine.GUIContent"/> for the given label and tooltip. These are recycled
+            internally and help reduce the garbage collector pressure in the editor.
+            </summary>
+            <param name="textAndTooltip">The label and tooltip separated by a <c>|</c>
+            character</param>
+            <returns>A recycled <see cref="T:UnityEngine.GUIContent"/></returns>
+        </member>
+        <member name="M:UnityEditor.Rendering.PostProcessing.EditorUtilities.DrawFixMeBox(System.String,System.Action)">
+            <summary>
+            Draws a UI box with a description and a "Fix Me" button next to it.
+            </summary>
+            <param name="text">The description</param>
+            <param name="action">The action to execute when the button is clicked</param>
+        </member>
+        <member name="M:UnityEditor.Rendering.PostProcessing.EditorUtilities.DrawSplitter">
+            <summary>
+            Draws a horizontal split line.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Rendering.PostProcessing.EditorUtilities.DrawOverrideCheckbox(UnityEngine.Rect,UnityEditor.SerializedProperty)">
+            <summary>
+            Draws a toggle using the "override checkbox" style.
+            </summary>
+            <param name="rect">The position and size of the toggle</param>
+            <param name="property">The override state property for the toggle</param>
+        </member>
+        <member name="M:UnityEditor.Rendering.PostProcessing.EditorUtilities.DrawHeaderLabel(System.String)">
+            <summary>
+            Draws a header label.
+            </summary>
+            <param name="title">The label to display as a header</param>
+        </member>
+        <member name="T:UnityEditor.Rendering.PostProcessing.PostProcessEffectEditor`1">
+            <summary>
+            The class to inherit from when designing custom effect editors.
+            </summary>
+            <typeparam name="T">The effect type to create an editor for</typeparam>
+        </member>
+        <member name="M:UnityEditor.Rendering.PostProcessing.PostProcessEffectEditor`1.FindProperty``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+             <summary>
+             Find a serialized property using an expression instead of a string. This is safer as it
+             helps avoiding typos and make code refactoring easier.
+             </summary>
+             <typeparam name="TValue">The serialized value type</typeparam>
+             <param name="expr">The expression to parse to reach the property</param>
+             <returns>A <see cref="T:UnityEditor.SerializedProperty"/> or <c>null</c> if none was found</returns>
+             <example>
+             <code>
+             [Serializable]
+             public class MyEffect : PostProcessEffectSettings
+             {
+                 public float myParameter = 1f;
+             }
+            
+             [PostProcessEditor(typeof(MyEffect))]
+             public class MyEffectEditor : PostProcessEffectEditor&lt;MyEffect&gt;
+             {
+                 SerializedProperty m_MyParameter;
+            
+                 public override void OnEnable()
+                 {
+                     m_MyParameter = FindProperty(x => x.myParameter);
+                 }
+             }
+             </code>
+             </example>
+             <remarks>
+             If you're trying to retrieve a <see cref="T:UnityEditor.Rendering.PostProcessing.SerializedParameterOverride"/>, you should
+             use <see cref="M:UnityEditor.Rendering.PostProcessing.PostProcessEffectEditor`1.FindParameterOverride``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})"/> instead.
+             </remarks>
+             <seealso cref="T:UnityEditor.SerializedProperty"/>
+             <seealso cref="M:UnityEditor.Rendering.PostProcessing.PostProcessEffectEditor`1.FindParameterOverride``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})"/>
+        </member>
+        <member name="M:UnityEditor.Rendering.PostProcessing.PostProcessEffectEditor`1.FindParameterOverride``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+             <summary>
+             Find a serialized parameter override using an expression instead of a string. This is
+             safer as it helps avoiding typos and make code refactoring easier.
+             </summary>
+             <typeparam name="TValue">The serialized value type</typeparam>
+             <param name="expr">The expression to parse to reach the parameter override</param>
+             <returns>A <see cref="T:UnityEditor.Rendering.PostProcessing.SerializedParameterOverride"/> or <c>null</c> if none was
+             found</returns>
+             <example>
+             <code>
+             [Serializable]
+             public class MyEffect : PostProcessEffectSettings
+             {
+                 public FloatParameter myParameter = new FloatParameter { value = 1f };
+             }
+            
+             [PostProcessEditor(typeof(MyEffect))]
+             public class MyEffectEditor : PostProcessEffectEditor&lt;MyEffect&gt;
+             {
+                 SerializedParameterOverride m_MyParameter;
+            
+                 public override void OnEnable()
+                 {
+                     m_MyParameter = FindParameterOverride(x => x.myParameter);
+                 }
+             }
+             </code>
+             </example>
+             <seealso cref="T:UnityEditor.Rendering.PostProcessing.SerializedParameterOverride"/>
+        </member>
+        <member name="T:UnityEditor.Rendering.PostProcessing.DefaultPostProcessEffectEditor">
+            <summary>
+            A default effect editor that gathers all parameters and list them vertically in the
+            inspector.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Rendering.PostProcessing.DefaultPostProcessEffectEditor.OnEnable">
+            <summary>
+            Called when the editor is initialized.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Rendering.PostProcessing.DefaultPostProcessEffectEditor.OnInspectorGUI">
+            <summary>
+            Called every time the inspector is being redrawn. This is where you should add your UI
+            drawing code.
+            </summary>
+        </member>
+        <member name="T:UnityEditor.Rendering.PostProcessing.DecoratorAttribute">
+            <summary>
+            Tells a <see cref="T:UnityEditor.Rendering.PostProcessing.AttributeDecorator"/> class which inspector attribute it's a decorator
+            for.
+            </summary>
+            <seealso cref="T:UnityEditor.Rendering.PostProcessing.AttributeDecorator"/>
+        </member>
+        <member name="F:UnityEditor.Rendering.PostProcessing.DecoratorAttribute.attributeType">
+            <summary>
+            The attribute type that this decorator can inspect.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Rendering.PostProcessing.DecoratorAttribute.#ctor(System.Type)">
+            <summary>
+            Creates a new attribute.
+            </summary>
+            <param name="attributeType">The type that this decorator can inspect</param>
+        </member>
+        <member name="T:UnityEditor.Rendering.PostProcessing.PostProcessEffectBaseEditor">
+            <summary>
+            The base class for all post-processing effect related editors. If you want to customize the
+            look of a custom post-processing effect, inherit from <see cref="T:UnityEditor.Rendering.PostProcessing.PostProcessEffectEditor`1"/>
+            instead.
+            </summary>
+            <seealso cref="T:UnityEditor.Rendering.PostProcessing.PostProcessEffectEditor`1"/>
+        </member>
+        <member name="M:UnityEditor.Rendering.PostProcessing.PostProcessEffectBaseEditor.Repaint">
+            <summary>
+            Repaints the inspector.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Rendering.PostProcessing.PostProcessEffectBaseEditor.OnEnable">
+            <summary>
+            Called when the editor is initialized.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Rendering.PostProcessing.PostProcessEffectBaseEditor.OnDisable">
+            <summary>
+            Called when the editor is de-initialized.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Rendering.PostProcessing.PostProcessEffectBaseEditor.OnInspectorGUI">
+            <summary>
+            Called every time the inspector is being redrawn. This is where you should add your UI
+            drawing code.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Rendering.PostProcessing.PostProcessEffectBaseEditor.GetDisplayTitle">
+            <summary>
+            Returns the label to use as the effect title. You can override this to return a custom
+            label, else it will use the effect type as the title.
+            </summary>
+            <returns>The label to use as the effect title</returns>
+        </member>
+        <member name="M:UnityEditor.Rendering.PostProcessing.PostProcessEffectBaseEditor.PropertyField(UnityEditor.Rendering.PostProcessing.SerializedParameterOverride)">
+            <summary>
+            Draws a property UI element.
+            </summary>
+            <param name="property">The property to draw</param>
+        </member>
+        <member name="M:UnityEditor.Rendering.PostProcessing.PostProcessEffectBaseEditor.PropertyField(UnityEditor.Rendering.PostProcessing.SerializedParameterOverride,UnityEngine.GUIContent)">
+            <summary>
+            Draws a property UI element with a custom title and/or tooltip.
+            </summary>
+            <param name="property">The property to draw</param>
+            <param name="title">A custom title and/or tooltip</param>
+        </member>
+        <member name="T:UnityEditor.Rendering.PostProcessing.SerializedParameterOverride">
+            <summary>
+            A wrapper used for <see cref="T:UnityEngine.Rendering.PostProcessing.ParameterOverride`1"/> serialization and easy access to the
+            underlying property and override state.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Rendering.PostProcessing.SerializedParameterOverride.overrideState">
+            <summary>
+            The override state property of the serialized parameter.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Rendering.PostProcessing.SerializedParameterOverride.value">
+            <summary>
+            The value property of the serialized parameter.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Rendering.PostProcessing.SerializedParameterOverride.attributes">
+            <summary>
+            An array of all attributes set on the original parameter.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Rendering.PostProcessing.SerializedParameterOverride.displayName">
+            <summary>
+            Returns the display name of the property.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Rendering.PostProcessing.SerializedParameterOverride.GetAttribute``1">
+            <summary>
+            Gets the attribute of type <c>T</c> from the original parameter.
+            </summary>
+            <typeparam name="T">The type of attribute to look for</typeparam>
+            <returns>And attribute or type <c>T</c>, or <c>null</c> if none has been found</returns>
+        </member>
+        <member name="T:UnityEditor.Rendering.PostProcessing.AttributeDecorator">
+            <summary>
+            The base abstract class for all attribute decorators.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Rendering.PostProcessing.AttributeDecorator.IsAutoProperty">
+            <summary>
+            Override this and return <c>false</c> if you want to customize the override checkbox
+            position, else it'll automatically draw it and put the property content in a
+            horizontal scope.
+            </summary>
+            <returns><c>true</c> if the override checkbox should be automatically put next to the
+            property, <c>false</c> if it uses a custom position</returns>
+        </member>
+        <member name="M:UnityEditor.Rendering.PostProcessing.AttributeDecorator.OnGUI(UnityEditor.SerializedProperty,UnityEditor.SerializedProperty,UnityEngine.GUIContent,System.Attribute)">
+            <summary>
+            The rendering method called for the custom GUI.
+            </summary>
+            <param name="property">The property to draw the UI for</param>
+            <param name="overrideState">The override checkbox property</param>
+            <param name="title">The title and tooltip for the property</param>
+            <param name="attribute">A reference to the property attribute set on the original field
+            </param>
+            <returns><c>true</c> if the property UI got rendered successfully, <c>false</c> to
+            fallback on the default editor UI for this property</returns>
+        </member>
+        <member name="T:UnityEditor.Rendering.PostProcessing.PostProcessEditorAttribute">
+            <summary>
+            Tells a <see cref="T:UnityEditor.Rendering.PostProcessing.PostProcessEffectEditor`1"/> class which run-time type it's an editor
+            for. When you make a custom editor for an effect, you need put this attribute on the editor
+            class.
+            </summary>
+            <seealso cref="T:UnityEditor.Rendering.PostProcessing.PostProcessEffectEditor`1"/>
+        </member>
+        <member name="F:UnityEditor.Rendering.PostProcessing.PostProcessEditorAttribute.settingsType">
+            <summary>
+            The type that this editor can edit.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Rendering.PostProcessing.PostProcessEditorAttribute.#ctor(System.Type)">
+            <summary>
+            Creates a new attribute.
+            </summary>
+            <param name="settingsType">The type that this editor can edit</param>
+        </member>
+        <member name="T:UnityEditor.Rendering.PostProcessing.Styling">
+            <summary>
+            Common styles used for Post-processing editor controls.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.PostProcessing.Styling.smallTickbox">
+            <summary>
+            Style for the override checkbox.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.PostProcessing.Styling.miniLabelButton">
+            <summary>
+            Style for the labels in the toolbar of each effect.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Rendering.PostProcessing.Styling.splitter">
+            <summary>
+            Color of UI splitters.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Rendering.PostProcessing.Styling.paneOptionsIcon">
+            <summary>
+            Option icon used in effect headers.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.PostProcessing.Styling.headerLabel">
+            <summary>
+            Style for effect header labels.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Rendering.PostProcessing.Styling.headerBackground">
+            <summary>
+            Color of effect header backgrounds.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.PostProcessing.Styling.wheelLabel">
+            <summary>
+            Style for the trackball labels.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.PostProcessing.Styling.wheelThumb">
+            <summary>
+            Style for the trackball cursors.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.PostProcessing.Styling.wheelThumbSize">
+            <summary>
+            Size of the trackball cursors.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.PostProcessing.Styling.preLabel">
+            <summary>
+            Style for the curve editor position info.
+            </summary>
+        </member>
+    </members>
+</doc>
