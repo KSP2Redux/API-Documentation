@@ -1,0 +1,2229 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Unity.Formats.Fbx.Editor</name>
+    </assembly>
+    <members>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.DCCIntegration.IntegrationZipFullPath">
+            <summary>
+            Gets the integration zip full path as an absolute Unity-style path.
+            </summary>
+            <returns>The integration zip full path.</returns>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.DCCIntegration.ProjectPath">
+            <summary>
+            Gets the project path.
+            </summary>
+            <returns>The project path.</returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.DCCIntegration.InstallIntegration(System.String)">
+            <summary>
+            Installs the integration using the provided executable.
+            </summary>
+            <returns>The integration.</returns>
+            <param name="exe">Exe.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.DCCIntegration.FolderAlreadyUnzippedAtPath(System.String)">
+            <summary>
+            Determines if folder is already unzipped at the specified path.
+            </summary>
+            <returns><c>true</c> if folder is already unzipped at the specified path; otherwise, <c>false</c>.</returns>
+            <param name="path">Path.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.DCCIntegration.LaunchDCCApplication(System.String)">
+            <summary>
+            Launches application at given path
+            </summary>
+            <param name="AppPath"></param>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.MayaIntegration.ExportSettingsPath">
+            <summary>
+            Gets the path to the export settings file.
+            Returns a relative path with forward slashes as path separators.
+            </summary>
+            <returns>The export settings path.</returns>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.MayaIntegration.ImportSettingsPath">
+            <summary>
+            Gets the path to the import settings file.
+            Returns a relative path with forward slashes as path separators.
+            </summary>
+            <returns>The import settings path.</returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.MayaIntegration.GetUserStartupScriptPath">
+            <summary>
+            Gets the user startup script path.
+            Returns a relative path with forward slashes as path separators.
+            </summary>
+            <returns>The user startup script path.</returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.MayaIntegration.CreateDirectory(System.String)">
+            <summary>
+            Creates the missing directories in path.
+            </summary>
+            <returns><c>true</c>, if directory was created, <c>false</c> otherwise.</returns>
+            <param name="path">Path to create.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.MayaIntegration.FolderAlreadyUnzippedAtPath(System.String)">
+            <summary>
+            Determines if folder is already unzipped at the specified path
+            by checking if UnityFbxForMaya.mod exists at expected location.
+            </summary>
+            <returns><c>true</c> if folder is already unzipped at the specified path; otherwise, <c>false</c>.</returns>
+            <param name="path">Path.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.MaxIntegration.GetAbsPath(System.String)">
+            <summary>
+            Gets the absolute Unity path for relative path in Integrations folder.
+            </summary>
+            <returns>The absolute path.</returns>
+            <param name="relPath">Relative path.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.MaxIntegration.FolderAlreadyUnzippedAtPath(System.String)">
+            <summary>
+            Determines if folder is already unzipped at the specified path
+            by checking if plugin exists at expected location.
+            </summary>
+            <returns><c>true</c> if folder is already unzipped at the specified path; otherwise, <c>false</c>.</returns>
+            <param name="path">Path.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.IntegrationsUI.GetDCCExe">
+            <summary>
+            The path of the DCC executable.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.IntegrationsUI.GetDCCName">
+            <summary>
+            Gets the name of the selected DCC.
+            </summary>
+            <returns>The DCC name.</returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.IntegrationsUI.ShowSuccessDialog(System.String,System.Int32)">
+            <summary>
+            Opens a dialog showing whether the installation succeeded.
+            </summary>
+            <param name="dcc">Dcc name.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.IntegrationsUI.DirectoryHasWritePermission(System.String)">
+            <summary>
+            Make sure we can write to this directory.
+            Try creating a file in path directory, if it raises an error, then we can't
+            write here.
+            TODO: find a more reliable way to check this
+            </summary>
+            <returns><c>true</c>, if possible to write to path, <c>false</c> otherwise.</returns>
+            <param name="path">Path.</param>
+        </member>
+        <member name="T:UnityEditor.Formats.Fbx.Exporter.ExportFormat">
+            <summary>
+            FBX export format options.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ExportFormat.ASCII">
+            <summary>
+            Output the FBX in ASCII format.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ExportFormat.Binary">
+            <summary>
+            Output the FBX in Binary format.
+            </summary>
+        </member>
+        <member name="T:UnityEditor.Formats.Fbx.Exporter.Include">
+            <summary>
+            Options for the type of data to include in the export
+            (Model only, animation only, or model and animation).
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.Include.Model">
+            <summary>
+            Export the model without animation.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.Include.Anim">
+            <summary>
+            Export the animation only.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.Include.ModelAndAnim">
+            <summary>
+            Export both the model and animation.
+            </summary>
+        </member>
+        <member name="T:UnityEditor.Formats.Fbx.Exporter.ObjectPosition">
+            <summary>
+            Options for the position to use for the root GameObject.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ObjectPosition.LocalCentered">
+            <summary>
+            For a single root, uses the local transform information.
+            If you select multiple GameObjects for export, the FBX Exporter centers GameObjects
+            around a shared root while keeping their relative placement unchanged.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ObjectPosition.WorldAbsolute">
+            <summary>
+            Uses the world position of the GameObjects.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ObjectPosition.Reset">
+            <summary>
+            Exports the GameObject to (0,0,0).
+            For convert to FBX prefab variant only, no UI option.
+            </summary>
+        </member>
+        <member name="T:UnityEditor.Formats.Fbx.Exporter.LODExportType">
+            <summary>
+            LODs to export for LOD groups.
+            </summary>
+            <remarks>
+            Notes:
+            - The FBX Exporter ignores LODs outside of selected hierarchy.
+            - The FBX Exporter does not filter out objects that are used as LODs and doesn't
+              export them if they aren’t direct descendants of their respective LOD Group
+            </remarks>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.LODExportType.All">
+            <summary>
+            Export all LODs.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.LODExportType.Highest">
+            <summary>
+            Export only the highest LOD.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.LODExportType.Lowest">
+            <summary>
+            Export only the lowest LOD.
+            </summary>
+        </member>
+        <member name="T:UnityEditor.Formats.Fbx.Exporter.FbxExportSettingsException">
+            <summary>
+            Exception class for FBX export settings.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportSettings.GetCustomVendorLocations">
+            <summary>
+            Returns a set of valid vendor folder paths with no trailing '/'
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportSettings.DCCVendorLocations">
+            <summary>
+            Retrieve available vendor locations.
+            If there is valid alternative vendor locations, do not use defaults
+            always use MAYA_LOCATION when available
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ExportSettings.prefabSavePaths">
+             <summary>
+             The path where Convert To Model will save the new fbx and prefab.
+            
+             To help teams work together, this is stored to be relative to the
+             Application.dataPath, and the path separator is the forward-slash
+             (e.g. unix and http, not windows).
+            
+             Use GetRelativeSavePath / SetRelativeSavePath to get/set this
+             value, properly interpreted for the current platform.
+             </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportSettings.GetUniqueDCCOptionName(System.String)">
+            <summary>
+            Increments the name if there is a duplicate in dccAppOptions.
+            </summary>
+            <returns>The unique name.</returns>
+            <param name="name">Name.</param>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportSettings.PreferredDCCApp">
+             <summary>
+            
+             Find the latest program available and make that the default choice.
+             Will always take any Maya version over any 3ds Max version.
+            
+             Returns the index of the most recent program in the list of dccOptionNames
+             Returns -1 on error.
+             </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportSettings.ChoosePreferredDCCApp(System.Int32,System.Int32)">
+            <summary>
+            Takes the index of two program names from dccOptionNames and chooses our preferred one based on the preference list
+            This happens in case of a tie between two programs with the same release year / version
+            </summary>
+            <param name="optionA"></param>
+            <param name="optionB"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportSettings.RemoveSpacesAndNumbers(System.String)">
+            <summary>
+            Takes a given string and removes any spaces or numbers from it
+            </summary>
+            <param name="s"></param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportSettings.FindDCCVersion(System.String)">
+            <summary>
+            Finds the version based off of the title of the application
+            </summary>
+            <param name="path"></param>
+            <returns> the year/version  OR -1 if the year could not be parsed </returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportSettings.FindDCCInstalls">
+             <summary>
+             Find Maya and 3DsMax installations at default install path.
+             Add results to given dictionary.
+            
+             If MAYA_LOCATION is set, add this to the list as well.
+             </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportSettings.FirstValidVendorLocation">
+            <summary>
+            Returns the first valid folder in our list of vendor locations
+            </summary>
+            <returns>The first valid vendor location</returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportSettings.GetMayaExePathFromLocation(System.String)">
+            <summary>
+            Gets the maya exe at Maya install location.
+            </summary>
+            <returns>The maya exe path.</returns>
+            <param name="location">Location of Maya install.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportSettings.AskMayaVersion(System.String)">
+            <summary>
+            Ask the version number by running maya.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportSettings.GetMaxOptionName(System.String)">
+            <summary>
+            Gets the unique label for a new 3DsMax dropdown option.
+            </summary>
+            <returns>The 3DsMax dropdown option label.</returns>
+            <param name="exePath">Exe path.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportSettings.GetRelativeSavePaths(System.Collections.Generic.List{System.String})">
+            <summary>
+            The relative save paths for given absolute paths.
+            This is relative to the Application.dataPath ; it uses '/' as the
+            separator on all platforms.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportSettings.GetMixedSavePaths(System.Collections.Generic.List{System.String})">
+            <summary>
+            Returns the paths for display in the menu.
+            Paths inside the Assets folder are relative, while those outside are kept absolute.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportSettings.GetRelativeFbxSavePaths">
+            <summary>
+            The path where Export model will save the new fbx.
+            This is relative to the Application.dataPath ; it uses '/' as the
+            separator on all platforms.
+            Only returns the paths within the Assets folder of the project.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportSettings.GetRelativeFbxSavePaths(System.Collections.Generic.List{System.String},System.Int32@)">
+            <summary>
+            The path where Export model will save the new fbx.
+            This is relative to the Application.dataPath ; it uses '/' as the
+            separator on all platforms.
+            Only returns the paths within the Assets folder of the project.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportSettings.GetRelativePrefabSavePaths">
+            <summary>
+            The path where Convert to Prefab will save the new prefab.
+            This is relative to the Application.dataPath ; it uses '/' as the
+            separator on all platforms.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportSettings.GetMixedFbxSavePaths">
+            <summary>
+            The paths formatted for display in the menu.
+            Paths outside the Assets folder are kept as they are and ones inside are shortened.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportSettings.AddSavePath(System.String,System.Collections.Generic.List{System.String},System.Boolean)">
+            <summary>
+            Adds the save path to given save path list.
+            </summary>
+            <param name="savePath">Save path.</param>
+            <param name="exportSavePaths">Export save paths.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportSettings.ConvertToAssetRelativePath(System.String,System.Boolean)">
+             <summary>
+             Convert an absolute path into a relative path like what you would
+             get from GetRelativeSavePath.
+            
+             This uses '/' as the path separator.
+            
+             If 'requireSubdirectory' is the default on, return empty-string if the full
+             path is not in a subdirectory of assets.
+             </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportSettings.GetRelativePath(System.String,System.String,System.Char)">
+            <summary>
+            Compute how to get from 'fromDir' to 'toDir' via a relative path.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportSettings.NormalizePath(System.String,System.Boolean,System.Char)">
+             <summary>
+             Normalize a path, cleaning up path separators, resolving '.' and
+             '..', removing duplicate and trailing path separators, etc.
+            
+             If the path passed in is a relative path, we remove leading path separators.
+             If it's an absolute path we don't.
+            
+             If you claim the path is absolute but actually it's relative, we
+             treat it as a relative path.
+             </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ConvertToPrefabEditorWindow.GetUIElementsInExportSetCount">
+            <summary>
+            Return the number of objects in the selection that contain RectTransforms.
+            </summary>
+        </member>
+        <member name="T:UnityEditor.Formats.Fbx.Exporter.IExportOptions">
+            <summary>
+            Interface of export options that you can set when exporting to FBX.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.IExportOptions.ExportFormat">
+            <summary>
+            The export format (binary or ascii).
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.IExportOptions.ModelAnimIncludeOption">
+            <summary>
+            Option to export the model only, the animation only, or both the model and the animation.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.IExportOptions.LODExportType">
+            <summary>
+            The type of LOD to export (All, Highest or Lowest).
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.IExportOptions.ObjectPosition">
+            <summary>
+            The position to export the object to (Local centered, World absolute, or Reset). Use Reset for converting to a Prefab.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.IExportOptions.AnimateSkinnedMesh">
+            <summary>
+            Option to export the animation on GameObjects that have a skinned mesh.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.IExportOptions.UseMayaCompatibleNames">
+            <summary>
+            Option to convert the GameObject and material names to Maya compatible names.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.IExportOptions.AllowSceneModification">
+            <summary>
+            Option to change the GameObjects and material names in the scene to keep them
+            Maya compatible after the export. Only works if UseMayaCompatibleNames is also enabled.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.IExportOptions.ExportUnrendered">
+            <summary>
+            Option to export GameObjects that don't have a renderer.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.IExportOptions.PreserveImportSettings">
+            <summary>
+            Option to preserve the previous import settings after the export when overwriting an existing FBX file.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.IExportOptions.KeepInstances">
+            <summary>
+            Option to keep multiple instances of the same mesh as separate instances on export.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.IExportOptions.EmbedTextures">
+            <summary>
+            Option to embed textures in the exported FBX file.
+            </summary>
+            <remarks>
+            To embed textures, you must set the file ExportFormat to binary.
+            </remarks>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.IExportOptions.AnimationSource">
+            <summary>
+            The transform to transfer the animation from. The animation is transferred to AnimationDest.
+            </summary>
+            <remarks>
+            Transform must be an ancestor of AnimationDest, and may be an ancestor of the selected GameObject.
+            </remarks>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.IExportOptions.AnimationDest">
+            <summary>
+            The transform to transfer the animation to.
+            This GameObject receives the transform animation on GameObjects between Source
+            and Destination as well as the animation on the Source itself.
+            </summary>
+        </member>
+        <member name="T:UnityEditor.Formats.Fbx.Exporter.ExportOptionsSettingsSerializeBase">
+            <summary>
+            Base class for the export model settings and convert to prefab settings.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportOptionsSettingsSerializeBase.ExportFormat">
+            <inheritdoc/>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportOptionsSettingsSerializeBase.SetExportFormat(UnityEditor.Formats.Fbx.Exporter.ExportFormat)">
+            <summary>
+            Specifies the export format to binary or ascii.
+            </summary>
+            <param name="format">Binary or ASCII</param>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportOptionsSettingsSerializeBase.AnimateSkinnedMesh">
+            <inheritdoc/>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportOptionsSettingsSerializeBase.SetAnimatedSkinnedMesh(System.Boolean)">
+            <summary>
+            Specifies whether to export animation on GameObjects containing a skinned mesh.
+            </summary>
+            <param name="animatedSkinnedMesh">True to export animation on skinned meshes, false otherwise.</param>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportOptionsSettingsSerializeBase.UseMayaCompatibleNames">
+            <inheritdoc/>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportOptionsSettingsSerializeBase.SetUseMayaCompatibleNames(System.Boolean)">
+            <summary>
+            Specifies whether to rename the exported GameObjects to Maya compatible names.
+            </summary>
+            <param name="useMayaCompNames">True to have export Maya compatible names, false otherwise.</param>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportOptionsSettingsSerializeBase.AnimationSource">
+            <inheritdoc/>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportOptionsSettingsSerializeBase.SetAnimationSource(UnityEngine.Transform)">
+            <summary>
+            Specifies the transform to transfer the animation from.
+            </summary>
+            <param name="source">The transform to transfer the animation from.</param>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportOptionsSettingsSerializeBase.AnimationDest">
+            <inheritdoc/>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportOptionsSettingsSerializeBase.SetAnimationDest(UnityEngine.Transform)">
+            <summary>
+            Specifies the transform to transfer the source animation to.
+            </summary>
+            <param name="dest">The transform to transfer the animation to.</param>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportOptionsSettingsSerializeBase.ModelAnimIncludeOption">
+            <inheritdoc/>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportOptionsSettingsSerializeBase.LODExportType">
+            <inheritdoc/>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportOptionsSettingsSerializeBase.ObjectPosition">
+            <inheritdoc/>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportOptionsSettingsSerializeBase.ExportUnrendered">
+            <inheritdoc/>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportOptionsSettingsSerializeBase.PreserveImportSettings">
+            <inheritdoc/>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportOptionsSettingsSerializeBase.AllowSceneModification">
+            <inheritdoc/>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportOptionsSettingsSerializeBase.KeepInstances">
+            <inheritdoc/>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportOptionsSettingsSerializeBase.EmbedTextures">
+            <inheritdoc/>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportOptionsSettingsSerializeBase.Equals(System.Object)">
+            <summary>
+            Checks if two instances of the export settings are equal.
+            </summary>
+            <param name="e">The other export setting object to check.</param>
+            <returns>True if equal, false otherwise.</returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportOptionsSettingsSerializeBase.GetHashCode">
+            <summary>
+            Gets the hash code for this instance of the export model settings.
+            </summary>
+            <returns>Unique hash code for the export model settings.</returns>
+        </member>
+        <member name="T:UnityEditor.Formats.Fbx.Exporter.ExportModelSettingsSerialize">
+            <summary>
+            Class specifying the settings for exporting to FBX.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportModelSettingsSerialize.ModelAnimIncludeOption">
+            <inheritdoc/>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportModelSettingsSerialize.SetModelAnimIncludeOption(UnityEditor.Formats.Fbx.Exporter.Include)">
+            <summary>
+            Specifies to export the model only, the animation only, or both the model and the animation.
+            </summary>
+            <param name="include">Model, animation, or model and animation</param>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportModelSettingsSerialize.LODExportType">
+            <inheritdoc/>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportModelSettingsSerialize.SetLODExportType(UnityEditor.Formats.Fbx.Exporter.LODExportType)">
+            <summary>
+            Specifies the type of LOD to export (All, Highest or Lowest).
+            </summary>
+            <param name="lodLevel">All, Highest, or Lowest</param>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportModelSettingsSerialize.ObjectPosition">
+            <inheritdoc/>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportModelSettingsSerialize.SetObjectPosition(UnityEditor.Formats.Fbx.Exporter.ObjectPosition)">
+            <summary>
+            Specifies the position to export the object to (Local centered, World absolute, or Reset). Use Reset for converting to a Prefab).
+            </summary>
+            <param name="objectPosition">Local centered, World absolute, or Reset</param>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportModelSettingsSerialize.ExportUnrendered">
+            <inheritdoc/>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportModelSettingsSerialize.SetExportUnrendered(System.Boolean)">
+            <summary>
+            Specifies whether to export GameObjects that don't have a renderer.
+            </summary>
+            <param name="exportUnrendered">True to export unrendered, false otherwise.</param>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportModelSettingsSerialize.PreserveImportSettings">
+            <inheritdoc/>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportModelSettingsSerialize.SetPreserveImportSettings(System.Boolean)">
+            <summary>
+            Specifies whether to preserve the previous import settings after the export when overwriting
+            an existing FBX file.
+            </summary>
+            <param name="preserveImportSettings">True to preserve the previous import settings, false otherwise.</param>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportModelSettingsSerialize.AllowSceneModification">
+            <inheritdoc/>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportModelSettingsSerialize.KeepInstances">
+            <inheritdoc/>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportModelSettingsSerialize.SetKeepInstances(System.Boolean)">
+            <summary>
+            Specifies whether to keep multiple instances of the same mesh as separate instances on export.
+            </summary>
+            <param name="keepInstances">True to export as separate instances, false otherwise.</param>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportModelSettingsSerialize.EmbedTextures">
+            <inheritdoc/>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportModelSettingsSerialize.SetEmbedTextures(System.Boolean)">
+            <summary>
+            Specifies whether to embed textures in the exported FBX file.
+            </summary>
+            <param name="embedTextures">True to embed textures, false otherwise.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportModelSettingsSerialize.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportModelSettingsSerialize.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="T:UnityEditor.Formats.Fbx.Exporter.ExportModelOptions">
+            <summary>
+            Class specifying the settings for exporting to FBX.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportModelOptions.ExportFormat">
+            <summary>
+            The export format (binary or ascii).
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportModelOptions.ModelAnimIncludeOption">
+            <summary>
+            Option to export the model only, the animation only, or both the model and the animation.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportModelOptions.LODExportType">
+            <summary>
+            The type of LOD to export (All, Highest or Lowest).
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportModelOptions.ObjectPosition">
+            <summary>
+            The position to export the object to (Local centered, World absolute, or Reset). Use Reset for converting to a Prefab.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportModelOptions.AnimateSkinnedMesh">
+            <summary>
+            Option to export the animation on GameObjects that have a skinned mesh.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportModelOptions.UseMayaCompatibleNames">
+            <summary>
+            Option to convert the GameObject and material names to Maya compatible names.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportModelOptions.UnityEditor#Formats#Fbx#Exporter#IExportOptions#AllowSceneModification">
+            <summary>
+            Option to change the GameObjects and material names in the scene to keep them
+            Maya compatible after the export. Only works if UseMayaCompatibleNames is also enabled.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportModelOptions.ExportUnrendered">
+            <summary>
+            Option to export GameObjects that don't have a renderer.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportModelOptions.PreserveImportSettings">
+            <summary>
+            Option to preserve the previous import settings after the export when overwriting an existing FBX file.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportModelOptions.KeepInstances">
+            <summary>
+            Option to keep multiple instances of the same mesh as separate instances on export.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportModelOptions.EmbedTextures">
+            <summary>
+            Option to embed textures in the exported FBX file.
+            </summary>
+            <remarks>
+            To embed textures, you must set the file ExportFormat to binary.
+            </remarks>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportModelOptions.AnimationSource">
+            <summary>
+            The transform to transfer the animation from. The animation is transferred to AnimationDest.
+            </summary>
+            <remarks>
+            Transform must be an ancestor of AnimationDest, and may be an ancestor of the selected GameObject.
+            </remarks>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportModelOptions.AnimationDest">
+            <summary>
+            The transform to transfer the animation to.
+            This GameObject receives the transform animation on GameObjects between Source
+            and Destination as well as the animation on the Source itself.
+            </summary>
+        </member>
+        <member name="T:UnityEditor.Formats.Fbx.Exporter.GetMeshForComponent`1">
+             <summary>
+             If your MonoBehaviour knows about some custom geometry that
+             isn't in a MeshFilter or SkinnedMeshRenderer, use
+             RegisterMeshCallback to get a callback when the exporter tries
+             to export your component.
+            
+             The callback should return true, and output the mesh you want.
+            
+             Return false if you don't want to drive this game object.
+            
+             Return true and output a null mesh if you don't want the
+             exporter to output anything.
+             </summary>
+        </member>
+        <member name="T:UnityEditor.Formats.Fbx.Exporter.GetMeshForObject">
+             <summary>
+             Delegate used to convert a GameObject into a mesh.
+            
+             This is useful if you want to have broader control over
+             the export process than the GetMeshForComponent callbacks
+             provide. But it's less efficient because you'll get a callback
+             on every single GameObject.
+             </summary>
+        </member>
+        <member name="T:UnityEditor.Formats.Fbx.Exporter.ModelExporter">
+            <summary>
+            <para>Use the ModelExporter class to export Unity GameObjects to an FBX file.</para>
+            <para>
+            Use the ExportObject and ExportObjects methods. The default export
+            options are used when exporting the objects to the FBX file.
+            </para>
+            <para>For API overview and example scripts, refer to @api_index.</para>
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ChangeLogPath">
+            <summary>
+            Path to the CHANGELOG file in Unity's virtual file system. Used to get the version number.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ModelExporter.DefaultCamera">
+            <summary>
+            name of the scene's default camera
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ModelExporter.NamePrefix">
+            <summary>
+            name prefix for custom properties
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.Create">
+            <summary>
+            Create instance of exporter.
+            </summary>
+        </member>
+        <member name="T:UnityEditor.Formats.Fbx.Exporter.ModelExporter.FbxNodeRelationType">
+            <summary>
+            Which components map from Unity Object to Fbx Object
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ModelExporter.MapUnityObjectToFbxNode">
+            <summary>
+            keep a map between GameObject and FbxNode for quick lookup when we export
+            animation.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ModelExporter.MapConstrainedObjectToConstraints">
+            <summary>
+            keep a map between the constrained FbxNode (in Unity this is the GameObject with constraint component)
+            and its FbxConstraints for quick lookup when exporting constraint animations.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ModelExporter.MapUnityObjectToBlendShapes">
+            <summary>
+            keep a map between the FbxNode and its blendshape channels for quick lookup when exporting blendshapes.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ModelExporter.MaterialMap">
+            <summary>
+            Map Unity material ID to FBX material object
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ModelExporter.TextureMap">
+            <summary>
+            Map texture properties to FBX texture object
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ModelExporter.SharedMeshes">
+            <summary>
+            Map a Unity mesh to an fbx node (for preserving instances)
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ModelExporter.NameToIndexMap">
+            <summary>
+            Map for the Name of an Object to number of objects with this name.
+            Used for enforcing unique names on export.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ModelExporter.MaterialNameToIndexMap">
+            <summary>
+            Map for the Material Name to number of materials with this name.
+            Used for enforcing unique names on export.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ModelExporter.TextureNameToIndexMap">
+            <summary>
+            Map for the Texture Name to number of textures with this name.
+            Used for enforcing unique names on export.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ModelExporter.UniqueNameFormat">
+            <summary>
+            Format for creating unique names
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ModelExporter.AnimFbxFileFormat">
+            <summary>
+            The animation fbx file format.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportSettings">
+            <summary>
+            Gets the export settings.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ModelExporter.DefaultMaterial">
+            <summary>
+            Gets the Unity default material.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.GetVersionFromReadme">
+            <summary>
+            Gets the version number of the FbxExporters plugin from the readme.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.GetOrCreateLayer(Autodesk.Fbx.FbxMesh,System.Int32)">
+            <summary>
+            Get a layer (to store UVs, normals, etc) on the mesh.
+            If it doesn't exist yet, create it.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportComponentAttributes(UnityEditor.Formats.Fbx.Exporter.ModelExporter.MeshInfo,Autodesk.Fbx.FbxMesh,System.Int32[])">
+            <summary>
+            Export the mesh's attributes using layer 0.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportUVs(Autodesk.Fbx.FbxMesh,UnityEditor.Formats.Fbx.Exporter.ModelExporter.MeshInfo,System.Int32[])">
+            <summary>
+            Unity has up to 4 uv sets per mesh. Export all the ones that exist.
+            </summary>
+            <param name="fbxMesh">Fbx mesh.</param>
+            <param name="mesh">Mesh.</param>
+            <param name="unmergedTriangles">Unmerged triangles.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportBlendShapes(UnityEditor.Formats.Fbx.Exporter.ModelExporter.MeshInfo,Autodesk.Fbx.FbxMesh,Autodesk.Fbx.FbxScene,System.Int32[])">
+            <summary>
+            Export the mesh's blend shapes.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ConvertToFbxVector4(UnityEngine.Vector3,System.Single)">
+             <summary>
+             Takes in a left-handed UnityEngine.Vector3 denoting a normal,
+             returns a right-handed FbxVector4.
+            
+             Unity is left-handed, Maya and Max are right-handed.
+             The FbxSdk conversion routines can't handle changing handedness.
+            
+             Remember you also need to flip the winding order on your polygons.
+             </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportTexture(UnityEngine.Material,System.String,Autodesk.Fbx.FbxSurfaceMaterial,System.String)">
+             <summary>
+             Exports a texture from Unity to FBX.
+             The texture must be a property on the unityMaterial; it gets
+             linked to the FBX via a property on the fbxMaterial.
+            
+             The texture file must be a file on disk; it is not embedded within the FBX.
+             </summary>
+             <param name="unityMaterial">Unity material.</param>
+             <param name="unityPropName">Unity property name, e.g. "_MainTex".</param>
+             <param name="fbxMaterial">Fbx material.</param>
+             <param name="fbxPropName">Fbx property name, e.g. <c>FbxSurfaceMaterial.sDiffuse</c>.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.GetMaterialColor(UnityEngine.Material,System.String,System.Single)">
+            <summary>
+            Get the color of a material, or grey if we can't find it.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportMaterial(UnityEngine.Material,Autodesk.Fbx.FbxScene,Autodesk.Fbx.FbxNode)">
+            <summary>
+            Export (and map) a Unity PBS material to FBX classic material
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.AssignLayerElementMaterial(Autodesk.Fbx.FbxMesh,UnityEngine.Mesh,System.Int32)">
+            <summary>
+            Sets up the material to polygon mapping for fbxMesh.
+            To determine which part of the mesh uses which material, look at the submeshes
+            and which polygons they represent.
+            Assuming equal number of materials as submeshes, and that they are in the same order.
+            (i.e. submesh 1 uses material 1)
+            </summary>
+            <param name="fbxMesh">Fbx mesh.</param>
+            <param name="mesh">Mesh.</param>
+            <param name="materials">Materials.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportMesh(UnityEngine.Mesh,Autodesk.Fbx.FbxNode,UnityEngine.Material[])">
+             <summary>
+             Exports a unity mesh and attaches it to the node as an FbxMesh.
+            
+             Able to export materials per sub-mesh as well (by default, exports with the default material).
+            
+             Use fbxNode.GetMesh() to access the exported mesh.
+             </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ControlPointToIndex">
+            <summary>
+            Keeps track of the index of each point in the exported vertex array.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportMesh(UnityEditor.Formats.Fbx.Exporter.ModelExporter.MeshInfo,Autodesk.Fbx.FbxNode)">
+            <summary>
+            Exports a unity mesh and attaches it to the node as an FbxMesh.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportSkinnedMesh(UnityEngine.GameObject,Autodesk.Fbx.FbxScene,Autodesk.Fbx.FbxNode)">
+            <summary>
+            Export GameObject as a skinned mesh with material, bones, a skin and, a bind pose.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.GetBindPose(UnityEngine.Transform,UnityEngine.Matrix4x4[],UnityEditor.Formats.Fbx.Exporter.ModelExporter.SkinnedMeshBoneInfo@)">
+            <summary>
+            Gets the bind pose for the Unity bone.
+            </summary>
+            <returns>The bind pose.</returns>
+            <param name="unityBone">Unity bone.</param>
+            <param name="bindPoses">Bind poses.</param>
+            <param name="boneInfo">Contains information about bones and skinned mesh.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportSkeleton(UnityEngine.SkinnedMeshRenderer,Autodesk.Fbx.FbxScene,System.Collections.Generic.Dictionary{UnityEngine.SkinnedMeshRenderer,UnityEngine.Transform[]}@)">
+            <summary>
+            Export bones of skinned mesh, if this is a skinned mesh with
+            bones and bind poses.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportSkin(UnityEngine.SkinnedMeshRenderer,UnityEditor.Formats.Fbx.Exporter.ModelExporter.MeshInfo,Autodesk.Fbx.FbxScene,Autodesk.Fbx.FbxMesh,Autodesk.Fbx.FbxNode)">
+            <summary>
+            Export binding of mesh to skeleton
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.SetVertexWeights(UnityEditor.Formats.Fbx.Exporter.ModelExporter.MeshInfo,System.Collections.Generic.Dictionary{System.Int32,Autodesk.Fbx.FbxCluster})">
+            <summary>
+            set vertex weights in cluster
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportBindPose(UnityEngine.SkinnedMeshRenderer,Autodesk.Fbx.FbxNode,Autodesk.Fbx.FbxScene,System.Collections.Generic.Dictionary{UnityEngine.SkinnedMeshRenderer,UnityEngine.Transform[]})">
+            <summary>
+            Export bind pose of mesh to skeleton
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.EulerToQuaternionZXY(UnityEngine.Vector3)">
+            <summary>
+            Euler (roll/pitch/yaw (ZXY rotation order) to quaternion.
+            </summary>
+            <returns>a quaternion.</returns>
+            <param name="euler">ZXY Euler.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.EulerToQuaternionXYZ(Autodesk.Fbx.FbxVector4)">
+            <summary>
+            Euler X/Y/Z rotation order to quaternion.
+            </summary>
+            <param name="euler">XYZ Euler.</param>
+            <returns>a quaternion</returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportInstance(UnityEngine.GameObject,Autodesk.Fbx.FbxScene,Autodesk.Fbx.FbxNode)">
+            <summary>
+            if this game object is a model prefab or the model has already been exported, then export with shared components
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportCamera(UnityEngine.GameObject,Autodesk.Fbx.FbxScene,Autodesk.Fbx.FbxNode)">
+            <summary>
+            Exports camera component
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportLight(UnityEngine.GameObject,Autodesk.Fbx.FbxScene,Autodesk.Fbx.FbxNode)">
+            <summary>
+            Exports light component.
+            Supported types: point, spot and directional
+            Cookie => Gobo
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.GetSampleTimes(UnityEngine.AnimationCurve[],System.Double)">
+            <summary>
+            Return set of sample times to cover all keys on animation curves
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.GetKeyTimes(UnityEngine.AnimationCurve[])">
+            <summary>
+            Return set of all keys times on animation curves
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportAnimationKeys(UnityEngine.AnimationCurve,Autodesk.Fbx.FbxAnimCurve,UnityEditor.Formats.Fbx.Exporter.ModelExporter.UnityToMayaConvertSceneHelper)">
+            <summary>
+            Export animation curve key frames with key tangents
+            NOTE : This is a work in progress (WIP). We only export the key time and value on
+            a Cubic curve using the default tangents.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportAnimationSamples(UnityEngine.AnimationCurve,Autodesk.Fbx.FbxAnimCurve,System.Double,UnityEditor.Formats.Fbx.Exporter.ModelExporter.UnityToMayaConvertSceneHelper)">
+            <summary>
+            Export animation curve key samples
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.GetFbxConstraint(Autodesk.Fbx.FbxNode,System.Type)">
+            <summary>
+            Get the FbxConstraint associated with the constrained node.
+            </summary>
+            <param name="constrainedNode"></param>
+            <param name="uniConstraintType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.GetFbxBlendShape(Autodesk.Fbx.FbxNode,System.String)">
+            <summary>
+            Get the FbxBlendshape with the given name associated with the FbxNode.
+            </summary>
+            <param name="blendshapeNode"></param>
+            <param name="uniPropertyName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportAnimationCurve(Autodesk.Fbx.FbxNode,UnityEngine.AnimationCurve,System.Single,System.String,System.Type,Autodesk.Fbx.FbxAnimLayer)">
+            <summary>
+            Export an AnimationCurve.
+            NOTE: This is not used for rotations, because we need to convert from
+            quaternion to euler and various other stuff.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportAnimationClip(UnityEngine.AnimationClip,UnityEngine.GameObject,Autodesk.Fbx.FbxScene)">
+            <summary>
+            Export an AnimationClip as a single take
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.TransferMotion(UnityEngine.Transform,UnityEngine.Transform,System.Single,System.Collections.Generic.Dictionary{UnityEngine.GameObject,System.Collections.Generic.List{UnityEditor.Formats.Fbx.Exporter.ModelExporter.UnityCurve}}@)">
+            <summary>
+            Transfers transform animation from source to dest. Replaces dest's Unity Animation Curves with updated animations.
+            NOTE: Source must be the parent of dest.
+            </summary>
+            <param name="source">Source animated object.</param>
+            <param name="dest">Destination, child of the source.</param>
+            <param name="sampleRate">Sample rate.</param>
+            <param name="unityCurves">Unity curves.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.GetRotationCurve``1(UnityEngine.GameObject,System.Single,System.Collections.Generic.Dictionary{UnityEngine.GameObject,UnityEditor.Formats.Fbx.Exporter.RotationCurve}@)">
+            <summary>
+            Gets or creates the rotation curve for GameObject uniGO.
+            </summary>
+            <returns>The rotation curve.</returns>
+            <param name="uniGO">Unity GameObject.</param>
+            <param name="frameRate">Frame rate.</param>
+            <param name="rotations">Rotations.</param>
+            <typeparam name="T"> RotationCurve is abstract so specify type of RotationCurve to create.</typeparam>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportAnimation(UnityEngine.GameObject,Autodesk.Fbx.FbxScene)">
+            <summary>
+            Export the Animator component on this game object
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.SetDefaultCamera(Autodesk.Fbx.FbxScene)">
+            <summary>
+            configures default camera for the scene
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.GetUniqueName(System.String,System.Collections.Generic.Dictionary{System.String,System.Int32})">
+            <summary>
+            Ensures that the inputted name is unique.
+            If a duplicate name is found, then it is incremented.
+            e.g. Sphere becomes Sphere_1
+            </summary>
+            <returns>Unique name</returns>
+            <param name="name">Name</param>
+            <param name="nameToCountMap">The dictionary to use to map name to # of occurences</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.GetUniqueFbxNodeName(System.String)">
+            <summary>
+            Ensures that the inputted name is unique.
+            If a duplicate name is found, then it is incremented.
+            e.g. Sphere becomes Sphere_1
+            </summary>
+            <returns>Unique name</returns>
+            <param name="name">Name</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.GetUniqueMaterialName(System.String)">
+            <summary>
+            Ensures that the inputted material name is unique.
+            If a duplicate name is found, then it is incremented.
+            e.g. mat becomes mat_1
+            </summary>
+            <param name="name">Name</param>
+            <returns>Unique material name</returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.GetUniqueTextureName(System.String)">
+            <summary>
+            Ensures that the inputted texture name is unique.
+            If a duplicate name is found, then it is incremented.
+            e.g. tex becomes tex_1
+            </summary>
+            <param name="name">Name</param>
+            <returns>Unique texture name</returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.CreateFbxNode(UnityEngine.GameObject,Autodesk.Fbx.FbxScene)">
+            <summary>
+            Create a fbxNode from unityGo.
+            </summary>
+            <param name="unityGo"></param>
+            <param name="fbxScene"></param>
+            <returns>the created FbxNode</returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportTransformHierarchy(UnityEngine.GameObject,Autodesk.Fbx.FbxScene,Autodesk.Fbx.FbxNode,System.Int32,System.Int32,UnityEngine.Vector3,UnityEditor.Formats.Fbx.Exporter.ModelExporter.TransformExportType,UnityEditor.Formats.Fbx.Exporter.LODExportType)">
+            <summary>
+            Creates an FbxNode for each GameObject.
+            </summary>
+            <returns>The number of nodes exported.</returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportAnimationOnly(UnityEngine.GameObject,Autodesk.Fbx.FbxScene,System.Int32,System.Int32,UnityEngine.Vector3,UnityEditor.Formats.Fbx.Exporter.IExportData,UnityEditor.Formats.Fbx.Exporter.ModelExporter.TransformExportType)">
+            <summary>
+            Exports all animation clips in the hierarchy along with
+            the minimum required GameObject information.
+            i.e. Animated GameObjects, their ancestors, and their transforms are exported,
+                but components are only exported if explicitly animated. Meshes are not exported.
+            </summary>
+            <returns>The number of nodes exported.</returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportGameObjectAndParents(UnityEngine.GameObject,UnityEngine.GameObject,Autodesk.Fbx.FbxScene,Autodesk.Fbx.FbxNode@,UnityEngine.Vector3,UnityEditor.Formats.Fbx.Exporter.ModelExporter.TransformExportType,System.Int32@,System.Int32)">
+            <summary>
+            Exports the Gameobject and its ancestors.
+            </summary>
+            <returns><c>true</c>, if game object and parents were exported,
+             <c>false</c> if export cancelled.</returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportBoneTransform(Autodesk.Fbx.FbxNode,Autodesk.Fbx.FbxScene,UnityEngine.Transform,UnityEditor.Formats.Fbx.Exporter.ModelExporter.SkinnedMeshBoneInfo)">
+            <summary>
+            Exports the bone transform.
+            </summary>
+            <returns><c>true</c>, if bone transform was exported, <c>false</c> otherwise.</returns>
+            <param name="fbxNode">Fbx node.</param>
+            <param name="fbxScene">Fbx scene.</param>
+            <param name="unityBone">Unity bone.</param>
+            <param name="boneInfo">Bone info.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.GetObjectToRootDepth(UnityEngine.Transform,UnityEngine.Transform)">
+            <summary>
+            Counts how many objects are between this object and the root (exclusive).
+            </summary>
+            <returns>The object to root count.</returns>
+            <param name="startObject">Start object.</param>
+            <param name="root">Root object.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.GetAnimOnlyHierarchyCount(System.Collections.Generic.Dictionary{UnityEngine.GameObject,UnityEditor.Formats.Fbx.Exporter.IExportData})">
+             <summary>
+             Gets the count of animated objects to be exported.
+            
+             In addition, collects the minimum set of what needs to be exported for each GameObject hierarchy.
+             This contains all the animated GameObjects, their ancestors, their transforms, as well as any animated
+             components and the animation clips. Also, the first animation to export, if any.
+             </summary>
+             <returns>The animation only hierarchy count.</returns>
+             <param name="hierarchyToExportData">Map from GameObject hierarchy to animation export data.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportComponents(Autodesk.Fbx.FbxScene)">
+            <summary>
+            Export components on this game object.
+            Transform components have already been exported.
+            This function exports the other components and animation.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.GameObjectHasAnimation(UnityEngine.GameObject)">
+            <summary>
+            Checks if the GameObject has animation.
+            </summary>
+            <returns><c>true</c>, if object has animation, <c>false</c> otherwise.</returns>
+            <param name="go">Go.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.GetHierarchyCount(System.Collections.Generic.HashSet{UnityEngine.GameObject})">
+            <summary>
+            A count of how many GameObjects we are exporting, to have a rough
+            idea of how long creating the scene will take.
+            </summary>
+            <returns>The hierarchy count.</returns>
+            <param name="exportSet">Export set.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.RemoveRedundantObjects(System.Collections.Generic.IEnumerable{UnityEngine.Object})">
+            <summary>
+            Removes objects that will already be exported anyway.
+            E.g. if a parent and its child are both selected, then the child
+                 will be removed from the export set.
+            </summary>
+            <returns>The revised export set</returns>
+            <param name="unityExportSet">Unity export set.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.EncapsulateBounds(UnityEngine.Transform,UnityEngine.Bounds@)">
+            <summary>
+            Recursively go through the hierarchy, unioning the bounding box centers
+            of all the children, to find the combined bounds.
+            </summary>
+            <param name="t">Transform.</param>
+            <param name="boundsUnion">The Bounds that is the Union of all the bounds on this transform's hierarchy.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.GetBounds(UnityEngine.Transform)">
+            <summary>
+            Gets the bounds of a transform.
+            Looks first at the Renderer, then Mesh, then Collider.
+            Default to a bounds with center transform.position and size zero.
+            </summary>
+            <returns>The bounds.</returns>
+            <param name="t">Transform.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.FindCenter(System.Collections.Generic.IEnumerable{UnityEngine.GameObject})">
+            <summary>
+            Finds the center of a group of GameObjects.
+            </summary>
+            <returns>Center of gameObjects.</returns>
+            <param name="gameObjects">Game objects.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.GetRecenteredTranslation(UnityEngine.Transform,UnityEngine.Vector3)">
+            <summary>
+            Gets the recentered translation.
+            </summary>
+            <returns>The recentered translation.</returns>
+            <param name="t">Transform.</param>
+            <param name="center">Center point.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportAll(System.Collections.Generic.IEnumerable{UnityEngine.Object},System.Collections.Generic.Dictionary{UnityEngine.GameObject,UnityEditor.Formats.Fbx.Exporter.IExportData})">
+             <summary>
+             Export all the objects in the set.
+             Return the number of objects in the set that we exported.
+            
+             This refreshes the asset database.
+             </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.DeleteTempFile">
+            <summary>
+            Deletes the file that got created while exporting.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ReplaceFile">
+            <summary>
+            Replaces the file we are overwriting with
+            the temp file that was exported to.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.OnContextItem(UnityEditor.MenuCommand)">
+            <summary>
+            Add a menu item "Export Model..." to a GameObject's context menu.
+            </summary>
+            <param name="command">Command.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.OnValidateMenuItem">
+            <summary>
+            Validate the menu item defined by the function OnContextItem.
+            </summary>
+        </member>
+        <member name="T:UnityEditor.Formats.Fbx.Exporter.ModelExporter.MeshInfo">
+            <summary>
+            Information about the mesh that is important for exporting.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ModelExporter.MeshInfo.IsValid">
+            <summary>
+            Return true if there's a valid mesh information
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ModelExporter.MeshInfo.VertexCount">
+            <summary>
+            Gets the vertex count.
+            </summary>
+            <value>The vertex count.</value>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ModelExporter.MeshInfo.m_triangles">
+            <summary>
+            Gets the triangles. Each triangle is represented as 3 indices from the vertices array.
+            Ex: if triangles = [3,4,2], then we have one triangle with vertices vertices[3], vertices[4], and vertices[2]
+            </summary>
+            <value>The triangles.</value>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ModelExporter.MeshInfo.m_vertices">
+            <summary>
+            Gets the vertices, represented in local coordinates.
+            </summary>
+            <value>The vertices.</value>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ModelExporter.MeshInfo.m_normals">
+            <summary>
+            Gets the normals for the vertices.
+            </summary>
+            <value>The normals.</value>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ModelExporter.MeshInfo.m_Binormals">
+            <summary>
+            Gets the binormals for the vertices.
+            </summary>
+            <value>The normals.</value>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ModelExporter.MeshInfo.m_tangents">
+            <summary>
+            Gets the tangents for the vertices.
+            </summary>
+            <value>The tangents.</value>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ModelExporter.MeshInfo.m_vertexColors">
+            <summary>
+            Gets the vertex colors for the vertices.
+            </summary>
+            <value>The vertex colors.</value>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ModelExporter.MeshInfo.m_UVs">
+            <summary>
+            Gets the uvs.
+            </summary>
+            <value>The uv.</value>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ModelExporter.MeshInfo.Materials">
+            <summary>
+            The material(s) used.
+            Always at least one.
+            None are missing materials (we replace missing materials with the default material).
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.MeshInfo.#ctor(UnityEngine.Mesh,UnityEngine.Material[])">
+            <summary>
+            Set up the MeshInfo with the given mesh and materials.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.GetGameObject(UnityEngine.Object)">
+            <summary>
+            Get the GameObject
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ModelExporter.MeshForComponentCallbacks">
+            <summary>
+            Map from type (must be a MonoBehaviour) to callback.
+            The type safety is lost; the caller must ensure it at run-time.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.RegisterMeshCallback``1(UnityEditor.Formats.Fbx.Exporter.GetMeshForComponent{``0},System.Boolean)">
+             <summary>
+             Register a callback to invoke if the object has a component of type T.
+            
+             This function is prefered over the other mesh callback
+             registration methods because it's type-safe, efficient, and
+             invocation order between types can be controlled in the UI by
+             reordering the components.
+            
+             It's an error to register a callback for a component that
+             already has one, unless 'replace' is set to true.
+             </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.RegisterMeshCallback(System.Type,UnityEditor.Formats.Fbx.Exporter.GetMeshForComponent,System.Boolean)">
+             <summary>
+             Register a callback to invoke if the object has a component of type T.
+            
+             The callback will be invoked with an argument of type T, it's
+             safe to downcast.
+            
+             Normally you'll want to use the generic form, but this one is
+             easier to use with reflection.
+             </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.UnRegisterMeshCallback``1">
+            <summary>
+            Forget the callback linked to a component of type T.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.UnRegisterMeshCallback(System.Type)">
+            <summary>
+            Forget the callback linked to a component of type T.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.UnRegisterAllMeshCallbacks">
+            <summary>
+            Forget the callbacks linked to components.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.RegisterMeshObjectCallback(UnityEditor.Formats.Fbx.Exporter.GetMeshForObject)">
+             <summary>
+             Register a callback to invoke on every GameObject we export.
+            
+             Avoid doing this if you can use a callback that depends on type.
+            
+             The GameObject-based callbacks are checked before the
+             component-based ones.
+            
+             Multiple GameObject-based callbacks can be registered; they are
+             checked in order of registration.
+             </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.UnRegisterMeshObjectCallback(UnityEditor.Formats.Fbx.Exporter.GetMeshForObject)">
+            <summary>
+            Forget a GameObject-based callback.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.UnRegisterAllMeshObjectCallbacks">
+            <summary>
+            Forget all GameObject-based callbacks.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportMesh(UnityEngine.GameObject,Autodesk.Fbx.FbxNode)">
+             <summary>
+             Exports a mesh for a unity gameObject.
+            
+             This goes through the callback system to find the right mesh and
+             allow plugins to substitute their own meshes.
+             </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ModelExporter.NumNodes">
+            <summary>
+            Number of nodes exported including siblings and decendents
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ModelExporter.NumMeshes">
+            <summary>
+            Number of meshes exported
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ModelExporter.NumTriangles">
+            <summary>
+            Number of triangles exported
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ModelExporter.LastFilePath">
+            <summary>
+            manage the selection of a filename
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportObject(System.String,UnityEngine.Object,UnityEditor.Formats.Fbx.Exporter.ExportModelOptions)">
+            <summary>
+            Exports a single Unity GameObject to an FBX file,
+            with the specified export settings.
+            </summary>
+            <returns>
+            The FBX file path if successful; otherwise null.
+            </returns>
+            <param name="filePath">Absolute file path to use for the FBX file.</param>
+            <param name="singleObject">The Unity GameObject to export.</param>
+            <param name="exportOptions">The export options to use.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportObjects(System.String,UnityEngine.Object[],UnityEditor.Formats.Fbx.Exporter.ExportModelOptions)">
+            <summary>
+            Exports an array of Unity GameObjects to an FBX file,
+            with the specified export settings.
+            </summary>
+            <returns>
+            The FBX file path if successful; otherwise null.
+            </returns>
+            <param name="filePath">Absolute file path to use for the FBX file.</param>
+            <param name="objects">Array of Unity GameObjects to export.</param>
+            <param name="exportOptions">The export options to use.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportObjects(System.String,UnityEngine.Object[])">
+            <summary>
+            Exports an array of Unity GameObjects to an FBX file.
+            </summary>
+            <returns>
+            The FBX file path if successful; otherwise returns null.
+            </returns>
+            <param name="filePath">Absolute file path to use for the FBX file.</param>
+            <param name="objects">Array of Unity GameObjects to export.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportObject(System.String,UnityEngine.Object)">
+            <summary>
+            Exports a single Unity GameObject to an FBX file.
+            </summary>
+            <returns>
+            The FBX file path if successful; otherwise null.
+            </returns>
+            <param name="filePath">Absolute file path to use for the FBX file.</param>
+            <param name="singleObject">The Unity GameObject to export.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportTimelineClip(System.String,UnityEngine.Timeline.TimelineClip,UnityEngine.Playables.PlayableDirector,UnityEditor.Formats.Fbx.Exporter.IExportOptions)">
+            <summary>
+            Exports the animation from a single TimelineClip to an FBX file.
+            </summary>
+            <param name="filePath">Absolute file path to use for the FBX file.</param>
+            <param name="timelineClip">The TimelineClip to export.</param>
+            <param name="exportOptions">The export options to use.</param>
+            <returns>The FBX file path if successful; otherwise null.</returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.ExportObjects(System.String,UnityEngine.Object[],UnityEditor.Formats.Fbx.Exporter.IExportOptions,System.Collections.Generic.Dictionary{UnityEngine.GameObject,UnityEditor.Formats.Fbx.Exporter.IExportData})">
+            <summary>
+            <para>Exports a list of GameObjects to an FBX file.</para>
+            <para>
+            Use the SaveFile panel to allow the user to enter a file name.
+            </para>
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ModelExporter.RemoveDiacritics(System.String)">
+            <summary>
+            Removes the diacritics (i.e. accents) from letters.
+            e.g. é becomes e
+            </summary>
+            <returns>Text with accents removed.</returns>
+            <param name="text">Text.</param>
+        </member>
+        <member name="T:UnityEditor.Formats.Fbx.Exporter.FbxPropertyChannelPair">
+            <summary>
+            Store FBX property name and channel name
+            Default constructor added because it needs to be called before autoimplemented properties can be assigned. Otherwise we get build errors
+            </summary>
+        </member>
+        <member name="T:UnityEditor.Formats.Fbx.Exporter.FbxPropertyChannelPair.PropertyChannelMap">
+            <summary>
+            Contains the two lists that map Unity property to FBX property and Unity channel to Fbx channel
+            for a set of properties.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.FbxPropertyChannelPair.PropertyChannelMap.GetFbxProperty(System.String)">
+            <summary>
+            Get the Fbx property name for the given Unity property name from the given list.
+            </summary>
+            <param name="uniProperty"></param>
+            <param name="propertyMap"></param>
+            <returns>The Fbx property name or null if there was no match in the list</returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.FbxPropertyChannelPair.PropertyChannelMap.GetFbxChannel(System.String)">
+            <summary>
+            Get the Fbx channel name for the given Unity channel from the given list.
+            </summary>
+            <param name="uniChannel"></param>
+            <param name="channelMap"></param>
+            <returns>The Fbx channel name or null if there was no match in the list</returns>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.FbxPropertyChannelPair.MapTransformPropToFbxProp">
+            <summary>
+            Map of Unity transform properties to their FBX equivalent.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.FbxPropertyChannelPair.MapAimConstraintPropToFbxProp">
+            <summary>
+            Map of Unity Aim constraint properties to their FBX equivalent.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.FbxPropertyChannelPair.MapColorPropToFbxProp">
+            <summary>
+            Map of Unity color properties to their FBX equivalent.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.FbxPropertyChannelPair.MapPropToFbxProp">
+            <summary>
+            Map of Unity properties to their FBX equivalent.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.FbxPropertyChannelPair.MapConstraintSourcePropToFbxProp">
+            <summary>
+            Map of Unity constraint source property name as a regular expression to the FBX property as a string format.
+            This is necessary because the Unity property contains an index in to an array, and the FBX property contains
+            the name of the source object.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.FbxPropertyChannelPair.MapConstraintSourceTransformPropToFbxProp">
+            <summary>
+            Map of Unity constraint source transform property name as a regular expression to the FBX property as a string format.
+            This is necessary because the Unity property contains an index in to an array, and the FBX property contains
+            the name of the source object.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.FbxPropertyChannelPair.MapBlendshapesPropToFbxProp">
+            <summary>
+            Map of Unity blendshape property name as a regular expression to the FBX property.
+            This is necessary because the Unity property contains the name of the target object.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.FbxPropertyChannelPair.MapTransformChannelToFbxChannel">
+            <summary>
+            Map of Unity transform channels to their FBX equivalent.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.FbxPropertyChannelPair.MapColorChannelToFbxChannel">
+            <summary>
+            Map of Unity color channels to their FBX equivalent.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.FbxPropertyChannelPair.GetUnityPropertyChannelPair(System.String)">
+             <summary>
+             Separates and returns the property and channel from the full Unity property name.
+            
+             Takes what is after the last period as the channel.
+             In order to use this have to be certain that there are channels, as there are cases where what is after
+             the last period is still the property name. E.g. m_Sources.Array.data[0].weight has no channel.
+             </summary>
+             <param name="fullPropertyName"></param>
+             <returns></returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.FbxPropertyChannelPair.GetFbxConstraintSourceProperty(System.String,Autodesk.Fbx.FbxConstraint,System.Collections.Generic.List{System.ValueTuple{System.String,System.String}})">
+             <summary>
+             Get the Fbx property name for the given Unity constraint source property name from the given list.
+            
+             This is different from GetFbxProperty() because the Unity constraint source properties contain indices, and
+             the Fbx constraint source property contains the name of the source object.
+             </summary>
+             <param name="uniProperty"></param>
+             <param name="constraint"></param>
+             <param name="propertyMap"></param>
+             <returns>The Fbx property name or null if there was no match in the list</returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.FbxPropertyChannelPair.GetFbxBlendshapeProperty(System.String,System.Collections.Generic.List{System.ValueTuple{System.String,System.String}})">
+             <summary>
+             Get the Fbx property name for the given Unity blendshape property name from the given list.
+            
+             This is different from GetFbxProperty() because the Unity blendshape properties contain the name
+             of the target object.
+             </summary>
+             <param name="uniProperty"></param>
+             <param name="propertyMap"></param>
+             <returns>The Fbx property name or null if there was no match in the list</returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.FbxPropertyChannelPair.GetChannelPairs(System.String,UnityEditor.Formats.Fbx.Exporter.FbxPropertyChannelPair.PropertyChannelMap,Autodesk.Fbx.FbxConstraint)">
+            <summary>
+            Try to get the property channel pairs for the given Unity property from the given property channel mapping.
+            </summary>
+            <param name="uniPropertyName"></param>
+            <param name="propertyChannelMap"></param>
+            <param name="constraint"></param>
+            <returns>The property channel pairs or null if there was no match</returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.FbxPropertyChannelPair.TryGetValue(System.String,UnityEditor.Formats.Fbx.Exporter.FbxPropertyChannelPair[]@,Autodesk.Fbx.FbxConstraint)">
+            <summary>
+            Map a Unity property name to the corresponding FBX property and
+            channel names.
+            </summary>
+        </member>
+        <member name="T:UnityEditor.Formats.Fbx.Exporter.ConvertToPrefabSettingsSerialize">
+            <summary>
+            Class specifying the FBX export settings when converting to a Prefab Variant.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ConvertToPrefabSettingsSerialize.ModelAnimIncludeOption">
+            <inheritdoc/>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ConvertToPrefabSettingsSerialize.LODExportType">
+            <inheritdoc/>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ConvertToPrefabSettingsSerialize.ObjectPosition">
+            <inheritdoc/>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ConvertToPrefabSettingsSerialize.ExportUnrendered">
+            <inheritdoc/>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ConvertToPrefabSettingsSerialize.AllowSceneModification">
+            <inheritdoc/>
+        </member>
+        <member name="T:UnityEditor.Formats.Fbx.Exporter.ConvertToPrefabVariantOptions">
+            <summary>
+            Class specifying the FBX export settings when converting to a Prefab Variant.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ConvertToPrefabVariantOptions.ExportFormat">
+            <summary>
+            The export format (binary or ascii).
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ConvertToPrefabVariantOptions.UnityEditor#Formats#Fbx#Exporter#IExportOptions#ModelAnimIncludeOption">
+            <summary>
+            Option to export the model only, the animation only, or both the model and the animation.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ConvertToPrefabVariantOptions.UnityEditor#Formats#Fbx#Exporter#IExportOptions#LODExportType">
+            <summary>
+            The type of LOD to export (All, Highest or Lowest).
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ConvertToPrefabVariantOptions.UnityEditor#Formats#Fbx#Exporter#IExportOptions#ObjectPosition">
+            <summary>
+            The position to export the object to (Local centered, World absolute, or Reset). Use Reset for converting to a Prefab.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ConvertToPrefabVariantOptions.AnimateSkinnedMesh">
+            <summary>
+            Option to export the animation on GameObjects that have a skinned mesh.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ConvertToPrefabVariantOptions.UseMayaCompatibleNames">
+            <summary>
+            Option to convert the GameObject and material names to Maya compatible names.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ConvertToPrefabVariantOptions.UnityEditor#Formats#Fbx#Exporter#IExportOptions#AllowSceneModification">
+            <summary>
+            Option to change the GameObjects and material names in the scene to keep them
+            Maya compatible after the export. Only works if UseMayaCompatibleNames is also enabled.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ConvertToPrefabVariantOptions.UnityEditor#Formats#Fbx#Exporter#IExportOptions#ExportUnrendered">
+            <summary>
+            Option to export GameObjects that don't have a renderer.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ConvertToPrefabVariantOptions.UnityEditor#Formats#Fbx#Exporter#IExportOptions#PreserveImportSettings">
+            <summary>
+            Option to preserve the previous import settings after the export when overwriting an existing FBX file.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ConvertToPrefabVariantOptions.UnityEditor#Formats#Fbx#Exporter#IExportOptions#KeepInstances">
+            <summary>
+            Option to keep multiple instances of the same mesh as separate instances on export.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ConvertToPrefabVariantOptions.UnityEditor#Formats#Fbx#Exporter#IExportOptions#EmbedTextures">
+            <summary>
+            Option to embed textures in the exported FBX file.
+            </summary>
+            <remarks>
+            To embed textures, you must set the file ExportFormat to binary.
+            </remarks>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ConvertToPrefabVariantOptions.AnimationSource">
+            <summary>
+            The transform to transfer the animation from. The animation is transferred to AnimationDest.
+            </summary>
+            <remarks>
+            Transform must be an ancestor of AnimationDest, and may be an ancestor of the selected GameObject.
+            </remarks>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ConvertToPrefabVariantOptions.AnimationDest">
+            <summary>
+            The transform to transfer the animation to.
+            This GameObject receives the transform animation on GameObjects between Source
+            and Destination as well as the animation on the Source itself.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ExportOptionsEditorWindow.m_exportSetContainsPrefabInstanceWithAddedObjects">
+            <summary>
+            Caches the result of SelectionContainsPrefabInstanceWithAddedObjects() as it
+            only needs to be updated when ToExport is modified.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportOptionsEditorWindow.CreateCustomUI">
+            <summary>
+            Function to be used by derived classes to add custom UI between the file path selector and export options.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportOptionsEditorWindow.IsAncestor(UnityEngine.Transform,UnityEngine.Transform)">
+            <summary>
+            Determines whether p is an ancestor to t.
+            </summary>
+            <returns><c>true</c> if p is ancestor to t; otherwise, <c>false</c>.</returns>
+            <param name="p">P.</param>
+            <param name="t">T.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportOptionsEditorWindow.IsInSameHierarchy(UnityEngine.Transform,UnityEngine.Transform)">
+            <summary>
+            Determines whether t1 and t2 are in the same hierarchy.
+            </summary>
+            <returns><c>true</c> if t1 is in same hierarchy as t2; otherwise, <c>false</c>.</returns>
+            <param name="t1">T1.</param>
+            <param name="t2">T2.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportOptionsEditorWindow.DoNotShowDialogUI">
+            <summary>
+            Add UI to turn the dialog off next time the user exports
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportOptionsEditorWindow.OverwriteExistingFile(System.String)">
+            <summary>
+            Checks whether the file exists and if it does then asks if it should be overwritten.
+            </summary>
+            <returns><c>true</c>, if file should be overwritten, <c>false</c> otherwise.</returns>
+            <param name="filePath">File path.</param>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ExportModelEditorWindow.DefaultFilename">
+            <summary>
+            Gets the filename from objects to export.
+            </summary>
+            <returns>The object's name if one object selected, "Untitled" if multiple
+            objects selected for export.</returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ExportModelEditorWindow.RestoreSettings">
+            <summary>
+            Restore changed export settings after export
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.Visitors.CameraVisitor.ConfigureCamera(UnityEngine.Camera,Autodesk.Fbx.FbxCamera)">
+            <summary>
+            Visit Object and configure FbxCamera
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.Visitors.CameraVisitor.ConfigureGameCamera(Autodesk.Fbx.FbxCamera,UnityEngine.Camera)">
+            <summary>
+            Configure FbxCameras from GameCamera
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.Visitors.CameraVisitor.ConfigurePhysicalCamera(Autodesk.Fbx.FbxCamera,UnityEngine.Camera)">
+            <summary>
+            Configure FbxCameras from a Physical Camera
+            </summary>
+        </member>
+        <member name="T:UnityEditor.Formats.Fbx.Exporter.FbxRecorderSettings">
+            <summary>
+            Class describing the settings for the FBX Recorder.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.FbxRecorderSettings.ExportGeometry">
+            <summary>
+            Option to export the geometry/meshes of the recorded hierarchy to FBX.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.FbxRecorderSettings.TransferAnimationSource">
+            <summary>
+            Option to transfer the transform animation from this transform to the destination.
+            This also transfers to the destination any animation on GameObjects between the source and the destination.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.FbxRecorderSettings.TransferAnimationDest">
+            <summary>
+            Option to transfer the transform animation from the source to this transform.
+            This also transfers to the destination any animation on GameObjects between the source and the destination.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.FbxRecorderSettings.GenerateBindingId">
+            <summary>
+            Get a binding ID for the transform, so that the reference survives domain reload. Maintaining a direct reference would not work
+            as all scene objects are destroyed and recreated on reload (e.g. when entering/exiting playmode).
+            </summary>
+            <returns>Binding ID</returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.FbxRecorderSettings.GetBinding(System.String)">
+            <summary>
+            Get the Unity object (in this case transform), associated with the given binding ID.
+            </summary>
+            <param name="id">Binding ID</param>
+            <returns>Transform associated with binding ID</returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.FbxRecorderSettings.SetBinding(System.String,UnityEngine.Object)">
+            <summary>
+            Set the binding ID to be associated with the given Unity object.
+            This information will be saved on domain reload, so that the object can still be found
+            with the binding ID.
+            </summary>
+            <param name="id">Binding ID</param>
+            <param name="obj">Unity Object</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.FbxRecorderSettings.IsAncestor(UnityEngine.Transform,UnityEngine.Transform)">
+            <summary>
+            Determines whether p is an ancestor to t.
+            </summary>
+            <returns><c>true</c> if p is ancestor to t; otherwise, <c>false</c>.</returns>
+            <param name="p">P.</param>
+            <param name="t">T.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.FbxRecorderSettings.IsInSameHierarchy(UnityEngine.Transform,UnityEngine.Transform)">
+            <summary>
+            Determines whether t1 and t2 are in the same hierarchy.
+            </summary>
+            <returns><c>true</c> if t1 is in same hierarchy as t2; otherwise, <c>false</c>.</returns>
+            <param name="t1">T1.</param>
+            <param name="t2">T2.</param>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.FbxRecorderSettings.AnimationInputSettings">
+            <summary>
+            Stores the reference to the current FBX Recorder's input settings.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.FbxRecorderSettings.#ctor">
+            <summary>
+            Default constructor for FbxRecorderSettings.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.FbxRecorderSettings.IsPlatformSupported">
+            <summary>
+            Indicates if the current platform is supported (True) or not (False).
+            </summary>
+            <remarks>
+            FBX Recorder currently supports the following platforms: LinuxEditor, OSXEditor, WindowsEditor.
+            </remarks>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.FbxRecorderSettings.InputsSettings">
+            <summary>
+            Stores the list of Input settings required by this Recorder.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.FbxRecorderSettings.GetErrors(System.Collections.Generic.List{System.String})">
+            <summary>
+            Tests if the Recorder has any errors.
+            </summary>
+            <param name="errors">List of errors encountered.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.FbxRecorderSettings.OnAfterDuplicate">
+            <summary>
+            Override this method if you need to do any post treatment after duplicating this Recorder in the Recorder Window.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.FbxRecorderSettings.Extension">
+            <summary>
+            Stores the file extension this Recorder uses (without the dot).
+            </summary>
+        </member>
+        <member name="T:UnityEditor.Formats.Fbx.Exporter.ConvertToNestedPrefab">
+            <summary>
+            <para>Class for converting an exported FBX to a Prefab Variant.</para>
+            <para>For API overview and example scripts, refer to @api_index.</para>
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ConvertToNestedPrefab.OnGameObjectContextItem(UnityEditor.MenuCommand)">
+             <summary>
+             OnContextItem is called either:
+             * when the user selects the menu item via the top menu (with a null MenuCommand), or
+             * when the user selects the menu item via the context menu (in which case there's a context)
+            
+             OnContextItem gets called once per selected object (if the
+             parent and child are selected, then OnContextItem will only be
+             called on the parent)
+             </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ConvertToNestedPrefab.OnValidateMenuItem">
+            <summary>
+            Validate the menu items defined above.
+            </summary>
+        </member>
+        <member name="P:UnityEditor.Formats.Fbx.Exporter.ConvertToNestedPrefab.ExportSettings">
+            <summary>
+            Gets the export settings.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ConvertToNestedPrefab.SetContainsOnlyPrefabAssets(UnityEngine.Object[])">
+            <summary>
+            Return true if the given set contains only prefab assets on disk,
+            and nothing from the scene.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ConvertToNestedPrefab.CreateInstantiatedModelPrefab(UnityEngine.GameObject[])">
+             <summary>
+             Create instantiated model prefabs from a selection of objects.
+            
+             Every hierarchy in the selection will be exported, under the name of the root.
+            
+             If an object and one of its descendents are both selected, the descendent is not promoted to be a prefab -- we only export the root.
+             </summary>
+             <returns>list of instanced Model Prefabs</returns>
+             <param name="unityGameObjectsToConvert">Unity game objects to convert to Model Prefab instances</param>
+             <param name="path">Path to save Model Prefab; use FbxExportSettings if null</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ConvertToNestedPrefab.FixSceneReferenceToObject(UnityEngine.Object,UnityEngine.GameObject,System.Collections.Generic.Dictionary{UnityEngine.Object,UnityEngine.Object})">
+             <summary>
+             For sceneObj, replace references of objects that are keys in fixSceneRefsMap, to the value.
+            
+             If the scene object is toConvertRoot or a child of it, then do not fix its references as it
+             will be deleted after conversion.
+             </summary>
+             <param name="sceneObj">scene object with reference to replace</param>
+             <param name="fixSceneRefsMap">mapping from original object to new object</param>
+             <param name="toConvertRoot">root of the hierarchy being converted</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ConvertToNestedPrefab.GetPropertyReflection(System.Object,System.String,System.Boolean)">
+            <summary>
+            Helper for getting a property from an instance with reflection.
+            </summary>
+            <param name="instance"></param>
+            <param name="propertyName"></param>
+            <param name="isPublic"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ConvertToNestedPrefab.ConvertToPrefabVariant(UnityEngine.GameObject,System.String,System.String,System.String,System.String,UnityEditor.Formats.Fbx.Exporter.ConvertToPrefabVariantOptions)">
+             <summary>
+             Convert one object (and the hierarchy below it) to a prefab variant of a model prefab.
+            
+             Returns the prefab asset that's linked to the fbx.
+            
+             If 'toConvert' is:
+             <list type="bullet">
+             <item><description>
+             A GameObject in the Scene, then the method exports the hierarchy to an FBX
+             and creates a new Prefab Variant pointing to the exported FBX.
+             </description></item>
+             <item><description>
+             The root of an FBX asset, or the root of an instance of an
+             FBX asset, then the method creates a new Prefab Variant
+             pointing to the existing FBX.
+             </description></item>
+             <item><description>
+             A Prefab asset,
+             then the method exports a new FBX asset and creates a new Prefab Variant
+             pointing to the FBX.
+             </description></item>
+             </list>
+             </summary>
+             <returns>The prefab variant linked to an fbx file.</returns>
+             <param name="toConvert">Object to convert.</param>
+             <param name="fbxFullPath">Absolute platform-specific path to
+             the fbx file. If the file already exists, it will be overwritten.
+             May be null, in which case we construct a unique filename.
+             Ignored if 'toConvert' is an fbx asset or is an instance of
+             one.</param>
+             <param name="fbxDirectoryFullPath">Absolute platform-specific
+             path to a directory in which to put the fbx file under a unique
+             filename. May be null, in which case we use the export settings.
+             Ignored if 'fbxFullPath' is specified. Ignored if 'toConvert' is
+             an fbx asset or an instance of one.</param>
+             <param name="prefabFullPath">Absolute platform-specific path to
+             the prefab file. If the file already exists, it will be
+             overwritten. May be null, in which case we construct a unique
+             filename. Ignored if 'toConvert' is a prefab asset.</param>
+             <param name="prefabDirectoryFullPath">Absolute
+             platform-specific path to a directory in which to put the prefab
+             file under a unique filename. May be null, in which case we use
+             the export settings. Ignored if 'prefabFullPath' is specified.
+             Ignored if 'toConvert' is a prefab asset.</param>
+             <param name="convertOptions">
+             Export options to use for exporting the model asset
+             to convert to a Prefab.
+             </param>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ConvertToNestedPrefab.SourceObjectInfo.destGO">
+            <summary>
+            The exported GameObject that will replace the source.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ConvertToNestedPrefab.SourceObjectInfo.sceneObjectsWithReference">
+             <summary>
+             A list of scene objects that reference this
+             object or one of its components. Populated before traversing the
+             components to speed up the search time of finding/replacing references.
+            
+             Note: In older versions of Unity (without the Search API), searching
+             for references by GameObject ID will not return objects that reference
+             the components of the same GameObject. Therefore in older versions still need
+             to do a search by component.
+             </summary>
+        </member>
+        <member name="F:UnityEditor.Formats.Fbx.Exporter.ConvertToNestedPrefab.s_nameToInfo">
+            <summary>
+            Dictionary from name of source object (in toConvert hierarchy) to info.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ConvertToNestedPrefab.GatherSceneHierarchy(UnityEngine.GameObject)">
+            <summary>
+            Populates the s_nameToInfo dictionary by traversing the given hierarchy.
+            In newer versions of Unity, as it traverses, will also perform a search
+            for references to each object or component in the scene.
+            </summary>
+            <param name="hierarchyRoot"></param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ConvertToNestedPrefab.WillExportFbx(UnityEngine.GameObject)">
+            <summary>
+            Check whether <see>Convert</see> will be exporting an fbx file,
+            or reusing one.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ConvertToNestedPrefab.GetOrCreateFbxAsset(UnityEngine.GameObject,System.String,System.String,UnityEditor.Formats.Fbx.Exporter.ConvertToPrefabSettingsSerialize)">
+             <summary>
+             Return an FBX asset that corresponds to 'toConvert'.
+            
+             If 'toConvert' is the root of an FBX asset, return it.
+            
+             If it's an instance in a scene the points to the root of an FBX
+             asset, return that asset.
+            
+             Otherwise, export according to the paths and options, and
+             return the new asset.
+             </summary>
+             <param name="toConvert">GameObject for which we want an fbx asset</param>
+             <param name="fbxDirectoryFullPath">Export will choose an
+             appropriate filename in this directory. Ignored if fbxFullPath is
+             set. Ignored if toConvert is an fbx asset or an instance of an
+             fbx.</param>
+             <param name="fbxDirectoryFullPath">Export will create this
+             file. Overrides fbxDirectoryFullPath. Ignored if toConvert is an
+             fbx asset or an instance of an fbx.</param>
+             <returns>The root of a model prefab asset.</returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ConvertToNestedPrefab.GetFbxAssetOrNull(UnityEngine.GameObject)">
+             <summary>
+             Returns the fbx asset on disk corresponding to the same hierarchy as is selected.
+            
+             Returns go if go is the root of a model prefab.
+             Returns the prefab parent of go if it's the root of a model prefab.
+             Returns null in all other circumstances.
+             </summary>
+             <returns>The root of a model prefab asset, or null.</returns>
+             <param name="go">A gameobject either in the scene or in the assets folder.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ConvertToNestedPrefab.IncrementFileName(System.String,System.String)">
+            <summary>
+            Check if the file exists, and if it does, then increment the name.
+            e.g. if filename is Sphere.fbx and it already exists, change it to Sphere 1.fbx.
+            </summary>
+            <returns>new file name.</returns>
+            <param name="filename">Filename.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ConvertToNestedPrefab.EnforceUniqueNames(System.Collections.Generic.IEnumerable{UnityEngine.GameObject})">
+            <summary>
+            Enforces that all object names be unique before exporting.
+            If an object with a duplicate name is found, then it is incremented.
+            e.g. Sphere becomes Sphere 1
+            </summary>
+            <param name="exportSet">Export set.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ConvertToNestedPrefab.UpdateFromSourceRecursive(UnityEngine.GameObject,UnityEngine.GameObject)">
+            <summary>
+            Updates the meshes and materials of the exported GameObjects
+            to link to those imported from the FBX.
+            </summary>
+            <param name="dest">GameObject to update.</param>
+            <param name="source">Source to update from.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ConvertToNestedPrefab.MapNameToSourceRecursive(UnityEngine.GameObject,UnityEngine.GameObject)">
+             <summary>
+             Gets a dictionary linking dest GameObject name to source game object.
+            
+             Before export we ensure that the hierarchy has unique names, so that we can map by name afterwards.
+             </summary>
+             <returns>Dictionary containing the name to source game object.</returns>
+             <param name="dest">Destination GameObject.</param>
+             <param name="source">Source GameObject.</param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ConvertToNestedPrefab.CopySerializedProperty(UnityEditor.SerializedObject,UnityEditor.SerializedProperty)">
+            <summary>
+            Copy the object reference from fromProperty to the matching property on serializedObject.
+            Use nameMap to find the correct object reference to use.
+            </summary>
+            <param name="serializedObject"></param>
+            <param name="fromProperty"></param>
+            <param name="nameMap"></param>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.ConvertToNestedPrefab.CopyComponents(UnityEngine.GameObject,UnityEngine.GameObject,UnityEngine.GameObject,System.Collections.Generic.Dictionary{UnityEngine.Object,UnityEngine.Object})">
+             <summary>
+             Copy components on the 'from' object which is the object being converted,
+             over to the 'to' object which is the FBX.
+            
+             Copy over everything except meshes and materials, since these
+             are already in the FBX.
+            
+             The 'from' hierarchy is not modified.
+            
+             Note: 'root' is the root object that is being converted
+            
+             For each component, add to fixSceneRefsMap a mapping from the original component on "from"
+             to the new component on "to". In order to be able to fix scene references that were
+             pointing to the original component.
+             </summary>
+        </member>
+        <member name="T:UnityEditor.Formats.Fbx.Exporter.RotationCurve">
+            <summary>
+            Base class for QuaternionCurve and EulerCurve.
+            Provides implementation for computing keys and generating FbxAnimCurves
+            for euler rotation.
+            </summary>
+        </member>
+        <member name="T:UnityEditor.Formats.Fbx.Exporter.EulerCurve">
+            <summary>
+            Convert from ZXY to XYZ euler, and remove
+            prerotation from animated rotation.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.EulerCurve.GetEulerIndex(System.String)">
+            <summary>
+            Gets the index of the euler curve by property name.
+            x = 0, y = 1, z = 2
+            </summary>
+            <returns>The index of the curve, or -1 if property doesn't map to Euler curve.</returns>
+            <param name="uniPropertyName">Unity property name.</param>
+        </member>
+        <member name="T:UnityEditor.Formats.Fbx.Exporter.QuaternionCurve">
+            <summary>
+            Exporting rotations is more complicated. We need to convert
+            from quaternion to euler. We use this class to help.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.QuaternionCurve.GetQuaternionIndex(System.String)">
+            <summary>
+            Gets the index of the curve by property name.
+            x = 0, y = 1, z = 2, w = 3
+            </summary>
+            <returns>The index of the curve, or -1 if property doesn't map to Quaternion curve.</returns>
+            <param name="uniPropertyName">Unity property name.</param>
+        </member>
+        <member name="T:UnityEditor.Formats.Fbx.Exporter.FbxAnimCurveModifyHelper">
+            <summary>
+            Exporting rotations is more complicated. We need to convert
+            from quaternion to euler. We use this class to help.
+            </summary>
+        </member>
+        <member name="T:UnityEditor.Formats.Fbx.Exporter.IExportData">
+            <summary>
+            Export data containing extra information required to export
+            </summary>
+        </member>
+        <member name="T:UnityEditor.Formats.Fbx.Exporter.AnimationOnlyExportData">
+            <summary>
+            Export data containing what to export when
+            exporting animation only.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.AnimationOnlyExportData.CollectDependencies(UnityEngine.AnimationClip,UnityEngine.GameObject,UnityEditor.Formats.Fbx.Exporter.IExportOptions)">
+            <summary>
+            collect all object dependencies for given animation clip
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.AnimationOnlyExportData.CollectDependencies(UnityEngine.AnimationClip[],UnityEngine.GameObject,UnityEditor.Formats.Fbx.Exporter.IExportOptions)">
+            <summary>
+            collect all objects dependencies for animation clips.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.AnimationOnlyExportData.GetGameObjectBoundToTimelineClip(UnityEngine.Timeline.TimelineClip,UnityEngine.Playables.PlayableDirector)">
+            <summary>
+            Get the GameObject that the clip is bound to in the timeline.
+            </summary>
+            <param name="timelineClip"></param>
+            <returns>The GameObject bound to the timeline clip or null if none.</returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.AnimationOnlyExportData.GetGameObjectAndAnimationClip(UnityEngine.Timeline.TimelineClip,UnityEngine.Playables.PlayableDirector)">
+            <summary>
+            Get the GameObject and it's corresponding animation clip from the given timeline clip.
+            </summary>
+            <param name="timelineClip"></param>
+            <returns>KeyValuePair containing GameObject and corresponding AnimationClip</returns>
+        </member>
+        <member name="M:UnityEditor.Formats.Fbx.Exporter.AnimationOnlyExportData.GetFileName(UnityEngine.Timeline.TimelineClip)">
+            <summary>
+            Get the filename of the format {model}@{anim}.fbx from the given timeline clip
+            </summary>
+            <param name="timelineClip"></param>
+            <returns>filename for use for exporting animation clip</returns>
+        </member>
+    </members>
+</doc>

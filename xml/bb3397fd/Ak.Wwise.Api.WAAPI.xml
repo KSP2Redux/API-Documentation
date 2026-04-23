@@ -1,0 +1,1036 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ak.Wwise.Api.WAAPI</name>
+    </assembly>
+    <members>
+        <member name="T:JsonSerializable">
+            <summary>
+            Base class for Json serializable objects. 
+            Implements implicit cast to string using UnityEngine.JsonUtility.ToJson.
+            </summary>
+        </member>
+        <member name="T:Args">
+            <summary>
+            Abstract base class for WAAPI command arguments.
+            </summary>
+        </member>
+        <member name="T:WaqlArgs">
+            <summary>
+            WAAPI arguments containing a WAQL string.
+            </summary>
+        </member>
+        <member name="T:ArgsObject">
+            <summary>
+            WAAPI arguments containing an object identfier.
+            </summary>
+        </member>
+        <member name="T:ArgsRename">
+            <summary>
+            WAAPI arguments containing an object identfier and new value used when renaming an object.
+            </summary>
+        </member>
+        <member name="T:ArgsDisplayName">
+            <summary>
+            WAAPI arguments containing an object identfier and name used when deleting an object.
+            </summary>
+        </member>
+        <member name="T:ArgsCommand">
+            <summary>
+            WAAPI arguments containing an object identfier and command field.
+            Used by AkWaapiUtilities.SelectObjectInAuthoringAsync().
+            </summary>
+        </member>
+        <member name="T:ArgsPlay">
+            <summary>
+            WAAPI arguments containing an Event identfier and transport ID.
+            Used to toggle Event playback.
+            </summary>
+        </member>
+        <member name="T:ArgsTransport">
+            <summary>
+            WAAPI arguments containing a transport ID.
+            Used to specify transports in transport-specific commands.
+            </summary>
+        </member>
+        <member name="T:Options">
+            <summary>
+            Abstract base class for WAAPI command options.
+            </summary>
+        </member>
+        <member name="T:ReturnOptions">
+            <summary>
+            WAAPI options to specify the names of fields to return in a WAAPI request returning WwiseObjects.
+            </summary>
+        </member>
+        <member name="T:TransportOptions">
+            <summary>
+            WAAPI options used to specify the transport ID when subscribing.
+            </summary>
+        </member>
+        <member name="T:ReturnTransport">
+            <summary>
+            Used to deserialize the response from an ak.wwise.core.transport.create command. 
+            Contains the transport ID.
+            </summary>
+        </member>
+        <member name="T:TransportState">
+            <summary>
+            Used to deserialize transport-state information receieved from the transport.stateChanged topic.
+            </summary>
+        </member>
+        <member name="T:ErrorMessage">
+            <summary>
+            Used to deserialize WAAPI error messages.
+            </summary>
+        </member>
+        <member name="T:ErrorDetails">
+            <summary>
+            Used to deserialize details in WAAPI error messages.
+            </summary>
+        </member>
+        <member name="T:ReturnWwiseObjects">
+            <summary>
+            Class used to deserialize a WAAPI response containing Wwise objects.
+            </summary>
+        </member>
+        <member name="T:ReturnWwiseObjects`1">
+            <summary>
+            Generic class to deserialize a WAAPI response containing Wwise objects with custom return options.
+            </summary>
+        </member>
+        <member name="T:SelectedWwiseObjects">
+            <summary>
+            Class used to deserialize selected Wwise objects published on the ak.wwise.ui.selectionChanged topic.
+            </summary>
+        </member>
+        <member name="T:WwiseRenameInfo">
+            <summary>
+            Used to deserialize information published on the ak.wwise.core.@object.nameChanged topic.
+            </summary>
+        </member>
+        <member name="T:WwiseChildModifiedInfo">
+            <summary>
+            Used to deserialize information published on the ak.wwise.core.@object.childAdded and ak.wwise.core.@object.childRemoved topics.
+            </summary>
+        </member>
+        <member name="T:WwiseObjectInfoJsonObject">
+            <summary>
+            Used to deserialize information from a request for a Wwise object.
+            Implements an implicit cast to WwiseObjectInfo.
+            </summary>
+        </member>
+        <member name="T:WwiseObjectInfoParent">
+            <summary>
+            Contains the GUID of the returned object's parent.
+            </summary>
+        </member>
+        <member name="T:WwiseObjectInfo">
+            <summary>
+            Class containing the information returned by a WAAPI request for an object.
+            </summary>
+        </member>
+        <member name="T:WaapiHelper">
+            <summary>
+            Contains a helper function GetWwiseObjectTypeFromString.
+            </summary>
+        </member>
+        <member name="T:WaapiKeywords">
+            <summary>
+            Contains fields for specific WAAPI keywords.
+            </summary>
+        </member>
+        <member name="F:WaapiKeywords.WwiseObjectTypeStrings">
+            <summary>
+            Maps WwiseObjectType to strings.
+            </summary>
+        </member>
+        <member name="F:WaapiKeywords.FolderDisplaynames">
+            <summary>
+            Maps root folder names to displayed strings.
+            </summary>
+        </member>
+        <member name="F:WaapiKeywords.typeStringDict">
+            <summary>
+            Maps strings to WwiseObjectType.
+            </summary>
+        </member>
+        <member name="T:AkWaapiClient">
+            <summary>
+            The Waapi Client provides a core interface to Waapi using strings only. You will need to provide your own JSON serialization.
+            </summary>
+        </member>
+        <member name="M:AkWaapiClient.Connect(System.String,System.Int32)">
+            <summary>Connect to a running instance of Wwise Authoring.</summary>
+            <param name="uri">URI to connect. Usually the WebSocket protocol (ws:) followed by the hostname and port, followed by waapi.</param>
+            <example>Connect("ws://localhost:8080/waapi")</example>
+            <param name="timeout">The maximum timeout in milliseconds for the function to execute. Will raise Waapi.TimeoutException when timeout is reached.</param>
+        </member>
+        <member name="M:AkWaapiClient.Close(System.Int32)">
+            <summary>Close the connection.</summary>
+            <param name="timeout">The maximum timeout in milliseconds for the function to execute. Will raise Waapi.TimeoutException when timeout is reached.</param>
+        </member>
+        <member name="M:AkWaapiClient.IsConnected">
+            <summary>
+            Return true if the client is connected and ready for operations.
+            </summary>
+        </member>
+        <member name="M:AkWaapiClient.Call(System.String,System.String,System.String,System.Int32)">
+            <summary>Call a WAAPI remote procedure. Refer to WAAPI reference documentation for a list of URIs and their arguments and options.</summary>
+            <param name="uri">The URI of the remote procedure.</param>
+            <param name="args">The arguments of the remote procedure.</param>
+            <param name="options">The options the remote procedure.</param>
+            <param name="timeout">The maximum timeout in milliseconds for the function to execute. Will raise Waapi.TimeoutException when timeout is reached.</param>
+            <returns>A JSON string with the result of the Remote Procedure Call.</returns>
+        </member>
+        <member name="M:AkWaapiClient.Subscribe(System.String,System.String,Wamp.PublishHandler,System.Int32)">
+            <summary>Subscribe to WAAPI topic. Refer to WAAPI reference documentation for a list of topics and their options.</summary>
+            <param name="topic">The topic to which subscribe.</param>
+            <param name="options">The options the subscription.</param>
+            <param name="publishHandler////// ">The delegate function to call when the topic is published.</param>
+            <param name="timeout">The maximum timeout in milliseconds for the function to execute. Will raise Waapi.TimeoutException when timeout is reached.</param>
+            <returns>Subscription id, that you can use to unsubscribe.</returns>
+        </member>
+        <member name="M:AkWaapiClient.Unsubscribe(System.UInt32,System.Int32)">
+            <summary>Unsubscribe from a subscription.</summary>
+            <param name="subscriptionId">The subscription id received from the initial subscription.</param>
+            <param name="timeout">The maximum timeout in milliseconds for the function to execute. Will raise Waapi.TimeoutException when timeout is reached.</param>
+        </member>
+        <member name="T:ak">
+            <summary>URI strings to use in WAAPI calls. For a complete description, refer to the official Wwise SDK documentation.</summary>
+        </member>
+        <member name="F:ak.soundengine.setMultiplePositions">
+            <summary>Set multiple positions for a single game object. Setting multiple positions for a single game object is a way to simulate multiple emission sources while using the resources of only one voice. This can be used to simulate wall openings, area sounds, or multiple objects emitting the same sound in the same area. See <tt>AK::SoundEngine::SetMultiplePositions</tt>.</summary>
+        </member>
+        <member name="F:ak.soundengine.setScalingFactor">
+            <summary>Set the scaling factor of a game object. Modify the attenuation computations on this game object to simulate sounds with a larger or smaller area of effect. See <tt>AK::SoundEngine::SetScalingFactor</tt>.</summary>
+        </member>
+        <member name="F:ak.soundengine.postEvent">
+            <summary>Asynchronously post an Event to the sound engine (by event ID). See <tt>AK::SoundEngine::PostEvent</tt>.</summary>
+        </member>
+        <member name="F:ak.soundengine.setRTPCValue">
+            <summary>Set the value of a real-time parameter control. See <tt>AK::SoundEngine::SetRTPCValue</tt>.</summary>
+        </member>
+        <member name="F:ak.soundengine.setObjectObstructionAndOcclusion">
+            <summary>Set a game object's obstruction and occlusion levels. This function is used to affect how an object should be heard by a specific listener. See <tt>AK::SoundEngine::SetObjectObstructionAndOcclusion</tt>.</summary>
+        </member>
+        <member name="F:ak.soundengine.setListeners">
+            <summary>Set a single game object's active listeners. By default, all new game objects have no listeners active, but this behavior can be overridden with <tt>SetDefaultListeners()</tt>. Inactive listeners are not computed. See <tt>AK::SoundEngine::SetListeners</tt>.</summary>
+        </member>
+        <member name="F:ak.soundengine.executeActionOnEvent">
+            <summary>Execute an action on all nodes that are referenced in the specified event in an action of type play. See <tt>AK::SoundEngine::ExecuteActionOnEvent</tt>.</summary>
+        </member>
+        <member name="F:ak.soundengine.setListenerSpatialization">
+            <summary>Set a listener's spatialization parameters. This lets you define listener-specific volume offsets for each audio channel. See <tt>AK::SoundEngine::SetListenerSpatialization</tt>.</summary>
+        </member>
+        <member name="F:ak.soundengine.resetRTPCValue">
+            <summary>Reset the value of a real-time parameter control to its default value, as specified in the Wwise project. See <tt>AK::SoundEngine::ResetRTPCValue</tt>.</summary>
+        </member>
+        <member name="F:ak.soundengine.unregisterGameObj">
+            <summary>Unregister a game object. Registering a game object twice does nothing. Unregistering it once unregisters it no matter how many times it has been registered. Unregistering a game object while it is in use is allowed, but the control over the parameters of this game object is lost. For example, say a sound associated with this game object is a 3D moving sound. It will stop moving when the game object is unregistered, and there will be no way to regain control over the game object. See <tt>AK::SoundEngine::UnregisterGameObj</tt>.</summary>
+        </member>
+        <member name="F:ak.soundengine.stopPlayingID">
+            <summary>Stop the current content, associated to the specified playing ID, from playing. See <tt>AK::SoundEngine::StopPlayingID</tt>.</summary>
+        </member>
+        <member name="F:ak.soundengine.setGameObjectAuxSendValues">
+            <summary>Set the Auxiliary Busses to route the specified game object. See <tt>AK::SoundEngine::SetGameObjectAuxSendValues</tt>.</summary>
+        </member>
+        <member name="F:ak.soundengine.seekOnEvent">
+            <summary>Seek inside all playing objects that are referenced in Play Actions of the specified Event. See <tt>AK::SoundEngine::SeekOnEvent</tt>.</summary>
+        </member>
+        <member name="F:ak.soundengine.registerGameObj">
+            <summary>Register a game object. Registering a game object twice does nothing. Unregistering it once unregisters it no matter how many times it has been registered. See <tt>AK::SoundEngine::RegisterGameObj</tt>.</summary>
+        </member>
+        <member name="F:ak.soundengine.setDefaultListeners">
+            <summary>Set a the default active listeners for all subsequent game objects that are registered. See <tt>AK::SoundEngine::SetDefaultListeners</tt>.</summary>
+        </member>
+        <member name="F:ak.soundengine.setPosition">
+            <summary>Set the position of a game object. See <tt>AK::SoundEngine::SetPosition</tt>.</summary>
+        </member>
+        <member name="F:ak.soundengine.postMsgMonitor">
+            <summary>Display a message in the profiler's Capture Log view.</summary>
+        </member>
+        <member name="F:ak.soundengine.setGameObjectOutputBusVolume">
+            <summary>Set the output bus volume (direct) to be used for the specified game object. See <tt>AK::SoundEngine::SetGameObjectOutputBusVolume</tt>.</summary>
+        </member>
+        <member name="F:ak.soundengine.setSwitch">
+            <summary>Set the State of a Switch Group. See <tt>AK::SoundEngine::SetSwitch</tt>.</summary>
+        </member>
+        <member name="F:ak.soundengine.stopAll">
+            <summary>Stop playing the current content associated to the specified game object ID. If no game object is specified, all sounds will be stopped. See <tt>AK::SoundEngine::StopAll</tt>.</summary>
+        </member>
+        <member name="F:ak.soundengine.postTrigger">
+            <summary>Post the specified Trigger. See <tt>AK::SoundEngine::PostTrigger</tt>.</summary>
+        </member>
+        <member name="F:ak.wwise.debug.testAssert">
+            <summary>Private use only.</summary>
+        </member>
+        <member name="F:ak.wwise.debug.assertFailed">
+            <summary>Sent when an assert has failed. This is only available with Debug builds.</summary>
+        </member>
+        <member name="F:ak.wwise.debug.enableAutomationMode">
+            <summary>Enable or disable the automation mode for Wwise. This reduces the potential interruptions caused by message boxes and dialogs. For instance, enabling the automation mode silently accepts: project migration, project load log, EULA acceptance, project licence display and generic message boxes.</summary>
+        </member>
+        <member name="F:ak.wwise.debug.enableAsserts">
+            <summary>Enables debug assertions. Every call to enableAsserts with false increments the ref count. Calling with true will decrement the ref count. This is only available with Debug builds.</summary>
+        </member>
+        <member name="F:ak.wwise.core.audioSourcePeaks.getMinMaxPeaksInRegion">
+            <summary>Get the min/max peak pairs, in a given region of an audio source, as a collection of binary strings (one per channel). The strings are base-64 encoded 16-bit signed int arrays, with min and max values being interleaved. If getCrossChannelPeaks is true, there will be only one binary string representing peaks across all channels globally.</summary>
+        </member>
+        <member name="F:ak.wwise.core.audioSourcePeaks.getMinMaxPeaksInTrimmedRegion">
+            <summary>Get the min/max peak pairs in the entire trimmed region of an audio source, for each channel, as an array of binary strings (one per channel). The strings are base-64 encoded 16-bit signed int arrays, with min and max values being interleaved. If getCrossChannelPeaks is true, there will be only one binary string representing peaks across all channels globally.</summary>
+        </member>
+        <member name="F:ak.wwise.core.remote.getConnectionStatus">
+            <summary>Retrieves the connection status.</summary>
+        </member>
+        <member name="F:ak.wwise.core.remote.getAvailableConsoles">
+            <summary>Retrieves all consoles available for connecting Wwise Authoring to a Sound Engine instance.</summary>
+        </member>
+        <member name="F:ak.wwise.core.remote.disconnect">
+            <summary>Disconnects the Wwise Authoring application from a connected Wwise Sound Engine running executable.</summary>
+        </member>
+        <member name="F:ak.wwise.core.remote.connect">
+            <summary>Connects the Wwise Authoring application to a Wwise Sound Engine running executable. The host must be running code with communication enabled.</summary>
+        </member>
+        <member name="F:ak.wwise.core.log.itemAdded">
+            <summary>Sent when an item is added to the log. This could be used to retrieve items added to the SoundBank generation log. To retrieve the complete log, refer to ak.wwise.core.log.get.</summary>
+        </member>
+        <member name="F:ak.wwise.core.log.get">
+            <summary>Retrieve the latest log for a specific channel. Refer to ak.wwise.core.log.itemadded to be notified when an item is added to the log.</summary>
+        </member>
+        <member name="F:ak.wwise.core.getInfo">
+            <summary>Retrieve global Wwise information.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.referenceChanged">
+            <summary>Sent when an object reference is changed.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.move">
+            <summary>Moves an object to the given parent. Returns the moved object.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.attenuationCurveLinkChanged">
+            <summary>Sent when an attenuation curve's link/unlink is changed.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.childAdded">
+            <summary>Sent when an object is added as a child to another object.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.getTypes">
+            <summary>Retrieves the list of all object types registered in Wwise's object model.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.propertyChanged">
+            <summary>Sent when the watched property of an object changes.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.create">
+            <summary>Creates an object of type 'type', as a child of 'parent'. Refer to ak.wwise.core.audio.import to import audio files to Wwise.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.get">
+            <summary>Performs a query, returns specified data for each object in query result.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.preDeleted">
+            <summary>Sent prior to an object's deletion.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.nameChanged">
+            <summary>Sent when an object is renamed. Publishes the object which the name was changed.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.postDeleted">
+            <summary>Sent following an object's deletion.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.notesChanged">
+            <summary>Sent when the object's notes are changed.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.getPropertyInfo">
+            <summary>Retrieves information about an object property.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.setName">
+            <summary>Renames an object.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.setNotes">
+            <summary>Sets the object's notes.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.setAttenuationCurve">
+            <summary>Sets the specified attenuation curve for a given attenuation object.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.setProperty">
+            <summary>Sets a property value of an object for a specific platform. Refer to  ak.wwise.core.object.setreference to set a reference to an object.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.copy">
+            <summary>Copies an object to the given parent.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.isPropertyEnabled">
+            <summary>Return true if a property is enabled based on the values of the properties it depends on.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.setRandomizer">
+            <summary>Sets the randomizer values of a property of an object for a specific platform.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.setReference">
+            <summary>Sets an object's reference value.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.attenuationCurveChanged">
+            <summary>Sent when an attenuation curve is changed.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.created">
+            <summary>Sent when an object is created.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.childRemoved">
+            <summary>Sent when an object is removed from the children of another object.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.getPropertyNames">
+            <summary>Retrieves the list of property and reference names for an object.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.getAttenuationCurve">
+            <summary>Gets the specified attenuation curve for a given attenuation object.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.curveChanged">
+            <summary>Sent when one or many curves are changed.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.delete">
+            <summary>Deletes the specified object.</summary>
+        </member>
+        <member name="F:ak.wwise.core.object.getPropertyAndReferenceNames">
+            <summary>Retrieves the list of property and reference names for an object.</summary>
+        </member>
+        <member name="F:ak.wwise.core.undo.endGroup">
+            <summary>Ends the last undo group.</summary>
+        </member>
+        <member name="F:ak.wwise.core.undo.cancelGroup">
+            <summary>Cancels the last undo group. Please note that this does not revert the operations made since the last ak.wwise.core.undo.begingroup call.</summary>
+        </member>
+        <member name="F:ak.wwise.core.undo.beginGroup">
+            <summary>Begins an undo group. Make sure to call ak.wwise.core.undo.endgroup exactly once for every ak.wwise.core.beginUndoGroup call you make. Calls to ak.wwise.core.undo.beginGroup can be nested.</summary>
+        </member>
+        <member name="F:ak.wwise.core.profiler.getCursorTime">
+            <summary>Returns the current time of the specified profiler cursor in milliseconds.</summary>
+        </member>
+        <member name="F:ak.wwise.core.profiler.startCapture">
+            <summary>Start the profiler capture and return the time at the beginning of the capture in milliseconds.</summary>
+        </member>
+        <member name="F:ak.wwise.core.profiler.getVoiceContributions">
+            <summary>Retrieves all parameters affecting voice volume, highpass and lowpass for a voice path, resolved from pipeline IDs.</summary>
+        </member>
+        <member name="F:ak.wwise.core.profiler.getVoices">
+            <summary>Retrieves the voices at a specific profiler capture time.</summary>
+        </member>
+        <member name="F:ak.wwise.core.profiler.getBusses">
+            <summary>Retrieves the busses at a specific profiler capture time.</summary>
+        </member>
+        <member name="F:ak.wwise.core.profiler.stopCapture">
+            <summary>Stop the profiler capture and return the time at the end of the capture in milliseconds.</summary>
+        </member>
+        <member name="F:ak.wwise.core.project.postClosed">
+            <summary>Sent when the after the project is completely closed.</summary>
+        </member>
+        <member name="F:ak.wwise.core.project.loaded">
+            <summary>Sent when the project has been successfully loaded.</summary>
+        </member>
+        <member name="F:ak.wwise.core.project.preClosed">
+            <summary>Sent when the project begins closing.</summary>
+        </member>
+        <member name="F:ak.wwise.core.project.save">
+            <summary>Saves the current project.</summary>
+        </member>
+        <member name="F:ak.wwise.core.project.saved">
+            <summary>Sent when the project has been saved.</summary>
+        </member>
+        <member name="F:ak.wwise.core.transport.getState">
+            <summary>Gets the state of the given transport object.</summary>
+        </member>
+        <member name="F:ak.wwise.core.transport.stateChanged">
+            <summary>Sent when the transport's state has changed.</summary>
+        </member>
+        <member name="F:ak.wwise.core.transport.create">
+            <summary>Creates a transport object for the given Wwise object.  The return transport object can be used to play, stop, pause and resume the Wwise object via the other transport functions.</summary>
+        </member>
+        <member name="F:ak.wwise.core.transport.getList">
+            <summary>Returns the list of transport objects.</summary>
+        </member>
+        <member name="F:ak.wwise.core.transport.destroy">
+            <summary>Destroys the given transport object.</summary>
+        </member>
+        <member name="F:ak.wwise.core.transport.executeAction">
+            <summary>Executes an action on the given transport object, or all transports if no transport is specified.</summary>
+        </member>
+        <member name="F:ak.wwise.core.soundbank.getInclusions">
+            <summary>Retrieves a SoundBank's inclusion list.</summary>
+        </member>
+        <member name="F:ak.wwise.core.soundbank.generated">
+            <summary>Sent when a single SoundBank is generated. This could be sent multiple times during SoundBank generation, for every SoundBank generated and for every platform. To generate SoundBanks, refer to ak.wwise.ui.commands.execute with one of the SoundBank generation commands.</summary>
+        </member>
+        <member name="F:ak.wwise.core.soundbank.setInclusions">
+            <summary>Modifies a SoundBank's inclusion list.  The 'operation' argument determines how the 'inclusions' argument modifies the SoundBank's inclusion list; 'inclusions' may be added to / removed from / replace the SoundBank's inclusion list.</summary>
+        </member>
+        <member name="F:ak.wwise.core.audio.import">
+            <summary>Create Wwise objects and import audio files. This function is using the same importation processor available through the Tab Delimited import in the Audio File Importer. The function returns an array of all objects created, replaced or re-used. Use the options to specify how the objects are returned.</summary>
+        </member>
+        <member name="F:ak.wwise.core.audio.importTabDelimited">
+            <summary>Scripted object creation and audio file import from a tab-delimited file.</summary>
+        </member>
+        <member name="F:ak.wwise.core.audio.imported">
+            <summary>Sent at the end of an import operation.</summary>
+        </member>
+        <member name="F:ak.wwise.core.switchContainer.removeAssignment">
+            <summary>Remove an assignment between a Switch Container's child and a State.</summary>
+        </member>
+        <member name="F:ak.wwise.core.switchContainer.getAssignments">
+            <summary>Returns the list of assignments between a Switch Container's children and states.</summary>
+        </member>
+        <member name="F:ak.wwise.core.switchContainer.assignmentRemoved">
+            <summary>Sent when an assignment is removed from a Switch Container.</summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:ak.wwise.core.switchContainer.addAssignment" -->
+        <member name="F:ak.wwise.core.switchContainer.assignmentAdded">
+            <summary>Sent when an assignment is added to a Switch Container.</summary>
+        </member>
+        <member name="F:ak.wwise.core.plugin.getList">
+            <summary>Retrieves the list of all object types registered in Wwise's object model.</summary>
+        </member>
+        <member name="F:ak.wwise.core.plugin.getProperty">
+            <summary>Retrieves information about an object property.</summary>
+        </member>
+        <member name="F:ak.wwise.core.plugin.getProperties">
+            <summary>Retrieves the list of property and reference names for an object.</summary>
+        </member>
+        <member name="F:ak.wwise.ui.project.close">
+            <summary>Closes the current project.</summary>
+        </member>
+        <member name="F:ak.wwise.ui.project.open">
+            <summary>Opens a project, specified by path. Please refer to ak.wwise.core.project.loaded for further explanations on how to be notified when the operation has completed.</summary>
+        </member>
+        <member name="F:ak.wwise.ui.bringToForeground">
+            <summary>Bring Wwise main window to foreground. Refer to SetForegroundWindow and AllowSetForegroundWindow on MSDN for more information on the restrictions. Refer to ak.wwise.core.getInfo to obtain the Wwise process ID for AllowSetForegroundWindow.</summary>
+        </member>
+        <member name="F:ak.wwise.ui.commands.unregister">
+            <summary>Unregister an array of add-on UI commands.</summary>
+        </member>
+        <member name="F:ak.wwise.ui.commands.executed">
+            <summary>Sent when a command is executed. The objects for which the command is executed are sent in the publication.</summary>
+        </member>
+        <member name="F:ak.wwise.ui.commands.execute">
+            <summary>Executes a command. Some commands can take a list of objects as parameter.</summary>
+        </member>
+        <member name="F:ak.wwise.ui.commands.register">
+            <summary>Register an array of add-on commands. Registered commands remain until the Wwise process is terminated. Refer to to ak.wwise.ui.commands.executed.</summary>
+        </member>
+        <member name="F:ak.wwise.ui.commands.getCommands">
+            <summary>Get the list of commands.</summary>
+        </member>
+        <member name="F:ak.wwise.ui.getSelectedObjects">
+            <summary>Retrieves the list of objects currently selected by the user in the active view.</summary>
+        </member>
+        <member name="F:ak.wwise.ui.selectionChanged">
+            <summary>Sent when the selection changes in the project.</summary>
+        </member>
+        <member name="F:ak.wwise.waapi.getTopics">
+            <summary>Retrieve the list of topics to which a client can subscribe.</summary>
+        </member>
+        <member name="F:ak.wwise.waapi.getFunctions">
+            <summary>Retrieve the list of functions.</summary>
+        </member>
+        <member name="F:ak.wwise.waapi.getSchema">
+            <summary>Retrieve the JSON schema of a Waapi URI.</summary>
+        </member>
+        <member name="T:Wamp">
+            <summary>
+            WAMP protocol implementation using only strings and regular expressions. This implements only a subset of the WAMP feature set and is only compatible with Wwise.
+            </summary>
+        </member>
+        <member name="T:Wamp.TimeoutException">
+            <summary>Exception thrown during WAMP operations when the timeout is reached.</summary> 
+        </member>
+        <member name="T:Wamp.ErrorException">
+            <summary>Exception thrown during WAMP operations.</summary> 
+        </member>
+        <member name="T:Wamp.Messages">
+            <summary>Messages ids defined by the WAMP protocol</summary> 
+        </member>
+        <member name="T:Wamp.Response">
+            <summary>Encapsulate a response from the server.</summary> 
+        </member>
+        <member name="T:Wamp.PublishHandler">
+            <summary>Publish events are delegates registered with Subscribe.</summary> 
+        </member>
+        <member name="M:Wamp.Parse(System.String)">
+            <summary>Parse a WAMP message from the server.</summary> 
+        </member>
+        <member name="M:Wamp.Receive(System.Int32)">
+            <summary>
+            Wait for the next response
+            </summary>
+            <returns>The response from the server.</returns>
+        </member>
+        <member name="M:Wamp.ReceiveExpect(Wamp.Messages,System.Int32,System.Int32)">
+            <summary>
+            Wait for the next response and do some validation on the response
+            </summary>
+            <param name="message">What message to expect</param>
+            <param name="requestId">What request id to expect</param>
+            <param name="timeout">The maximum timeout in milliseconds for the function to execute. Will raise exception when timeout is reached.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Wamp.Connect(System.String,System.Int32)">
+            <summary>
+            Connect to the specified host, handshake and prepare the listening task.
+            </summary>
+            <param name="host">The URI of the host, usually something like ws://host:port</param>
+            <param name="timeout">The maximum timeout in milliseconds for the function to execute. Will raise exception when timeout is reached.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Wamp.IsConnected">
+            <summary>
+            Tell the connection state of the WebSocket client.
+            </summary>
+            <returns>Return true if the connection is open and ready.</returns>
+        </member>
+        <member name="M:Wamp.Close(System.Int32)">
+            <summary>Close the connection.</summary>
+            <param name="timeout">The maximum timeout in milliseconds for the function to execute. Will raise exception when timeout is reached.</param>
+        </member>
+        <member name="M:Wamp.Call(System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Invoke an RPC function from the uri
+            </summary>
+            <param name="uri">URI of the function</param>
+            <param name="args">Arguments</param>
+            <param name="options">Options</param>
+            <param name="timeout">The maximum timeout in milliseconds for the function to execute. Will raise exception when Waapi.TimeoutException is reached.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Wamp.Subscribe(System.String,System.String,Wamp.PublishHandler,System.Int32)">
+            <summary>
+            Subscribe to a WAMP topic.
+            </summary>
+            <param name="topic">The topic to which subscribe.</param>
+            <param name="options">The options the subscription.</param>
+            <param name="publishEvent">The delegate function to call when the topic is published.</param>
+            <param name="timeout">The maximum timeout in milliseconds for the function to execute. Will raise Waapi.TimeoutException when timeout is reached.</param>
+            <returns>Subscription id, that you can use to unsubscribe.</returns>
+        </member>
+        <member name="M:Wamp.Unsubscribe(System.UInt32,System.Int32)">
+            <summary>Unsubscribe from a subscription.</summary>
+            <param name="subscriptionId">The subscription id received from the initial subscription.</param>
+            <param name="timeout">The maximum timeout in milliseconds for the function to execute. Will raise Waapi.TimeoutException when timeout is reached.</param>
+        </member>
+        <member name="T:AkWaapiUtilities">
+            <summary>
+            This class wraps the client that communicates with the Wwise Authoring application via WAAPI.
+            Given that only one request can be pending on the websocket, a queue is used to consume all calls sequentially.
+            Messages sent to WAAPI use the JSON format and are serialized by Unity Json serialization. 
+            Helper classes (\ref WaapiHelper) for serialization, keywords for WAAPI commands (\ref WaapiKeywords), and classes for serializing message arguments and deserializing responses are found in AkWaapiHelper.cs.
+            Uri.cs contains classes with fields containing URI strings for WAAPI calls and error messages.
+            </summary>
+        </member>
+        <member name="F:AkWaapiUtilities.Disconnecting">
+            <summary>
+            Fired when the connection is closing or closed, the bool parameter represents whether the socket connection is still open (for cleaning up subscriptions).
+            </summary>
+        </member>
+        <member name="F:AkWaapiUtilities.Connected">
+            <summary>
+            Fired when the connection is established, should be used by external classes to subscribe to topics they are interested in.
+            </summary>
+        </member>
+        <member name="F:AkWaapiUtilities.QueueConsumed">
+            <summary>
+            Fired when all commands in the queue have been executed.
+            </summary>
+        </member>
+        <member name="T:AkWaapiUtilities.GetResultListDelegate`1">
+            <summary>
+            Generic delegate function for callbacks that expect to receive a list of objects in response to a WAAPI request.
+            </summary>
+            <param name="result"></param>
+        </member>
+        <member name="T:AkWaapiUtilities.GetResultDelegate`1">
+            <summary>
+            Generic delegate function for callbacks that expect to receive a single object in response to a WAAPI request.
+            </summary>
+            <param name="result"></param>
+        </member>
+        <member name="F:AkWaapiUtilities.dataPath">
+            <summary>
+            Used to store store UnityEngine.Application.dataPath because we can't access it outside of the main loop
+            </summary>
+        </member>
+        <member name="M:AkWaapiUtilities.#cctor">
+            <summary>
+            Bind disconnection method to compilation started delegate and start the async Waapi loop.
+            </summary>
+        </member>
+        <member name="T:AkWaapiUtilities.WaapiCommand">
+            <summary>
+            A simple structure containing an async payload function that will be executed when it is consumed by the command queue.
+            </summary>
+        </member>
+        <member name="T:AkWaapiUtilities.SubscriptionInfo">
+            <summary>
+            Class used to store information about a specific subscription.
+            </summary>
+        </member>
+        <member name="T:AkWaapiUtilities.TransportInfo">
+            <summary>
+            Holds information about a playing transport.
+            </summary>
+        </member>
+        <member name="P:AkWaapiUtilities.ItemTransports">
+            <summary>
+            Stores TransportInfo of playing Events.
+            </summary>
+        </member>
+        <member name="P:AkWaapiUtilities.WaapiClient">
+            <summary>
+            WAAPI client wrapping WAMP calls. Lazy instantiated.
+            </summary>
+        </member>
+        <member name="M:AkWaapiUtilities.IsConnected">
+            <summary>
+            Check whether the client is currently connected.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AkWaapiUtilities.Loop">
+            <summary>
+            Main loop for the WAAPI API. Checks if the client is connected and consumes all commands.
+            </summary>
+        </member>
+        <member name="M:AkWaapiUtilities.ConsumeCommandQueue">
+            <summary>
+            Consumes all WAAPICommands in the queue and then fires QueueConsumed.
+            </summary>
+            <returns>Awaitable Task</returns>
+        </member>
+        <member name="M:AkWaapiUtilities.CheckConnection">
+            <summary>
+            Checks the global WAAPI settings and disconnects if WAAPI is disabled or connection settings have changed.
+            If disconnected, try to connect with current settings.
+            </summary>
+            <returns>True if the client is connected</returns>
+        </member>
+        <member name="M:AkWaapiUtilities.CheckProjectLoaded">
+            <summary>
+            Tries to communicate with Wwise and compares the current open project with the project path specified in the Unity Wwise Editor settings.
+            </summary>
+            <returns>True if the correct wwise project is open in Wwise.</returns>
+        </member>
+        <member name="M:AkWaapiUtilities.FireDisconnect(System.Boolean)">
+            <summary>
+            Starts the diconnection process. 
+            Invokes Disconnecting() so that other classes using WAAPI can clean up and add commands to unsubscribe from topics.
+            Consumes the last batch of commands in the command queue then closes the client.
+            </summary>
+        </member>
+        <member name="M:AkWaapiUtilities.Disconnected">
+            <summary>
+            Invoked after the client has disconnected from Wwise authoring.
+            </summary>
+        </member>
+        <member name="M:AkWaapiUtilities.GetStatusString">
+            <summary>
+            Returns a rich text string representing the current WAAPI connection status.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AkWaapiUtilities.QueueCommand(System.String,System.String,System.String)">
+            <summary>
+            Use this function to enqueue a command with no expected return object.
+            </summary>
+            <param name="uri">The URI of the waapi command</param>
+            <param name="args">The command-specific arguments</param>
+            <param name="options">The command-specific options</param>
+        </member>
+        <member name="M:AkWaapiUtilities.QueueCommandWithReturnType``1(System.String,AkWaapiUtilities.GetResultDelegate{``0},System.String,System.String)">
+            <summary>
+            Use this function to enqueue a command with an expected return object of type T.
+            The command will deserialize the respone as type T and pass it to the callback.
+            /// </summary>
+            <typeparam name="T"> Type of the expected return object</typeparam>
+            <param name="uri">The URI of the waapi command</param>
+            <param name="args">The command-specific arguments</param>
+            <param name="options">The command-specific options</param>
+            <param name="callback">Function accepting an argument of type T</param>
+        </member>
+        <member name="M:AkWaapiUtilities.QueueCommandWithReturnWwiseObjects``1(WaqlArgs,ReturnOptions,AkWaapiUtilities.GetResultListDelegate{``0})">
+            <summary>
+            Enqueues a command with a payload that desirializes the list of wwise objects from the response.
+            </summary>
+            <param name="args"></param>
+            <param name="options"></param>
+            <param name="callback"></param>
+        </member>
+        <member name="M:AkWaapiUtilities.GetWwiseObject``1(System.Guid,ReturnOptions,AkWaapiUtilities.GetResultListDelegate{``0})">
+            <summary>
+            Generic function for fetching a Wwise object with custom return options.
+            </summary>
+            <typeparam name="T"> Type of the object to be deserialized from the response.</typeparam>
+            <param name="guid">GUID of the target object.</param>
+            <param name="options">Specifies which object properties to include in the response</param>
+            <param name="callback">Function accteping a list of T objects.</param>
+        </member>
+        <member name="M:AkWaapiUtilities.GetWwiseObjects``1(System.Collections.Generic.List{System.Guid},ReturnOptions,AkWaapiUtilities.GetResultListDelegate{``0})">
+            <summary>
+            Generic function for fetching a list of Wwise objects with custom return options.
+            </summary>
+            <typeparam name="T"> Type of the object to be deserialized from the response.</typeparam>
+            <param name="guids">GUIDs of the target objects.</param>
+            <param name="options">Specifies which object properties to include in the response</param>
+            <param name="callback">Function accteping a list of T objects.</param>
+        </member>
+        <member name="M:AkWaapiUtilities.GetWwiseObjectAndAncestors``1(System.Guid,ReturnOptions,AkWaapiUtilities.GetResultListDelegate{``0})">
+            <summary>
+            Enqueues a waapi command to fetch the specified object and all of its ancestors in the hierarchy.
+            Passes the list of WwiseObjectInfo containing the specified object and ancestors to the callback. 
+            </summary>
+            <param name="guid">GUID of the target object.</param>
+            <param name="options">Specifies which object properties to include in the response</param>
+            <param name="callback">Function accepting a list of WwiseObjectInfo.</param>
+        </member>
+        <member name="M:AkWaapiUtilities.GetWwiseObjectAndDescendants``1(System.Guid,ReturnOptions,System.Int32,AkWaapiUtilities.GetResultListDelegate{``0})">
+            <summary>
+            Enqueues a waapi comand to fetch the specified object and all of its descendants in the hierarchy to a specified depth.
+            Passes the list of WwiseObjectInfo containing the specified object and descendants to the callback. 
+            </summary>
+            <param name="guid">GUID of the target object.</param>
+            <param name="options">Specifies which object properties to include in the response</param>
+            <param name="depth"> Depth of descendants to fetch. If -1, fetches all descendants.</param>
+            <param name="callback">Function accepting a list of WwiseObjectInfo.</param>
+        </member>
+        <member name="M:AkWaapiUtilities.GetWwiseObjectAndDescendants``1(System.String,ReturnOptions,System.Int32,AkWaapiUtilities.GetResultListDelegate{``0})">
+            <summary>
+            Composes a WAQL "from object" request based on the parameters and enqueues a WAAPI command.
+            Passes the list of WwiseObjectInfo containing the results to the callback
+            </summary>
+            <param name="identifier">Can bethe target object GUID or path within the hierarchy.</param>
+            <param name="options">Specifies which object properties to include in the response</param>
+            <param name="depth">Depth of descendants to fetch. If -1, fetches all descendants.</param>
+            <param name="callback">Function accepting a list of WwiseObjectInfo.</param>
+        </member>
+        <member name="M:AkWaapiUtilities.Search``1(System.String,WwiseObjectType,ReturnOptions,AkWaapiUtilities.GetResultListDelegate{``0})">
+            <summary>
+            Composes a WAQL "search" request based on the parameters and enqueues a WAAPI command.
+            Passes the list of WwiseObjectInfo containing the search results to the callback
+            </summary>
+            <param name="searchString">Characters to search for.</param>
+            <param name="options">Specifies which object properties to include in the response</param>
+            <param name="objectType">An optional object type used to filter search results.</param>
+            <param name="callback">Function accepting a list of WwiseObjectInfo.</param>
+        </member>
+        <member name="M:AkWaapiUtilities.GetChildren``1(System.Guid,ReturnOptions,AkWaapiUtilities.GetResultListDelegate{``0})">
+            <summary>
+            Get the children of a given object.
+            </summary>
+            <param name="guid">GUID of the target object.</param>
+            <param name="options">Specifies which object properties to include in the response</param>
+            <param name="callback">Function accepting a list of WwiseObjectInfo.</param>
+        </member>
+        <member name="M:AkWaapiUtilities.GetProject``1(AkWaapiUtilities.GetResultListDelegate{``0},ReturnOptions)">
+            <summary>
+            Get the WwiseObjectInfo for the project.
+            </summary>
+            <param name="callback">Function accepting a list of WwiseObjectInfo. The first element of the list will be the project info.</param>
+            <param name="options">Specifies which object properties to include in the response</param>
+        </member>
+        <member name="M:AkWaapiUtilities.ParseObjectInfo(System.Collections.Generic.List{WwiseObjectInfoJsonObject})">
+            <summary>
+            Parse the response WwiseObjectInfoJsonObject of a "from object" request and implicit cast the objects to WwiseObjectInfo.
+            </summary>
+            <param name="returnObjects"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AkWaapiUtilities.SelectObjectInAuthoring(System.Guid)">
+            <summary>
+            Select the object in Wwise Authoring.
+            Creates a WaapiCommand object containing a lambda call to SelectObjectInAuthoringAsync and adds it to the waapiCommandQueue.
+            </summary>
+            <param name="guid">GUID of the object to be selected.</param>
+        </member>
+        <member name="M:AkWaapiUtilities.SelectObjectInAuthoringAsync(System.Guid)">
+            <summary>
+            Creates and sends a WAAPI command to select a Wwise object.
+            </summary>
+            <param name="guid">GUID of the object to be selected.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AkWaapiUtilities.OpenWorkUnitInExplorer(System.Guid)">
+            <summary>
+            Open the OS file browser to the folder containing this object's Work Unit.
+            Creates a WaapiCommand object containing a lambda call to OpenWorkUnitInExplorerAsync and adds it to the waapiCommandQueue.
+            </summary>
+            <param name="guid">GUID of the object to be found.</param>
+        </member>
+        <member name="M:AkWaapiUtilities.OpenSoundBankInExplorer(System.Guid)">
+            <summary>
+            Open the OS file browser to the folder containing the generated SoundBank.
+            Creates a WaapiCommand object containing a lambda call to OpenSoundBankInExplorer and adds it to the waapiCommandQueue.
+            </summary>
+            <param name="guid">GUID of the SoundBank to be found.</param>
+        </member>
+        <member name="M:AkWaapiUtilities.OpenWorkUnitInExplorerAsync(System.Guid)">
+            <summary>
+            Uses a waapi call to get the object's file path, then opens the containing folder in the system's file browser.
+            </summary>
+            <param name="guid">GUID of the object to be found.</param>
+            <returns>Awaitable Task.</returns>
+        </member>
+        <member name="M:AkWaapiUtilities.OpenSoundBankInExplorerAsync(System.Guid)">
+            <summary>
+            Uses a waapi call to get the SoundBank's generated bank path, then opens the containing folder in the system's file browser.
+            </summary>
+            <param name="guid">GUID of the object to be found.</param>
+            <returns>Awaitable Task.</returns>
+        </member>
+        <member name="M:AkWaapiUtilities.Rename(System.Guid,System.String)">
+            <summary>
+            Rename an object in Wwise authoring.
+            Creates a WaapiCommand object containing a lambda call to RenameAsync and adds it to the waapiCommandQueue.
+            </summary>
+            <param name="guid">GUID of the object to be renamed.</param>
+            <param name="newName">New name for the wwise object.</param>
+        </member>
+        <member name="M:AkWaapiUtilities.RenameAsync(System.Guid,System.String)">
+            <summary>
+            Sends a WAAPI command to rename a Wwise object.
+            </summary>
+            <param name="guid">GUID of the object to be renamed.</param>
+            <param name="newName">New name for the wwise object.</param>
+            <returns>Awaitable Task.</returns>
+        </member>
+        <member name="M:AkWaapiUtilities.Delete(System.Guid)">
+            <summary>
+            Delete an object in wwise authoring. Work Units cannot be deleted in this manner.
+            Creates a WaapiCommand object containing a lambda call to DeleteAsync and adds it to the waapiCommandQueue.
+            </summary>
+            <param name="guid">GUID of the object to be deleted.</param>
+        </member>
+        <member name="M:AkWaapiUtilities.DeleteAsync(System.Guid)">
+            <summary>
+            Sends three WAAPI commands:
+            1. Begin an undo group.
+            2. Delete the specified object.
+            3. Close the undo group.
+            </summary>
+            <param name="guid">GUID of the object to be deleted.</param>
+            <returns>Awaitable Task.</returns>
+        </member>
+        <member name="M:AkWaapiUtilities.IsPlayable(WwiseObjectType)">
+            <summary>
+            Checks if Wwise object is playable.
+            </summary>
+            <param name="type">WwiseObjectType of object to check.</param>
+            <returns>True if playable</returns>
+        </member>
+        <member name="M:AkWaapiUtilities.TogglePlayEvent(WwiseObjectType,System.Guid)">
+             <summary>
+             Play or pause an object in Wwise authoring.
+             Creates a WaapiCommand object containing a lambda call to TogglePlayEventAsync and adds it to the waapiCommandQueue.
+            </summary>
+             <param name="objectType">Used to check whether the object is playable.</param>
+             <param name="guid">GUID of the object to be played.</param>
+        </member>
+        <member name="M:AkWaapiUtilities.TogglePlayEventAsync(System.Guid)">
+            <summary>
+            Play or pause an object in Wwise authoring. Opens a new transport in wwise to play the sound if it does not exist yet.
+            </summary>
+            <param name="guid">GUID of the object to be played.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AkWaapiUtilities.GetTransport(System.Guid)">
+            <summary>
+            Find the open transport in ItemTransports or create a new one.
+            </summary>
+            <param name="guid">GUID of the object.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AkWaapiUtilities.CreateTransport(System.Guid)">
+            <summary>
+            Send a WAAPI call to create a transport in Wwise.
+            Subscribe to the ak.wwise.core.transport.stateChanged topic of the new transport.
+            Add the transport info to ItemTransports.
+            </summary>
+            <param name="guid">GUID of the Event</param>
+            <returns></returns>
+        </member>
+        <member name="M:AkWaapiUtilities.HandleTransportStateChanged(System.String)">
+            <summary>
+            Handle the messages published by a transport when its state is changed.
+            If stopped, enqueue a command with DestroyTransport as its payload.
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:AkWaapiUtilities.StopTransport(System.Int32)">
+            <summary>
+            Send a WAAPI command to stop the specific transport.
+            </summary>
+            <param name="in_transportID">ID of the transport.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AkWaapiUtilities.DestroyTransport(System.Guid)">
+            <summary>
+            Unsubscribe from the transport topic and send a WAAPI command to destroy the transport in Wwise.
+            </summary>
+            <param name="in_itemID"> GUID of the Event.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AkWaapiUtilities.StopAllTransports">
+            <summary>
+            Stops all playing transports.
+            Creates a WaapiCommand object containing a lambda call to StopAllTransportsAsync and adds it to the waapiCommandQueue.
+            </summary>
+        </member>
+        <member name="M:AkWaapiUtilities.StopAllTransportsAsync">
+            <summary>
+            Stops all playing transports.
+            </summary>
+            <returns>Awaitable task.</returns>
+        </member>
+        <member name="M:AkWaapiUtilities.Subscribe(System.String,Wamp.PublishHandler,System.Action{AkWaapiUtilities.SubscriptionInfo})">
+            <summary>
+            Subscribe to WAAPI topic. Refer to WAAPI reference documentation for a list of topics and their options.
+            Creates a WaapiCommand object containing a lambda call to SubscribeAsync and adds it to the waapiCommandQueue.
+            </summary>
+            <param name="topic">The topic URI to subscribe to.</param>
+            <param name="subscriptionCallback">Delegate function to call when the topic is published.</param>
+            <param name="handshakeCallback">Action to be executed once the subscription has been made. 
+            This should store the subscription ID so that the subscription can be cleaned up when it is no longer needed.</param>
+        </member>
+        <member name="M:AkWaapiUtilities.SubscribeAsync(AkWaapiUtilities.SubscriptionInfo)">
+            <summary>
+            Subscribe to WAAPI topic. Refer to WAAPI reference documentation for a list of topics and their options.
+            Creates and sends a WAAPI command to subscribe to the topic.
+            </summary>
+            <param name="subscription">SubscriptionInfo object containing the topic URI and the message handling callback.</param>
+            <returns>Updated SubscriptionInfo object containing the subscription ID (uint). </returns>
+        </member>
+        <member name="M:AkWaapiUtilities.Unsubscribe(System.UInt32)">
+            <summary>
+            Unsubscribe from an existing subscription.
+            Creates a WaapiCommand object containing a lambda call to UnsubscribeAsync and adds it to the waapiCommandQueue.
+            </summary>
+            <param name="id"> The subscription ID received from the initial subscription.</param>
+        </member>
+        <member name="M:AkWaapiUtilities.UnsubscribeAsync(System.UInt32)">
+            <summary>
+            Unsubscribe from a subscription.
+            </summary>
+            <param name="id"> The subscription ID received from the initial subscription.</param>
+            <returns>Awaitable Task.</returns>
+        </member>
+        <member name="M:AkWaapiUtilities.ParseSelectedObjects(System.String)">
+            <summary>
+            Deserializes the objects published by the ak.wwise.ui.selectionChanged topic.
+            </summary>
+            <param name="json">Json string containing the message.</param>
+            <returns>List of WwiseObjectInfo objects. </returns>
+        </member>
+        <member name="M:AkWaapiUtilities.ParseRenameObject(System.String)">
+            <summary>
+            Deserializes the object published by the ak.wwise.core.object.nameChanged topic.
+            </summary>
+            <param name="json">Json string containing the message.</param>
+            <returns>WwiseRenameInfo containing the object information and the new name.</returns>
+        </member>
+        <member name="M:AkWaapiUtilities.ParseChildAddedOrRemoved(System.String)">
+            <summary>
+            Deserializes the object published by the ak.wwise.core.object.childAdded or ak.wwise.core.object.childRemoved topic.
+            </summary>
+            <param name="json">Json string containing the message.</param>
+            <returns> WwiseChildModifiedInfo containing parent and child object information.</returns>
+        </member>
+    </members>
+</doc>

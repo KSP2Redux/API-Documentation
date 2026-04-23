@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Unity.Bindings.OpenImageIO.Editor</name>
+    </assembly>
+    <members>
+        <member name="T:UnityEditor.Bindings.OpenImageIO.OiioWrapper">
+            <summary>
+            Class containing bindings for IO operations using OpenImageIO library
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Bindings.OpenImageIO.OiioWrapper.WriteImage(Unity.Collections.FixedString4096Bytes,System.UInt32,UnityEditor.Bindings.OpenImageIO.OiioWrapper.ImageHeader*)">
+            <summary>
+            Writes an image to the specified file name.
+            </summary>
+            <param name="filePath">Path of the file to write.</param>
+            <param name="nImages">Number of sub-images in this file.</param>
+            <param name="headers">Pointer to ImageHeaders for the file to write.</param>
+            <returns>An integer representing the return code</returns>
+        </member>
+        <member name="M:UnityEditor.Bindings.OpenImageIO.OiioWrapper.ReadImage(Unity.Collections.FixedString4096Bytes)">
+            <summary>
+            Reads an image from its file name.
+            </summary>
+            <param name="filePath">Path of the file to read.</param>
+            <returns> A SubImagesList with the information of the file.</returns>
+        </member>
+        <member name="M:UnityEditor.Bindings.OpenImageIO.OiioWrapper.FreeAllocatedMemory(UnityEditor.Bindings.OpenImageIO.OiioWrapper.SubImagesList)">
+            <summary>
+            Frees the memory allocated for the SubImagesList passed.
+            </summary>
+            <param name="list">SubImagesList representing information to clear.</param>
+            <returns>Zero (0) if successful.</returns>
+        </member>
+        <member name="T:UnityEditor.Bindings.OpenImageIO.OiioWrapper.Attribute">
+            <summary>
+            A struct (key value pair) used to encode metadata in an image.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Bindings.OpenImageIO.OiioWrapper.Attribute.key">
+            <summary>
+            Attribute key (its unique name as expected by OIIO)
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Bindings.OpenImageIO.OiioWrapper.Attribute.value">
+            <summary>
+            Attribute value
+            </summary>
+        </member>
+        <member name="T:UnityEditor.Bindings.OpenImageIO.OiioWrapper.ImageHeader">
+            <summary>
+            A struct representing an Image Header
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Bindings.OpenImageIO.OiioWrapper.ImageHeader.data">
+            <summary>
+            Pointer to image data structure
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Bindings.OpenImageIO.OiioWrapper.ImageHeader.channelsCount">
+            <summary>
+            Number of channels in the image
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Bindings.OpenImageIO.OiioWrapper.ImageHeader.width">
+            <summary>
+            Image width
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Bindings.OpenImageIO.OiioWrapper.ImageHeader.height">
+            <summary>
+            Image height
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Bindings.OpenImageIO.OiioWrapper.ImageHeader.attributesCount">
+            <summary>
+            Number of attributes
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Bindings.OpenImageIO.OiioWrapper.ImageHeader.attributes">
+            <summary>
+            Pointer to attributes data structure
+            </summary>
+        </member>
+        <member name="T:UnityEditor.Bindings.OpenImageIO.OiioWrapper.SubImagesList">
+            <summary>
+            A struct representing the sub-images in an image.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Bindings.OpenImageIO.OiioWrapper.SubImagesList.subImagesCount">
+            <summary>
+            Number of sub-images in this list.
+            </summary>
+        </member>
+        <member name="F:UnityEditor.Bindings.OpenImageIO.OiioWrapper.SubImagesList.data">
+            <summary>
+            Pointer to sub-image data.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.Bindings.OpenImageIO.OiioWrapper.IntPtrToManagedArray``1(System.IntPtr,System.UInt32)">
+            <summary>
+            Reads an IntPtr into an Array of structs of length arrayCount.
+            </summary>
+            <param name="pointerToArr">IntPtr pointing to the data to read.</param>
+            <param name="arrayCount">Number of items in the array.</param>
+            <typeparam name="T">Type of struct for the array.</typeparam>
+            <returns>An array of type T structs.</returns>
+        </member>
+        <member name="M:UnityEditor.Bindings.OpenImageIO.OiioWrapper.Tex2DFromImageHeader(UnityEditor.Bindings.OpenImageIO.OiioWrapper.ImageHeader)">
+            <summary>
+            Reads an ImageHeader and returns it as a Texture2D.
+            </summary>
+            <param name="subImgHeader">ImageHeader describing image to read.</param>
+            <returns>A Texture2D based on the passed ImageHeader.</returns>
+            <exception cref="T:System.Exception">Throws if number of channels is not supported.</exception>
+        </member>
+    </members>
+</doc>

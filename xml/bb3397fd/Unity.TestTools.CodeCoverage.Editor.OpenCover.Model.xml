@@ -1,0 +1,678 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Unity.TestTools.CodeCoverage.Editor.OpenCover.Model</name>
+    </assembly>
+    <members>
+        <member name="T:OpenCover.Framework.Model.SummarySkippedEntity">
+            <summary>
+            A skipped entity that also carries a Summary object which is not
+            always serialized
+            </summary>
+        </member>
+        <member name="M:OpenCover.Framework.Model.SummarySkippedEntity.#ctor">
+            <summary>
+            Initialise
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.SummarySkippedEntity.Summary">
+            <summary>
+            A Summary of results for a entity
+            </summary>
+        </member>
+        <member name="M:OpenCover.Framework.Model.SummarySkippedEntity.ShouldSerializeSummary">
+            <summary>
+            Control serialization of the Summary  object
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:OpenCover.Framework.Model.IDocumentReference">
+            <summary>
+            A point may have a document reference
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.IDocumentReference.Document">
+            <summary>
+            The document url
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.IDocumentReference.FileId">
+            <summary>
+            The document id after lookup
+            </summary>
+        </member>
+        <member name="T:OpenCover.Framework.Model.Class">
+            <summary>
+            An entity that contains methods
+            </summary>
+        </member>
+        <member name="M:OpenCover.Framework.Model.Class.#ctor">
+            <summary>
+            instantiate
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Class.FullName">
+            <summary>
+            The full name of the class
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Class.Methods">
+            <summary>
+            A list of methods that make up the class
+            </summary>
+        </member>
+        <member name="M:OpenCover.Framework.Model.Class.MarkAsSkipped(OpenCover.Framework.Model.SkippedMethod)">
+            <summary>
+            If a class was skipped by instrumentation, supply the reason why
+            </summary>
+            <param name="reason"></param>
+        </member>
+        <member name="T:OpenCover.Framework.Model.Method">
+            <summary>
+            An method entity that can be instrumented
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Method.MetadataToken">
+            <summary>
+            The MetadataToken used to identify this entity within the assembly
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Method.FullName">
+            <summary>
+            The full name of the method (method-definition), includes return-type namespace-class::call-name(argument-types)
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Method.FileRef">
+            <summary>
+            A reference to a file in the file collection (used to help visualisation)
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Method.SequencePoints">
+            <summary>
+            A list of sequence points that have been produced for this method
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Method.BranchPoints">
+            <summary>
+            A list of branch points that have been identified for this method
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Method.MethodPoint">
+            <summary>
+            A method point to identify the entry of a method
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Method.Visited">
+            <summary>
+            Has the method been visited
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Method.CyclomaticComplexity">
+            <summary>
+            What is the cyclomatic complexity of this method.
+            </summary>
+            <remarks>Calculated using the Gendarme rules library</remarks>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Method.NPathComplexity">
+            <summary>
+            What is the NPath complexity of this method.
+            </summary>
+            <remarks>Product of path branches (ie:path0=2;path1=3;path2=2 =&gt;2*3*2==12</remarks>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Method.SequenceCoverage">
+            <summary>
+            What is the sequence coverage of this method
+            </summary>
+            <remarks>Rounded for ease</remarks>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Method.BranchCoverage">
+            <summary>
+            What is the branch coverage of this method
+            </summary>
+            <remarks>Rounded for ease</remarks>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Method.CrapScore">
+            <summary>
+            What is the crap score of this method
+            based on the following calculation
+            CRAP1(m) = comp(m)^2 * (1 – cov(m)/100)^3 + comp(m)
+            </summary>
+            <remarks>Rounded for ease</remarks>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Method.IsConstructor">
+            <summary>
+            Is this method a constructor
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Method.IsStatic">
+            <summary>
+            Is this method static
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Method.IsGetter">
+            <summary>
+            Is this method a property getter
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Method.IsSetter">
+            <summary>
+            Is this method a property setter
+            </summary>
+        </member>
+        <member name="M:OpenCover.Framework.Model.Method.MarkAsSkipped(OpenCover.Framework.Model.SkippedMethod)">
+            <summary>
+            Mark an entity as skipped
+            </summary>
+            <param name="reason">Provide a reason</param>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Method.IsGenerated">
+            <summary>
+            True if this.FullName matches generated-method-regex-pattern
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Method.CallName">
+            <summary>
+            Method "::CallName(". (Name excluding return type, namespace and arguments)
+            </summary>
+        </member>
+        <member name="T:OpenCover.Framework.Model.FileRef">
+            <summary>
+            A file reference within the coverage session and is used to point to an existing File entity
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.FileRef.UniqueId">
+            <summary>
+            The uniqueid of a file in a coverage session
+            </summary>
+        </member>
+        <member name="T:OpenCover.Framework.Model.File">
+            <summary>
+            File details of a source file
+            </summary>
+        </member>
+        <member name="M:OpenCover.Framework.Model.File.#ctor">
+            <summary>
+            A standard constructor
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.File.FullPath">
+            <summary>
+            The path to file
+            </summary>
+        </member>
+        <member name="T:OpenCover.Framework.Model.SkippedMethod">
+            <summary>
+            Describes how a method or class was skipped
+            </summary>
+        </member>
+        <member name="F:OpenCover.Framework.Model.SkippedMethod.Attribute">
+            <summary>
+            Entity was skipped due to a matching exclusion attribute filter
+            </summary>
+        </member>
+        <member name="F:OpenCover.Framework.Model.SkippedMethod.File">
+            <summary>
+            Entity was skipped due to a matching exclusion file filter
+            </summary>
+        </member>
+        <member name="F:OpenCover.Framework.Model.SkippedMethod.Filter">
+            <summary>
+            Entity was skipped due to a matching exclusion module/class filter
+            </summary>
+        </member>
+        <member name="F:OpenCover.Framework.Model.SkippedMethod.MissingPdb">
+            <summary>
+            Entity was skipped due to a missing PDB
+            </summary>
+        </member>
+        <member name="F:OpenCover.Framework.Model.SkippedMethod.Inferred">
+            <summary>
+            Entity was skipped by inference (usually related to File filters)
+            </summary>
+        </member>
+        <member name="F:OpenCover.Framework.Model.SkippedMethod.AutoImplementedProperty">
+            <summary>
+            Entity (method) was skipped as it is an auto-implemented property.
+            </summary>
+        </member>
+        <member name="F:OpenCover.Framework.Model.SkippedMethod.NativeCode">
+            <summary>
+            Entity (method) was skipped as it is native code.
+            </summary>
+        </member>
+        <member name="F:OpenCover.Framework.Model.SkippedMethod.Unknown">
+            <summary>
+            Entity (method) was skipped for other reasons.
+            </summary>
+        </member>
+        <member name="F:OpenCover.Framework.Model.SkippedMethod.FolderExclusion">
+            <summary>
+            Entity (dll) was skipped due to folder exclusion.
+            </summary>
+        </member>
+        <member name="F:OpenCover.Framework.Model.SkippedMethod.Delegate">
+            <summary>
+            Entity (method) was skipped due to being a delegate.
+            </summary>
+        </member>
+        <member name="F:OpenCover.Framework.Model.SkippedMethod.FSharpInternal">
+            <summary>
+            Entity (method) was skipped due to being an F# internal implementation
+            detail (in either a record or discriminated union type).
+            </summary>
+        </member>
+        <member name="T:OpenCover.Framework.Model.CoverageSession">
+            <summary>
+            A coverage session
+            </summary>
+        </member>
+        <member name="M:OpenCover.Framework.Model.CoverageSession.#ctor">
+            <summary>
+            initialise a coverage session
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.CoverageSession.SessionId">
+            <summary>
+            A unique session identifier
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.CoverageSession.Summary">
+            <summary>
+            A Summary of results for the session
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.CoverageSession.Modules">
+            <summary>
+            A list of modules that have been profiled under the session
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.CoverageSession.Version">
+            <summary>
+            The current version
+            </summary>
+        </member>
+        <member name="T:OpenCover.Framework.Model.SkippedEntity">
+            <summary>
+            The entity can be skipped from coverage but needs to supply a reason
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.SkippedEntity.SkippedDueTo">
+            <summary>
+            If this class has been skipped then this value will describe why
+            </summary>
+        </member>
+        <member name="M:OpenCover.Framework.Model.SkippedEntity.ShouldSerializeSkippedDueTo">
+            <summary>
+            If this class has been skipped then this value will allow the data to be serialized
+            </summary>
+        </member>
+        <member name="M:OpenCover.Framework.Model.SkippedEntity.MarkAsSkipped(OpenCover.Framework.Model.SkippedMethod)">
+            <summary>
+            Mark an entity as skipped
+            </summary>
+            <param name="reason">Provide a reason</param>
+        </member>
+        <member name="T:OpenCover.Framework.Model.TrackedMethodRef">
+            <summary>
+            A reference to a tracked method
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.TrackedMethodRef.UniqueId">
+            <summary>
+            unique id assigned
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.TrackedMethodRef.VisitCount">
+            <summary>
+            The visit count
+            </summary>
+        </member>
+        <member name="T:OpenCover.Framework.Model.TrackedMethod">
+            <summary>
+            A method being tracked
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.TrackedMethod.UniqueId">
+            <summary>
+            unique id assigned
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.TrackedMethod.MetadataToken">
+            <summary>
+            The MetadataToken used to identify this entity within the assembly
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.TrackedMethod.FullName">
+            <summary>
+            The name of the method being tracked
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.TrackedMethod.Strategy">
+            <summary>
+            The reason/plugin why the method is being tracked
+            </summary>
+        </member>
+        <member name="T:OpenCover.Framework.Model.BranchPoint">
+            <summary>
+            a branch point
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.BranchPoint.StartLine">
+            <summary>
+            Line of the branching instruction
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.BranchPoint.Path">
+            <summary>
+            A path that can be taken
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.BranchPoint.OffsetPoints">
+            <summary>
+            List of OffsetPoints between Offset and EndOffset (exclusive)
+            </summary>
+        </member>
+        <member name="M:OpenCover.Framework.Model.BranchPoint.ShouldSerializeOffsetPoints">
+            <summary>
+            Should offset points be serialized
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:OpenCover.Framework.Model.BranchPoint.EndOffset">
+            <summary>
+            Last Offset == EndOffset.
+            Can be same as Offset
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.BranchPoint.FileId">
+            <summary>
+            The file associated with the supplied startline
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.BranchPoint.Document">
+            <summary>
+            The url to the document if an entry was not mapped to an id
+            </summary>
+        </member>
+        <member name="T:OpenCover.Framework.Model.InstrumentationPoint">
+            <summary>
+            An instrumentable point
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.InstrumentationPoint.Count">
+            <summary>
+            Return the number of visit points
+            </summary>
+        </member>
+        <member name="M:OpenCover.Framework.Model.InstrumentationPoint.GetVisitCount(System.UInt32)">
+            <summary>
+            Get the number of recorded visit points for this identifier
+            </summary>
+            <param name="spid">the sequence point identifier - NOTE 0 is not used</param>
+        </member>
+        <member name="M:OpenCover.Framework.Model.InstrumentationPoint.AddVisitCount(System.UInt32,System.UInt32,System.Int32)">
+            <summary>
+            Add a number of recorded visit ppints against this identifier
+            </summary>
+            <param name="spid">the sequence point identifier - NOTE 0 is not used</param>
+            <param name="trackedMethodId">the id of a tracked method - Note 0 means no method currently tracking</param>
+            <param name="amount">the number of visit points to add</param>
+        </member>
+        <member name="M:OpenCover.Framework.Model.InstrumentationPoint.#ctor">
+            <summary>
+            Initialise
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.InstrumentationPoint.VisitCount">
+            <summary>
+            Store the number of visits
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.InstrumentationPoint.UniqueSequencePoint">
+            <summary>
+            A unique number
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.InstrumentationPoint.Ordinal">
+            <summary>
+            An order of the point within the method
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.InstrumentationPoint.Offset">
+            <summary>
+            The IL offset of the point
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.InstrumentationPoint.IsSkipped">
+            <summary>
+            Used to hide an instrumentation point
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.InstrumentationPoint.TrackedMethodRefs">
+            <summary>
+            The list of tracked methods
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.InstrumentationPoint.OrigSequencePoint">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:OpenCover.Framework.Model.Module">
+            <summary>
+            The details of a module
+            </summary>
+        </member>
+        <member name="M:OpenCover.Framework.Model.Module.#ctor">
+            <summary>
+            simple constructor
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Module.ModulePath">
+            <summary>
+            The full path name to the module
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Module.ModuleTime">
+            <summary>
+            GetlastWriteTimeUtc
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Module.Aliases">
+            <summary>
+            A list of aliases
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Module.ModuleName">
+            <summary>
+            The name of the module
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Module.Files">
+            <summary>
+            The files that make up the module
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Module.Classes">
+            <summary>
+            The classes that make up the module
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Module.TrackedMethods">
+            <summary>
+            Methods that are being tracked i.e. test methods
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Module.ModuleHash">
+            <summary>
+            A hash of the file used to group them together (especially when running against mstest)
+            </summary>
+        </member>
+        <member name="M:OpenCover.Framework.Model.Module.MarkAsSkipped(OpenCover.Framework.Model.SkippedMethod)">
+            <summary>
+            Mark an entity as skipped
+            </summary>
+            <param name="reason">Provide a reason</param>
+        </member>
+        <member name="T:OpenCover.Framework.Model.Summary">
+            <summary>
+            A summary of results
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Summary.NumSequencePoints">
+            <summary>
+            The number of sequence points
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Summary.VisitedSequencePoints">
+            <summary>
+            The number of sequence points visited
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Summary.NumBranchPoints">
+            <summary>
+            The number of branch points
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Summary.VisitedBranchPoints">
+            <summary>
+            The number of branch points visited
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Summary.SequenceCoverage">
+            <summary>
+            What is the sequence coverage?
+            </summary>
+            <remarks>Rounded for ease</remarks>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Summary.BranchCoverage">
+            <summary>
+            What is the branch coverage?
+            </summary>
+            <remarks>Rounded for ease</remarks>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Summary.MaxCyclomaticComplexity">
+            <summary>
+            What is the maximum cyclomatic complexity.
+            </summary>
+            <remarks>Calculated using the Gendarme rules library</remarks>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Summary.MinCyclomaticComplexity">
+            <summary>
+            What is the minimum cyclomatic complexity.
+            </summary>
+            <remarks>Calculated using the Gendarme rules library</remarks>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Summary.MaxCrapScore">
+            <summary>
+            What is the maximum crap score
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Summary.MinCrapScore">
+            <summary>
+            What is the minimum crap score.
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Summary.VisitedClasses">
+            <summary>
+            What is the number of visited classes
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Summary.NumClasses">
+            <summary>
+            What is the total number of classes
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Summary.VisitedMethods">
+            <summary>
+            What is the number of visited methods
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.Summary.NumMethods">
+            <summary>
+            What is the total number of methods
+            </summary>
+        </member>
+        <member name="T:OpenCover.Framework.Model.SequencePoint">
+            <summary>
+            a sequence point
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.SequencePoint.StartLine">
+            <summary>
+            The start line of the sequence point
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.SequencePoint.StartColumn">
+            <summary>
+            The start column of the sequence point
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.SequencePoint.EndLine">
+            <summary>
+            The end line of the sequence point
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.SequencePoint.EndColumn">
+            <summary>
+            The end column of the sequence point
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.SequencePoint.BranchExitsCount">
+            <summary>
+            Count of merged branches
+            </summary>
+            <summary>
+            The number of branch exits
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.SequencePoint.BranchExitsVisit">
+            <summary>
+            Visit count of merged branches
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.SequencePoint.FileId">
+            <summary>
+            The file associated with the supplied startline
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.SequencePoint.Document">
+            <summary>
+            The url to the document if an entry was not mapped to an id
+            </summary>
+        </member>
+        <member name="P:OpenCover.Framework.Model.SequencePoint.IsSingleCharSequencePoint">
+            <summary>
+            Property
+            </summary>
+        </member>
+        <member name="M:OpenCover.Framework.Model.SequencePoint.IsLineEqual(OpenCover.Framework.Model.SequencePoint)">
+            <summary>
+            SonnarQube wants no more than 3 boolean conditions
+            </summary>
+            <param name="sp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCover.Framework.Model.SequencePoint.IsColumnEqual(OpenCover.Framework.Model.SequencePoint)">
+            <summary>
+            SonnarQube wants no more than 3 boolean conditions
+            </summary>
+            <param name="sp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCover.Framework.Model.SequencePoint.IsPositionEqual(OpenCover.Framework.Model.SequencePoint)">
+            <summary>
+            Is Start/End Line/Column equal
+            </summary>
+            <param name="sp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCover.Framework.Model.SequencePoint.IsFileIdEqual(OpenCover.Framework.Model.SequencePoint)">
+            <summary>
+            Is FileId equal? (If FileId is 0 then file is unknown)
+            </summary>
+            <param name="sp"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

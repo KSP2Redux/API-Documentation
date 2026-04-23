@@ -1,0 +1,229 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Unity.ShaderGraph.Editor</name>
+    </assembly>
+    <members>
+        <member name="P:UnityEditor.ShaderGraph.Internal.KeywordDependentCollection`7.baseInstance">
+            <summary>
+            All permutation will inherit from base's active fields
+            </summary>
+        </member>
+        <member name="M:UnityEditor.ShaderGraph.CreateShaderGraph.CreateFromTemplate(System.Action{System.String},System.String,System.String)">
+            <summary>
+            Prompts the user to create a new Shader Graph from a Template.
+            /// The Template Browser opens if <paramref name="templateSourcePath"/> is null.
+            </summary>
+            <param name="callback">Callback to execute with the created shader graph asset.</param>
+            <param name="templateSourcePath">Shader Graph template file. Use string.Empty for Blank Shader Graph.</param>
+            <param name="filename">New Shader Graph filename.</param>
+        </member>
+        <member name="M:UnityEditor.ShaderGraph.CreateShaderGraph.CreateGraphAndMaterialFromTemplate(System.Action{UnityEngine.Material},System.String,System.String)">
+            <summary>
+            Prompts the user to create a new Shader Graph from a Template and associated Material.
+            The Template Browser opens if <paramref name="templateSourcePath"/> is null.
+            </summary>
+            <param name="callback">Callback to execute with the created material.</param>
+            <param name="templateSourcePath">Shader Graph template file. Use string.Empty for Blank Shader Graph.</param>
+            /// <param name="filename">New Shader Graph filename.</param>
+        </member>
+        <member name="T:UnityEditor.ShaderGraph.Drawing.IShaderInputObserver">
+            <summary>
+            This interface is implemented by any entity that wants to be made aware of updates to a shader input
+            </summary>
+        </member>
+        <member name="M:UnityEditor.ShaderGraph.GraphUtil.SanitizeName(System.Collections.Generic.IEnumerable{System.String},System.String,System.String,System.String)">
+            <summary>
+            Sanitizes a supplied string such that it does not collide
+            with any other name in a collection.
+            </summary>
+            <param name="existingNames">
+            A collection of names that the new name should not collide with.
+            </param>
+            <param name="duplicateFormat">
+            The format applied to the name if a duplicate exists.
+            This must be a format string that contains `{0}` and `{1}`
+            once each. An example could be `{0} ({1})`, which will append ` (n)`
+            to the name for the n`th duplicate.
+            </param>
+            <param name="name">
+            The name to be sanitized.
+            </param>
+            <returns>
+            A name that is distinct form any name in `existingNames`.
+            </returns>
+        </member>
+        <member name="T:UnityEditor.ShaderGraph.MinimalGraphData">
+            <summary>
+            Minimal version of <see cref="T:UnityEditor.ShaderGraph.GraphData"/> used for gathering dependencies. This allows us to not deserialize
+            all the nodes, ports, edges, groups etc., which is important as we cannot share data between
+            <see cref="M:UnityEditor.ShaderGraph.ShaderSubGraphImporter.GatherDependenciesFromSourceFile(System.String)"/> and
+            <see cref="M:UnityEditor.ShaderGraph.ShaderSubGraphImporter.OnImportAsset(UnityEditor.AssetImporters.AssetImportContext)"/>. The latter must always import fully, but for the former we
+            want to avoid the extra GC pressure.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.ShaderGraph.ShaderStageExtensions.TryGetShaderStage(UnityEditor.ShaderGraph.ShaderStageCapability,UnityEditor.ShaderGraph.ShaderStage@)">
+            <summary>
+            Tries to convert a ShaderStageCapability into a ShaderStage. The conversion is only successful if the given ShaderStageCapability <paramref name="capability"/> refers to exactly 1 shader stage.
+            </summary>
+            <param name="capability">The ShaderStageCapability to convert.</param>
+            <param name="stage">If <paramref name="capability"/> refers to exactly 1 shader stage, this parameter will contain the equivalent ShaderStage of that. Otherwise the value is undefined.</param>
+            <returns>True is <paramref name="capability"/> holds exactly 1 shader stage.</returns>
+        </member>
+        <member name="T:UnityEditor.ShaderGraph.IMaterialSlotSupportsLiteralMode">
+            <summary>
+            Literal mode says that the property being passed to a slot / node is a literal
+            This is used if the node internally has a conditional statement that produces a texture reference.
+            In these situations, the shader compiler requires the value being used for the switch / if to be known at compile time.
+            </summary>
+        </member>
+        <member name="T:UnityEditor.ShaderGraph.SlotDependencyInfo">
+            Cached run-time information for slot dependency tracking within a sub-graph
+        </member>
+        <member name="T:UnityEditor.ShaderGraph.ITerrainSubTarget">
+            <summary>
+            Sub-target used to filter Terrain-specific nodes
+            </summary>
+        </member>
+        <member name="M:UnityEditor.ShaderGraph.BlackboardInputInfo.#ctor(System.Single,System.String)">
+            <summary>
+            Provide additional information to provide the blackboard for order and name of the ShaderInput item.
+            </summary>
+            <param name="priority">Priority of the item, higher values will result in lower positions in the menu.</param>
+            <param name="name">Name of the item. If null, the class name of the item will be used instead.</param>
+        </member>
+        <member name="P:UnityEditor.Graphing.GraphObject.materialArtifact">
+            <summary>
+            The Material artifact generated by the import process.
+            Every modification to this material will be lost when the graph is saved.
+            for.
+            </summary>
+        </member>
+        <member name="T:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI">
+            <summary>
+            The base class to implement the fullscreen Material GUI in a render pipeline.
+            </summary>
+        </member>
+        <member name="T:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.Expandable">
+            <summary>Enum used to store the expanded state of the drawer in the material GUI</summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.Expandable.SurfaceOptions">
+            <summary>Surface Option key for the MaterialHeaderScopeList.RegisterHeaderScope call</summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.Expandable.SurfaceInputs">
+            <summary>Surface Inputs key for the MaterialHeaderScopeList.RegisterHeaderScope call</summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.Styles.SurfaceOptions">
+            <summary>Surface Option header name</summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.Styles.SurfaceInputs">
+            <summary>Surface Inputs header name</summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.Styles.blendingMode">
+            <summary>Name and tooltip for the blending mode property in the material GUI</summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.Styles.srcColorBlendMode">
+            <summary>Name and tooltip for the source color blend mode property in the material GUI</summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.Styles.dstColorBlendMode">
+            <summary>Name and tooltip for the destination color blend mode property in the material GUI</summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.Styles.colorBlendOperation">
+            <summary>Name and tooltip for the color blend operation property in the material GUI</summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.Styles.srcAlphaBlendMode">
+            <summary>Name and tooltip for the source alpha blend mode property in the material GUI</summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.Styles.dstAlphaBlendMode">
+            <summary>Name and tooltip for the destination alpha blend mode property in the material GUI</summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.Styles.alphaBlendOperation">
+            <summary>Name and tooltip for the alpha blend operation property in the material GUI</summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.Styles.depthWrite">
+            <summary>Name and tooltip for the depth write property in the material GUI</summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.Styles.depthTest">
+            <summary>Name and tooltip for the depth test property in the material GUI</summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.Styles.stencil">
+            <summary>Name and tooltip for the stencil override property in the material GUI</summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.Styles.stencilRef">
+            <summary>Name and tooltip for the stencil reference property in the material GUI</summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.Styles.stencilReadMask">
+            <summary>Name and tooltip for the stencil read mask property in the material GUI</summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.Styles.stencilWriteMask">
+            <summary>Name and tooltip for the stencil write mask property in the material GUI</summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.Styles.stencilComparison">
+            <summary>Name and tooltip for the stencil comparison property in the material GUI</summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.Styles.stencilPass">
+            <summary>Name and tooltip for the stencil pass operation property in the material GUI</summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.Styles.stencilFail">
+            <summary>Name and tooltip for the stencil fail operation property in the material GUI</summary>
+        </member>
+        <member name="F:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.Styles.stencilDepthFail">
+            <summary>Name and tooltip for the stencil depth fail operation property in the material GUI</summary>
+        </member>
+        <member name="M:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.OnGUI(UnityEditor.MaterialEditor,UnityEditor.MaterialProperty[])">
+            <summary>
+            Unity calls this function when it displays the GUI. To implement your custom GUI, override this function..
+            </summary>
+            <param name="materialEditor">Material editor instance.</param>
+            <param name="properties">The list of properties in the inspected material(s).</param>
+        </member>
+        <member name="M:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.OnOpenGUI(UnityEngine.Material,UnityEditor.MaterialEditor,UnityEditor.MaterialProperty[])">
+            <summary>
+            Unity calls this function when it displays the GUI. To implement your custom GUI, override this function..
+            </summary>
+            <param name="materialEditor">Material editor instance.</param>
+            <param name="properties">The list of properties in the inspected material(s).</param>
+            <param name="material">The target materials for this GUI.</param>
+        </member>
+        <member name="M:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.AssignNewShaderToMaterial(UnityEngine.Material,UnityEngine.Shader,UnityEngine.Shader)">
+            <summary>
+            Assign a new FullscreenShader to the target material.
+            </summary>
+            <param name="material">A valid material using a Fullscreen Shader Graph.</param>
+            <param name="oldShader"></param>
+            <param name="newShader"></param>
+        </member>
+        <member name="M:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.DrawSurfaceOptions(UnityEngine.Material)">
+            <summary>
+            Draw the Surface Options section of the fullscreen shader GUI.
+            </summary>
+            <param name="material">A valid material using a Fullscreen Shader Graph.</param>
+        </member>
+        <member name="M:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.DrawSurfaceInputs(UnityEngine.Material)">
+            <summary>
+            Draw the Surface Inputs section of the fullscreen shader GUI.
+            </summary>
+            <param name="material">A valid material using a Fullscreen Shader Graph.</param>
+        </member>
+        <member name="M:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.ValidateMaterial(UnityEngine.Material)">
+            <summary>
+            Ensures that the material is correctly setup.
+            </summary>
+            <param name="material">A valid material using a Fullscreen Shader Graph.</param>
+        </member>
+        <member name="M:UnityEditor.Rendering.Fullscreen.ShaderGraph.FullscreenShaderGUI.SetupSurface(UnityEngine.Material)">
+            <summary>
+            Setup the fullscreen shader keywords from the material properties.
+            </summary>
+            <param name="material">A valid material using a Fullscreen Shader Graph.</param>
+        </member>
+        <member name="F:UnityEditor.Rendering.BuiltIn.ShaderKeywordStrings.ReflectionProbeAtlas">
+            <summary> Keyword used for Reflection probe atlas. </summary>
+        </member>
+        <member name="T:UnityEditor.Rendering.UITK.ShaderGraph.IUISubTarget">
+            <summary>
+            Sub-target used to filter UI-specific nodes
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Unity.Formats.Fbx.Runtime</name>
+    </assembly>
+    <members>
+        <member name="T:UnityEngine.Formats.Fbx.Exporter.HandleUpdate">
+             <summary>
+             Handler for an OnUpdate event.
+            
+             The update is performed on a temporary instance, which, shortly after
+             this handler is invoked, will be applied to the prefab.
+            
+             The event handler can make changes to any objects in the hierarchy rooted
+             by the updatedInstance. Those changes will be applied to the prefab.
+            
+             The updatedObjects include all objects in the temporary instance
+             that were:
+             - created, or
+             - changed parent, or
+             - had a component that was created, destroyed, or updated.
+             There is no notification for entire objects that were destroyed.
+             </summary>
+        </member>
+        <member name="T:UnityEngine.Formats.Fbx.Exporter.FbxPrefab">
+             <summary>
+             This component is applied to a prefab. It keeps the prefab sync'd up
+             with an FBX file.
+            
+             Other parts of the ecosystem:
+                     FbxPrefabInspector
+                     FbxPrefabAutoUpdater
+             </summary>
+        </member>
+        <member name="F:UnityEngine.Formats.Fbx.Exporter.FbxPrefab.m_fbxHistory">
+            <summary>
+            Representation of the FBX file as it was when the prefab was
+            last saved. This lets us update the prefab when the FBX changes.
+            </summary>
+        </member>
+        <member name="F:UnityEngine.Formats.Fbx.Exporter.FbxPrefab.m_fbxModel">
+            <summary>
+            Which FBX file does this refer to?
+            </summary>
+        </member>
+        <member name="F:UnityEngine.Formats.Fbx.Exporter.FbxPrefab.m_autoUpdate">
+            <summary>
+            Should we auto-update this prefab when the FBX file is updated?
+            </summary>
+        </member>
+        <member name="E:UnityEngine.Formats.Fbx.Exporter.FbxPrefab.OnUpdate">
+            <summary>
+            OnUpdate is raised once when an FbxPrefab gets updated, after all the changes
+            have been done.
+            </summary>
+        </member>
+        <member name="M:UnityEngine.Formats.Fbx.Exporter.FbxPrefab.CallOnUpdate(UnityEngine.Formats.Fbx.Exporter.FbxPrefab,System.Collections.Generic.IEnumerable{UnityEngine.GameObject})">
+            <summary>
+            Notify listeners that they're free to make adjustments.
+            This will be called after the FbxPrefab auto updater has completed it's work.
+            </summary>
+            <param name="instance">Updated FbxPrefab instance.</param>
+            <param name="updatedObjects">Updated objects.</param>
+        </member>
+    </members>
+</doc>
