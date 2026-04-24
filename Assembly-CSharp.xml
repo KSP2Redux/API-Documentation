@@ -5327,6 +5327,21 @@
             Flow action that creates a <see cref="T:KSP.Sim.impl.ViewController" /> and synchronizes it with the universe view during game load.
             </summary>
         </member>
+        <member name="T:KSP.Game.Load.UpdateRocketTechTreeSaveMigration011">
+            <summary>
+            Save migration for the SM+/MD rocket-tree restructure that inserted 1.5v nodes and raised the 2v node costs.
+            </summary>
+        </member>
+        <member name="T:KSP.Game.Load.SaveGameMigrationRunner">
+            <summary>
+            Applies all registered serialized-save migrations in ascending schema order.
+            </summary>
+        </member>
+        <member name="T:KSP.Game.Load.SaveGameMigrationResult">
+            <summary>
+            Result summary for a save migration pass.
+            </summary>
+        </member>
         <member name="T:KSP.Game.Load.CollectFlightDataFlowAction">
             <summary>
             Flow action that collects active vessel components and flight control state into serializable form for a save operation.
@@ -5487,6 +5502,11 @@
             Flow action that loads and parses part data text assets during game load.
             </summary>
         </member>
+        <member name="T:KSP.Game.Load.SaveGameMigration">
+            <summary>
+            Base type for one-way serialized save-data migrations that upgrade older saves to the current schema version.
+            </summary>
+        </member>
         <member name="T:KSP.Game.Load.CollectMetadataFlowAction">
             <summary>
             Flow action that collects and writes game session metadata into the current save, including universe time, game mode, campaign settings, and mod information.
@@ -5555,6 +5575,11 @@
         <member name="T:KSP.Game.Load.LoadMapCore">
             <summary>
             A <see cref="T:KSP.Game.Flow.FlowAction" /> step that loads map core assets during the game loading sequence.
+            </summary>
+        </member>
+        <member name="T:KSP.Game.Load.ApplySaveGameMigrationsFlowAction">
+            <summary>
+            Flow action that upgrades deserialized save data to the current schema before runtime managers consume it.
             </summary>
         </member>
         <member name="T:KSP.Game.Load.SerializeGameDataFlowAction">
