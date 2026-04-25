@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class CameraRenderStackBase | KSP2Redux API (Beta) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class CameraRenderStackBase | KSP2Redux API (Beta) ">
+    
+    <meta name="description" content="A base class for  implementations, providing default camera shot routing and coordinate-space conversion utilities via the main render camera.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="KSP.Rendering.impl.CameraRenderStackBase">
+
+
+
+  <h1 id="KSP_Rendering_impl_CameraRenderStackBase" data-uid="KSP.Rendering.impl.CameraRenderStackBase" class="text-break">Class CameraRenderStackBase</h1>
+  <div class="markdown level0 summary"><p>A base class for <a class="xref" href="KSP.Rendering.ICameraRenderStack.html">ICameraRenderStack</a> implementations, providing default camera shot routing and coordinate-space conversion utilities via the main render camera.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Object.html">Object</a></div>
+    <div class="level2"><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Component.html">Component</a></div>
+    <div class="level3"><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Behaviour.html">Behaviour</a></div>
+    <div class="level4"><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/MonoBehaviour.html">MonoBehaviour</a></div>
+    <div class="level5"><a class="xref" href="KSP.Game.KerbalMonoBehaviour.html">KerbalMonoBehaviour</a></div>
+    <div class="level6"><span class="xref">CameraRenderStackBase</span></div>
+      <div class="level7"><a class="xref" href="GlobalAssemblyCSharp.PQSTestCameraSkyboxCameraStack.html">PQSTestCameraSkyboxCameraStack</a></div>
+      <div class="level7"><a class="xref" href="KSP.Rendering.impl.FlightCameraRenderStack_Physics.html">FlightCameraRenderStack_Physics</a></div>
+      <div class="level7"><a class="xref" href="KSP.Rendering.impl.FlightCameraRenderStack_Scaled.html">FlightCameraRenderStack_Scaled</a></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="KSP.Rendering.ICameraRenderStack.html">ICameraRenderStack</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Game">KerbalMonoBehaviour.Game</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Assets">KerbalMonoBehaviour.Assets</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Messages">KerbalMonoBehaviour.Messages</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_CFXSystem">KerbalMonoBehaviour.CFXSystem</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_IsGameShuttingDown">KerbalMonoBehaviour.IsGameShuttingDown</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Rendering.html">Rendering</a>.<a class="xref" href="KSP.Rendering.impl.html">impl</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="KSP_Rendering_impl_CameraRenderStackBase_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class CameraRenderStackBase : KerbalMonoBehaviour, ICameraRenderStack</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+
+
+  <a id="KSP_Rendering_impl_CameraRenderStackBase__ctor_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.#ctor*"></a>
+  <h4 id="KSP_Rendering_impl_CameraRenderStackBase__ctor" data-uid="KSP.Rendering.impl.CameraRenderStackBase.#ctor">CameraRenderStackBase()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected CameraRenderStackBase()</code></pre>
+  </div>
+  <h3 id="fields">Fields
+</h3>
+
+
+  <h4 id="KSP_Rendering_impl_CameraRenderStackBase_debugCamera" data-uid="KSP.Rendering.impl.CameraRenderStackBase.debugCamera">debugCamera</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Camera debugCamera</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Camera.html">Camera</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="KSP_Rendering_impl_CameraRenderStackBase_RenderCameraGimbal_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.RenderCameraGimbal*"></a>
+  <h4 id="KSP_Rendering_impl_CameraRenderStackBase_RenderCameraGimbal" data-uid="KSP.Rendering.impl.CameraRenderStackBase.RenderCameraGimbal">RenderCameraGimbal</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Transform RenderCameraGimbal { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_CameraRenderStackBase_RenderCameraMount_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.RenderCameraMount*"></a>
+  <h4 id="KSP_Rendering_impl_CameraRenderStackBase_RenderCameraMount" data-uid="KSP.Rendering.impl.CameraRenderStackBase.RenderCameraMount">RenderCameraMount</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Transform RenderCameraMount { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_CameraRenderStackBase_RenderSpace_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.RenderSpace*"></a>
+  <h4 id="KSP_Rendering_impl_CameraRenderStackBase_RenderSpace" data-uid="KSP.Rendering.impl.CameraRenderStackBase.RenderSpace">RenderSpace</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract RenderSpaceType RenderSpace { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.RenderSpaceType.html">RenderSpaceType</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="KSP_Rendering_impl_CameraRenderStackBase_ApplyCameraShot_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.ApplyCameraShot*"></a>
+  <h4 id="KSP_Rendering_impl_CameraRenderStackBase_ApplyCameraShot_KSP_Sim_ICameraShot_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.ApplyCameraShot(KSP.Sim.ICameraShot)">ApplyCameraShot(ICameraShot)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void ApplyCameraShot(ICameraShot cameraShot)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.ICameraShot.html">ICameraShot</a></td>
+        <td><span class="parametername">cameraShot</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_CameraRenderStackBase_GetCameraEffectsSystem_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.GetCameraEffectsSystem*"></a>
+  <h4 id="KSP_Rendering_impl_CameraRenderStackBase_GetCameraEffectsSystem" data-uid="KSP.Rendering.impl.CameraRenderStackBase.GetCameraEffectsSystem">GetCameraEffectsSystem()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract CameraEffectsSystem GetCameraEffectsSystem()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.CameraEffectsSystem.html">CameraEffectsSystem</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_CameraRenderStackBase_GetCubemapRenderCamera_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.GetCubemapRenderCamera*"></a>
+  <h4 id="KSP_Rendering_impl_CameraRenderStackBase_GetCubemapRenderCamera" data-uid="KSP.Rendering.impl.CameraRenderStackBase.GetCubemapRenderCamera">GetCubemapRenderCamera()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract Camera GetCubemapRenderCamera()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Camera.html">Camera</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_CameraRenderStackBase_GetDebugRenderCamera_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.GetDebugRenderCamera*"></a>
+  <h4 id="KSP_Rendering_impl_CameraRenderStackBase_GetDebugRenderCamera" data-uid="KSP.Rendering.impl.CameraRenderStackBase.GetDebugRenderCamera">GetDebugRenderCamera()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract Camera GetDebugRenderCamera()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Camera.html">Camera</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_CameraRenderStackBase_GetMainRenderCamera_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.GetMainRenderCamera*"></a>
+  <h4 id="KSP_Rendering_impl_CameraRenderStackBase_GetMainRenderCamera" data-uid="KSP.Rendering.impl.CameraRenderStackBase.GetMainRenderCamera">GetMainRenderCamera()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract Camera GetMainRenderCamera()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Camera.html">Camera</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_CameraRenderStackBase_GetPostProcessLayer_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.GetPostProcessLayer*"></a>
+  <h4 id="KSP_Rendering_impl_CameraRenderStackBase_GetPostProcessLayer" data-uid="KSP.Rendering.impl.CameraRenderStackBase.GetPostProcessLayer">GetPostProcessLayer()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract PostProcessLayer GetPostProcessLayer()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">PostProcessLayer</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_CameraRenderStackBase_GetRenderCameras_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.GetRenderCameras*"></a>
+  <h4 id="KSP_Rendering_impl_CameraRenderStackBase_GetRenderCameras_System_Boolean_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.GetRenderCameras(System.Boolean)">GetRenderCameras(bool)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract Camera[] GetRenderCameras(bool includeDebugCameras = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">includeDebugCameras</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Camera.html">Camera</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_CameraRenderStackBase_InternalApplyShotToRenderCamera_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.InternalApplyShotToRenderCamera*"></a>
+  <h4 id="KSP_Rendering_impl_CameraRenderStackBase_InternalApplyShotToRenderCamera_KSP_Sim_ICameraShot_UnityEngine_Camera_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.InternalApplyShotToRenderCamera(KSP.Sim.ICameraShot,UnityEngine.Camera)">InternalApplyShotToRenderCamera(ICameraShot, Camera)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected abstract void InternalApplyShotToRenderCamera(ICameraShot shot, Camera renderCamera)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.ICameraShot.html">ICameraShot</a></td>
+        <td><span class="parametername">shot</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Camera.html">Camera</a></td>
+        <td><span class="parametername">renderCamera</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_CameraRenderStackBase_RenderShotToTexture_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.RenderShotToTexture*"></a>
+  <h4 id="KSP_Rendering_impl_CameraRenderStackBase_RenderShotToTexture_KSP_Sim_ICameraShot_UnityEngine_RenderTexture_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.RenderShotToTexture(KSP.Sim.ICameraShot,UnityEngine.RenderTexture)">RenderShotToTexture(ICameraShot, RenderTexture)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void RenderShotToTexture(ICameraShot cameraShot, RenderTexture renderTarget)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.ICameraShot.html">ICameraShot</a></td>
+        <td><span class="parametername">cameraShot</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">RenderTexture</span></td>
+        <td><span class="parametername">renderTarget</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_CameraRenderStackBase_ScreenPointToRay_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.ScreenPointToRay*"></a>
+  <h4 id="KSP_Rendering_impl_CameraRenderStackBase_ScreenPointToRay_UnityEngine_Vector3_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.ScreenPointToRay(UnityEngine.Vector3)">ScreenPointToRay(Vector3)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Ray ScreenPointToRay(Vector3 position)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Ray.html">Ray</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_CameraRenderStackBase_ScreenToViewportPoint_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.ScreenToViewportPoint*"></a>
+  <h4 id="KSP_Rendering_impl_CameraRenderStackBase_ScreenToViewportPoint_UnityEngine_Vector3_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.ScreenToViewportPoint(UnityEngine.Vector3)">ScreenToViewportPoint(Vector3)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Vector3 ScreenToViewportPoint(Vector3 position)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_CameraRenderStackBase_ScreenToWorldPoint_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.ScreenToWorldPoint*"></a>
+  <h4 id="KSP_Rendering_impl_CameraRenderStackBase_ScreenToWorldPoint_UnityEngine_Vector3_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.ScreenToWorldPoint(UnityEngine.Vector3)">ScreenToWorldPoint(Vector3)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Vector3 ScreenToWorldPoint(Vector3 position)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_CameraRenderStackBase_SetRenderCamerasEnabled_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.SetRenderCamerasEnabled*"></a>
+  <h4 id="KSP_Rendering_impl_CameraRenderStackBase_SetRenderCamerasEnabled_System_Boolean_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.SetRenderCamerasEnabled(System.Boolean)">SetRenderCamerasEnabled(bool)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetRenderCamerasEnabled(bool enabled)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">enabled</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_CameraRenderStackBase_ViewportPointToRay_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.ViewportPointToRay*"></a>
+  <h4 id="KSP_Rendering_impl_CameraRenderStackBase_ViewportPointToRay_UnityEngine_Vector3_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.ViewportPointToRay(UnityEngine.Vector3)">ViewportPointToRay(Vector3)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Ray ViewportPointToRay(Vector3 position)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Ray.html">Ray</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_CameraRenderStackBase_ViewportToScreenPoint_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.ViewportToScreenPoint*"></a>
+  <h4 id="KSP_Rendering_impl_CameraRenderStackBase_ViewportToScreenPoint_UnityEngine_Vector3_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.ViewportToScreenPoint(UnityEngine.Vector3)">ViewportToScreenPoint(Vector3)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Vector3 ViewportToScreenPoint(Vector3 position)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_CameraRenderStackBase_ViewportToWorldPoint_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.ViewportToWorldPoint*"></a>
+  <h4 id="KSP_Rendering_impl_CameraRenderStackBase_ViewportToWorldPoint_UnityEngine_Vector3_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.ViewportToWorldPoint(UnityEngine.Vector3)">ViewportToWorldPoint(Vector3)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Vector3 ViewportToWorldPoint(Vector3 position)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_CameraRenderStackBase_WorldToScreenPoint_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.WorldToScreenPoint*"></a>
+  <h4 id="KSP_Rendering_impl_CameraRenderStackBase_WorldToScreenPoint_UnityEngine_Vector3_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.WorldToScreenPoint(UnityEngine.Vector3)">WorldToScreenPoint(Vector3)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Vector3 WorldToScreenPoint(Vector3 position)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_CameraRenderStackBase_WorldToViewportPoint_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.WorldToViewportPoint*"></a>
+  <h4 id="KSP_Rendering_impl_CameraRenderStackBase_WorldToViewportPoint_UnityEngine_Vector3_" data-uid="KSP.Rendering.impl.CameraRenderStackBase.WorldToViewportPoint(UnityEngine.Vector3)">WorldToViewportPoint(Vector3)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Vector3 WorldToViewportPoint(Vector3 position)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="KSP.Rendering.ICameraRenderStack.html">ICameraRenderStack</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetField__2___0_System_String_">Util.GetField&lt;T, R&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetField__2___0_System_String___1_">Util.SetField&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromProperties_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromProperties(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetFieldValue__1_System_Object_System_String_">Util.GetFieldValue&lt;T&gt;(object, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.GameObjectExtension.html#GlobalAssemblyCSharp_GameObjectExtension_GetComponentCached__1_UnityEngine_Component___0__">GameObjectExtension.GetComponentCached&lt;T&gt;(Component, ref T)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.GameObjectExtension.html#GlobalAssemblyCSharp_GameObjectExtension_GetComponentInParent__1_UnityEngine_Component_System_Boolean_">GameObjectExtension.GetComponentInParent&lt;T&gt;(Component, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.ComponentExtensions.html#KSP_ComponentExtensions_CopyFrom__1_UnityEngine_Component___0_">ComponentExtensions.CopyFrom&lt;T&gt;(Component, T)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.OAB.DataContextMonoBehaviorExtensionDooblyDo.html#KSP_OAB_DataContextMonoBehaviorExtensionDooblyDo_FindDataContextProviderInHierarchy_UnityEngine_MonoBehaviour_">DataContextMonoBehaviorExtensionDooblyDo.FindDataContextProviderInHierarchy(MonoBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.GameObjectExtension.html#GlobalAssemblyCSharp_GameObjectExtension_SetDebugName_UnityEngine_Object_System_String_">GameObjectExtension.SetDebugName(Object, string)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from prerelease
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

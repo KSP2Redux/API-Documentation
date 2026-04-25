@@ -1,0 +1,3096 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class PQS | KSP2Redux API (Beta) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class PQS | KSP2Redux API (Beta) ">
+    
+    <meta name="description" content="Represents a Procedural Quad Sphere (PQS) planet-terrain component, managing quad subdivision, physics generation, and rendering for a celestial body.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="KSP.Rendering.Planets.PQS">
+
+
+
+  <h1 id="KSP_Rendering_Planets_PQS" data-uid="KSP.Rendering.Planets.PQS" class="text-break">Class PQS</h1>
+  <div class="markdown level0 summary"><p>Represents a Procedural Quad Sphere (PQS) planet-terrain component, managing quad subdivision, physics generation, and rendering for a celestial body.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Object.html">Object</a></div>
+    <div class="level2"><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Component.html">Component</a></div>
+    <div class="level3"><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Behaviour.html">Behaviour</a></div>
+    <div class="level4"><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/MonoBehaviour.html">MonoBehaviour</a></div>
+    <div class="level5"><span class="xref">PQS</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Rendering.html">Rendering</a>.<a class="xref" href="KSP.Rendering.Planets.html">Planets</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="KSP_Rendering_Planets_PQS_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[AwesomeTechnologiesScriptOrder(3)]
+[AddComponentMenu(&quot;PQuadSphere/PQS&quot;)]
+public class PQS : MonoBehaviour</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+
+
+  <a id="KSP_Rendering_Planets_PQS__ctor_" data-uid="KSP.Rendering.Planets.PQS.#ctor*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS__ctor" data-uid="KSP.Rendering.Planets.PQS.#ctor">PQS()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PQS()</code></pre>
+  </div>
+  <h3 id="fields">Fields
+</h3>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_BUFFER_SIZE" data-uid="KSP.Rendering.Planets.PQS.BUFFER_SIZE">BUFFER_SIZE</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int BUFFER_SIZE = 12000</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_DebugIncludeInterestPositions" data-uid="KSP.Rendering.Planets.PQS.DebugIncludeInterestPositions">DebugIncludeInterestPositions</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool DebugIncludeInterestPositions</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_DebugInterestGroupRadiusMultiplier" data-uid="KSP.Rendering.Planets.PQS.DebugInterestGroupRadiusMultiplier">DebugInterestGroupRadiusMultiplier</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static double DebugInterestGroupRadiusMultiplier</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_DebugInterestVesselCount" data-uid="KSP.Rendering.Planets.PQS.DebugInterestVesselCount">DebugInterestVesselCount</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int DebugInterestVesselCount</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_EmptyDecalInstanceList" data-uid="KSP.Rendering.Planets.PQS.EmptyDecalInstanceList">EmptyDecalInstanceList</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NativeList&lt;DecalInstance&gt; EmptyDecalInstanceList</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">NativeList</span>&lt;<a class="xref" href="DecalInstance.html">DecalInstance</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_FixedLevel" data-uid="KSP.Rendering.Planets.PQS.FixedLevel">FixedLevel</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int FixedLevel</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_PQRenderData" data-uid="KSP.Rendering.Planets.PQS.PQRenderData">PQRenderData</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PQData PQRenderData</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Planets.PQData.html">PQData</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_PQSPositionId" data-uid="KSP.Rendering.Planets.PQS.PQSPositionId">PQSPositionId</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly int PQSPositionId</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_PQSRenderer" data-uid="KSP.Rendering.Planets.PQS.PQSRenderer">PQSRenderer</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PQSRenderer PQSRenderer</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Planets.PQSRenderer.html">PQSRenderer</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_PQSToWorldMtxId" data-uid="KSP.Rendering.Planets.PQS.PQSToWorldMtxId">PQSToWorldMtxId</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly int PQSToWorldMtxId</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_SCALED_SPACE_MESH_SCALE" data-uid="KSP.Rendering.Planets.PQS.SCALED_SPACE_MESH_SCALE">SCALED_SPACE_MESH_SCALE</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const double SCALED_SPACE_MESH_SCALE = 1000</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_ScaledSpaceTextureGeneratorSettings" data-uid="KSP.Rendering.Planets.PQS.ScaledSpaceTextureGeneratorSettings">ScaledSpaceTextureGeneratorSettings</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ScaledSpaceTextureGeneratorSettings ScaledSpaceTextureGeneratorSettings</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.ScaledSpaceTextureGeneratorSettings.html">ScaledSpaceTextureGeneratorSettings</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_UseFixedLevel" data-uid="KSP.Rendering.Planets.PQS.UseFixedLevel">UseFixedLevel</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool UseFixedLevel</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_WorldToPQSMtxId" data-uid="KSP.Rendering.Planets.PQS.WorldToPQSMtxId">WorldToPQSMtxId</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly int WorldToPQSMtxId</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_circumference" data-uid="KSP.Rendering.Planets.PQS.circumference">circumference</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HideInInspector]
+public double circumference</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_collapseDelta" data-uid="KSP.Rendering.Planets.PQS.collapseDelta">collapseDelta</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HideInInspector]
+public double collapseDelta</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_data" data-uid="KSP.Rendering.Planets.PQS.data">data</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PQSData data</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Planets.PQSData.html">PQSData</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_generatePhysics" data-uid="KSP.Rendering.Planets.PQS.generatePhysics">generatePhysics</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool generatePhysics</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_graphicsStats" data-uid="KSP.Rendering.Planets.PQS.graphicsStats">graphicsStats</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PQS.StatCollection graphicsStats</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Planets.PQS.html">PQS</a>.<a class="xref" href="KSP.Rendering.Planets.PQS.StatCollection.html">StatCollection</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_halfChord" data-uid="KSP.Rendering.Planets.PQS.halfChord">halfChord</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HideInInspector]
+public double halfChord</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_isActive" data-uid="KSP.Rendering.Planets.PQS.isActive">isActive</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool isActive</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_isAlive" data-uid="KSP.Rendering.Planets.PQS.isAlive">isAlive</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool isAlive</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_isStarted" data-uid="KSP.Rendering.Planets.PQS.isStarted">isStarted</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool isStarted</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_isSubdivisionEnabled" data-uid="KSP.Rendering.Planets.PQS.isSubdivisionEnabled">isSubdivisionEnabled</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool isSubdivisionEnabled</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_maxRaycastDistance" data-uid="KSP.Rendering.Planets.PQS.maxRaycastDistance">maxRaycastDistance</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float maxRaycastDistance</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_parentSphere" data-uid="KSP.Rendering.Planets.PQS.parentSphere">parentSphere</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HideInInspector]
+public PQS parentSphere</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Planets.PQS.html">PQS</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_physicsStats" data-uid="KSP.Rendering.Planets.PQS.physicsStats">physicsStats</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PQS.StatCollection physicsStats</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Planets.PQS.html">PQS</a>.<a class="xref" href="KSP.Rendering.Planets.PQS.StatCollection.html">StatCollection</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_primaryTargetAltitude" data-uid="KSP.Rendering.Planets.PQS.primaryTargetAltitude">primaryTargetAltitude</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double primaryTargetAltitude</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_primaryTargetDistance" data-uid="KSP.Rendering.Planets.PQS.primaryTargetDistance">primaryTargetDistance</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double primaryTargetDistance</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_quadAllowBuild" data-uid="KSP.Rendering.Planets.PQS.quadAllowBuild">quadAllowBuild</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HideInInspector]
+public bool quadAllowBuild</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_radiusMax" data-uid="KSP.Rendering.Planets.PQS.radiusMax">radiusMax</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HideInInspector]
+public double radiusMax</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_radiusMin" data-uid="KSP.Rendering.Planets.PQS.radiusMin">radiusMin</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HideInInspector]
+public double radiusMin</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_radiusSquared" data-uid="KSP.Rendering.Planets.PQS.radiusSquared">radiusSquared</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HideInInspector]
+public double radiusSquared</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_settings" data-uid="KSP.Rendering.Planets.PQS.settings">settings</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PQSGlobalSettings settings</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Planets.PQSGlobalSettings.html">PQSGlobalSettings</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_trackStats" data-uid="KSP.Rendering.Planets.PQS.trackStats">trackStats</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool trackStats</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_visRad" data-uid="KSP.Rendering.Planets.PQS.visRad">visRad</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HideInInspector]
+public double visRad</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_visRadDelta" data-uid="KSP.Rendering.Planets.PQS.visRadDelta">visRadDelta</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HideInInspector]
+public double visRadDelta</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_waterStats" data-uid="KSP.Rendering.Planets.PQS.waterStats">waterStats</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PQS.StatCollection waterStats</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Planets.PQS.html">PQS</a>.<a class="xref" href="KSP.Rendering.Planets.PQS.StatCollection.html">StatCollection</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="KSP_Rendering_Planets_PQS_AtmosphereData_" data-uid="KSP.Rendering.Planets.PQS.AtmosphereData*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_AtmosphereData" data-uid="KSP.Rendering.Planets.PQS.AtmosphereData">AtmosphereData</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AtmosphereDataModelComponent AtmosphereData { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.AtmosphereDataModelComponent.html">AtmosphereDataModelComponent</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_CoreCelestialBodyData_" data-uid="KSP.Rendering.Planets.PQS.CoreCelestialBodyData*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_CoreCelestialBodyData" data-uid="KSP.Rendering.Planets.PQS.CoreCelestialBodyData">CoreCelestialBodyData</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CoreCelestialBodyData CoreCelestialBodyData { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.CoreCelestialBodyData.html">CoreCelestialBodyData</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_HasPrimaryTarget_" data-uid="KSP.Rendering.Planets.PQS.HasPrimaryTarget*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_HasPrimaryTarget" data-uid="KSP.Rendering.Planets.PQS.HasPrimaryTarget">HasPrimaryTarget</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HasPrimaryTarget { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_HasPrimaryTargetForRendering_" data-uid="KSP.Rendering.Planets.PQS.HasPrimaryTargetForRendering*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_HasPrimaryTargetForRendering" data-uid="KSP.Rendering.Planets.PQS.HasPrimaryTargetForRendering">HasPrimaryTargetForRendering</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HasPrimaryTargetForRendering { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_HasSecondaryTarget_" data-uid="KSP.Rendering.Planets.PQS.HasSecondaryTarget*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_HasSecondaryTarget" data-uid="KSP.Rendering.Planets.PQS.HasSecondaryTarget">HasSecondaryTarget</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HasSecondaryTarget { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_LightData_" data-uid="KSP.Rendering.Planets.PQS.LightData*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_LightData" data-uid="KSP.Rendering.Planets.PQS.LightData">LightData</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LightData LightData { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.LightData.html">LightData</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_PlanetSimBehavior_" data-uid="KSP.Rendering.Planets.PQS.PlanetSimBehavior*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_PlanetSimBehavior" data-uid="KSP.Rendering.Planets.PQS.PlanetSimBehavior">PlanetSimBehavior</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CelestialBodyBehavior PlanetSimBehavior { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.CelestialBodyBehavior.html">CelestialBodyBehavior</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_PrimaryTargetProvider_" data-uid="KSP.Rendering.Planets.PQS.PrimaryTargetProvider*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_PrimaryTargetProvider" data-uid="KSP.Rendering.Planets.PQS.PrimaryTargetProvider">PrimaryTargetProvider</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PQSTargetProvider PrimaryTargetProvider { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Planets.PQSTargetProvider.html">PQSTargetProvider</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_ScaledRenderer_" data-uid="KSP.Rendering.Planets.PQS.ScaledRenderer*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_ScaledRenderer" data-uid="KSP.Rendering.Planets.PQS.ScaledRenderer">ScaledRenderer</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MeshRenderer ScaledRenderer { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/MeshRenderer.html">MeshRenderer</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_SecondaryTargetProvider_" data-uid="KSP.Rendering.Planets.PQS.SecondaryTargetProvider*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_SecondaryTargetProvider" data-uid="KSP.Rendering.Planets.PQS.SecondaryTargetProvider">SecondaryTargetProvider</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PQSTargetProvider SecondaryTargetProvider { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Planets.PQSTargetProvider.html">PQSTargetProvider</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_VSPInstance_" data-uid="KSP.Rendering.Planets.PQS.VSPInstance*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_VSPInstance" data-uid="KSP.Rendering.Planets.PQS.VSPInstance">VSPInstance</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Material VSPInstance { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Material.html">Material</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_primaryTargetHeight_" data-uid="KSP.Rendering.Planets.PQS.primaryTargetHeight*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_primaryTargetHeight" data-uid="KSP.Rendering.Planets.PQS.primaryTargetHeight">primaryTargetHeight</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double primaryTargetHeight { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_primaryTargetObserverHeight_" data-uid="KSP.Rendering.Planets.PQS.primaryTargetObserverHeight*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_primaryTargetObserverHeight" data-uid="KSP.Rendering.Planets.PQS.primaryTargetObserverHeight">primaryTargetObserverHeight</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double primaryTargetObserverHeight { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_primaryTargetObserverTerrainHeight_" data-uid="KSP.Rendering.Planets.PQS.primaryTargetObserverTerrainHeight*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_primaryTargetObserverTerrainHeight" data-uid="KSP.Rendering.Planets.PQS.primaryTargetObserverTerrainHeight">primaryTargetObserverTerrainHeight</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double primaryTargetObserverTerrainHeight { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_relativeFloatingOriginPosition_" data-uid="KSP.Rendering.Planets.PQS.relativeFloatingOriginPosition*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_relativeFloatingOriginPosition" data-uid="KSP.Rendering.Planets.PQS.relativeFloatingOriginPosition">relativeFloatingOriginPosition</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3d relativeFloatingOriginPosition { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_relativePrimaryTargetObserverPositionNormalized_" data-uid="KSP.Rendering.Planets.PQS.relativePrimaryTargetObserverPositionNormalized*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_relativePrimaryTargetObserverPositionNormalized" data-uid="KSP.Rendering.Planets.PQS.relativePrimaryTargetObserverPositionNormalized">relativePrimaryTargetObserverPositionNormalized</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3d relativePrimaryTargetObserverPositionNormalized { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_relativePrimaryTargetPosition_" data-uid="KSP.Rendering.Planets.PQS.relativePrimaryTargetPosition*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_relativePrimaryTargetPosition" data-uid="KSP.Rendering.Planets.PQS.relativePrimaryTargetPosition">relativePrimaryTargetPosition</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3d relativePrimaryTargetPosition { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_relativePrimaryTargetPositionNormalized_" data-uid="KSP.Rendering.Planets.PQS.relativePrimaryTargetPositionNormalized*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_relativePrimaryTargetPositionNormalized" data-uid="KSP.Rendering.Planets.PQS.relativePrimaryTargetPositionNormalized">relativePrimaryTargetPositionNormalized</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3d relativePrimaryTargetPositionNormalized { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_relativePrimaryTargetPositionOnRadiusSphere_" data-uid="KSP.Rendering.Planets.PQS.relativePrimaryTargetPositionOnRadiusSphere*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_relativePrimaryTargetPositionOnRadiusSphere" data-uid="KSP.Rendering.Planets.PQS.relativePrimaryTargetPositionOnRadiusSphere">relativePrimaryTargetPositionOnRadiusSphere</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3d relativePrimaryTargetPositionOnRadiusSphere { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_relativeSecondaryTargetPosition_" data-uid="KSP.Rendering.Planets.PQS.relativeSecondaryTargetPosition*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_relativeSecondaryTargetPosition" data-uid="KSP.Rendering.Planets.PQS.relativeSecondaryTargetPosition">relativeSecondaryTargetPosition</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3d relativeSecondaryTargetPosition { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_secondaryTargetAltitude_" data-uid="KSP.Rendering.Planets.PQS.secondaryTargetAltitude*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_secondaryTargetAltitude" data-uid="KSP.Rendering.Planets.PQS.secondaryTargetAltitude">secondaryTargetAltitude</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double secondaryTargetAltitude { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="KSP_Rendering_Planets_PQS_ActivateSphere_" data-uid="KSP.Rendering.Planets.PQS.ActivateSphere*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_ActivateSphere" data-uid="KSP.Rendering.Planets.PQS.ActivateSphere">ActivateSphere()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ActivateSphere()</code></pre>
+  </div>
+
+
+  <a id="KSP_Rendering_Planets_PQS_AddPQSBlocker_" data-uid="KSP.Rendering.Planets.PQS.AddPQSBlocker*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_AddPQSBlocker_KSP_Rendering_Planets_IPQSTerrainBlocker_" data-uid="KSP.Rendering.Planets.PQS.AddPQSBlocker(KSP.Rendering.Planets.IPQSTerrainBlocker)">AddPQSBlocker(IPQSTerrainBlocker)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddPQSBlocker(IPQSTerrainBlocker blocker)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Planets.IPQSTerrainBlocker.html">IPQSTerrainBlocker</a></td>
+        <td><span class="parametername">blocker</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_AddStats_" data-uid="KSP.Rendering.Planets.PQS.AddStats*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_AddStats_KSP_Rendering_Planets_PQS_StatCollection_System_Int32_System_Int32_System_Int32_System_Int32_System_Int32_" data-uid="KSP.Rendering.Planets.PQS.AddStats(KSP.Rendering.Planets.PQS.StatCollection,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">AddStats(StatCollection, int, int, int, int, int)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddStats(PQS.StatCollection c, int total, int added, int destroyed, int cached, int changed)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Planets.PQS.html">PQS</a>.<a class="xref" href="KSP.Rendering.Planets.PQS.StatCollection.html">StatCollection</a></td>
+        <td><span class="parametername">c</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">total</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">added</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">destroyed</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">cached</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">changed</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_AllocInterestGroups_" data-uid="KSP.Rendering.Planets.PQS.AllocInterestGroups*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_AllocInterestGroups" data-uid="KSP.Rendering.Planets.PQS.AllocInterestGroups">AllocInterestGroups()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NativeList&lt;InterestGroup&gt; AllocInterestGroups()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">NativeList</span>&lt;<a class="xref" href="KSP.Rendering.Planets.InterestGroup.html">InterestGroup</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_DeactivateSphere_" data-uid="KSP.Rendering.Planets.PQS.DeactivateSphere*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_DeactivateSphere" data-uid="KSP.Rendering.Planets.PQS.DeactivateSphere">DeactivateSphere()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DeactivateSphere()</code></pre>
+  </div>
+
+
+  <a id="KSP_Rendering_Planets_PQS_GetAltitude_" data-uid="KSP.Rendering.Planets.PQS.GetAltitude*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_GetAltitude_Vector3d_" data-uid="KSP.Rendering.Planets.PQS.GetAltitude(Vector3d)">GetAltitude(Vector3d)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double GetAltitude(Vector3d worldPosition)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">worldPosition</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_GetBiomeDataAtPosition_" data-uid="KSP.Rendering.Planets.PQS.GetBiomeDataAtPosition*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_GetBiomeDataAtPosition_UnityEngine_Vector3_" data-uid="KSP.Rendering.Planets.PQS.GetBiomeDataAtPosition(UnityEngine.Vector3)">GetBiomeDataAtPosition(Vector3)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PQSData.BiomeSurfaceData GetBiomeDataAtPosition(Vector3 pos)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">pos</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Planets.PQSData.html">PQSData</a>.<a class="xref" href="KSP.Rendering.Planets.PQSData.BiomeSurfaceData.html">BiomeSurfaceData</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_GetBiomeMaskAtTextureCoordinate_" data-uid="KSP.Rendering.Planets.PQS.GetBiomeMaskAtTextureCoordinate*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_GetBiomeMaskAtTextureCoordinate_UnityEngine_Vector2_" data-uid="KSP.Rendering.Planets.PQS.GetBiomeMaskAtTextureCoordinate(UnityEngine.Vector2)">GetBiomeMaskAtTextureCoordinate(Vector2)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color GetBiomeMaskAtTextureCoordinate(Vector2 texCoord)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector2</span></td>
+        <td><span class="parametername">texCoord</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Color.html">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_GetBiomeTextureWeights_" data-uid="KSP.Rendering.Planets.PQS.GetBiomeTextureWeights*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_GetBiomeTextureWeights_System_Int32_" data-uid="KSP.Rendering.Planets.PQS.GetBiomeTextureWeights(System.Int32)">GetBiomeTextureWeights(int)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector4 GetBiomeTextureWeights(int biomeIndex)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">biomeIndex</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector4</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_GetDominantBiomeIndexFromBiomeMask_" data-uid="KSP.Rendering.Planets.PQS.GetDominantBiomeIndexFromBiomeMask*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_GetDominantBiomeIndexFromBiomeMask_UnityEngine_Color_" data-uid="KSP.Rendering.Planets.PQS.GetDominantBiomeIndexFromBiomeMask(UnityEngine.Color)">GetDominantBiomeIndexFromBiomeMask(Color)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int GetDominantBiomeIndexFromBiomeMask(Color biomeMaskWeights)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Color.html">Color</a></td>
+        <td><span class="parametername">biomeMaskWeights</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_GetHeight_" data-uid="KSP.Rendering.Planets.PQS.GetHeight*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_GetHeight_UnityEngine_Vector2_UnityEngine_Vector3_" data-uid="KSP.Rendering.Planets.PQS.GetHeight(UnityEngine.Vector2,UnityEngine.Vector3)">GetHeight(Vector2, Vector3)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double GetHeight(Vector2 uv, Vector3 radialVector)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector2</span></td>
+        <td><span class="parametername">uv</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">radialVector</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_GetPQSBlockers_" data-uid="KSP.Rendering.Planets.PQS.GetPQSBlockers*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_GetPQSBlockers" data-uid="KSP.Rendering.Planets.PQS.GetPQSBlockers">GetPQSBlockers()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;IPQSTerrainBlocker&gt; GetPQSBlockers()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="KSP.Rendering.Planets.IPQSTerrainBlocker.html">IPQSTerrainBlocker</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_GetRelativeAltitude_" data-uid="KSP.Rendering.Planets.PQS.GetRelativeAltitude*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_GetRelativeAltitude_UnityEngine_Vector3_" data-uid="KSP.Rendering.Planets.PQS.GetRelativeAltitude(UnityEngine.Vector3)">GetRelativeAltitude(Vector3)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double GetRelativeAltitude(Vector3 worldPosition)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">worldPosition</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_GetRelativeDirection_" data-uid="KSP.Rendering.Planets.PQS.GetRelativeDirection*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_GetRelativeDirection_Vector3d_" data-uid="KSP.Rendering.Planets.PQS.GetRelativeDirection(Vector3d)">GetRelativeDirection(Vector3d)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3d GetRelativeDirection(Vector3d worldDirection)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">worldDirection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_GetRelativeDistance_" data-uid="KSP.Rendering.Planets.PQS.GetRelativeDistance*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_GetRelativeDistance_UnityEngine_Vector3_" data-uid="KSP.Rendering.Planets.PQS.GetRelativeDistance(UnityEngine.Vector3)">GetRelativeDistance(Vector3)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double GetRelativeDistance(Vector3 worldPosition)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">worldPosition</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_GetRelativeDistanceSqr_" data-uid="KSP.Rendering.Planets.PQS.GetRelativeDistanceSqr*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_GetRelativeDistanceSqr_UnityEngine_Vector3_" data-uid="KSP.Rendering.Planets.PQS.GetRelativeDistanceSqr(UnityEngine.Vector3)">GetRelativeDistanceSqr(Vector3)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double GetRelativeDistanceSqr(Vector3 worldDirection)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">worldDirection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_GetRelativePosition_" data-uid="KSP.Rendering.Planets.PQS.GetRelativePosition*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_GetRelativePosition_Vector3d_" data-uid="KSP.Rendering.Planets.PQS.GetRelativePosition(Vector3d)">GetRelativePosition(Vector3d)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3d GetRelativePosition(Vector3d worldPosition)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">worldPosition</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_GetSurfaceHeight_" data-uid="KSP.Rendering.Planets.PQS.GetSurfaceHeight*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_GetSurfaceHeight_Vector3d_System_Boolean_" data-uid="KSP.Rendering.Planets.PQS.GetSurfaceHeight(Vector3d,System.Boolean)">GetSurfaceHeight(Vector3d, bool)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double GetSurfaceHeight(Vector3d radialVector, bool includeDecals)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">radialVector</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">includeDecals</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_GetTransition_" data-uid="KSP.Rendering.Planets.PQS.GetTransition*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_GetTransition_System_Boolean_" data-uid="KSP.Rendering.Planets.PQS.GetTransition(System.Boolean)">GetTransition(bool)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float GetTransition(bool scaled = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">scaled</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_GetVertexSphericalUVs_" data-uid="KSP.Rendering.Planets.PQS.GetVertexSphericalUVs*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_GetVertexSphericalUVs_UnityEngine_Vector3_" data-uid="KSP.Rendering.Planets.PQS.GetVertexSphericalUVs(UnityEngine.Vector3)">GetVertexSphericalUVs(Vector3)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 GetVertexSphericalUVs(Vector3 pos)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">pos</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_GetWorldPosition_" data-uid="KSP.Rendering.Planets.PQS.GetWorldPosition*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_GetWorldPosition_Vector3d_" data-uid="KSP.Rendering.Planets.PQS.GetWorldPosition(Vector3d)">GetWorldPosition(Vector3d)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3d GetWorldPosition(Vector3d localPosition)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">localPosition</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_IsRunning_" data-uid="KSP.Rendering.Planets.PQS.IsRunning*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_IsRunning" data-uid="KSP.Rendering.Planets.PQS.IsRunning">IsRunning()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsRunning()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_LineSphereIntersection_" data-uid="KSP.Rendering.Planets.PQS.LineSphereIntersection*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_LineSphereIntersection_Vector3d_Vector3d_System_Double_Vector3d__" data-uid="KSP.Rendering.Planets.PQS.LineSphereIntersection(Vector3d,Vector3d,System.Double,Vector3d@)">LineSphereIntersection(Vector3d, Vector3d, double, out Vector3d)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool LineSphereIntersection(Vector3d relPos, Vector3d relVel, double radius, out Vector3d relIntersection)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">relPos</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">relVel</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">radius</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">relIntersection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_OnSettingChanged_" data-uid="KSP.Rendering.Planets.PQS.OnSettingChanged*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_OnSettingChanged_KSP_Rendering_Setting_" data-uid="KSP.Rendering.Planets.PQS.OnSettingChanged(KSP.Rendering.Setting)">OnSettingChanged(Setting)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnSettingChanged(Setting setting)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Setting.html">Setting</a></td>
+        <td><span class="parametername">setting</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_RayIntersection_" data-uid="KSP.Rendering.Planets.PQS.RayIntersection*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_RayIntersection_UnityEngine_Vector3_UnityEngine_Vector3_System_Double__" data-uid="KSP.Rendering.Planets.PQS.RayIntersection(UnityEngine.Vector3,UnityEngine.Vector3,System.Double@)">RayIntersection(Vector3, Vector3, out double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool RayIntersection(Vector3 worldStart, Vector3 worldDirection, out double intersectionDistance)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">worldStart</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">worldDirection</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">intersectionDistance</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_RayIntersection_" data-uid="KSP.Rendering.Planets.PQS.RayIntersection*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_RayIntersection_UnityEngine_Vector3_UnityEngine_Vector3_Vector3d__" data-uid="KSP.Rendering.Planets.PQS.RayIntersection(UnityEngine.Vector3,UnityEngine.Vector3,Vector3d@)">RayIntersection(Vector3, Vector3, out Vector3d)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool RayIntersection(Vector3 worldStart, Vector3 worldDirection, out Vector3d intersection)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">worldStart</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">worldDirection</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">intersection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_RebuildSphere_" data-uid="KSP.Rendering.Planets.PQS.RebuildSphere*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_RebuildSphere" data-uid="KSP.Rendering.Planets.PQS.RebuildSphere">RebuildSphere()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RebuildSphere()</code></pre>
+  </div>
+
+
+  <a id="KSP_Rendering_Planets_PQS_RemovePQSBlocker_" data-uid="KSP.Rendering.Planets.PQS.RemovePQSBlocker*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_RemovePQSBlocker_KSP_Rendering_Planets_IPQSTerrainBlocker_" data-uid="KSP.Rendering.Planets.PQS.RemovePQSBlocker(KSP.Rendering.Planets.IPQSTerrainBlocker)">RemovePQSBlocker(IPQSTerrainBlocker)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemovePQSBlocker(IPQSTerrainBlocker blocker)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Planets.IPQSTerrainBlocker.html">IPQSTerrainBlocker</a></td>
+        <td><span class="parametername">blocker</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_SetCelestialBodyBehavior_" data-uid="KSP.Rendering.Planets.PQS.SetCelestialBodyBehavior*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_SetCelestialBodyBehavior_KSP_Sim_impl_CelestialBodyBehavior_" data-uid="KSP.Rendering.Planets.PQS.SetCelestialBodyBehavior(KSP.Sim.impl.CelestialBodyBehavior)">SetCelestialBodyBehavior(CelestialBodyBehavior)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetCelestialBodyBehavior(CelestialBodyBehavior cbBehavior)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.CelestialBodyBehavior.html">CelestialBodyBehavior</a></td>
+        <td><span class="parametername">cbBehavior</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_SetCoreCelestialBodyData_" data-uid="KSP.Rendering.Planets.PQS.SetCoreCelestialBodyData*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_SetCoreCelestialBodyData_KSP_CoreCelestialBodyData_" data-uid="KSP.Rendering.Planets.PQS.SetCoreCelestialBodyData(KSP.CoreCelestialBodyData)">SetCoreCelestialBodyData(CoreCelestialBodyData)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetCoreCelestialBodyData(CoreCelestialBodyData cbData)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.CoreCelestialBodyData.html">CoreCelestialBodyData</a></td>
+        <td><span class="parametername">cbData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_SetLightData_" data-uid="KSP.Rendering.Planets.PQS.SetLightData*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_SetLightData_KSP_Rendering_LightData_" data-uid="KSP.Rendering.Planets.PQS.SetLightData(KSP.Rendering.LightData)">SetLightData(LightData)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetLightData(LightData lightData)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.LightData.html">LightData</a></td>
+        <td><span class="parametername">lightData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_SetScaledAtmosphereTransition_" data-uid="KSP.Rendering.Planets.PQS.SetScaledAtmosphereTransition*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_SetScaledAtmosphereTransition_System_Single_System_Single_" data-uid="KSP.Rendering.Planets.PQS.SetScaledAtmosphereTransition(System.Single,System.Single)">SetScaledAtmosphereTransition(float, float)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetScaledAtmosphereTransition(float transition, float ditherScale)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">transition</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">ditherScale</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_SetScaledMeshTransition_" data-uid="KSP.Rendering.Planets.PQS.SetScaledMeshTransition*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_SetScaledMeshTransition_System_Single_System_Single_" data-uid="KSP.Rendering.Planets.PQS.SetScaledMeshTransition(System.Single,System.Single)">SetScaledMeshTransition(float, float)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetScaledMeshTransition(float transition, float ditherScale)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">transition</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">ditherScale</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_SetScaledSpaceMaterial_" data-uid="KSP.Rendering.Planets.PQS.SetScaledSpaceMaterial*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_SetScaledSpaceMaterial_UnityEngine_Material_" data-uid="KSP.Rendering.Planets.PQS.SetScaledSpaceMaterial(UnityEngine.Material)">SetScaledSpaceMaterial(Material)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetScaledSpaceMaterial(Material material)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Material.html">Material</a></td>
+        <td><span class="parametername">material</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_SetScaledSpaceRenderer_" data-uid="KSP.Rendering.Planets.PQS.SetScaledSpaceRenderer*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_SetScaledSpaceRenderer_UnityEngine_MeshRenderer_" data-uid="KSP.Rendering.Planets.PQS.SetScaledSpaceRenderer(UnityEngine.MeshRenderer)">SetScaledSpaceRenderer(MeshRenderer)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetScaledSpaceRenderer(MeshRenderer renderer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/MeshRenderer.html">MeshRenderer</a></td>
+        <td><span class="parametername">renderer</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_SetSecondaryTarget_" data-uid="KSP.Rendering.Planets.PQS.SetSecondaryTarget*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_SetSecondaryTarget_KSP_Rendering_Planets_PQSTargetProvider_" data-uid="KSP.Rendering.Planets.PQS.SetSecondaryTarget(KSP.Rendering.Planets.PQSTargetProvider)">SetSecondaryTarget(PQSTargetProvider)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetSecondaryTarget(PQSTargetProvider targetProvider)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Planets.PQSTargetProvider.html">PQSTargetProvider</a></td>
+        <td><span class="parametername">targetProvider</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_SetTarget_" data-uid="KSP.Rendering.Planets.PQS.SetTarget*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_SetTarget_KSP_Rendering_Planets_PQSTargetProvider_" data-uid="KSP.Rendering.Planets.PQS.SetTarget(KSP.Rendering.Planets.PQSTargetProvider)">SetTarget(PQSTargetProvider)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetTarget(PQSTargetProvider targetProvider)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Planets.PQSTargetProvider.html">PQSTargetProvider</a></td>
+        <td><span class="parametername">targetProvider</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_Sync_" data-uid="KSP.Rendering.Planets.PQS.Sync*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_Sync" data-uid="KSP.Rendering.Planets.PQS.Sync">Sync()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Sync()</code></pre>
+  </div>
+
+
+  <a id="KSP_Rendering_Planets_PQS_SyncVSPMat_" data-uid="KSP.Rendering.Planets.PQS.SyncVSPMat*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_SyncVSPMat" data-uid="KSP.Rendering.Planets.PQS.SyncVSPMat">SyncVSPMat()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void SyncVSPMat()</code></pre>
+  </div>
+
+
+  <a id="KSP_Rendering_Planets_PQS_UpdateSphere_" data-uid="KSP.Rendering.Planets.PQS.UpdateSphere*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_UpdateSphere" data-uid="KSP.Rendering.Planets.PQS.UpdateSphere">UpdateSphere()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UpdateSphere()</code></pre>
+  </div>
+  <h3 id="events">Events
+</h3>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_SphereActivated" data-uid="KSP.Rendering.Planets.PQS.SphereActivated">SphereActivated</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event PQS.OnEvent SphereActivated</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Planets.PQS.html">PQS</a>.<a class="xref" href="KSP.Rendering.Planets.PQS.OnEvent.html">OnEvent</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_SphereDeactivated" data-uid="KSP.Rendering.Planets.PQS.SphereDeactivated">SphereDeactivated</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event PQS.OnEvent SphereDeactivated</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Planets.PQS.html">PQS</a>.<a class="xref" href="KSP.Rendering.Planets.PQS.OnEvent.html">OnEvent</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_onDestroyed" data-uid="KSP.Rendering.Planets.PQS.onDestroyed">onDestroyed</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event PQS.OnEvent onDestroyed</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Planets.PQS.html">PQS</a>.<a class="xref" href="KSP.Rendering.Planets.PQS.OnEvent.html">OnEvent</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_onStarted" data-uid="KSP.Rendering.Planets.PQS.onStarted">onStarted</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event PQS.OnEvent onStarted</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Planets.PQS.html">PQS</a>.<a class="xref" href="KSP.Rendering.Planets.PQS.OnEvent.html">OnEvent</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQS_onUpdateFinished" data-uid="KSP.Rendering.Planets.PQS.onUpdateFinished">onUpdateFinished</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event PQS.OnEvent onUpdateFinished</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Planets.PQS.html">PQS</a>.<a class="xref" href="KSP.Rendering.Planets.PQS.OnEvent.html">OnEvent</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetField__2___0_System_String_">Util.GetField&lt;T, R&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetField__2___0_System_String___1_">Util.SetField&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromProperties_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromProperties(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetFieldValue__1_System_Object_System_String_">Util.GetFieldValue&lt;T&gt;(object, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.GameObjectExtension.html#GlobalAssemblyCSharp_GameObjectExtension_GetComponentCached__1_UnityEngine_Component___0__">GameObjectExtension.GetComponentCached&lt;T&gt;(Component, ref T)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.GameObjectExtension.html#GlobalAssemblyCSharp_GameObjectExtension_GetComponentInParent__1_UnityEngine_Component_System_Boolean_">GameObjectExtension.GetComponentInParent&lt;T&gt;(Component, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.ComponentExtensions.html#KSP_ComponentExtensions_CopyFrom__1_UnityEngine_Component___0_">ComponentExtensions.CopyFrom&lt;T&gt;(Component, T)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.OAB.DataContextMonoBehaviorExtensionDooblyDo.html#KSP_OAB_DataContextMonoBehaviorExtensionDooblyDo_FindDataContextProviderInHierarchy_UnityEngine_MonoBehaviour_">DataContextMonoBehaviorExtensionDooblyDo.FindDataContextProviderInHierarchy(MonoBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.GameObjectExtension.html#GlobalAssemblyCSharp_GameObjectExtension_SetDebugName_UnityEngine_Object_System_String_">GameObjectExtension.SetDebugName(Object, string)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from prerelease
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

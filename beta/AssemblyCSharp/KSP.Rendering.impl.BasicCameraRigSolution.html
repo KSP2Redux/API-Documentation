@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class BasicCameraRigSolution | KSP2Redux API (Beta) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class BasicCameraRigSolution | KSP2Redux API (Beta) ">
+    
+    <meta name="description" content="Represents the standard camera rig solution, managing gimbal state, camera positioning, input processing, and terrain collision for in-flight and scene cameras.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="KSP.Rendering.impl.BasicCameraRigSolution">
+
+
+
+  <h1 id="KSP_Rendering_impl_BasicCameraRigSolution" data-uid="KSP.Rendering.impl.BasicCameraRigSolution" class="text-break">Class BasicCameraRigSolution</h1>
+  <div class="markdown level0 summary"><p>Represents the standard camera rig solution, managing gimbal state, camera positioning, input processing, and terrain collision for in-flight and scene cameras.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><span class="xref">BasicCameraRigSolution</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="KSP.Sim.ICameraRigSolution.html">ICameraRigSolution</a></div>
+    <div><a class="xref" href="KSP.Sim.ICameraShotInGimbal.html">ICameraShotInGimbal</a></div>
+    <div><a class="xref" href="KSP.Sim.ICameraShot.html">ICameraShot</a></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Rendering.html">Rendering</a>.<a class="xref" href="KSP.Rendering.impl.html">impl</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="KSP_Rendering_impl_BasicCameraRigSolution_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class BasicCameraRigSolution : ICameraRigSolution, ICameraShotInGimbal, ICameraShot</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution__ctor_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.#ctor*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution__ctor_System_String_KSP_Sim_CameraTweakables_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.#ctor(System.String,KSP.Sim.CameraTweakables)">BasicCameraRigSolution(string, CameraTweakables)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BasicCameraRigSolution(string solutionGuid, CameraTweakables cameraTweakables)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">solutionGuid</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.CameraTweakables.html">CameraTweakables</a></td>
+        <td><span class="parametername">cameraTweakables</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+</h3>
+
+
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_DEFAULT_FLIGHT_GIMBALSTATE" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.DEFAULT_FLIGHT_GIMBALSTATE">DEFAULT_FLIGHT_GIMBALSTATE</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static GimbalState DEFAULT_FLIGHT_GIMBALSTATE</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.GimbalState.html">GimbalState</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_DEFAULT_GIMBALSTATE" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.DEFAULT_GIMBALSTATE">DEFAULT_GIMBALSTATE</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static GimbalState DEFAULT_GIMBALSTATE</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.GimbalState.html">GimbalState</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_VesselSwitchBackoffFOVFactor" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.VesselSwitchBackoffFOVFactor">VesselSwitchBackoffFOVFactor</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float VesselSwitchBackoffFOVFactor</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_VesselSwitchBackoffPadding" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.VesselSwitchBackoffPadding">VesselSwitchBackoffPadding</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float VesselSwitchBackoffPadding</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_AnchorFrame_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.AnchorFrame*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_AnchorFrame" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.AnchorFrame">AnchorFrame</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITransformFrame AnchorFrame { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.ITransformFrame.html">ITransformFrame</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_CameraForward_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.CameraForward*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_CameraForward" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.CameraForward">CameraForward</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector CameraForward { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.Vector.html">Vector</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_CameraFrame_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.CameraFrame*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_CameraFrame" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.CameraFrame">CameraFrame</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITransformFrame CameraFrame { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.ITransformFrame.html">ITransformFrame</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_CameraPosition_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.CameraPosition*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_CameraPosition" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.CameraPosition">CameraPosition</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Position CameraPosition { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.Position.html">Position</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_CameraRotation_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.CameraRotation*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_CameraRotation" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.CameraRotation">CameraRotation</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Rotation CameraRotation { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.Rotation.html">Rotation</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_CameraShot_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.CameraShot*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_CameraShot" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.CameraShot">CameraShot</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICameraShotInGimbal CameraShot { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.ICameraShotInGimbal.html">ICameraShotInGimbal</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_CameraUp_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.CameraUp*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_CameraUp" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.CameraUp">CameraUp</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector CameraUp { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.Vector.html">Vector</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_FieldOfView_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.FieldOfView*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_FieldOfView" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.FieldOfView">FieldOfView</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double FieldOfView { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_GimbalAxis_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.GimbalAxis*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_GimbalAxis" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.GimbalAxis">GimbalAxis</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector GimbalAxis { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.Vector.html">Vector</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_GimbalFrame_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.GimbalFrame*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_GimbalFrame" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.GimbalFrame">GimbalFrame</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITransformFrame GimbalFrame { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.ITransformFrame.html">ITransformFrame</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_GimbalPosition_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.GimbalPosition*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_GimbalPosition" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.GimbalPosition">GimbalPosition</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Position GimbalPosition { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.Position.html">Position</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_GimbalRotation_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.GimbalRotation*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_GimbalRotation" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.GimbalRotation">GimbalRotation</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Rotation GimbalRotation { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.Rotation.html">Rotation</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_GimbalState_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.GimbalState*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_GimbalState" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.GimbalState">GimbalState</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GimbalState GimbalState { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.GimbalState.html">GimbalState</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_IsOrthographic_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.IsOrthographic*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_IsOrthographic" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.IsOrthographic">IsOrthographic</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsOrthographic { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_OrthographicSize_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.OrthographicSize*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_OrthographicSize" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.OrthographicSize">OrthographicSize</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double OrthographicSize { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_AnchorToRig_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.AnchorToRig*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_AnchorToRig_KSP_Sim_ICameraRigAnchorProvider_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.AnchorToRig(KSP.Sim.ICameraRigAnchorProvider)">AnchorToRig(ICameraRigAnchorProvider)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AnchorToRig(ICameraRigAnchorProvider anchorProvider)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.ICameraRigAnchorProvider.html">ICameraRigAnchorProvider</a></td>
+        <td><span class="parametername">anchorProvider</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_Dispose_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.Dispose*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_Dispose" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_GetCameraContext_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.GetCameraContext*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_GetCameraContext" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.GetCameraContext">GetCameraContext()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FlightCameraContext GetCameraContext()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.FlightCameraContext.html">FlightCameraContext</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_InitGimbalState_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.InitGimbalState*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_InitGimbalState" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.InitGimbalState">InitGimbalState()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void InitGimbalState()</code></pre>
+  </div>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_ModifyGimbalState_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.ModifyGimbalState*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_ModifyGimbalState_KSP_Sim_GimbalStateIncremental_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.ModifyGimbalState(KSP.Sim.GimbalStateIncremental)">ModifyGimbalState(GimbalStateIncremental)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ModifyGimbalState(GimbalStateIncremental change)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.GimbalStateIncremental.html">GimbalStateIncremental</a></td>
+        <td><span class="parametername">change</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_ModifyGimbalStateIncremental_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.ModifyGimbalStateIncremental*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_ModifyGimbalStateIncremental_KSP_Sim_GimbalStateIncremental_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.ModifyGimbalStateIncremental(KSP.Sim.GimbalStateIncremental)">ModifyGimbalStateIncremental(GimbalStateIncremental)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ModifyGimbalStateIncremental(GimbalStateIncremental change)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.GimbalStateIncremental.html">GimbalStateIncremental</a></td>
+        <td><span class="parametername">change</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_OnViewControllerFlowFinished_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.OnViewControllerFlowFinished*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_OnViewControllerFlowFinished_KSP_Messages_MessageCenterMessage_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.OnViewControllerFlowFinished(KSP.Messages.MessageCenterMessage)">OnViewControllerFlowFinished(MessageCenterMessage)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnViewControllerFlowFinished(MessageCenterMessage viewControllerMessage)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Messages.MessageCenterMessage.html">MessageCenterMessage</a></td>
+        <td><span class="parametername">viewControllerMessage</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_RefreshShot_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.RefreshShot*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_RefreshShot" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.RefreshShot">RefreshShot()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RefreshShot()</code></pre>
+  </div>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_ResetGimbalAndCamera_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.ResetGimbalAndCamera*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_ResetGimbalAndCamera_KSP_Sim_GimbalState_System_Boolean_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.ResetGimbalAndCamera(KSP.Sim.GimbalState,System.Boolean)">ResetGimbalAndCamera(GimbalState, bool)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ResetGimbalAndCamera(GimbalState state, bool shouldLerp = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.GimbalState.html">GimbalState</a></td>
+        <td><span class="parametername">state</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">shouldLerp</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_ResetGimbalAndCamera_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.ResetGimbalAndCamera*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_ResetGimbalAndCamera_System_Boolean_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.ResetGimbalAndCamera(System.Boolean)">ResetGimbalAndCamera(bool)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ResetGimbalAndCamera(bool shouldLerp = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">shouldLerp</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_SetCameraFieldOfView_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.SetCameraFieldOfView*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_SetCameraFieldOfView_System_Double_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.SetCameraFieldOfView(System.Double)">SetCameraFieldOfView(double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetCameraFieldOfView(double newFieldOfView)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">newFieldOfView</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_SetCameraIsOrthographic_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.SetCameraIsOrthographic*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_SetCameraIsOrthographic_System_Boolean_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.SetCameraIsOrthographic(System.Boolean)">SetCameraIsOrthographic(bool)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetCameraIsOrthographic(bool newIsOrthographic)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">newIsOrthographic</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_SetCameraOrbitTarget_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.SetCameraOrbitTarget*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_SetCameraOrbitTarget_UnityEngine_Transform_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.SetCameraOrbitTarget(UnityEngine.Transform)">SetCameraOrbitTarget(Transform)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetCameraOrbitTarget(Transform newTransform)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
+        <td><span class="parametername">newTransform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_SetCameraOrthographicSize_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.SetCameraOrthographicSize*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_SetCameraOrthographicSize_System_Double_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.SetCameraOrthographicSize(System.Double)">SetCameraOrthographicSize(double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetCameraOrthographicSize(double newSize)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">newSize</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_SetDefaultGimbalState_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.SetDefaultGimbalState*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_SetDefaultGimbalState_KSP_Sim_GimbalState_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.SetDefaultGimbalState(KSP.Sim.GimbalState)">SetDefaultGimbalState(GimbalState)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetDefaultGimbalState(GimbalState gimbalState)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.GimbalState.html">GimbalState</a></td>
+        <td><span class="parametername">gimbalState</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_SetGimbalPositionProvider_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.SetGimbalPositionProvider*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_SetGimbalPositionProvider_KSP_Sim_IGimbalPositionProvider_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.SetGimbalPositionProvider(KSP.Sim.IGimbalPositionProvider)">SetGimbalPositionProvider(IGimbalPositionProvider)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetGimbalPositionProvider(IGimbalPositionProvider positionProvider)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.IGimbalPositionProvider.html">IGimbalPositionProvider</a></td>
+        <td><span class="parametername">positionProvider</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_SetGimbalRotationProvider_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.SetGimbalRotationProvider*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_SetGimbalRotationProvider_KSP_Sim_IDynamicFrameRotationProvider_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.SetGimbalRotationProvider(KSP.Sim.IDynamicFrameRotationProvider)">SetGimbalRotationProvider(IDynamicFrameRotationProvider)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetGimbalRotationProvider(IDynamicFrameRotationProvider rotationProvider)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.IDynamicFrameRotationProvider.html">IDynamicFrameRotationProvider</a></td>
+        <td><span class="parametername">rotationProvider</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_SetGimbalState_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.SetGimbalState*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_SetGimbalState_KSP_Sim_GimbalState_System_Boolean_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.SetGimbalState(KSP.Sim.GimbalState,System.Boolean)">SetGimbalState(GimbalState, bool)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetGimbalState(GimbalState state, bool shouldLerp = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.GimbalState.html">GimbalState</a></td>
+        <td><span class="parametername">state</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">shouldLerp</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_SetTargetGimbalTransform_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.SetTargetGimbalTransform*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_SetTargetGimbalTransform_KSP_Sim_Position_KSP_Sim_Rotation_System_Boolean_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.SetTargetGimbalTransform(KSP.Sim.Position,KSP.Sim.Rotation,System.Boolean)">SetTargetGimbalTransform(Position, Rotation, bool)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetTargetGimbalTransform(Position targetPosition, Rotation targetRotation, bool shouldLerp = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.Position.html">Position</a></td>
+        <td><span class="parametername">targetPosition</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.Rotation.html">Rotation</a></td>
+        <td><span class="parametername">targetRotation</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">shouldLerp</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_SetTweakablesOverride_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.SetTweakablesOverride*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_SetTweakablesOverride_KSP_Sim_ICameraTweakablesProvider_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.SetTweakablesOverride(KSP.Sim.ICameraTweakablesProvider)">SetTweakablesOverride(ICameraTweakablesProvider)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetTweakablesOverride(ICameraTweakablesProvider tweakablesOverride)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.ICameraTweakablesProvider.html">ICameraTweakablesProvider</a></td>
+        <td><span class="parametername">tweakablesOverride</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_impl_BasicCameraRigSolution_UpdateShot_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.UpdateShot*"></a>
+  <h4 id="KSP_Rendering_impl_BasicCameraRigSolution_UpdateShot_System_Double_KSP_Sim_CameraInputState_" data-uid="KSP.Rendering.impl.BasicCameraRigSolution.UpdateShot(System.Double,KSP.Sim.CameraInputState)">UpdateShot(double, CameraInputState)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UpdateShot(double universeDeltaTime, CameraInputState newInputs)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">universeDeltaTime</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.CameraInputState.html">CameraInputState</a></td>
+        <td><span class="parametername">newInputs</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="KSP.Sim.ICameraRigSolution.html">ICameraRigSolution</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.ICameraShotInGimbal.html">ICameraShotInGimbal</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.ICameraShot.html">ICameraShot</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetField__2___0_System_String_">Util.GetField&lt;T, R&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetField__2___0_System_String___1_">Util.SetField&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromProperties_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromProperties(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetFieldValue__1_System_Object_System_String_">Util.GetFieldValue&lt;T&gt;(object, string)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from prerelease
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

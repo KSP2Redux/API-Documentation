@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class PositionUtils | KSP2Redux API (Beta) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class PositionUtils | KSP2Redux API (Beta) ">
+    
+    <meta name="description" content="Utility methods for position coordinate conversions, camera orientation computation, and sphere ray intersection in the PQS free camera system.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="KSP.Tools.PQSFreeCamUtils.PositionUtils">
+
+
+
+  <h1 id="KSP_Tools_PQSFreeCamUtils_PositionUtils" data-uid="KSP.Tools.PQSFreeCamUtils.PositionUtils" class="text-break">Class PositionUtils</h1>
+  <div class="markdown level0 summary"><p>Utility methods for position coordinate conversions, camera orientation computation, and sphere ray intersection in the PQS free camera system.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><span class="xref">PositionUtils</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Tools.html">Tools</a>.<a class="xref" href="KSP.Tools.PQSFreeCamUtils.html">PQSFreeCamUtils</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="KSP_Tools_PQSFreeCamUtils_PositionUtils_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class PositionUtils</code></pre>
+  </div>
+  <h3 id="fields">Fields
+</h3>
+
+
+  <h4 id="KSP_Tools_PQSFreeCamUtils_PositionUtils_DEG2RAD" data-uid="KSP.Tools.PQSFreeCamUtils.PositionUtils.DEG2RAD">DEG2RAD</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const double DEG2RAD = 0.017453292519943295</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Tools_PQSFreeCamUtils_PositionUtils_FLOAT_COMPARISON_TOLERANCE" data-uid="KSP.Tools.PQSFreeCamUtils.PositionUtils.FLOAT_COMPARISON_TOLERANCE">FLOAT_COMPARISON_TOLERANCE</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const float FLOAT_COMPARISON_TOLERANCE = 1E-05</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Tools_PQSFreeCamUtils_PositionUtils_RAD2DEG" data-uid="KSP.Tools.PQSFreeCamUtils.PositionUtils.RAD2DEG">RAD2DEG</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const double RAD2DEG = 57.29577951308232</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="KSP_Tools_PQSFreeCamUtils_PositionUtils_AreLatLonClose_" data-uid="KSP.Tools.PQSFreeCamUtils.PositionUtils.AreLatLonClose*"></a>
+  <h4 id="KSP_Tools_PQSFreeCamUtils_PositionUtils_AreLatLonClose_System_Double_System_Double_System_Double_System_Double_System_Double_System_Single_" data-uid="KSP.Tools.PQSFreeCamUtils.PositionUtils.AreLatLonClose(System.Double,System.Double,System.Double,System.Double,System.Double,System.Single)">AreLatLonClose(double, double, double, double, double, float)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AreLatLonClose(double radius, double pos1Lat, double pos1Lon, double pos2Lat, double pos2Lon, float threshhold)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">radius</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">pos1Lat</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">pos1Lon</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">pos2Lat</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">pos2Lon</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">threshhold</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Tools_PQSFreeCamUtils_PositionUtils_ComputeCamRotation_" data-uid="KSP.Tools.PQSFreeCamUtils.PositionUtils.ComputeCamRotation*"></a>
+  <h4 id="KSP_Tools_PQSFreeCamUtils_PositionUtils_ComputeCamRotation_QuaternionD_System_Double_System_Double_" data-uid="KSP.Tools.PQSFreeCamUtils.PositionUtils.ComputeCamRotation(QuaternionD,System.Double,System.Double)">ComputeCamRotation(QuaternionD, double, double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static QuaternionD ComputeCamRotation(QuaternionD orientation, double camAngle, double camPitch)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.QuaternionD.html">QuaternionD</a></td>
+        <td><span class="parametername">orientation</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">camAngle</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">camPitch</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.QuaternionD.html">QuaternionD</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Tools_PQSFreeCamUtils_PositionUtils_GetHeadingFromOrientationCamAngle_" data-uid="KSP.Tools.PQSFreeCamUtils.PositionUtils.GetHeadingFromOrientationCamAngle*"></a>
+  <h4 id="KSP_Tools_PQSFreeCamUtils_PositionUtils_GetHeadingFromOrientationCamAngle_QuaternionD_System_Double_" data-uid="KSP.Tools.PQSFreeCamUtils.PositionUtils.GetHeadingFromOrientationCamAngle(QuaternionD,System.Double)">GetHeadingFromOrientationCamAngle(QuaternionD, double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static double GetHeadingFromOrientationCamAngle(QuaternionD orientation, double camAngle)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.QuaternionD.html">QuaternionD</a></td>
+        <td><span class="parametername">orientation</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">camAngle</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Tools_PQSFreeCamUtils_PositionUtils_GetLatLonDist_" data-uid="KSP.Tools.PQSFreeCamUtils.PositionUtils.GetLatLonDist*"></a>
+  <h4 id="KSP_Tools_PQSFreeCamUtils_PositionUtils_GetLatLonDist_System_Double_System_Double_System_Double_System_Double_System_Double_" data-uid="KSP.Tools.PQSFreeCamUtils.PositionUtils.GetLatLonDist(System.Double,System.Double,System.Double,System.Double,System.Double)">GetLatLonDist(double, double, double, double, double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static double GetLatLonDist(double radius, double pos1Lat, double pos1Lon, double pos2Lat, double pos2Lon)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">radius</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">pos1Lat</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">pos1Lon</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">pos2Lat</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">pos2Lon</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Tools_PQSFreeCamUtils_PositionUtils_GetLonLatFromRadialPos_" data-uid="KSP.Tools.PQSFreeCamUtils.PositionUtils.GetLonLatFromRadialPos*"></a>
+  <h4 id="KSP_Tools_PQSFreeCamUtils_PositionUtils_GetLonLatFromRadialPos_Vector3d_" data-uid="KSP.Tools.PQSFreeCamUtils.PositionUtils.GetLonLatFromRadialPos(Vector3d)">GetLonLatFromRadialPos(Vector3d)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Vector2d GetLonLatFromRadialPos(Vector3d radialNormal)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">radialNormal</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector2d</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Tools_PQSFreeCamUtils_PositionUtils_GetRadialNormalFromLatLon_" data-uid="KSP.Tools.PQSFreeCamUtils.PositionUtils.GetRadialNormalFromLatLon*"></a>
+  <h4 id="KSP_Tools_PQSFreeCamUtils_PositionUtils_GetRadialNormalFromLatLon_System_Double_System_Double_" data-uid="KSP.Tools.PQSFreeCamUtils.PositionUtils.GetRadialNormalFromLatLon(System.Double,System.Double)">GetRadialNormalFromLatLon(double, double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Vector3d GetRadialNormalFromLatLon(double lat, double lon)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">lat</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">lon</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Tools_PQSFreeCamUtils_PositionUtils_GetUnitVectorFromAngle_" data-uid="KSP.Tools.PQSFreeCamUtils.PositionUtils.GetUnitVectorFromAngle*"></a>
+  <h4 id="KSP_Tools_PQSFreeCamUtils_PositionUtils_GetUnitVectorFromAngle_System_Double_" data-uid="KSP.Tools.PQSFreeCamUtils.PositionUtils.GetUnitVectorFromAngle(System.Double)">GetUnitVectorFromAngle(double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Vector2d GetUnitVectorFromAngle(double camAngle)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">camAngle</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector2d</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Tools_PQSFreeCamUtils_PositionUtils_RaycastParametricSphere_" data-uid="KSP.Tools.PQSFreeCamUtils.PositionUtils.RaycastParametricSphere*"></a>
+  <h4 id="KSP_Tools_PQSFreeCamUtils_PositionUtils_RaycastParametricSphere_System_Double_Vector3d_Vector3d_System_Double__System_Double__" data-uid="KSP.Tools.PQSFreeCamUtils.PositionUtils.RaycastParametricSphere(System.Double,Vector3d,Vector3d,System.Double@,System.Double@)">RaycastParametricSphere(double, Vector3d, Vector3d, out double, out double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool RaycastParametricSphere(double radius, Vector3d rayPos, Vector3d rayDir, out double t1, out double t2)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">radius</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">rayPos</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">rayDir</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">t1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">t2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Tools_PQSFreeCamUtils_PositionUtils_TranslateOrientation_" data-uid="KSP.Tools.PQSFreeCamUtils.PositionUtils.TranslateOrientation*"></a>
+  <h4 id="KSP_Tools_PQSFreeCamUtils_PositionUtils_TranslateOrientation_QuaternionD_System_Double_System_Double_System_Double_System_Double_" data-uid="KSP.Tools.PQSFreeCamUtils.PositionUtils.TranslateOrientation(QuaternionD,System.Double,System.Double,System.Double,System.Double)">TranslateOrientation(QuaternionD, double, double, double, double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static QuaternionD TranslateOrientation(QuaternionD orientation, double radius, double angle, double x, double y)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.QuaternionD.html">QuaternionD</a></td>
+        <td><span class="parametername">orientation</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">radius</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">angle</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">x</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">y</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.QuaternionD.html">QuaternionD</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from prerelease
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

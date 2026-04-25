@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class KerbalCharacterStateHandler | KSP2Redux API (Beta) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class KerbalCharacterStateHandler | KSP2Redux API (Beta) ">
+    
+    <meta name="description" content="A base class for a single Kerbal EVA character state, providing lifecycle and physics integration hooks.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler">
+
+
+
+  <h1 id="KSP_Sim_impl_KerbalCharacterStateHandler" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler" class="text-break">Class KerbalCharacterStateHandler</h1>
+  <div class="markdown level0 summary"><p>A base class for a single Kerbal EVA character state, providing lifecycle and physics integration hooks.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><span class="xref">KerbalCharacterStateHandler</span></div>
+      <div class="level2"><a class="xref" href="KSP.Sim.impl.ClimbKerbalCharacterStateHandler.html">ClimbKerbalCharacterStateHandler</a></div>
+      <div class="level2"><a class="xref" href="KSP.Sim.impl.GroundDetectKerbalCharacterStateHandler.html">GroundDetectKerbalCharacterStateHandler</a></div>
+      <div class="level2"><a class="xref" href="KSP.Sim.impl.JumpKerbalCharacterStateHandler.html">JumpKerbalCharacterStateHandler</a></div>
+      <div class="level2"><a class="xref" href="KSP.Sim.impl.MoveGroundKerbalCharacterStateHandler.html">MoveGroundKerbalCharacterStateHandler</a></div>
+      <div class="level2"><a class="xref" href="KSP.Sim.impl.PlayAnimationKerbalCharacterStateHandler.html">PlayAnimationKerbalCharacterStateHandler</a></div>
+      <div class="level2"><a class="xref" href="KSP.Sim.impl.StandKerbalCharacterStateHandler.html">StandKerbalCharacterStateHandler</a></div>
+      <div class="level2"><a class="xref" href="KSP.Sim.impl.StepDetectKerbalCharacterStateHandler.html">StepDetectKerbalCharacterStateHandler</a></div>
+      <div class="level2"><a class="xref" href="KSP.Sim.impl.SwimKerbalCharacterStateHandler.html">SwimKerbalCharacterStateHandler</a></div>
+      <div class="level2"><a class="xref" href="KSP.Sim.impl.WaterDetectKerbalCharacterStateHandler.html">WaterDetectKerbalCharacterStateHandler</a></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Sim.html">Sim</a>.<a class="xref" href="KSP.Sim.impl.html">impl</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="KSP_Sim_impl_KerbalCharacterStateHandler_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class KerbalCharacterStateHandler</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+
+
+  <a id="KSP_Sim_impl_KerbalCharacterStateHandler__ctor_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.#ctor*"></a>
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler__ctor_KSP_Sim_impl_KerbalBehavior_KSP_Sim_impl_KerbalCharacterStateHandlerType_System_Boolean_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.#ctor(KSP.Sim.impl.KerbalBehavior,KSP.Sim.impl.KerbalCharacterStateHandlerType,System.Boolean)">KerbalCharacterStateHandler(KerbalBehavior, KerbalCharacterStateHandlerType, bool)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public KerbalCharacterStateHandler(KerbalBehavior kerbalBehavior, KerbalCharacterStateHandlerType handlerType, bool isPermanent)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.KerbalBehavior.html">KerbalBehavior</a></td>
+        <td><span class="parametername">kerbalBehavior</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.KerbalCharacterStateHandlerType.html">KerbalCharacterStateHandlerType</a></td>
+        <td><span class="parametername">handlerType</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">isPermanent</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+</h3>
+
+
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler__handlerType" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler._handlerType">_handlerType</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected KerbalCharacterStateHandlerType _handlerType</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.KerbalCharacterStateHandlerType.html">KerbalCharacterStateHandlerType</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler__isActive" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler._isActive">_isActive</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected bool _isActive</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler__isInitialized" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler._isInitialized">_isInitialized</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected bool _isInitialized</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler__isPermanent" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler._isPermanent">_isPermanent</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected bool _isPermanent</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler__kerbalBehavior" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler._kerbalBehavior">_kerbalBehavior</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected KerbalBehavior _kerbalBehavior</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.KerbalBehavior.html">KerbalBehavior</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler__normalToSprintLerp" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler._normalToSprintLerp">_normalToSprintLerp</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected float _normalToSprintLerp</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="KSP_Sim_impl_KerbalCharacterStateHandler_Game_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.Game*"></a>
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler_Game" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.Game">Game</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected static GameInstance Game { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Game.GameInstance.html">GameInstance</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_KerbalCharacterStateHandler_HandlerType_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.HandlerType*"></a>
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler_HandlerType" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.HandlerType">HandlerType</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public KerbalCharacterStateHandlerType HandlerType { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.KerbalCharacterStateHandlerType.html">KerbalCharacterStateHandlerType</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_KerbalCharacterStateHandler_IsActive_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.IsActive*"></a>
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler_IsActive" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.IsActive">IsActive</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsActive { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_KerbalCharacterStateHandler_KerbalVesselComponent_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.KerbalVesselComponent*"></a>
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler_KerbalVesselComponent" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.KerbalVesselComponent">KerbalVesselComponent</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected VesselComponent KerbalVesselComponent { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.VesselComponent.html">VesselComponent</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="KSP_Sim_impl_KerbalCharacterStateHandler_AcceptMessage_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.AcceptMessage*"></a>
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler_AcceptMessage_KSP_Sim_impl_KerbalCharacterMessage_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.AcceptMessage(KSP.Sim.impl.KerbalCharacterMessage)">AcceptMessage(KerbalCharacterMessage)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void AcceptMessage(KerbalCharacterMessage message)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.KerbalCharacterMessage.html">KerbalCharacterMessage</a></td>
+        <td><span class="parametername">message</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_KerbalCharacterStateHandler_CalcNormalToSprintLerp_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.CalcNormalToSprintLerp*"></a>
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler_CalcNormalToSprintLerp_System_Double_System_Double_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.CalcNormalToSprintLerp(System.Double,System.Double)">CalcNormalToSprintLerp(double, double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected double CalcNormalToSprintLerp(double normalModeBasedValue, double sprintModeBasedValue)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">normalModeBasedValue</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">sprintModeBasedValue</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_KerbalCharacterStateHandler_CalcNormalToSprintLerp_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.CalcNormalToSprintLerp*"></a>
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler_CalcNormalToSprintLerp_System_Single_System_Single_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.CalcNormalToSprintLerp(System.Single,System.Single)">CalcNormalToSprintLerp(float, float)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected float CalcNormalToSprintLerp(float normalModeBasedValue, float sprintModeBasedValue)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">normalModeBasedValue</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">sprintModeBasedValue</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_KerbalCharacterStateHandler_CanBeActivatedByInput_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.CanBeActivatedByInput*"></a>
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler_CanBeActivatedByInput" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.CanBeActivatedByInput">CanBeActivatedByInput()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool CanBeActivatedByInput()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_KerbalCharacterStateHandler_CanBeDeactivatedByLocomotionHandler_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.CanBeDeactivatedByLocomotionHandler*"></a>
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler_CanBeDeactivatedByLocomotionHandler_KSP_Sim_impl_KerbalCharacterStateHandler_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.CanBeDeactivatedByLocomotionHandler(KSP.Sim.impl.KerbalCharacterStateHandler)">CanBeDeactivatedByLocomotionHandler(KerbalCharacterStateHandler)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool CanBeDeactivatedByLocomotionHandler(KerbalCharacterStateHandler deactivateByHandler)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.KerbalCharacterStateHandler.html">KerbalCharacterStateHandler</a></td>
+        <td><span class="parametername">deactivateByHandler</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_KerbalCharacterStateHandler_Deinitialize_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.Deinitialize*"></a>
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler_Deinitialize" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.Deinitialize">Deinitialize()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void Deinitialize()</code></pre>
+  </div>
+
+
+  <a id="KSP_Sim_impl_KerbalCharacterStateHandler_FixedUpdate_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.FixedUpdate*"></a>
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler_FixedUpdate_System_Single_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.FixedUpdate(System.Single)">FixedUpdate(float)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void FixedUpdate(float fixedDeltaTime)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">fixedDeltaTime</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_KerbalCharacterStateHandler_Initialize_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.Initialize*"></a>
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler_Initialize" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.Initialize">Initialize()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void Initialize()</code></pre>
+  </div>
+
+
+  <a id="KSP_Sim_impl_KerbalCharacterStateHandler_LateUpdate_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.LateUpdate*"></a>
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler_LateUpdate_System_Single_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.LateUpdate(System.Single)">LateUpdate(float)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool LateUpdate(float deltaTime)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">deltaTime</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_KerbalCharacterStateHandler_ResetAnimationStateMoveVars_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.ResetAnimationStateMoveVars*"></a>
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler_ResetAnimationStateMoveVars" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.ResetAnimationStateMoveVars">ResetAnimationStateMoveVars()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void ResetAnimationStateMoveVars()</code></pre>
+  </div>
+
+
+  <a id="KSP_Sim_impl_KerbalCharacterStateHandler_ShouldApplyPhysics_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.ShouldApplyPhysics*"></a>
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler_ShouldApplyPhysics" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.ShouldApplyPhysics">ShouldApplyPhysics()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ShouldApplyPhysics()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_KerbalCharacterStateHandler_ShouldApplyStaticFriction_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.ShouldApplyStaticFriction*"></a>
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler_ShouldApplyStaticFriction" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.ShouldApplyStaticFriction">ShouldApplyStaticFriction()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldApplyStaticFriction()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_KerbalCharacterStateHandler_ShouldApplyUpright_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.ShouldApplyUpright*"></a>
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler_ShouldApplyUpright" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.ShouldApplyUpright">ShouldApplyUpright()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldApplyUpright()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_KerbalCharacterStateHandler_ShouldBeActive_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.ShouldBeActive*"></a>
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler_ShouldBeActive" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.ShouldBeActive">ShouldBeActive()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual bool ShouldBeActive()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_KerbalCharacterStateHandler_Start_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.Start*"></a>
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler_Start" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.Start">Start()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void Start()</code></pre>
+  </div>
+
+
+  <a id="KSP_Sim_impl_KerbalCharacterStateHandler_Stop_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.Stop*"></a>
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler_Stop" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.Stop">Stop()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void Stop()</code></pre>
+  </div>
+
+
+  <a id="KSP_Sim_impl_KerbalCharacterStateHandler_Update_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.Update*"></a>
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler_Update_System_Single_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.Update(System.Single)">Update(float)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool Update(float deltaTime)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">deltaTime</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_KerbalCharacterStateHandler_UpdateInput_" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.UpdateInput*"></a>
+  <h4 id="KSP_Sim_impl_KerbalCharacterStateHandler_UpdateInput" data-uid="KSP.Sim.impl.KerbalCharacterStateHandler.UpdateInput">UpdateInput()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void UpdateInput()</code></pre>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetField__2___0_System_String_">Util.GetField&lt;T, R&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetField__2___0_System_String___1_">Util.SetField&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromProperties_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromProperties(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetFieldValue__1_System_Object_System_String_">Util.GetFieldValue&lt;T&gt;(object, string)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from prerelease
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

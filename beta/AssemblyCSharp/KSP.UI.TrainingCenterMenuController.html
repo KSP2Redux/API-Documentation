@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class TrainingCenterMenuController | KSP2Redux API (Beta) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class TrainingCenterMenuController | KSP2Redux API (Beta) ">
+    
+    <meta name="description" content="Controls the Training Center menu, managing tutorial and lesson presentation, background scene toggling, and mission activation.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="KSP.UI.TrainingCenterMenuController">
+
+
+
+  <h1 id="KSP_UI_TrainingCenterMenuController" data-uid="KSP.UI.TrainingCenterMenuController" class="text-break">Class TrainingCenterMenuController</h1>
+  <div class="markdown level0 summary"><p>Controls the Training Center menu, managing tutorial and lesson presentation, background scene toggling, and mission activation.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Object.html">Object</a></div>
+    <div class="level2"><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Component.html">Component</a></div>
+    <div class="level3"><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Behaviour.html">Behaviour</a></div>
+    <div class="level4"><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/MonoBehaviour.html">MonoBehaviour</a></div>
+    <div class="level5"><a class="xref" href="KSP.Game.KerbalMonoBehaviour.html">KerbalMonoBehaviour</a></div>
+    <div class="level6"><span class="xref">TrainingCenterMenuController</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Game">KerbalMonoBehaviour.Game</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Assets">KerbalMonoBehaviour.Assets</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Messages">KerbalMonoBehaviour.Messages</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_CFXSystem">KerbalMonoBehaviour.CFXSystem</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_IsGameShuttingDown">KerbalMonoBehaviour.IsGameShuttingDown</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.UI.html">UI</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="KSP_UI_TrainingCenterMenuController_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[DisableCustomEditorBase]
+[RequireComponent(typeof(CanvasGroup))]
+public class TrainingCenterMenuController : KerbalMonoBehaviour</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+
+
+  <a id="KSP_UI_TrainingCenterMenuController__ctor_" data-uid="KSP.UI.TrainingCenterMenuController.#ctor*"></a>
+  <h4 id="KSP_UI_TrainingCenterMenuController__ctor" data-uid="KSP.UI.TrainingCenterMenuController.#ctor">TrainingCenterMenuController()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TrainingCenterMenuController()</code></pre>
+  </div>
+  <h3 id="fields">Fields
+</h3>
+
+
+  <h4 id="KSP_UI_TrainingCenterMenuController_BackgroundAssetName" data-uid="KSP.UI.TrainingCenterMenuController.BackgroundAssetName">BackgroundAssetName</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string BackgroundAssetName</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_TrainingCenterMenuController_BackgroundScene" data-uid="KSP.UI.TrainingCenterMenuController.BackgroundScene">BackgroundScene</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Scene BackgroundScene</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/SceneManagement.Scene.html">Scene</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_TrainingCenterMenuController_BackgroundSceneName" data-uid="KSP.UI.TrainingCenterMenuController.BackgroundSceneName">BackgroundSceneName</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string BackgroundSceneName</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_TrainingCenterMenuController_LessonItemPrefab" data-uid="KSP.UI.TrainingCenterMenuController.LessonItemPrefab">LessonItemPrefab</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ContextBindRoot LessonItemPrefab</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.UI.Binding.ContextBindRoot.html">ContextBindRoot</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_TrainingCenterMenuController_LessonsIcons" data-uid="KSP.UI.TrainingCenterMenuController.LessonsIcons">LessonsIcons</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LessonIcon[] LessonsIcons</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.UI.LessonIcon.html">LessonIcon</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_TrainingCenterMenuController_PreviousLightingProfile" data-uid="KSP.UI.TrainingCenterMenuController.PreviousLightingProfile">PreviousLightingProfile</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static EnvironmentLightingProfile PreviousLightingProfile</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.EnvironmentLightingProfile.html">EnvironmentLightingProfile</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_TrainingCenterMenuController_ProgressLessonIcons" data-uid="KSP.UI.TrainingCenterMenuController.ProgressLessonIcons">ProgressLessonIcons</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProgressLessonIcon[] ProgressLessonIcons</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.UI.ProgressLessonIcon.html">ProgressLessonIcon</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_TrainingCenterMenuController_ProgressTutorialIcons" data-uid="KSP.UI.TrainingCenterMenuController.ProgressTutorialIcons">ProgressTutorialIcons</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProgressTutorialIcon[] ProgressTutorialIcons</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.UI.ProgressTutorialIcon.html">ProgressTutorialIcon</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_TrainingCenterMenuController_TrainingCenterBackgroundInstance" data-uid="KSP.UI.TrainingCenterMenuController.TrainingCenterBackgroundInstance">TrainingCenterBackgroundInstance</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static GameObject TrainingCenterBackgroundInstance</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">GameObject</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_TrainingCenterMenuController_TrainingCenterBackgroundInstanceCamera" data-uid="KSP.UI.TrainingCenterMenuController.TrainingCenterBackgroundInstanceCamera">TrainingCenterBackgroundInstanceCamera</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Camera TrainingCenterBackgroundInstanceCamera</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Camera.html">Camera</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_TrainingCenterMenuController_TrainingCenterLightingProfile" data-uid="KSP.UI.TrainingCenterMenuController.TrainingCenterLightingProfile">TrainingCenterLightingProfile</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static EnvironmentLightingProfile TrainingCenterLightingProfile</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.EnvironmentLightingProfile.html">EnvironmentLightingProfile</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_TrainingCenterMenuController_TutorialFeatureIcons" data-uid="KSP.UI.TrainingCenterMenuController.TutorialFeatureIcons">TutorialFeatureIcons</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TutorialFeatureIcon[] TutorialFeatureIcons</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.UI.TutorialFeatureIcon.html">TutorialFeatureIcon</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_TrainingCenterMenuController_TutorialIcons" data-uid="KSP.UI.TrainingCenterMenuController.TutorialIcons">TutorialIcons</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TutorialIcon[] TutorialIcons</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.UI.TutorialIcon.html">TutorialIcon</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_TrainingCenterMenuController_TutorialItemPrefab" data-uid="KSP.UI.TrainingCenterMenuController.TutorialItemPrefab">TutorialItemPrefab</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Header(&quot;Prefabs&quot;)]
+public ContextBindRoot TutorialItemPrefab</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.UI.Binding.ContextBindRoot.html">ContextBindRoot</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_TrainingCenterMenuController_TutorialToggleGroup" data-uid="KSP.UI.TrainingCenterMenuController.TutorialToggleGroup">TutorialToggleGroup</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ToggleGroupExtended TutorialToggleGroup</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ToggleGroupExtended</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_TrainingCenterMenuController_TutorialsContent" data-uid="KSP.UI.TrainingCenterMenuController.TutorialsContent">TutorialsContent</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Header(&quot;References&quot;)]
+public SyncToggleGroupWithChildren TutorialsContent</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.UI.SyncToggleGroupWithChildren.html">SyncToggleGroupWithChildren</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_TrainingCenterMenuController_UiRoot" data-uid="KSP.UI.TrainingCenterMenuController.UiRoot">UiRoot</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Header(&quot;BindRoots&quot;)]
+public ContextBindRoot UiRoot</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.UI.Binding.ContextBindRoot.html">ContextBindRoot</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="KSP_UI_TrainingCenterMenuController_IsSubMenuVisible_" data-uid="KSP.UI.TrainingCenterMenuController.IsSubMenuVisible*"></a>
+  <h4 id="KSP_UI_TrainingCenterMenuController_IsSubMenuVisible" data-uid="KSP.UI.TrainingCenterMenuController.IsSubMenuVisible">IsSubMenuVisible</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsSubMenuVisible { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_UI_TrainingCenterMenuController_IsVisible_" data-uid="KSP.UI.TrainingCenterMenuController.IsVisible*"></a>
+  <h4 id="KSP_UI_TrainingCenterMenuController_IsVisible" data-uid="KSP.UI.TrainingCenterMenuController.IsVisible">IsVisible</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsVisible { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="KSP_UI_TrainingCenterMenuController_DismissDialog_" data-uid="KSP.UI.TrainingCenterMenuController.DismissDialog*"></a>
+  <h4 id="KSP_UI_TrainingCenterMenuController_DismissDialog" data-uid="KSP.UI.TrainingCenterMenuController.DismissDialog">DismissDialog()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DismissDialog()</code></pre>
+  </div>
+
+
+  <a id="KSP_UI_TrainingCenterMenuController_ExitTrainingCenter_" data-uid="KSP.UI.TrainingCenterMenuController.ExitTrainingCenter*"></a>
+  <h4 id="KSP_UI_TrainingCenterMenuController_ExitTrainingCenter" data-uid="KSP.UI.TrainingCenterMenuController.ExitTrainingCenter">ExitTrainingCenter()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ExitTrainingCenter()</code></pre>
+  </div>
+
+
+  <a id="KSP_UI_TrainingCenterMenuController_MissionActivated_" data-uid="KSP.UI.TrainingCenterMenuController.MissionActivated*"></a>
+  <h4 id="KSP_UI_TrainingCenterMenuController_MissionActivated_System_String_" data-uid="KSP.UI.TrainingCenterMenuController.MissionActivated(System.String)">MissionActivated(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MissionActivated(string ID)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">ID</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_UI_TrainingCenterMenuController_MissionReset_" data-uid="KSP.UI.TrainingCenterMenuController.MissionReset*"></a>
+  <h4 id="KSP_UI_TrainingCenterMenuController_MissionReset_System_String_" data-uid="KSP.UI.TrainingCenterMenuController.MissionReset(System.String)">MissionReset(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MissionReset(string ID)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">ID</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_UI_TrainingCenterMenuController_SetSubMenuVisible_" data-uid="KSP.UI.TrainingCenterMenuController.SetSubMenuVisible*"></a>
+  <h4 id="KSP_UI_TrainingCenterMenuController_SetSubMenuVisible_System_Boolean_" data-uid="KSP.UI.TrainingCenterMenuController.SetSubMenuVisible(System.Boolean)">SetSubMenuVisible(bool)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetSubMenuVisible(bool isVisible = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">isVisible</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_UI_TrainingCenterMenuController_SetVisible_" data-uid="KSP.UI.TrainingCenterMenuController.SetVisible*"></a>
+  <h4 id="KSP_UI_TrainingCenterMenuController_SetVisible_System_Boolean_" data-uid="KSP.UI.TrainingCenterMenuController.SetVisible(System.Boolean)">SetVisible(bool)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetVisible(bool isVisible = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">isVisible</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetField__2___0_System_String_">Util.GetField&lt;T, R&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetField__2___0_System_String___1_">Util.SetField&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromProperties_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromProperties(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetFieldValue__1_System_Object_System_String_">Util.GetFieldValue&lt;T&gt;(object, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.GameObjectExtension.html#GlobalAssemblyCSharp_GameObjectExtension_GetComponentCached__1_UnityEngine_Component___0__">GameObjectExtension.GetComponentCached&lt;T&gt;(Component, ref T)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.GameObjectExtension.html#GlobalAssemblyCSharp_GameObjectExtension_GetComponentInParent__1_UnityEngine_Component_System_Boolean_">GameObjectExtension.GetComponentInParent&lt;T&gt;(Component, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.ComponentExtensions.html#KSP_ComponentExtensions_CopyFrom__1_UnityEngine_Component___0_">ComponentExtensions.CopyFrom&lt;T&gt;(Component, T)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.OAB.DataContextMonoBehaviorExtensionDooblyDo.html#KSP_OAB_DataContextMonoBehaviorExtensionDooblyDo_FindDataContextProviderInHierarchy_UnityEngine_MonoBehaviour_">DataContextMonoBehaviorExtensionDooblyDo.FindDataContextProviderInHierarchy(MonoBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.GameObjectExtension.html#GlobalAssemblyCSharp_GameObjectExtension_SetDebugName_UnityEngine_Object_System_String_">GameObjectExtension.SetDebugName(Object, string)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from prerelease
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

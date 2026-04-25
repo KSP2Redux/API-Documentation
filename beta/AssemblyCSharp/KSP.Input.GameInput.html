@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class GameInput | KSP2Redux API (Beta) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class GameInput | KSP2Redux API (Beta) ">
+    
+    <meta name="description" content="Provides programmatic access to , ,  and  instances defined in asset &amp;quot;Assets/ReduxAssets/Input/InputActions.inputactions&amp;quot;.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="KSP.Input.GameInput">
+
+
+
+  <h1 id="KSP_Input_GameInput" data-uid="KSP.Input.GameInput" class="text-break">Class GameInput</h1>
+  <div class="markdown level0 summary"><p>Provides programmatic access to <span class="xref">UnityEngine.InputSystem.InputActionAsset</span>, <span class="xref">UnityEngine.InputSystem.InputActionMap</span>, <span class="xref">UnityEngine.InputSystem.InputAction</span> and <span class="xref">UnityEngine.InputSystem.InputControlScheme</span> instances defined in asset &quot;Assets/ReduxAssets/Input/InputActions.inputactions&quot;.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><span class="xref">GameInput</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Input.html">Input</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="KSP_Input_GameInput_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class GameInput</code></pre>
+  </div>
+  <h5 id="KSP_Input_GameInput_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>This class is source generated and any manual edits will be discarded if the associated asset is reimported or modified.</p>
+</div>
+  <h5 id="KSP_Input_GameInput_examples"><strong>Examples</strong></h5>
+  <pre><code class="lang-csharp">using namespace UnityEngine;
+using UnityEngine.InputSystem;
+
+// Example of using an InputActionMap named "Player" from a UnityEngine.MonoBehaviour implementing callback interface.
+public class Example : MonoBehaviour, MyActions.IPlayerActions
+{
+    private MyActions_Actions m_Actions;                  // Source code representation of asset.
+    private MyActions_Actions.PlayerActions m_Player;     // Source code representation of action map.
+
+    void Awake()
+    {
+        m_Actions = new MyActions_Actions();              // Create asset object.
+        m_Player = m_Actions.Player;                      // Extract action map object.
+        m_Player.AddCallbacks(this);                      // Register callback interface IPlayerActions.
+    }
+
+    void OnDestroy()
+    {
+        m_Actions.Dispose();                              // Destroy asset object.
+    }
+
+    void OnEnable()
+    {
+        m_Player.Enable();                                // Enable all actions within map.
+    }
+
+    void OnDisable()
+    {
+        m_Player.Disable();                               // Disable all actions within map.
+    }
+
+    #region Interface implementation of MyActions.IPlayerActions
+
+    // Invoked when "Move" action is either started, performed or canceled.
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        Debug.Log($"OnMove: {context.ReadValue&lt;Vector2&gt;()}");
+    }
+
+    // Invoked when "Attack" action is either started, performed or canceled.
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        Debug.Log($"OnAttack: {context.ReadValue&lt;float&gt;()}");
+    }
+
+    #endregion
+}</code></pre>
+
+  <h3 id="constructors">Constructors
+</h3>
+
+
+  <a id="KSP_Input_GameInput__ctor_" data-uid="KSP.Input.GameInput.#ctor*"></a>
+  <h4 id="KSP_Input_GameInput__ctor" data-uid="KSP.Input.GameInput.#ctor">GameInput()</h4>
+  <div class="markdown level1 summary"><p>Constructs a new instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GameInput()</code></pre>
+  </div>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="KSP_Input_GameInput_Audio_" data-uid="KSP.Input.GameInput.Audio*"></a>
+  <h4 id="KSP_Input_GameInput_Audio" data-uid="KSP.Input.GameInput.Audio">Audio</h4>
+  <div class="markdown level1 summary"><p>Provides a new <a class="xref" href="KSP.Input.GameInput.AudioActions.html">GameInput.AudioActions</a> instance referencing this action map.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GameInput.AudioActions Audio { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Input.GameInput.html">GameInput</a>.<a class="xref" href="KSP.Input.GameInput.AudioActions.html">AudioActions</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Input_GameInput_ConsoleToolbox_" data-uid="KSP.Input.GameInput.ConsoleToolbox*"></a>
+  <h4 id="KSP_Input_GameInput_ConsoleToolbox" data-uid="KSP.Input.GameInput.ConsoleToolbox">ConsoleToolbox</h4>
+  <div class="markdown level1 summary"><p>Provides a new <a class="xref" href="KSP.Input.GameInput.ConsoleToolboxActions.html">GameInput.ConsoleToolboxActions</a> instance referencing this action map.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GameInput.ConsoleToolboxActions ConsoleToolbox { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Input.GameInput.html">GameInput</a>.<a class="xref" href="KSP.Input.GameInput.ConsoleToolboxActions.html">ConsoleToolboxActions</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Input_GameInput_Cursor_" data-uid="KSP.Input.GameInput.Cursor*"></a>
+  <h4 id="KSP_Input_GameInput_Cursor" data-uid="KSP.Input.GameInput.Cursor">Cursor</h4>
+  <div class="markdown level1 summary"><p>Provides a new <a class="xref" href="KSP.Input.GameInput.CursorActions.html">GameInput.CursorActions</a> instance referencing this action map.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GameInput.CursorActions Cursor { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Input.GameInput.html">GameInput</a>.<a class="xref" href="KSP.Input.GameInput.CursorActions.html">CursorActions</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Input_GameInput_EVA_" data-uid="KSP.Input.GameInput.EVA*"></a>
+  <h4 id="KSP_Input_GameInput_EVA" data-uid="KSP.Input.GameInput.EVA">EVA</h4>
+  <div class="markdown level1 summary"><p>Provides a new <a class="xref" href="KSP.Input.GameInput.EVAActions.html">GameInput.EVAActions</a> instance referencing this action map.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GameInput.EVAActions EVA { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Input.GameInput.html">GameInput</a>.<a class="xref" href="KSP.Input.GameInput.EVAActions.html">EVAActions</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Input_GameInput_Flight_" data-uid="KSP.Input.GameInput.Flight*"></a>
+  <h4 id="KSP_Input_GameInput_Flight" data-uid="KSP.Input.GameInput.Flight">Flight</h4>
+  <div class="markdown level1 summary"><p>Provides a new <a class="xref" href="KSP.Input.GameInput.FlightActions.html">GameInput.FlightActions</a> instance referencing this action map.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GameInput.FlightActions Flight { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Input.GameInput.html">GameInput</a>.<a class="xref" href="KSP.Input.GameInput.FlightActions.html">FlightActions</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Input_GameInput_GamePadScheme_" data-uid="KSP.Input.GameInput.GamePadScheme*"></a>
+  <h4 id="KSP_Input_GameInput_GamePadScheme" data-uid="KSP.Input.GameInput.GamePadScheme">GamePadScheme</h4>
+  <div class="markdown level1 summary"><p>Provides access to the input control scheme.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InputControlScheme GamePadScheme { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">InputControlScheme</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Input_GameInput_GamePadScheme_seealso">See Also</h5>
+  <div class="seealso">
+      <div><span class="xref">InputControlScheme</span></div>
+  </div>
+
+
+  <a id="KSP_Input_GameInput_Global_" data-uid="KSP.Input.GameInput.Global*"></a>
+  <h4 id="KSP_Input_GameInput_Global" data-uid="KSP.Input.GameInput.Global">Global</h4>
+  <div class="markdown level1 summary"><p>Provides a new <a class="xref" href="KSP.Input.GameInput.GlobalActions.html">GameInput.GlobalActions</a> instance referencing this action map.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GameInput.GlobalActions Global { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Input.GameInput.html">GameInput</a>.<a class="xref" href="KSP.Input.GameInput.GlobalActions.html">GlobalActions</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Input_GameInput_HideScheme_" data-uid="KSP.Input.GameInput.HideScheme*"></a>
+  <h4 id="KSP_Input_GameInput_HideScheme" data-uid="KSP.Input.GameInput.HideScheme">HideScheme</h4>
+  <div class="markdown level1 summary"><p>Provides access to the input control scheme.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InputControlScheme HideScheme { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">InputControlScheme</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Input_GameInput_HideScheme_seealso">See Also</h5>
+  <div class="seealso">
+      <div><span class="xref">InputControlScheme</span></div>
+  </div>
+
+
+  <a id="KSP_Input_GameInput_KSC_" data-uid="KSP.Input.GameInput.KSC*"></a>
+  <h4 id="KSP_Input_GameInput_KSC" data-uid="KSP.Input.GameInput.KSC">KSC</h4>
+  <div class="markdown level1 summary"><p>Provides a new <a class="xref" href="KSP.Input.GameInput.KSCActions.html">GameInput.KSCActions</a> instance referencing this action map.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GameInput.KSCActions KSC { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Input.GameInput.html">GameInput</a>.<a class="xref" href="KSP.Input.GameInput.KSCActions.html">KSCActions</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Input_GameInput_KeyboardScheme_" data-uid="KSP.Input.GameInput.KeyboardScheme*"></a>
+  <h4 id="KSP_Input_GameInput_KeyboardScheme" data-uid="KSP.Input.GameInput.KeyboardScheme">KeyboardScheme</h4>
+  <div class="markdown level1 summary"><p>Provides access to the input control scheme.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InputControlScheme KeyboardScheme { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">InputControlScheme</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Input_GameInput_KeyboardScheme_seealso">See Also</h5>
+  <div class="seealso">
+      <div><span class="xref">InputControlScheme</span></div>
+  </div>
+
+
+  <a id="KSP_Input_GameInput_MapView_" data-uid="KSP.Input.GameInput.MapView*"></a>
+  <h4 id="KSP_Input_GameInput_MapView" data-uid="KSP.Input.GameInput.MapView">MapView</h4>
+  <div class="markdown level1 summary"><p>Provides a new <a class="xref" href="KSP.Input.GameInput.MapViewActions.html">GameInput.MapViewActions</a> instance referencing this action map.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GameInput.MapViewActions MapView { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Input.GameInput.html">GameInput</a>.<a class="xref" href="KSP.Input.GameInput.MapViewActions.html">MapViewActions</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Input_GameInput_Navigation_Move_DPad_" data-uid="KSP.Input.GameInput.Navigation_Move_DPad*"></a>
+  <h4 id="KSP_Input_GameInput_Navigation_Move_DPad" data-uid="KSP.Input.GameInput.Navigation_Move_DPad">Navigation_Move_DPad</h4>
+  <div class="markdown level1 summary"><p>Provides a new <a class="xref" href="KSP.Input.GameInput.Navigation_Move_DPadActions.html">GameInput.Navigation_Move_DPadActions</a> instance referencing this action map.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GameInput.Navigation_Move_DPadActions Navigation_Move_DPad { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Input.GameInput.html">GameInput</a>.<a class="xref" href="KSP.Input.GameInput.Navigation_Move_DPadActions.html">Navigation_Move_DPadActions</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Input_GameInput_Navigation_Move_LeftStick_" data-uid="KSP.Input.GameInput.Navigation_Move_LeftStick*"></a>
+  <h4 id="KSP_Input_GameInput_Navigation_Move_LeftStick" data-uid="KSP.Input.GameInput.Navigation_Move_LeftStick">Navigation_Move_LeftStick</h4>
+  <div class="markdown level1 summary"><p>Provides a new <a class="xref" href="KSP.Input.GameInput.Navigation_Move_LeftStickActions.html">GameInput.Navigation_Move_LeftStickActions</a> instance referencing this action map.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GameInput.Navigation_Move_LeftStickActions Navigation_Move_LeftStick { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Input.GameInput.html">GameInput</a>.<a class="xref" href="KSP.Input.GameInput.Navigation_Move_LeftStickActions.html">Navigation_Move_LeftStickActions</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Input_GameInput_Navigation_Quit_" data-uid="KSP.Input.GameInput.Navigation_Quit*"></a>
+  <h4 id="KSP_Input_GameInput_Navigation_Quit" data-uid="KSP.Input.GameInput.Navigation_Quit">Navigation_Quit</h4>
+  <div class="markdown level1 summary"><p>Provides a new <a class="xref" href="KSP.Input.GameInput.Navigation_QuitActions.html">GameInput.Navigation_QuitActions</a> instance referencing this action map.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GameInput.Navigation_QuitActions Navigation_Quit { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Input.GameInput.html">GameInput</a>.<a class="xref" href="KSP.Input.GameInput.Navigation_QuitActions.html">Navigation_QuitActions</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Input_GameInput_Navigation_Scroll_" data-uid="KSP.Input.GameInput.Navigation_Scroll*"></a>
+  <h4 id="KSP_Input_GameInput_Navigation_Scroll" data-uid="KSP.Input.GameInput.Navigation_Scroll">Navigation_Scroll</h4>
+  <div class="markdown level1 summary"><p>Provides a new <a class="xref" href="KSP.Input.GameInput.Navigation_ScrollActions.html">GameInput.Navigation_ScrollActions</a> instance referencing this action map.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GameInput.Navigation_ScrollActions Navigation_Scroll { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Input.GameInput.html">GameInput</a>.<a class="xref" href="KSP.Input.GameInput.Navigation_ScrollActions.html">Navigation_ScrollActions</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Input_GameInput_Navigation_Slider_" data-uid="KSP.Input.GameInput.Navigation_Slider*"></a>
+  <h4 id="KSP_Input_GameInput_Navigation_Slider" data-uid="KSP.Input.GameInput.Navigation_Slider">Navigation_Slider</h4>
+  <div class="markdown level1 summary"><p>Provides a new <a class="xref" href="KSP.Input.GameInput.Navigation_SliderActions.html">GameInput.Navigation_SliderActions</a> instance referencing this action map.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GameInput.Navigation_SliderActions Navigation_Slider { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Input.GameInput.html">GameInput</a>.<a class="xref" href="KSP.Input.GameInput.Navigation_SliderActions.html">Navigation_SliderActions</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Input_GameInput_Navigation_Submit_" data-uid="KSP.Input.GameInput.Navigation_Submit*"></a>
+  <h4 id="KSP_Input_GameInput_Navigation_Submit" data-uid="KSP.Input.GameInput.Navigation_Submit">Navigation_Submit</h4>
+  <div class="markdown level1 summary"><p>Provides a new <a class="xref" href="KSP.Input.GameInput.Navigation_SubmitActions.html">GameInput.Navigation_SubmitActions</a> instance referencing this action map.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GameInput.Navigation_SubmitActions Navigation_Submit { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Input.GameInput.html">GameInput</a>.<a class="xref" href="KSP.Input.GameInput.Navigation_SubmitActions.html">Navigation_SubmitActions</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Input_GameInput_RD_" data-uid="KSP.Input.GameInput.RD*"></a>
+  <h4 id="KSP_Input_GameInput_RD" data-uid="KSP.Input.GameInput.RD">RD</h4>
+  <div class="markdown level1 summary"><p>Provides a new <a class="xref" href="KSP.Input.GameInput.RDActions.html">GameInput.RDActions</a> instance referencing this action map.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GameInput.RDActions RD { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Input.GameInput.html">GameInput</a>.<a class="xref" href="KSP.Input.GameInput.RDActions.html">RDActions</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Input_GameInput_VAB_" data-uid="KSP.Input.GameInput.VAB*"></a>
+  <h4 id="KSP_Input_GameInput_VAB" data-uid="KSP.Input.GameInput.VAB">VAB</h4>
+  <div class="markdown level1 summary"><p>Provides a new <a class="xref" href="KSP.Input.GameInput.VABActions.html">GameInput.VABActions</a> instance referencing this action map.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GameInput.VABActions VAB { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Input.GameInput.html">GameInput</a>.<a class="xref" href="KSP.Input.GameInput.VABActions.html">VABActions</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Input_GameInput_asset_" data-uid="KSP.Input.GameInput.asset*"></a>
+  <h4 id="KSP_Input_GameInput_asset" data-uid="KSP.Input.GameInput.asset">asset</h4>
+  <div class="markdown level1 summary"><p>Provides access to the underlying asset instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InputActionAsset asset { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">InputActionAsset</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Input_GameInput_bindingMask_" data-uid="KSP.Input.GameInput.bindingMask*"></a>
+  <h4 id="KSP_Input_GameInput_bindingMask" data-uid="KSP.Input.GameInput.bindingMask">bindingMask</h4>
+  <div class="markdown level1 summary"><p>Binding mask to apply to all action maps and actions in the asset.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InputBinding? bindingMask { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">InputBinding</span>?</td>
+        <td><p>Optional mask that determines which bindings in the asset to enable.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Input_GameInput_bindingMask_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Binding masks can be applied at three different levels: for an entire asset through
+this property, for a specific map through <span class="xref">UnityEngine.InputSystem.InputActionMap.bindingMask</span>,
+and for single actions through <span class="xref">UnityEngine.InputSystem.InputAction.bindingMask</span>. By default,
+none of the masks will be set (i.e. they will be <code>null</code>).</p>
+<p>When an action is enabled, all the binding masks that apply to it are taken into
+account. Specifically, this means that any given binding on the action will be
+enabled only if it matches the mask applied to the asset, the mask applied
+to the map that contains the action, and the mask applied to the action itself.
+All the masks are individually optional.</p>
+<p>Masks are matched against bindings using <span class="xref">UnityEngine.InputSystem.InputBinding.Matches(UnityEngine.InputSystem.InputBinding)</span>.</p>
+<p>Note that if you modify the masks applicable to an action while it is
+enabled, the action's <span class="xref">UnityEngine.InputSystem.InputAction.controls</span> will get updated immediately to
+respect the mask. To avoid repeated binding resolution, it is most efficient
+to apply binding masks before enabling actions.</p>
+<p>Binding masks are non-destructive. All the bindings on the action are left
+in place. Setting a mask will not affect the value of the <span class="xref">UnityEngine.InputSystem.InputAction.bindings</span>
+and <span class="xref">UnityEngine.InputSystem.InputActionMap.bindings</span> properties.</p>
+</div>
+  <h5 id="KSP_Input_GameInput_bindingMask_seealso">See Also</h5>
+  <div class="seealso">
+      <div><span class="xref">MaskByGroup</span>(<span class="xref">string</span>)</div>
+      <div><span class="xref">bindingMask</span></div>
+      <div><span class="xref">bindingMask</span></div>
+  </div>
+
+
+  <a id="KSP_Input_GameInput_bindings_" data-uid="KSP.Input.GameInput.bindings*"></a>
+  <h4 id="KSP_Input_GameInput_bindings" data-uid="KSP.Input.GameInput.bindings">bindings</h4>
+  <div class="markdown level1 summary"><p>Iterate over all bindings in the asset.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;InputBinding&gt; bindings { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">InputBinding</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Input_GameInput_bindings_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This iterates over all action maps in <span class="xref">UnityEngine.InputSystem.InputActionAsset.actionMaps</span> and, within each
+map, over the set of <span class="xref">UnityEngine.InputSystem.InputActionMap.bindings</span>.</p>
+</div>
+  <h5 id="KSP_Input_GameInput_bindings_seealso">See Also</h5>
+  <div class="seealso">
+      <div><span class="xref">bindings</span></div>
+  </div>
+
+
+  <a id="KSP_Input_GameInput_controlSchemes_" data-uid="KSP.Input.GameInput.controlSchemes*"></a>
+  <h4 id="KSP_Input_GameInput_controlSchemes" data-uid="KSP.Input.GameInput.controlSchemes">controlSchemes</h4>
+  <div class="markdown level1 summary"><p>List of control schemes defined in the asset.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReadOnlyArray&lt;InputControlScheme&gt; controlSchemes { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ReadOnlyArray</span>&lt;<span class="xref">InputControlScheme</span>&gt;</td>
+        <td><p>Control schemes defined for the asset.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Input_GameInput_controlSchemes_seealso">See Also</h5>
+  <div class="seealso">
+      <div><span class="xref">AddControlScheme</span>(<span class="xref">InputActionAsset</span>, <span class="xref">string</span>)</div>
+      <div><span class="xref">RemoveControlScheme</span>(<span class="xref">InputActionAsset</span>, <span class="xref">string</span>)</div>
+  </div>
+
+
+  <a id="KSP_Input_GameInput_devices_" data-uid="KSP.Input.GameInput.devices*"></a>
+  <h4 id="KSP_Input_GameInput_devices" data-uid="KSP.Input.GameInput.devices">devices</h4>
+  <div class="markdown level1 summary"><p>Set of devices that bindings in the asset can bind to.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReadOnlyArray&lt;InputDevice&gt;? devices { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ReadOnlyArray</span>&lt;<span class="xref">InputDevice</span>&gt;?</td>
+        <td><p>Optional set of devices to use by bindings in the asset.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Input_GameInput_devices_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>By default (with this property being <code>null</code>), bindings will bind to any of the
+controls available through <span class="xref">UnityEngine.InputSystem.InputSystem.devices</span>, i.e. controls from all
+devices in the system will be used.</p>
+<p>By setting this property, binding resolution can instead be restricted to just specific
+devices. This restriction can either be applied to an entire asset using this property
+or to specific action maps by using <span class="xref">UnityEngine.InputSystem.InputActionMap.devices</span>. Note that if
+both this property and <span class="xref">UnityEngine.InputSystem.InputActionMap.devices</span> is set for a specific action
+map, the list of devices on the action map will take precedence and the list on the
+asset will be ignored for bindings in that action map.</p>
+<example>
+<pre><code class="lang-csharp">// Create an asset with a single action map and a single action with a
+// gamepad binding.
+var asset = ScriptableObject.CreateInstance&lt;InputActionAsset&gt;();
+var actionMap = new InputActionMap();
+var fireAction = actionMap.AddAction("Fire", binding: "&lt;Gamepad&gt;/buttonSouth");
+asset.AddActionMap(actionMap);
+
+// Let's assume we have two gamepads connected. If we enable the
+// action map now, the 'Fire' action will bind to both.
+actionMap.Enable();
+
+// This will print two controls.
+Debug.Log(string.Join("\n", fireAction.controls));
+
+// To restrict the setup to just the first gamepad, we can assign
+// to the 'devices' property (in this case, we could do so on either
+// the action map or on the asset; we choose the latter here).
+asset.devices = new InputDevice[] { Gamepad.all[0] };
+
+// Now this will print only one control.
+Debug.Log(string.Join("\n", fireAction.controls));</code></pre>
+</example>
+</div>
+  <h5 id="KSP_Input_GameInput_devices_seealso">See Also</h5>
+  <div class="seealso">
+      <div><span class="xref">devices</span></div>
+  </div>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="KSP_Input_GameInput_Contains_" data-uid="KSP.Input.GameInput.Contains*"></a>
+  <h4 id="KSP_Input_GameInput_Contains_UnityEngine_InputSystem_InputAction_" data-uid="KSP.Input.GameInput.Contains(UnityEngine.InputSystem.InputAction)">Contains(InputAction)</h4>
+  <div class="markdown level1 summary"><p>Return <code>true</code> if the given action is part of the asset.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Contains(InputAction action)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">InputAction</span></td>
+        <td><span class="parametername">action</span></td>
+        <td><p>An action. Can be null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the given action is part of the asset, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Input_GameInput_Disable_" data-uid="KSP.Input.GameInput.Disable*"></a>
+  <h4 id="KSP_Input_GameInput_Disable" data-uid="KSP.Input.GameInput.Disable">Disable()</h4>
+  <div class="markdown level1 summary"><p>Disable all action maps in the asset.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Disable()</code></pre>
+  </div>
+  <h5 id="KSP_Input_GameInput_Disable_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method is equivalent to calling <span class="xref">UnityEngine.InputSystem.InputActionMap.Disable()</span> on
+all maps in <span class="xref">UnityEngine.InputSystem.InputActionAsset.actionMaps</span>.</p>
+</div>
+
+
+  <a id="KSP_Input_GameInput_Dispose_" data-uid="KSP.Input.GameInput.Dispose*"></a>
+  <h4 id="KSP_Input_GameInput_Dispose" data-uid="KSP.Input.GameInput.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"><p>Destroys this asset and all associated <span class="xref">UnityEngine.InputSystem.InputAction</span> instances.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+
+
+  <a id="KSP_Input_GameInput_Enable_" data-uid="KSP.Input.GameInput.Enable*"></a>
+  <h4 id="KSP_Input_GameInput_Enable" data-uid="KSP.Input.GameInput.Enable">Enable()</h4>
+  <div class="markdown level1 summary"><p>Enable all action maps in the asset.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Enable()</code></pre>
+  </div>
+  <h5 id="KSP_Input_GameInput_Enable_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method is equivalent to calling <span class="xref">UnityEngine.InputSystem.InputActionMap.Enable()</span> on
+all maps in <span class="xref">UnityEngine.InputSystem.InputActionAsset.actionMaps</span>.</p>
+</div>
+
+
+  <a id="KSP_Input_GameInput_Finalize_" data-uid="KSP.Input.GameInput.Finalize*"></a>
+  <h4 id="KSP_Input_GameInput_Finalize" data-uid="KSP.Input.GameInput.Finalize">~GameInput()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected ~GameInput()</code></pre>
+  </div>
+
+
+  <a id="KSP_Input_GameInput_FindAction_" data-uid="KSP.Input.GameInput.FindAction*"></a>
+  <h4 id="KSP_Input_GameInput_FindAction_System_String_System_Boolean_" data-uid="KSP.Input.GameInput.FindAction(System.String,System.Boolean)">FindAction(string, bool)</h4>
+  <div class="markdown level1 summary"><p>Find an <span class="xref">UnityEngine.InputSystem.InputAction</span> by its name in one of the <span class="xref">UnityEngine.InputSystem.InputActionMap</span>s
+in the asset.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InputAction FindAction(string actionNameOrId, bool throwIfNotFound = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">actionNameOrId</span></td>
+        <td><p>Name of the action as either a &quot;map/action&quot; combination (e.g. &quot;gameplay/fire&quot;) or
+a simple name (e.g. &quot;fire&quot;). In the former case, the name is split at the '/' slash and the first part is used to find
+a map with that name and the second part is used to find an action with that name inside the map. In the
+latter case, all maps are searched in order and the first action that has the given name in any of the maps
+is returned. Note that name comparisons are case-insensitive.</p>
+<pre><code>         Alternatively, the given string can be a GUID as given by &lt;xref href=&quot;UnityEngine.InputSystem.InputAction.id&quot; data-throw-if-not-resolved=&quot;false&quot;&gt;&lt;/xref&gt;.
+</code></pre>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">throwIfNotFound</span></td>
+        <td><p>If <code>true</code>, instead of returning <code>null</code> when the action
+cannot be found, throw <code>ArgumentException</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">InputAction</span></td>
+        <td><p>The action with the corresponding name or <code>null</code> if no matching action could be found.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Input_GameInput_FindAction_System_String_System_Boolean__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Note that no lookup structures are used internally to speed the operation up. Instead, the search is done
+linearly. For repeated access of an action, it is thus generally best to look up actions once ahead of
+time and cache the result.</p>
+<p>If multiple actions have the same name and <code class="paramref">actionNameOrId</code> is not an ID and not an
+action name qualified by a map name (that is, in the form of <code>&quot;mapName/actionName&quot;</code>), the action that
+is returned will be from the first map in <span class="xref">UnityEngine.InputSystem.InputActionAsset.actionMaps</span> that has an action with the given name.
+An exception is if, of the multiple actions with the same name, some are enabled and some are disabled. In
+this case, the first action that is enabled is returned.</p>
+<p>If an action name contains a slash &quot;/&quot;, e.g. &quot;yaw/pitch&quot; and there is also a map called &quot;yaw&quot; which
+contains an action &quot;pitch&quot;, the action &quot;pitch&quot; within the map &quot;yaw&quot; will be returned instead of the
+action named &quot;yaw/pitch&quot;.</p>
+<example>
+<pre><code class="lang-csharp">var asset = ScriptableObject.CreateInstance&lt;InputActionAsset&gt;();
+
+var map1 = new InputActionMap("map1");
+var map2 = new InputActionMap("map2");
+
+asset.AddActionMap(map1);
+asset.AddActionMap(map2);
+
+var action1 = map1.AddAction("action1");
+var action2 = map1.AddAction("action2");
+var action3 = map2.AddAction("action3");
+
+// Search all maps in the asset for any action that has the given name.
+asset.FindAction("action1") // Returns action1.
+asset.FindAction("action2") // Returns action2
+asset.FindAction("action3") // Returns action3.
+
+// Search for a specific action in a specific map.
+asset.FindAction("map1/action1") // Returns action1.
+asset.FindAction("map2/action2") // Returns action2.
+asset.FindAction("map3/action3") // Returns action3.
+
+// Search by unique action ID.
+asset.FindAction(action1.id.ToString()) // Returns action1.
+asset.FindAction(action2.id.ToString()) // Returns action2.
+asset.FindAction(action3.id.ToString()) // Returns action3.</code></pre>
+</example>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ArgumentNullException</span></td>
+        <td><p><code class="paramref">actionNameOrId</code> is <code>null</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">ArgumentException</span></td>
+        <td><p>Thrown if <code class="paramref">throwIfNotFound</code> is true and the
+action could not be found. -Or- If <code class="paramref">actionNameOrId</code> contains a slash but is missing
+either the action or the map name.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Input_GameInput_FindBinding_" data-uid="KSP.Input.GameInput.FindBinding*"></a>
+  <h4 id="KSP_Input_GameInput_FindBinding_UnityEngine_InputSystem_InputBinding_UnityEngine_InputSystem_InputAction__" data-uid="KSP.Input.GameInput.FindBinding(UnityEngine.InputSystem.InputBinding,UnityEngine.InputSystem.InputAction@)">FindBinding(InputBinding, out InputAction)</h4>
+  <div class="markdown level1 summary"><p>Find the index of the first binding that matches the given mask.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int FindBinding(InputBinding bindingMask, out InputAction action)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">InputBinding</span></td>
+        <td><span class="parametername">bindingMask</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">InputAction</span></td>
+        <td><span class="parametername">action</span></td>
+        <td><p>Receives the action on which the binding was found. If none was found,
+will be set to <code>null</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><p>Index into <span class="xref">UnityEngine.InputSystem.InputAction.bindings</span> of <code class="paramref">action</code> of the binding
+that matches <code class="paramref">mask</code>. If no binding matches, will return -1.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Input_GameInput_FindBinding_UnityEngine_InputSystem_InputBinding_UnityEngine_InputSystem_InputAction___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>For details about matching bindings by a mask, see <span class="xref">UnityEngine.InputSystem.InputBinding.Matches(UnityEngine.InputSystem.InputBinding)</span>.</p>
+<example>
+<pre><code class="lang-csharp">var index = playerInput.actions.FindBinding(
+    new InputBinding { path = "&lt;Gamepad&gt;/buttonSouth" },
+    out var action);
+
+if (index != -1)
+    Debug.Log($"The A button is bound to {action}");</code></pre>
+</example>
+</div>
+  <h5 id="KSP_Input_GameInput_FindBinding_UnityEngine_InputSystem_InputBinding_UnityEngine_InputSystem_InputAction___seealso">See Also</h5>
+  <div class="seealso">
+      <div><span class="xref">Matches</span>(<span class="xref">InputBinding</span>)</div>
+      <div><span class="xref">bindings</span></div>
+  </div>
+
+
+  <a id="KSP_Input_GameInput_GetEnumerator_" data-uid="KSP.Input.GameInput.GetEnumerator*"></a>
+  <h4 id="KSP_Input_GameInput_GetEnumerator" data-uid="KSP.Input.GameInput.GetEnumerator">GetEnumerator()</h4>
+  <div class="markdown level1 summary"><p>Enumerate all actions in the asset.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerator&lt;InputAction&gt; GetEnumerator()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IEnumerator</span>&lt;<span class="xref">InputAction</span>&gt;</td>
+        <td><p>An enumerator going over the actions in the asset.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Input_GameInput_GetEnumerator_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Actions will be enumerated one action map in <span class="xref">UnityEngine.InputSystem.InputActionAsset.actionMaps</span>
+after the other. The actions from each map will be yielded in turn.</p>
+<p>This method will allocate GC heap memory.</p>
+</div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetField__2___0_System_String_">Util.GetField&lt;T, R&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetField__2___0_System_String___1_">Util.SetField&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.Extensions.html#GlobalAssemblyCSharp_Extensions_Count__1_System_Collections_Generic_IEnumerable___0__">Extensions.Count&lt;T&gt;(IEnumerable&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.VFX.Plume.CollectionExtensions.html#Redux_VFX_Plume_CollectionExtensions_AddCollectionItem__1_System_Collections_Generic_IEnumerable___0____0_">CollectionExtensions.AddCollectionItem&lt;T&gt;(IEnumerable&lt;T&gt;, T)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.VFX.Plume.CollectionExtensions.html#Redux_VFX_Plume_CollectionExtensions_AddRange__1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEnumerable___0__">CollectionExtensions.AddRange&lt;T&gt;(IEnumerable&lt;T&gt;, IEnumerable&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromProperties_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromProperties(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetFieldValue__1_System_Object_System_String_">Util.GetFieldValue&lt;T&gt;(object, string)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from prerelease
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

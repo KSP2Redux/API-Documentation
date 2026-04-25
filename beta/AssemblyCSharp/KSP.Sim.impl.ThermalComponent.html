@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class ThermalComponent | KSP2Redux API (Beta) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class ThermalComponent | KSP2Redux API (Beta) ">
+    
+    <meta name="description" content="ObjectComponent that manages per-part thermal simulation for a vessel, computing heat fluxes, applying cooling energy, and destroying overheated parts.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="KSP.Sim.impl.ThermalComponent">
+
+
+
+  <h1 id="KSP_Sim_impl_ThermalComponent" data-uid="KSP.Sim.impl.ThermalComponent" class="text-break">Class ThermalComponent</h1>
+  <div class="markdown level0 summary"><p>ObjectComponent that manages per-part thermal simulation for a vessel, computing heat fluxes, applying cooling energy, and destroying overheated parts.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><a class="xref" href="KSP.Sim.impl.ObjectComponent.html">ObjectComponent</a></div>
+    <div class="level2"><span class="xref">ThermalComponent</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="KSP.Sim.IGuidIdentity.html">IGuidIdentity</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent__isEnabled">ObjectComponent._isEnabled</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_initialDefinitionData">ObjectComponent.initialDefinitionData</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_Is_KSP_Sim_IGuidIdentity_">ObjectComponent.Is(IGuidIdentity)</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnAdded_KSP_Sim_impl_SimulationObjectModel_System_Double_">ObjectComponent.OnAdded(SimulationObjectModel, double)</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnFixedUpdate_System_Double_System_Double_">ObjectComponent.OnFixedUpdate(double, double)</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnLateUpdate_System_Double_">ObjectComponent.OnLateUpdate(double)</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_SetDefinition_System_Object_">ObjectComponent.SetDefinition(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_Game">ObjectComponent.Game</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_SimulationObject">ObjectComponent.SimulationObject</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_transform">ObjectComponent.transform</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_IsDestroyed">ObjectComponent.IsDestroyed</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_IsDestroyedOrBeingDestroyed">ObjectComponent.IsDestroyedOrBeingDestroyed</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_IsValidInSim">ObjectComponent.IsValidInSim</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_IsEnabled">ObjectComponent.IsEnabled</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_GlobalId">ObjectComponent.GlobalId</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_Guid">ObjectComponent.Guid</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_Name">ObjectComponent.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_DisplayName">ObjectComponent.DisplayName</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_IsLocallyAuthorized">ObjectComponent.IsLocallyAuthorized</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_IsLocallyOwned">ObjectComponent.IsLocallyOwned</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Sim.html">Sim</a>.<a class="xref" href="KSP.Sim.impl.html">impl</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="KSP_Sim_impl_ThermalComponent_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class ThermalComponent : ObjectComponent, IGuidIdentity</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+
+
+  <a id="KSP_Sim_impl_ThermalComponent__ctor_" data-uid="KSP.Sim.impl.ThermalComponent.#ctor*"></a>
+  <h4 id="KSP_Sim_impl_ThermalComponent__ctor" data-uid="KSP.Sim.impl.ThermalComponent.#ctor">ThermalComponent()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ThermalComponent()</code></pre>
+  </div>
+  <h3 id="fields">Fields
+</h3>
+
+
+  <h4 id="KSP_Sim_impl_ThermalComponent_CurrentCBData" data-uid="KSP.Sim.impl.ThermalComponent.CurrentCBData">CurrentCBData</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CelestialBodyComponent CurrentCBData</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="KSP_Sim_impl_ThermalComponent_DefinitionType_" data-uid="KSP.Sim.impl.ThermalComponent.DefinitionType*"></a>
+  <h4 id="KSP_Sim_impl_ThermalComponent_DefinitionType" data-uid="KSP.Sim.impl.ThermalComponent.DefinitionType">DefinitionType</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TypeConverterIgnore]
+public override Type DefinitionType { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Type</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_DefinitionType">ObjectComponent.DefinitionType</a></div>
+
+
+  <a id="KSP_Sim_impl_ThermalComponent_StateType_" data-uid="KSP.Sim.impl.ThermalComponent.StateType*"></a>
+  <h4 id="KSP_Sim_impl_ThermalComponent_StateType" data-uid="KSP.Sim.impl.ThermalComponent.StateType">StateType</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TypeConverterIgnore]
+public override Type StateType { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Type</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_StateType">ObjectComponent.StateType</a></div>
+
+
+  <a id="KSP_Sim_impl_ThermalComponent_Type_" data-uid="KSP.Sim.impl.ThermalComponent.Type*"></a>
+  <h4 id="KSP_Sim_impl_ThermalComponent_Type" data-uid="KSP.Sim.impl.ThermalComponent.Type">Type</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TypeConverterIgnore]
+public override Type Type { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Type</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_Type">ObjectComponent.Type</a></div>
+
+
+  <a id="KSP_Sim_impl_ThermalComponent_ViewObjectComponentType_" data-uid="KSP.Sim.impl.ThermalComponent.ViewObjectComponentType*"></a>
+  <h4 id="KSP_Sim_impl_ThermalComponent_ViewObjectComponentType" data-uid="KSP.Sim.impl.ThermalComponent.ViewObjectComponentType">ViewObjectComponentType</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TypeConverterIgnore]
+public override Type ViewObjectComponentType { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Type</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_ViewObjectComponentType">ObjectComponent.ViewObjectComponentType</a></div>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="KSP_Sim_impl_ThermalComponent_Dispose_" data-uid="KSP.Sim.impl.ThermalComponent.Dispose*"></a>
+  <h4 id="KSP_Sim_impl_ThermalComponent_Dispose" data-uid="KSP.Sim.impl.ThermalComponent.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+
+
+  <a id="KSP_Sim_impl_ThermalComponent_Finalize_" data-uid="KSP.Sim.impl.ThermalComponent.Finalize*"></a>
+  <h4 id="KSP_Sim_impl_ThermalComponent_Finalize" data-uid="KSP.Sim.impl.ThermalComponent.Finalize">~ThermalComponent()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected ~ThermalComponent()</code></pre>
+  </div>
+
+
+  <a id="KSP_Sim_impl_ThermalComponent_GetDefinition_" data-uid="KSP.Sim.impl.ThermalComponent.GetDefinition*"></a>
+  <h4 id="KSP_Sim_impl_ThermalComponent_GetDefinition" data-uid="KSP.Sim.impl.ThermalComponent.GetDefinition">GetDefinition()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override object GetDefinition()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">object</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_GetDefinition">ObjectComponent.GetDefinition()</a></div>
+
+
+  <a id="KSP_Sim_impl_ThermalComponent_GetState_" data-uid="KSP.Sim.impl.ThermalComponent.GetState*"></a>
+  <h4 id="KSP_Sim_impl_ThermalComponent_GetState" data-uid="KSP.Sim.impl.ThermalComponent.GetState">GetState()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override object GetState()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">object</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_GetState">ObjectComponent.GetState()</a></div>
+
+
+  <a id="KSP_Sim_impl_ThermalComponent_OnRemoved_" data-uid="KSP.Sim.impl.ThermalComponent.OnRemoved*"></a>
+  <h4 id="KSP_Sim_impl_ThermalComponent_OnRemoved_KSP_Sim_impl_SimulationObjectModel_System_Double_" data-uid="KSP.Sim.impl.ThermalComponent.OnRemoved(KSP.Sim.impl.SimulationObjectModel,System.Double)">OnRemoved(SimulationObjectModel, double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void OnRemoved(SimulationObjectModel simulationObject, double universalTime)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.SimulationObjectModel.html">SimulationObjectModel</a></td>
+        <td><span class="parametername">simulationObject</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">universalTime</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnRemoved_KSP_Sim_impl_SimulationObjectModel_System_Double_">ObjectComponent.OnRemoved(SimulationObjectModel, double)</a></div>
+
+
+  <a id="KSP_Sim_impl_ThermalComponent_OnStart_" data-uid="KSP.Sim.impl.ThermalComponent.OnStart*"></a>
+  <h4 id="KSP_Sim_impl_ThermalComponent_OnStart_System_Double_" data-uid="KSP.Sim.impl.ThermalComponent.OnStart(System.Double)">OnStart(double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void OnStart(double universalTime)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">universalTime</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnStart_System_Double_">ObjectComponent.OnStart(double)</a></div>
+
+
+  <a id="KSP_Sim_impl_ThermalComponent_OnUpdate_" data-uid="KSP.Sim.impl.ThermalComponent.OnUpdate*"></a>
+  <h4 id="KSP_Sim_impl_ThermalComponent_OnUpdate_System_Double_System_Double_" data-uid="KSP.Sim.impl.ThermalComponent.OnUpdate(System.Double,System.Double)">OnUpdate(double, double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void OnUpdate(double universalTime, double deltaUniversalTime)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">universalTime</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">deltaUniversalTime</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnUpdate_System_Double_System_Double_">ObjectComponent.OnUpdate(double, double)</a></div>
+
+
+  <a id="KSP_Sim_impl_ThermalComponent_SetState_" data-uid="KSP.Sim.impl.ThermalComponent.SetState*"></a>
+  <h4 id="KSP_Sim_impl_ThermalComponent_SetState_System_Object_KSP_Sim_ISimulationModelMap_" data-uid="KSP.Sim.impl.ThermalComponent.SetState(System.Object,KSP.Sim.ISimulationModelMap)">SetState(object, ISimulationModelMap)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override object SetState(object stateData, ISimulationModelMap modelMap)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">object</span></td>
+        <td><span class="parametername">stateData</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.ISimulationModelMap.html">ISimulationModelMap</a></td>
+        <td><span class="parametername">modelMap</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">object</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_SetState_System_Object_KSP_Sim_ISimulationModelMap_">ObjectComponent.SetState(object, ISimulationModelMap)</a></div>
+
+
+  <a id="KSP_Sim_impl_ThermalComponent_ValidateState_" data-uid="KSP.Sim.impl.ThermalComponent.ValidateState*"></a>
+  <h4 id="KSP_Sim_impl_ThermalComponent_ValidateState_System_Object_KSP_Sim_ISimulationModelMap_" data-uid="KSP.Sim.impl.ThermalComponent.ValidateState(System.Object,KSP.Sim.ISimulationModelMap)">ValidateState(object, ISimulationModelMap)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool ValidateState(object stateData, ISimulationModelMap simulationModelMap)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">object</span></td>
+        <td><span class="parametername">stateData</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.ISimulationModelMap.html">ISimulationModelMap</a></td>
+        <td><span class="parametername">simulationModelMap</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_ValidateState_System_Object_KSP_Sim_ISimulationModelMap_">ObjectComponent.ValidateState(object, ISimulationModelMap)</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="KSP.Sim.IGuidIdentity.html">IGuidIdentity</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetField__2___0_System_String_">Util.GetField&lt;T, R&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetField__2___0_System_String___1_">Util.SetField&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromProperties_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromProperties(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetFieldValue__1_System_Object_System_String_">Util.GetFieldValue&lt;T&gt;(object, string)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from prerelease
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class MissionControlMenuController | KSP2Redux API (Beta) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class MissionControlMenuController | KSP2Redux API (Beta) ">
+    
+    <meta name="description" content="Controller for the Mission Control menu, managing mission browsing, tracking, briefing, debriefing, and submission.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="KSP.UI.MissionControlMenuController">
+
+
+
+  <h1 id="KSP_UI_MissionControlMenuController" data-uid="KSP.UI.MissionControlMenuController" class="text-break">Class MissionControlMenuController</h1>
+  <div class="markdown level0 summary"><p>Controller for the Mission Control menu, managing mission browsing, tracking, briefing, debriefing, and submission.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Object.html">Object</a></div>
+    <div class="level2"><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Component.html">Component</a></div>
+    <div class="level3"><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Behaviour.html">Behaviour</a></div>
+    <div class="level4"><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/MonoBehaviour.html">MonoBehaviour</a></div>
+    <div class="level5"><a class="xref" href="KSP.Game.KerbalMonoBehaviour.html">KerbalMonoBehaviour</a></div>
+    <div class="level6"><span class="xref">MissionControlMenuController</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Game">KerbalMonoBehaviour.Game</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Assets">KerbalMonoBehaviour.Assets</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Messages">KerbalMonoBehaviour.Messages</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_CFXSystem">KerbalMonoBehaviour.CFXSystem</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_IsGameShuttingDown">KerbalMonoBehaviour.IsGameShuttingDown</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.UI.html">UI</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="KSP_UI_MissionControlMenuController_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[RequireComponent(typeof(CanvasGroup))]
+public class MissionControlMenuController : KerbalMonoBehaviour</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+
+
+  <a id="KSP_UI_MissionControlMenuController__ctor_" data-uid="KSP.UI.MissionControlMenuController.#ctor*"></a>
+  <h4 id="KSP_UI_MissionControlMenuController__ctor" data-uid="KSP.UI.MissionControlMenuController.#ctor">MissionControlMenuController()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MissionControlMenuController()</code></pre>
+  </div>
+  <h3 id="fields">Fields
+</h3>
+
+
+  <h4 id="KSP_UI_MissionControlMenuController_BRIEF_BRANCH_ID" data-uid="KSP.UI.MissionControlMenuController.BRIEF_BRANCH_ID">BRIEF_BRANCH_ID</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string BRIEF_BRANCH_ID = &quot;Brief&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_MissionControlMenuController_BackgroundScene" data-uid="KSP.UI.MissionControlMenuController.BackgroundScene">BackgroundScene</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Scene BackgroundScene</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/SceneManagement.Scene.html">Scene</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_MissionControlMenuController_CLOSE_MISSION_POPOVER_ROOT" data-uid="KSP.UI.MissionControlMenuController.CLOSE_MISSION_POPOVER_ROOT">CLOSE_MISSION_POPOVER_ROOT</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string CLOSE_MISSION_POPOVER_ROOT = &quot;../CloseMissionPopOver&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_MissionControlMenuController_DEBRIEF_BRANCH_ID" data-uid="KSP.UI.MissionControlMenuController.DEBRIEF_BRANCH_ID">DEBRIEF_BRANCH_ID</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string DEBRIEF_BRANCH_ID = &quot;Debrief&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_MissionControlMenuController_LOC_MISSION_REWARD_SCIENCE" data-uid="KSP.UI.MissionControlMenuController.LOC_MISSION_REWARD_SCIENCE">LOC_MISSION_REWARD_SCIENCE</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string LOC_MISSION_REWARD_SCIENCE = &quot;Missions/MissionControl/Rewards/Science&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_MissionControlMenuController_LOC_MISSION_REWARD_TEXT" data-uid="KSP.UI.MissionControlMenuController.LOC_MISSION_REWARD_TEXT">LOC_MISSION_REWARD_TEXT</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string LOC_MISSION_REWARD_TEXT = &quot;Missions/MissionControl/Rewards/Reward&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_MissionControlMenuController_MISSION_BRIEFING" data-uid="KSP.UI.MissionControlMenuController.MISSION_BRIEFING">MISSION_BRIEFING</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string MISSION_BRIEFING = &quot;MissionBriefing&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_MissionControlMenuController_MISSION_BRIEFING_ROOT" data-uid="KSP.UI.MissionControlMenuController.MISSION_BRIEFING_ROOT">MISSION_BRIEFING_ROOT</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string MISSION_BRIEFING_ROOT = &quot;../MissionBriefing&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_MissionControlMenuController_MISSION_DEBRIEFING" data-uid="KSP.UI.MissionControlMenuController.MISSION_DEBRIEFING">MISSION_DEBRIEFING</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string MISSION_DEBRIEFING = &quot;MissionDebriefing&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_MissionControlMenuController_MISSION_DEBRIEFING_ROOT" data-uid="KSP.UI.MissionControlMenuController.MISSION_DEBRIEFING_ROOT">MISSION_DEBRIEFING_ROOT</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string MISSION_DEBRIEFING_ROOT = &quot;../MissionDebriefing&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_MissionControlMenuController_MissionControlBackgroundInstance" data-uid="KSP.UI.MissionControlMenuController.MissionControlBackgroundInstance">MissionControlBackgroundInstance</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HideInInspector]
+public GameObject MissionControlBackgroundInstance</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">GameObject</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_MissionControlMenuController_MissionControlBackgroundInstanceCamera" data-uid="KSP.UI.MissionControlMenuController.MissionControlBackgroundInstanceCamera">MissionControlBackgroundInstanceCamera</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HideInInspector]
+public Camera MissionControlBackgroundInstanceCamera</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Camera.html">Camera</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_MissionControlMenuController_ON_SUBMIT_BRANCH_ID" data-uid="KSP.UI.MissionControlMenuController.ON_SUBMIT_BRANCH_ID">ON_SUBMIT_BRANCH_ID</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string ON_SUBMIT_BRANCH_ID = &quot;OnSubmit&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_MissionControlMenuController_SELECTED_MISSION" data-uid="KSP.UI.MissionControlMenuController.SELECTED_MISSION">SELECTED_MISSION</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string SELECTED_MISSION = &quot;Selected&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_MissionControlMenuController_SELECTED_MISSION_ROOT" data-uid="KSP.UI.MissionControlMenuController.SELECTED_MISSION_ROOT">SELECTED_MISSION_ROOT</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string SELECTED_MISSION_ROOT = &quot;../Selected&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_MissionControlMenuController_SUBMIT_MISSION" data-uid="KSP.UI.MissionControlMenuController.SUBMIT_MISSION">SUBMIT_MISSION</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string SUBMIT_MISSION = &quot;SubmitMission&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_MissionControlMenuController_SUBMIT_MISSION_ROOT" data-uid="KSP.UI.MissionControlMenuController.SUBMIT_MISSION_ROOT">SUBMIT_MISSION_ROOT</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string SUBMIT_MISSION_ROOT = &quot;../SubmitMission&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_MissionControlMenuController_TRACK_MISSION" data-uid="KSP.UI.MissionControlMenuController.TRACK_MISSION">TRACK_MISSION</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string TRACK_MISSION = &quot;TrackMission&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_MissionControlMenuController_TRACK_MISSION_ROOT" data-uid="KSP.UI.MissionControlMenuController.TRACK_MISSION_ROOT">TRACK_MISSION_ROOT</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string TRACK_MISSION_ROOT = &quot;../TrackMission&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_MissionControlMenuController_UpdateUI" data-uid="KSP.UI.MissionControlMenuController.UpdateUI">UpdateUI</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UnityAction UpdateUI</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Events.UnityAction.html">UnityAction</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_MissionControlMenuController_completedMissionElementPrefab" data-uid="KSP.UI.MissionControlMenuController.completedMissionElementPrefab">completedMissionElementPrefab</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ContextBindRoot completedMissionElementPrefab</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.UI.Binding.ContextBindRoot.html">ContextBindRoot</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_MissionControlMenuController_completedMissionPrefabKey" data-uid="KSP.UI.MissionControlMenuController.completedMissionPrefabKey">completedMissionPrefabKey</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string completedMissionPrefabKey</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_MissionControlMenuController_primaryMissionElementPrefab" data-uid="KSP.UI.MissionControlMenuController.primaryMissionElementPrefab">primaryMissionElementPrefab</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ContextBindRoot primaryMissionElementPrefab</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.UI.Binding.ContextBindRoot.html">ContextBindRoot</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_MissionControlMenuController_primaryMissionPrefabKey" data-uid="KSP.UI.MissionControlMenuController.primaryMissionPrefabKey">primaryMissionPrefabKey</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Header(&quot;Primary Mission keys and Prefabs&quot;)]
+public string primaryMissionPrefabKey</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_MissionControlMenuController_secondaryMissionElementPrefab" data-uid="KSP.UI.MissionControlMenuController.secondaryMissionElementPrefab">secondaryMissionElementPrefab</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ContextBindRoot secondaryMissionElementPrefab</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.UI.Binding.ContextBindRoot.html">ContextBindRoot</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_UI_MissionControlMenuController_secondaryMissionPrefabKey" data-uid="KSP.UI.MissionControlMenuController.secondaryMissionPrefabKey">secondaryMissionPrefabKey</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string secondaryMissionPrefabKey</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="KSP_UI_MissionControlMenuController_MissionLog_" data-uid="KSP.UI.MissionControlMenuController.MissionLog*"></a>
+  <h4 id="KSP_UI_MissionControlMenuController_MissionLog" data-uid="KSP.UI.MissionControlMenuController.MissionLog">MissionLog</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MissionLog MissionLog { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.MissionLog.html">MissionLog</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="KSP_UI_MissionControlMenuController_AddMissionUIElement_" data-uid="KSP.UI.MissionControlMenuController.AddMissionUIElement*"></a>
+  <h4 id="KSP_UI_MissionControlMenuController_AddMissionUIElement_KSP_Game_Missions_MissionUIElement_" data-uid="KSP.UI.MissionControlMenuController.AddMissionUIElement(KSP.Game.Missions.MissionUIElement)">AddMissionUIElement(MissionUIElement)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void AddMissionUIElement(MissionUIElement missionUIElement)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Game.Missions.MissionUIElement.html">MissionUIElement</a></td>
+        <td><span class="parametername">missionUIElement</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_UI_MissionControlMenuController_AddNewMissionUIElement_" data-uid="KSP.UI.MissionControlMenuController.AddNewMissionUIElement*"></a>
+  <h4 id="KSP_UI_MissionControlMenuController_AddNewMissionUIElement_KSP_Game_Missions_Definitions_MissionData_KSP_Game_Missions_Definitions_MissionSaveData_" data-uid="KSP.UI.MissionControlMenuController.AddNewMissionUIElement(KSP.Game.Missions.Definitions.MissionData,KSP.Game.Missions.Definitions.MissionSaveData)">AddNewMissionUIElement(MissionData, MissionSaveData)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddNewMissionUIElement(MissionData missionData, MissionSaveData saveData)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Game.Missions.Definitions.MissionData.html">MissionData</a></td>
+        <td><span class="parametername">missionData</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Game.Missions.Definitions.MissionSaveData.html">MissionSaveData</a></td>
+        <td><span class="parametername">saveData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_UI_MissionControlMenuController_CloseMissionPopOver_" data-uid="KSP.UI.MissionControlMenuController.CloseMissionPopOver*"></a>
+  <h4 id="KSP_UI_MissionControlMenuController_CloseMissionPopOver" data-uid="KSP.UI.MissionControlMenuController.CloseMissionPopOver">CloseMissionPopOver()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CloseMissionPopOver()</code></pre>
+  </div>
+
+
+  <a id="KSP_UI_MissionControlMenuController_DismissMissionControl_" data-uid="KSP.UI.MissionControlMenuController.DismissMissionControl*"></a>
+  <h4 id="KSP_UI_MissionControlMenuController_DismissMissionControl" data-uid="KSP.UI.MissionControlMenuController.DismissMissionControl">DismissMissionControl()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DismissMissionControl()</code></pre>
+  </div>
+
+
+  <a id="KSP_UI_MissionControlMenuController_ExitMissionControl_" data-uid="KSP.UI.MissionControlMenuController.ExitMissionControl*"></a>
+  <h4 id="KSP_UI_MissionControlMenuController_ExitMissionControl" data-uid="KSP.UI.MissionControlMenuController.ExitMissionControl">ExitMissionControl()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ExitMissionControl()</code></pre>
+  </div>
+
+
+  <a id="KSP_UI_MissionControlMenuController_FinalizeSubmitMission_" data-uid="KSP.UI.MissionControlMenuController.FinalizeSubmitMission*"></a>
+  <h4 id="KSP_UI_MissionControlMenuController_FinalizeSubmitMission_KSP_Game_Missions_Definitions_MissionData_" data-uid="KSP.UI.MissionControlMenuController.FinalizeSubmitMission(KSP.Game.Missions.Definitions.MissionData)">FinalizeSubmitMission(MissionData)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void FinalizeSubmitMission(MissionData missionData)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Game.Missions.Definitions.MissionData.html">MissionData</a></td>
+        <td><span class="parametername">missionData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_UI_MissionControlMenuController_GetTrackedMission_" data-uid="KSP.UI.MissionControlMenuController.GetTrackedMission*"></a>
+  <h4 id="KSP_UI_MissionControlMenuController_GetTrackedMission" data-uid="KSP.UI.MissionControlMenuController.GetTrackedMission">GetTrackedMission()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MissionToggleExtended GetTrackedMission()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">MissionToggleExtended</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_UI_MissionControlMenuController_Initialize_" data-uid="KSP.UI.MissionControlMenuController.Initialize*"></a>
+  <h4 id="KSP_UI_MissionControlMenuController_Initialize" data-uid="KSP.UI.MissionControlMenuController.Initialize">Initialize()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Initialize()</code></pre>
+  </div>
+
+
+  <a id="KSP_UI_MissionControlMenuController_InitializeMissionLogData_" data-uid="KSP.UI.MissionControlMenuController.InitializeMissionLogData*"></a>
+  <h4 id="KSP_UI_MissionControlMenuController_InitializeMissionLogData" data-uid="KSP.UI.MissionControlMenuController.InitializeMissionLogData">InitializeMissionLogData()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[ContextMenu(&quot;InitializeMissionLogData&quot;)]
+public void InitializeMissionLogData()</code></pre>
+  </div>
+
+
+  <a id="KSP_UI_MissionControlMenuController_SetVisible_" data-uid="KSP.UI.MissionControlMenuController.SetVisible*"></a>
+  <h4 id="KSP_UI_MissionControlMenuController_SetVisible_System_Boolean_" data-uid="KSP.UI.MissionControlMenuController.SetVisible(System.Boolean)">SetVisible(bool)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetVisible(bool isVisible = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">isVisible</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_UI_MissionControlMenuController_SubmitMission_" data-uid="KSP.UI.MissionControlMenuController.SubmitMission*"></a>
+  <h4 id="KSP_UI_MissionControlMenuController_SubmitMission_KSP_Game_Missions_MissionUIElement_" data-uid="KSP.UI.MissionControlMenuController.SubmitMission(KSP.Game.Missions.MissionUIElement)">SubmitMission(MissionUIElement)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SubmitMission(MissionUIElement missionUIElement)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Game.Missions.MissionUIElement.html">MissionUIElement</a></td>
+        <td><span class="parametername">missionUIElement</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_UI_MissionControlMenuController_ToggleMissionControlScene_" data-uid="KSP.UI.MissionControlMenuController.ToggleMissionControlScene*"></a>
+  <h4 id="KSP_UI_MissionControlMenuController_ToggleMissionControlScene_System_Boolean_" data-uid="KSP.UI.MissionControlMenuController.ToggleMissionControlScene(System.Boolean)">ToggleMissionControlScene(bool)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ToggleMissionControlScene(bool isVisible)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">isVisible</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_UI_MissionControlMenuController_ToggleTrackMission_" data-uid="KSP.UI.MissionControlMenuController.ToggleTrackMission*"></a>
+  <h4 id="KSP_UI_MissionControlMenuController_ToggleTrackMission_KSP_Game_Missions_MissionUIElement_" data-uid="KSP.UI.MissionControlMenuController.ToggleTrackMission(KSP.Game.Missions.MissionUIElement)">ToggleTrackMission(MissionUIElement)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ToggleTrackMission(MissionUIElement missionUIElement)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Game.Missions.MissionUIElement.html">MissionUIElement</a></td>
+        <td><span class="parametername">missionUIElement</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_UI_MissionControlMenuController_UpdateUIAction_" data-uid="KSP.UI.MissionControlMenuController.UpdateUIAction*"></a>
+  <h4 id="KSP_UI_MissionControlMenuController_UpdateUIAction" data-uid="KSP.UI.MissionControlMenuController.UpdateUIAction">UpdateUIAction()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UpdateUIAction()</code></pre>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetField__2___0_System_String_">Util.GetField&lt;T, R&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetField__2___0_System_String___1_">Util.SetField&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromProperties_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromProperties(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetFieldValue__1_System_Object_System_String_">Util.GetFieldValue&lt;T&gt;(object, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.GameObjectExtension.html#GlobalAssemblyCSharp_GameObjectExtension_GetComponentCached__1_UnityEngine_Component___0__">GameObjectExtension.GetComponentCached&lt;T&gt;(Component, ref T)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.GameObjectExtension.html#GlobalAssemblyCSharp_GameObjectExtension_GetComponentInParent__1_UnityEngine_Component_System_Boolean_">GameObjectExtension.GetComponentInParent&lt;T&gt;(Component, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.ComponentExtensions.html#KSP_ComponentExtensions_CopyFrom__1_UnityEngine_Component___0_">ComponentExtensions.CopyFrom&lt;T&gt;(Component, T)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.OAB.DataContextMonoBehaviorExtensionDooblyDo.html#KSP_OAB_DataContextMonoBehaviorExtensionDooblyDo_FindDataContextProviderInHierarchy_UnityEngine_MonoBehaviour_">DataContextMonoBehaviorExtensionDooblyDo.FindDataContextProviderInHierarchy(MonoBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.GameObjectExtension.html#GlobalAssemblyCSharp_GameObjectExtension_SetDebugName_UnityEngine_Object_System_String_">GameObjectExtension.SetDebugName(Object, string)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from prerelease
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

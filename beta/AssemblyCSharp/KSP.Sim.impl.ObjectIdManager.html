@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class ObjectIdManager | KSP2Redux API (Beta) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class ObjectIdManager | KSP2Redux API (Beta) ">
+    
+    <meta name="description" content="Manages per-player collections of object IDs, supporting allocation, generation, and reclamation of unique object identifiers.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="KSP.Sim.impl.ObjectIdManager">
+
+
+
+  <h1 id="KSP_Sim_impl_ObjectIdManager" data-uid="KSP.Sim.impl.ObjectIdManager" class="text-break">Class ObjectIdManager</h1>
+  <div class="markdown level0 summary"><p>Manages per-player collections of object IDs, supporting allocation, generation, and reclamation of unique object identifiers.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><span class="xref">ObjectIdManager</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Sim.html">Sim</a>.<a class="xref" href="KSP.Sim.impl.html">impl</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="KSP_Sim_impl_ObjectIdManager_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class ObjectIdManager</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+
+
+  <a id="KSP_Sim_impl_ObjectIdManager__ctor_" data-uid="KSP.Sim.impl.ObjectIdManager.#ctor*"></a>
+  <h4 id="KSP_Sim_impl_ObjectIdManager__ctor_System_Int32_System_Int32_System_Int32_System_Int32_System_Int32_" data-uid="KSP.Sim.impl.ObjectIdManager.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">ObjectIdManager(int, int, int, int, int)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ObjectIdManager(int globalArraySizeInitial, int globalArraySizeGrow, int playerArraySizeInitial, int playerArraySizeGrow, int maxPlayers)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">globalArraySizeInitial</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">globalArraySizeGrow</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">playerArraySizeInitial</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">playerArraySizeGrow</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">maxPlayers</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+</h3>
+
+
+  <h4 id="KSP_Sim_impl_ObjectIdManager_DEFAULT_GLOBAL_ARRAY_SIZE_GROW" data-uid="KSP.Sim.impl.ObjectIdManager.DEFAULT_GLOBAL_ARRAY_SIZE_GROW">DEFAULT_GLOBAL_ARRAY_SIZE_GROW</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int DEFAULT_GLOBAL_ARRAY_SIZE_GROW = 128</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Sim_impl_ObjectIdManager_DEFAULT_GLOBAL_ARRAY_SIZE_INITIAL" data-uid="KSP.Sim.impl.ObjectIdManager.DEFAULT_GLOBAL_ARRAY_SIZE_INITIAL">DEFAULT_GLOBAL_ARRAY_SIZE_INITIAL</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int DEFAULT_GLOBAL_ARRAY_SIZE_INITIAL = 256</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Sim_impl_ObjectIdManager_DEFAULT_MAX_PLAYERS" data-uid="KSP.Sim.impl.ObjectIdManager.DEFAULT_MAX_PLAYERS">DEFAULT_MAX_PLAYERS</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int DEFAULT_MAX_PLAYERS = 0</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Sim_impl_ObjectIdManager_DEFAULT_PLAYER_ARRAY_SIZE_GROW" data-uid="KSP.Sim.impl.ObjectIdManager.DEFAULT_PLAYER_ARRAY_SIZE_GROW">DEFAULT_PLAYER_ARRAY_SIZE_GROW</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int DEFAULT_PLAYER_ARRAY_SIZE_GROW = 64</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Sim_impl_ObjectIdManager_DEFAULT_PLAYER_ARRAY_SIZE_INITIAL" data-uid="KSP.Sim.impl.ObjectIdManager.DEFAULT_PLAYER_ARRAY_SIZE_INITIAL">DEFAULT_PLAYER_ARRAY_SIZE_INITIAL</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int DEFAULT_PLAYER_ARRAY_SIZE_INITIAL = 64</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="KSP_Sim_impl_ObjectIdManager_GlobalArraySizeGrow_" data-uid="KSP.Sim.impl.ObjectIdManager.GlobalArraySizeGrow*"></a>
+  <h4 id="KSP_Sim_impl_ObjectIdManager_GlobalArraySizeGrow" data-uid="KSP.Sim.impl.ObjectIdManager.GlobalArraySizeGrow">GlobalArraySizeGrow</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int GlobalArraySizeGrow { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_ObjectIdManager_GlobalArraySizeInitial_" data-uid="KSP.Sim.impl.ObjectIdManager.GlobalArraySizeInitial*"></a>
+  <h4 id="KSP_Sim_impl_ObjectIdManager_GlobalArraySizeInitial" data-uid="KSP.Sim.impl.ObjectIdManager.GlobalArraySizeInitial">GlobalArraySizeInitial</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int GlobalArraySizeInitial { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_ObjectIdManager_PlayerArraySizeGrow_" data-uid="KSP.Sim.impl.ObjectIdManager.PlayerArraySizeGrow*"></a>
+  <h4 id="KSP_Sim_impl_ObjectIdManager_PlayerArraySizeGrow" data-uid="KSP.Sim.impl.ObjectIdManager.PlayerArraySizeGrow">PlayerArraySizeGrow</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int PlayerArraySizeGrow { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_ObjectIdManager_PlayerArraySizeInitial_" data-uid="KSP.Sim.impl.ObjectIdManager.PlayerArraySizeInitial*"></a>
+  <h4 id="KSP_Sim_impl_ObjectIdManager_PlayerArraySizeInitial" data-uid="KSP.Sim.impl.ObjectIdManager.PlayerArraySizeInitial">PlayerArraySizeInitial</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int PlayerArraySizeInitial { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="KSP_Sim_impl_ObjectIdManager_Finalize_" data-uid="KSP.Sim.impl.ObjectIdManager.Finalize*"></a>
+  <h4 id="KSP_Sim_impl_ObjectIdManager_Finalize" data-uid="KSP.Sim.impl.ObjectIdManager.Finalize">~ObjectIdManager()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected ~ObjectIdManager()</code></pre>
+  </div>
+
+
+  <a id="KSP_Sim_impl_ObjectIdManager_FindObjectIdCollectionByPlayerId_" data-uid="KSP.Sim.impl.ObjectIdManager.FindObjectIdCollectionByPlayerId*"></a>
+  <h4 id="KSP_Sim_impl_ObjectIdManager_FindObjectIdCollectionByPlayerId_System_Byte_" data-uid="KSP.Sim.impl.ObjectIdManager.FindObjectIdCollectionByPlayerId(System.Byte)">FindObjectIdCollectionByPlayerId(byte)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ObjectIdCollection FindObjectIdCollectionByPlayerId(byte playerId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">byte</span></td>
+        <td><span class="parametername">playerId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.ObjectIdCollection.html">ObjectIdCollection</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_ObjectIdManager_FindObjectIdEntryByObjectId_" data-uid="KSP.Sim.impl.ObjectIdManager.FindObjectIdEntryByObjectId*"></a>
+  <h4 id="KSP_Sim_impl_ObjectIdManager_FindObjectIdEntryByObjectId_System_UInt64_" data-uid="KSP.Sim.impl.ObjectIdManager.FindObjectIdEntryByObjectId(System.UInt64)">FindObjectIdEntryByObjectId(ulong)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ObjectIdEntry FindObjectIdEntryByObjectId(ulong objectId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ulong</span></td>
+        <td><span class="parametername">objectId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.ObjectIdEntry.html">ObjectIdEntry</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_ObjectIdManager_GenerateNewObjectId_" data-uid="KSP.Sim.impl.ObjectIdManager.GenerateNewObjectId*"></a>
+  <h4 id="KSP_Sim_impl_ObjectIdManager_GenerateNewObjectId_System_Byte_" data-uid="KSP.Sim.impl.ObjectIdManager.GenerateNewObjectId(System.Byte)">GenerateNewObjectId(byte)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ulong GenerateNewObjectId(byte playerId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">byte</span></td>
+        <td><span class="parametername">playerId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ulong</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_ObjectIdManager_Init_" data-uid="KSP.Sim.impl.ObjectIdManager.Init*"></a>
+  <h4 id="KSP_Sim_impl_ObjectIdManager_Init_System_Int32_System_Int32_System_Int32_System_Int32_System_Int32_" data-uid="KSP.Sim.impl.ObjectIdManager.Init(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">Init(int, int, int, int, int)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Init(int globalArraySizeInitial, int globalArraySizeGrow, int playerArraySizeInitial, int playerArraySizeGrow, int maxPlayers)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">globalArraySizeInitial</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">globalArraySizeGrow</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">playerArraySizeInitial</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">playerArraySizeGrow</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">maxPlayers</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_ObjectIdManager_MarkAsAllocated_" data-uid="KSP.Sim.impl.ObjectIdManager.MarkAsAllocated*"></a>
+  <h4 id="KSP_Sim_impl_ObjectIdManager_MarkAsAllocated_System_UInt64_" data-uid="KSP.Sim.impl.ObjectIdManager.MarkAsAllocated(System.UInt64)">MarkAsAllocated(ulong)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MarkAsAllocated(ulong objectId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ulong</span></td>
+        <td><span class="parametername">objectId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_ObjectIdManager_MarkAsAllocated_" data-uid="KSP.Sim.impl.ObjectIdManager.MarkAsAllocated*"></a>
+  <h4 id="KSP_Sim_impl_ObjectIdManager_MarkAsAllocated_System_UInt64_System_Boolean_" data-uid="KSP.Sim.impl.ObjectIdManager.MarkAsAllocated(System.UInt64,System.Boolean)">MarkAsAllocated(ulong, bool)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MarkAsAllocated(ulong objectId, bool allocated)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ulong</span></td>
+        <td><span class="parametername">objectId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">allocated</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_ObjectIdManager_MarkAsUnallocated_" data-uid="KSP.Sim.impl.ObjectIdManager.MarkAsUnallocated*"></a>
+  <h4 id="KSP_Sim_impl_ObjectIdManager_MarkAsUnallocated_System_UInt64_" data-uid="KSP.Sim.impl.ObjectIdManager.MarkAsUnallocated(System.UInt64)">MarkAsUnallocated(ulong)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MarkAsUnallocated(ulong objectId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ulong</span></td>
+        <td><span class="parametername">objectId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_ObjectIdManager_ReturnObjectId_" data-uid="KSP.Sim.impl.ObjectIdManager.ReturnObjectId*"></a>
+  <h4 id="KSP_Sim_impl_ObjectIdManager_ReturnObjectId_System_UInt64_" data-uid="KSP.Sim.impl.ObjectIdManager.ReturnObjectId(System.UInt64)">ReturnObjectId(ulong)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ReturnObjectId(ulong objectId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ulong</span></td>
+        <td><span class="parametername">objectId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_ObjectIdManager_SetGlobalArraySizeGrow_" data-uid="KSP.Sim.impl.ObjectIdManager.SetGlobalArraySizeGrow*"></a>
+  <h4 id="KSP_Sim_impl_ObjectIdManager_SetGlobalArraySizeGrow_System_Int32_" data-uid="KSP.Sim.impl.ObjectIdManager.SetGlobalArraySizeGrow(System.Int32)">SetGlobalArraySizeGrow(int)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetGlobalArraySizeGrow(int globalArraySizeGrow)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">globalArraySizeGrow</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_ObjectIdManager_SetGlobalArraySizeInitial_" data-uid="KSP.Sim.impl.ObjectIdManager.SetGlobalArraySizeInitial*"></a>
+  <h4 id="KSP_Sim_impl_ObjectIdManager_SetGlobalArraySizeInitial_System_Int32_" data-uid="KSP.Sim.impl.ObjectIdManager.SetGlobalArraySizeInitial(System.Int32)">SetGlobalArraySizeInitial(int)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetGlobalArraySizeInitial(int globalArraySizeInitial)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">globalArraySizeInitial</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_ObjectIdManager_SetPlayerArraySizeGrow_" data-uid="KSP.Sim.impl.ObjectIdManager.SetPlayerArraySizeGrow*"></a>
+  <h4 id="KSP_Sim_impl_ObjectIdManager_SetPlayerArraySizeGrow_System_Int32_" data-uid="KSP.Sim.impl.ObjectIdManager.SetPlayerArraySizeGrow(System.Int32)">SetPlayerArraySizeGrow(int)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetPlayerArraySizeGrow(int playerArraySizeGrow)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">playerArraySizeGrow</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_ObjectIdManager_SetPlayerArraySizeInitial_" data-uid="KSP.Sim.impl.ObjectIdManager.SetPlayerArraySizeInitial*"></a>
+  <h4 id="KSP_Sim_impl_ObjectIdManager_SetPlayerArraySizeInitial_System_Int32_" data-uid="KSP.Sim.impl.ObjectIdManager.SetPlayerArraySizeInitial(System.Int32)">SetPlayerArraySizeInitial(int)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetPlayerArraySizeInitial(int playerArraySizeInitial)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">playerArraySizeInitial</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_ObjectIdManager_SetupCollection_" data-uid="KSP.Sim.impl.ObjectIdManager.SetupCollection*"></a>
+  <h4 id="KSP_Sim_impl_ObjectIdManager_SetupCollection_System_Int32_" data-uid="KSP.Sim.impl.ObjectIdManager.SetupCollection(System.Int32)">SetupCollection(int)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetupCollection(int maxPlayers)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">maxPlayers</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_ObjectIdManager_TeardownCollection_" data-uid="KSP.Sim.impl.ObjectIdManager.TeardownCollection*"></a>
+  <h4 id="KSP_Sim_impl_ObjectIdManager_TeardownCollection" data-uid="KSP.Sim.impl.ObjectIdManager.TeardownCollection">TeardownCollection()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void TeardownCollection()</code></pre>
+  </div>
+
+
+  <a id="KSP_Sim_impl_ObjectIdManager_Uninit_" data-uid="KSP.Sim.impl.ObjectIdManager.Uninit*"></a>
+  <h4 id="KSP_Sim_impl_ObjectIdManager_Uninit" data-uid="KSP.Sim.impl.ObjectIdManager.Uninit">Uninit()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Uninit()</code></pre>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetField__2___0_System_String_">Util.GetField&lt;T, R&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetField__2___0_System_String___1_">Util.SetField&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromProperties_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromProperties(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetFieldValue__1_System_Object_System_String_">Util.GetFieldValue&lt;T&gt;(object, string)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from prerelease
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
