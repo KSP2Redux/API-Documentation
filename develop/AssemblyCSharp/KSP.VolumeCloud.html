@@ -86,9 +86,11 @@
 Classes
 </h3>
       <h4><a class="xref" href="KSP.VolumeCloud.BaseNoiseGenerator.html">BaseNoiseGenerator</a></h4>
-      <section></section>
+      <section><p>A base class for noise generators implementing the <a class="xref" href="KSP.VolumeCloud.INoiseGenerator.html">INoiseGenerator</a> contract.</p>
+</section>
       <h4><a class="xref" href="KSP.VolumeCloud.BasicShape3dGenerator.html">BasicShape3dGenerator</a></h4>
-      <section></section>
+      <section><p>Generates a basic 3D cloud shape noise texture by sampling Perlin and Worley noise across four color channels.</p>
+</section>
       <h4><a class="xref" href="KSP.VolumeCloud.CloudLightManager.html">CloudLightManager</a></h4>
       <section><p>Singleton manager that tracks lights and their shadow maps for the volumetric cloud rendering system.</p>
 </section>
@@ -108,9 +110,11 @@ Classes
       <section><p>Singleton registry that manages the active list of <a class="xref" href="KSP.VolumeCloud.CloudRenderHelper.html">CloudRenderHelper</a> instances and synchronizes <a class="xref" href="KSP.VolumeCloud.VolumeCloudConfiguration.html">VolumeCloudConfiguration</a> settings to the scaled cloud rendering layer.</p>
 </section>
       <h4><a class="xref" href="KSP.VolumeCloud.CurlNoiseGenerator.html">CurlNoiseGenerator</a></h4>
-      <section></section>
+      <section><p>Generates curl noise texture samples by computing the curl of a 2D Perlin noise field via a <a class="xref" href="KSP.VolumeCloud.PerlinNoiseGenerator.html">PerlinNoiseGenerator</a>.</p>
+</section>
       <h4><a class="xref" href="KSP.VolumeCloud.CustomTexGenerator.html">CustomTexGenerator</a></h4>
-      <section></section>
+      <section><p>Serializable <a class="xref" href="KSP.VolumeCloud.INoiseGenerator.html">INoiseGenerator</a> implementation that blends Worley and Perlin octave noise at configurable weights and periods.</p>
+</section>
       <h4><a class="xref" href="KSP.VolumeCloud.FrameIndexSequences.html">FrameIndexSequences</a></h4>
       <section><p>Tracks the temporal upscaling and spatio-temporal blue noise frame index sequences used in volume cloud rendering.</p>
 </section>
@@ -118,16 +122,20 @@ Classes
       <section><p>Manages a <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/SparseTexture.html">SparseTexture</a> by dividing a source texture into tiles and loading or unloading individual tiles on demand based on a per-tile visibility check.</p>
 </section>
       <h4><a class="xref" href="KSP.VolumeCloud.NoiseTextureAdapter.html">NoiseTextureAdapter</a></h4>
-      <section></section>
+      <section><p>Adapter that wraps an <a class="xref" href="KSP.VolumeCloud.INoiseGenerator.html">INoiseGenerator</a> to satisfy the <a class="xref" href="KSP.VolumeCloud.ITextureGenerator.html">ITextureGenerator</a> interface, mapping noise samples to texture colors.</p>
+</section>
       <h4><a class="xref" href="KSP.VolumeCloud.PerlinNoiseGenerator.html">PerlinNoiseGenerator</a></h4>
-      <section></section>
+      <section><p>Perlin noise implementation of <a class="xref" href="KSP.VolumeCloud.BaseNoiseGenerator.html">BaseNoiseGenerator</a> with configurable octave count for fractal noise output.</p>
+</section>
       <h4><a class="xref" href="KSP.VolumeCloud.Texture3dGenerator.html">Texture3dGenerator</a></h4>
-      <section></section>
+      <section><p>Generates multi-channel Worley noise texture data for volumetric cloud rendering, implementing <a class="xref" href="KSP.VolumeCloud.ITextureGenerator.html">ITextureGenerator</a> and <a class="xref" href="KSP.VolumeCloud.ITextureFastGenerator.html">ITextureFastGenerator</a>.</p>
+</section>
       <h4><a class="xref" href="KSP.VolumeCloud.Utils.html">Utils</a></h4>
       <section><p>Utility methods for generating 3D and 2D textures from volume cloud texture generators.</p>
 </section>
       <h4><a class="xref" href="KSP.VolumeCloud.VolumeCloudBakeCubemap.html">VolumeCloudBakeCubemap</a></h4>
-      <section></section>
+      <section><p>Camera image effect that bakes volumetric clouds to a cubemap.</p>
+</section>
       <h4><a class="xref" href="KSP.VolumeCloud.VolumeCloudConfiguration.html">VolumeCloudConfiguration</a></h4>
       <section><p>Represents a ScriptableObject asset that defines the volumetric cloud rendering configuration for a celestial body.</p>
 </section>
@@ -153,12 +161,14 @@ Classes
       <section><p>Cloud layer data for a cumulus cloud formation, extending <a class="xref" href="KSP.VolumeCloud.VolumeCloudConfiguration.CloudsData.html">VolumeCloudConfiguration.CloudsData</a> with distribution maps, density, and detail texture settings.</p>
 </section>
       <h4><a class="xref" href="KSP.VolumeCloud.VolumeCloudRenderer.html">VolumeCloudRenderer</a></h4>
-      <section></section>
+      <section><p>Camera image-effect component that renders volumetric clouds via raymarching.</p>
+</section>
       <h4><a class="xref" href="KSP.VolumeCloud.VolumeCloudWindowConfigurations.html">VolumeCloudWindowConfigurations</a></h4>
       <section><p>Configuration asset for the volume cloud editor window, holding generator references and texture save names.</p>
 </section>
       <h4><a class="xref" href="KSP.VolumeCloud.WorleyNoiseGenerator.html">WorleyNoiseGenerator</a></h4>
-      <section></section>
+      <section><p>Noise generator that produces Worley (cellular) noise with configurable octaves, brightness, and contrast.</p>
+</section>
     <h3 id="structs">
 Structs
 </h3>
@@ -172,16 +182,20 @@ Structs
 Interfaces
 </h3>
       <h4><a class="xref" href="KSP.VolumeCloud.INoiseGenerator.html">INoiseGenerator</a></h4>
-      <section></section>
+      <section><p>Interface for generating noise values at a given 3D position.</p>
+</section>
       <h4><a class="xref" href="KSP.VolumeCloud.ITextureFastGenerator.html">ITextureFastGenerator</a></h4>
-      <section></section>
+      <section><p>Interface for fast texture generation, providing a method to sample all color values for 2D or 3D textures.</p>
+</section>
       <h4><a class="xref" href="KSP.VolumeCloud.ITextureGenerator.html">ITextureGenerator</a></h4>
-      <section></section>
+      <section><p>Interface for sampling texture color values at a given 3D position.</p>
+</section>
     <h3 id="enums">
 Enums
 </h3>
       <h4><a class="xref" href="KSP.VolumeCloud.CameraPositionOnCumulus.html">CameraPositionOnCumulus</a></h4>
-      <section></section>
+      <section><p>The camera's vertical position relative to a cumulus cloud layer.</p>
+</section>
       <h4><a class="xref" href="KSP.VolumeCloud.CloudRenderHelper.QualitySelection.html">CloudRenderHelper.QualitySelection</a></h4>
       <section><p>Quality level options for volumetric cloud rendering.</p>
 </section>
