@@ -451,7 +451,8 @@
 
   <a id="KSP_Modules_Module_SolarPanel_CalculateTrackingLOS_" data-uid="KSP.Modules.Module_SolarPanel.CalculateTrackingLOS*"></a>
   <h4 id="KSP_Modules_Module_SolarPanel_CalculateTrackingLOS_UnityEngine_Vector3_System_String__" data-uid="KSP.Modules.Module_SolarPanel.CalculateTrackingLOS(UnityEngine.Vector3,System.String@)">CalculateTrackingLOS(Vector3, ref string)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Evaluates line-of-sight (LOS) between the solar panel and its tracking target.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -470,12 +471,14 @@
       <tr>
         <td><span class="xref">Vector3</span></td>
         <td><span class="parametername">trackingDirection</span></td>
-        <td></td>
+        <td><p>The normalized vector toward the light source.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">blocker</span></td>
-        <td></td>
+        <td><p>Output string identifying the obstructing object (Body, Terrain, or Part).</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -490,12 +493,22 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the panel is receiving light; false if obstructed.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="KSP.Modules.Module_Deployable.html#KSP_Modules_Module_Deployable_CalculateTrackingLOS_UnityEngine_Vector3_System_String__">Module_Deployable.CalculateTrackingLOS(Vector3, ref string)</a></div>
+  <h5 id="KSP_Modules_Module_SolarPanel_CalculateTrackingLOS_UnityEngine_Vector3_System_String___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Logic flow:</p>
+<ol>
+<li>Checks for simulated orbital occlusion (SimBlockingBody).</li>
+<li>Validates panel orientation relative to the light source (Incidence Angle).</li>
+<li>Performs a physical Raycast to detect terrain (PQSRenderer) or vessel self-shadowing (PartBehavior).</li>
+<li>Updates localization strings for the UI display.</li>
+</ol>
+</div>
 
 
   <a id="KSP_Modules_Module_SolarPanel_GetModuleDisplayName_" data-uid="KSP.Modules.Module_SolarPanel.GetModuleDisplayName*"></a>
