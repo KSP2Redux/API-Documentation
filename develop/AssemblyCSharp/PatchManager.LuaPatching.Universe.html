@@ -228,6 +228,31 @@ through <code>PM</code>; once loading is done, <a class="xref" href="PatchManage
   </table>
 
 
+  <h4 id="PatchManager_LuaPatching_Universe_AllPatchesBuckets" data-uid="PatchManager.LuaPatching.Universe.AllPatchesBuckets">AllPatchesBuckets</h4>
+  <div class="markdown level1 summary"><p>All buckets for each patch type</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, Universe.LabelPatchBuckets&gt; AllPatchesBuckets</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Dictionary</span>&lt;<span class="xref">string</span>, <a class="xref" href="PatchManager.LuaPatching.Universe.html">Universe</a>.<a class="xref" href="PatchManager.LuaPatching.Universe.LabelPatchBuckets.html">LabelPatchBuckets</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <h4 id="PatchManager_LuaPatching_Universe_AllStages" data-uid="PatchManager.LuaPatching.Universe.AllStages">AllStages</h4>
   <div class="markdown level1 summary"><p>Every known stage keyed by name, including the implicit per-mod and per-mod-post stages set up at construction.</p>
 </div>
@@ -704,6 +729,57 @@ chain stages declared by the same mod.</p>
   </table>
 
 
+  <a id="PatchManager_LuaPatching_Universe_HasAnyPatchFor_" data-uid="PatchManager.LuaPatching.Universe.HasAnyPatchFor*"></a>
+  <h4 id="PatchManager_LuaPatching_Universe_HasAnyPatchFor_System_String_System_String_" data-uid="PatchManager.LuaPatching.Universe.HasAnyPatchFor(System.String,System.String)">HasAnyPatchFor(string, string)</h4>
+  <div class="markdown level1 summary"><p>Check if there are any patches that match the given label/name combo</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HasAnyPatchFor(string label, string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">label</span></td>
+        <td><p>The label</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The name</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>true if any patches match</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="PatchManager_LuaPatching_Universe_LoadPatchAsset_" data-uid="PatchManager.LuaPatching.Universe.LoadPatchAsset*"></a>
   <h4 id="PatchManager_LuaPatching_Universe_LoadPatchAsset_UnityEngine_TextAsset_System_String_" data-uid="PatchManager.LuaPatching.Universe.LoadPatchAsset(UnityEngine.TextAsset,System.String)">LoadPatchAsset(TextAsset, string)</h4>
   <div class="markdown level1 summary"><p>Loads and runs a single Lua patch from a <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/TextAsset.html">TextAsset</a>.</p>
@@ -808,58 +884,6 @@ All scripts share a single <span class="xref">MoonSharp.Interpreter.Script</span
         <td><span class="xref">DirectoryInfo</span></td>
         <td><span class="parametername">directoryInfo</span></td>
         <td><p>The directory the patch was discovered in; exposed to the script as the <code>Location</code> global.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="PatchManager_LuaPatching_Universe_MatchesPattern_" data-uid="PatchManager.LuaPatching.Universe.MatchesPattern*"></a>
-  <h4 id="PatchManager_LuaPatching_Universe_MatchesPattern_System_String_System_String_" data-uid="PatchManager.LuaPatching.Universe.MatchesPattern(System.String,System.String)">MatchesPattern(string, string)</h4>
-  <div class="markdown level1 summary"><p>Returns whether <code class="paramref">name</code> matches the given pattern, where <code>*</code> matches any run of
-characters and <code>?</code> matches an optional character.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static bool MatchesPattern(string name, string pattern)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">string</span></td>
-        <td><span class="parametername">name</span></td>
-        <td><p>The candidate asset name.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">string</span></td>
-        <td><span class="parametername">pattern</span></td>
-        <td><p>The wildcard pattern.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">bool</span></td>
-        <td><p>True if <code class="paramref">name</code> matches <code class="paramref">pattern</code>, false otherwise.</p>
 </td>
       </tr>
     </tbody>
