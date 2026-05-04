@@ -74329,7 +74329,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "PatchManager.Core.Cache.Json.Inventory",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Core.Cache.Json.Inventory.yml\" sourcestartlinenumber=\"1\">Serves as a catalog of all patched labels and their respective archives.</p>\n"
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Core.Cache.Json.Inventory.yml\" sourcestartlinenumber=\"1\">Catalog of all patched labels and their respective archives, persisted to disk between runs.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -74487,6 +74487,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Generic.GenericLuaModule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.Generic.GenericLuaModule.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.Generic.GenericLuaModule",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Generic.GenericLuaModule.yml\" sourcestartlinenumber=\"1\">Lua submodule exposed as <code>PM.JSON</code>, providing label-untyped patch and asset-creation helpers backed by\nthe generic <code>JSON</code> converter.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "AssemblyCSharp/PatchManager.Generic.GenericModule.yml",
       "output": {
         ".html": {
@@ -74497,35 +74511,21 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "PatchManager.Generic.GenericModule",
-      "Summary": null
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Generic.GenericModule.yml\" sourcestartlinenumber=\"1\">IModule registration for the generic JSON patching domain.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Generic.SassyPatching.Rulesets.JsonRuleset.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Generic.JsonConverter.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Generic.SassyPatching.Rulesets.JsonRuleset.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Generic.JsonConverter.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Generic.SassyPatching.Rulesets.JsonRuleset",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Generic.SassyPatching.Rulesets.JsonRuleset.yml\" sourcestartlinenumber=\"1\">This is a generic json patching ruleset</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Generic.SassyPatching.Rulesets.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Generic.SassyPatching.Rulesets.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Generic.SassyPatching.Rulesets",
-      "Summary": null
+      "Title": "PatchManager.Generic.JsonConverter",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Generic.JsonConverter.yml\" sourcestartlinenumber=\"1\">Generic <xref href=\"PatchManager.LuaPatching.IConverter\" data-throw-if-not-resolved=\"false\"></xref> registered as <code>&quot;JSON&quot;</code>; wraps any JSON token in a plain\n<xref href=\"PatchManager.LuaPatching.JsonUserData\" data-throw-if-not-resolved=\"false\"></xref> for Lua scripts to manipulate.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -74543,31 +74543,353 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Missions.Builtins.MissionsBuiltins.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Attributes.ConverterAttribute.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Missions.Builtins.MissionsBuiltins.html"
+          "relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Attributes.ConverterAttribute.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Missions.Builtins.MissionsBuiltins",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Missions.Builtins.MissionsBuiltins.yml\" sourcestartlinenumber=\"1\">Builtins for missions.</p>\n"
+      "Title": "PatchManager.LuaPatching.Attributes.ConverterAttribute",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.LuaPatching.Attributes.ConverterAttribute.yml\" sourcestartlinenumber=\"1\">Marks an <xref href=\"PatchManager.LuaPatching.IConverter\" data-throw-if-not-resolved=\"false\"></xref> implementation as discoverable by name.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Missions.Builtins.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Attributes.PatchManagerModuleAttribute.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Missions.Builtins.html"
+          "relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Attributes.PatchManagerModuleAttribute.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Missions.Builtins",
+      "Title": "PatchManager.LuaPatching.Attributes.PatchManagerModuleAttribute",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.LuaPatching.Attributes.PatchManagerModuleAttribute.yml\" sourcestartlinenumber=\"1\">Marks a class as a PatchManager submodule that Lua scripts access via <code>PM.&lt;SubmoduleName&gt;</code>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Attributes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Attributes.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.LuaPatching.Attributes",
       "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Builtin.JsonModule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Builtin.JsonModule.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.LuaPatching.Builtin.JsonModule",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.LuaPatching.Builtin.JsonModule.yml\" sourcestartlinenumber=\"1\">Lua module exposed under the global <code>J</code> namespace, providing helpers for constructing JSON literals\nthat MoonSharp's auto-conversion does not produce.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Builtin.PatchManagerCore.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Builtin.PatchManagerCore.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.LuaPatching.Builtin.PatchManagerCore",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.LuaPatching.Builtin.PatchManagerCore.yml\" sourcestartlinenumber=\"1\">The PatchManager Lua library, exposed to scripts as the global <code>PM</code>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Builtin.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Builtin.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.LuaPatching.Builtin",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.LuaPatching.IConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.LuaPatching.IConverter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.LuaPatching.IConverter",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.LuaPatching.IConverter.yml\" sourcestartlinenumber=\"1\">Bidirectional converter between a JSON token and the Lua-facing <xref href=\"MoonSharp.Interpreter.DynValue\" data-throw-if-not-resolved=\"false\"></xref> exposed to patch scripts.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.LuaPatching.JsonUserData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.LuaPatching.JsonUserData.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.LuaPatching.JsonUserData",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.LuaPatching.JsonUserData.yml\" sourcestartlinenumber=\"1\">Lua-facing wrapper exposing a Newtonsoft <xref href=\"Newtonsoft.Json.Linq.JToken\" data-throw-if-not-resolved=\"false\"></xref> as a table-like UserData.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.LuaPatching.LuaAsset.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.LuaPatching.LuaAsset.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.LuaPatching.LuaAsset",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.LuaPatching.LuaAsset.yml\" sourcestartlinenumber=\"1\">A new asset queued for creation by a Lua patch script.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.LuaPatching.LuaPatch.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.LuaPatching.LuaPatch.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.LuaPatching.LuaPatch",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.LuaPatching.LuaPatch.yml\" sourcestartlinenumber=\"1\">A registered patch operation: which converter, which addressables target, what callback to run, and at which stage.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.LuaPatching.LuaPatchingModule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.LuaPatching.LuaPatchingModule.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.LuaPatching.LuaPatchingModule",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.LuaPatching.LuaPatchingModule.yml\" sourcestartlinenumber=\"1\">IModule that performs the late assembly scan for the Lua patching universe, registering Lua-exposed types,\nPatchManager submodules, and converters with MoonSharp once all mod assemblies are loaded.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.LuaPatching.PatchManagerScriptLoader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.LuaPatching.PatchManagerScriptLoader.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.LuaPatching.PatchManagerScriptLoader",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.LuaPatching.PatchManagerScriptLoader.yml\" sourcestartlinenumber=\"1\">MoonSharp <xref href=\"MoonSharp.Interpreter.Loaders.IScriptLoader\" data-throw-if-not-resolved=\"false\"></xref> for PatchManager Lua scripts.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Stage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Stage.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.LuaPatching.Stage",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.LuaPatching.Stage.yml\" sourcestartlinenumber=\"1\">A patching stage with optional ordering constraints relative to other stages.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Universe.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Universe.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.LuaPatching.Universe",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.LuaPatching.Universe.yml\" sourcestartlinenumber=\"1\">The central orchestrator for Lua-based patching: loads patch scripts, registers patches and new assets,\nsorts stages topologically, and runs the resulting pipeline against each patched asset.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Utility.DelegateRegistry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Utility.DelegateRegistry.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.LuaPatching.Utility.DelegateRegistry",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.LuaPatching.Utility.DelegateRegistry.yml\" sourcestartlinenumber=\"1\">Registers MoonSharp Lua-to-CLR converters for delegate types so Lua functions can be passed directly to\nCLR APIs that take strongly-typed delegates (<xref href=\"System.Action\" data-throw-if-not-resolved=\"false\"></xref>, <xref href=\"System.Func%601\" data-throw-if-not-resolved=\"false\"></xref>, custom\ndelegate types) of any arity.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Utility.ExtensibleJsonUserData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Utility.ExtensibleJsonUserData.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.LuaPatching.Utility.ExtensibleJsonUserData",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.LuaPatching.Utility.ExtensibleJsonUserData.yml\" sourcestartlinenumber=\"1\">JSON-object UserData base class that lets subclasses override or add string-keyed properties.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Utility.FallbackRegistrationPolicy.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Utility.FallbackRegistrationPolicy.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.LuaPatching.Utility.FallbackRegistrationPolicy",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.LuaPatching.Utility.FallbackRegistrationPolicy.yml\" sourcestartlinenumber=\"1\">MoonSharp <xref href=\"MoonSharp.Interpreter.Interop.RegistrationPolicies.IRegistrationPolicy\" data-throw-if-not-resolved=\"false\"></xref> that wraps every UserData type with a string indexer in an\n<xref href=\"PatchManager.LuaPatching.Utility.IndexerFallbackDescriptor\" data-throw-if-not-resolved=\"false\"></xref> and disallows automatic type registration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Utility.IndexedListUserData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Utility.IndexedListUserData.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.LuaPatching.Utility.IndexedListUserData",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.LuaPatching.Utility.IndexedListUserData.yml\" sourcestartlinenumber=\"1\">JSON-array UserData base class that exposes the array as a name-indexed lookup table.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Utility.IndexerFallbackDescriptor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Utility.IndexerFallbackDescriptor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.LuaPatching.Utility.IndexerFallbackDescriptor",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.LuaPatching.Utility.IndexerFallbackDescriptor.yml\" sourcestartlinenumber=\"1\">Wraps an <xref href=\"MoonSharp.Interpreter.Interop.IUserDataDescriptor\" data-throw-if-not-resolved=\"false\"></xref> so that string-key lookups that miss the type's declared\nmembers fall through to the type's string indexer.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Utility.PatchCallbackExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Utility.PatchCallbackExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.LuaPatching.Utility.PatchCallbackExtensions",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.LuaPatching.Utility.PatchCallbackExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods that adapt typed user callbacks into the <xref href=\"System.Func%602\" data-throw-if-not-resolved=\"false\"></xref> signature\nthe patch pipeline expects, unwrapping the wrapped UserData on the way in.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Utility.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.LuaPatching.Utility.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.LuaPatching.Utility",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.LuaPatching.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.LuaPatching.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.LuaPatching",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Missions.Converters.MissionConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.Missions.Converters.MissionConverter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.Missions.Converters.MissionConverter",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Missions.Converters.MissionConverter.yml\" sourcestartlinenumber=\"1\"><xref href=\"PatchManager.LuaPatching.IConverter\" data-throw-if-not-resolved=\"false\"></xref> registered as <code>&quot;Mission&quot;</code>; wraps a mission definition in a <xref href=\"PatchManager.Missions.UserData.MissionUserData\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Missions.Converters.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.Missions.Converters.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.Missions.Converters",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Missions.MissionsLuaModule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.Missions.MissionsLuaModule.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.Missions.MissionsLuaModule",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Missions.MissionsLuaModule.yml\" sourcestartlinenumber=\"1\">Lua submodule exposed as <code>PM.Missions</code>, providing patches and creation helpers for missions, stages,\nconditions, and actions.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -74581,7 +74903,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "PatchManager.Missions.MissionsModule",
-      "Summary": null
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Missions.MissionsModule.yml\" sourcestartlinenumber=\"1\">IModule registration for the missions patching domain.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -74599,184 +74921,86 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Missions.Modifiables.MissionModifiable.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Missions.UserData.ContentBranchesUserData.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Missions.Modifiables.MissionModifiable.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Missions.UserData.ContentBranchesUserData.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Missions.Modifiables.MissionModifiable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Missions.Modifiables.MissionModifiable.yml\" sourcestartlinenumber=\"1\">Modifiable for <xref href=\"PatchManager.Missions.Selectables.MissionSelectable\" data-throw-if-not-resolved=\"false\"></xref>. This is used to modify the mission object.</p>\n"
+      "Title": "PatchManager.Missions.UserData.ContentBranchesUserData",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Missions.UserData.ContentBranchesUserData.yml\" sourcestartlinenumber=\"1\">Indexed-list wrapper for a mission's <code>ContentBranches</code> array, keyed by each branch's <code>ID</code>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Missions.Modifiables.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Missions.UserData.MissionRewardUserData.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Missions.Modifiables.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Missions.UserData.MissionRewardUserData.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Missions.Modifiables",
-      "Summary": null
+      "Title": "PatchManager.Missions.UserData.MissionRewardUserData",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Missions.UserData.MissionRewardUserData.yml\" sourcestartlinenumber=\"1\">Indexed-list wrapper for a stage's <code>MissionRewardDefinitions</code> array, keyed by each reward's <code>MissionRewardType</code>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Missions.Rulesets.MissionRuleset.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Missions.UserData.MissionUserData.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Missions.Rulesets.MissionRuleset.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Missions.UserData.MissionUserData.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Missions.Rulesets.MissionRuleset",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Missions.Rulesets.MissionRuleset.yml\" sourcestartlinenumber=\"1\">Ruleset for the missions patcher.</p>\n"
+      "Title": "PatchManager.Missions.UserData.MissionUserData",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Missions.UserData.MissionUserData.yml\" sourcestartlinenumber=\"1\">Mission definition wrapper exposing the <code>missionStages</code> array as a typed <xref href=\"PatchManager.Missions.UserData.StagesUserData\" data-throw-if-not-resolved=\"false\"></xref> and\nthe optional <code>ContentBranches</code> array as a typed <xref href=\"PatchManager.Missions.UserData.ContentBranchesUserData\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Missions.Rulesets.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Missions.UserData.StageUserData.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Missions.Rulesets.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Missions.UserData.StageUserData.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Missions.Rulesets",
-      "Summary": null
+      "Title": "PatchManager.Missions.UserData.StageUserData",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Missions.UserData.StageUserData.yml\" sourcestartlinenumber=\"1\">Mission stage wrapper exposing the optional <code>MissionReward</code> object as a typed <xref href=\"PatchManager.Missions.UserData.MissionRewardUserData\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Missions.Selectables.ActionsSelectable.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Missions.UserData.StagesUserData.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Missions.Selectables.ActionsSelectable.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Missions.UserData.StagesUserData.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Missions.Selectables.ActionsSelectable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Missions.Selectables.ActionsSelectable.yml\" sourcestartlinenumber=\"1\">Selectable for the actions array of a mission.</p>\n"
+      "Title": "PatchManager.Missions.UserData.StagesUserData",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Missions.UserData.StagesUserData.yml\" sourcestartlinenumber=\"1\">Indexed-list wrapper for a mission's <code>missionStages</code> array, keyed by each stage's <code>name</code>, wrapping\neach entry in a typed <xref href=\"PatchManager.Missions.UserData.StageUserData\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Missions.Selectables.ConditionSetSelectable.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Missions.UserData.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Missions.Selectables.ConditionSetSelectable.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Missions.UserData.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Missions.Selectables.ConditionSetSelectable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Missions.Selectables.ConditionSetSelectable.yml\" sourcestartlinenumber=\"1\">Selectable for the condition set of a mission.</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Missions.Selectables.ContentBranchSelectable.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Missions.Selectables.ContentBranchSelectable.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Missions.Selectables.ContentBranchSelectable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Missions.Selectables.ContentBranchSelectable.yml\" sourcestartlinenumber=\"1\">A selectable for a content branch.</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Missions.Selectables.ContentBranchesSelectable.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Missions.Selectables.ContentBranchesSelectable.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Missions.Selectables.ContentBranchesSelectable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Missions.Selectables.ContentBranchesSelectable.yml\" sourcestartlinenumber=\"1\">Selectable for the ContentBranches of a Mission</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Missions.Selectables.MissionRewardSelectable.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Missions.Selectables.MissionRewardSelectable.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Missions.Selectables.MissionRewardSelectable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Missions.Selectables.MissionRewardSelectable.yml\" sourcestartlinenumber=\"1\">A selectable for a mission reward.</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Missions.Selectables.MissionSelectable.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Missions.Selectables.MissionSelectable.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Missions.Selectables.MissionSelectable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Missions.Selectables.MissionSelectable.yml\" sourcestartlinenumber=\"1\">A selectable for the main body of a mission</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Missions.Selectables.StageSelectable.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Missions.Selectables.StageSelectable.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Missions.Selectables.StageSelectable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Missions.Selectables.StageSelectable.yml\" sourcestartlinenumber=\"1\">Selectable for a stage in a mission.</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Missions.Selectables.StagesSelectable.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Missions.Selectables.StagesSelectable.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Missions.Selectables.StagesSelectable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Missions.Selectables.StagesSelectable.yml\" sourcestartlinenumber=\"1\">Selectable for the stages of a mission.</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Missions.Selectables.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Missions.Selectables.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Missions.Selectables",
+      "Title": "PatchManager.Missions.UserData",
       "Summary": null
     },
     {
@@ -74805,7 +75029,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "PatchManager.Parts.Attributes.ModuleDataAdapterAttribute",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Parts.Attributes.ModuleDataAdapterAttribute.yml\" sourcestartlinenumber=\"1\">Types that take this attribute must inherit from (ISelectable) and must have a constructor that takes the following arguments\nJObject - ModuleData.DataObject\nModuleSelectable - Module</p>\n"
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Parts.Attributes.ModuleDataAdapterAttribute.yml\" sourcestartlinenumber=\"1\">Marks a class as a typed adapter for one or more part-module data types, surfacing them in Lua under a\nstrongly-typed wrapper instead of the raw JSON.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -74823,59 +75047,45 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Parts.Builtins.PartsBuiltins.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Parts.Converters.PartConverter.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Parts.Builtins.PartsBuiltins.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Parts.Converters.PartConverter.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Parts.Builtins.PartsBuiltins",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Parts.Builtins.PartsBuiltins.yml\" sourcestartlinenumber=\"1\">This library contains utilities for working with parts in Patch Manager</p>\n"
+      "Title": "PatchManager.Parts.Converters.PartConverter",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Parts.Converters.PartConverter.yml\" sourcestartlinenumber=\"1\"><xref href=\"PatchManager.LuaPatching.IConverter\" data-throw-if-not-resolved=\"false\"></xref> registered as <code>&quot;Part&quot;</code>; wraps a part definition envelope in a <xref href=\"PatchManager.Parts.UserData.PartUserData\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Parts.Builtins.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Parts.Converters.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Parts.Builtins.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Parts.Converters.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Parts.Builtins",
+      "Title": "PatchManager.Parts.Converters",
       "Summary": null
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Parts.Modifiables.PartModifiable.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Parts.PartsLuaModule.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Parts.Modifiables.PartModifiable.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Parts.PartsLuaModule.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Parts.Modifiables.PartModifiable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Parts.Modifiables.PartModifiable.yml\" sourcestartlinenumber=\"1\">Represents the modifiable state of a part_json file</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Parts.Modifiables.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Parts.Modifiables.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Parts.Modifiables",
-      "Summary": null
+      "Title": "PatchManager.Parts.PartsLuaModule",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Parts.PartsLuaModule.yml\" sourcestartlinenumber=\"1\">Lua submodule exposed as <code>PM.Parts</code>, providing patches for part definitions.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -74907,114 +75117,86 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Parts.Rulesets.PartsRuleset.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Parts.UserData.EngineUserData.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Parts.Rulesets.PartsRuleset.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Parts.UserData.EngineUserData.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Parts.Rulesets.PartsRuleset",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Parts.Rulesets.PartsRuleset.yml\" sourcestartlinenumber=\"1\">The <code sourcefile=\"AssemblyCSharp/PatchManager.Parts.Rulesets.PartsRuleset.yml\" sourcestartlinenumber=\"1\">:parts</code> ruleset used by sassy patching</p>\n"
+      "Title": "PatchManager.Parts.UserData.EngineUserData",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Parts.UserData.EngineUserData.yml\" sourcestartlinenumber=\"1\"><code>Data_Engine</code> module-data adapter that exposes the engine's <code>engineModes</code> array as a typed\n<xref href=\"PatchManager.Parts.UserData.ModesUserData\" data-throw-if-not-resolved=\"false\"></xref> rather than a raw <xref href=\"PatchManager.LuaPatching.JsonUserData\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Parts.Rulesets.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Parts.UserData.ModesUserData.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Parts.Rulesets.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Parts.UserData.ModesUserData.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Parts.Rulesets",
-      "Summary": null
+      "Title": "PatchManager.Parts.UserData.ModesUserData",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Parts.UserData.ModesUserData.yml\" sourcestartlinenumber=\"1\">Indexed-list wrapper for an engine's <code>engineModes</code> array, keyed by each mode's <code>engineID</code>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Parts.Selectables.DataEngineSelectable.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Parts.UserData.ModuleUserData.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Parts.Selectables.DataEngineSelectable.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Parts.UserData.ModuleUserData.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Parts.Selectables.DataEngineSelectable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Parts.Selectables.DataEngineSelectable.yml\" sourcestartlinenumber=\"1\">Represents a selectable for the selection and transformation of Data_Engine</p>\n"
+      "Title": "PatchManager.Parts.UserData.ModuleUserData",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Parts.UserData.ModuleUserData.yml\" sourcestartlinenumber=\"1\">Standalone wrapper for a part module's serialized JSON, exposing each <code>ModuleData</code> entry by name with a\ntyped adapter when one is registered for the data type.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Parts.Selectables.ModuleSelectable.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Parts.UserData.PartUserData.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Parts.Selectables.ModuleSelectable.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Parts.UserData.PartUserData.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Parts.Selectables.ModuleSelectable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Parts.Selectables.ModuleSelectable.yml\" sourcestartlinenumber=\"1\">Represents the selectable data in a part module;</p>\n"
+      "Title": "PatchManager.Parts.UserData.PartUserData",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Parts.UserData.PartUserData.yml\" sourcestartlinenumber=\"1\">Part definition wrapper exposing the inner <code>data</code> subtree, the typed <code>resourceContainers</code> array, and\neach part module as a virtual property keyed by the module's short name.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Parts.Selectables.PartSelectable.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Parts.UserData.ResourceContainersUserData.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Parts.Selectables.PartSelectable.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Parts.UserData.ResourceContainersUserData.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Parts.Selectables.PartSelectable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Parts.Selectables.PartSelectable.yml\" sourcestartlinenumber=\"1\">Represents a selectable for selection and transformation of part data</p>\n"
+      "Title": "PatchManager.Parts.UserData.ResourceContainersUserData",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Parts.UserData.ResourceContainersUserData.yml\" sourcestartlinenumber=\"1\">Indexed-list wrapper for a part's <code>resourceContainers</code> array, keyed by each container's <code>name</code>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Parts.Selectables.ResourceContainerSelectable.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Parts.UserData.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Parts.Selectables.ResourceContainerSelectable.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Parts.UserData.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Parts.Selectables.ResourceContainerSelectable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Parts.Selectables.ResourceContainerSelectable.yml\" sourcestartlinenumber=\"1\">A selectable that operates on resource container objects specifically</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Parts.Selectables.ResourceContainersSelectable.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Parts.Selectables.ResourceContainersSelectable.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Parts.Selectables.ResourceContainersSelectable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Parts.Selectables.ResourceContainersSelectable.yml\" sourcestartlinenumber=\"1\">Represents the resourceContainers field of a part json as a selectable</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Parts.Selectables.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Parts.Selectables.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Parts.Selectables",
+      "Title": "PatchManager.Parts.UserData",
       "Summary": null
     },
     {
@@ -75043,76 +75225,62 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "PatchManager.PatchManager",
-      "Summary": null
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.PatchManager.yml\" sourcestartlinenumber=\"1\">Main PatchManager mod entry point: registers every PatchManager submodule and drives them through SpaceWarp's lifecycle.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Planets.Modifiables.AtmosphereOverrideModifiable.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Planets.Converters.CelestialBodyConverter.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Planets.Modifiables.AtmosphereOverrideModifiable.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Planets.Converters.CelestialBodyConverter.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Planets.Modifiables.AtmosphereOverrideModifiable",
-      "Summary": null
+      "Title": "PatchManager.Planets.Converters.CelestialBodyConverter",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Planets.Converters.CelestialBodyConverter.yml\" sourcestartlinenumber=\"1\"><xref href=\"PatchManager.LuaPatching.IConverter\" data-throw-if-not-resolved=\"false\"></xref> registered as <code>&quot;Planet&quot;</code>; wraps celestial body JSON envelopes in a\n<xref href=\"PatchManager.Planets.UserData.CelestialBodyUserData\" data-throw-if-not-resolved=\"false\"></xref> for patching of the inner <code>data</code> subtree.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Planets.Modifiables.CelestialBodyModifiable.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Planets.Converters.GalaxyConverter.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Planets.Modifiables.CelestialBodyModifiable.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Planets.Converters.GalaxyConverter.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Planets.Modifiables.CelestialBodyModifiable",
-      "Summary": null
+      "Title": "PatchManager.Planets.Converters.GalaxyConverter",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Planets.Converters.GalaxyConverter.yml\" sourcestartlinenumber=\"1\"><xref href=\"PatchManager.LuaPatching.IConverter\" data-throw-if-not-resolved=\"false\"></xref> registered as <code>&quot;Galaxy&quot;</code>; wraps a galaxy definition in a\n<xref href=\"PatchManager.Planets.UserData.GalaxyUserData\" data-throw-if-not-resolved=\"false\"></xref> for patch scripts.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Planets.Modifiables.GalaxyModifiable.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Planets.Converters.VolumeCloudConverter.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Planets.Modifiables.GalaxyModifiable.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Planets.Converters.VolumeCloudConverter.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Planets.Modifiables.GalaxyModifiable",
-      "Summary": null
+      "Title": "PatchManager.Planets.Converters.VolumeCloudConverter",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Planets.Converters.VolumeCloudConverter.yml\" sourcestartlinenumber=\"1\"><xref href=\"PatchManager.LuaPatching.IConverter\" data-throw-if-not-resolved=\"false\"></xref> registered as <code>&quot;Cloud&quot;</code>; wraps a volume-cloud configuration in a\n<xref href=\"PatchManager.Planets.UserData.VolumeCloudUserData\" data-throw-if-not-resolved=\"false\"></xref> for patch scripts.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Planets.Modifiables.VolumeCloudOverrideModifiable.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Planets.Converters.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Planets.Modifiables.VolumeCloudOverrideModifiable.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Planets.Converters.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Planets.Modifiables.VolumeCloudOverrideModifiable",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Planets.Modifiables.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Planets.Modifiables.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Planets.Modifiables",
+      "Title": "PatchManager.Planets.Converters",
       "Summary": null
     },
     {
@@ -75201,6 +75369,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Planets.PlanetsLuaModule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.Planets.PlanetsLuaModule.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.Planets.PlanetsLuaModule",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Planets.PlanetsLuaModule.yml\" sourcestartlinenumber=\"1\">Lua submodule exposed as <code>PM.Planets</code>, providing patches for celestial bodies, the default galaxy,\nand atmosphere / cloud overrides.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "AssemblyCSharp/PatchManager.Planets.PlanetsModule.yml",
       "output": {
         ".html": {
@@ -75211,146 +75393,76 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "PatchManager.Planets.PlanetsModule",
-      "Summary": null
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Planets.PlanetsModule.yml\" sourcestartlinenumber=\"1\">Planet patching module.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Planets.Rulesets.AtmosphereOverrideRuleset.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Planets.UserData.CelestialBodyUserData.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Planets.Rulesets.AtmosphereOverrideRuleset.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Planets.UserData.CelestialBodyUserData.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Planets.Rulesets.AtmosphereOverrideRuleset",
-      "Summary": null
+      "Title": "PatchManager.Planets.UserData.CelestialBodyUserData",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Planets.UserData.CelestialBodyUserData.yml\" sourcestartlinenumber=\"1\">JSON UserData wrapping a celestial body's <code>data</code> subtree while preserving the full envelope for round-tripping.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Planets.Rulesets.CelestialBodyRuleset.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Planets.UserData.CloudUserData.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Planets.Rulesets.CelestialBodyRuleset.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Planets.UserData.CloudUserData.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Planets.Rulesets.CelestialBodyRuleset",
-      "Summary": null
+      "Title": "PatchManager.Planets.UserData.CloudUserData",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Planets.UserData.CloudUserData.yml\" sourcestartlinenumber=\"1\">Indexed-list wrapper for a volume cloud's <code>cumulusList</code>, keyed by each layer's <code>layerName</code>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Planets.Rulesets.GalaxyRuleset.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Planets.UserData.GalaxyUserData.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Planets.Rulesets.GalaxyRuleset.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Planets.UserData.GalaxyUserData.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Planets.Rulesets.GalaxyRuleset",
-      "Summary": null
+      "Title": "PatchManager.Planets.UserData.GalaxyUserData",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Planets.UserData.GalaxyUserData.yml\" sourcestartlinenumber=\"1\">Galaxy definition wrapper that exposes each celestial body in the galaxy's <code>CelestialBodies</code> array as a\nvirtual property keyed by GUID.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Planets.Rulesets.VolumeCloudOverrideRuleset.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Planets.UserData.VolumeCloudUserData.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Planets.Rulesets.VolumeCloudOverrideRuleset.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Planets.UserData.VolumeCloudUserData.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Planets.Rulesets.VolumeCloudOverrideRuleset",
-      "Summary": null
+      "Title": "PatchManager.Planets.UserData.VolumeCloudUserData",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Planets.UserData.VolumeCloudUserData.yml\" sourcestartlinenumber=\"1\">Volume-cloud configuration wrapper that exposes the <code>cumulusList</code> array as a typed\n<xref href=\"PatchManager.Planets.UserData.CloudUserData\" data-throw-if-not-resolved=\"false\"></xref> rather than a raw PatchManager.LuaPatching.JsonUserData.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Planets.Rulesets.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Planets.UserData.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Planets.Rulesets.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Planets.UserData.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Planets.Rulesets",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Planets.Selectables.AtmosphereOverrideSelectable.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Planets.Selectables.AtmosphereOverrideSelectable.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Planets.Selectables.AtmosphereOverrideSelectable",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Planets.Selectables.CelestialBodySelectable.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Planets.Selectables.CelestialBodySelectable.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Planets.Selectables.CelestialBodySelectable",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Planets.Selectables.GalaxySelectable.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Planets.Selectables.GalaxySelectable.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Planets.Selectables.GalaxySelectable",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Planets.Selectables.VolumeCloudSelectable.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Planets.Selectables.VolumeCloudSelectable.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Planets.Selectables.VolumeCloudSelectable",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Planets.Selectables.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Planets.Selectables.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Planets.Selectables",
+      "Title": "PatchManager.Planets.UserData",
       "Summary": null
     },
     {
@@ -75411,6 +75523,34 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Resources.ResourceConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.Resources.ResourceConverter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.Resources.ResourceConverter",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Resources.ResourceConverter.yml\" sourcestartlinenumber=\"1\"><xref href=\"PatchManager.LuaPatching.IConverter\" data-throw-if-not-resolved=\"false\"></xref> registered as <code>&quot;Resource&quot;</code>; routes JSON to a typed <xref href=\"PatchManager.Resources.UserData.RecipeUserData\" data-throw-if-not-resolved=\"false\"></xref>\nor <xref href=\"PatchManager.Resources.UserData.ResourceUserData\" data-throw-if-not-resolved=\"false\"></xref> based on whether the asset's <code>isRecipe</code> flag is set.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Resources.ResourcesLuaModule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.Resources.ResourcesLuaModule.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.Resources.ResourcesLuaModule",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Resources.ResourcesLuaModule.yml\" sourcestartlinenumber=\"1\">Lua submodule exposed as <code>PM.Resources</code>, providing patches and creation helpers for resource and recipe definitions.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "AssemblyCSharp/PatchManager.Resources.ResourcesModule.yml",
       "output": {
         ".html": {
@@ -75425,86 +75565,58 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Resources.Rulesets.ResourceRuleset.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Resources.UserData.IngredientsUserData.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Resources.Rulesets.ResourceRuleset.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Resources.UserData.IngredientsUserData.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Resources.Rulesets.ResourceRuleset",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Resources.Rulesets.ResourceRuleset.yml\" sourcestartlinenumber=\"1\">A patcher ruleset meant for adapting/creating resource definitions</p>\n"
+      "Title": "PatchManager.Resources.UserData.IngredientsUserData",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Resources.UserData.IngredientsUserData.yml\" sourcestartlinenumber=\"1\">Indexed-list wrapper for a recipe's <code>ingredients</code> array, keyed by each ingredient's <code>name</code>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Resources.Rulesets.ResourceUnitRuleset.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Resources.UserData.RecipeUserData.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Resources.Rulesets.ResourceUnitRuleset.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Resources.UserData.RecipeUserData.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Resources.Rulesets.ResourceUnitRuleset",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Resources.Rulesets.ResourceUnitRuleset.yml\" sourcestartlinenumber=\"1\">Implements the resource units ruleset from <a href=\"https://github.com/KSP2Community/CommunityResources\" sourcefile=\"AssemblyCSharp/PatchManager.Resources.Rulesets.ResourceUnitRuleset.yml\" sourcestartlinenumber=\"1\">https://github.com/KSP2Community/CommunityResources</a></p>\n"
+      "Title": "PatchManager.Resources.UserData.RecipeUserData",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Resources.UserData.RecipeUserData.yml\" sourcestartlinenumber=\"1\">Recipe-style resource definition wrapper exposing the inner <code>recipeData</code> subtree while preserving the full\nenvelope, and exposing the <code>ingredients</code> array as a typed <xref href=\"PatchManager.Resources.UserData.IngredientsUserData\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Resources.Rulesets.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Resources.UserData.ResourceUserData.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Resources.Rulesets.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Resources.UserData.ResourceUserData.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Resources.Rulesets",
-      "Summary": null
+      "Title": "PatchManager.Resources.UserData.ResourceUserData",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Resources.UserData.ResourceUserData.yml\" sourcestartlinenumber=\"1\">Plain resource definition wrapper exposing the inner <code>data</code> subtree while preserving the full envelope for round-tripping.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Resources.Selectables.RecipeSelectable.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Resources.UserData.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Resources.Selectables.RecipeSelectable.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Resources.UserData.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Resources.Selectables.RecipeSelectable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Resources.Selectables.RecipeSelectable.yml\" sourcestartlinenumber=\"1\">Represents a selectable for the selection and transformation of recipe data</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Resources.Selectables.ResourceSelectable.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Resources.Selectables.ResourceSelectable.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Resources.Selectables.ResourceSelectable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Resources.Selectables.ResourceSelectable.yml\" sourcestartlinenumber=\"1\">Represents a selectable for the selection and transformation of resource data</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Resources.Selectables.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Resources.Selectables.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Resources.Selectables",
+      "Title": "PatchManager.Resources.UserData",
       "Summary": null
     },
     {
@@ -75523,2439 +75635,73 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Attributes.PatcherRulesetAttribute.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Science.Converters.DiscoverablesConverter.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Attributes.PatcherRulesetAttribute.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Science.Converters.DiscoverablesConverter.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Attributes.PatcherRulesetAttribute",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Attributes.PatcherRulesetAttribute.yml\" sourcestartlinenumber=\"1\">Used to define that a class will be used in the patcher to &quot;get&quot; a ruleset\nFor example [PatcherRuleset(&quot;parts&quot;)] creates the &quot;:parts&quot; ruleset</p>\n"
+      "Title": "PatchManager.Science.Converters.DiscoverablesConverter",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Science.Converters.DiscoverablesConverter.yml\" sourcestartlinenumber=\"1\"><xref href=\"PatchManager.LuaPatching.IConverter\" data-throw-if-not-resolved=\"false\"></xref> registered as <code>&quot;Discoverables&quot;</code>; wraps a science region's discoverables envelope\nin a <xref href=\"PatchManager.Science.UserData.DiscoverablesUserData\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Attributes.SassyConstantAttribute.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Science.Converters.ExperimentConverter.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Attributes.SassyConstantAttribute.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Science.Converters.ExperimentConverter.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Attributes.SassyConstantAttribute",
+      "Title": "PatchManager.Science.Converters.ExperimentConverter",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Science.Converters.ExperimentConverter.yml\" sourcestartlinenumber=\"1\"><xref href=\"PatchManager.LuaPatching.IConverter\" data-throw-if-not-resolved=\"false\"></xref> registered as <code>&quot;Experiment&quot;</code>; wraps a science experiment envelope in an\n<xref href=\"PatchManager.Science.UserData.ExperimentUserData\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Science.Converters.ScienceRegionsConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.Science.Converters.ScienceRegionsConverter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.Science.Converters.ScienceRegionsConverter",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Science.Converters.ScienceRegionsConverter.yml\" sourcestartlinenumber=\"1\"><xref href=\"PatchManager.LuaPatching.IConverter\" data-throw-if-not-resolved=\"false\"></xref> registered as <code>&quot;ScienceRegions&quot;</code>; wraps a science-region envelope in a\n<xref href=\"PatchManager.Science.UserData.ScienceRegionsUserData\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Science.Converters.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/PatchManager.Science.Converters.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PatchManager.Science.Converters",
       "Summary": null
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Attributes.SassyLibraryAttribute.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Science.ScienceLuaModule.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Attributes.SassyLibraryAttribute.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Science.ScienceLuaModule.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Attributes.SassyLibraryAttribute",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Attributes.SassyLibraryAttribute.yml\" sourcestartlinenumber=\"1\">Represents a builtin (C#) library for the sassy patcher execution engine</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Attributes.SassyMethodAttribute.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Attributes.SassyMethodAttribute.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Attributes.SassyMethodAttribute",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Attributes.SassyMethodAttribute.yml\" sourcestartlinenumber=\"1\">Defines this as a method for sassy patcher, it can define any argument type it wants, and reflection will be used to convert them at runtime\nMethod overloading is not allowed</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Attributes.SassyNameAttribute.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Attributes.SassyNameAttribute.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Attributes.SassyNameAttribute",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Attributes.VarArgsAttribute.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Attributes.VarArgsAttribute.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Attributes.VarArgsAttribute",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Attributes.VarArgsAttribute.yml\" sourcestartlinenumber=\"1\">Used on a parameter for a builtin method to change it from matching List&lt;Value&gt; to all the remaining arguments</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Attributes.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Attributes.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Attributes",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.BaseSelectable.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.BaseSelectable.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.BaseSelectable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.BaseSelectable.yml\" sourcestartlinenumber=\"1\">A base class for selectables that implements most of the selection functions</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Builtins.ConfigBuiltins.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Builtins.ConfigBuiltins.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Builtins.ConfigBuiltins",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Builtins.DebugBuiltins.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Builtins.DebugBuiltins.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Builtins.DebugBuiltins",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Builtins.DebugBuiltins.yml\" sourcestartlinenumber=\"1\">Contains a lot of builtin debug libraries for the sassy patch engine to use</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Builtins.DictionaryBuiltins.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Builtins.DictionaryBuiltins.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Builtins.DictionaryBuiltins",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Builtins.DictionaryBuiltins.yml\" sourcestartlinenumber=\"1\">Object/dictionary builtins</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Builtins.FunctionalBuiltins.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Builtins.FunctionalBuiltins.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Builtins.FunctionalBuiltins",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Builtins.ListBuiltins.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Builtins.ListBuiltins.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Builtins.ListBuiltins",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Builtins.ListBuiltins.yml\" sourcestartlinenumber=\"1\">This is the list library used by sassy patching, every method that is list specific in it is prepended w/ list. to prevent overloading</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Builtins.MathBuiltins.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Builtins.MathBuiltins.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Builtins.MathBuiltins",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Builtins.MathBuiltins.yml\" sourcestartlinenumber=\"1\">A builtin math library to make dealing with stuff easier</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Builtins.MetaBuiltins.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Builtins.MetaBuiltins.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Builtins.MetaBuiltins",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Builtins.ReflectionBuiltins.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Builtins.ReflectionBuiltins.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Builtins.ReflectionBuiltins",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Builtins.ReflectionBuiltins.yml\" sourcestartlinenumber=\"1\">This is the reflection library used by Sassy patching, its very simple as not much reflection is needed by the language</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Builtins.StringBuiltins.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Builtins.StringBuiltins.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Builtins.StringBuiltins",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Builtins.StringBuiltins.yml\" sourcestartlinenumber=\"1\">This contains all the builtin methods applying over strings</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Builtins.TypeConversion.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Builtins.TypeConversion.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Builtins.TypeConversion",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Builtins.TypeConversion.yml\" sourcestartlinenumber=\"1\">This contains all the builtin methods for converting between types</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Builtins.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Builtins.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Builtins",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Coordinate.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Coordinate.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Coordinate",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Coordinate.yml\" sourcestartlinenumber=\"1\">Defines a location in a file</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.DataValue.DataType.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.DataValue.DataType.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.DataValue.DataType",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.DataValue.DataType.yml\" sourcestartlinenumber=\"1\">The types of values that a Value can be</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.DataValue.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.DataValue.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.DataValue",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.DataValue.yml\" sourcestartlinenumber=\"1\">The basic value type that the sassy patching engine uses\nIt can be one of 8 different types of values, 6 of which correspond fully to JSON types w/ one extra type/value meant to &quot;delete&quot; whatever it is assigned to, and then closures</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Exceptions.BinaryExpressionTypeException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Exceptions.BinaryExpressionTypeException.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Exceptions.BinaryExpressionTypeException",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Exceptions.BinaryExpressionTypeException.yml\" sourcestartlinenumber=\"1\">An exception thrown when the operands of a binary expression do not match together for the expression</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Exceptions.DataValueOperationException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Exceptions.DataValueOperationException.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Exceptions.DataValueOperationException",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Exceptions.DictionaryKeyNotFoundException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Exceptions.DictionaryKeyNotFoundException.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Exceptions.DictionaryKeyNotFoundException",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Exceptions.DictionaryKeyNotFoundException.yml\" sourcestartlinenumber=\"1\">An exception thrown when a dictionary is indexed with a key that it does not have</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Exceptions.IncorrectTypeException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Exceptions.IncorrectTypeException.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Exceptions.IncorrectTypeException",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Exceptions.IncorrectTypeException.yml\" sourcestartlinenumber=\"1\">An exception that is thrown when a <xref href=\"PatchManager.SassyPatching.DataValue\" data-throw-if-not-resolved=\"false\"></xref> is read as a type which it is not</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Exceptions.InterpolationException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Exceptions.InterpolationException.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Exceptions.InterpolationException",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Exceptions.InterpreterException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Exceptions.InterpreterException.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Exceptions.InterpreterException",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Exceptions.InterpreterException.yml\" sourcestartlinenumber=\"1\">An exception thrown by the patch interpreter due to runtime code being bad</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Exceptions.InvalidVariableReferenceException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Exceptions.InvalidVariableReferenceException.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Exceptions.InvalidVariableReferenceException",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Exceptions.InvalidVariableReferenceException.yml\" sourcestartlinenumber=\"1\">An exception thrown when a variable is being referenced that does not exist</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Exceptions.InvocationException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Exceptions.InvocationException.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Exceptions.InvocationException",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Exceptions.InvocationException.yml\" sourcestartlinenumber=\"1\">Thrown when invoking a managed function goes awry</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Exceptions.ListIndexOutOfRangeException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Exceptions.ListIndexOutOfRangeException.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Exceptions.ListIndexOutOfRangeException",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Exceptions.NotModifiableException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Exceptions.NotModifiableException.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Exceptions.NotModifiableException",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Exceptions.NotModifiableException.yml\" sourcestartlinenumber=\"1\">Thrown when a selectable is trying to be modified that can't be modified</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Exceptions.TypeConversionException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Exceptions.TypeConversionException.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Exceptions.TypeConversionException",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Exceptions.TypeConversionException.yml\" sourcestartlinenumber=\"1\">Thrown by the Managed invoker when a type cannot be converted either way</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Exceptions.UnaryTypeException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Exceptions.UnaryTypeException.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Exceptions.UnaryTypeException",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Exceptions.UnaryTypeException.yml\" sourcestartlinenumber=\"1\">An exception thrown when a unary expression is being run on a type that which it cannot</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Exceptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Exceptions.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Exceptions",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Execution.BoundPatchFunction.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Execution.BoundPatchFunction.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Execution.BoundPatchFunction",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Execution.BoundPatchFunction.yml\" sourcestartlinenumber=\"1\">A patch function that already has an argument bound to it</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Execution.Environment.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Execution.Environment.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Execution.Environment",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Execution.Environment.yml\" sourcestartlinenumber=\"1\">Describes a local environment/scope (per function/patch) used by the patching engine</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Execution.GlobalEnvironment.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Execution.GlobalEnvironment.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Execution.GlobalEnvironment",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Execution.GlobalEnvironment.yml\" sourcestartlinenumber=\"1\">Describes a global (per patch file) environment used by the sassy patching engine</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Execution.PatchArgument.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Execution.PatchArgument.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Execution.PatchArgument",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Execution.PatchArgument.yml\" sourcestartlinenumber=\"1\">This represents an argument passed to a patch function</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Execution.PatchFunction.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Execution.PatchFunction.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Execution.PatchFunction",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Execution.PatchFunction.yml\" sourcestartlinenumber=\"1\">This is the base class for a patcher function be it dll or file based</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Execution.PatchLibrary.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Execution.PatchLibrary.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Execution.PatchLibrary",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Execution.PatchLibrary.yml\" sourcestartlinenumber=\"1\">This is the base class of a patcher library, either for file or dll libraries, the register into is what is used by the engine to register everything</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Execution.PatchMixin.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Execution.PatchMixin.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Execution.PatchMixin",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Execution.SassyGenerator.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Execution.SassyGenerator.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Execution.SassyGenerator",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Execution.SassyTextPatcher.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Execution.SassyTextPatcher.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Execution.SassyTextPatcher",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Execution.SassyTextPatcher.yml\" sourcestartlinenumber=\"1\">This is the class that all sassy patches get converted to</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Execution.SelectableWithEnvironment.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Execution.SelectableWithEnvironment.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Execution.SelectableWithEnvironment",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Execution.SelectableWithEnvironment.yml\" sourcestartlinenumber=\"1\">Used to store information in a selectable, for stuff like class capture selectors and the like\nMakes stuff a lot more complex, but meh</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Execution.Stage.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Execution.Stage.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Execution.Stage",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Execution.Universe.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Execution.Universe.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Execution.Universe",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Execution.Universe.yml\" sourcestartlinenumber=\"1\">The state that all executing patches share</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Execution.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Execution.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Execution",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Interfaces.IModifiable.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Interfaces.IModifiable.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Interfaces.IModifiable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Interfaces.IModifiable.yml\" sourcestartlinenumber=\"1\">Represents a modifiable value</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Interfaces.INewAsset.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Interfaces.INewAsset.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Interfaces.INewAsset",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Interfaces.INewAsset.yml\" sourcestartlinenumber=\"1\">Represents a new asset being created</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Interfaces.IPatcherRuleSet.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Interfaces.IPatcherRuleSet.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Interfaces.IPatcherRuleSet",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Interfaces.IPatcherRuleSet.yml\" sourcestartlinenumber=\"1\">A ruleset for the patcher (the &quot;:...&quot; selectors)</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Interfaces.ISelectable.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Interfaces.ISelectable.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Interfaces.ISelectable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Interfaces.ISelectable.yml\" sourcestartlinenumber=\"1\">Represents a selectable object</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Interfaces.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Interfaces.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Interfaces",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Modifiables.CustomJTokenModifiable.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Modifiables.CustomJTokenModifiable.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Modifiables.CustomJTokenModifiable",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Modifiables.JTokenModifiable.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Modifiables.JTokenModifiable.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Modifiables.JTokenModifiable",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Modifiables.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Modifiables.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Modifiables",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.NewAssets.NewGenericAsset.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.NewAssets.NewGenericAsset.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.NewAssets.NewGenericAsset",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.NewAssets.NewGenericAsset.yml\" sourcestartlinenumber=\"1\">Represents a newly made generic asset</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.NewAssets.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.NewAssets.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.NewAssets",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Argument.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Argument.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Argument",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Argument.yml\" sourcestartlinenumber=\"1\">Represents an argument definition for a function/mixin</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Attributes.NewAttribute.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Attributes.NewAttribute.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Attributes.NewAttribute",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Attributes.RequireExpressions.RequireAnd.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Attributes.RequireExpressions.RequireAnd.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Attributes.RequireExpressions.RequireAnd",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Attributes.RequireExpressions.RequireExpression.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Attributes.RequireExpressions.RequireExpression.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Attributes.RequireExpressions.RequireExpression",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Attributes.RequireExpressions.RequireExpression.yml\" sourcestartlinenumber=\"1\">Represents a node in a require expression</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Attributes.RequireExpressions.RequireGuid.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Attributes.RequireExpressions.RequireGuid.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Attributes.RequireExpressions.RequireGuid",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Attributes.RequireExpressions.RequireNot.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Attributes.RequireExpressions.RequireNot.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Attributes.RequireExpressions.RequireNot",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Attributes.RequireExpressions.RequireOr.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Attributes.RequireExpressions.RequireOr.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Attributes.RequireExpressions.RequireOr",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Attributes.RequireExpressions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Attributes.RequireExpressions.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Attributes.RequireExpressions",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Attributes.RequireModAttribute.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Attributes.RequireModAttribute.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Attributes.RequireModAttribute",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Attributes.RequireModAttribute.yml\" sourcestartlinenumber=\"1\">Represents an attribute that modifies a selection block to only run if a mod is loaded</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Attributes.RunAtStageAttribute.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Attributes.RunAtStageAttribute.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Attributes.RunAtStageAttribute",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Attributes.RunAtStageAttribute.yml\" sourcestartlinenumber=\"1\">Represents an attribute that defines the stage of a selection block\nThis should only be on top level blocks</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Attributes.SelectorAttribute.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Attributes.SelectorAttribute.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Attributes.SelectorAttribute",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Attributes.SelectorAttribute.yml\" sourcestartlinenumber=\"1\">Represents an attribute applied to a selection block</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Attributes.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Attributes.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Attributes",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Block.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Block.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Block",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Block.yml\" sourcestartlinenumber=\"1\">Represents a group of nodes</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.CallArgument.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.CallArgument.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.CallArgument",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.CallArgument.yml\" sourcestartlinenumber=\"1\">Represents an argument in a function call</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.ErrorNode.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.ErrorNode.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.ErrorNode",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.ErrorNode.yml\" sourcestartlinenumber=\"1\">A node representing a transformation error</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.Add.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.Add.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Binary.Add",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.Add.yml\" sourcestartlinenumber=\"1\">Represents a binary expression which adds its 2 children together and returns the result</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.And.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.And.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Binary.And",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.And.yml\" sourcestartlinenumber=\"1\">Represents a binary expression that returns true if both children are truthy (short circuits)</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.Binary.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.Binary.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Binary.Binary",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.Binary.yml\" sourcestartlinenumber=\"1\">Represents a binary expressions which performs a computation on 2 values to return one value</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.Divide.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.Divide.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Binary.Divide",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.Divide.yml\" sourcestartlinenumber=\"1\">Represents a binary expression which divides the left hand side by the right hand side</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.EqualTo.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.EqualTo.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Binary.EqualTo",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.EqualTo.yml\" sourcestartlinenumber=\"1\">Represents a binary expression that returns true if both of its children are equal</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.GreaterThan.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.GreaterThan.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Binary.GreaterThan",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.GreaterThan.yml\" sourcestartlinenumber=\"1\">Represents a binary expression that returns true if its left hand side is greater than its right hand side</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.GreaterThanEqual.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.GreaterThanEqual.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Binary.GreaterThanEqual",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.GreaterThanEqual.yml\" sourcestartlinenumber=\"1\">Represents a binary expression that returns true if its left hand side is greater than or equal to its right hand side</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.LesserThan.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.LesserThan.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Binary.LesserThan",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.LesserThan.yml\" sourcestartlinenumber=\"1\">Represents a binary expression that returns true if its left hand side is less than its right hand side</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.LesserThanEqual.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.LesserThanEqual.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Binary.LesserThanEqual",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.LesserThanEqual.yml\" sourcestartlinenumber=\"1\">Represents a binary expression that returns true if its left hand side is less than or equal to its right hand side</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.Multiply.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.Multiply.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Binary.Multiply",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.Multiply.yml\" sourcestartlinenumber=\"1\">Represents a binary expression which multiplies its 2 children together and returns the result</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.NotEqualTo.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.NotEqualTo.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Binary.NotEqualTo",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.NotEqualTo.yml\" sourcestartlinenumber=\"1\">Represents a binary expression that returns true if both of its children are not equal</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.Or.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.Or.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Binary.Or",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.Or.yml\" sourcestartlinenumber=\"1\">Represents a binary expression that returns true if either child is truthy (short circuits)</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.Remainder.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.Remainder.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Binary.Remainder",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.Remainder.yml\" sourcestartlinenumber=\"1\">Represents a binary expression which divides the left hand side by the right hand side and returns the remainder</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.Subscript.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.Subscript.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Binary.Subscript",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.Subscript.yml\" sourcestartlinenumber=\"1\">A binary expression which indexes the left hand side by the right hand side and returns the result</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.Subtract.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.Subtract.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Binary.Subtract",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.Subtract.yml\" sourcestartlinenumber=\"1\">Represents a binary expression which subtracts the right hand side from the left hand side</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Binary.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Binary",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Closure.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Closure.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Closure",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Closure.yml\" sourcestartlinenumber=\"1\">Represents a function definition</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Expression.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Expression.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Expression",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Expression.yml\" sourcestartlinenumber=\"1\">Represents an expression node</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.ListNode.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.ListNode.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.ListNode",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.ListNode.yml\" sourcestartlinenumber=\"1\">Represents a list initializer</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.LocalVariableReference.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.LocalVariableReference.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.LocalVariableReference",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.LocalVariableReference.yml\" sourcestartlinenumber=\"1\">Represents a local variable (indexing into $current)</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.MemberCall.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.MemberCall.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.MemberCall",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.MemberCall.yml\" sourcestartlinenumber=\"1\">Represents a member call, or a call syntax where the left hand side is the first argument</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.ObjectNode.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.ObjectNode.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.ObjectNode",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.ObjectNode.yml\" sourcestartlinenumber=\"1\">Represents an object initializer</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.SimpleCall.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.SimpleCall.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.SimpleCall",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.SimpleCall.yml\" sourcestartlinenumber=\"1\">Represents a simple function call</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Ternary.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Ternary.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Ternary",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Ternary.yml\" sourcestartlinenumber=\"1\">Represents a ternary expression, which computes the left hand side if the condition is true otherwise the righthand side</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Unary.Implicit.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Unary.Implicit.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Unary.Implicit",
-      "Summary": "<p>\nRepresents an implicit operation node, which is a node that grabs the variable $value from the environment and applies a computation to it\n</p>\n<p>\n$value is always the value of the variable/field being modified\n</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Unary.ImplicitAdd.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Unary.ImplicitAdd.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Unary.ImplicitAdd",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Unary.ImplicitAdd.yml\" sourcestartlinenumber=\"1\">Represents an implicit addition, which adds the child to $value</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Unary.ImplicitDivide.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Unary.ImplicitDivide.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Unary.ImplicitDivide",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Unary.ImplicitDivide.yml\" sourcestartlinenumber=\"1\">Represent an implicit division which divides $value by its child</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Unary.ImplicitMultiply.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Unary.ImplicitMultiply.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Unary.ImplicitMultiply",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Unary.ImplicitMultiply.yml\" sourcestartlinenumber=\"1\">Represents an implicit multiplication which multiplies $value by its child</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Unary.ImplicitSubtract.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Unary.ImplicitSubtract.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Unary.ImplicitSubtract",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Unary.ImplicitSubtract.yml\" sourcestartlinenumber=\"1\">Represents an implicit subtraction which subtracts its child from $value</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Unary.Negate.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Unary.Negate.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Unary.Negate",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Unary.Negate.yml\" sourcestartlinenumber=\"1\">Represents a negation operation which returns the negative value of its child</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Unary.Not.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Unary.Not.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Unary.Not",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Unary.Not.yml\" sourcestartlinenumber=\"1\">Represents a not operation which returns the opposite of the truthiness  of its child</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Unary.Positive.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Unary.Positive.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Unary.Positive",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Unary.Positive.yml\" sourcestartlinenumber=\"1\">Represents a positive expression which returns its child</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Unary.Unary.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Unary.Unary.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Unary.Unary",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Unary.Unary.yml\" sourcestartlinenumber=\"1\">Represents a unary expression (an expression with one child)</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Unary.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.Unary.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.Unary",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.ValueNode.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.ValueNode.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.ValueNode",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.ValueNode.yml\" sourcestartlinenumber=\"1\">Represents a literal value</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.VariableReference.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.VariableReference.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions.VariableReference",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.VariableReference.yml\" sourcestartlinenumber=\"1\">Represents a reference to a variable within the current environment</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Expressions.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Expressions",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Indexers.EverythingIndexer.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Indexers.EverythingIndexer.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Indexers.EverythingIndexer",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Indexers.Indexer.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Indexers.Indexer.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Indexers.Indexer",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Indexers.Indexer.yml\" sourcestartlinenumber=\"1\">Represents a field indexer</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Indexers.SingleIndexer.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Indexers.SingleIndexer.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Indexers.SingleIndexer",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Indexers.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Indexers.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Indexers",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.KeyValueNode.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.KeyValueNode.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.KeyValueNode",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.KeyValueNode.yml\" sourcestartlinenumber=\"1\">A node representing a Key/Value pair in an Objects definition</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Node.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Node.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Node",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Node.yml\" sourcestartlinenumber=\"1\">An abstract class representing a node in the tree of a patch file</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.SassyPatch.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.SassyPatch.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.SassyPatch",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.SassyPatch.yml\" sourcestartlinenumber=\"1\">The top level node of a patch file, represents the entire file</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.ChildSelector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.ChildSelector.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Selectors.ChildSelector",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.ChildSelector.yml\" sourcestartlinenumber=\"1\">Represents a selector that selects children of a selectable that match a selector</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.ClassCaptureSelector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.ClassCaptureSelector.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Selectors.ClassCaptureSelector",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.ClassSelector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.ClassSelector.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Selectors.ClassSelector",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.ClassSelector.yml\" sourcestartlinenumber=\"1\">Represents a selector that selects selectables that have a class</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.CombinationSelector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.CombinationSelector.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Selectors.CombinationSelector",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.CombinationSelector.yml\" sourcestartlinenumber=\"1\">Represents a selector that selects all selectables that get selected by any of the selectors contained within</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.ElementAdditionSelector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.ElementAdditionSelector.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Selectors.ElementAdditionSelector",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.ElementAdditionSelector.yml\" sourcestartlinenumber=\"1\">Represents a selector that adds an element to a selectable and selects it</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.ElementSelector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.ElementSelector.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Selectors.ElementSelector",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.ElementSelector.yml\" sourcestartlinenumber=\"1\">Represents a selector that selects all selectables that are an element type</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.EnsureSelector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.EnsureSelector.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Selectors.EnsureSelector",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.EnsureSelector.yml\" sourcestartlinenumber=\"1\">Represents a selector that adds an element to a selectable and selects it</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.IntersectionSelector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.IntersectionSelector.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Selectors.IntersectionSelector",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.IntersectionSelector.yml\" sourcestartlinenumber=\"1\">Represents a selector that selects all selectables that get selected by all of the selectors contained within</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.NameSelector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.NameSelector.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Selectors.NameSelector",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.NameSelector.yml\" sourcestartlinenumber=\"1\">Represents a selector that matches selectables that have a name that matches a name pattern</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.RulesetSelector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.RulesetSelector.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Selectors.RulesetSelector",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.RulesetSelector.yml\" sourcestartlinenumber=\"1\">Represents a selector that defines the ruleset that following selectors follow</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.Selector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.Selector.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Selectors.Selector",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.Selector.yml\" sourcestartlinenumber=\"1\">Represents a selector node</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.WildcardSelector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.WildcardSelector.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Selectors.WildcardSelector",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.WildcardSelector.yml\" sourcestartlinenumber=\"1\">Represents a selection action that matches all selectables</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.WithoutClassSelector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.WithoutClassSelector.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Selectors.WithoutClassSelector",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.WithoutClassSelector.yml\" sourcestartlinenumber=\"1\">Represents a selector that matches selectables that don't have the class defined in this</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.WithoutNameSelector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.WithoutNameSelector.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Selectors.WithoutNameSelector",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.WithoutNameSelector.yml\" sourcestartlinenumber=\"1\">Represents a selector that matches selectables that don't have a name that matches a name pattern</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Selectors.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Selectors",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.Conditional.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.Conditional.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Statements.Conditional",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.Conditional.yml\" sourcestartlinenumber=\"1\">Represents a conditional (if-else) statement</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.Each.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.Each.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Statements.Each",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.Each.yml\" sourcestartlinenumber=\"1\">Represents a loop that iterates over a list/dictionary/string</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.For.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.For.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Statements.For",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.For.yml\" sourcestartlinenumber=\"1\">Represents a loop that iterates over a range of numbers</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.FunctionLevel.Return.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.FunctionLevel.Return.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Statements.FunctionLevel.Return",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.FunctionLevel.Return.yml\" sourcestartlinenumber=\"1\">Represents a function return statement</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.FunctionLevel.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.FunctionLevel.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Statements.FunctionLevel",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.SelectionBlock.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.SelectionBlock.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Statements.SelectionBlock",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.SelectionBlock.yml\" sourcestartlinenumber=\"1\">Represents a selection block</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.DeleteValue.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.DeleteValue.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.DeleteValue",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.DeleteValue.yml\" sourcestartlinenumber=\"1\">Represents a deletion selection action</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.Field.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.Field.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.Field",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.Field.yml\" sourcestartlinenumber=\"1\">Represents a field setting selection action</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.ISelectionAction.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.ISelectionAction.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.ISelectionAction",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.ISelectionAction.yml\" sourcestartlinenumber=\"1\">This represents a selection action to be taken on a selection</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.MergeValue.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.MergeValue.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.MergeValue",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.MergeValue.yml\" sourcestartlinenumber=\"1\">Represents a merge selection action</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.MixinBlockInclude.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.MixinBlockInclude.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.MixinBlockInclude",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.MixinBlockInclude.yml\" sourcestartlinenumber=\"1\">Represents a mixin block include (i.e. slotting actions into a mixin)</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.MixinInclude.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.MixinInclude.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.MixinInclude",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.MixinInclude.yml\" sourcestartlinenumber=\"1\">Represents a mixin inclusion</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.MixinSlot.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.MixinSlot.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.MixinSlot",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.SetValue.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.SetValue.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.SetValue",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.SetValue.yml\" sourcestartlinenumber=\"1\">Represents a value setting selection action</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.SelectionLevel.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Statements.SelectionLevel",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.TopLevel.ConfigCreation.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.TopLevel.ConfigCreation.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Statements.TopLevel.ConfigCreation",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.TopLevel.ConfigUpdate.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.TopLevel.ConfigUpdate.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Statements.TopLevel.ConfigUpdate",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.TopLevel.Function.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.TopLevel.Function.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Statements.TopLevel.Function",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.TopLevel.Function.yml\" sourcestartlinenumber=\"1\">Represents a function definition</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.TopLevel.Import.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.TopLevel.Import.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Statements.TopLevel.Import",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.TopLevel.Import.yml\" sourcestartlinenumber=\"1\">Represents a library import</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.TopLevel.Mixin.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.TopLevel.Mixin.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Statements.TopLevel.Mixin",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.TopLevel.Mixin.yml\" sourcestartlinenumber=\"1\">Represents a selection block mixin</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.TopLevel.PatchDeclaration.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.TopLevel.PatchDeclaration.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Statements.TopLevel.PatchDeclaration",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.TopLevel.PatchDeclaration.yml\" sourcestartlinenumber=\"1\">Represents a declaration of which labels to patch</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.TopLevel.StageDefinition.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.TopLevel.StageDefinition.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Statements.TopLevel.StageDefinition",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.TopLevel.StageDefinitionAttribute.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.TopLevel.StageDefinitionAttribute.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Statements.TopLevel.StageDefinitionAttribute",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.TopLevel.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.TopLevel.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Statements.TopLevel",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.VariableDeclaration.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.VariableDeclaration.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Statements.VariableDeclaration",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.VariableDeclaration.yml\" sourcestartlinenumber=\"1\">Represents a variable declaration</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.While.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.While.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Statements.While",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.While.yml\" sourcestartlinenumber=\"1\">Represents a loop that iterates while a condition remains true</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.Statements.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes.Statements",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Nodes.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Nodes",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Selectables.JTokenSelectable.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Selectables.JTokenSelectable.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Selectables.JTokenSelectable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Selectables.JTokenSelectable.yml\" sourcestartlinenumber=\"1\">Represents a selectable that operates over <xref href=\"Newtonsoft.Json.Linq.JToken\" data-throw-if-not-resolved=\"false\"></xref> objects</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Selectables.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Selectables.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Selectables",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Transformer.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.Transformer.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching.Transformer",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.SassyPatching.Transformer.yml\" sourcestartlinenumber=\"1\">A class used for transforming an Antlr representation of a Patch to our own node tree representation</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.SassyPatching.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.SassyPatching.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.SassyPatching",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Science.Modifiables.DiscoverablesModifiable.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Science.Modifiables.DiscoverablesModifiable.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Science.Modifiables.DiscoverablesModifiable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Science.Modifiables.DiscoverablesModifiable.yml\" sourcestartlinenumber=\"1\">Modifiable for <xref href=\"PatchManager.Science.Selectables.DiscoverablesSelectable\" data-throw-if-not-resolved=\"false\"></xref>. This is used to modify the discoverables object.</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Science.Modifiables.ExperimentModifiable.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Science.Modifiables.ExperimentModifiable.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Science.Modifiables.ExperimentModifiable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Science.Modifiables.ExperimentModifiable.yml\" sourcestartlinenumber=\"1\">Modifiable for <xref href=\"PatchManager.Science.Selectables.ExperimentSelectable\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Science.Modifiables.RegionsModifiable.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Science.Modifiables.RegionsModifiable.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Science.Modifiables.RegionsModifiable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Science.Modifiables.RegionsModifiable.yml\" sourcestartlinenumber=\"1\">Modifiable for <xref href=\"PatchManager.Science.Selectables.RegionsSelectable\" data-throw-if-not-resolved=\"false\"></xref>. This is used to modify the discoverables object.</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Science.Modifiables.ScienceModifiable.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Science.Modifiables.ScienceModifiable.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Science.Modifiables.ScienceModifiable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Science.Modifiables.ScienceModifiable.yml\" sourcestartlinenumber=\"1\">Modifiable for <xref href=\"PatchManager.Science.Selectables.ScienceSelectable\" data-throw-if-not-resolved=\"false\"></xref>. This is used to modify the science object.</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Science.Modifiables.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Science.Modifiables.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Science.Modifiables",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Science.Rulesets.DiscoverablesRuleset.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Science.Rulesets.DiscoverablesRuleset.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Science.Rulesets.DiscoverablesRuleset",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Science.Rulesets.DiscoverablesRuleset.yml\" sourcestartlinenumber=\"1\">A ruleset for modifying discoverable positions in the game</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Science.Rulesets.ExperimentRuleset.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Science.Rulesets.ExperimentRuleset.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Science.Rulesets.ExperimentRuleset",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Science.Rulesets.ExperimentRuleset.yml\" sourcestartlinenumber=\"1\">Ruleset for the ScienceExperiment part module.</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Science.Rulesets.RegionsRuleset.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Science.Rulesets.RegionsRuleset.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Science.Rulesets.RegionsRuleset",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Science.Rulesets.RegionsRuleset.yml\" sourcestartlinenumber=\"1\">Ruleset for science regions</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Science.Rulesets.ScienceRuleset.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Science.Rulesets.ScienceRuleset.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Science.Rulesets.ScienceRuleset",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Science.Rulesets.ScienceRuleset.yml\" sourcestartlinenumber=\"1\">This ruleset is used to patch the science tech tree.</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Science.Rulesets.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Science.Rulesets.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Science.Rulesets",
-      "Summary": null
+      "Title": "PatchManager.Science.ScienceLuaModule",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Science.ScienceLuaModule.yml\" sourcestartlinenumber=\"1\">Lua submodule exposed as <code>PM.Science</code>, providing patches and creation helpers for science discoverables,\nexperiments, regions, and tech nodes.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -77969,76 +75715,62 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "PatchManager.Science.ScienceModule",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Science.ScienceModule.yml\" sourcestartlinenumber=\"1\">The science module.</p>\n"
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Science.ScienceModule.yml\" sourcestartlinenumber=\"1\">IModule registration for the science patching domain.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Science.Selectables.DiscoverablesSelectable.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Science.UserData.DiscoverablesUserData.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Science.Selectables.DiscoverablesSelectable.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Science.UserData.DiscoverablesUserData.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Science.Selectables.DiscoverablesSelectable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Science.Selectables.DiscoverablesSelectable.yml\" sourcestartlinenumber=\"1\">A selectable that represents discoverables</p>\n"
+      "Title": "PatchManager.Science.UserData.DiscoverablesUserData",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Science.UserData.DiscoverablesUserData.yml\" sourcestartlinenumber=\"1\">Indexed-list wrapper for a science region's discoverables, keyed by each entry's <code>ScienceRegionId</code>, while\npreserving the full envelope for round-tripping.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Science.Selectables.ExperimentSelectable.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Science.UserData.ExperimentUserData.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Science.Selectables.ExperimentSelectable.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Science.UserData.ExperimentUserData.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Science.Selectables.ExperimentSelectable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Science.Selectables.ExperimentSelectable.yml\" sourcestartlinenumber=\"1\">A selectable that represents a science experiment</p>\n"
+      "Title": "PatchManager.Science.UserData.ExperimentUserData",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Science.UserData.ExperimentUserData.yml\" sourcestartlinenumber=\"1\">Science experiment wrapper exposing the inner <code>Data</code> subtree while preserving the full envelope for round-tripping.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Science.Selectables.RegionsSelectable.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Science.UserData.ScienceRegionsUserData.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Science.Selectables.RegionsSelectable.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Science.UserData.ScienceRegionsUserData.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Science.Selectables.RegionsSelectable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Science.Selectables.RegionsSelectable.yml\" sourcestartlinenumber=\"1\">This is the selectable for science regions</p>\n"
+      "Title": "PatchManager.Science.UserData.ScienceRegionsUserData",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Science.UserData.ScienceRegionsUserData.yml\" sourcestartlinenumber=\"1\">Indexed-list wrapper for a body's science regions, keyed by each region's <code>id</code>, while preserving the full\nenvelope for round-tripping and exposing the body name and situation data as typed properties.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Science.Selectables.ScienceSelectable.yml",
+      "source_relative_path": "AssemblyCSharp/PatchManager.Science.UserData.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Science.Selectables.ScienceSelectable.html"
+          "relative_path": "AssemblyCSharp/PatchManager.Science.UserData.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PatchManager.Science.Selectables.ScienceSelectable",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Science.Selectables.ScienceSelectable.yml\" sourcestartlinenumber=\"1\">A selectable that represents a science experiment</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/PatchManager.Science.Selectables.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/PatchManager.Science.Selectables.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PatchManager.Science.Selectables",
+      "Title": "PatchManager.Science.UserData",
       "Summary": null
     },
     {
@@ -78109,7 +75841,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "PatchManager.Shared.Modules.IModule",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Shared.Modules.IModule.yml\" sourcestartlinenumber=\"1\">Base interface for PatchManager DLL modules.</p>\n"
+      "Summary": "<p sourcefile=\"AssemblyCSharp/PatchManager.Shared.Modules.IModule.yml\" sourcestartlinenumber=\"1\">Interface for PatchManager DLL modules.</p>\n"
     },
     {
       "type": "ManagedReference",
