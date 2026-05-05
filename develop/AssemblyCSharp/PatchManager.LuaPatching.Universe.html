@@ -152,6 +152,32 @@ through <code>PM</code>; once loading is done, <a class="xref" href="PatchManage
 </h3>
 
 
+  <h4 id="PatchManager_LuaPatching_Universe_AllAddressPatches" data-uid="PatchManager.LuaPatching.Universe.AllAddressPatches">AllAddressPatches</h4>
+  <div class="markdown level1 summary"><p>Registered patches keyed by addressables address, for assets that are not under any label.
+Sorted in <a class="xref" href="PatchManager.LuaPatching.Universe.html#PatchManager_LuaPatching_Universe_SetupPatchesForRun">SetupPatchesForRun()</a> by stage priority.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, List&lt;LuaPatch&gt;&gt; AllAddressPatches</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Dictionary</span>&lt;<span class="xref">string</span>, <span class="xref">List</span>&lt;<a class="xref" href="PatchManager.LuaPatching.LuaPatch.html">LuaPatch</a>&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <h4 id="PatchManager_LuaPatching_Universe_AllMods" data-uid="PatchManager.LuaPatching.Universe.AllMods">AllMods</h4>
   <div class="markdown level1 summary"><p>The set of mod IDs the universe was constructed with, used by stage scheduling and
 <a class="xref" href="PatchManager.LuaPatching.Builtin.PatchManagerCore.html#PatchManager_LuaPatching_Builtin_PatchManagerCore_Loaded_System_String_">Loaded(string)</a>.</p>
@@ -172,6 +198,31 @@ through <code>PM</code>; once loading is done, <a class="xref" href="PatchManage
     <tbody>
       <tr>
         <td><span class="xref">HashSet</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="PatchManager_LuaPatching_Universe_AllNewAddressAssets" data-uid="PatchManager.LuaPatching.Universe.AllNewAddressAssets">AllNewAddressAssets</h4>
+  <div class="markdown level1 summary"><p>Assets queued for creation via <a class="xref" href="PatchManager.LuaPatching.Builtin.PatchManagerCore.html#PatchManager_LuaPatching_Builtin_PatchManagerCore_NewAddress_System_String_System_String_MoonSharp_Interpreter_DynValue_">NewAddress(string, string, DynValue)</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;LuaAsset&gt; AllNewAddressAssets</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="PatchManager.LuaPatching.LuaAsset.html">LuaAsset</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -456,6 +507,33 @@ chain stages declared by the same mod.</p>
   </table>
 
 
+  <h4 id="PatchManager_LuaPatching_Universe_PatchedAddresses" data-uid="PatchManager.LuaPatching.Universe.PatchedAddresses">PatchedAddresses</h4>
+  <div class="markdown level1 summary"><p>The set of addressables addresses with at least one address patch or new-address asset registered.
+Replaced by <a class="xref" href="PatchManager.LuaPatching.Universe.html#PatchManager_LuaPatching_Universe_SetupPatchesForRun">SetupPatchesForRun()</a> with the keys of <a class="xref" href="PatchManager.LuaPatching.Universe.html#PatchManager_LuaPatching_Universe_AllAddressPatches">AllAddressPatches</a> unioned
+with the labels of <a class="xref" href="PatchManager.LuaPatching.Universe.html#PatchManager_LuaPatching_Universe_AllNewAddressAssets">AllNewAddressAssets</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HashSet&lt;string&gt; PatchedAddresses</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">HashSet</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <h4 id="PatchManager_LuaPatching_Universe_PatchedLabels" data-uid="PatchManager.LuaPatching.Universe.PatchedLabels">PatchedLabels</h4>
   <div class="markdown level1 summary"><p>The set of addressables labels with at least one patch or new-asset registered. Replaced by
 <a class="xref" href="PatchManager.LuaPatching.Universe.html#PatchManager_LuaPatching_Universe_SetupPatchesForRun">SetupPatchesForRun()</a> with the keys of <a class="xref" href="PatchManager.LuaPatching.Universe.html#PatchManager_LuaPatching_Universe_AllPatches">AllPatches</a>.</p>
@@ -585,6 +663,64 @@ chain stages declared by the same mod.</p>
 </h3>
 
 
+  <a id="PatchManager_LuaPatching_Universe_AddAddressAsset_" data-uid="PatchManager.LuaPatching.Universe.AddAddressAsset*"></a>
+  <h4 id="PatchManager_LuaPatching_Universe_AddAddressAsset_PatchManager_LuaPatching_LuaAsset_" data-uid="PatchManager.LuaPatching.Universe.AddAddressAsset(PatchManager.LuaPatching.LuaAsset)">AddAddressAsset(LuaAsset)</h4>
+  <div class="markdown level1 summary"><p>Queues a new address-keyed asset for creation and records its address in <a class="xref" href="PatchManager.LuaPatching.Universe.html#PatchManager_LuaPatching_Universe_PatchedAddresses">PatchedAddresses</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddAddressAsset(LuaAsset asset)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.LuaAsset.html">LuaAsset</a></td>
+        <td><span class="parametername">asset</span></td>
+        <td><p>The asset to queue.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_Universe_AddAddressPatch_" data-uid="PatchManager.LuaPatching.Universe.AddAddressPatch*"></a>
+  <h4 id="PatchManager_LuaPatching_Universe_AddAddressPatch_PatchManager_LuaPatching_LuaPatch_" data-uid="PatchManager.LuaPatching.Universe.AddAddressPatch(PatchManager.LuaPatching.LuaPatch)">AddAddressPatch(LuaPatch)</h4>
+  <div class="markdown level1 summary"><p>Registers an address-keyed patch and records its address in <a class="xref" href="PatchManager.LuaPatching.Universe.html#PatchManager_LuaPatching_Universe_PatchedAddresses">PatchedAddresses</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddAddressPatch(LuaPatch patch)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.LuaPatch.html">LuaPatch</a></td>
+        <td><span class="parametername">patch</span></td>
+        <td><p>The patch to register.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="PatchManager_LuaPatching_Universe_AddAsset_" data-uid="PatchManager.LuaPatching.Universe.AddAsset*"></a>
   <h4 id="PatchManager_LuaPatching_Universe_AddAsset_PatchManager_LuaPatching_LuaAsset_" data-uid="PatchManager.LuaPatching.Universe.AddAsset(PatchManager.LuaPatching.LuaAsset)">AddAsset(LuaAsset)</h4>
   <div class="markdown level1 summary"><p>Queues a new asset for creation and records its label in <a class="xref" href="PatchManager.LuaPatching.Universe.html#PatchManager_LuaPatching_Universe_PatchedLabels">PatchedLabels</a>.</p>
@@ -672,6 +808,98 @@ chain stages declared by the same mod.</p>
         <td><a class="xref" href="PatchManager.LuaPatching.Stage.html">Stage</a></td>
         <td><span class="parametername">stage</span></td>
         <td><p>The stage to register.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_Universe_BuildPrimaryKeyMapForLabel_" data-uid="PatchManager.LuaPatching.Universe.BuildPrimaryKeyMapForLabel*"></a>
+  <h4 id="PatchManager_LuaPatching_Universe_BuildPrimaryKeyMapForLabel_System_String_" data-uid="PatchManager.LuaPatching.Universe.BuildPrimaryKeyMapForLabel(System.String)">BuildPrimaryKeyMapForLabel(string)</h4>
+  <div class="markdown level1 summary"><p>Returns the primary Addressables address for every <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/TextAsset.html">TextAsset</a> under
+<code class="paramref">label</code>, keyed by the asset's Unity object name (the file basename without
+extension).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, string&gt; BuildPrimaryKeyMapForLabel(string label)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">label</span></td>
+        <td><p>The Addressables label whose assets to enumerate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Dictionary</span>&lt;<span class="xref">string</span>, <span class="xref">string</span>&gt;</td>
+        <td><p>A map from asset Unity name to primary address; empty when the label resolves to nothing.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_Universe_DiscoverLabelsForAddress_" data-uid="PatchManager.LuaPatching.Universe.DiscoverLabelsForAddress*"></a>
+  <h4 id="PatchManager_LuaPatching_Universe_DiscoverLabelsForAddress_System_String_" data-uid="PatchManager.LuaPatching.Universe.DiscoverLabelsForAddress(System.String)">DiscoverLabelsForAddress(string)</h4>
+  <div class="markdown level1 summary"><p>Returns every Addressables label that includes the asset at <code class="paramref">address</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;string&gt; DiscoverLabelsForAddress(string address)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">address</span></td>
+        <td><p>The Addressables address to look up labels for.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td><p>The discovered label keys; empty when the asset has no labels or does not exist.</p>
 </td>
       </tr>
     </tbody>
@@ -774,6 +1002,51 @@ chain stages declared by the same mod.</p>
       <tr>
         <td><span class="xref">bool</span></td>
         <td><p>true if any patches match</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_Universe_HasAnyPatchForAddress_" data-uid="PatchManager.LuaPatching.Universe.HasAnyPatchForAddress*"></a>
+  <h4 id="PatchManager_LuaPatching_Universe_HasAnyPatchForAddress_System_String_" data-uid="PatchManager.LuaPatching.Universe.HasAnyPatchForAddress(System.String)">HasAnyPatchForAddress(string)</h4>
+  <div class="markdown level1 summary"><p>Returns whether any address-keyed patch is registered for the given address.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HasAnyPatchForAddress(string address)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">address</span></td>
+        <td><p>The Addressables address to test.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if any address patch targets the address, false otherwise.</p>
 </td>
       </tr>
     </tbody>
@@ -884,6 +1157,64 @@ All scripts share a single <span class="xref">MoonSharp.Interpreter.Script</span
         <td><span class="xref">DirectoryInfo</span></td>
         <td><span class="parametername">directoryInfo</span></td>
         <td><p>The directory the patch was discovered in; exposed to the script as the <code>Location</code> global.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_Universe_PromoteAddressLabelsToPatchedLabels_" data-uid="PatchManager.LuaPatching.Universe.PromoteAddressLabelsToPatchedLabels*"></a>
+  <h4 id="PatchManager_LuaPatching_Universe_PromoteAddressLabelsToPatchedLabels" data-uid="PatchManager.LuaPatching.Universe.PromoteAddressLabelsToPatchedLabels">PromoteAddressLabelsToPatchedLabels()</h4>
+  <div class="markdown level1 summary"><p>For every entry in <a class="xref" href="PatchManager.LuaPatching.Universe.html#PatchManager_LuaPatching_Universe_PatchedAddresses">PatchedAddresses</a>, discovers the labels that contain the address
+and adds each one to <a class="xref" href="PatchManager.LuaPatching.Universe.html#PatchManager_LuaPatching_Universe_PatchedLabels">PatchedLabels</a> so a label-flow rebuild gets scheduled.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void PromoteAddressLabelsToPatchedLabels()</code></pre>
+  </div>
+
+
+  <a id="PatchManager_LuaPatching_Universe_ResolvePrimaryKey_" data-uid="PatchManager.LuaPatching.Universe.ResolvePrimaryKey*"></a>
+  <h4 id="PatchManager_LuaPatching_Universe_ResolvePrimaryKey_System_String_" data-uid="PatchManager.LuaPatching.Universe.ResolvePrimaryKey(System.String)">ResolvePrimaryKey(string)</h4>
+  <div class="markdown level1 summary"><p>Returns the primary Addressables address for <code class="paramref">key</code>, or <code>nil</code> when the key
+resolves to nothing.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string ResolvePrimaryKey(string key)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">key</span></td>
+        <td><p>An Addressables key (address, label, or alias).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><p>The primary key of the first resolved location, or <code>nil</code>.</p>
 </td>
       </tr>
     </tbody>
@@ -1022,6 +1353,70 @@ match, otherwise the chain is flushed back to JSON, lifted by the new converter,
 Returns <code class="paramref">data</code> unchanged when no patch applied; returns <code>null</code> when a patch
 removed the asset.</p>
 </div>
+
+
+  <a id="PatchManager_LuaPatching_Universe_RunAllPatchesForAddress_" data-uid="PatchManager.LuaPatching.Universe.RunAllPatchesForAddress*"></a>
+  <h4 id="PatchManager_LuaPatching_Universe_RunAllPatchesForAddress_System_String_Newtonsoft_Json_Linq_JToken_System_Int32__System_Int32__" data-uid="PatchManager.LuaPatching.Universe.RunAllPatchesForAddress(System.String,Newtonsoft.Json.Linq.JToken,System.Int32@,System.Int32@)">RunAllPatchesForAddress(string, JToken, out int, out int)</h4>
+  <div class="markdown level1 summary"><p>Runs every address-keyed patch registered for <code class="paramref">address</code> against the given JSON,
+returning the final result.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JToken RunAllPatchesForAddress(string address, JToken data, out int patchCount, out int errorCount)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">address</span></td>
+        <td><p>The asset's Addressables address.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">JToken</span></td>
+        <td><span class="parametername">data</span></td>
+        <td><p>The asset's parsed JSON.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">patchCount</span></td>
+        <td><p>Set to the number of patches that ran successfully.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">errorCount</span></td>
+        <td><p>Set to the number of patches that threw.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">JToken</span></td>
+        <td><p>The patched JSON, or <code>null</code> when the asset was removed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <a id="PatchManager_LuaPatching_Universe_SetupPatchesForRun_" data-uid="PatchManager.LuaPatching.Universe.SetupPatchesForRun*"></a>

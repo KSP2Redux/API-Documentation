@@ -416,6 +416,63 @@ fully-qualified name.</p>
   </table>
 
 
+  <a id="PatchManager_LuaPatching_Builtin_PatchManagerCore_NewAddress_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.NewAddress*"></a>
+  <h4 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_NewAddress_System_String_System_String_MoonSharp_Interpreter_DynValue_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.NewAddress(System.String,System.String,MoonSharp.Interpreter.DynValue)">NewAddress(string, string, DynValue)</h4>
+  <div class="markdown level1 summary"><p>Queues a brand-new asset for creation at the given Addressables address, with no label.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void NewAddress(string converter, string address, DynValue newObject)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">converter</span></td>
+        <td><p>The name of the converter that will serialize <code class="paramref">newObject</code> to JSON.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">address</span></td>
+        <td><p>The Addressables address for the new asset (globally unique).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><span class="parametername">newObject</span></td>
+        <td><p>The Lua-facing value for the new asset.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Exception</span></td>
+        <td><p>Thrown when <code class="paramref">converter</code> is not registered.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="PatchManager_LuaPatching_Builtin_PatchManagerCore_Patch_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.Patch*"></a>
   <h4 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_Patch_MoonSharp_Interpreter_Script_System_String_System_String_System_String_System_Func_MoonSharp_Interpreter_DynValue_System_String__" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.Patch(MoonSharp.Interpreter.Script,System.String,System.String,System.String,System.Func{MoonSharp.Interpreter.DynValue,System.String})">Patch(Script, string, string, string, Func&lt;DynValue, string&gt;)</h4>
   <div class="markdown level1 summary"><p>Registers a patch that runs against assets under the given label whose name matches <code class="paramref">name</code>.</p>
@@ -486,6 +543,85 @@ fully-qualified name.</p>
   <h5 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_Patch_MoonSharp_Interpreter_Script_System_String_System_String_System_String_System_Func_MoonSharp_Interpreter_DynValue_System_String___remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p><code class="paramref">name</code> may include <code>*</code> and <code>?</code> wildcards, expanded by Universe.MatchesPattern.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Exception</span></td>
+        <td><p>Thrown when <code class="paramref">converter</code> is not registered, or when <code class="paramref">method</code> is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_Builtin_PatchManagerCore_PatchAddress_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.PatchAddress*"></a>
+  <h4 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_PatchAddress_MoonSharp_Interpreter_Script_System_String_System_String_System_Func_MoonSharp_Interpreter_DynValue_System_String__" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.PatchAddress(MoonSharp.Interpreter.Script,System.String,System.String,System.Func{MoonSharp.Interpreter.DynValue,System.String})">PatchAddress(Script, string, string, Func&lt;DynValue, string&gt;)</h4>
+  <div class="markdown level1 summary"><p>Registers a patch that runs against a single asset identified by its Addressables address.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LuaPatch PatchAddress(Script context, string converter, string address, Func&lt;DynValue, string&gt; method)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Script</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The host Lua script; its <code>ModId</code> global is used as the patch's default stage.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">converter</span></td>
+        <td><p>The name of the converter to use, as registered via <a class="xref" href="PatchManager.LuaPatching.Attributes.ConverterAttribute.html">ConverterAttribute</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">address</span></td>
+        <td><p>The Addressables address of the asset to patch.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Func</span>&lt;<span class="xref">DynValue</span>, <span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">method</span></td>
+        <td><p>The patch callback. Returns <code>&quot;remove&quot;</code> to delete the asset, <code>null</code> to keep it.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.LuaPatch.html">LuaPatch</a></td>
+        <td><p>The registered patch, suitable for chaining (for example <a class="xref" href="PatchManager.LuaPatching.LuaPatch.html#PatchManager_LuaPatching_LuaPatch_OnStage_System_String_">OnStage(string)</a>).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h5 class="exceptions">Exceptions</h5>
   <table class="table table-bordered table-condensed">
     <thead>

@@ -264,7 +264,9 @@
 
   <a id="KSP_Game_GameModeManager_Initialize_" data-uid="KSP.Game.GameModeManager.Initialize*"></a>
   <h4 id="KSP_Game_GameModeManager_Initialize_KSP_Game_GameInstance_System_Action_" data-uid="KSP.Game.GameModeManager.Initialize(KSP.Game.GameInstance,System.Action)">Initialize(GameInstance, Action)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Wires the localization callback. Game-mode asset loading is deferred to <a class="xref" href="KSP.Game.GameModeManager.html#KSP_Game_GameModeManager_LoadAllGameModes_System_Action_">LoadAllGameModes(Action)</a>
+so PatchManager can apply patches before the JSON is parsed.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -283,12 +285,14 @@
       <tr>
         <td><a class="xref" href="KSP.Game.GameInstance.html">GameInstance</a></td>
         <td><span class="parametername">gameInstance</span></td>
-        <td></td>
+        <td><p>The owning game instance.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Action</span></td>
         <td><span class="parametername">resolve</span></td>
-        <td></td>
+        <td><p>Callback invoked once registration finishes.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -331,6 +335,36 @@
       <tr>
         <td><span class="xref">bool</span></td>
         <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Game_GameModeManager_LoadAllGameModes_" data-uid="KSP.Game.GameModeManager.LoadAllGameModes*"></a>
+  <h4 id="KSP_Game_GameModeManager_LoadAllGameModes_System_Action_" data-uid="KSP.Game.GameModeManager.LoadAllGameModes(System.Action)">LoadAllGameModes(Action)</h4>
+  <div class="markdown level1 summary"><p>Loads every <code>game_mode</code>-labelled <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/TextAsset.html">TextAsset</a> from Addressables and parses each into a
+<a class="xref" href="KSP.Game.GameMode.html">GameMode</a> entry in <span class="xref">KSP.Game.GameModeManager._allGameModes</span>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void LoadAllGameModes(Action resolve)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action</span></td>
+        <td><span class="parametername">resolve</span></td>
+        <td><p>Callback invoked once every game-mode asset has been parsed and released.</p>
+</td>
       </tr>
     </tbody>
   </table>
