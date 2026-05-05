@@ -1857,12 +1857,13 @@ with IsCompoundJoint. (Struts, joint refinorcement, fuel tubes, etc.</p>
 
 
   <a id="KSP_Sim_impl_PartOwnerComponent_Remove_" data-uid="KSP.Sim.impl.PartOwnerComponent.Remove*"></a>
-  <h4 id="KSP_Sim_impl_PartOwnerComponent_Remove_KSP_Sim_impl_PartComponent_System_Boolean_" data-uid="KSP.Sim.impl.PartOwnerComponent.Remove(KSP.Sim.impl.PartComponent,System.Boolean)">Remove(PartComponent, bool)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="KSP_Sim_impl_PartOwnerComponent_Remove_KSP_Sim_impl_PartComponent_System_Boolean_System_Boolean_" data-uid="KSP.Sim.impl.PartOwnerComponent.Remove(KSP.Sim.impl.PartComponent,System.Boolean,System.Boolean)">Remove(PartComponent, bool, bool)</h4>
+  <div class="markdown level1 summary"><p>Removes a part from this part owner component</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Remove(PartComponent part, bool fireChangedEvents)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Remove(PartComponent part, bool fireChangedEvents, bool destroyOnEmpty = true)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -1877,15 +1878,29 @@ with IsCompoundJoint. (Struts, joint refinorcement, fuel tubes, etc.</p>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.PartComponent.html">PartComponent</a></td>
         <td><span class="parametername">part</span></td>
-        <td></td>
+        <td><p>The part to remove</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">fireChangedEvents</span></td>
-        <td></td>
+        <td><p>Should events be published for the part count changing</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">destroyOnEmpty</span></td>
+        <td><p>Should the part owner be destroyed once it is empty (defaults <code>true</code>)</p>
+</td>
       </tr>
     </tbody>
   </table>
+  <h5 id="KSP_Sim_impl_PartOwnerComponent_Remove_KSP_Sim_impl_PartComponent_System_Boolean_System_Boolean__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method did not have <code class="paramref">destroyOnEmpty</code> as a parameter originally, but this causes issues
+in the vessel merging path, where parts are removed from both vessels as they are moved over.
+Which could lead to earlier than wanted deletions of those old vessels, and they should be destroyed after
+the merge completes, not during.</p>
+</div>
 
 
   <a id="KSP_Sim_impl_PartOwnerComponent_RemoveContainerCallback_" data-uid="KSP.Sim.impl.PartOwnerComponent.RemoveContainerCallback*"></a>

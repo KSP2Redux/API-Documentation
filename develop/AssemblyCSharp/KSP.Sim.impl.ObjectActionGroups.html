@@ -390,7 +390,8 @@
 
   <a id="KSP_Sim_impl_ObjectActionGroups_ToggleActionGroupActionsInternal_" data-uid="KSP.Sim.impl.ObjectActionGroups.ToggleActionGroupActionsInternal*"></a>
   <h4 id="KSP_Sim_impl_ObjectActionGroups_ToggleActionGroupActionsInternal_KSP_Sim_KSPActionGroup_" data-uid="KSP.Sim.impl.ObjectActionGroups.ToggleActionGroupActionsInternal(KSP.Sim.KSPActionGroup)">ToggleActionGroupActionsInternal(KSPActionGroup)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Toggles all the actions on an action group</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -409,10 +410,40 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.KSPActionGroup.html">KSPActionGroup</a></td>
         <td><span class="parametername">group</span></td>
-        <td></td>
+        <td><p>The group to toggle</p>
+</td>
       </tr>
     </tbody>
   </table>
+  <h5 id="KSP_Sim_impl_ObjectActionGroups_ToggleActionGroupActionsInternal_KSP_Sim_KSPActionGroup__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Captures a snapshot of property states before toggling, as symmetry propagation will update property states
+mid loop, leading to a 2 (or other even) item symmetry group scenario not seemingly toggling as it does this:</p>
+<p>Initial state:
+1: false
+2: false</p>
+<p>Iteration 1 -&gt; Invert 1
+1: invert -&gt; true
+2: symmetry propagates -&gt; true</p>
+<p>Iteration 2 -&gt; Invert 2
+1: symmetry propagates -&gt; false
+2: invert -&gt; false</p>
+<p>Final state:
+1: false
+2: false</p>
+<p>So to counteract this bug, the initial state is snapshotted at the beginning, leading to a state like</p>
+<p>Initial state:
+1: false
+2: false</p>
+<p>Iteration 1 -&gt; Invert 1 from initial
+1: invert -&gt; true
+2: symmetry propagates -&gt; true</p>
+<p>Iteration 2 -&gt; Invert 2 from initial
+1: symmetry propagates -&gt; true
+2: invert -&gt; true</p>
+<p>Final state:
+1: true
+2: true</p>
+</div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
