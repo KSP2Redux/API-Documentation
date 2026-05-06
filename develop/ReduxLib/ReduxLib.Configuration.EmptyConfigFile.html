@@ -114,107 +114,14 @@
 </h3>
 
 
-  <a id="ReduxLib_Configuration_EmptyConfigFile_Item_" data-uid="ReduxLib.Configuration.EmptyConfigFile.Item*"></a>
-  <h4 id="ReduxLib_Configuration_EmptyConfigFile_Item_System_String_" data-uid="ReduxLib.Configuration.EmptyConfigFile.Item(System.String)">this[string]</h4>
-  <div class="markdown level1 summary"><p>A list of all keys in the specified section.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IReadOnlyList&lt;string&gt; this[string section] { get; }</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">string</span></td>
-        <td><span class="parametername">section</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">IReadOnlyList</span>&lt;<span class="xref">string</span>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="ReduxLib_Configuration_EmptyConfigFile_Item_" data-uid="ReduxLib.Configuration.EmptyConfigFile.Item*"></a>
-  <h4 id="ReduxLib_Configuration_EmptyConfigFile_Item_System_String_System_String_" data-uid="ReduxLib.Configuration.EmptyConfigFile.Item(System.String,System.String)">this[string, string]</h4>
-  <div class="markdown level1 summary"><p>Gets the <a class="xref" href="ReduxLib.Configuration.IConfigEntry.html">IConfigEntry</a> with the specified section and key.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IConfigEntry this[string section, string key] { get; }</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">string</span></td>
-        <td><span class="parametername">section</span></td>
-        <td><p>Section of the entry.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">string</span></td>
-        <td><span class="parametername">key</span></td>
-        <td><p>Key of the entry.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="ReduxLib.Configuration.IConfigEntry.html">IConfigEntry</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
   <a id="ReduxLib_Configuration_EmptyConfigFile_Sections_" data-uid="ReduxLib.Configuration.EmptyConfigFile.Sections*"></a>
   <h4 id="ReduxLib_Configuration_EmptyConfigFile_Sections" data-uid="ReduxLib.Configuration.EmptyConfigFile.Sections">Sections</h4>
-  <div class="markdown level1 summary"><p>A list of all sections in the configuration file.</p>
+  <div class="markdown level1 summary"><p>All sections in the configuration file, in declaration order. Also indexable by section name.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IReadOnlyList&lt;string&gt; Sections { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public ConfigSectionList Sections { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-condensed">
@@ -226,7 +133,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IReadOnlyList</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td><a class="xref" href="ReduxLib.Configuration.ConfigSectionList.html">ConfigSectionList</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -235,14 +142,16 @@
 </h3>
 
 
-  <a id="ReduxLib_Configuration_EmptyConfigFile_Bind_" data-uid="ReduxLib.Configuration.EmptyConfigFile.Bind*"></a>
-  <h4 id="ReduxLib_Configuration_EmptyConfigFile_Bind__1_System_String_System_String___0_System_String_ReduxLib_Configuration_IValueConstraint_" data-uid="ReduxLib.Configuration.EmptyConfigFile.Bind``1(System.String,System.String,``0,System.String,ReduxLib.Configuration.IValueConstraint)">Bind&lt;T&gt;(string, string, T?, string, IValueConstraint?)</h4>
-  <div class="markdown level1 summary"><p>Binds a new <a class="xref" href="ReduxLib.Configuration.IConfigEntry.html">IConfigEntry</a> to the specified section and key.</p>
+  <a id="ReduxLib_Configuration_EmptyConfigFile_GetOrCreateSection_" data-uid="ReduxLib.Configuration.EmptyConfigFile.GetOrCreateSection*"></a>
+  <h4 id="ReduxLib_Configuration_EmptyConfigFile_GetOrCreateSection_System_String_System_String_" data-uid="ReduxLib.Configuration.EmptyConfigFile.GetOrCreateSection(System.String,System.String)">GetOrCreateSection(string, string?)</h4>
+  <div class="markdown level1 summary"><p>Gets the section with the given name, creating it if it doesn't exist yet.
+If the section is being created, <code class="paramref">localizationKey</code> is used as its
+localization key. If the section already exists, its existing localization key is preserved.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IConfigEntry Bind&lt;T&gt;(string section, string key, T? defaultValue = default, string description = &quot;&quot;, IValueConstraint? constraint = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public IConfigSection GetOrCreateSection(string name, string? localizationKey)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -256,33 +165,13 @@
     <tbody>
       <tr>
         <td><span class="xref">string</span></td>
-        <td><span class="parametername">section</span></td>
-        <td><p>Section of the entry.</p>
-</td>
+        <td><span class="parametername">name</span></td>
+        <td></td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
-        <td><span class="parametername">key</span></td>
-        <td><p>Key of the entry.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">T</span></td>
-        <td><span class="parametername">defaultValue</span></td>
-        <td><p>Default value of the entry.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">string</span></td>
-        <td><span class="parametername">description</span></td>
-        <td><p>Description of the entry.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="ReduxLib.Configuration.IValueConstraint.html">IValueConstraint</a></td>
-        <td><span class="parametername">constraint</span></td>
-        <td><p>The initial constraint of the entry.</p>
-</td>
+        <td><span class="parametername">localizationKey</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -296,25 +185,8 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="ReduxLib.Configuration.IConfigEntry.html">IConfigEntry</a></td>
-        <td><p>The bound <a class="xref" href="ReduxLib.Configuration.IConfigEntry.html">IConfigEntry</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td><p>Type of the entry.</p>
-</td>
+        <td><a class="xref" href="ReduxLib.Configuration.IConfigSection.html">IConfigSection</a></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -332,6 +204,10 @@
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="ReduxLib.Configuration.IConfigFile.html">IConfigFile</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="ReduxLib.Configuration.ConfigExtensions.html#ReduxLib_Configuration_ConfigExtensions_Bind_ReduxLib_Configuration_IConfigFile_System_Object_">ConfigExtensions.Bind(IConfigFile, object)</a>
   </div>
 
 </article>
