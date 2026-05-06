@@ -111,15 +111,6 @@
       <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_GetJTokenForDynValue_Newtonsoft_Json_Linq_JToken_MoonSharp_Interpreter_DynValue_">JsonUserData.GetJTokenForDynValue(JToken, DynValue)</a>
     </div>
     <div>
-      <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_RequireArray_Newtonsoft_Json_Linq_JToken_System_String_">JsonUserData.RequireArray(JToken, string)</a>
-    </div>
-    <div>
-      <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_RequireObject_Newtonsoft_Json_Linq_JToken_System_String_">JsonUserData.RequireObject(JToken, string)</a>
-    </div>
-    <div>
-      <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_RequireString_Newtonsoft_Json_Linq_JToken_System_String_">JsonUserData.RequireString(JToken, string)</a>
-    </div>
-    <div>
       <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_HasKey_System_String_">JsonUserData.HasKey(string)</a>
     </div>
     <div>
@@ -144,7 +135,7 @@
 caches that translate string keys to array positions and to wrapped item values. Lua scripts then treat the array
 as if it were a Lua table keyed by item name -- string indexing, <a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html#PatchManager_LuaPatching_Utility_IndexedListUserData_Remove_System_String_">Remove(string)</a>, and iteration via
 <a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html#PatchManager_LuaPatching_Utility_IndexedListUserData_Pairs">Pairs()</a> all operate on names rather than raw JSON object keys. Mutations (<a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html#PatchManager_LuaPatching_Utility_IndexedListUserData_Append_MoonSharp_Interpreter_DynValue_">Append(DynValue)</a>,
-<a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html#PatchManager_LuaPatching_Utility_IndexedListUserData_Insert_System_Int32_MoonSharp_Interpreter_DynValue_">Insert(int, DynValue)</a>, Remove(int), <a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html#PatchManager_LuaPatching_Utility_IndexedListUserData_Clear">Clear()</a>) update the caches in step.
+<a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html#PatchManager_LuaPatching_Utility_IndexedListUserData_Insert_System_Int32_MoonSharp_Interpreter_DynValue_">Insert(int, DynValue)</a>, <a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html#PatchManager_LuaPatching_Utility_IndexedListUserData_Remove_System_Int32_">Remove(int)</a>, <a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html#PatchManager_LuaPatching_Utility_IndexedListUserData_Clear">Clear()</a>) update the caches in step.
 String-indexed assignment is intentionally unsupported and always throws -- callers must use the explicit
 add/remove methods so the name-to-index mapping stays consistent.</p>
 </div>
@@ -683,6 +674,53 @@ re-keys the list on its new name.</p>
 
 
   <a id="PatchManager_LuaPatching_Utility_IndexedListUserData_Remove_" data-uid="PatchManager.LuaPatching.Utility.IndexedListUserData.Remove*"></a>
+  <h4 id="PatchManager_LuaPatching_Utility_IndexedListUserData_Remove_System_Int32_" data-uid="PatchManager.LuaPatching.Utility.IndexedListUserData.Remove(System.Int32)">Remove(int)</h4>
+  <div class="markdown level1 summary"><p>Removes the array element at the given 1-indexed position.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Remove(int index)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>The 1-indexed array position to remove.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_Remove_System_Int32_">JsonUserData.Remove(int)</a></div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Exception</span></td>
+        <td><p>Thrown when the token is not <span class="xref">Newtonsoft.Json.Linq.JTokenType.Array</span> or when the index is out of range.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_Utility_IndexedListUserData_Remove_" data-uid="PatchManager.LuaPatching.Utility.IndexedListUserData.Remove*"></a>
   <h4 id="PatchManager_LuaPatching_Utility_IndexedListUserData_Remove_System_String_" data-uid="PatchManager.LuaPatching.Utility.IndexedListUserData.Remove(System.String)">Remove(string)</h4>
   <div class="markdown level1 summary"><p>Removes the object property with the given key.</p>
 </div>
@@ -727,84 +765,6 @@ re-keys the list on its new name.</p>
       </tr>
     </tbody>
   </table>
-
-
-  <a id="PatchManager_LuaPatching_Utility_IndexedListUserData_RemoveAt_" data-uid="PatchManager.LuaPatching.Utility.IndexedListUserData.RemoveAt*"></a>
-  <h4 id="PatchManager_LuaPatching_Utility_IndexedListUserData_RemoveAt_System_Int32_" data-uid="PatchManager.LuaPatching.Utility.IndexedListUserData.RemoveAt(System.Int32)">RemoveAt(int)</h4>
-  <div class="markdown level1 summary"><p>Removes the array element at the given 1-indexed position.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void RemoveAt(int index)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">int</span></td>
-        <td><span class="parametername">index</span></td>
-        <td><p>The 1-indexed array position to remove.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_RemoveAt_System_Int32_">JsonUserData.RemoveAt(int)</a></div>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Exception</span></td>
-        <td><p>Thrown when the token is not <span class="xref">Newtonsoft.Json.Linq.JTokenType.Array</span> or when the index is out of range.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="PatchManager_LuaPatching_Utility_IndexedListUserData_RemoveWhere_" data-uid="PatchManager.LuaPatching.Utility.IndexedListUserData.RemoveWhere*"></a>
-  <h4 id="PatchManager_LuaPatching_Utility_IndexedListUserData_RemoveWhere_System_Func_MoonSharp_Interpreter_DynValue_System_Boolean__" data-uid="PatchManager.LuaPatching.Utility.IndexedListUserData.RemoveWhere(System.Func{MoonSharp.Interpreter.DynValue,System.Boolean})">RemoveWhere(Func&lt;DynValue, bool&gt;)</h4>
-  <div class="markdown level1 summary"><p>Remove all items that match a passed predicate</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void RemoveWhere(Func&lt;DynValue, bool&gt; callback)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Func</span>&lt;<span class="xref">DynValue</span>, <span class="xref">bool</span>&gt;</td>
-        <td><span class="parametername">callback</span></td>
-        <td><p>The predicate to check against</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_RemoveWhere_System_Func_MoonSharp_Interpreter_DynValue_System_Boolean__">JsonUserData.RemoveWhere(Func&lt;DynValue, bool&gt;)</a></div>
 
 
   <a id="PatchManager_LuaPatching_Utility_IndexedListUserData_SoftRefresh_" data-uid="PatchManager.LuaPatching.Utility.IndexedListUserData.SoftRefresh*"></a>

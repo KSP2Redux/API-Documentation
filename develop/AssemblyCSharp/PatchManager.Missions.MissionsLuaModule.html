@@ -189,22 +189,6 @@ the underlying JSON for further configuration.</p>
       </tr>
     </tbody>
   </table>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">ScriptRuntimeException</span></td>
-        <td><p>Thrown when <code class="paramref">type</code> resolves to a class without a parameterless constructor.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
 
 
   <a id="PatchManager_Missions_MissionsLuaModule_And_" data-uid="PatchManager.Missions.MissionsLuaModule.And*"></a>
@@ -491,13 +475,13 @@ further configuration.</p>
 
 
   <a id="PatchManager_Missions_MissionsLuaModule_Patch_" data-uid="PatchManager.Missions.MissionsLuaModule.Patch*"></a>
-  <h4 id="PatchManager_Missions_MissionsLuaModule_Patch_MoonSharp_Interpreter_Script_System_String_" data-uid="PatchManager.Missions.MissionsLuaModule.Patch(MoonSharp.Interpreter.Script,System.String)">Patch(Script, string)</h4>
-  <div class="markdown level1 summary"><p>Registers a mission patch with the given namespaced patch name.</p>
+  <h4 id="PatchManager_Missions_MissionsLuaModule_Patch_MoonSharp_Interpreter_Script_System_String_System_Func_PatchManager_Missions_UserData_MissionUserData_System_String__" data-uid="PatchManager.Missions.MissionsLuaModule.Patch(MoonSharp.Interpreter.Script,System.String,System.Func{PatchManager.Missions.UserData.MissionUserData,System.String})">Patch(Script, string, Func&lt;MissionUserData, string&gt;)</h4>
+  <div class="markdown level1 summary"><p>Registers a patch that runs against the mission matching <code class="paramref">name</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public LuaPatch Patch(Script script, string name)</code></pre>
+    <pre><code class="lang-csharp hljs">public LuaPatch Patch(Script script, string name, Func&lt;MissionUserData, string&gt; callback)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -512,13 +496,19 @@ further configuration.</p>
       <tr>
         <td><span class="xref">Script</span></td>
         <td><span class="parametername">script</span></td>
-        <td><p>The host Lua script; its <code>ModId</code> global is used to namespace <code class="paramref">name</code>.</p>
+        <td><p>The host Lua script.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">name</span></td>
-        <td><p>The patch's local name; namespaced with the host mod's ID.</p>
+        <td><p>The mission name pattern (supports <code>*</code> and <code>?</code> wildcards).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Func</span>&lt;<a class="xref" href="PatchManager.Missions.UserData.MissionUserData.html">MissionUserData</a>, <span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">callback</span></td>
+        <td><p>The patch callback. Returns <code>&quot;remove&quot;</code> to delete the mission, <code>null</code> to keep it.</p>
 </td>
       </tr>
     </tbody>
@@ -539,9 +529,57 @@ further configuration.</p>
       </tr>
     </tbody>
   </table>
-  <h5 id="PatchManager_Missions_MissionsLuaModule_Patch_MoonSharp_Interpreter_Script_System_String__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>The patch matches every mission by default; restrict it via <a class="xref" href="PatchManager.LuaPatching.LuaPatch.html#PatchManager_LuaPatching_LuaPatch_Named_System_String___">Named(params string[])</a>, which supports <code>*</code> and <code>?</code> wildcards.</p>
+
+
+  <a id="PatchManager_Missions_MissionsLuaModule_PatchAll_" data-uid="PatchManager.Missions.MissionsLuaModule.PatchAll*"></a>
+  <h4 id="PatchManager_Missions_MissionsLuaModule_PatchAll_MoonSharp_Interpreter_Script_System_Func_PatchManager_Missions_UserData_MissionUserData_System_String__" data-uid="PatchManager.Missions.MissionsLuaModule.PatchAll(MoonSharp.Interpreter.Script,System.Func{PatchManager.Missions.UserData.MissionUserData,System.String})">PatchAll(Script, Func&lt;MissionUserData, string&gt;)</h4>
+  <div class="markdown level1 summary"><p>Registers a patch that runs against every mission definition.</p>
 </div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LuaPatch PatchAll(Script script, Func&lt;MissionUserData, string&gt; callback)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Script</span></td>
+        <td><span class="parametername">script</span></td>
+        <td><p>The host Lua script.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Func</span>&lt;<a class="xref" href="PatchManager.Missions.UserData.MissionUserData.html">MissionUserData</a>, <span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">callback</span></td>
+        <td><p>The patch callback. Returns <code>&quot;remove&quot;</code> to delete the mission, <code>null</code> to keep it.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.LuaPatch.html">LuaPatch</a></td>
+        <td><p>The registered patch.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
