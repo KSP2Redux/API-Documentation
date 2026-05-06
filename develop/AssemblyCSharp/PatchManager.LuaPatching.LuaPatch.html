@@ -288,6 +288,35 @@ public IConverter ConverterInstance</code></pre>
   </table>
 
 
+  <h4 id="PatchManager_LuaPatching_LuaPatch_DisallowedNames" data-uid="PatchManager.LuaPatching.LuaPatch.DisallowedNames">DisallowedNames</h4>
+  <div class="markdown level1 summary"><p>The asset names this patch rejects.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+public HashSet&lt;NamePattern&gt; DisallowedNames</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">HashSet</span>&lt;<a class="xref" href="PatchManager.LuaPatching.Utility.NamePattern.html">NamePattern</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PatchManager_LuaPatching_LuaPatch_DisallowedNames_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Supports <code>*</code> and <code>?</code> wildcards.</p>
+</div>
+
+
   <h4 id="PatchManager_LuaPatching_LuaPatch_Label" data-uid="PatchManager.LuaPatching.LuaPatch.Label">Label</h4>
   <div class="markdown level1 summary"><p>The addressables label whose assets this patch targets.</p>
 </div>
@@ -954,6 +983,57 @@ mutates the wrapped JSON in place; its non-removal return value is otherwise unu
   </table>
 
 
+  <a id="PatchManager_LuaPatching_LuaPatch_HasNo_" data-uid="PatchManager.LuaPatching.LuaPatch.HasNo*"></a>
+  <h4 id="PatchManager_LuaPatching_LuaPatch_HasNo_System_String_System_String_" data-uid="PatchManager.LuaPatching.LuaPatch.HasNo(System.String,System.String)">HasNo(string, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a requirement that the asset does not expose <code class="paramref">key</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LuaPatch HasNo(string key, string message = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">key</span></td>
+        <td><p>The key the asset must not expose.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">message</span></td>
+        <td><p>Optional assertion message logged when the key is present.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.LuaPatch.html">LuaPatch</a></td>
+        <td><p>The patch instance for chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="PatchManager_LuaPatching_LuaPatch_Named_" data-uid="PatchManager.LuaPatching.LuaPatch.Named*"></a>
   <h4 id="PatchManager_LuaPatching_LuaPatch_Named_System_String___" data-uid="PatchManager.LuaPatching.LuaPatch.Named(System.String[])">Named(params string[])</h4>
   <div class="markdown level1 summary"><p>Makes the patch target the assets with these names.</p>
@@ -1090,6 +1170,51 @@ mutates the wrapped JSON in place; its non-removal return value is otherwise unu
   <h5 id="PatchManager_LuaPatching_LuaPatch_NeedsPatch_System_String____remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This set is resolved against the patches already filtered through mod-level requirements.</p>
 </div>
+
+
+  <a id="PatchManager_LuaPatching_LuaPatch_NotNamed_" data-uid="PatchManager.LuaPatching.LuaPatch.NotNamed*"></a>
+  <h4 id="PatchManager_LuaPatching_LuaPatch_NotNamed_System_String___" data-uid="PatchManager.LuaPatching.LuaPatch.NotNamed(System.String[])">NotNamed(params string[])</h4>
+  <div class="markdown level1 summary"><p>Makes the patch reject the assets with these names.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LuaPatch NotNamed(params string[] names)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span>[]</td>
+        <td><span class="parametername">names</span></td>
+        <td><p>The asset names to reject.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.LuaPatch.html">LuaPatch</a></td>
+        <td><p>The patch instance for chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <a id="PatchManager_LuaPatching_LuaPatch_Requires_" data-uid="PatchManager.LuaPatching.LuaPatch.Requires*"></a>
