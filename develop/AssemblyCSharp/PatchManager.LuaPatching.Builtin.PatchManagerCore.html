@@ -184,7 +184,7 @@ public class PatchManagerCore</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">KeyNotFoundException</span></td>
+        <td><span class="xref">ScriptRuntimeException</span></td>
         <td><p>Thrown when no submodule with the given name is registered.</p>
 </td>
       </tr>
@@ -192,120 +192,6 @@ public class PatchManagerCore</code></pre>
   </table>
   <h3 id="methods">Methods
 </h3>
-
-
-  <a id="PatchManager_LuaPatching_Builtin_PatchManagerCore_GlobalStage_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.GlobalStage*"></a>
-  <h4 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_GlobalStage_MoonSharp_Interpreter_Script_System_String_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.GlobalStage(MoonSharp.Interpreter.Script,System.String)">GlobalStage(Script, string)</h4>
-  <div class="markdown level1 summary"><p>Creates a named stage that runs after the last implicit stage of the entire mod load order.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Stage GlobalStage(Script context, string name)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Script</span></td>
-        <td><span class="parametername">context</span></td>
-        <td><p>The host Lua script; its <code>ModId</code> global is used to namespace the stage.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">string</span></td>
-        <td><span class="parametername">name</span></td>
-        <td><p>The stage name (registered as <code>&quot;modId:name&quot;</code>).</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="PatchManager.LuaPatching.Stage.html">Stage</a></td>
-        <td><p>The created stage, suitable for chaining (for example <a class="xref" href="PatchManager.LuaPatching.Stage.html#PatchManager_LuaPatching_Stage_Before_MoonSharp_Interpreter_CallbackArguments_">Before(CallbackArguments)</a> / <a class="xref" href="PatchManager.LuaPatching.Stage.html#PatchManager_LuaPatching_Stage_After_MoonSharp_Interpreter_CallbackArguments_">After(CallbackArguments)</a>).</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_GlobalStage_MoonSharp_Interpreter_Script_System_String__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>The stage is registered under <code>&quot;modId:name&quot;</code>; references via <a class="xref" href="PatchManager.LuaPatching.LuaPatch.html#PatchManager_LuaPatching_LuaPatch_OnStage_System_String_">OnStage(string)</a>,
-<a class="xref" href="PatchManager.LuaPatching.Stage.html#PatchManager_LuaPatching_Stage_Before_MoonSharp_Interpreter_CallbackArguments_">Before(CallbackArguments)</a>, and <a class="xref" href="PatchManager.LuaPatching.Stage.html#PatchManager_LuaPatching_Stage_After_MoonSharp_Interpreter_CallbackArguments_">After(CallbackArguments)</a> use that fully-qualified name.</p>
-</div>
-
-
-  <a id="PatchManager_LuaPatching_Builtin_PatchManagerCore_ImplicitStage_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.ImplicitStage*"></a>
-  <h4 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_ImplicitStage_MoonSharp_Interpreter_Script_System_String_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.ImplicitStage(MoonSharp.Interpreter.Script,System.String)">ImplicitStage(Script, string)</h4>
-  <div class="markdown level1 summary"><p>Creates a named stage that runs after the most recent implicit stage from the same host mod.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Stage ImplicitStage(Script context, string name)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Script</span></td>
-        <td><span class="parametername">context</span></td>
-        <td><p>The host Lua script; its <code>ModId</code> global is used to scope the implicit chain.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">string</span></td>
-        <td><span class="parametername">name</span></td>
-        <td><p>The stage name (registered as <code>&quot;modId:name&quot;</code>).</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="PatchManager.LuaPatching.Stage.html">Stage</a></td>
-        <td><p>The created stage, suitable for chaining (for example <a class="xref" href="PatchManager.LuaPatching.Stage.html#PatchManager_LuaPatching_Stage_Before_MoonSharp_Interpreter_CallbackArguments_">Before(CallbackArguments)</a> / <a class="xref" href="PatchManager.LuaPatching.Stage.html#PatchManager_LuaPatching_Stage_After_MoonSharp_Interpreter_CallbackArguments_">After(CallbackArguments)</a>).</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_ImplicitStage_MoonSharp_Interpreter_Script_System_String__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Use this when stages within a mod should run in declaration order. The first <code>ImplicitStage</code> in a mod
-runs after the mod's own base stage, and each subsequent one runs after its predecessor. The mod's
-<code>__post</code> stage is also updated to run after the new stage so the mod's post stage stays at the tail
-of the mod's chain. The stage is registered under <code>&quot;modId:name&quot;</code>; references via
-<a class="xref" href="PatchManager.LuaPatching.LuaPatch.html#PatchManager_LuaPatching_LuaPatch_OnStage_System_String_">OnStage(string)</a>, <a class="xref" href="PatchManager.LuaPatching.Stage.html#PatchManager_LuaPatching_Stage_Before_MoonSharp_Interpreter_CallbackArguments_">Before(CallbackArguments)</a>, and <a class="xref" href="PatchManager.LuaPatching.Stage.html#PatchManager_LuaPatching_Stage_After_MoonSharp_Interpreter_CallbackArguments_">After(CallbackArguments)</a> use that
-fully-qualified name.</p>
-</div>
 
 
   <a id="PatchManager_LuaPatching_Builtin_PatchManagerCore_Loaded_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.Loaded*"></a>
@@ -408,64 +294,7 @@ fully-qualified name.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Exception</span></td>
-        <td><p>Thrown when <code class="paramref">converter</code> is not registered.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="PatchManager_LuaPatching_Builtin_PatchManagerCore_NewAddress_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.NewAddress*"></a>
-  <h4 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_NewAddress_System_String_System_String_MoonSharp_Interpreter_DynValue_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.NewAddress(System.String,System.String,MoonSharp.Interpreter.DynValue)">NewAddress(string, string, DynValue)</h4>
-  <div class="markdown level1 summary"><p>Queues a brand-new asset for creation at the given Addressables address, with no label.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void NewAddress(string converter, string address, DynValue newObject)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">string</span></td>
-        <td><span class="parametername">converter</span></td>
-        <td><p>The name of the converter that will serialize <code class="paramref">newObject</code> to JSON.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">string</span></td>
-        <td><span class="parametername">address</span></td>
-        <td><p>The Addressables address for the new asset (globally unique).</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">DynValue</span></td>
-        <td><span class="parametername">newObject</span></td>
-        <td><p>The Lua-facing value for the new asset.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Exception</span></td>
+        <td><span class="xref">ScriptRuntimeException</span></td>
         <td><p>Thrown when <code class="paramref">converter</code> is not registered.</p>
 </td>
       </tr>
@@ -474,13 +303,13 @@ fully-qualified name.</p>
 
 
   <a id="PatchManager_LuaPatching_Builtin_PatchManagerCore_Patch_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.Patch*"></a>
-  <h4 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_Patch_MoonSharp_Interpreter_Script_System_String_System_String_System_String_System_Func_MoonSharp_Interpreter_DynValue_System_String__" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.Patch(MoonSharp.Interpreter.Script,System.String,System.String,System.String,System.Func{MoonSharp.Interpreter.DynValue,System.String})">Patch(Script, string, string, string, Func&lt;DynValue, string&gt;)</h4>
-  <div class="markdown level1 summary"><p>Registers a patch that runs against assets under the given label whose name matches <code class="paramref">name</code>.</p>
+  <h4 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_Patch_MoonSharp_Interpreter_Script_System_String_System_String_System_String_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.Patch(MoonSharp.Interpreter.Script,System.String,System.String,System.String)">Patch(Script, string, string, string)</h4>
+  <div class="markdown level1 summary"><p>Registers a patch keyed by the given addressables label and namespaced patch name.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public LuaPatch Patch(Script context, string converter, string label, string name, Func&lt;DynValue, string&gt; method)</code></pre>
+    <pre><code class="lang-csharp hljs">public LuaPatch Patch(Script script, string converter, string label, string name)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -494,175 +323,8 @@ fully-qualified name.</p>
     <tbody>
       <tr>
         <td><span class="xref">Script</span></td>
-        <td><span class="parametername">context</span></td>
-        <td><p>The host Lua script; its <code>ModId</code> global is used as the patch's default stage.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">string</span></td>
-        <td><span class="parametername">converter</span></td>
-        <td><p>The name of the converter to use, as registered via <a class="xref" href="PatchManager.LuaPatching.Attributes.ConverterAttribute.html">ConverterAttribute</a>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">string</span></td>
-        <td><span class="parametername">label</span></td>
-        <td><p>The addressables label to patch.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">string</span></td>
-        <td><span class="parametername">name</span></td>
-        <td><p>The addressables address pattern to match.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">Func</span>&lt;<span class="xref">DynValue</span>, <span class="xref">string</span>&gt;</td>
-        <td><span class="parametername">method</span></td>
-        <td><p>The patch callback. Returns <code>&quot;remove&quot;</code> to delete the asset, <code>null</code> to keep it.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="PatchManager.LuaPatching.LuaPatch.html">LuaPatch</a></td>
-        <td><p>The registered patch, suitable for chaining (for example <a class="xref" href="PatchManager.LuaPatching.LuaPatch.html#PatchManager_LuaPatching_LuaPatch_OnStage_System_String_">OnStage(string)</a>).</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_Patch_MoonSharp_Interpreter_Script_System_String_System_String_System_String_System_Func_MoonSharp_Interpreter_DynValue_System_String___remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p><code class="paramref">name</code> may include <code>*</code> and <code>?</code> wildcards, expanded by Universe.MatchesPattern.</p>
-</div>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Exception</span></td>
-        <td><p>Thrown when <code class="paramref">converter</code> is not registered, or when <code class="paramref">method</code> is null.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="PatchManager_LuaPatching_Builtin_PatchManagerCore_PatchAddress_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.PatchAddress*"></a>
-  <h4 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_PatchAddress_MoonSharp_Interpreter_Script_System_String_System_String_System_Func_MoonSharp_Interpreter_DynValue_System_String__" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.PatchAddress(MoonSharp.Interpreter.Script,System.String,System.String,System.Func{MoonSharp.Interpreter.DynValue,System.String})">PatchAddress(Script, string, string, Func&lt;DynValue, string&gt;)</h4>
-  <div class="markdown level1 summary"><p>Registers a patch that runs against a single asset identified by its Addressables address.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public LuaPatch PatchAddress(Script context, string converter, string address, Func&lt;DynValue, string&gt; method)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Script</span></td>
-        <td><span class="parametername">context</span></td>
-        <td><p>The host Lua script; its <code>ModId</code> global is used as the patch's default stage.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">string</span></td>
-        <td><span class="parametername">converter</span></td>
-        <td><p>The name of the converter to use, as registered via <a class="xref" href="PatchManager.LuaPatching.Attributes.ConverterAttribute.html">ConverterAttribute</a>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">string</span></td>
-        <td><span class="parametername">address</span></td>
-        <td><p>The Addressables address of the asset to patch.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">Func</span>&lt;<span class="xref">DynValue</span>, <span class="xref">string</span>&gt;</td>
-        <td><span class="parametername">method</span></td>
-        <td><p>The patch callback. Returns <code>&quot;remove&quot;</code> to delete the asset, <code>null</code> to keep it.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="PatchManager.LuaPatching.LuaPatch.html">LuaPatch</a></td>
-        <td><p>The registered patch, suitable for chaining (for example <a class="xref" href="PatchManager.LuaPatching.LuaPatch.html#PatchManager_LuaPatching_LuaPatch_OnStage_System_String_">OnStage(string)</a>).</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Exception</span></td>
-        <td><p>Thrown when <code class="paramref">converter</code> is not registered, or when <code class="paramref">method</code> is null.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="PatchManager_LuaPatching_Builtin_PatchManagerCore_PatchAll_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.PatchAll*"></a>
-  <h4 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_PatchAll_MoonSharp_Interpreter_Script_System_String_System_String_System_Func_MoonSharp_Interpreter_DynValue_System_String__" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.PatchAll(MoonSharp.Interpreter.Script,System.String,System.String,System.Func{MoonSharp.Interpreter.DynValue,System.String})">PatchAll(Script, string, string, Func&lt;DynValue, string&gt;)</h4>
-  <div class="markdown level1 summary"><p>Registers a patch that runs against every asset under the given addressables label.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public LuaPatch PatchAll(Script context, string converter, string label, Func&lt;DynValue, string&gt; method)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Script</span></td>
-        <td><span class="parametername">context</span></td>
-        <td><p>The host Lua script; its <code>ModId</code> global is used as the patch's default stage.</p>
+        <td><span class="parametername">script</span></td>
+        <td><p>The host Lua script; its <code>ModId</code> global is used to namespace <code class="paramref">name</code>.</p>
 </td>
       </tr>
       <tr>
@@ -678,9 +340,9 @@ fully-qualified name.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Func</span>&lt;<span class="xref">DynValue</span>, <span class="xref">string</span>&gt;</td>
-        <td><span class="parametername">method</span></td>
-        <td><p>The patch callback. Returns <code>&quot;remove&quot;</code> to delete the asset, <code>null</code> to keep it.</p>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The patch's local name; the host mod's ID is prepended to form the full namespaced name.</p>
 </td>
       </tr>
     </tbody>
@@ -696,7 +358,7 @@ fully-qualified name.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="PatchManager.LuaPatching.LuaPatch.html">LuaPatch</a></td>
-        <td><p>The registered patch, suitable for chaining (for example <a class="xref" href="PatchManager.LuaPatching.LuaPatch.html#PatchManager_LuaPatching_LuaPatch_OnStage_System_String_">OnStage(string)</a>).</p>
+        <td><p>The registered patch, suitable for chaining (for example <a class="xref" href="PatchManager.LuaPatching.LuaPatch.html#PatchManager_LuaPatching_LuaPatch_Do_System_Func_MoonSharp_Interpreter_DynValue_System_String__">Do(Func&lt;DynValue, string&gt;)</a>).</p>
 </td>
       </tr>
     </tbody>
@@ -711,67 +373,12 @@ fully-qualified name.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Exception</span></td>
-        <td><p>Thrown when <code class="paramref">converter</code> is not registered, or when <code class="paramref">method</code> is null.</p>
+        <td><span class="xref">ScriptRuntimeException</span></td>
+        <td><p>Thrown when <code class="paramref">converter</code> is not registered.</p>
 </td>
       </tr>
     </tbody>
   </table>
-
-
-  <a id="PatchManager_LuaPatching_Builtin_PatchManagerCore_Stage_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.Stage*"></a>
-  <h4 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_Stage_MoonSharp_Interpreter_Script_System_String_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.Stage(MoonSharp.Interpreter.Script,System.String)">Stage(Script, string)</h4>
-  <div class="markdown level1 summary"><p>Creates a named stage with no implicit ordering; callers must declare any required relations explicitly.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Stage Stage(Script context, string name)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Script</span></td>
-        <td><span class="parametername">context</span></td>
-        <td><p>The host Lua script; its <code>ModId</code> global is used to namespace the stage.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">string</span></td>
-        <td><span class="parametername">name</span></td>
-        <td><p>The stage name (registered as <code>&quot;modId:name&quot;</code>).</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="PatchManager.LuaPatching.Stage.html">Stage</a></td>
-        <td><p>The created stage, suitable for chaining (for example <a class="xref" href="PatchManager.LuaPatching.Stage.html#PatchManager_LuaPatching_Stage_Before_MoonSharp_Interpreter_CallbackArguments_">Before(CallbackArguments)</a> / <a class="xref" href="PatchManager.LuaPatching.Stage.html#PatchManager_LuaPatching_Stage_After_MoonSharp_Interpreter_CallbackArguments_">After(CallbackArguments)</a>).</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_Stage_MoonSharp_Interpreter_Script_System_String__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>The stage is registered under <code>&quot;modId:name&quot;</code>; references via <a class="xref" href="PatchManager.LuaPatching.LuaPatch.html#PatchManager_LuaPatching_LuaPatch_OnStage_System_String_">OnStage(string)</a>,
-<a class="xref" href="PatchManager.LuaPatching.Stage.html#PatchManager_LuaPatching_Stage_Before_MoonSharp_Interpreter_CallbackArguments_">Before(CallbackArguments)</a>, and <a class="xref" href="PatchManager.LuaPatching.Stage.html#PatchManager_LuaPatching_Stage_After_MoonSharp_Interpreter_CallbackArguments_">After(CallbackArguments)</a> use that fully-qualified name.</p>
-</div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
