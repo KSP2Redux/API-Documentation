@@ -428,7 +428,7 @@ public static DynValue GetFromJToken(JToken token)</code></pre>
       <tr>
         <td><span class="xref">JToken</span></td>
         <td><span class="parametername">token</span></td>
-        <td><p>The token to lift.</p>
+        <td><p>The token to lift, or <code>null</code> for a missing key.</p>
 </td>
       </tr>
     </tbody>
@@ -450,9 +450,10 @@ public static DynValue GetFromJToken(JToken token)</code></pre>
     </tbody>
   </table>
   <h5 id="PatchManager_LuaPatching_JsonUserData_GetFromJToken_Newtonsoft_Json_Linq_JToken__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Objects and arrays are wrapped in a fresh <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a>; primitives become the matching
-<span class="xref">MoonSharp.Interpreter.DynValue</span> kind; <span class="xref">Newtonsoft.Json.Linq.JTokenType.None</span>, <span class="xref">Newtonsoft.Json.Linq.JTokenType.Null</span>, and
-<span class="xref">Newtonsoft.Json.Linq.JTokenType.Undefined</span> all map to <span class="xref">MoonSharp.Interpreter.DynValue.Nil</span>.</p>
+  <div class="markdown level1 remarks"><p>A null token (missing JSON key) maps to <span class="xref">MoonSharp.Interpreter.DynValue.Nil</span>. Objects and arrays are wrapped in
+a fresh <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a>; primitives become the matching <span class="xref">MoonSharp.Interpreter.DynValue</span> kind;
+<span class="xref">Newtonsoft.Json.Linq.JTokenType.None</span>, <span class="xref">Newtonsoft.Json.Linq.JTokenType.Null</span>, and <span class="xref">Newtonsoft.Json.Linq.JTokenType.Undefined</span>
+all map to <span class="xref">MoonSharp.Interpreter.DynValue.Nil</span>.</p>
 </div>
   <h5 class="exceptions">Exceptions</h5>
   <table class="table table-bordered table-condensed">

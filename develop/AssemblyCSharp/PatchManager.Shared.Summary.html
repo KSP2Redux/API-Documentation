@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class Summary | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="This is a class that holds the summary state for patches">
+    <meta name="description" content="Per-run summary of patch loading and application across the Early, Default, and Late passes.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,7 @@
 
 
   <h1 id="PatchManager_Shared_Summary" data-uid="PatchManager.Shared.Summary" class="text-break">Class Summary</h1>
-  <div class="markdown level0 summary"><p>This is a class that holds the summary state for patches</p>
+  <div class="markdown level0 summary"><p>Per-run summary of patch loading and application across the Early, Default, and Late passes.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -112,7 +112,7 @@
 
 
   <h4 id="PatchManager_Shared_Summary_ErroredFiles" data-uid="PatchManager.Shared.Summary.ErroredFiles">ErroredFiles</h4>
-  <div class="markdown level1 summary"><p>The files that failed even loading</p>
+  <div class="markdown level1 summary"><p>Lua files that failed to load.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -162,7 +162,7 @@
 
 
   <h4 id="PatchManager_Shared_Summary_RecognizedModIds" data-uid="PatchManager.Shared.Summary.RecognizedModIds">RecognizedModIds</h4>
-  <div class="markdown level1 summary"><p>A list of recognized mod names in the patching system</p>
+  <div class="markdown level1 summary"><p>Mod IDs the patching system has registered.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -187,7 +187,7 @@
 
 
   <h4 id="PatchManager_Shared_Summary_RemovedPatches" data-uid="PatchManager.Shared.Summary.RemovedPatches">RemovedPatches</h4>
-  <div class="markdown level1 summary"><p>This is all the patches that were removed during the setup phase</p>
+  <div class="markdown level1 summary"><p>Patches that were removed during the setup phase before any pass ran.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -212,12 +212,12 @@
 
 
   <h4 id="PatchManager_Shared_Summary_Summaries" data-uid="PatchManager.Shared.Summary.Summaries">Summaries</h4>
-  <div class="markdown level1 summary"><p>All of the current summaries</p>
+  <div class="markdown level1 summary"><p>Per-label asset summaries, in the order labels were first touched.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public List&lt;(string labelName, List&lt;(string assetName, string address, List&lt;Summary.SummaryEntry&gt; entries)&gt;)&gt; Summaries</code></pre>
+    <pre><code class="lang-csharp hljs">public List&lt;(string labelName, List&lt;Summary.AssetSummary&gt; assets)&gt; Summaries</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -229,7 +229,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">List</span>&lt;(<span class="xref">string</span> <span class="xref">labelName</span>, <span class="xref">List</span>&lt;(<span class="xref">string</span> <span class="xref">assetName</span>, <span class="xref">string</span> <span class="xref">address</span>, <span class="xref">List</span>&lt;<a class="xref" href="PatchManager.Shared.Summary.html">Summary</a>.<a class="xref" href="PatchManager.Shared.Summary.SummaryEntry.html">SummaryEntry</a>&gt; <span class="xref">entries</span>)&gt;)&gt;</td>
+        <td><span class="xref">List</span>&lt;(<span class="xref">string</span> <span class="xref">labelName</span>, <span class="xref">List</span>&lt;<a class="xref" href="PatchManager.Shared.Summary.html">Summary</a>.<a class="xref" href="PatchManager.Shared.Summary.AssetSummary.html">AssetSummary</a>&gt; <span class="xref">assets</span>)&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -240,7 +240,7 @@
 
   <a id="PatchManager_Shared_Summary_Apply_" data-uid="PatchManager.Shared.Summary.Apply*"></a>
   <h4 id="PatchManager_Shared_Summary_Apply_System_String_" data-uid="PatchManager.Shared.Summary.Apply(System.String)">Apply(string)</h4>
-  <div class="markdown level1 summary"><p>Mark a patch as applied</p>
+  <div class="markdown level1 summary"><p>Marks a patch as applied in the current pass.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -260,7 +260,7 @@
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">patchName</span></td>
-        <td><p>The patch to mark as applied</p>
+        <td><p>The patch to mark.</p>
 </td>
       </tr>
     </tbody>
@@ -269,7 +269,9 @@
 
   <a id="PatchManager_Shared_Summary_BeginAsset_" data-uid="PatchManager.Shared.Summary.BeginAsset*"></a>
   <h4 id="PatchManager_Shared_Summary_BeginAsset_System_String_System_String_" data-uid="PatchManager.Shared.Summary.BeginAsset(System.String,System.String)">BeginAsset(string, string)</h4>
-  <div class="markdown level1 summary"><p>Note that we are starting to patch the given asset in the summary</p>
+  <div class="markdown level1 summary"><p>Begins or resumes the given asset under the current label. Reuses the existing
+<a class="xref" href="PatchManager.Shared.Summary.AssetSummary.html">Summary.AssetSummary</a> when the asset has been started before so multi-pass entries
+accumulate under one asset heading.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -289,13 +291,13 @@
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">assetName</span></td>
-        <td><p>The name of the asset as targeted via :Named</p>
+        <td><p>The asset's name.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">address</span></td>
-        <td><p>The address of the label</p>
+        <td><p>The addressables address.</p>
 </td>
       </tr>
     </tbody>
@@ -304,7 +306,7 @@
 
   <a id="PatchManager_Shared_Summary_BeginLabel_" data-uid="PatchManager.Shared.Summary.BeginLabel*"></a>
   <h4 id="PatchManager_Shared_Summary_BeginLabel_System_String_" data-uid="PatchManager.Shared.Summary.BeginLabel(System.String)">BeginLabel(string)</h4>
-  <div class="markdown level1 summary"><p>Note that we are beginning the given label in the summary</p>
+  <div class="markdown level1 summary"><p>Begins or resumes the given label.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -324,16 +326,20 @@
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">labelName</span></td>
-        <td><p>The label name</p>
+        <td><p>The label name.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 id="PatchManager_Shared_Summary_BeginLabel_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Reuses the existing asset list when the label has already been started so multi-pass entries
+accumulate under one heading.</p>
+</div>
 
 
   <a id="PatchManager_Shared_Summary_BeginNewAsset_" data-uid="PatchManager.Shared.Summary.BeginNewAsset*"></a>
   <h4 id="PatchManager_Shared_Summary_BeginNewAsset_System_String_System_String_" data-uid="PatchManager.Shared.Summary.BeginNewAsset(System.String,System.String)">BeginNewAsset(string, string)</h4>
-  <div class="markdown level1 summary"><p>Like <a class="xref" href="PatchManager.Shared.Summary.html#PatchManager_Shared_Summary_BeginAsset_System_String_System_String_">BeginAsset(string, string)</a>, but flags this asset as a brand-new one created during patching so it counts in <a class="xref" href="PatchManager.Shared.Summary.html#PatchManager_Shared_Summary_NewAssetCount">NewAssetCount</a>.</p>
+  <div class="markdown level1 summary"><p>Like <a class="xref" href="PatchManager.Shared.Summary.html#PatchManager_Shared_Summary_BeginAsset_System_String_System_String_">BeginAsset(string, string)</a> but counts the asset as a brand-new creation.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -366,9 +372,39 @@
   </table>
 
 
+  <a id="PatchManager_Shared_Summary_BeginPass_" data-uid="PatchManager.Shared.Summary.BeginPass*"></a>
+  <h4 id="PatchManager_Shared_Summary_BeginPass_PatchManager_LuaPatching_LuaPatch_PatchPass_" data-uid="PatchManager.Shared.Summary.BeginPass(PatchManager.LuaPatching.LuaPatch.PatchPass)">BeginPass(PatchPass)</h4>
+  <div class="markdown level1 summary"><p>Sets the pass that subsequent <a class="xref" href="PatchManager.Shared.Summary.html#PatchManager_Shared_Summary_Apply_System_String_">Apply(string)</a>, <a class="xref" href="PatchManager.Shared.Summary.html#PatchManager_Shared_Summary_Skip_System_String_System_String_">Skip(string, string)</a>,
+<a class="xref" href="PatchManager.Shared.Summary.html#PatchManager_Shared_Summary_Error_System_String_System_String_">Error(string, string)</a>, and <a class="xref" href="PatchManager.Shared.Summary.html#PatchManager_Shared_Summary_RemovedAsset_System_String_">RemovedAsset(string)</a> calls are stamped with.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void BeginPass(LuaPatch.PatchPass pass)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.LuaPatch.html">LuaPatch</a>.<a class="xref" href="PatchManager.LuaPatching.LuaPatch.PatchPass.html">PatchPass</a></td>
+        <td><span class="parametername">pass</span></td>
+        <td><p>The pass currently being run.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="PatchManager_Shared_Summary_Dump_" data-uid="PatchManager.Shared.Summary.Dump*"></a>
   <h4 id="PatchManager_Shared_Summary_Dump" data-uid="PatchManager.Shared.Summary.Dump">Dump()</h4>
-  <div class="markdown level1 summary"><p>Dumps the entire summary to a string</p>
+  <div class="markdown level1 summary"><p>Renders the summary as a string for the patch summary log.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -386,7 +422,7 @@
     <tbody>
       <tr>
         <td><span class="xref">string</span></td>
-        <td><p>a string form of the summary</p>
+        <td><p>The rendered summary.</p>
 </td>
       </tr>
     </tbody>
@@ -395,7 +431,7 @@
 
   <a id="PatchManager_Shared_Summary_Error_" data-uid="PatchManager.Shared.Summary.Error*"></a>
   <h4 id="PatchManager_Shared_Summary_Error_System_String_System_Exception_" data-uid="PatchManager.Shared.Summary.Error(System.String,System.Exception)">Error(string, Exception)</h4>
-  <div class="markdown level1 summary"><p>Mark a patch as having errored out</p>
+  <div class="markdown level1 summary"><p>Marks a patch as errored in the current pass.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -415,13 +451,13 @@
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">patchName</span></td>
-        <td><p>The patch that errored out</p>
+        <td><p>The patch.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">Exception</span></td>
         <td><span class="parametername">reason</span></td>
-        <td><p>The actual exception</p>
+        <td><p>The actual exception.</p>
 </td>
       </tr>
     </tbody>
@@ -430,7 +466,7 @@
 
   <a id="PatchManager_Shared_Summary_Error_" data-uid="PatchManager.Shared.Summary.Error*"></a>
   <h4 id="PatchManager_Shared_Summary_Error_System_String_System_String_" data-uid="PatchManager.Shared.Summary.Error(System.String,System.String)">Error(string, string)</h4>
-  <div class="markdown level1 summary"><p>Mark a patch as having errored out</p>
+  <div class="markdown level1 summary"><p>Marks a patch as errored in the current pass.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -450,13 +486,13 @@
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">patchName</span></td>
-        <td><p>The patch that errored out</p>
+        <td><p>The patch.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">reason</span></td>
-        <td><p>The error message</p>
+        <td><p>Error message.</p>
 </td>
       </tr>
     </tbody>
@@ -465,7 +501,7 @@
 
   <a id="PatchManager_Shared_Summary_ErrorFile_" data-uid="PatchManager.Shared.Summary.ErrorFile*"></a>
   <h4 id="PatchManager_Shared_Summary_ErrorFile_System_String_System_Exception_" data-uid="PatchManager.Shared.Summary.ErrorFile(System.String,System.Exception)">ErrorFile(string, Exception)</h4>
-  <div class="markdown level1 summary"><p>Mark a file as having failed to load</p>
+  <div class="markdown level1 summary"><p>Marks a Lua file as having failed to load.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -485,13 +521,13 @@
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">filename</span></td>
-        <td><p>The file that failed to load</p>
+        <td><p>The file.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">Exception</span></td>
         <td><span class="parametername">reason</span></td>
-        <td><p>The actual exception</p>
+        <td><p>The actual exception.</p>
 </td>
       </tr>
     </tbody>
@@ -500,7 +536,7 @@
 
   <a id="PatchManager_Shared_Summary_Remove_" data-uid="PatchManager.Shared.Summary.Remove*"></a>
   <h4 id="PatchManager_Shared_Summary_Remove_System_String_System_String_System_String_" data-uid="PatchManager.Shared.Summary.Remove(System.String,System.String,System.String)">Remove(string, string, string)</h4>
-  <div class="markdown level1 summary"><p>Mark a patch as removed</p>
+  <div class="markdown level1 summary"><p>Marks a patch as removed during setup (failed mod or patch constraint, or caught in a cycle).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -520,19 +556,19 @@
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">name</span></td>
-        <td><p>The patch name</p>
+        <td><p>The patch name.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">status</span></td>
-        <td><p>The short status reason (e.g. <code>MISSING</code>, <code>CONFLICT</code>, <code>CYCLE</code>).</p>
+        <td><p>Short status reason (<code>MISSING</code>, <code>CONFLICT</code>, <code>CYCLE</code>).</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">context</span></td>
-        <td><p>Optional detail describing the status (e.g. the missing mod or conflicting patch).</p>
+        <td><p>Optional detail describing the status.</p>
 </td>
       </tr>
     </tbody>
@@ -541,7 +577,7 @@
 
   <a id="PatchManager_Shared_Summary_RemovedAsset_" data-uid="PatchManager.Shared.Summary.RemovedAsset*"></a>
   <h4 id="PatchManager_Shared_Summary_RemovedAsset_System_String_" data-uid="PatchManager.Shared.Summary.RemovedAsset(System.String)">RemovedAsset(string)</h4>
-  <div class="markdown level1 summary"><p>Mark a patch as having removed an asset</p>
+  <div class="markdown level1 summary"><p>Marks a patch as having removed an asset in the current pass.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -561,7 +597,7 @@
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">patchName</span></td>
-        <td><p>The patch that removed the asset</p>
+        <td><p>The patch that removed the asset.</p>
 </td>
       </tr>
     </tbody>
@@ -570,7 +606,7 @@
 
   <a id="PatchManager_Shared_Summary_Skip_" data-uid="PatchManager.Shared.Summary.Skip*"></a>
   <h4 id="PatchManager_Shared_Summary_Skip_System_String_System_String_" data-uid="PatchManager.Shared.Summary.Skip(System.String,System.String)">Skip(string, string)</h4>
-  <div class="markdown level1 summary"><p>Mark a patch as having been skipped</p>
+  <div class="markdown level1 summary"><p>Marks a patch as skipped in the current pass.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -590,13 +626,13 @@
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">patchName</span></td>
-        <td><p>The patch that was skipped</p>
+        <td><p>The patch.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">reason</span></td>
-        <td><p>The reason that the patch was skipped</p>
+        <td><p>Skip reason.</p>
 </td>
       </tr>
     </tbody>

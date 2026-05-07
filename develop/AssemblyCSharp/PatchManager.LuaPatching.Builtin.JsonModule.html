@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class JsonModule | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="Lua module exposed under the global J namespace, providing helpers for constructing JSON literals that MoonSharp&#39;s auto-conversion does not produce.">
+    <meta name="description" content="Lua module exposed under the global J namespace, providing helpers for constructing JSON literals that MoonSharp&#39;s auto-conversion does not produce. Also installed as callable: invoking J(value) converts value to a .">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,8 +81,9 @@
 
 
   <h1 id="PatchManager_LuaPatching_Builtin_JsonModule" data-uid="PatchManager.LuaPatching.Builtin.JsonModule" class="text-break">Class JsonModule</h1>
-  <div class="markdown level0 summary"><p>Lua module exposed under the global <code>J</code> namespace, providing helpers for constructing JSON literals
-that MoonSharp's auto-conversion does not produce.</p>
+  <div class="markdown level0 summary"><p>Lua module exposed under the global <code>J</code> namespace, providing helpers for constructing JSON
+literals that MoonSharp's auto-conversion does not produce. Also installed as callable: invoking
+<code>J(value)</code> converts <code class="paramref">value</code> to a <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a>.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -228,6 +229,37 @@ than a float (for example IDs or counts). Existing integer slots already preserv
 assignment via <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_GetJTokenForDynValue_Newtonsoft_Json_Linq_JToken_MoonSharp_Interpreter_DynValue_">GetJTokenForDynValue(JToken, DynValue)</a>; this helper is for
 the no-previous-slot case.</p>
 </div>
+
+
+  <a id="PatchManager_LuaPatching_Builtin_JsonModule_Register_" data-uid="PatchManager.LuaPatching.Builtin.JsonModule.Register*"></a>
+  <h4 id="PatchManager_LuaPatching_Builtin_JsonModule_Register_MoonSharp_Interpreter_Script_" data-uid="PatchManager.LuaPatching.Builtin.JsonModule.Register(MoonSharp.Interpreter.Script)">Register(Script)</h4>
+  <div class="markdown level1 summary"><p>Registers the <code>J</code> module on <code class="paramref">script</code> and installs a <code>__call</code>
+metamethod so <code>J(value)</code> from Lua converts <code class="paramref">value</code> to a
+<a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Register(Script script)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Script</span></td>
+        <td><span class="parametername">script</span></td>
+        <td><p>The script to register the module on.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>

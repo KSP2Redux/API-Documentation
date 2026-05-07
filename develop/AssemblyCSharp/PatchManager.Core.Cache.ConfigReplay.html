@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class ConfigReplay | KSP2Redux API (Develop) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class ConfigReplay | KSP2Redux API (Develop) ">
+    
+    <meta name="description" content="Tracks Config: bindings declared by Lua patches so they can be replayed on launches where the patch cache is hot and the scripts therefore do not re-run. Replay re-creates the bindings against the appropriate  so the settings UI is populated, and compares the current value to the value the patch ran with to flag stale caches that need invalidating.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PatchManager.Core.Cache.ConfigReplay">
+
+
+
+  <h1 id="PatchManager_Core_Cache_ConfigReplay" data-uid="PatchManager.Core.Cache.ConfigReplay" class="text-break">Class ConfigReplay</h1>
+  <div class="markdown level0 summary"><p>Tracks <code>Config:</code> bindings declared by Lua patches so they can be replayed on launches where the
+patch cache is hot and the scripts therefore do not re-run. Replay re-creates the bindings against the
+appropriate <a class="xref" href="../ReduxLib/ReduxLib.Configuration.IConfigFile.html">IConfigFile</a> so the settings UI is populated, and compares the current value
+to the value the patch ran with to flag stale caches that need invalidating.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><span class="xref">ConfigReplay</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PatchManager.html">PatchManager</a>.<a class="xref" href="PatchManager.Core.html">Core</a>.<a class="xref" href="PatchManager.Core.Cache.html">Cache</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="PatchManager_Core_Cache_ConfigReplay_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class ConfigReplay</code></pre>
+  </div>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="PatchManager_Core_Cache_ConfigReplay_ChangedKeys_" data-uid="PatchManager.Core.Cache.ConfigReplay.ChangedKeys*"></a>
+  <h4 id="PatchManager_Core_Cache_ConfigReplay_ChangedKeys" data-uid="PatchManager.Core.Cache.ConfigReplay.ChangedKeys">ChangedKeys</h4>
+  <div class="markdown level1 summary"><p>Section/name pairs whose current value differs from the value the patch was last run with.
+Populated by <a class="xref" href="PatchManager.Core.Cache.ConfigReplay.html#PatchManager_Core_Cache_ConfigReplay_ReplayAll">ReplayAll()</a>. Each entry is in the form <code>{modId}:{section}/{name}</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static List&lt;string&gt; ChangedKeys { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_Core_Cache_ConfigReplay_HasStaleConfigs_" data-uid="PatchManager.Core.Cache.ConfigReplay.HasStaleConfigs*"></a>
+  <h4 id="PatchManager_Core_Cache_ConfigReplay_HasStaleConfigs" data-uid="PatchManager.Core.Cache.ConfigReplay.HasStaleConfigs">HasStaleConfigs</h4>
+  <div class="markdown level1 summary"><p>True if at least one tracked config value has changed since the last patch run, false otherwise.
+Callers treat this as a cue to invalidate the patch cache before applying patches.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool HasStaleConfigs { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_Core_Cache_ConfigReplay_StandaloneConfigs_" data-uid="PatchManager.Core.Cache.ConfigReplay.StandaloneConfigs*"></a>
+  <h4 id="PatchManager_Core_Cache_ConfigReplay_StandaloneConfigs" data-uid="PatchManager.Core.Cache.ConfigReplay.StandaloneConfigs">StandaloneConfigs</h4>
+  <div class="markdown level1 summary"><p>Config files for standalone single-file patches whose .lua file still exists on disk. SpaceWarp does
+not manage these (no descriptor), so the host is responsible for wiring them into the settings
+menu. Populated as standalone patches are resolved in <a class="xref" href="PatchManager.Core.Cache.ConfigReplay.html#PatchManager_Core_Cache_ConfigReplay_GetConfigFileForMod_System_String_System_String_">GetConfigFileForMod(string, string)</a> or replayed
+in <a class="xref" href="PatchManager.Core.Cache.ConfigReplay.html#PatchManager_Core_Cache_ConfigReplay_ReplayAll">ReplayAll()</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IReadOnlyCollection&lt;ConfigReplay.StandaloneConfigInfo&gt; StandaloneConfigs { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IReadOnlyCollection</span>&lt;<a class="xref" href="PatchManager.Core.Cache.ConfigReplay.html">ConfigReplay</a>.<a class="xref" href="PatchManager.Core.Cache.ConfigReplay.StandaloneConfigInfo.html">StandaloneConfigInfo</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="PatchManager_Core_Cache_ConfigReplay_GetConfigFileForMod_" data-uid="PatchManager.Core.Cache.ConfigReplay.GetConfigFileForMod*"></a>
+  <h4 id="PatchManager_Core_Cache_ConfigReplay_GetConfigFileForMod_System_String_System_String_" data-uid="PatchManager.Core.Cache.ConfigReplay.GetConfigFileForMod(System.String,System.String)">GetConfigFileForMod(string, string)</h4>
+  <div class="markdown level1 summary"><p>Resolves the config file a patch's bindings should live in. Descriptor mods reuse the SpaceWarp
+descriptor's <code>ConfigFile</code> so PatchManager bindings land in the same file as the rest of the
+mod's config; standalone single-file patches get a sidecar file alongside the .lua.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IConfigFile GetConfigFileForMod(string modId, string standaloneLuaPath = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">modId</span></td>
+        <td><p>The mod ID. For standalone patches this is the patch filename stem.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">standaloneLuaPath</span></td>
+        <td><p>For standalone single-file patches, the absolute path to the .lua file. Null for descriptor mods.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="../ReduxLib/ReduxLib.Configuration.IConfigFile.html">IConfigFile</a></td>
+        <td><p>The config file for the given patch.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">InvalidOperationException</span></td>
+        <td><p>Thrown when <code class="paramref">standaloneLuaPath</code> is null and no SpaceWarp descriptor is registered for <code class="paramref">modId</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_Core_Cache_ConfigReplay_RecordEntry_" data-uid="PatchManager.Core.Cache.ConfigReplay.RecordEntry*"></a>
+  <h4 id="PatchManager_Core_Cache_ConfigReplay_RecordEntry_System_String_System_String_System_String_System_String_System_String_System_String_System_Object_System_Object_ReduxLib_Configuration_IValueConstraint_" data-uid="PatchManager.Core.Cache.ConfigReplay.RecordEntry(System.String,System.String,System.String,System.String,System.String,System.String,System.Object,System.Object,ReduxLib.Configuration.IValueConstraint)">RecordEntry(string, string, string, string, string, string, object, object, IValueConstraint)</h4>
+  <div class="markdown level1 summary"><p>Records (or overwrites) a binding into the inventory's replay slice for the given mod. Called from
+<a class="xref" href="PatchManager.LuaPatching.Builtin.LuaPatchConfig.html">LuaPatchConfig</a> as each <code>Config:</code> method runs.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void RecordEntry(string modId, string standaloneLuaPath, string type, string section, string name, string description, object defaultValue, object ranWith, IValueConstraint constraint = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">modId</span></td>
+        <td><p>The mod ID the calling patch was loaded under.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">standaloneLuaPath</span></td>
+        <td><p>For standalone single-file patches, the absolute path to the .lua file. Null for descriptor mods.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>Type tag matching the <code>Config:</code> method that produced the entry.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">section</span></td>
+        <td><p>The config-file section the binding lives in.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The binding's key within its section.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">description</span></td>
+        <td><p>Description string the patch declared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">object</span></td>
+        <td><span class="parametername">defaultValue</span></td>
+        <td><p>Default value the patch declared, serialized as JSON.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">object</span></td>
+        <td><span class="parametername">ranWith</span></td>
+        <td><p>The current value at the time the patch ran, persisted so subsequent launches can detect changes.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="../ReduxLib/ReduxLib.Configuration.IValueConstraint.html">IValueConstraint</a></td>
+        <td><span class="parametername">constraint</span></td>
+        <td><p>Optional constraint declared by the patch.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_Core_Cache_ConfigReplay_ReplayAll_" data-uid="PatchManager.Core.Cache.ConfigReplay.ReplayAll*"></a>
+  <h4 id="PatchManager_Core_Cache_ConfigReplay_ReplayAll" data-uid="PatchManager.Core.Cache.ConfigReplay.ReplayAll">ReplayAll()</h4>
+  <div class="markdown level1 summary"><p>Replays every recorded binding against its mod's config file. Re-binds the entry so it shows up in
+the settings UI even on hot-cache launches, and flags <a class="xref" href="PatchManager.Core.Cache.ConfigReplay.html#PatchManager_Core_Cache_ConfigReplay_ChangedKeys">ChangedKeys</a> for any entry whose
+current value differs from the recorded ran-with.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void ReplayAll()</code></pre>
+  </div>
+  <h5 id="PatchManager_Core_Cache_ConfigReplay_ReplayAll_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Should run early at startup, after SpaceWarp has populated <code>PluginList</code> but before deciding
+whether to use the patch cache. Slices for standalone patches whose .lua file no longer exists, or
+descriptor mods that are not loaded this run, are pruned from the inventory: the recorded ran-with
+no longer reflects reality. User-set values stay in the underlying .json config files and are
+re-bound automatically when the mod returns and its patches run again.</p>
+</div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from develop
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
