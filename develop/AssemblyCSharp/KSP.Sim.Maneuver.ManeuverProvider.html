@@ -588,13 +588,44 @@ public ContextListProperty&lt;StageIndicatorDataContext&gt; StagingIndicators { 
   </table>
 
 
-  <a id="KSP_Sim_Maneuver_ManeuverProvider_OnEngineThrustChanged_" data-uid="KSP.Sim.Maneuver.ManeuverProvider.OnEngineThrustChanged*"></a>
-  <h4 id="KSP_Sim_Maneuver_ManeuverProvider_OnEngineThrustChanged_KSP_Messages_MessageCenterMessage_" data-uid="KSP.Sim.Maneuver.ManeuverProvider.OnEngineThrustChanged(KSP.Messages.MessageCenterMessage)">OnEngineThrustChanged(MessageCenterMessage)</h4>
-  <div class="markdown level1 summary"></div>
+  <a id="KSP_Sim_Maneuver_ManeuverProvider_OnEngineThrustCalculationComplete_" data-uid="KSP.Sim.Maneuver.ManeuverProvider.OnEngineThrustCalculationComplete*"></a>
+  <h4 id="KSP_Sim_Maneuver_ManeuverProvider_OnEngineThrustCalculationComplete_KSP_Messages_MessageCenterMessage_" data-uid="KSP.Sim.Maneuver.ManeuverProvider.OnEngineThrustCalculationComplete(KSP.Messages.MessageCenterMessage)">OnEngineThrustCalculationComplete(MessageCenterMessage)</h4>
+  <div class="markdown level1 summary"><p>Once engine thrust calculation is complete, check if there is an active node and if _isPendingTwrUpdate is true.
+Invoke OnManeuverNodeBurnChanged to recalculate burn time and revalidate UI if conditions are met.
+If not, return.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void OnEngineThrustChanged(MessageCenterMessage msg)</code></pre>
+    <pre><code class="lang-csharp hljs">public void OnEngineThrustCalculationComplete(MessageCenterMessage msg)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Messages.MessageCenterMessage.html">MessageCenterMessage</a></td>
+        <td><span class="parametername">msg</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_Maneuver_ManeuverProvider_OnEngineThrustLimiterChanged_" data-uid="KSP.Sim.Maneuver.ManeuverProvider.OnEngineThrustLimiterChanged*"></a>
+  <h4 id="KSP_Sim_Maneuver_ManeuverProvider_OnEngineThrustLimiterChanged_KSP_Messages_MessageCenterMessage_" data-uid="KSP.Sim.Maneuver.ManeuverProvider.OnEngineThrustLimiterChanged(KSP.Messages.MessageCenterMessage)">OnEngineThrustLimiterChanged(MessageCenterMessage)</h4>
+  <div class="markdown level1 summary"><p>The player has changed the engine thrust limiter, set _isPendingTwrUpdate to true to update the maneuver once it is done calculating</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnEngineThrustLimiterChanged(MessageCenterMessage msg)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
