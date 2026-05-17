@@ -124,7 +124,7 @@
 
   <a id="PatchManager_Core_CoreModule_CurrentUniverse_" data-uid="PatchManager.Core.CoreModule.CurrentUniverse*"></a>
   <h4 id="PatchManager_Core_CoreModule_CurrentUniverse" data-uid="PatchManager.Core.CoreModule.CurrentUniverse">CurrentUniverse</h4>
-  <div class="markdown level1 summary"><p>This is the current universe that patch manager is using (used for interop reasons)</p>
+  <div class="markdown level1 summary"><p>The current universe that patch manager is using (exposed for interop).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -141,7 +141,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="PatchManager.SassyPatching.Execution.Universe.html">Universe</a></td>
+        <td><a class="xref" href="PatchManager.LuaPatching.Universe.html">Universe</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -152,7 +152,7 @@
 
   <a id="PatchManager_Core_CoreModule_BindConfiguration_" data-uid="PatchManager.Core.CoreModule.BindConfiguration*"></a>
   <h4 id="PatchManager_Core_CoreModule_BindConfiguration_ReduxLib_Configuration_IConfigFile_" data-uid="PatchManager.Core.CoreModule.BindConfiguration(ReduxLib.Configuration.IConfigFile)">BindConfiguration(IConfigFile)</h4>
-  <div class="markdown level1 summary"><p>Called to bind configuration to this module specifically.</p>
+  <div class="markdown level1 summary"><p>Called once during host-mod startup to let the module bind its configuration entries.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -172,18 +172,22 @@
       <tr>
         <td><a class="xref" href="../ReduxLib/ReduxLib.Configuration.IConfigFile.html">IConfigFile</a></td>
         <td><span class="parametername">modConfiguration</span></td>
-        <td><p>The configuration of the base Patch Manager mod to bind to</p>
+        <td><p>The host PatchManager mod's configuration file.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="PatchManager.Shared.Modules.BaseModule.html#PatchManager_Shared_Modules_BaseModule_BindConfiguration_ReduxLib_Configuration_IConfigFile_">BaseModule.BindConfiguration(IConfigFile)</a></div>
+  <h5 id="PatchManager_Core_CoreModule_BindConfiguration_ReduxLib_Configuration_IConfigFile__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>All PatchManager modules share the host mod's single <a class="xref" href="../ReduxLib/ReduxLib.Configuration.IConfigFile.html">IConfigFile</a>, so implementations should
+namespace their config sections to avoid collisions. Invoked before <a class="xref" href="PatchManager.Shared.Modules.IModule.html#PatchManager_Shared_Modules_IModule_Init">Init()</a>.</p>
+</div>
 
 
   <a id="PatchManager_Core_CoreModule_GetDetails_" data-uid="PatchManager.Core.CoreModule.GetDetails*"></a>
   <h4 id="PatchManager_Core_CoreModule_GetDetails" data-uid="PatchManager.Core.CoreModule.GetDetails">GetDetails()</h4>
-  <div class="markdown level1 summary"><p>Called when getting the details information for patch manager after game load.</p>
+  <div class="markdown level1 summary"><p>Returns the visual element to embed in PatchManager's mod-list details foldout for this module.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -201,18 +205,22 @@
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/UIElements.VisualElement.html">VisualElement</a></td>
-        <td><p>A visual element describing information about the module or null for no information</p>
+        <td><p>The visual element describing the module, or <code>null</code> if the module has nothing to report.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="PatchManager.Shared.Modules.BaseModule.html#PatchManager_Shared_Modules_BaseModule_GetDetails">BaseModule.GetDetails()</a></div>
+  <h5 id="PatchManager_Core_CoreModule_GetDetails_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Invoked once during post-initialization, when PatchManager assembles the per-module diagnostics panel.
+Implementations should return <code>null</code> when the module has nothing to display.</p>
+</div>
 
 
   <a id="PatchManager_Core_CoreModule_Init_" data-uid="PatchManager.Core.CoreModule.Init*"></a>
   <h4 id="PatchManager_Core_CoreModule_Init" data-uid="PatchManager.Core.CoreModule.Init">Init()</h4>
-  <div class="markdown level1 summary"><p>Reads all patch files.</p>
+  <div class="markdown level1 summary"><p>Decides whether to invalidate the cache, then schedules the patch-loading flow actions for the SpaceWarp loader.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -225,8 +233,7 @@
 
   <a id="PatchManager_Core_CoreModule_PreLoad_" data-uid="PatchManager.Core.CoreModule.PreLoad*"></a>
   <h4 id="PatchManager_Core_CoreModule_PreLoad" data-uid="PatchManager.Core.CoreModule.PreLoad">PreLoad()</h4>
-  <div class="markdown level1 summary"><p>Called in mod's OnPreInitialized method after the game is loaded.
-Use this to register resource locators and do things that require the GameInstance.</p>
+  <div class="markdown level1 summary"><p>Called from the host mod's OnPreInitialized, the first SpaceWarp init stage, before the game is loaded.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -235,6 +242,10 @@ Use this to register resource locators and do things that require the GameInstan
   </div>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="PatchManager.Shared.Modules.BaseModule.html#PatchManager_Shared_Modules_BaseModule_PreLoad">BaseModule.PreLoad()</a></div>
+  <h5 id="PatchManager_Core_CoreModule_PreLoad_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Implementations typically use this for setup that must run before the game finishes loading,
+such as constructing the patch universe or registering state that later init steps depend on.</p>
+</div>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="PatchManager.Shared.Modules.IModule.html">IModule</a>

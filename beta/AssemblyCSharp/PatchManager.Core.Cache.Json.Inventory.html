@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class Inventory | KSP2Redux API (Beta) ">
     
-    <meta name="description" content="Serves as a catalog of all patched labels and their respective archives.">
+    <meta name="description" content="Catalog of all patched labels and their respective archives, persisted to disk between runs.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,7 @@
 
 
   <h1 id="PatchManager_Core_Cache_Json_Inventory" data-uid="PatchManager.Core.Cache.Json.Inventory" class="text-break">Class Inventory</h1>
-  <div class="markdown level0 summary"><p>Serves as a catalog of all patched labels and their respective archives.</p>
+  <div class="markdown level0 summary"><p>Catalog of all patched labels and their respective archives, persisted to disk between runs.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -165,7 +165,8 @@
 
   <a id="PatchManager_Core_Cache_Json_Inventory_DefinitionCount_" data-uid="PatchManager.Core.Cache.Json.Inventory.DefinitionCount*"></a>
   <h4 id="PatchManager_Core_Cache_Json_Inventory_DefinitionCount" data-uid="PatchManager.Core.Cache.Json.Inventory.DefinitionCount">DefinitionCount</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Total number of distinct asset definitions touched by patches during the most recent rebuild.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -190,7 +191,8 @@
 
   <a id="PatchManager_Core_Cache_Json_Inventory_ErrorCount_" data-uid="PatchManager.Core.Cache.Json.Inventory.ErrorCount*"></a>
   <h4 id="PatchManager_Core_Cache_Json_Inventory_ErrorCount" data-uid="PatchManager.Core.Cache.Json.Inventory.ErrorCount">ErrorCount</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Total number of patch errors during the most recent rebuild.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -215,7 +217,8 @@
 
   <a id="PatchManager_Core_Cache_Json_Inventory_NewAssetCount_" data-uid="PatchManager.Core.Cache.Json.Inventory.NewAssetCount*"></a>
   <h4 id="PatchManager_Core_Cache_Json_Inventory_NewAssetCount" data-uid="PatchManager.Core.Cache.Json.Inventory.NewAssetCount">NewAssetCount</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Total number of new assets created during the most recent rebuild.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -240,7 +243,8 @@
 
   <a id="PatchManager_Core_Cache_Json_Inventory_PatchCount_" data-uid="PatchManager.Core.Cache.Json.Inventory.PatchCount*"></a>
   <h4 id="PatchManager_Core_Cache_Json_Inventory_PatchCount" data-uid="PatchManager.Core.Cache.Json.Inventory.PatchCount">PatchCount</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Total number of patches applied during the most recent rebuild.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -291,11 +295,16 @@
 
   <a id="PatchManager_Core_Cache_Json_Inventory_SerializedConfigs_" data-uid="PatchManager.Core.Cache.Json.Inventory.SerializedConfigs*"></a>
   <h4 id="PatchManager_Core_Cache_Json_Inventory_SerializedConfigs" data-uid="PatchManager.Core.Cache.Json.Inventory.SerializedConfigs">SerializedConfigs</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Per-mod replay slices for <code>Config:</code> bindings, keyed by mod ID. Each slice carries identity
+(descriptor vs standalone + .lua path) and the bindings the mod's patches declared. Lets the settings
+UI surface bindings on hot-cache launches when the patch scripts don't run, and lets
+<a class="xref" href="PatchManager.Core.Cache.ConfigReplay.html">ConfigReplay</a> compare current values against the value the patch ran with to decide
+whether to invalidate.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, Dictionary&lt;string, JToken&gt;&gt; SerializedConfigs { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, ConfigReplaySlice&gt; SerializedConfigs { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-condensed">
@@ -307,7 +316,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Dictionary</span>&lt;<span class="xref">string</span>, <span class="xref">Dictionary</span>&lt;<span class="xref">string</span>, <span class="xref">JToken</span>&gt;&gt;</td>
+        <td><span class="xref">Dictionary</span>&lt;<span class="xref">string</span>, <a class="xref" href="PatchManager.Core.Cache.Json.ConfigReplaySlice.html">ConfigReplaySlice</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -354,7 +363,7 @@
     <tbody>
       <tr>
         <td><span class="xref">KeyValuePair</span>&lt;<span class="xref">string</span>, <a class="xref" href="PatchManager.Core.Cache.Json.CacheEntry.html">CacheEntry</a>&gt;</td>
-        <td><p>A pair of asset label and instance of <a class="xref" href="PatchManager.Core.Cache.Json.CacheEntry.html">CacheEntry</a> if found, otherwise null.</p>
+        <td><p>A pair of asset label and instance of <a class="xref" href="PatchManager.Core.Cache.Json.CacheEntry.html">CacheEntry</a> if found, otherwise the default pair.</p>
 </td>
       </tr>
     </tbody>
@@ -399,7 +408,7 @@
     <tbody>
       <tr>
         <td><span class="xref">KeyValuePair</span>&lt;<span class="xref">string</span>, <a class="xref" href="PatchManager.Core.Cache.Json.CacheEntry.html">CacheEntry</a>&gt;</td>
-        <td><p>A pair of asset label and instance of <a class="xref" href="PatchManager.Core.Cache.Json.CacheEntry.html">CacheEntry</a> if found, otherwise null.</p>
+        <td><p>A pair of asset label and instance of <a class="xref" href="PatchManager.Core.Cache.Json.CacheEntry.html">CacheEntry</a> if found, otherwise the default pair.</p>
 </td>
       </tr>
     </tbody>

@@ -88,8 +88,24 @@ Classes
       <h4><a class="xref" href="PatchManager.Core.Cache.Json.CacheEntry.html">CacheEntry</a></h4>
       <section><p>Represents an entry in the cache for a specific asset label.</p>
 </section>
+      <h4><a class="xref" href="PatchManager.Core.Cache.Json.ConfigReplayConstraint.html">ConfigReplayConstraint</a></h4>
+      <section><p>Persisted form of an <a class="xref" href="../ReduxLib/ReduxLib.Configuration.IValueConstraint.html">IValueConstraint</a> for replay.
+Discriminated by <a class="xref" href="PatchManager.Core.Cache.Json.ConfigReplayConstraint.html#PatchManager_Core_Cache_Json_ConfigReplayConstraint_Kind">Kind</a>: <code>range</code> uses <a class="xref" href="PatchManager.Core.Cache.Json.ConfigReplayConstraint.html#PatchManager_Core_Cache_Json_ConfigReplayConstraint_Min">Min</a> / <a class="xref" href="PatchManager.Core.Cache.Json.ConfigReplayConstraint.html#PatchManager_Core_Cache_Json_ConfigReplayConstraint_Max">Max</a>,
+<code>list</code> uses <a class="xref" href="PatchManager.Core.Cache.Json.ConfigReplayConstraint.html#PatchManager_Core_Cache_Json_ConfigReplayConstraint_Values">Values</a>.</p>
+</section>
+      <h4><a class="xref" href="PatchManager.Core.Cache.Json.ConfigReplayEntry.html">ConfigReplayEntry</a></h4>
+      <section><p>Persisted record of a single <code>Config:</code> binding declared by a Lua patch. Stored under
+<a class="xref" href="PatchManager.Core.Cache.Json.ConfigReplaySlice.html#PatchManager_Core_Cache_Json_ConfigReplaySlice_Entries">Entries</a> and replayed by <a class="xref" href="PatchManager.Core.Cache.ConfigReplay.html">ConfigReplay</a> so the
+binding survives hot-cache launches that skip running the Lua scripts.</p>
+</section>
+      <h4><a class="xref" href="PatchManager.Core.Cache.Json.ConfigReplaySlice.html">ConfigReplaySlice</a></h4>
+      <section><p>Per-mod replay slice carrying identity (descriptor versus standalone, plus the .lua path for standalones)
+and the bindings the mod's patches declared. Stored as <a class="xref" href="PatchManager.Core.Cache.Json.Inventory.html#PatchManager_Core_Cache_Json_Inventory_SerializedConfigs">SerializedConfigs</a>
+values so <a class="xref" href="PatchManager.Core.Cache.ConfigReplay.html">ConfigReplay</a> can decide at replay time whether the mod still exists
+before re-binding its entries.</p>
+</section>
       <h4><a class="xref" href="PatchManager.Core.Cache.Json.Inventory.html">Inventory</a></h4>
-      <section><p>Serves as a catalog of all patched labels and their respective archives.</p>
+      <section><p>Catalog of all patched labels and their respective archives, persisted to disk between runs.</p>
 </section>
       <h4><a class="xref" href="PatchManager.Core.Cache.Json.PatchHashes.html">PatchHashes</a></h4>
       <section><p>Contains hashes of the cache.</p>

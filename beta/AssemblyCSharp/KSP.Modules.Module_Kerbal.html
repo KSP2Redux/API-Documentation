@@ -98,6 +98,7 @@
     <div><a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a></div>
     <div><a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a></div>
     <div><a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a></div>
+    <div><a class="xref" href="GlobalAssemblyCSharp.ILateUpdate.html">ILateUpdate</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -124,6 +125,12 @@
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnStart">PartBehaviourModule.OnStart()</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_ShouldShowAdvancedEditorControls_System_Boolean_">PartBehaviourModule.ShouldShowAdvancedEditorControls(bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_SetAdvancedEditorVisible_KSP_Sim_Definitions_ModuleData_KSP_Sim_Definitions_IModuleDataContext_System_Boolean_">PartBehaviourModule.SetAdvancedEditorVisible(ModuleData, IModuleDataContext, bool)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_Shutdown">PartBehaviourModule.Shutdown()</a>
@@ -171,9 +178,6 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnUpdate_System_Single_">PartBehaviourModule.OnUpdate(float)</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnModuleUpdate_System_Single_">PartBehaviourModule.OnModuleUpdate(float)</a>
-    </div>
-    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnModuleOABUpdate_System_Single_">PartBehaviourModule.OnModuleOABUpdate(float)</a>
     </div>
     <div>
@@ -211,6 +215,9 @@
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_resourceFlowRequestBroker">PartBehaviourModule.resourceFlowRequestBroker</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsAdvancedEditorEnabled">PartBehaviourModule.IsAdvancedEditorEnabled</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_partOwner">PartBehaviourModule.partOwner</a>
@@ -262,7 +269,7 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Module_Kerbal_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Module_Kerbal : PartBehaviourModule, IPartModule, IFixedUpdate, IPriorityOverride, IUpdate, IObjectAssemblyPartModule</code></pre>
+    <pre><code class="lang-csharp hljs">public class Module_Kerbal : PartBehaviourModule, IPartModule, IFixedUpdate, IPriorityOverride, IUpdate, IObjectAssemblyPartModule, ILateUpdate</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -732,6 +739,83 @@
   <div><a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_AddDataModules">PartBehaviourModule.AddDataModules()</a></div>
 
 
+  <a id="KSP_Modules_Module_Kerbal_BindKerbalBehavior_" data-uid="KSP.Modules.Module_Kerbal.BindKerbalBehavior*"></a>
+  <h4 id="KSP_Modules_Module_Kerbal_BindKerbalBehavior_KSP_Sim_impl_KerbalBehavior_" data-uid="KSP.Modules.Module_Kerbal.BindKerbalBehavior(KSP.Sim.impl.KerbalBehavior)">BindKerbalBehavior(KerbalBehavior)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void BindKerbalBehavior(KerbalBehavior kerbalBehavior)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.KerbalBehavior.html">KerbalBehavior</a></td>
+        <td><span class="parametername">kerbalBehavior</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Modules_Module_Kerbal_GetPersonalParachuteActionState_" data-uid="KSP.Modules.Module_Kerbal.GetPersonalParachuteActionState*"></a>
+  <h4 id="KSP_Modules_Module_Kerbal_GetPersonalParachuteActionState" data-uid="KSP.Modules.Module_Kerbal.GetPersonalParachuteActionState">GetPersonalParachuteActionState()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public KSPActionGroupState GetPersonalParachuteActionState()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.KSPActionGroupState.html">KSPActionGroupState</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Modules_Module_Kerbal_GetPlantFlagActionState_" data-uid="KSP.Modules.Module_Kerbal.GetPlantFlagActionState*"></a>
+  <h4 id="KSP_Modules_Module_Kerbal_GetPlantFlagActionState" data-uid="KSP.Modules.Module_Kerbal.GetPlantFlagActionState">GetPlantFlagActionState()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public KSPActionGroupState GetPlantFlagActionState()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.KSPActionGroupState.html">KSPActionGroupState</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Modules_Module_Kerbal_IsRunningExperiment_" data-uid="KSP.Modules.Module_Kerbal.IsRunningExperiment*"></a>
   <h4 id="KSP_Modules_Module_Kerbal_IsRunningExperiment" data-uid="KSP.Modules.Module_Kerbal.IsRunningExperiment">IsRunningExperiment()</h4>
   <div class="markdown level1 summary"></div>
@@ -757,6 +841,37 @@
   </table>
 
 
+  <a id="KSP_Modules_Module_Kerbal_OnAdvancedEditorModeChanged_" data-uid="KSP.Modules.Module_Kerbal.OnAdvancedEditorModeChanged*"></a>
+  <h4 id="KSP_Modules_Module_Kerbal_OnAdvancedEditorModeChanged_System_Boolean_" data-uid="KSP.Modules.Module_Kerbal.OnAdvancedEditorModeChanged(System.Boolean)">OnAdvancedEditorModeChanged(bool)</h4>
+  <div class="markdown level1 summary"><p>Called when the Advanced Editor gameplay setting changes while this module is alive.
+Override this to refresh PAM visibility for advanced controls.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnAdvancedEditorModeChanged(bool advancedEditorEnabled)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">advancedEditorEnabled</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnAdvancedEditorModeChanged_System_Boolean_">PartBehaviourModule.OnAdvancedEditorModeChanged(bool)</a></div>
+
+
   <a id="KSP_Modules_Module_Kerbal_OnInitialize_" data-uid="KSP.Modules.Module_Kerbal.OnInitialize*"></a>
   <h4 id="KSP_Modules_Module_Kerbal_OnInitialize" data-uid="KSP.Modules.Module_Kerbal.OnInitialize">OnInitialize()</h4>
   <div class="markdown level1 summary"></div>
@@ -767,6 +882,45 @@
   </div>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnInitialize">PartBehaviourModule.OnInitialize()</a></div>
+
+
+  <a id="KSP_Modules_Module_Kerbal_OnLateUpdate_" data-uid="KSP.Modules.Module_Kerbal.OnLateUpdate*"></a>
+  <h4 id="KSP_Modules_Module_Kerbal_OnLateUpdate" data-uid="KSP.Modules.Module_Kerbal.OnLateUpdate">OnLateUpdate()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnLateUpdate()</code></pre>
+  </div>
+
+
+  <a id="KSP_Modules_Module_Kerbal_OnModuleUpdate_" data-uid="KSP.Modules.Module_Kerbal.OnModuleUpdate*"></a>
+  <h4 id="KSP_Modules_Module_Kerbal_OnModuleUpdate_System_Single_" data-uid="KSP.Modules.Module_Kerbal.OnModuleUpdate(System.Single)">OnModuleUpdate(float)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnModuleUpdate(float deltaTime)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">deltaTime</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnModuleUpdate_System_Single_">PartBehaviourModule.OnModuleUpdate(float)</a></div>
 
 
   <a id="KSP_Modules_Module_Kerbal_OnShutdown_" data-uid="KSP.Modules.Module_Kerbal.OnShutdown*"></a>
@@ -798,6 +952,76 @@
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void ReparentJetpackVFXToRig()</code></pre>
+  </div>
+
+
+  <a id="KSP_Modules_Module_Kerbal_ShouldShowPersonalParachuteActionBarButton_" data-uid="KSP.Modules.Module_Kerbal.ShouldShowPersonalParachuteActionBarButton*"></a>
+  <h4 id="KSP_Modules_Module_Kerbal_ShouldShowPersonalParachuteActionBarButton" data-uid="KSP.Modules.Module_Kerbal.ShouldShowPersonalParachuteActionBarButton">ShouldShowPersonalParachuteActionBarButton()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ShouldShowPersonalParachuteActionBarButton()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Modules_Module_Kerbal_ShouldShowPlantFlagActionBarButton_" data-uid="KSP.Modules.Module_Kerbal.ShouldShowPlantFlagActionBarButton*"></a>
+  <h4 id="KSP_Modules_Module_Kerbal_ShouldShowPlantFlagActionBarButton" data-uid="KSP.Modules.Module_Kerbal.ShouldShowPlantFlagActionBarButton">ShouldShowPlantFlagActionBarButton()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ShouldShowPlantFlagActionBarButton()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Modules_Module_Kerbal_TriggerPersonalParachuteAction_" data-uid="KSP.Modules.Module_Kerbal.TriggerPersonalParachuteAction*"></a>
+  <h4 id="KSP_Modules_Module_Kerbal_TriggerPersonalParachuteAction" data-uid="KSP.Modules.Module_Kerbal.TriggerPersonalParachuteAction">TriggerPersonalParachuteAction()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void TriggerPersonalParachuteAction()</code></pre>
+  </div>
+
+
+  <a id="KSP_Modules_Module_Kerbal_TriggerPlantFlagAction_" data-uid="KSP.Modules.Module_Kerbal.TriggerPlantFlagAction*"></a>
+  <h4 id="KSP_Modules_Module_Kerbal_TriggerPlantFlagAction" data-uid="KSP.Modules.Module_Kerbal.TriggerPlantFlagAction">TriggerPlantFlagAction()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void TriggerPlantFlagAction()</code></pre>
   </div>
 
 
@@ -851,6 +1075,9 @@
   </div>
   <div>
       <a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ILateUpdate.html">ILateUpdate</a>
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>

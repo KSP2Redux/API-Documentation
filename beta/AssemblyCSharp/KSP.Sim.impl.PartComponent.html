@@ -3237,12 +3237,13 @@ public PartProperties partProperties { get; }</code></pre>
 
 
   <a id="KSP_Sim_impl_PartComponent_SetPartOwner_" data-uid="KSP.Sim.impl.PartComponent.SetPartOwner*"></a>
-  <h4 id="KSP_Sim_impl_PartComponent_SetPartOwner_KSP_Sim_impl_PartOwnerComponent_System_Boolean_System_Boolean_" data-uid="KSP.Sim.impl.PartComponent.SetPartOwner(KSP.Sim.impl.PartOwnerComponent,System.Boolean,System.Boolean)">SetPartOwner(PartOwnerComponent, bool, bool)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="KSP_Sim_impl_PartComponent_SetPartOwner_KSP_Sim_impl_PartOwnerComponent_System_Boolean_System_Boolean_System_Boolean_" data-uid="KSP.Sim.impl.PartComponent.SetPartOwner(KSP.Sim.impl.PartOwnerComponent,System.Boolean,System.Boolean,System.Boolean)">SetPartOwner(PartOwnerComponent, bool, bool, bool)</h4>
+  <div class="markdown level1 summary"><p>Change the owner of a part</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public List&lt;PartComponent&gt; SetPartOwner(PartOwnerComponent newPartOwner, bool isRecursive, bool ignoreChildrenOfCompoundParts = false)</code></pre>
+    <pre><code class="lang-csharp hljs">public List&lt;PartComponent&gt; SetPartOwner(PartOwnerComponent newPartOwner, bool isRecursive, bool ignoreChildrenOfCompoundParts = false, bool destroyOldOwnerOnEmpty = true)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -3257,17 +3258,26 @@ public PartProperties partProperties { get; }</code></pre>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.PartOwnerComponent.html">PartOwnerComponent</a></td>
         <td><span class="parametername">newPartOwner</span></td>
-        <td></td>
+        <td><p>The new owner</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">isRecursive</span></td>
-        <td></td>
+        <td><p>Should all children be moved over</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">ignoreChildrenOfCompoundParts</span></td>
-        <td></td>
+        <td><p>Should those children of compound parts be ignored</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">destroyOldOwnerOnEmpty</span></td>
+        <td><p>Should the old part owner be destroyed if this removes the last part</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3282,10 +3292,15 @@ public PartProperties partProperties { get; }</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="KSP.Sim.impl.PartComponent.html">PartComponent</a>&gt;</td>
-        <td></td>
+        <td><p>A list of all the changed parts</p>
+</td>
       </tr>
     </tbody>
   </table>
+  <h5 id="KSP_Sim_impl_PartComponent_SetPartOwner_KSP_Sim_impl_PartOwnerComponent_System_Boolean_System_Boolean_System_Boolean__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Similar to <a class="xref" href="KSP.Sim.impl.PartOwnerComponent.html#KSP_Sim_impl_PartOwnerComponent_Remove_KSP_Sim_impl_PartComponent_System_Boolean_System_Boolean_">Remove(PartComponent, bool, bool)</a> this did not used to have the destroy on empty parameter, for
+reasons to do with the vessel merge path destroying the vessel to early</p>
+</div>
 
 
   <a id="KSP_Sim_impl_PartComponent_SetPendingPromotion_" data-uid="KSP.Sim.impl.PartComponent.SetPendingPromotion*"></a>

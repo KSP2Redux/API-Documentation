@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Interface IModule | KSP2Redux API (Beta) ">
     
-    <meta name="description" content="Base interface for PatchManager DLL modules.">
+    <meta name="description" content="Interface for PatchManager DLL modules.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,7 @@
 
 
   <h1 id="PatchManager_Shared_Modules_IModule" data-uid="PatchManager.Shared.Modules.IModule" class="text-break">Interface IModule</h1>
-  <div class="markdown level0 summary"><p>Base interface for PatchManager DLL modules.</p>
+  <div class="markdown level0 summary"><p>Interface for PatchManager DLL modules.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PatchManager.html">PatchManager</a>.<a class="xref" href="PatchManager.Shared.html">Shared</a>.<a class="xref" href="PatchManager.Shared.Modules.html">Modules</a></h6>
@@ -90,13 +90,20 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public interface IModule</code></pre>
   </div>
+  <h5 id="PatchManager_Shared_Modules_IModule_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>Each PatchManager module assembly contains exactly one type that implements this interface;
+<span class="xref">PatchManager.Shared.Modules.ModuleManager</span> discovers and instantiates it via reflection at module-registration time.
+Lifecycle methods fire in the order <a class="xref" href="PatchManager.Shared.Modules.IModule.html#PatchManager_Shared_Modules_IModule_Init">Init()</a> -&gt; <a class="xref" href="PatchManager.Shared.Modules.IModule.html#PatchManager_Shared_Modules_IModule_PreLoad">PreLoad()</a> -&gt; <a class="xref" href="PatchManager.Shared.Modules.IModule.html#PatchManager_Shared_Modules_IModule_Load">Load()</a>,
+each at a different stage of the host mod's bootstrap. Implementations that only need a subset of the
+lifecycle should derive from <a class="xref" href="PatchManager.Shared.Modules.BaseModule.html">BaseModule</a> rather than implementing the interface directly.</p>
+</div>
   <h3 id="methods">Methods
 </h3>
 
 
   <a id="PatchManager_Shared_Modules_IModule_BindConfiguration_" data-uid="PatchManager.Shared.Modules.IModule.BindConfiguration*"></a>
   <h4 id="PatchManager_Shared_Modules_IModule_BindConfiguration_ReduxLib_Configuration_IConfigFile_" data-uid="PatchManager.Shared.Modules.IModule.BindConfiguration(ReduxLib.Configuration.IConfigFile)">BindConfiguration(IConfigFile)</h4>
-  <div class="markdown level1 summary"><p>Called to bind configuration to this module specifically.</p>
+  <div class="markdown level1 summary"><p>Called once during host-mod startup to let the module bind its configuration entries.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -116,16 +123,20 @@
       <tr>
         <td><a class="xref" href="../ReduxLib/ReduxLib.Configuration.IConfigFile.html">IConfigFile</a></td>
         <td><span class="parametername">modConfiguration</span></td>
-        <td><p>The configuration of the base Patch Manager mod to bind to</p>
+        <td><p>The host PatchManager mod's configuration file.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 id="PatchManager_Shared_Modules_IModule_BindConfiguration_ReduxLib_Configuration_IConfigFile__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>All PatchManager modules share the host mod's single <a class="xref" href="../ReduxLib/ReduxLib.Configuration.IConfigFile.html">IConfigFile</a>, so implementations should
+namespace their config sections to avoid collisions. Invoked before <a class="xref" href="PatchManager.Shared.Modules.IModule.html#PatchManager_Shared_Modules_IModule_Init">Init()</a>.</p>
+</div>
 
 
   <a id="PatchManager_Shared_Modules_IModule_GetDetails_" data-uid="PatchManager.Shared.Modules.IModule.GetDetails*"></a>
   <h4 id="PatchManager_Shared_Modules_IModule_GetDetails" data-uid="PatchManager.Shared.Modules.IModule.GetDetails">GetDetails()</h4>
-  <div class="markdown level1 summary"><p>Called when getting the details information for patch manager after game load.</p>
+  <div class="markdown level1 summary"><p>Returns the visual element to embed in PatchManager's mod-list details foldout for this module.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -143,47 +154,59 @@
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/UIElements.VisualElement.html">VisualElement</a></td>
-        <td><p>A visual element describing information about the module or null for no information</p>
+        <td><p>The visual element describing the module, or <code>null</code> if the module has nothing to report.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 id="PatchManager_Shared_Modules_IModule_GetDetails_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Invoked once during post-initialization, when PatchManager assembles the per-module diagnostics panel.
+Implementations should return <code>null</code> when the module has nothing to display.</p>
+</div>
 
 
   <a id="PatchManager_Shared_Modules_IModule_Init_" data-uid="PatchManager.Shared.Modules.IModule.Init*"></a>
   <h4 id="PatchManager_Shared_Modules_IModule_Init" data-uid="PatchManager.Shared.Modules.IModule.Init">Init()</h4>
-  <div class="markdown level1 summary"><p>Called in the mod's Start method before the game is loaded.
-Use this method to register actions with the FlowManager.</p>
+  <div class="markdown level1 summary"><p>Called during the host mod's Start, before the game itself is loaded.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">void Init()</code></pre>
   </div>
+  <h5 id="PatchManager_Shared_Modules_IModule_Init_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Implementations typically use this to register actions with the FlowManager.</p>
+</div>
 
 
   <a id="PatchManager_Shared_Modules_IModule_Load_" data-uid="PatchManager.Shared.Modules.IModule.Load*"></a>
   <h4 id="PatchManager_Shared_Modules_IModule_Load" data-uid="PatchManager.Shared.Modules.IModule.Load">Load()</h4>
-  <div class="markdown level1 summary"><p>Called in mod's OnInitialized method after the game is loaded.
-Use this to register resource locators and do things that require the GameInstance.</p>
+  <div class="markdown level1 summary"><p>Called from the host mod's OnInitialized, the second SpaceWarp init stage, after the game and mod assets are loaded.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">void Load()</code></pre>
   </div>
+  <h5 id="PatchManager_Shared_Modules_IModule_Load_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Implementations typically use this to register resource locators and perform setup that requires
+a fully initialized GameInstance.</p>
+</div>
 
 
   <a id="PatchManager_Shared_Modules_IModule_PreLoad_" data-uid="PatchManager.Shared.Modules.IModule.PreLoad*"></a>
   <h4 id="PatchManager_Shared_Modules_IModule_PreLoad" data-uid="PatchManager.Shared.Modules.IModule.PreLoad">PreLoad()</h4>
-  <div class="markdown level1 summary"><p>Called in mod's OnPreInitialized method after the game is loaded.
-Use this to register resource locators and do things that require the GameInstance.</p>
+  <div class="markdown level1 summary"><p>Called from the host mod's OnPreInitialized, the first SpaceWarp init stage, before the game is loaded.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">void PreLoad()</code></pre>
   </div>
+  <h5 id="PatchManager_Shared_Modules_IModule_PreLoad_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Implementations typically use this for setup that must run before the game finishes loading,
+such as constructing the patch universe or registering state that later init steps depend on.</p>
+</div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>

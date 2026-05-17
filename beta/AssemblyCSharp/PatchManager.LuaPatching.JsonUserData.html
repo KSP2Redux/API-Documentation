@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class JsonUserData | KSP2Redux API (Beta) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class JsonUserData | KSP2Redux API (Beta) ">
+    
+    <meta name="description" content="Lua-facing wrapper exposing a Newtonsoft  as a table-like UserData.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PatchManager.LuaPatching.JsonUserData">
+
+
+
+  <h1 id="PatchManager_LuaPatching_JsonUserData" data-uid="PatchManager.LuaPatching.JsonUserData" class="text-break">Class JsonUserData</h1>
+  <div class="markdown level0 summary"><p>Lua-facing wrapper exposing a Newtonsoft <span class="xref">Newtonsoft.Json.Linq.JToken</span> as a table-like UserData.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><span class="xref">JsonUserData</span></div>
+      <div class="level2"><a class="xref" href="PatchManager.LuaPatching.Utility.ExtensibleJsonUserData.html">ExtensibleJsonUserData</a></div>
+      <div class="level2"><a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html">IndexedListUserData</a></div>
+      <div class="level2"><a class="xref" href="PatchManager.Planets.UserData.CelestialBodyUserData.html">CelestialBodyUserData</a></div>
+      <div class="level2"><a class="xref" href="PatchManager.Resources.UserData.ResourceUserData.html">ResourceUserData</a></div>
+      <div class="level2"><a class="xref" href="PatchManager.Science.UserData.ExperimentUserData.html">ExperimentUserData</a></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PatchManager.html">PatchManager</a>.<a class="xref" href="PatchManager.LuaPatching.html">LuaPatching</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="PatchManager_LuaPatching_JsonUserData_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MoonSharpUserData]
+public class JsonUserData</code></pre>
+  </div>
+  <h5 id="PatchManager_LuaPatching_JsonUserData_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>Patch scripts read and mutate JSON assets through this type: object keys become string indices,
+array elements become 1-indexed integer indices (matching Lua convention), and iteration is exposed
+through the <code>__pairs</code> / <code>__ipairs</code> metamethods on <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_Pairs">Pairs()</a>.
+Reads against the wrong token type are non-fatal -- they log a debug message and return
+<span class="xref">MoonSharp.Interpreter.DynValue.Nil</span> or an empty result. Writes against the wrong token type throw, since
+silently accepting a write would lose data. Subclasses (<a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html">IndexedListUserData</a>,
+<a class="xref" href="PatchManager.LuaPatching.Utility.ExtensibleJsonUserData.html">ExtensibleJsonUserData</a>) override these members to layer name-indexed lookup or
+virtual properties on top of the underlying JSON.</p>
+</div>
+  <h3 id="constructors">Constructors
+</h3>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData__ctor_" data-uid="PatchManager.LuaPatching.JsonUserData.#ctor*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData__ctor_Newtonsoft_Json_Linq_JToken_" data-uid="PatchManager.LuaPatching.JsonUserData.#ctor(Newtonsoft.Json.Linq.JToken)">JsonUserData(JToken)</h4>
+  <div class="markdown level1 summary"><p>Creates a new wrapper around the given JSON token.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonUserData(JToken token)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">JToken</span></td>
+        <td><span class="parametername">token</span></td>
+        <td><p>The token to wrap.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+</h3>
+
+
+  <h4 id="PatchManager_LuaPatching_JsonUserData_Token" data-uid="PatchManager.LuaPatching.JsonUserData.Token">Token</h4>
+  <div class="markdown level1 summary"><p>The wrapped JSON token. Hidden from Lua; C# callers may read or replace it directly.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+public JToken Token</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">JToken</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_Count_" data-uid="PatchManager.LuaPatching.JsonUserData.Count*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_Count" data-uid="PatchManager.LuaPatching.JsonUserData.Count">Count</h4>
+  <div class="markdown level1 summary"><p>Gets the number of elements in the wrapped array, or 0 when the token is not an array (also logs a debug message).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual int Count { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_Item_" data-uid="PatchManager.LuaPatching.JsonUserData.Item*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_Item_System_Int32_" data-uid="PatchManager.LuaPatching.JsonUserData.Item(System.Int32)">this[int]</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the array element at the given 1-indexed position.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DynValue this[int index] { get; set; }</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>The 1-indexed array position.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><p>The element at the given position, or <span class="xref">MoonSharp.Interpreter.DynValue.Nil</span> if absent or out of range.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PatchManager_LuaPatching_JsonUserData_Item_System_Int32__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Reads on a non-array token log a debug message and return <span class="xref">MoonSharp.Interpreter.DynValue.Nil</span>; out-of-range
+reads also return <span class="xref">MoonSharp.Interpreter.DynValue.Nil</span>. Writes throw when the token is not an array; assigning
+at <code>Count + 1</code> appends.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Exception</span></td>
+        <td><p>Thrown when setting on a token whose type is not <span class="xref">Newtonsoft.Json.Linq.JTokenType.Array</span>, or when the index is out of range.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_Item_" data-uid="PatchManager.LuaPatching.JsonUserData.Item*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_Item_System_String_" data-uid="PatchManager.LuaPatching.JsonUserData.Item(System.String)">this[string]</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the object property with the given key.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DynValue this[string index] { get; set; }</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>The property name.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><p>The property value, or <span class="xref">MoonSharp.Interpreter.DynValue.Nil</span> if absent.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PatchManager_LuaPatching_JsonUserData_Item_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Reads on a non-object token log a debug message and return <span class="xref">MoonSharp.Interpreter.DynValue.Nil</span>; reads of missing
+keys also return <span class="xref">MoonSharp.Interpreter.DynValue.Nil</span>. Writes throw when the token is not an object.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Exception</span></td>
+        <td><p>Thrown when setting on a token whose type is not <span class="xref">Newtonsoft.Json.Linq.JTokenType.Object</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_Append_" data-uid="PatchManager.LuaPatching.JsonUserData.Append*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_Append_MoonSharp_Interpreter_DynValue_" data-uid="PatchManager.LuaPatching.JsonUserData.Append(MoonSharp.Interpreter.DynValue)">Append(DynValue)</h4>
+  <div class="markdown level1 summary"><p>Appends an element to the end of the wrapped array.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void Append(DynValue value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The element to append.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Exception</span></td>
+        <td><p>Thrown when the token is not <span class="xref">Newtonsoft.Json.Linq.JTokenType.Array</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_Clear_" data-uid="PatchManager.LuaPatching.JsonUserData.Clear*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_Clear" data-uid="PatchManager.LuaPatching.JsonUserData.Clear">Clear()</h4>
+  <div class="markdown level1 summary"><p>Removes every element from the wrapped array.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void Clear()</code></pre>
+  </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Exception</span></td>
+        <td><p>Thrown when the token is not <span class="xref">Newtonsoft.Json.Linq.JTokenType.Array</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_GetFromJToken_" data-uid="PatchManager.LuaPatching.JsonUserData.GetFromJToken*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_GetFromJToken_Newtonsoft_Json_Linq_JToken_" data-uid="PatchManager.LuaPatching.JsonUserData.GetFromJToken(Newtonsoft.Json.Linq.JToken)">GetFromJToken(JToken)</h4>
+  <div class="markdown level1 summary"><p>Lifts a JSON token into the corresponding Lua-facing <span class="xref">MoonSharp.Interpreter.DynValue</span>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+public static DynValue GetFromJToken(JToken token)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">JToken</span></td>
+        <td><span class="parametername">token</span></td>
+        <td><p>The token to lift, or <code>null</code> for a missing key.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><p>The Lua value for the given token.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PatchManager_LuaPatching_JsonUserData_GetFromJToken_Newtonsoft_Json_Linq_JToken__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>A null token (missing JSON key) maps to <span class="xref">MoonSharp.Interpreter.DynValue.Nil</span>. Objects and arrays are wrapped in
+a fresh <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a>; primitives become the matching <span class="xref">MoonSharp.Interpreter.DynValue</span> kind;
+<span class="xref">Newtonsoft.Json.Linq.JTokenType.None</span>, <span class="xref">Newtonsoft.Json.Linq.JTokenType.Null</span>, and <span class="xref">Newtonsoft.Json.Linq.JTokenType.Undefined</span>
+all map to <span class="xref">MoonSharp.Interpreter.DynValue.Nil</span>.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Exception</span></td>
+        <td><p>Thrown when <code class="paramref">token</code>'s type is not one of the handled token types.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_GetJTokenForDynValue_" data-uid="PatchManager.LuaPatching.JsonUserData.GetJTokenForDynValue*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_GetJTokenForDynValue_MoonSharp_Interpreter_DynValue_" data-uid="PatchManager.LuaPatching.JsonUserData.GetJTokenForDynValue(MoonSharp.Interpreter.DynValue)">GetJTokenForDynValue(DynValue)</h4>
+  <div class="markdown level1 summary"><p>Converts a Lua <span class="xref">MoonSharp.Interpreter.DynValue</span> into the equivalent <span class="xref">Newtonsoft.Json.Linq.JToken</span>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static JToken GetJTokenForDynValue(DynValue dv)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><span class="parametername">dv</span></td>
+        <td><p>The Lua value to convert.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">JToken</span></td>
+        <td><p>The JSON representation of <code class="paramref">dv</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PatchManager_LuaPatching_JsonUserData_GetJTokenForDynValue_MoonSharp_Interpreter_DynValue__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Lua numbers become integers when they have no fractional part. Lua tables become JSON arrays when
+their integer length is non-zero, JSON objects otherwise. Nested <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a> values
+are unwrapped to their underlying token. Use the protected overload to disambiguate against an existing
+slot's type.</p>
+</div>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_GetJTokenForDynValue_" data-uid="PatchManager.LuaPatching.JsonUserData.GetJTokenForDynValue*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_GetJTokenForDynValue_Newtonsoft_Json_Linq_JToken_MoonSharp_Interpreter_DynValue_" data-uid="PatchManager.LuaPatching.JsonUserData.GetJTokenForDynValue(Newtonsoft.Json.Linq.JToken,MoonSharp.Interpreter.DynValue)">GetJTokenForDynValue(JToken, DynValue)</h4>
+  <div class="markdown level1 summary"><p>Converts a Lua <span class="xref">MoonSharp.Interpreter.DynValue</span> into a <span class="xref">Newtonsoft.Json.Linq.JToken</span>, using <code class="paramref">previous</code>'s type
+as a hint for ambiguous numeric and empty-table cases.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected static JToken GetJTokenForDynValue(JToken previous, DynValue value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">JToken</span></td>
+        <td><span class="parametername">previous</span></td>
+        <td><p>The token currently at the target slot, or <code>null</code> when none.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The Lua value to convert.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">JToken</span></td>
+        <td><p>The JSON representation of <code class="paramref">value</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PatchManager_LuaPatching_JsonUserData_GetJTokenForDynValue_Newtonsoft_Json_Linq_JToken_MoonSharp_Interpreter_DynValue__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Used by indexer setters so that assigning a Lua number to an existing integer slot keeps it integer,
+and so that an empty Lua table replacing a JSON array does not collapse into an empty object.</p>
+</div>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_HasKey_" data-uid="PatchManager.LuaPatching.JsonUserData.HasKey*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_HasKey_System_String_" data-uid="PatchManager.LuaPatching.JsonUserData.HasKey(System.String)">HasKey(string)</h4>
+  <div class="markdown level1 summary"><p>Returns whether the wrapped object contains a property with the given key.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool HasKey(string key)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">key</span></td>
+        <td><p>The property name to test.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the wrapped object contains <code class="paramref">key</code>, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_Insert_" data-uid="PatchManager.LuaPatching.JsonUserData.Insert*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_Insert_System_Int32_MoonSharp_Interpreter_DynValue_" data-uid="PatchManager.LuaPatching.JsonUserData.Insert(System.Int32,MoonSharp.Interpreter.DynValue)">Insert(int, DynValue)</h4>
+  <div class="markdown level1 summary"><p>Inserts an element at the given 1-indexed position, shifting later elements right.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void Insert(int index, DynValue value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>The 1-indexed position to insert at.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The element to insert.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Exception</span></td>
+        <td><p>Thrown when the token is not <span class="xref">Newtonsoft.Json.Linq.JTokenType.Array</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_Keys_" data-uid="PatchManager.LuaPatching.JsonUserData.Keys*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_Keys" data-uid="PatchManager.LuaPatching.JsonUserData.Keys">Keys()</h4>
+  <div class="markdown level1 summary"><p>Enumerates the property names of the wrapped object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual IEnumerable&lt;string&gt; Keys()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td><p>The property names of the wrapped object.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PatchManager_LuaPatching_JsonUserData_Keys_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Returns an empty sequence (and logs a debug message) when the token is not an object.</p>
+</div>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_Pairs_" data-uid="PatchManager.LuaPatching.JsonUserData.Pairs*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_Pairs" data-uid="PatchManager.LuaPatching.JsonUserData.Pairs">Pairs()</h4>
+  <div class="markdown level1 summary"><p>Returns an iterator suitable for Lua's <code>__pairs</code> / <code>__ipairs</code> metamethods.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MoonSharpUserDataMetamethod(&quot;__pairs&quot;)]
+[MoonSharpUserDataMetamethod(&quot;__ipairs&quot;)]
+public virtual DynValue Pairs()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><p>The iterator callback.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PatchManager_LuaPatching_JsonUserData_Pairs_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Arrays yield 1-indexed (index, value) tuples; objects yield (key, value) tuples; any other token type
+yields nothing and logs a debug message. Bound to both metamethods, so <code>pairs</code> and <code>ipairs</code>
+in Lua produce the same iterator.</p>
+</div>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_Patch_" data-uid="PatchManager.LuaPatching.JsonUserData.Patch*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_Patch_System_String_System_Action_MoonSharp_Interpreter_DynValue__" data-uid="PatchManager.LuaPatching.JsonUserData.Patch(System.String,System.Action{MoonSharp.Interpreter.DynValue})">Patch(string, Action&lt;DynValue&gt;)</h4>
+  <div class="markdown level1 summary"><p>Invokes <code class="paramref">callback</code> with the value at <code class="paramref">key</code> when the key is present;
+does nothing otherwise.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void Patch(string key, Action&lt;DynValue&gt; callback)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">key</span></td>
+        <td><p>The property name to patch.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<span class="xref">DynValue</span>&gt;</td>
+        <td><span class="parametername">callback</span></td>
+        <td><p>The callback to invoke with the existing value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_Remove_" data-uid="PatchManager.LuaPatching.JsonUserData.Remove*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_Remove_System_String_" data-uid="PatchManager.LuaPatching.JsonUserData.Remove(System.String)">Remove(string)</h4>
+  <div class="markdown level1 summary"><p>Removes the object property with the given key.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void Remove(string key)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">key</span></td>
+        <td><p>The property name to remove.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Exception</span></td>
+        <td><p>Thrown when the token is not <span class="xref">Newtonsoft.Json.Linq.JTokenType.Object</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_RemoveAt_" data-uid="PatchManager.LuaPatching.JsonUserData.RemoveAt*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_RemoveAt_System_Int32_" data-uid="PatchManager.LuaPatching.JsonUserData.RemoveAt(System.Int32)">RemoveAt(int)</h4>
+  <div class="markdown level1 summary"><p>Removes the array element at the given 1-indexed position.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void RemoveAt(int index)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>The 1-indexed array position to remove.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Exception</span></td>
+        <td><p>Thrown when the token is not <span class="xref">Newtonsoft.Json.Linq.JTokenType.Array</span> or when the index is out of range.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_RemoveWhere_" data-uid="PatchManager.LuaPatching.JsonUserData.RemoveWhere*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_RemoveWhere_System_Func_MoonSharp_Interpreter_DynValue_System_Boolean__" data-uid="PatchManager.LuaPatching.JsonUserData.RemoveWhere(System.Func{MoonSharp.Interpreter.DynValue,System.Boolean})">RemoveWhere(Func&lt;DynValue, bool&gt;)</h4>
+  <div class="markdown level1 summary"><p>Remove all items that match a passed predicate</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void RemoveWhere(Func&lt;DynValue, bool&gt; callback)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Func</span>&lt;<span class="xref">DynValue</span>, <span class="xref">bool</span>&gt;</td>
+        <td><span class="parametername">callback</span></td>
+        <td><p>The predicate to check against</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_RequireArray_" data-uid="PatchManager.LuaPatching.JsonUserData.RequireArray*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_RequireArray_Newtonsoft_Json_Linq_JToken_System_String_" data-uid="PatchManager.LuaPatching.JsonUserData.RequireArray(Newtonsoft.Json.Linq.JToken,System.String)">RequireArray(JToken, string)</h4>
+  <div class="markdown level1 summary"><p>Casts <code class="paramref">token</code> to <span class="xref">Newtonsoft.Json.Linq.JArray</span>, throwing a Lua-decorated error when the cast fails.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static JArray RequireArray(JToken token, string what)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">JToken</span></td>
+        <td><span class="parametername">token</span></td>
+        <td><p>The token to cast.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">what</span></td>
+        <td><p>A label describing what the token represents, used in the error message.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">JArray</span></td>
+        <td><p>The token as a <span class="xref">Newtonsoft.Json.Linq.JArray</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptRuntimeException</span></td>
+        <td><p>Thrown when <code class="paramref">token</code> is missing or not a JSON array.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_RequireObject_" data-uid="PatchManager.LuaPatching.JsonUserData.RequireObject*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_RequireObject_Newtonsoft_Json_Linq_JToken_System_String_" data-uid="PatchManager.LuaPatching.JsonUserData.RequireObject(Newtonsoft.Json.Linq.JToken,System.String)">RequireObject(JToken, string)</h4>
+  <div class="markdown level1 summary"><p>Casts <code class="paramref">token</code> to <span class="xref">Newtonsoft.Json.Linq.JObject</span>, throwing a Lua-decorated error when the cast fails.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static JObject RequireObject(JToken token, string what)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">JToken</span></td>
+        <td><span class="parametername">token</span></td>
+        <td><p>The token to cast.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">what</span></td>
+        <td><p>A label describing what the token represents, used in the error message.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">JObject</span></td>
+        <td><p>The token as a <span class="xref">Newtonsoft.Json.Linq.JObject</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptRuntimeException</span></td>
+        <td><p>Thrown when <code class="paramref">token</code> is missing or not a JSON object.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_RequireString_" data-uid="PatchManager.LuaPatching.JsonUserData.RequireString*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_RequireString_Newtonsoft_Json_Linq_JToken_System_String_" data-uid="PatchManager.LuaPatching.JsonUserData.RequireString(Newtonsoft.Json.Linq.JToken,System.String)">RequireString(JToken, string)</h4>
+  <div class="markdown level1 summary"><p>Reads <code class="paramref">token</code> as a JSON string, throwing a Lua-decorated error when it is missing or non-string.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string RequireString(JToken token, string what)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">JToken</span></td>
+        <td><span class="parametername">token</span></td>
+        <td><p>The token to read.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">what</span></td>
+        <td><p>A label describing what the token represents, used in the error message.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><p>The token's string value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptRuntimeException</span></td>
+        <td><p>Thrown when <code class="paramref">token</code> is missing or not a JSON string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetField__2___0_System_String_">Util.GetField&lt;T, R&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetField__2___0_System_String___1_">Util.SetField&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromProperties_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromProperties(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetFieldValue__1_System_Object_System_String_">Util.GetFieldValue&lt;T&gt;(object, string)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from prerelease
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
