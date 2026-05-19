@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Struct Transformd | KSP2Redux API (Beta) ">
     
-    
+    <meta name="description" content="Struct representing ECS transform data.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,8 @@
 
 
   <h1 id="Redux_Ecs_Components_Transformd" data-uid="Redux.Ecs.Components.Transformd" class="text-break">Struct Transformd</h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>Struct representing ECS transform data.</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.Ecs.html">Ecs</a>.<a class="xref" href="Redux.Ecs.Components.html">Components</a></h6>
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
@@ -90,16 +91,20 @@
     <pre><code class="lang-csharp hljs">[BurstCompile]
 public struct Transformd</code></pre>
   </div>
+  <h5 id="Redux_Ecs_Components_Transformd_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>TODO: Possibly rename this, and explore possibility of splitting component into location and velocity data -
+though if velocity and location data are used within the same methods and not separately, then there'd be no point.</p>
+</div>
   <h3 id="fields">Fields
 </h3>
 
 
-  <h4 id="Redux_Ecs_Components_Transformd_localMatrix" data-uid="Redux.Ecs.Components.Transformd.localMatrix">localMatrix</h4>
+  <h4 id="Redux_Ecs_Components_Transformd_Position" data-uid="Redux.Ecs.Components.Transformd.Position">Position</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Matrix4x4D localMatrix</code></pre>
+    <pre><code class="lang-csharp hljs">public Vector3d Position</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -111,19 +116,19 @@ public struct Transformd</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="GlobalAssemblyCSharp.Matrix4x4D.html">Matrix4x4D</a></td>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
         <td></td>
       </tr>
     </tbody>
   </table>
 
 
-  <h4 id="Redux_Ecs_Components_Transformd_localMatrixInverse" data-uid="Redux.Ecs.Components.Transformd.localMatrixInverse">localMatrixInverse</h4>
+  <h4 id="Redux_Ecs_Components_Transformd_Rotation" data-uid="Redux.Ecs.Components.Transformd.Rotation">Rotation</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Matrix4x4D localMatrixInverse</code></pre>
+    <pre><code class="lang-csharp hljs">public QuaternionD Rotation</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -135,7 +140,55 @@ public struct Transformd</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="GlobalAssemblyCSharp.Matrix4x4D.html">Matrix4x4D</a></td>
+        <td><a class="xref" href="GlobalAssemblyCSharp.QuaternionD.html">QuaternionD</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Ecs_Components_Transformd_VelocityAngular" data-uid="Redux.Ecs.Components.Transformd.VelocityAngular">VelocityAngular</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3d VelocityAngular</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Ecs_Components_Transformd_VelocityLinear" data-uid="Redux.Ecs.Components.Transformd.VelocityLinear">VelocityLinear</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3d VelocityLinear</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -299,6 +352,94 @@ public static int FindCommonParent(in EntityManager em, in Entity lhs, in Entity
   </table>
 
 
+  <a id="Redux_Ecs_Components_Transformd_GetLocalMatrix_" data-uid="Redux.Ecs.Components.Transformd.GetLocalMatrix*"></a>
+  <h4 id="Redux_Ecs_Components_Transformd_GetLocalMatrix" data-uid="Redux.Ecs.Components.Transformd.GetLocalMatrix">GetLocalMatrix()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly Matrix4x4D GetLocalMatrix()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Matrix4x4D.html">Matrix4x4D</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Ecs_Components_Transformd_GetLocalMatrixInverse_" data-uid="Redux.Ecs.Components.Transformd.GetLocalMatrixInverse*"></a>
+  <h4 id="Redux_Ecs_Components_Transformd_GetLocalMatrixInverse" data-uid="Redux.Ecs.Components.Transformd.GetLocalMatrixInverse">GetLocalMatrixInverse()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly Matrix4x4D GetLocalMatrixInverse()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Matrix4x4D.html">Matrix4x4D</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Ecs_Components_Transformd_SetAngularVelocity_" data-uid="Redux.Ecs.Components.Transformd.SetAngularVelocity*"></a>
+  <h4 id="Redux_Ecs_Components_Transformd_SetAngularVelocity_Unity_Entities_EntityManager__Unity_Entities_Entity__Vector3d__" data-uid="Redux.Ecs.Components.Transformd.SetAngularVelocity(Unity.Entities.EntityManager@,Unity.Entities.Entity@,Vector3d@)">SetAngularVelocity(in EntityManager, in Entity, in Vector3d)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[BurstCompile]
+public static void SetAngularVelocity(in EntityManager em, in Entity transform, in Vector3d angularVelocity)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">angularVelocity</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="Redux_Ecs_Components_Transformd_SetIdentity_" data-uid="Redux.Ecs.Components.Transformd.SetIdentity*"></a>
   <h4 id="Redux_Ecs_Components_Transformd_SetIdentity" data-uid="Redux.Ecs.Components.Transformd.SetIdentity">SetIdentity()</h4>
   <div class="markdown level1 summary"></div>
@@ -307,6 +448,49 @@ public static int FindCommonParent(in EntityManager em, in Entity lhs, in Entity
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void SetIdentity()</code></pre>
   </div>
+
+
+  <a id="Redux_Ecs_Components_Transformd_SetPositionAndRotation_" data-uid="Redux.Ecs.Components.Transformd.SetPositionAndRotation*"></a>
+  <h4 id="Redux_Ecs_Components_Transformd_SetPositionAndRotation_Unity_Entities_EntityManager__Unity_Entities_Entity__Vector3d__QuaternionD__" data-uid="Redux.Ecs.Components.Transformd.SetPositionAndRotation(Unity.Entities.EntityManager@,Unity.Entities.Entity@,Vector3d@,QuaternionD@)">SetPositionAndRotation(in EntityManager, in Entity, in Vector3d, in QuaternionD)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[BurstCompile]
+public static void SetPositionAndRotation(in EntityManager em, in Entity entity, in Vector3d localPosition, in QuaternionD localRotation)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">entity</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">localPosition</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.QuaternionD.html">QuaternionD</a></td>
+        <td><span class="parametername">localRotation</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <a id="Redux_Ecs_Components_Transformd_SetPositionAndRotation_" data-uid="Redux.Ecs.Components.Transformd.SetPositionAndRotation*"></a>
@@ -335,6 +519,141 @@ public static int FindCommonParent(in EntityManager em, in Entity lhs, in Entity
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.QuaternionD.html">QuaternionD</a></td>
         <td><span class="parametername">localRotation</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Ecs_Components_Transformd_SetVelocity_" data-uid="Redux.Ecs.Components.Transformd.SetVelocity*"></a>
+  <h4 id="Redux_Ecs_Components_Transformd_SetVelocity_Unity_Entities_EntityManager__Unity_Entities_Entity__Vector3d__" data-uid="Redux.Ecs.Components.Transformd.SetVelocity(Unity.Entities.EntityManager@,Unity.Entities.Entity@,Vector3d@)">SetVelocity(in EntityManager, in Entity, in Vector3d)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[BurstCompile]
+public static void SetVelocity(in EntityManager em, in Entity transform, in Vector3d velocity)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">velocity</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Ecs_Components_Transformd_ToLocalAngularVelocity_" data-uid="Redux.Ecs.Components.Transformd.ToLocalAngularVelocity*"></a>
+  <h4 id="Redux_Ecs_Components_Transformd_ToLocalAngularVelocity_Unity_Entities_EntityManager__Unity_Entities_Entity__Unity_Entities_Entity__Vector3d__Vector3d__" data-uid="Redux.Ecs.Components.Transformd.ToLocalAngularVelocity(Unity.Entities.EntityManager@,Unity.Entities.Entity@,Unity.Entities.Entity@,Vector3d@,Vector3d@)">ToLocalAngularVelocity(in EntityManager, in Entity, in Entity, in Vector3d, out Vector3d)</h4>
+  <div class="markdown level1 summary"><p>Find the relative angular velocity between two reference frames.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[BurstCompile]
+public static void ToLocalAngularVelocity(in EntityManager em, in Entity thisEnt, in Entity otherEnt, in Vector3d angularVelocityInOther, out Vector3d relativeAngularVelocity)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">thisEnt</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">otherEnt</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">angularVelocityInOther</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">relativeAngularVelocity</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Ecs_Components_Transformd_ToLocalPosition_" data-uid="Redux.Ecs.Components.Transformd.ToLocalPosition*"></a>
+  <h4 id="Redux_Ecs_Components_Transformd_ToLocalPosition_Unity_Entities_EntityManager__Unity_Entities_Entity__Unity_Entities_Entity__Vector3d__Vector3d__" data-uid="Redux.Ecs.Components.Transformd.ToLocalPosition(Unity.Entities.EntityManager@,Unity.Entities.Entity@,Unity.Entities.Entity@,Vector3d@,Vector3d@)">ToLocalPosition(in EntityManager, in Entity, in Entity, in Vector3d, out Vector3d)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[BurstCompile]
+public static void ToLocalPosition(in EntityManager em, in Entity thisEnt, in Entity otherEnt, in Vector3d positionInOther, out Vector3d position)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">thisEnt</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">otherEnt</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">positionInOther</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">position</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -431,6 +750,60 @@ public static void ToLocalVector(in EntityManager em, in Entity thisEnt, in Enti
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
         <td><span class="parametername">localVector</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Ecs_Components_Transformd_ToLocalVelocity_" data-uid="Redux.Ecs.Components.Transformd.ToLocalVelocity*"></a>
+  <h4 id="Redux_Ecs_Components_Transformd_ToLocalVelocity_Unity_Entities_EntityManager__Unity_Entities_Entity__Unity_Entities_Entity__Vector3d__Vector3d__Vector3d__" data-uid="Redux.Ecs.Components.Transformd.ToLocalVelocity(Unity.Entities.EntityManager@,Unity.Entities.Entity@,Unity.Entities.Entity@,Vector3d@,Vector3d@,Vector3d@)">ToLocalVelocity(in EntityManager, in Entity, in Entity, in Vector3d, in Vector3d, out Vector3d)</h4>
+  <div class="markdown level1 summary"><p>Transform a velocity at a given position between frames.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[BurstCompile]
+public static void ToLocalVelocity(in EntityManager em, in Entity thisEnt, in Entity otherEnt, in Vector3d velocityInOther, in Vector3d positionInOther, out Vector3d velocity)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">thisEnt</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">otherEnt</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">velocityInOther</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">positionInOther</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">velocity</span></td>
         <td></td>
       </tr>
     </tbody>
