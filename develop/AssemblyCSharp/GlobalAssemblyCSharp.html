@@ -1481,7 +1481,7 @@ using a virtual mouse position and enforcing a single active instance at a time.
       <section><p>Represents collider data for a PQS terrain surface, holding a reference to the owning <a class="xref" href="KSP.Rendering.Planets.PQS.html">PQS</a> instance.</p>
 </section>
       <h4><a class="xref" href="GlobalAssemblyCSharp.PQSDecal.html">PQSDecal</a></h4>
-      <section><p>Represents a PQS terrain decal asset, storing height, blend mode, opacity, and masking configuration.</p>
+      <section><p>Represents a PQS terrain decal asset, storing height, blend mode, opacity, and masking values shared across instances of this template. Per-decal source textures (Diffuse/Normal/AlphaMaskTexture/Peak/Slope) are Redux-only authoring data and live on <code>PQSDecalTemplateAuthoring</code> in the editor-only sidecar registry.</p>
 </section>
       <h4><a class="xref" href="GlobalAssemblyCSharp.PQSDecalController.html">PQSDecalController</a></h4>
       <section><p>Represents a controller for PQS terrain decal rendering that manages <a class="xref" href="PQSDecalInstance.html">PQSDecalInstance</a> objects and height data for a celestial body surface.</p>
@@ -1490,7 +1490,7 @@ using a virtual mouse position and enforcing a single active instance at a time.
       <section><p>ScriptableObject that stores serialized PQS decal instances, baked decal lists, texture arrays, and heightmap data for planetary surface decals.</p>
 </section>
       <h4><a class="xref" href="GlobalAssemblyCSharp.PQSDecalInstance.html">PQSDecalInstance</a></h4>
-      <section><p>Represents a single placed instance of a <a class="xref" href="GlobalAssemblyCSharp.PQSDecalInstance.html#PQSDecalInstance_PQSDecal">PQSDecal</a> on a planet surface, with per-instance position, scale, rotation, and appearance override settings.</p>
+      <section><p>Represents a single placed instance of a <a class="xref" href="GlobalAssemblyCSharp.PQSDecalInstance.html#PQSDecalInstance_PQSDecal">PQSDecal</a> on a planet surface, with per-instance position, scale, rotation, and per-field overrides of the template's appearance values.</p>
 </section>
       <h4><a class="xref" href="GlobalAssemblyCSharp.PQSHeightmapProcessor.html">PQSHeightmapProcessor</a></h4>
       <section><p>Processes PQS heightmap textures on the GPU using compute shaders to apply blurring, gradient, and curvature filters.</p>
@@ -1876,9 +1876,6 @@ using a virtual mouse position and enforcing a single active instance at a time.
       <h4><a class="xref" href="GlobalAssemblyCSharp.ScaledCloudConfiguration.scaledCloudMaterialData.html">ScaledCloudConfiguration.scaledCloudMaterialData</a></h4>
       <section><p>Represents the material configuration data for a single scaled-space cloud layer.</p>
 </section>
-      <h4><a class="xref" href="GlobalAssemblyCSharp.ScaledSpaceTextureGenerator.html">ScaledSpaceTextureGenerator</a></h4>
-      <section><p>MonoBehaviour that generates scaled-space albedo, specular, normal, and emission render textures for a planetary body by rendering its PQS material through an orthographic camera.</p>
-</section>
       <h4><a class="xref" href="GlobalAssemblyCSharp.ScaledSpaceTextureGeneratorSettings.html">ScaledSpaceTextureGeneratorSettings</a></h4>
       <section><p>Represents the configuration settings for generating scaled space textures.</p>
 </section>
@@ -2070,6 +2067,10 @@ using a virtual mouse position and enforcing a single active instance at a time.
 </section>
       <h4><a class="xref" href="GlobalAssemblyCSharp.SurfaceColliderData.html">SurfaceColliderData</a></h4>
       <section><p>Represents the biome type and color data associated with a surface collider.</p>
+</section>
+      <h4><a class="xref" href="GlobalAssemblyCSharp.SurfaceLandmark.html">SurfaceLandmark</a></h4>
+      <section><p>Authoring wrapper that coordinates a smoothing decal, prefab spawner, and discoverable entry
+at one lat/lon on a celestial body.</p>
 </section>
       <h4><a class="xref" href="GlobalAssemblyCSharp.TMPProUtil.html">TMPProUtil</a></h4>
       <section><p>Utility methods for converting Unity UI types to their TextMeshPro equivalents.</p>
