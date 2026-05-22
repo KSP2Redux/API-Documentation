@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class TransformPathAttribute | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="Marks a string field as the path to a Unity Transform within the part hierarchy.">
+    <meta name="description" content="Marks a string field that holds a slash-separated path to a Transform within the part hierarchy. The runtime resolves the stored value via transform.Find(path), which interprets slashes as hierarchy levels.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,9 @@
 
 
   <h1 id="Redux_Modules_Attributes_TransformPathAttribute" data-uid="Redux.Modules.Attributes.TransformPathAttribute" class="text-break">Class TransformPathAttribute</h1>
-  <div class="markdown level0 summary"><p>Marks a string field as the path to a Unity Transform within the part hierarchy.</p>
+  <div class="markdown level0 summary"><p>Marks a string field that holds a slash-separated path to a Transform within the part
+hierarchy. The runtime resolves the stored value via <code>transform.Find(path)</code>, which
+interprets slashes as hierarchy levels.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -98,9 +100,9 @@
 public sealed class TransformPathAttribute : Attribute</code></pre>
   </div>
   <h5 id="Redux_Modules_Attributes_TransformPathAttribute_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>The path is interpreted relative to the part's root GameObject. The author-facing renderer
-pairs the string field with a transform picker, and validators check the path resolves under
-the prefab at edit time.</p>
+  <div class="markdown level0 remarks"><p>Use this attribute only for fields whose runtime lookup is path-aware. For bare-name
+single-target references use <a class="xref" href="Redux.Modules.Attributes.TransformNameAttribute.html">TransformNameAttribute</a>. For multi-match
+group references use <a class="xref" href="Redux.Modules.Attributes.TransformGroupAttribute.html">TransformGroupAttribute</a>.</p>
 </div>
   <h3 id="constructors">Constructors
 </h3>
