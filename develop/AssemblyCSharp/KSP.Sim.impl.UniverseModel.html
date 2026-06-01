@@ -87,66 +87,36 @@
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">object</span></div>
-    <div class="level1"><span class="xref">UniverseModel</span></div>
+    <div class="level1"><span class="xref">ComponentSystemBase</span></div>
+    <div class="level2"><span class="xref">SystemBase</span></div>
+    <div class="level3"><span class="xref">UniverseModel</span></div>
   </div>
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="KSP.Sim.IUniverseModel.html">IUniverseModel</a></div>
     <div><a class="xref" href="KSP.Sim.ISimulationModelMap.html">ISimulationModelMap</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a></div>
     <div><a class="xref" href="KSP.Sim.IUniverseTime.html">IUniverseTime</a></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Sim.html">Sim</a>.<a class="xref" href="KSP.Sim.impl.html">impl</a></h6>
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Sim_impl_UniverseModel_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class UniverseModel : IUniverseModel, ISimulationModelMap, IFixedUpdate, IPriorityOverride, IUniverseTime</code></pre>
+    <pre><code class="lang-csharp hljs">[UpdateInGroup(typeof(SimulationSystemGroup))]
+[UpdateAfter(typeof(AuxPhysicsUpdate))]
+public class UniverseModel : SystemBase, IUniverseModel, ISimulationModelMap, IUniverseTime</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
 
 
   <a id="KSP_Sim_impl_UniverseModel__ctor_" data-uid="KSP.Sim.impl.UniverseModel.#ctor*"></a>
-  <h4 id="KSP_Sim_impl_UniverseModel__ctor_System_Double_KSP_Sim_impl_InertialFrame_ILateUpdateDriver_KSP_Messages_MessageCenter_" data-uid="KSP.Sim.impl.UniverseModel.#ctor(System.Double,KSP.Sim.impl.InertialFrame,ILateUpdateDriver,KSP.Messages.MessageCenter)">UniverseModel(double, InertialFrame, ILateUpdateDriver, MessageCenter)</h4>
+  <h4 id="KSP_Sim_impl_UniverseModel__ctor" data-uid="KSP.Sim.impl.UniverseModel.#ctor">UniverseModel()</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public UniverseModel(double universalTime, InertialFrame inertialReferenceFrame, ILateUpdateDriver lateUpdateDriver, MessageCenter messageCenter)</code></pre>
+    <pre><code class="lang-csharp hljs">public UniverseModel()</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">double</span></td>
-        <td><span class="parametername">universalTime</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="KSP.Sim.impl.InertialFrame.html">InertialFrame</a></td>
-        <td><span class="parametername">inertialReferenceFrame</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="GlobalAssemblyCSharp.ILateUpdateDriver.html">ILateUpdateDriver</a></td>
-        <td><span class="parametername">lateUpdateDriver</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="KSP.Messages.MessageCenter.html">MessageCenter</a></td>
-        <td><span class="parametername">messageCenter</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <h3 id="properties">Properties
 </h3>
 
@@ -3365,6 +3335,48 @@
   </table>
 
 
+  <a id="KSP_Sim_impl_UniverseModel_Initialize_" data-uid="KSP.Sim.impl.UniverseModel.Initialize*"></a>
+  <h4 id="KSP_Sim_impl_UniverseModel_Initialize_System_Double_KSP_Sim_impl_InertialFrame_ILateUpdateDriver_KSP_Messages_MessageCenter_" data-uid="KSP.Sim.impl.UniverseModel.Initialize(System.Double,KSP.Sim.impl.InertialFrame,ILateUpdateDriver,KSP.Messages.MessageCenter)">Initialize(double, InertialFrame, ILateUpdateDriver, MessageCenter)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Initialize(double universalTime, InertialFrame inertialReferenceFrame, ILateUpdateDriver lateUpdateDriver, MessageCenter messageCenter)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">universalTime</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.InertialFrame.html">InertialFrame</a></td>
+        <td><span class="parametername">inertialReferenceFrame</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.ILateUpdateDriver.html">ILateUpdateDriver</a></td>
+        <td><span class="parametername">lateUpdateDriver</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Messages.MessageCenter.html">MessageCenter</a></td>
+        <td><span class="parametername">messageCenter</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Sim_impl_UniverseModel_LateUpdateSimObjects_" data-uid="KSP.Sim.impl.UniverseModel.LateUpdateSimObjects*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_LateUpdateSimObjects" data-uid="KSP.Sim.impl.UniverseModel.LateUpdateSimObjects">LateUpdateSimObjects()</h4>
   <div class="markdown level1 summary"></div>
@@ -3373,6 +3385,83 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void LateUpdateSimObjects()</code></pre>
   </div>
+
+
+  <a id="KSP_Sim_impl_UniverseModel_OnCreate_" data-uid="KSP.Sim.impl.UniverseModel.OnCreate*"></a>
+  <h4 id="KSP_Sim_impl_UniverseModel_OnCreate" data-uid="KSP.Sim.impl.UniverseModel.OnCreate">OnCreate()</h4>
+  <div class="markdown level1 summary"><p>Called when this system is created.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnCreate()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Unity.Entities.ComponentSystemBase.OnCreate()</span></div>
+  <h5 id="KSP_Sim_impl_UniverseModel_OnCreate_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Implement an OnCreate() function to set up system resources when it is created.</p>
+<p>OnCreate is invoked before the the first time <span class="xref">Unity.Entities.ComponentSystemBase.OnStartRunning()</span> and OnUpdate are invoked.</p>
+</div>
+
+
+  <a id="KSP_Sim_impl_UniverseModel_OnCreateForCompiler_" data-uid="KSP.Sim.impl.UniverseModel.OnCreateForCompiler*"></a>
+  <h4 id="KSP_Sim_impl_UniverseModel_OnCreateForCompiler" data-uid="KSP.Sim.impl.UniverseModel.OnCreateForCompiler">OnCreateForCompiler()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnCreateForCompiler()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Unity.Entities.ComponentSystemBase.OnCreateForCompiler()</span></div>
+
+
+  <a id="KSP_Sim_impl_UniverseModel_OnDestroy_" data-uid="KSP.Sim.impl.UniverseModel.OnDestroy*"></a>
+  <h4 id="KSP_Sim_impl_UniverseModel_OnDestroy" data-uid="KSP.Sim.impl.UniverseModel.OnDestroy">OnDestroy()</h4>
+  <div class="markdown level1 summary"><p>Called when this system is destroyed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnDestroy()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Unity.Entities.ComponentSystemBase.OnDestroy()</span></div>
+  <h5 id="KSP_Sim_impl_UniverseModel_OnDestroy_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Systems are destroyed when the application shuts down, the World is destroyed, or you
+call <span class="xref">Unity.Entities.World.DestroySystem(Unity.Entities.SystemHandle)</span>. In the Unity Editor, system destruction occurs when you exit
+Play Mode and when scripts are reloaded.</p>
+</div>
+
+
+  <a id="KSP_Sim_impl_UniverseModel_OnUpdate_" data-uid="KSP.Sim.impl.UniverseModel.OnUpdate*"></a>
+  <h4 id="KSP_Sim_impl_UniverseModel_OnUpdate" data-uid="KSP.Sim.impl.UniverseModel.OnUpdate">OnUpdate()</h4>
+  <div class="markdown level1 summary"><p>Implement <code>OnUpdate()</code> to perform the major work of this system.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnUpdate()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Unity.Entities.SystemBase.OnUpdate()</span></div>
+  <h5 id="KSP_Sim_impl_UniverseModel_OnUpdate_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+By default, the system invokes `OnUpdate()` once every frame on the main thread.
+To skip OnUpdate if all of the system's [EntityQueries] are empty, use the
+[RequireMatchingQueriesForUpdateAttribute]. To limit when OnUpdate is invoked, you can
+specify components that must exist, or queries that match specific Entities. To do
+this, call <span class="xref">Unity.Entities.ComponentSystemBase.RequireForUpdate&lt;T&gt;()</span> or
+<span class="xref">Unity.Entities.ComponentSystemBase.RequireForUpdate(Unity.Entities.EntityQuery)</span>
+in the system's OnCreate method. For more information, see [ShouldRunSystem].
+</p>
+<p>
+Use [IJobEntity] or <span class="xref">Unity.Entities.SystemAPI.Query&lt;T1&gt;()</span> for common iteration patterns. You can also instantiate and schedule an <span class="xref">Unity.Entities.IJobChunk</span> instance;
+implement other <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Jobs.html">Unity.Jobs</a> interfaces or perform work on the main thread. If you call <span class="xref">Unity.Entities.EntityManager</span> methods
+that perform structural changes on the main thread, be sure to arrange the system order to minimize the
+performance impact of the resulting [sync points].
+</p>
+</div>
 
 
   <a id="KSP_Sim_impl_UniverseModel_RemoveCelestialBody_" data-uid="KSP.Sim.impl.UniverseModel.RemoveCelestialBody*"></a>
@@ -4131,12 +4220,6 @@
   </div>
   <div>
       <a class="xref" href="KSP.Sim.ISimulationModelMap.html">ISimulationModelMap</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a>
   </div>
   <div>
       <a class="xref" href="KSP.Sim.IUniverseTime.html">IUniverseTime</a>

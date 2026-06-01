@@ -87,38 +87,21 @@
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">object</span></div>
-    <div class="level1"><a class="xref" href="KSP.Game.KerbalMonoBehaviour.html">KerbalMonoBehaviour</a></div>
-    <div class="level2"><span class="xref">PhysicsSpaceProvider</span></div>
+    <div class="level1"><span class="xref">ComponentSystemBase</span></div>
+    <div class="level2"><span class="xref">SystemBase</span></div>
+    <div class="level3"><span class="xref">PhysicsSpaceProvider</span></div>
   </div>
   <div class="implements">
     <h5>Implements</h5>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a></div>
     <div><a class="xref" href="KSP.Sim.IPhysicsSpaceProvider.html">IPhysicsSpaceProvider</a></div>
-  </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Game">KerbalMonoBehaviour.Game</a>
-    </div>
-    <div>
-      <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Assets">KerbalMonoBehaviour.Assets</a>
-    </div>
-    <div>
-      <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Messages">KerbalMonoBehaviour.Messages</a>
-    </div>
-    <div>
-      <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_CFXSystem">KerbalMonoBehaviour.CFXSystem</a>
-    </div>
-    <div>
-      <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_IsGameShuttingDown">KerbalMonoBehaviour.IsGameShuttingDown</a>
-    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Sim.html">Sim</a>.<a class="xref" href="KSP.Sim.impl.html">impl</a></h6>
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Sim_impl_PhysicsSpaceProvider_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class PhysicsSpaceProvider : KerbalMonoBehaviour, IFixedUpdate, IPriorityOverride, IPhysicsSpaceProvider</code></pre>
+    <pre><code class="lang-csharp hljs">[UpdateInGroup(typeof(SimulationSystemGroup))]
+[UpdateAfter(typeof(UniverseModel))]
+public class PhysicsSpaceProvider : SystemBase, IPhysicsSpaceProvider</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -296,6 +279,36 @@
       </tr>
     </tbody>
   </table>
+
+
+  <a id="KSP_Sim_impl_PhysicsSpaceProvider_OnUpdate_" data-uid="KSP.Sim.impl.PhysicsSpaceProvider.OnUpdate*"></a>
+  <h4 id="KSP_Sim_impl_PhysicsSpaceProvider_OnUpdate" data-uid="KSP.Sim.impl.PhysicsSpaceProvider.OnUpdate">OnUpdate()</h4>
+  <div class="markdown level1 summary"><p>Implement <code>OnUpdate()</code> to perform the major work of this system.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnUpdate()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Unity.Entities.SystemBase.OnUpdate()</span></div>
+  <h5 id="KSP_Sim_impl_PhysicsSpaceProvider_OnUpdate_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+By default, the system invokes `OnUpdate()` once every frame on the main thread.
+To skip OnUpdate if all of the system's [EntityQueries] are empty, use the
+[RequireMatchingQueriesForUpdateAttribute]. To limit when OnUpdate is invoked, you can
+specify components that must exist, or queries that match specific Entities. To do
+this, call <span class="xref">Unity.Entities.ComponentSystemBase.RequireForUpdate&lt;T&gt;()</span> or
+<span class="xref">Unity.Entities.ComponentSystemBase.RequireForUpdate(Unity.Entities.EntityQuery)</span>
+in the system's OnCreate method. For more information, see [ShouldRunSystem].
+</p>
+<p>
+Use [IJobEntity] or <span class="xref">Unity.Entities.SystemAPI.Query&lt;T1&gt;()</span> for common iteration patterns. You can also instantiate and schedule an <span class="xref">Unity.Entities.IJobChunk</span> instance;
+implement other <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Jobs.html">Unity.Jobs</a> interfaces or perform work on the main thread. If you call <span class="xref">Unity.Entities.EntityManager</span> methods
+that perform structural changes on the main thread, be sure to arrange the system order to minimize the
+performance impact of the resulting [sync points].
+</p>
+</div>
 
 
   <a id="KSP_Sim_impl_PhysicsSpaceProvider_PhysicsToAngularVelocity_" data-uid="KSP.Sim.impl.PhysicsSpaceProvider.PhysicsToAngularVelocity*"></a>
@@ -855,12 +868,12 @@
 
 
   <a id="KSP_Sim_impl_PhysicsSpaceProvider_SyncTo_" data-uid="KSP.Sim.impl.PhysicsSpaceProvider.SyncTo*"></a>
-  <h4 id="KSP_Sim_impl_PhysicsSpaceProvider_SyncTo_KSP_Sim_impl_FloatingOrigin_" data-uid="KSP.Sim.impl.PhysicsSpaceProvider.SyncTo(KSP.Sim.impl.FloatingOrigin)">SyncTo(FloatingOrigin)</h4>
+  <h4 id="KSP_Sim_impl_PhysicsSpaceProvider_SyncTo_KSP_Sim_impl_FloatingOrigin_UnityEngine_Transform_" data-uid="KSP.Sim.impl.PhysicsSpaceProvider.SyncTo(KSP.Sim.impl.FloatingOrigin,UnityEngine.Transform)">SyncTo(FloatingOrigin, Transform)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void SyncTo(FloatingOrigin floatingOrigin)</code></pre>
+    <pre><code class="lang-csharp hljs">public void SyncTo(FloatingOrigin floatingOrigin, Transform transform)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -875,6 +888,11 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.FloatingOrigin.html">FloatingOrigin</a></td>
         <td><span class="parametername">floatingOrigin</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
+        <td><span class="parametername">transform</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -1016,12 +1034,6 @@
     </tbody>
   </table>
   <h3 id="implements">Implements</h3>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a>
-  </div>
   <div>
       <a class="xref" href="KSP.Sim.IPhysicsSpaceProvider.html">IPhysicsSpaceProvider</a>
   </div>
