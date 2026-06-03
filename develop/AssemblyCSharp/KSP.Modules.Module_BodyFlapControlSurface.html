@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class Module_BodyFlapControlSurface | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="Procedural body-flap actuator. Unlike ordinary control surfaces, body flaps move in a one-sided 0..range envelope and only accept control input while deployed.">
+    <meta name="description" content="Compatibility alias for saved craft that reference the old KSP.Modules body-flap type. New part definitions should use .">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,8 +81,8 @@
 
 
   <h1 id="KSP_Modules_Module_BodyFlapControlSurface" data-uid="KSP.Modules.Module_BodyFlapControlSurface" class="text-break">Class Module_BodyFlapControlSurface</h1>
-  <div class="markdown level0 summary"><p>Procedural body-flap actuator. Unlike ordinary control surfaces, body flaps move in a one-sided
-0..range envelope and only accept control input while deployed.</p>
+  <div class="markdown level0 summary"><p>Compatibility alias for saved craft that reference the old KSP.Modules body-flap type.
+New part definitions should use <a class="xref" href="Redux.Modules.Module_BodyFlapControlSurface.html">Module_BodyFlapControlSurface</a>.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -92,7 +92,8 @@
     <div class="level2"><a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html">PartBehaviourModule</a></div>
     <div class="level3"><a class="xref" href="KSP.Modules.Module_LiftingSurface.html">Module_LiftingSurface</a></div>
     <div class="level4"><a class="xref" href="KSP.Modules.Module_ControlSurface.html">Module_ControlSurface</a></div>
-    <div class="level5"><span class="xref">Module_BodyFlapControlSurface</span></div>
+    <div class="level5"><a class="xref" href="Redux.Modules.Module_BodyFlapControlSurface.html">Module_BodyFlapControlSurface</a></div>
+    <div class="level6"><span class="xref">Module_BodyFlapControlSurface</span></div>
   </div>
   <div class="implements">
     <h5>Implements</h5>
@@ -103,6 +104,27 @@
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Redux.Modules.Module_BodyFlapControlSurface.html#Redux_Modules_Module_BodyFlapControlSurface_BodyFlapCameraTransformName">Module_BodyFlapControlSurface.BodyFlapCameraTransformName</a>
+    </div>
+    <div>
+      <a class="xref" href="Redux.Modules.Module_BodyFlapControlSurface.html#Redux_Modules_Module_BodyFlapControlSurface_AddDataModules">Module_BodyFlapControlSurface.AddDataModules()</a>
+    </div>
+    <div>
+      <a class="xref" href="Redux.Modules.Module_BodyFlapControlSurface.html#Redux_Modules_Module_BodyFlapControlSurface_OnInitialize">Module_BodyFlapControlSurface.OnInitialize()</a>
+    </div>
+    <div>
+      <a class="xref" href="Redux.Modules.Module_BodyFlapControlSurface.html#Redux_Modules_Module_BodyFlapControlSurface_OnShutdown">Module_BodyFlapControlSurface.OnShutdown()</a>
+    </div>
+    <div>
+      <a class="xref" href="Redux.Modules.Module_BodyFlapControlSurface.html#Redux_Modules_Module_BodyFlapControlSurface_MeshDataChanged">Module_BodyFlapControlSurface.MeshDataChanged()</a>
+    </div>
+    <div>
+      <a class="xref" href="Redux.Modules.Module_BodyFlapControlSurface.html#Redux_Modules_Module_BodyFlapControlSurface_OnModuleOABFixedUpdate_System_Single_">Module_BodyFlapControlSurface.OnModuleOABFixedUpdate(float)</a>
+    </div>
+    <div>
+      <a class="xref" href="Redux.Modules.Module_BodyFlapControlSurface.html#Redux_Modules_Module_BodyFlapControlSurface_CtrlSurfaceUpdate_UnityEngine_Vector3_System_Single_">Module_BodyFlapControlSurface.CtrlSurfaceUpdate(Vector3, float)</a>
+    </div>
     <div>
       <a class="xref" href="KSP.Modules.Module_ControlSurface.html#KSP_Modules_Module_ControlSurface_dataCtrlSurface">Module_ControlSurface.dataCtrlSurface</a>
     </div>
@@ -170,13 +192,7 @@
       <a class="xref" href="KSP.Modules.Module_ControlSurface.html#KSP_Modules_Module_ControlSurface__rotationAxesSignDot">Module_ControlSurface._rotationAxesSignDot</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Modules.Module_ControlSurface.html#KSP_Modules_Module_ControlSurface_AddDataModules">Module_ControlSurface.AddDataModules()</a>
-    </div>
-    <div>
       <a class="xref" href="KSP.Modules.Module_ControlSurface.html#KSP_Modules_Module_ControlSurface_GetModuleDisplayName">Module_ControlSurface.GetModuleDisplayName()</a>
-    </div>
-    <div>
-      <a class="xref" href="KSP.Modules.Module_ControlSurface.html#KSP_Modules_Module_ControlSurface_OnShutdown">Module_ControlSurface.OnShutdown()</a>
     </div>
     <div>
       <a class="xref" href="KSP.Modules.Module_ControlSurface.html#KSP_Modules_Module_ControlSurface_OnModuleFixedUpdate_System_Single_">Module_ControlSurface.OnModuleFixedUpdate(float)</a>
@@ -401,7 +417,7 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[ModuleCategory(&quot;Aerodynamics&quot;)]
 [ModuleDescription(&quot;Surface-parallel body flap that deflects for atmospheric control&quot;)]
-public class Module_BodyFlapControlSurface : Module_ControlSurface, IPartModule, IObjectAssemblyPartModule, ILiftProvider, ITorqueProvider</code></pre>
+public class Module_BodyFlapControlSurface : Module_BodyFlapControlSurface, IPartModule, IObjectAssemblyPartModule, ILiftProvider, ITorqueProvider</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -415,121 +431,6 @@ public class Module_BodyFlapControlSurface : Module_ControlSurface, IPartModule,
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public Module_BodyFlapControlSurface()</code></pre>
   </div>
-  <h3 id="fields">Fields
-</h3>
-
-
-  <h4 id="KSP_Modules_Module_BodyFlapControlSurface_BodyFlapCameraTransformName" data-uid="KSP.Modules.Module_BodyFlapControlSurface.BodyFlapCameraTransformName">BodyFlapCameraTransformName</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public const string BodyFlapCameraTransformName = &quot;bodyFlapTipCamera&quot;</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">string</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="methods">Methods
-</h3>
-
-
-  <a id="KSP_Modules_Module_BodyFlapControlSurface_CtrlSurfaceUpdate_" data-uid="KSP.Modules.Module_BodyFlapControlSurface.CtrlSurfaceUpdate*"></a>
-  <h4 id="KSP_Modules_Module_BodyFlapControlSurface_CtrlSurfaceUpdate_UnityEngine_Vector3_System_Single_" data-uid="KSP.Modules.Module_BodyFlapControlSurface.CtrlSurfaceUpdate(UnityEngine.Vector3,System.Single)">CtrlSurfaceUpdate(Vector3, float)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected override void CtrlSurfaceUpdate(Vector3 vel, float deltaTime)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Vector3</span></td>
-        <td><span class="parametername">vel</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">float</span></td>
-        <td><span class="parametername">deltaTime</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="KSP.Modules.Module_ControlSurface.html#KSP_Modules_Module_ControlSurface_CtrlSurfaceUpdate_UnityEngine_Vector3_System_Single_">Module_ControlSurface.CtrlSurfaceUpdate(Vector3, float)</a></div>
-
-
-  <a id="KSP_Modules_Module_BodyFlapControlSurface_MeshDataChanged_" data-uid="KSP.Modules.Module_BodyFlapControlSurface.MeshDataChanged*"></a>
-  <h4 id="KSP_Modules_Module_BodyFlapControlSurface_MeshDataChanged" data-uid="KSP.Modules.Module_BodyFlapControlSurface.MeshDataChanged">MeshDataChanged()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected override void MeshDataChanged()</code></pre>
-  </div>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="KSP.Modules.Module_ControlSurface.html#KSP_Modules_Module_ControlSurface_MeshDataChanged">Module_ControlSurface.MeshDataChanged()</a></div>
-
-
-  <a id="KSP_Modules_Module_BodyFlapControlSurface_OnInitialize_" data-uid="KSP.Modules.Module_BodyFlapControlSurface.OnInitialize*"></a>
-  <h4 id="KSP_Modules_Module_BodyFlapControlSurface_OnInitialize" data-uid="KSP.Modules.Module_BodyFlapControlSurface.OnInitialize">OnInitialize()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected override void OnInitialize()</code></pre>
-  </div>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="KSP.Modules.Module_ControlSurface.html#KSP_Modules_Module_ControlSurface_OnInitialize">Module_ControlSurface.OnInitialize()</a></div>
-
-
-  <a id="KSP_Modules_Module_BodyFlapControlSurface_OnModuleOABFixedUpdate_" data-uid="KSP.Modules.Module_BodyFlapControlSurface.OnModuleOABFixedUpdate*"></a>
-  <h4 id="KSP_Modules_Module_BodyFlapControlSurface_OnModuleOABFixedUpdate_System_Single_" data-uid="KSP.Modules.Module_BodyFlapControlSurface.OnModuleOABFixedUpdate(System.Single)">OnModuleOABFixedUpdate(float)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected override void OnModuleOABFixedUpdate(float fixedDeltaTime)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">float</span></td>
-        <td><span class="parametername">fixedDeltaTime</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="KSP.Modules.Module_ControlSurface.html#KSP_Modules_Module_ControlSurface_OnModuleOABFixedUpdate_System_Single_">Module_ControlSurface.OnModuleOABFixedUpdate(float)</a></div>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a>
