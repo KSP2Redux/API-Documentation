@@ -206,6 +206,13 @@ including caustics, water depth, and back-surface rendering driven by camera sub
       <h4><a class="xref" href="KSP.Rendering.Planets.PrevisCameraManager.html">PrevisCameraManager</a></h4>
       <section><p>Manages camera configuration and scene setup for planet rendering preview scenes in the Unity Editor.</p>
 </section>
+      <h4><a class="xref" href="KSP.Rendering.Planets.ShaderRefactorProfile.html">ShaderRefactorProfile</a></h4>
+      <section><p>Describes how <a class="xref" href="KSP.Rendering.Planets.PQSRenderer.html">PQSRenderer</a> should drive a given <a class="xref" href="KSP.Rendering.Planets.ShaderRefactorState.html">ShaderRefactorState</a>:
+which shader the planet material uses, the base shader pass offset, and which modern-pipeline
+features are active. Routing every renderer decision through a profile keeps the per-variant
+behaviour in one table instead of scattered <code>== Standard</code> checks, so adding a variant is a
+single enum value plus a single table entry.</p>
+</section>
       <h4><a class="xref" href="KSP.Rendering.Planets.VolumeCloudManager.html">VolumeCloudManager</a></h4>
       <section><p>Manages volumetric cloud rendering for planetary bodies, tracking loaded cloud models and post-process effects across flight and map views.</p>
 </section>
@@ -357,7 +364,9 @@ Enums
       <section><p>The axis-aligned face of a cube sphere on which a planetary quad is rendered.</p>
 </section>
       <h4><a class="xref" href="KSP.Rendering.Planets.ShaderRefactorState.html">ShaderRefactorState</a></h4>
-      <section><p>Represents the planet rendering shader state, indicating whether the standard refactored shaders or the legacy shaders are in use.</p>
+      <section><p>Selects which planet rendering shader variant <a class="xref" href="KSP.Rendering.Planets.PQSRenderer.html">PQSRenderer</a> drives. The
+per-variant behaviour (which shader, pass offset, and pipeline features) is described by
+<a class="xref" href="KSP.Rendering.Planets.ShaderRefactorProfile.html">ShaderRefactorProfile</a>.</p>
 </section>
       <h4><a class="xref" href="KSP.Rendering.Planets.UnderWaterGodRayQuality.html">UnderWaterGodRayQuality</a></h4>
       <section><p>Quality levels for the underwater god ray rendering effect.</p>

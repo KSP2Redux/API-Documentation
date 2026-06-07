@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class ShaderRefactorProfile | KSP2Redux API (Develop) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class ShaderRefactorProfile | KSP2Redux API (Develop) ">
+    
+    <meta name="description" content="Describes how  should drive a given : which shader the planet material uses, the base shader pass offset, and which modern-pipeline features are active. Routing every renderer decision through a profile keeps the per-variant behaviour in one table instead of scattered == Standard checks, so adding a variant is a single enum value plus a single table entry.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="KSP.Rendering.Planets.ShaderRefactorProfile">
+
+
+
+  <h1 id="KSP_Rendering_Planets_ShaderRefactorProfile" data-uid="KSP.Rendering.Planets.ShaderRefactorProfile" class="text-break">Class ShaderRefactorProfile</h1>
+  <div class="markdown level0 summary"><p>Describes how <a class="xref" href="KSP.Rendering.Planets.PQSRenderer.html">PQSRenderer</a> should drive a given <a class="xref" href="KSP.Rendering.Planets.ShaderRefactorState.html">ShaderRefactorState</a>:
+which shader the planet material uses, the base shader pass offset, and which modern-pipeline
+features are active. Routing every renderer decision through a profile keeps the per-variant
+behaviour in one table instead of scattered <code>== Standard</code> checks, so adding a variant is a
+single enum value plus a single table entry.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><span class="xref">ShaderRefactorProfile</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Rendering.html">Rendering</a>.<a class="xref" href="KSP.Rendering.Planets.html">Planets</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="KSP_Rendering_Planets_ShaderRefactorProfile_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class ShaderRefactorProfile</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+
+
+  <a id="KSP_Rendering_Planets_ShaderRefactorProfile__ctor_" data-uid="KSP.Rendering.Planets.ShaderRefactorProfile.#ctor*"></a>
+  <h4 id="KSP_Rendering_Planets_ShaderRefactorProfile__ctor_System_String_System_Int32_System_Boolean_System_Boolean_" data-uid="KSP.Rendering.Planets.ShaderRefactorProfile.#ctor(System.String,System.Int32,System.Boolean,System.Boolean)">ShaderRefactorProfile(string, int, bool, bool)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ShaderRefactorProfile(string shaderName, int passOffset, bool usesBiomeBucketing, bool usesDecalPrepassVariants)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">shaderName</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">passOffset</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">usesBiomeBucketing</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">usesDecalPrepassVariants</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="KSP_Rendering_Planets_ShaderRefactorProfile_PassOffset_" data-uid="KSP.Rendering.Planets.ShaderRefactorProfile.PassOffset*"></a>
+  <h4 id="KSP_Rendering_Planets_ShaderRefactorProfile_PassOffset" data-uid="KSP.Rendering.Planets.ShaderRefactorProfile.PassOffset">PassOffset</h4>
+  <div class="markdown level1 summary"><p>Base offset added to the logical shader pass indices. The refactored/modern shaders place
+their custom passes 7 entries after the legacy layout.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int PassOffset { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_ShaderRefactorProfile_ShaderName_" data-uid="KSP.Rendering.Planets.ShaderRefactorProfile.ShaderName*"></a>
+  <h4 id="KSP_Rendering_Planets_ShaderRefactorProfile_ShaderName" data-uid="KSP.Rendering.Planets.ShaderRefactorProfile.ShaderName">ShaderName</h4>
+  <div class="markdown level1 summary"><p>Registered shader name (passed to <code>Shader.Find</code>) to swap onto a copy of the PQS surface
+material, or <code>null</code> to use the surface material directly without copying.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string ShaderName { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_ShaderRefactorProfile_UsesBiomeBucketing_" data-uid="KSP.Rendering.Planets.ShaderRefactorProfile.UsesBiomeBucketing*"></a>
+  <h4 id="KSP_Rendering_Planets_ShaderRefactorProfile_UsesBiomeBucketing" data-uid="KSP.Rendering.Planets.ShaderRefactorProfile.UsesBiomeBucketing">UsesBiomeBucketing</h4>
+  <div class="markdown level1 summary"><p>Whether the variant runs the biome-bucketing + triplanar setup/dispatch and supports the
+<code>DEBUG_OUTPUT_BIOME_COLOR</code> keyword.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool UsesBiomeBucketing { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_ShaderRefactorProfile_UsesDecalPrepassVariants_" data-uid="KSP.Rendering.Planets.ShaderRefactorProfile.UsesDecalPrepassVariants*"></a>
+  <h4 id="KSP_Rendering_Planets_ShaderRefactorProfile_UsesDecalPrepassVariants" data-uid="KSP.Rendering.Planets.ShaderRefactorProfile.UsesDecalPrepassVariants">UsesDecalPrepassVariants</h4>
+  <div class="markdown level1 summary"><p>Whether the shader exposes the three decal prepass variants (NoDecals/4Decals/InfDecals).
+When true the deferred-decal mask pass also sits two indices further along.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool UsesDecalPrepassVariants { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="KSP_Rendering_Planets_ShaderRefactorProfile_Get_" data-uid="KSP.Rendering.Planets.ShaderRefactorProfile.Get*"></a>
+  <h4 id="KSP_Rendering_Planets_ShaderRefactorProfile_Get_KSP_Rendering_Planets_ShaderRefactorState_" data-uid="KSP.Rendering.Planets.ShaderRefactorProfile.Get(KSP.Rendering.Planets.ShaderRefactorState)">Get(ShaderRefactorState)</h4>
+  <div class="markdown level1 summary"><p>Returns the profile for <code class="paramref">state</code>, falling back to the
+<a class="xref" href="KSP.Rendering.Planets.ShaderRefactorState.html#KSP_Rendering_Planets_ShaderRefactorState_Standard">Standard</a> profile for any unregistered state.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ShaderRefactorProfile Get(ShaderRefactorState state)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Planets.ShaderRefactorState.html">ShaderRefactorState</a></td>
+        <td><span class="parametername">state</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Planets.ShaderRefactorProfile.html">ShaderRefactorProfile</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_ShaderRefactorProfile_GetDecalSurfacePassIndex_" data-uid="KSP.Rendering.Planets.ShaderRefactorProfile.GetDecalSurfacePassIndex*"></a>
+  <h4 id="KSP_Rendering_Planets_ShaderRefactorProfile_GetDecalSurfacePassIndex" data-uid="KSP.Rendering.Planets.ShaderRefactorProfile.GetDecalSurfacePassIndex">GetDecalSurfacePassIndex()</h4>
+  <div class="markdown level1 summary"><p>The deferred decal mask/surface pass index. Sits two indices further along when the shader
+exposes the three decal prepass variants. Modern: 15 (<a class="xref" href="KSP.Rendering.Planets.ShaderRefactorProfile.html#KSP_Rendering_Planets_ShaderRefactorProfile_PassOffset">PassOffset</a> 7 + 8);
+legacy: 6.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int GetDecalSurfacePassIndex()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_ShaderRefactorProfile_GetDepthPassIndex_" data-uid="KSP.Rendering.Planets.ShaderRefactorProfile.GetDepthPassIndex*"></a>
+  <h4 id="KSP_Rendering_Planets_ShaderRefactorProfile_GetDepthPassIndex" data-uid="KSP.Rendering.Planets.ShaderRefactorProfile.GetDepthPassIndex">GetDepthPassIndex()</h4>
+  <div class="markdown level1 summary"><p>The custom depth prepass index. Modern shaders place it at 11 (<a class="xref" href="KSP.Rendering.Planets.ShaderRefactorProfile.html#KSP_Rendering_Planets_ShaderRefactorProfile_PassOffset">PassOffset</a> 7</p>
+<ul>
+<li>4); the legacy layout has it at 4.</li>
+</ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int GetDepthPassIndex()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_ShaderRefactorProfile_GetPrepassIndex_" data-uid="KSP.Rendering.Planets.ShaderRefactorProfile.GetPrepassIndex*"></a>
+  <h4 id="KSP_Rendering_Planets_ShaderRefactorProfile_GetPrepassIndex_System_Int32_" data-uid="KSP.Rendering.Planets.ShaderRefactorProfile.GetPrepassIndex(System.Int32)">GetPrepassIndex(int)</h4>
+  <div class="markdown level1 summary"><p>The local-space prepass index. <code class="paramref">decalVariant</code> selects the decal variant
+(0 = NoDecals, 1 = 4Decals, 2 = InfDecals) when <a class="xref" href="KSP.Rendering.Planets.ShaderRefactorProfile.html#KSP_Rendering_Planets_ShaderRefactorProfile_UsesDecalPrepassVariants">UsesDecalPrepassVariants</a> is
+true; the legacy single prepass uses variant 0. Modern variants land at 12-14
+(<a class="xref" href="KSP.Rendering.Planets.ShaderRefactorProfile.html#KSP_Rendering_Planets_ShaderRefactorProfile_PassOffset">PassOffset</a> 7 + 5..7); the legacy single prepass is at 5.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int GetPrepassIndex(int decalVariant = 0)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">decalVariant</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_ShaderRefactorProfile_Register_" data-uid="KSP.Rendering.Planets.ShaderRefactorProfile.Register*"></a>
+  <h4 id="KSP_Rendering_Planets_ShaderRefactorProfile_Register_KSP_Rendering_Planets_ShaderRefactorState_KSP_Rendering_Planets_ShaderRefactorProfile_" data-uid="KSP.Rendering.Planets.ShaderRefactorProfile.Register(KSP.Rendering.Planets.ShaderRefactorState,KSP.Rendering.Planets.ShaderRefactorProfile)">Register(ShaderRefactorState, ShaderRefactorProfile)</h4>
+  <div class="markdown level1 summary"><p>Registers or overrides the profile for a state, allowing future/custom shader variants to be
+plugged in without modifying the built-in table.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Register(ShaderRefactorState state, ShaderRefactorProfile profile)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Planets.ShaderRefactorState.html">ShaderRefactorState</a></td>
+        <td><span class="parametername">state</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Planets.ShaderRefactorProfile.html">ShaderRefactorProfile</a></td>
+        <td><span class="parametername">profile</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetField__2___0_System_String_">Util.GetField&lt;T, R&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetField__2___0_System_String___1_">Util.SetField&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromProperties_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromProperties(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetFieldValue__1_System_Object_System_String_">Util.GetFieldValue&lt;T&gt;(object, string)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from develop
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
