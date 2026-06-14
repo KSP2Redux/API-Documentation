@@ -1,0 +1,1292 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SpaceWarp2</name>
+    </assembly>
+    <members>
+        <member name="T:SpaceWarp2.Patching.LoadingActions.ModLoadingAction">
+            <summary>
+            A general loading action for a SpaceWarp mod plugin.
+            </summary>
+        </member>
+        <member name="M:SpaceWarp2.Patching.LoadingActions.ModLoadingAction.#ctor(System.String,System.Action{SpaceWarp2.API.Mods.ISpaceWarpMod},SpaceWarp2.API.Mods.ISpaceWarpMod)">
+            <summary>
+            Creates a new mod plugin loading action.
+            </summary>
+            <param name="actionName">Name of the loading action.</param>
+            <param name="action">Callback to perform the loading action.</param>
+            <param name="plugin">The mod plugin to create the action for.</param>
+        </member>
+        <member name="M:SpaceWarp2.Patching.LoadingActions.ModLoadingAction.DoAction(System.Action,System.Action{System.String})">
+            <summary>
+            Performs the loading action.
+            </summary>
+            <param name="resolve">Callback to call when the action is resolved.</param>
+            <param name="reject">Callback to call when the action is rejected.</param>
+        </member>
+        <member name="T:SpaceWarp2.Patching.LoadingActions.DescriptorLoadingAction">
+            <summary>
+            A general loading action for a mod descriptor.
+            </summary>
+        </member>
+        <member name="M:SpaceWarp2.Patching.LoadingActions.DescriptorLoadingAction.#ctor(System.String,System.Action{SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor},SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor)">
+            <summary>
+            Creates a new descriptor loading action.
+            </summary>
+            <param name="actionName">Name of the loading action.</param>
+            <param name="action">Callback to perform the loading action.</param>
+            <param name="plugin">The plugin descriptor to create the action for.</param>
+        </member>
+        <member name="M:SpaceWarp2.Patching.LoadingActions.DescriptorLoadingAction.DoAction(System.Action,System.Action{System.String})">
+            <summary>
+            Performs the loading action.
+            </summary>
+            <param name="resolve">Callback to call when the action is resolved.</param>
+            <param name="reject">Callback to call when the action is rejected.</param>
+        </member>
+        <member name="M:SpaceWarp2.InternalUtilities.PathHelpers.GetRelativePath(System.String,System.String)">
+            <summary>
+            Creates a relative path from one file or folder to another.
+            </summary>
+            <param name="fromPath">Contains the directory that defines the start of the relative path.</param>
+            <param name="toPath">Contains the path that defines the endpoint of the relative path.</param>
+            <returns>The relative path from the start directory to the end path.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="fromPath" /> or <paramref name="toPath" /> is <c>null</c>.</exception>
+            <exception cref="T:System.UriFormatException"></exception>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="T:SpaceWarp2.API.Mods.GlobalModDefines">
+            <summary>
+            Global definitions for all SpaceWarp mods.
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.API.Mods.GlobalModDefines.AssetBundlesFolder">
+            <summary>
+            Relative path to the folder containing the mod's asset bundles.
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.API.Mods.GlobalModDefines.ImageAssetsFolder">
+            <summary>
+            Relative path to the folder containing the mod's images.
+            </summary>
+        </member>
+        <member name="T:SpaceWarp2.API.Mods.JSON.DependencyInfo">
+            <summary>
+            Represents the json property info. Properties have to use the same name as in the JSON file, that's why they break
+            convention.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.JSON.DependencyInfo.ID">
+            <summary>
+            The ID of the dependency.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.JSON.DependencyInfo.Version">
+            <summary>
+            The version of the dependency.
+            </summary>
+        </member>
+        <member name="T:SpaceWarp2.API.Mods.JSON.ModInfo">
+            <summary>
+            Representation of the mod info JSON file.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.JSON.ModInfo.Spec">
+            <summary>
+            The spec version of the mod info file.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.JSON.ModInfo.ModID">
+            <summary>
+            The mod ID of the mod.
+            </summary>
+            <exception cref="T:SpaceWarp2.API.Mods.JSON.DeprecatedSwinfoPropertyException">Thrown when the spec version is 1.2.</exception>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.JSON.ModInfo.Name">
+            <summary>
+            The name of the mod.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.JSON.ModInfo.Author">
+            <summary>
+            The author of the mod.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.JSON.ModInfo.Description">
+            <summary>
+            The description of the mod.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.JSON.ModInfo.Source">
+            <summary>
+            The URL of the source code of the mod.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.JSON.ModInfo.Version">
+            <summary>
+            The version of the mod.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.JSON.ModInfo.Dependencies">
+            <summary>
+            The dependencies of the mod.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.JSON.ModInfo.SupportedKsp2Versions">
+            <summary>
+            The KSP2 versions supported by the mod.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.JSON.ModInfo.VersionCheck">
+            <summary>
+            The URL for the version checking of the mod.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.JSON.ModInfo.Conflicts">
+            <summary>
+            The conflicts of the mod.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.JSON.ModInfo.Patchers">
+            <summary>
+            The filenames of patcher assemblies of the mod.
+            </summary>
+        </member>
+        <member name="T:SpaceWarp2.API.Mods.JSON.SupportedVersionsInfo">
+            <summary>
+            Representation of the supported version info of a mod from a JSON file.
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.API.Mods.JSON.SupportedVersionsInfo.DefaultMin">
+            <summary>
+            The default minimum version.
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.API.Mods.JSON.SupportedVersionsInfo.DefaultMax">
+            <summary>
+            The default maximum version.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.JSON.SupportedVersionsInfo.Min">
+            <summary>
+            The minimum supported version of KSP2.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.JSON.SupportedVersionsInfo.Max">
+            <summary>
+            The maximum supported version of KSP2.
+            </summary>
+        </member>
+        <member name="M:SpaceWarp2.API.Mods.JSON.SupportedVersionsInfo.IsSupported(System.String)">
+            <summary>
+            Checks if the given version is supported by this mod.
+            </summary>
+            <param name="toCheck">The version to check.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SpaceWarp2.API.Mods.JSON.SupportedVersionsInfo.ToString">
+            <summary>
+            Returns a string representation of the version range.
+            </summary>
+            <returns>The string representation of the version range.</returns>
+        </member>
+        <member name="T:SpaceWarp2.API.Mods.JSON.SpecVersion">
+            <summary>
+            Represents the version of the API specification from the swinfo.json file.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.JSON.SpecVersion.Major">
+            <summary>
+            Major version number.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.JSON.SpecVersion.Minor">
+            <summary>
+            Minor version number.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.JSON.SpecVersion.Default">
+            <summary>
+            Specification version 1.0 (SpaceWarp &lt; 1.2.0) - used if "spec" is not specified in the swinfo.json file.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.JSON.SpecVersion.V1_2">
+            <summary>
+            Specification version 1.2 (SpaceWarp 1.2.0 - 1.2.1) - replaces SpaceWarp's proprietary ModID with BepInEx plugin GUID.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.JSON.SpecVersion.V1_3">
+            <summary>
+            Specification version 1.3 (SpaceWarp 1.3.0 - 1.4.3) - adds back the ModID field, but enforces that it is the same
+            as the BepInEx plugin GUID if there is a BepInEx plugin attached to the swinfo, since w/ version 1.3 there
+            does not have to be a plugin.
+            Also enforces that all dependencies use BepInEx GUID, and that they are loaded.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.JSON.SpecVersion.V2_0">
+            <summary>
+            Specification version 2.0 (SpaceWarp 1.5.0 - 1.7.0) - removes support for version checking from .csproj files,
+            adds support for specifying mod conflicts. Switched to semantic versioning.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.JSON.SpecVersion.V2_1">
+            <summary>
+            Specification version 2.1 (SpaceWarp 1.8.0 - 1.9.5) - requires that mods specify their preload patchers in the
+            swinfo.json file.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.JSON.SpecVersion.V3_0">
+            <summary>
+            Specification version 3.0 (SpaceWarp 2.0.0 - *) - requires mods to specify their entrypoint DLL in "main_assembly".
+            </summary>
+        </member>
+        <member name="M:SpaceWarp2.API.Mods.JSON.SpecVersion.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Creates a new SpecVersion object with the version "major.minor".
+            </summary>
+            <param name="major">Major version number</param>
+            <param name="minor">Minor version number</param>
+        </member>
+        <member name="M:SpaceWarp2.API.Mods.JSON.SpecVersion.#ctor(System.String)">
+            <summary>
+            Creates a new SpecVersion object from a string.
+            </summary>
+            <param name="version">Specification version in the format "major.minor"</param>
+            <exception cref="T:SpaceWarp2.API.Mods.JSON.InvalidSpecVersionException">Thrown if the string format is invalid</exception>
+        </member>
+        <member name="M:SpaceWarp2.API.Mods.JSON.SpecVersion.ToString">
+            <summary>
+            Returns the string representation of the version in the format "major.minor".
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SpaceWarp2.API.Mods.JSON.SpecVersion.op_LessThan(SpaceWarp2.API.Mods.JSON.SpecVersion,SpaceWarp2.API.Mods.JSON.SpecVersion)">
+            <summary>
+            Returns true if the first version is less than the second version.
+            </summary>
+            <param name="a">First version</param>
+            <param name="b">Second version</param>
+            <returns>True if the first version is less than the second version</returns>
+        </member>
+        <member name="M:SpaceWarp2.API.Mods.JSON.SpecVersion.op_GreaterThan(SpaceWarp2.API.Mods.JSON.SpecVersion,SpaceWarp2.API.Mods.JSON.SpecVersion)">
+            <summary>
+            Returns true if the first version is greater than the second version.
+            </summary>
+            <param name="a">First version</param>
+            <param name="b">Second version</param>
+            <returns>True if the first version is greater than the second version</returns>
+        </member>
+        <member name="M:SpaceWarp2.API.Mods.JSON.SpecVersion.op_LessThanOrEqual(SpaceWarp2.API.Mods.JSON.SpecVersion,SpaceWarp2.API.Mods.JSON.SpecVersion)">
+            <summary>
+            Returns true if the first version is less than or equal to the second version.
+            </summary>
+            <param name="a">First version</param>
+            <param name="b">Second version</param>
+            <returns>True if the first version is less than or equal to the second version</returns>
+        </member>
+        <member name="M:SpaceWarp2.API.Mods.JSON.SpecVersion.op_GreaterThanOrEqual(SpaceWarp2.API.Mods.JSON.SpecVersion,SpaceWarp2.API.Mods.JSON.SpecVersion)">
+            <summary>
+            Returns true if the first version is greater than or equal to the second version.
+            </summary>
+            <param name="a">First version</param>
+            <param name="b">Second version</param>
+            <returns>True if the first version is greater than or equal to the second version</returns>
+        </member>
+        <member name="T:SpaceWarp2.API.Mods.JSON.InvalidSpecVersionException">
+            <summary>
+            Thrown if the specification version string is invalid.
+            </summary>
+        </member>
+        <member name="M:SpaceWarp2.API.Mods.JSON.InvalidSpecVersionException.#ctor(System.String)">
+            <summary>
+            Creates a new InvalidSpecVersionException.
+            </summary>
+            <param name="version">Invalid version string</param>
+        </member>
+        <member name="T:SpaceWarp2.API.Mods.JSON.DeprecatedSwinfoPropertyException">
+            <summary>
+            Thrown if a property is deprecated in the current specification version.
+            </summary>
+        </member>
+        <member name="M:SpaceWarp2.API.Mods.JSON.DeprecatedSwinfoPropertyException.#ctor(System.String,SpaceWarp2.API.Mods.JSON.SpecVersion)">
+            <summary>
+            Creates a new DeprecatedSwinfoPropertyException.
+            </summary>
+            <param name="property">Deprecated property name</param>
+            <param name="deprecationVersion">Specification version in which the property was deprecated</param>
+        </member>
+        <member name="T:SpaceWarp2.API.Mods.ISpaceWarpMod">
+            <summary>
+            Interface for all SpaceWarp mods
+            </summary>
+        </member>
+        <member name="M:SpaceWarp2.API.Mods.ISpaceWarpMod.OnPreInitialized">
+            <summary>
+            <para>1st stage initialization.</para>
+            <para>This is called before any of the game is actually loaded, it is called as early as possible in the game's
+            bootstrap process.</para>
+            </summary>
+        </member>
+        <member name="M:SpaceWarp2.API.Mods.ISpaceWarpMod.OnInitialized">
+            <summary>
+            <para>2nd stage initialization.</para>
+            <para>This is called after the game is loaded, and after your mods assets are loaded.</para>
+            </summary>
+        </member>
+        <member name="M:SpaceWarp2.API.Mods.ISpaceWarpMod.OnPostInitialized">
+            <summary>
+            <para>3rd stage initialization.</para>
+            <para>This is called after all mods have done 2nd stage initialization.</para>
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.ISpaceWarpMod.SWLogger">
+            <summary>
+            Gets the logger for this mod
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.ISpaceWarpMod.SWConfiguration">
+            <summary>
+            Gets the configuration file for this mod
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.ISpaceWarpMod.SWMetadata">
+            <summary>
+            Gets the metadata for this mod
+            </summary>
+        </member>
+        <member name="T:SpaceWarp2.API.Mods.PluginList">
+            <summary>
+            API for accessing information about currently loaded and disabled plugins.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.PluginList.ModListChangedSinceLastRun">
+            <summary>
+            Set if the plugin list is different in any way since last run (version differences, new mods, mods removed,
+            mods disabled, description differences, any different in any swinfo file and the disabled mod list).
+            </summary>
+        </member>
+        <member name="M:SpaceWarp2.API.Mods.PluginList.TryGetSwinfo(System.String)">
+            <summary>
+            Retrieves the <see cref="T:SpaceWarp2.API.Mods.JSON.ModInfo"/> of the specified plugin. Returns null if the specified plugin guid doesn't
+            have an associated <see cref="T:SpaceWarp2.API.Mods.JSON.ModInfo"/>.
+            </summary>
+            <param name="guid">GUID of the plugin</param>
+            <returns><see cref="T:SpaceWarp2.API.Mods.JSON.ModInfo"/> of the plugin or null if not found</returns>
+        </member>
+        <member name="M:SpaceWarp2.API.Mods.PluginList.TryGetDescriptor(System.String)">
+            <summary>
+            Retrieves the <see cref="T:SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor"/> of the specified plugin. Returns null if the specified plugin guid doesn't
+            have an associated <see cref="T:SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor"/>.
+            </summary>
+            <param name="guid">GUID of the plugin</param>
+            <returns><see cref="T:SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor"/> of the plugin or null if not found</returns>
+        </member>
+        <member name="M:SpaceWarp2.API.Mods.PluginList.TryGetPlugin``1">
+            <summary>
+            Retrieves the instance of the specified plugin class.
+            </summary>
+            <typeparam name="T">The type of the plugin class</typeparam>
+            <returns>Plugin instance or null if not found</returns>
+        </member>
+        <member name="M:SpaceWarp2.API.Mods.PluginList.TryGetPlugin``1(System.String)">
+            <summary>
+            Retrieves the instance of a plugin class with the given GUID.
+            </summary>
+            <param name="guid">GUID of the plugin</param>
+            <typeparam name="T">The type of the plugin class</typeparam>
+            <returns>Plugin instance or null if not found</returns>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.PluginList.AllEnabledAndActivePlugins">
+            <summary>
+            All plugins that are enabled and active (not errored)
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.PluginList.AllDisabledPlugins">
+            <summary>
+            All disabled plugins
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.PluginList.AllErroredPlugins">
+            <summary>
+            All errored plugins
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Mods.PluginList.AllPlugins">
+            <summary>
+            All plugins, including disabled and errored
+            </summary>
+        </member>
+        <member name="M:SpaceWarp2.API.Mods.PluginList.ResolveDependenciesAndLoadOrder">
+            <summary>
+            This is done after Awake/LoadModule(), so that everything else can use it
+            </summary>
+        </member>
+        <member name="T:SpaceWarp2.API.Mods.SpaceWarpErrorDescription">
+            <summary>
+            This class is used to describe the errors that occur when loading a plugin
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.API.Mods.SpaceWarpErrorDescription.Plugin">
+            <summary>
+            The plugin that errored
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.API.Mods.SpaceWarpErrorDescription.MissingSwinfo">
+            <summary>
+            Whether the plugin is missing a swinfo file
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.API.Mods.SpaceWarpErrorDescription.BadDirectory">
+            <summary>
+            Whether the plugin is in the wrong directory
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.API.Mods.SpaceWarpErrorDescription.BadID">
+            <summary>
+            Whether the plugin has a bad ID
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.API.Mods.SpaceWarpErrorDescription.MismatchedVersion">
+            <summary>
+            Whether there's a version mismatch between the swinfo and the plugin
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.API.Mods.SpaceWarpErrorDescription.DisabledDependencies">
+            <summary>
+            List of dependencies that are disabled
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.API.Mods.SpaceWarpErrorDescription.ErroredDependencies">
+            <summary>
+            List of dependencies that errored
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.API.Mods.SpaceWarpErrorDescription.MissingDependencies">
+            <summary>
+            List of dependencies that are missing
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.API.Mods.SpaceWarpErrorDescription.UnsupportedDependencies">
+            <summary>
+            List of dependencies that are unsupported
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.API.Mods.SpaceWarpErrorDescription.UnspecifiedDependencies">
+            <summary>
+            List of dependencies that are unspecified
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.API.Mods.SpaceWarpErrorDescription.Incompatibilities">
+            <summary>
+            List of incompatibilities
+            </summary>
+        </member>
+        <member name="M:SpaceWarp2.API.Mods.SpaceWarpErrorDescription.#ctor(SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor)">
+            <summary>
+            Creates a new error description for a plugin
+            </summary>
+            <param name="plugin">The plugin that errored</param>
+        </member>
+        <member name="T:SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor">
+            <summary>
+            A descriptor for a SpaceWarp plugin.
+            </summary>
+        </member>
+        <member name="M:SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.#ctor(SpaceWarp2.API.Mods.ISpaceWarpMod,System.String,System.String,SpaceWarp2.API.Mods.JSON.ModInfo,System.IO.DirectoryInfo,System.Boolean,ReduxLib.Configuration.IConfigFile)">
+            <summary>
+            Creates a new plugin descriptor.
+            </summary>
+            <param name="plugin">The plugin instance.</param>
+            <param name="guid">The plugin's GUID.</param>
+            <param name="name">The plugin's name.</param>
+            <param name="swInfo">The plugin's swinfo.</param>
+            <param name="folder">The plugin's folder.</param>
+            <param name="doLoadingActions">Whether or not to do loading actions.</param>
+            <param name="configFile">The plugin's config file.</param>
+        </member>
+        <member name="F:SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.Plugin">
+            <summary>
+            The plugin instance.
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.Guid">
+            <summary>
+            The plugin's GUID.
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.Name">
+            <summary>
+            The plugin's name.
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.SWInfo">
+            <summary>
+            The plugin's swinfo.
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.Folder">
+            <summary>
+            The plugin's folder.
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.DoLoadingActions">
+            <summary>
+            Whether or not to do loading actions.
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.ConfigFile">
+            <summary>
+            The plugin's config file.
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.Outdated">
+            <summary>
+            Whether or not the plugin is outdated. Set by the version checking system.
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.Unsupported">
+            <summary>
+            Whether or not the plugin is unsupported.
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.LatePreInitialize">
+            <summary>
+            Whether or not the plugin has been pre-initialized yet.
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.IsCore">
+            <summary>
+            Is this a core mod (as in which part of the mod list does it go into)
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.IsKsp1">
+            <summary>
+            Is this a KSP1 mod imported via the KSP1 mod importer (controls which foldout in the mod list it goes into).
+            </summary>
+        </member>
+        <member name="T:SpaceWarp2.API.Parts.PartComponentModuleOverride">
+            <summary>
+            This class allows you to register your custom PartComponentModule for background resource processing.
+            </summary>
+        </member>
+        <member name="M:SpaceWarp2.API.Parts.PartComponentModuleOverride.RegisterModuleForBackgroundResourceProcessing``1">
+            <summary>
+            Registers your custom module for background resource processing.
+            </summary>
+            <typeparam name="T">Your Custom Module class that inherits from PartComponentModule</typeparam>
+        </member>
+        <member name="M:SpaceWarp2.API.Parts.PartComponentModuleOverride.UnRegisterModuleForBackgroundResourceProcessing``1">
+            <summary>
+            Unregisters your custom module from background resource processing.
+            </summary>
+            <typeparam name="T">Your Custom Module class that inherits from PartComponentModule</typeparam>
+        </member>
+        <member name="M:SpaceWarp2.API.Backend.Modding.IInternalModRegister.GetPluginDescriptorForKsp1Mod(System.String,System.IO.DirectoryInfo,System.String,System.String,System.String)">
+            <summary>
+            Builds a <see cref="T:SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor"/> for a KSP1 mod surfaced through the
+            KSP1 mod importer. These descriptors don't host a real plugin; they exist so the mod
+            shows up under the "KSP1 Mods" foldout in the SpaceWarp mod list.
+            </summary>
+        </member>
+        <member name="T:SpaceWarp2.API.Backend.SaveGameManager.SaveGameCallbackFunctionDelegate">
+            <summary>
+            The delegate type that will be called when a save or load event is triggered.
+            </summary>
+        </member>
+        <member name="T:SpaceWarp2.API.Backend.SaveGameManager.PluginSaveData">
+            <summary>
+            This class is used to store your mod data for saving and loading.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Backend.SaveGameManager.PluginSaveData.ModGuid">
+            <summary>
+            The GUID of your mod
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Backend.SaveGameManager.PluginSaveData.SaveData">
+            <summary>
+            The data that will be saved
+            </summary>
+        </member>
+        <member name="T:SpaceWarp2.API.Versions.VersionUtility">
+            <summary>
+            Utility class for comparing semantic versions
+            </summary>
+        </member>
+        <member name="M:SpaceWarp2.API.Versions.VersionUtility.IsNewerThan(System.String,System.String)">
+            <summary>
+            Checks if one semantic version is newer than another
+            </summary>
+            <param name="version1">The first version</param>
+            <param name="version2">The second version</param>
+            <returns>version1 is newer than version2</returns>
+        </member>
+        <member name="M:SpaceWarp2.API.Versions.VersionUtility.IsOlderThan(System.String,System.String)">
+            <summary>
+            Checks if one semantic version is older than another
+            </summary>
+            <param name="version1">The first version</param>
+            <param name="version2">The second version</param>
+            <returns>version1 is older than version2</returns>
+        </member>
+        <member name="M:SpaceWarp2.API.Versions.VersionUtility.IsSupported(System.String,System.String,System.String)">
+            <summary>
+            Checks if a semantic version is supported by a range of versions
+            </summary>
+            <param name="version">The version to check</param>
+            <param name="min">The minimum version</param>
+            <param name="max">The maximum version</param>
+            <returns></returns>
+        </member>
+        <member name="M:SpaceWarp2.API.Versions.VersionUtility.CompareSemanticVersionStrings(System.String,System.String)">
+            <summary>
+            Compares 2 semantic versions
+            </summary>
+            <param name="version1">The first version</param>
+            <param name="version2">The second version</param>
+            <returns>
+            0 if version1 equals version2, -1 if version1 is less than version2, 1 if version1 is greater than version2
+            </returns>
+        </member>
+        <member name="T:SpaceWarp2.API.Versions.SemanticVersion">
+            <summary>
+            Extended version of semantic versioning (see https://semver.org/) that supports an unlimited amount of
+            version numbers.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Versions.SemanticVersion.Major">
+            <summary>
+            The major (first) version number.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Versions.SemanticVersion.Minor">
+            <summary>
+            The minor (second) version number.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Versions.SemanticVersion.Patch">
+            <summary>
+            The patch (third) version number.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Versions.SemanticVersion.VersionNumbers">
+            <summary>
+            List of all version numbers.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Versions.SemanticVersion.Prerelease">
+            <summary>
+            Prerelease identifiers.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.Versions.SemanticVersion.Build">
+            <summary>
+            Build metadata.
+            </summary>
+        </member>
+        <member name="M:SpaceWarp2.API.Versions.SemanticVersion.#ctor(System.Int32,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Creates a new SemanticVersion object.
+            </summary>
+            <param name="major">Major version number</param>
+            <param name="minor">Minor version number</param>
+            <param name="patch">Patch version number</param>
+            <param name="prerelease">Prerelease identifiers</param>
+            <param name="build">Build metadata</param>
+        </member>
+        <member name="M:SpaceWarp2.API.Versions.SemanticVersion.#ctor(System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a new SemanticVersion object.
+            </summary>
+            <param name="major">Major version number</param>
+            <param name="minor">Minor version number</param>
+            <param name="patch">Patch version number</param>
+            <param name="prerelease">Prerelease identifiers</param>
+        </member>
+        <member name="M:SpaceWarp2.API.Versions.SemanticVersion.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a new SemanticVersion object.
+            </summary>
+            <param name="major">Major version number</param>
+            <param name="minor">Minor version number</param>
+            <param name="patch">Patch version number</param>
+        </member>
+        <member name="M:SpaceWarp2.API.Versions.SemanticVersion.#ctor(System.String)">
+            <summary>
+            Creates a new SemanticVersion object from a version string.
+            </summary>
+            <param name="version">Version string in the format "major.minor.patch[-prerelease][+build]"</param>
+            <exception cref="T:System.ArgumentException">Thrown if the version string is invalid</exception>
+        </member>
+        <member name="M:SpaceWarp2.API.Versions.SemanticVersion.CompareTo(SpaceWarp2.API.Versions.SemanticVersion)">
+            <summary>
+            Compares this version to another version.
+            </summary>
+            <param name="other">The other version to compare to.</param>
+            <returns>
+            Negative if this version is less than the other version, 0 if they are equal, positive if this version is
+            larger than the other version.
+            </returns>
+        </member>
+        <member name="M:SpaceWarp2.API.Versions.SemanticVersion.op_LessThan(SpaceWarp2.API.Versions.SemanticVersion,SpaceWarp2.API.Versions.SemanticVersion)">
+            <summary>
+            Compares whether one version is less than another version.
+            </summary>
+            <param name="a">First version to compare.</param>
+            <param name="b">Second version to compare.</param>
+            <returns>True if a is less than b, false otherwise.</returns>
+        </member>
+        <member name="M:SpaceWarp2.API.Versions.SemanticVersion.op_GreaterThan(SpaceWarp2.API.Versions.SemanticVersion,SpaceWarp2.API.Versions.SemanticVersion)">
+            <summary>
+            Compares whether one version is greater than another version.
+            </summary>
+            <param name="a">First version to compare.</param>
+            <param name="b">Second version to compare.</param>
+            <returns>True if a is greater than b, false otherwise.</returns>
+        </member>
+        <member name="M:SpaceWarp2.API.Versions.SemanticVersion.op_LessThanOrEqual(SpaceWarp2.API.Versions.SemanticVersion,SpaceWarp2.API.Versions.SemanticVersion)">
+            <summary>
+            Compares whether one version is less than or equal to another version.
+            </summary>
+            <param name="a">First version to compare.</param>
+            <param name="b">Second version to compare.</param>
+            <returns>True if a is less than or equal to b, false otherwise.</returns>
+        </member>
+        <member name="M:SpaceWarp2.API.Versions.SemanticVersion.op_GreaterThanOrEqual(SpaceWarp2.API.Versions.SemanticVersion,SpaceWarp2.API.Versions.SemanticVersion)">
+            <summary>
+            Compares whether one version is greater than or equal to another version.
+            </summary>
+            <param name="a">First version to compare.</param>
+            <param name="b">Second version to compare.</param>
+            <returns>True if a is greater than or equal to b, false otherwise.</returns>
+        </member>
+        <member name="M:SpaceWarp2.API.Versions.SemanticVersion.op_Equality(SpaceWarp2.API.Versions.SemanticVersion,SpaceWarp2.API.Versions.SemanticVersion)">
+            <summary>
+            Compares whether one version is equal to another version.
+            </summary>
+            <param name="a">First version to compare.</param>
+            <param name="b">Second version to compare.</param>
+            <returns>True if a is equal to b, false otherwise.</returns>
+        </member>
+        <member name="M:SpaceWarp2.API.Versions.SemanticVersion.op_Inequality(SpaceWarp2.API.Versions.SemanticVersion,SpaceWarp2.API.Versions.SemanticVersion)">
+            <summary>
+            Compares whether one version is not equal to another version.
+            </summary>
+            <param name="a">First version to compare.</param>
+            <param name="b">Second version to compare.</param>
+            <returns>True if a is not equal to b, false otherwise.</returns>
+        </member>
+        <member name="M:SpaceWarp2.API.Versions.SemanticVersion.ToString">
+            <summary>
+            Returns the version as a string.
+            </summary>
+            <returns>Version string.</returns>
+        </member>
+        <member name="M:SpaceWarp2.API.Versions.SemanticVersion.op_Implicit(SpaceWarp2.API.Versions.SemanticVersion)~System.String">
+            <summary>
+            Implicitly converts a SemanticVersion object to a string.
+            </summary>
+            <param name="version">SemanticVersion object to convert.</param>
+            <returns>Version string.</returns>
+        </member>
+        <member name="M:SpaceWarp2.API.Versions.SemanticVersion.op_Explicit(System.String)~SpaceWarp2.API.Versions.SemanticVersion">
+            <summary>
+            Explicitly converts a string to a SemanticVersion object.
+            </summary>
+            <param name="version">Version string to convert.</param>
+            <returns>SemanticVersion object.</returns>
+        </member>
+        <member name="T:SpaceWarp2.API.Loading.LoadingActions.AddressableAction`1">
+            <summary>
+            A loading action that loads addressable assets by label.
+            </summary>
+            <typeparam name="T">The type of assets to load.</typeparam>
+        </member>
+        <member name="M:SpaceWarp2.API.Loading.LoadingActions.AddressableAction`1.#ctor(System.String,System.String,System.Action{`0})">
+            <summary>
+            Creates a new addressable loading action.
+            </summary>
+            <param name="name">Name of the action.</param>
+            <param name="label">Label of the asset to load.</param>
+            <param name="action">Action to perform on the loaded asset.</param>
+        </member>
+        <member name="M:SpaceWarp2.API.Loading.LoadingActions.AddressableAction`1.#ctor(System.String,System.String,System.Boolean,System.Action{`0})">
+            <summary>
+            Creates a new addressable loading action, with the option to keep the asset in memory after loading.
+            This is useful for textures or UXML templates, for example.
+            </summary>
+            <param name="name">Name of the action.</param>
+            <param name="label">Label of the asset to load.</param>
+            <param name="action">Action to perform on the loaded asset.</param>
+            <param name="keepAssets">Allows to keep asset in memory after loading them.</param>
+        </member>
+        <member name="M:SpaceWarp2.API.Loading.LoadingActions.AddressableAction`1.DoAction(System.Action,System.Action{System.String})">
+            <summary>
+            Performs the loading action.
+            </summary>
+            <param name="resolve">Callback to call when the action is resolved.</param>
+            <param name="reject">Callback to call when the action is rejected.</param>
+        </member>
+        <member name="T:SpaceWarp2.API.Loading.SaveLoad">
+            <summary>
+            An API to register flow actions to be run during loading and saving.
+            </summary>
+        </member>
+        <member name="M:SpaceWarp2.API.Loading.SaveLoad.AddFlowActionToGameLoadAfter(ReduxLib.GameInterfaces.IFlowAction,System.String)">
+             <summary>
+                 <para>Add a <cref>FlowAction</cref> to the Game's load sequence.</para>
+            
+                 <para>The action will be run after the first FlowAction with a name equal to referenceAction.
+                 If referenceAction is <c>null</c>, the action will be the first action run.</para>
+            
+                 <para>
+                     The FlowActions that occur in this sequence by default are: (Updated for KSP 0.1.1.0)
+                     <list type="number">
+                         <item><c>"Creating Splash Screens Prefab"</c></item>
+                         <item><c>"Set Loading Optimizations"</c></item>
+                         <item><c>"Initialize Addressables system"</c></item>
+                         <item><c>"Creating Game Instance"</c></item>
+                         <item><c>"Initializing Game Instance"</c></item>
+                         <item><c>"Creating Graphics Manager"</c></item>
+                         <item><c>"Creating Main Menu"</c></item>
+                         <item><c>"Load UI Background Scenes"</c></item>
+                         <item><c>"Parsing Loading Screens"</c></item>
+                         <item><c>"Set Loading Optimizations"</c></item>
+                         <item><c>"loading addressable localizations"</c> (Added by SpaceWarp)</item>
+                     </list>
+                 </para>
+             </summary>
+             <param name="flowAction">The FlowAction to insert</param>
+             <param name="referenceAction">The name of the action to insert a TFlowActionType after. Use <c>null</c> to insert it at the start.</param>
+        </member>
+        <member name="M:SpaceWarp2.API.Loading.SaveLoad.AddFlowActionToCampaignLoadAfter``1(System.String)">
+             <summary>
+                 <para>Add a <cref>FlowAction</cref> to the save file loading sequence. A new <c>TFlowActionType</c> is constructed every load.</para>
+            
+                 <para>
+                     TFlowActionType must have a public constructor that at most one of each of the following types:
+                     <list type="bullet">
+                         <item><cref>SaveLoadManager</cref></item>
+                         <item><cref>LoadOrSaveCampaignTicket</cref></item>
+                         <item><cref>LoadGameData</cref></item>
+                     </list>
+                 </para>
+            
+                 <para>The action will be run after the first FlowAction with a name equal to referenceAction.
+                 If referenceAction is <c>null</c>, the action will be the first action run.</para>
+            
+                 <para>
+                     The FlowActions that occur in this sequence by default are: (Updated for KSP 0.1.1.0)
+                     <list type="number">
+                         <item><c>"Deserializing Save File Contents"</c></item>
+                         <item><c>"Starting..."</c></item>
+                         <item><c>"Loading session manager data"</c></item>
+                         <item><c>"Set Loading Optimizations"</c></item>
+                         <item><c>"Setup local player"</c></item>
+                         <item><c>"Load Session Guid"</c></item>
+                         <item><c>"Loading KSP2 mission base"</c></item>
+                         <item><c>"Load Campaign Players"</c></item>
+                         <item><c>"Load Agencies"</c></item>
+                         <item><c>"Load Fixup Player And Agency"</c></item>
+                         <item><c>"Setup OAB Part Seed Counter"</c></item>
+                         <item><c>"Unload Main Menu"</c></item>
+                         <item><c>"Validating Version Number"</c></item>
+                         <item><c>"Initializing Session Data"</c></item>
+                         <item><c>"Load required assets"</c></item>
+                         <item><c>"Parsing resource assets"</c></item>
+                         <item><c>"Freezing resource definition database"</c></item>
+                         <item><c>"Parsing procedural part assets"</c></item>
+                         <item><c>"Freezing procedural part definition database"</c></item>
+                         <item><c>"Loading Kerbal Prefab Data"</c></item>
+                         <item><c>"Loading Kerbal Roster Data"</c></item>
+                         <item><c>"Loading Colony Data"</c></item>
+                         <item><c>"Setup Properties"</c></item>
+                         <item><c>"Creating Simulation"</c></item>
+                         <item><c>"Loading Celestial Body Data"</c></item>
+                         <item><c>"Parsing interstellar universe"</c></item>
+                         <item><c>"Parsing parts text assets"</c></item>
+                         <item><c>"Creating Celestial Bodies"</c></item>
+                         <item><c>"Pumping Sim Once"</c></item>
+                         <item><c>"Creating Universe"</c></item>
+                         <item><c>"Creating ViewController"</c></item>
+                         <item><c>"Pumping Sim Once"</c></item>
+                         <item><c>"Spawning initial local-space body..."</c></item>
+                         <item><c>"Loading Map Systems"</c></item>
+                         <item><c>"Loading UI Manager"</c></item>
+                         <item><c>"Loading KSP2 missions"</c></item>
+                         <item><c>"Setting Universe State"</c></item>
+                         <item><c>"Creating Vessel"</c></item>
+                         <item><c>"Set Active Vessel for Local Player"</c></item>
+                         <item><c>"Loading Travel Log Data"</c></item>
+                         <item><c>"Pumping Sim Once"</c></item>
+                         <item><c>"Loading dashboard for the user"</c></item>
+                         <item><c>"Setting Camera State"</c></item>
+                         <item><c>"Starting Sim"</c></item>
+                         <item><c>"Pumping Sim Once"</c></item>
+                         <item><c>"Applying flight control state"</c></item>
+                         <item><c>"Applying legacy module data to vessel parts"</c></item>
+                         <item><c>"Load Planted Flags"</c></item>
+                         <item><c>"Wait for async handles"</c></item>
+                         <item><c>"Load Done"</c></item>
+                         <item><c>"Set Loading Optimizations"</c></item>
+                         <item><c>"Ending..."</c></item>
+                     </list>
+                 </para>
+             </summary>
+             <typeparam name="TFlowActionType">The type of FlowAction to insert</typeparam>
+             <param name="referenceAction">The name of the action to insert a TFlowActionType after. Use <c>null</c> to insert it at the start.</param>
+             <exception cref="T:System.InvalidOperationException">Thrown if <c>TFlowActionType</c> does not have a valid Constructor</exception>
+        </member>
+        <member name="M:SpaceWarp2.API.Loading.SaveLoad.AddFlowActionToCampaignLoadAfter(ReduxLib.GameInterfaces.IFlowAction,System.String)">
+             <summary>
+                 <para>Add a <cref>FlowAction</cref> to the save file loading sequence. The same object is used for every load.</para>
+            
+                 <para>The action will be run after the first FlowAction with a name equal to referenceAction.
+                 If referenceAction is <c>null</c>, the action will be the first action run.</para>
+            
+                 <para>
+                     The FlowActions that occur in this sequence by default are: (Updated for KSP 0.1.1.0)
+                     <list type="number">
+                         <item><c>"Deserializing Save File Contents"</c></item>
+                         <item><c>"Starting..."</c></item>
+                         <item><c>"Loading session manager data"</c></item>
+                         <item><c>"Set Loading Optimizations"</c></item>
+                         <item><c>"Setup local player"</c></item>
+                         <item><c>"Load Session Guid"</c></item>
+                         <item><c>"Loading KSP2 mission base"</c></item>
+                         <item><c>"Load Campaign Players"</c></item>
+                         <item><c>"Load Agencies"</c></item>
+                         <item><c>"Load Fixup Player And Agency"</c></item>
+                         <item><c>"Setup OAB Part Seed Counter"</c></item>
+                         <item><c>"Unload Main Menu"</c></item>
+                         <item><c>"Validating Version Number"</c></item>
+                         <item><c>"Initializing Session Data"</c></item>
+                         <item><c>"Load required assets"</c></item>
+                         <item><c>"Parsing resource assets"</c></item>
+                         <item><c>"Freezing resource definition database"</c></item>
+                         <item><c>"Parsing procedural part assets"</c></item>
+                         <item><c>"Freezing procedural part definition database"</c></item>
+                         <item><c>"Loading Kerbal Prefab Data"</c></item>
+                         <item><c>"Loading Kerbal Roster Data"</c></item>
+                         <item><c>"Loading Colony Data"</c></item>
+                         <item><c>"Setup Properties"</c></item>
+                         <item><c>"Creating Simulation"</c></item>
+                         <item><c>"Loading Celestial Body Data"</c></item>
+                         <item><c>"Parsing interstellar universe"</c></item>
+                         <item><c>"Parsing parts text assets"</c></item>
+                         <item><c>"Creating Celestial Bodies"</c></item>
+                         <item><c>"Pumping Sim Once"</c></item>
+                         <item><c>"Creating Universe"</c></item>
+                         <item><c>"Creating ViewController"</c></item>
+                         <item><c>"Pumping Sim Once"</c></item>
+                         <item><c>"Spawning initial local-space body..."</c></item>
+                         <item><c>"Loading Map Systems"</c></item>
+                         <item><c>"Loading UI Manager"</c></item>
+                         <item><c>"Loading KSP2 missions"</c></item>
+                         <item><c>"Setting Universe State"</c></item>
+                         <item><c>"Creating Vessel"</c></item>
+                         <item><c>"Set Active Vessel for Local Player"</c></item>
+                         <item><c>"Loading Travel Log Data"</c></item>
+                         <item><c>"Pumping Sim Once"</c></item>
+                         <item><c>"Loading dashboard for the user"</c></item>
+                         <item><c>"Setting Camera State"</c></item>
+                         <item><c>"Starting Sim"</c></item>
+                         <item><c>"Pumping Sim Once"</c></item>
+                         <item><c>"Applying flight control state"</c></item>
+                         <item><c>"Applying legacy module data to vessel parts"</c></item>
+                         <item><c>"Load Planted Flags"</c></item>
+                         <item><c>"Wait for async handles"</c></item>
+                         <item><c>"Load Done"</c></item>
+                         <item><c>"Set Loading Optimizations"</c></item>
+                         <item><c>"Ending..."</c></item>
+                     </list>
+                 </para>
+             </summary>
+             <param name="flowAction">The FlowAction to insert</param>
+             <param name="referenceAction">The name of the action to insert a FlowActionType after. Use <c>null</c> to insert it at the start.</param>
+        </member>
+        <member name="M:SpaceWarp2.API.Loading.SaveLoad.AddFlowActionToCampaignSaveAfter``1(System.String)">
+             <summary>
+                 <para>Add a <cref>FlowAction</cref> to the save file writing sequence. A new <c>TFlowActionType</c> is constructed every load.</para>
+            
+                 <para>
+                     TFlowActionType must have a public constructor that at most one of each of the following types:
+                     <list type="bullet">
+                         <item><cref>SaveLoadManager</cref></item>
+                         <item><cref>LoadOrSaveCampaignTicket</cref></item>
+                     </list>
+                 </para>
+            
+                 <para>The action will be run after the first FlowAction with a name equal to referenceAction.
+                 If referenceAction is <c>null</c>, the action will be the first action run.</para>
+            
+                 <para>
+                     The FlowActions that occur in this sequence by default are: (Updated for KSP 0.1.1.0)
+                     <list type="number">
+                         <item><c>"Collecting vessel data for serialization"</c></item>
+                         <item><c>"Saving session manager"</c></item>
+                         <item><c>"Setting version"</c></item>
+                         <item><c>"Saving session guid"</c></item>
+                         <item><c>"Collecting game session metadata"</c></item>
+                         <item><c>"Saving Kerbal roster"</c></item>
+                         <item><c>"Saving colony data"</c></item>
+                         <item><c>"Saving Travel Log"</c></item>
+                         <item><c>"Collecting mission data for serialization"</c></item>
+                         <item><c>"Collecting OAB workspace data for serialization"</c></item>
+                         <item><c>"Saving planted flags"</c></item>
+                         <item><c>"Saving agencies"</c></item>
+                         <item><c>"Saving campaign players"</c></item>
+                         <item><c>"Serializing Save File Contents"</c></item>
+                     </list>
+                 </para>
+             </summary>
+             <typeparam name="TFlowActionType">The type of FlowAction to insert</typeparam>
+             <param name="referenceAction">The name of the action to insert a TFlowActionType after. Use <c>null</c> to insert it at the start.</param>
+             <exception cref="T:System.InvalidOperationException">Thrown if <c>TFlowActionType</c> does not have a valid Constructor</exception>
+        </member>
+        <member name="M:SpaceWarp2.API.Loading.SaveLoad.AddFlowActionToCampaignSaveAfter(ReduxLib.GameInterfaces.IFlowAction,System.String)">
+             <summary>
+                 <para>Add a <cref>FlowAction</cref> to the save file writing sequence. The same object is used for every load.</para>
+            
+                 <para>The action will be run after the first FlowAction with a name equal to referenceAction.
+                 If referenceAction is <c>null</c>, the action will be the first action run.</para>
+            
+                 <para>
+                     The FlowActions that occur in this sequence by default are: (Updated for KSP 0.1.1.0)
+                     <list type="number">
+                         <item><c>"Collecting vessel data for serialization"</c></item>
+                         <item><c>"Saving session manager"</c></item>
+                         <item><c>"Setting version"</c></item>
+                         <item><c>"Saving session guid"</c></item>
+                         <item><c>"Collecting game session metadata"</c></item>
+                         <item><c>"Saving Kerbal roster"</c></item>
+                         <item><c>"Saving colony data"</c></item>
+                         <item><c>"Saving Travel Log"</c></item>
+                         <item><c>"Collecting mission data for serialization"</c></item>
+                         <item><c>"Collecting OAB workspace data for serialization"</c></item>
+                         <item><c>"Saving planted flags"</c></item>
+                         <item><c>"Saving agencies"</c></item>
+                         <item><c>"Saving campaign players"</c></item>
+                         <item><c>"Serializing Save File Contents"</c></item>
+                     </list>
+                 </para>
+             </summary>
+             <param name="flowAction">The FlowAction to insert</param>
+             <param name="referenceAction">The name of the action to insert a FlowActionType after. Use <c>null</c> to insert it at the start.</param>
+        </member>
+        <member name="T:SpaceWarp2.API.Loading.Loading">
+            <summary>
+            API for mods to register their actions for the loading of assets.
+            </summary>
+        </member>
+        <member name="M:SpaceWarp2.API.Loading.Loading.AddDescriptorLoadingAction(System.String,System.Action{SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor})">
+            <summary>
+            Registers a per mod loading action (but more general). Should be added either on Awake() or Start().
+            </summary>
+            <param name="name">The name of the action</param>
+            <param name="action">The action</param>
+        </member>
+        <member name="M:SpaceWarp2.API.Loading.Loading.AddGeneralLoadingAction(System.Func{ReduxLib.GameInterfaces.IFlowAction})">
+            <summary>
+            Registers a general loading action. Should be added either on Awake() or Start().
+            </summary>
+            <param name="actionGenerator">The action generator</param>
+        </member>
+        <member name="M:SpaceWarp2.API.Loading.Loading.AddAddressablesLoadingAction``1(System.String,System.String,System.Action{``0})">
+            <summary>
+            Registers an action to be done on addressables after addressables have been loaded. Should be added either on Awake() or Start().
+            </summary>
+            <param name="name">The name of the action</param>
+            <param name="label">The addressables label to hook into</param>
+            <param name="action">The action to be done on each addressables asset</param>
+            <typeparam name="T">The type of asset that this action is done upon</typeparam>
+        </member>
+        <member name="M:SpaceWarp2.API.Loading.Loading.AddAddressablesLoadingAction``1(System.String,System.String,System.Boolean,System.Action{``0})">
+            <summary>
+            Registers an action to be done on addressables after addressables have been loaded. Should be added either on Awake() or Start().
+            Allows to keep asset in memory after loading them. This is useful for textures or UXML templates, for example.
+            </summary>
+            <param name="name">The name of the action</param>
+            <param name="label">The addressables label to hook into</param>
+            <param name="keepAssets">Indicates if assets should be kept in memory after loading them.</param>
+            <param name="action">The action to be done on each addressables asset</param>
+            <typeparam name="T">The type of asset that this action is done upon</typeparam>
+        </member>
+        <member name="T:SpaceWarp2.API.CommonPaths">
+            <summary>
+            Contains paths to various directories.
+            </summary>
+        </member>
+        <member name="T:SpaceWarp2.API.SaveGameManager.ModSaves">
+            <summary>
+            This class allows you to register your mod data for the game's save file system .
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.API.SaveGameManager.ModSaves.PluginSaveData">
+            <summary>
+            Per-save plugin data
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.API.SaveGameManager.ModSaves.PluginCampaignData">
+            <summary>
+            Per-campaign plugin data
+            </summary>
+        </member>
+        <member name="M:SpaceWarp2.API.SaveGameManager.ModSaves.RegisterSaveLoadGameData``1(System.String,System.Action{``0},System.Action{``0},System.Func{``0,``0},``0,SpaceWarp2.API.Backend.SaveGameManager.PersistenceKind)">
+            <summary>
+            Registers your mod data for saving and loading events.
+            </summary>
+            <typeparam name="T">Any object</typeparam>
+            <param name="modGuid">
+            Your mod GUID. Or, technically, any kind of string can be passed here, but what is mandatory is that it's unique
+            compared to what other mods will use.
+            </param>
+            <param name="onSave">
+            Function that will execute when a SAVE event is triggered. Defaults to null or no callback.
+            </param>
+            <param name="onLoad">
+            Function that will execute when a LOAD event is triggered. Defaults to null or no callback.
+            </param>
+            <param name="onNew">
+            Function that will execute when a LOAD event happens where there was not data prior in the save or campaign for
+            this mod. What is passed in is the old data, and what is returned becomes the new data. 
+            </param>
+            <param name="saveData">
+            Your object that will be saved to a save file during a save event and that will be updated when a load event
+            pulls new data. Ensure that a new instance of this object is NOT created after registration.
+            </param>
+            <param name="persistenceKind">
+            How the save data is persisted, per save or per campaign, your mod can register save data in one of each of these
+            slots
+            </param>
+            <returns>
+            T saveData object you passed as a parameter, or a default instance of object T if you didn't pass anything
+            </returns>
+        </member>
+        <member name="M:SpaceWarp2.API.SaveGameManager.ModSaves.UnRegisterSaveLoadGameData(System.String,SpaceWarp2.API.Backend.SaveGameManager.PersistenceKind)">
+            <summary>
+            Unregister your previously registered mod data for saving and loading. Use this if you no longer need your data
+            to be saved and loaded.
+            </summary>
+            <param name="modGuid">Your mod GUID you used when registering.</param>
+            <param name="persistenceKind">
+            The type of persistence you used when registering.
+            </param>
+        </member>
+        <member name="M:SpaceWarp2.API.SaveGameManager.ModSaves.ReregisterSaveLoadGameData``1(System.String,System.Action{``0},System.Action{``0},System.Func{``0,``0},``0,SpaceWarp2.API.Backend.SaveGameManager.PersistenceKind)">
+            <summary>
+            Unregisters then again registers your mod data for saving and loading events
+            </summary>
+            <typeparam name="T">The type of your save data</typeparam>
+            <param name="modGuid">
+            Your mod GUID. Or, technically, any kind of string can be passed here, but what is mandatory is that it's unique
+            compared to what other mods will use.
+            </param>
+            <param name="onSave">
+            Function that will execute when a SAVE event is triggered. Defaults to null or no callback.
+            </param>
+            <param name="onLoad">
+            Function that will execute when a LOAD event is triggered. Defaults to null or no callback.
+            </param>
+            <param name="onNew">
+            Function that will execute when a LOAD event is triggered where there was not data prior in the save or campaign for
+            this mod. What is passed in is the old data, and what is returned becomes the new data.
+            </param>
+            <param name="saveData">
+            Your object that will be saved to a save file during a save event and that will be
+            updated when a load event pulls new data. Ensure that a new instance of this object is NOT created after
+            registration.
+            </param>
+            <param name="persistenceKind">
+            How the save data is persisted, per save or per campaign, your mod can register save data in one of each of these
+            slots
+            </param>
+            <returns>
+            T saveData object you passed as a parameter, or a default instance of object T if you didn't pass anything
+            </returns>
+        </member>
+        <member name="M:SpaceWarp2.API.SaveGameManager.ModSaves.TriggerCampaignSaveDataUpdate">
+            <summary>
+            Manually trigger a campaign save data flush
+            </summary>
+        </member>
+        <member name="T:SpaceWarp2.API.ModList">
+            <summary>
+            Contains methods related to the mod list.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.ModList.DisabledPluginGuids">
+            <summary>
+            The list of all disabled plugin GUIDs.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.API.ModList.ChangedSinceLastRun">
+            <summary>
+            Whether the mod list changed since the last run.
+            </summary>
+        </member>
+        <member name="T:SpaceWarp2.Modules.SpaceWarpModule">
+            <summary>
+            Base class for SpaceWarp modules.
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.Modules.SpaceWarpModule.ModuleLogger">
+            <summary>
+            The logger for the module.
+            </summary>
+        </member>
+        <member name="F:SpaceWarp2.Modules.SpaceWarpModule.ModuleConfiguration">
+            <summary>
+            The configuration file for the module.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.Modules.SpaceWarpModule.Name">
+            <summary>
+            The name of the module.
+            </summary>
+        </member>
+        <member name="M:SpaceWarp2.Modules.SpaceWarpModule.LoadModule">
+            <summary>
+            Loads the module. Called in plugin's Awake method.
+            </summary>
+        </member>
+        <member name="M:SpaceWarp2.Modules.SpaceWarpModule.PreInitializeModule">
+            <summary>
+            1st stage of module initialization. Called in plugin's OnPreInitialized method.
+            </summary>
+        </member>
+        <member name="M:SpaceWarp2.Modules.SpaceWarpModule.InitializeModule">
+            <summary>
+            2nd stage of module initialization. Called in plugin's OnInitialized method.
+            </summary>
+        </member>
+        <member name="M:SpaceWarp2.Modules.SpaceWarpModule.PostInitializeModule">
+            <summary>
+            3rd stage of module initialization. Called in plugin's OnPostInitialized method.
+            </summary>
+        </member>
+        <member name="P:SpaceWarp2.Modules.SpaceWarpModule.Prerequisites">
+            <summary>
+            Names of modules that this module depends on.
+            </summary>
+        </member>
+        <member name="T:SpaceWarp2.Modules.ModuleManager">
+            <summary>
+            Manager of SpaceWarp modules.
+            </summary>
+        </member>
+        <member name="M:SpaceWarp2.Modules.ModuleManager.TryGetModule(System.String,SpaceWarp2.Modules.SpaceWarpModule@)">
+            <summary>
+            Gets a SpaceWarp module instance by name.
+            </summary>
+            <param name="name">Name of the module.</param>
+            <param name="module">The module instance.</param>
+            <returns>True if the module was found, false otherwise.</returns>
+        </member>
+        <member name="F:SpaceWarp2.SpaceWarpPlugin.Instance">
+            <summary>
+            SpaceWarp plugin instance.
+            </summary>
+        </member>
+    </members>
+</doc>
