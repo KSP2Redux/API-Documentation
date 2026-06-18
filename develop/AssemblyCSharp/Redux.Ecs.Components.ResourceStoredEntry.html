@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Struct ResourceStoredEntry | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="One per-resource slot mirroring a managed ResourceContainer, in the same order as the container&#39;s ResourceIDMap so list index equals buffer index.">
+    <meta name="description" content="One per-resource storage slot of a .">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,9 +81,7 @@
 
 
   <h1 id="Redux_Ecs_Components_ResourceStoredEntry" data-uid="Redux.Ecs.Components.ResourceStoredEntry" class="text-break">Struct ResourceStoredEntry</h1>
-  <div class="markdown level0 summary"><p>One per-resource slot mirroring a managed <code>ResourceContainer</code>, in the
-same order as the container's <code>ResourceIDMap</code> so list index equals
-buffer index.</p>
+  <div class="markdown level0 summary"><p>One per-resource storage slot of a <a class="xref" href="KSP.Sim.ResourceSystem.ResourceContainer.html">ResourceContainer</a>.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.Ecs.html">Ecs</a>.<a class="xref" href="Redux.Ecs.Components.html">Components</a></h6>
@@ -93,6 +91,10 @@ buffer index.</p>
     <pre><code class="lang-csharp hljs">[InternalBufferCapacity(0)]
 public struct ResourceStoredEntry</code></pre>
   </div>
+  <h5 id="Redux_Ecs_Components_ResourceStoredEntry_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>These are stored in the same order as the container's <code>ResourceIDMap</code>,
+so the slot index is equivalent to the buffer index.</p>
+</div>
   <h3 id="fields">Fields
 </h3>
 
@@ -115,54 +117,6 @@ public struct ResourceStoredEntry</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">double</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="Redux_Ecs_Components_ResourceStoredEntry_FLAG_NON_STAGEABLE" data-uid="Redux.Ecs.Components.ResourceStoredEntry.FLAG_NON_STAGEABLE">FLAG_NON_STAGEABLE</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public const byte FLAG_NON_STAGEABLE = 1</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">byte</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="Redux_Ecs_Components_ResourceStoredEntry_Flags" data-uid="Redux.Ecs.Components.ResourceStoredEntry.Flags">Flags</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public byte Flags</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">byte</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -235,6 +189,34 @@ public struct ResourceStoredEntry</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="Redux_Ecs_Components_ResourceStoredEntry_NonStageable_" data-uid="Redux.Ecs.Components.ResourceStoredEntry.NonStageable*"></a>
+  <h4 id="Redux_Ecs_Components_ResourceStoredEntry_NonStageable" data-uid="Redux.Ecs.Components.ResourceStoredEntry.NonStageable">NonStageable</h4>
+  <div class="markdown level1 summary"><p>Whether this slot's resource is excluded from staging.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool NonStageable { readonly get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
         <td></td>
       </tr>
     </tbody>

@@ -331,11 +331,12 @@
 
 
   <h4 id="KSP_Sim_ResourceSystem_ResourceContainer_CapacityUnitsLookup" data-uid="KSP.Sim.ResourceSystem.ResourceContainer.CapacityUnitsLookup">CapacityUnitsLookup</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The capacity in units of each storage slot, in slot order.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public readonly List&lt;double&gt; CapacityUnitsLookup</code></pre>
+    <pre><code class="lang-csharp hljs">public readonly ResourceContainer.DoubleSlotView CapacityUnitsLookup</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -347,7 +348,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">List</span>&lt;<span class="xref">double</span>&gt;</td>
+        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceContainer.html">ResourceContainer</a>.<a class="xref" href="KSP.Sim.ResourceSystem.ResourceContainer.DoubleSlotView.html">DoubleSlotView</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -355,11 +356,12 @@
 
 
   <h4 id="KSP_Sim_ResourceSystem_ResourceContainer_ResourceIDMap" data-uid="KSP.Sim.ResourceSystem.ResourceContainer.ResourceIDMap">ResourceIDMap</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The resource id of each storage slot, in slot order.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public readonly List&lt;ResourceDefinitionID&gt; ResourceIDMap</code></pre>
+    <pre><code class="lang-csharp hljs">public readonly ResourceContainer.ResourceIdView ResourceIDMap</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -371,7 +373,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">List</span>&lt;<a class="xref" href="KSP.Sim.ResourceSystem.ResourceDefinitionID.html">ResourceDefinitionID</a>&gt;</td>
+        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceContainer.html">ResourceContainer</a>.<a class="xref" href="KSP.Sim.ResourceSystem.ResourceContainer.ResourceIdView.html">ResourceIdView</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -379,11 +381,12 @@
 
 
   <h4 id="KSP_Sim_ResourceSystem_ResourceContainer_StoredUnitsLookup" data-uid="KSP.Sim.ResourceSystem.ResourceContainer.StoredUnitsLookup">StoredUnitsLookup</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The stored units of each storage slot, in slot order.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public readonly List&lt;double&gt; StoredUnitsLookup</code></pre>
+    <pre><code class="lang-csharp hljs">public readonly ResourceContainer.DoubleSlotView StoredUnitsLookup</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -395,7 +398,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">List</span>&lt;<span class="xref">double</span>&gt;</td>
+        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceContainer.html">ResourceContainer</a>.<a class="xref" href="KSP.Sim.ResourceSystem.ResourceContainer.DoubleSlotView.html">DoubleSlotView</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -423,6 +426,32 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_ResourceSystem_ResourceContainer_Entity_" data-uid="KSP.Sim.ResourceSystem.ResourceContainer.Entity*"></a>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceContainer_Entity" data-uid="KSP.Sim.ResourceSystem.ResourceContainer.Entity">Entity</h4>
+  <div class="markdown level1 summary"><p>The container's storage entity, or <span class="xref">Unity.Entities.Entity.Null</span> until first write.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Entity Entity { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Entity</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -530,16 +559,17 @@
   </table>
 
 
-  <a id="KSP_Sim_ResourceSystem_ResourceContainer_Bind_" data-uid="KSP.Sim.ResourceSystem.ResourceContainer.Bind*"></a>
-  <h4 id="KSP_Sim_ResourceSystem_ResourceContainer_Bind_Unity_Entities_Entity_" data-uid="KSP.Sim.ResourceSystem.ResourceContainer.Bind(Unity.Entities.Entity)">Bind(Entity)</h4>
-  <div class="markdown level1 summary"><p>Binds this container to an ECS entity so every slot mutation also
-mirrors into the entity's <a class="xref" href="Redux.Ecs.Components.ResourceStoredEntry.html">ResourceStoredEntry</a> buffer,
-then writes the current slot state into the buffer.</p>
+  <a id="KSP_Sim_ResourceSystem_ResourceContainer_BindToEntity_" data-uid="KSP.Sim.ResourceSystem.ResourceContainer.BindToEntity*"></a>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceContainer_BindToEntity_Unity_Entities_Entity_" data-uid="KSP.Sim.ResourceSystem.ResourceContainer.BindToEntity(Unity.Entities.Entity)">BindToEntity(Entity)</h4>
+  <div class="markdown level1 summary"><p>Binds the container's storage to an existing entity instead of creating
+a dedicated one, for the flight case where a part has exactly one
+container and its slots live on the part entity. The entity is treated
+as borrowed and is not destroyed by <a class="xref" href="KSP.Sim.ResourceSystem.ResourceContainer.html#KSP_Sim_ResourceSystem_ResourceContainer_Dispose">Dispose()</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Bind(Entity entity)</code></pre>
+    <pre><code class="lang-csharp hljs">public void BindToEntity(Entity entity)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -766,6 +796,18 @@ then writes the current slot state into the buffer.</p>
       </tr>
     </tbody>
   </table>
+
+
+  <a id="KSP_Sim_ResourceSystem_ResourceContainer_Dispose_" data-uid="KSP.Sim.ResourceSystem.ResourceContainer.Dispose*"></a>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceContainer_Dispose" data-uid="KSP.Sim.ResourceSystem.ResourceContainer.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"><p>Destroys the container's storage entity. Safe to call when no entity
+exists or the world is gone, so it can run during scene teardown.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
 
 
   <a id="KSP_Sim_ResourceSystem_ResourceContainer_DumpAllResources_" data-uid="KSP.Sim.ResourceSystem.ResourceContainer.DumpAllResources*"></a>
@@ -1128,7 +1170,7 @@ then writes the current slot state into the buffer.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IEnumerator&lt;ResourceDefinitionID&gt; GetEnumerator()</code></pre>
+    <pre><code class="lang-csharp hljs">public ResourceContainer.ResourceIdView.Enumerator GetEnumerator()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-condensed">
@@ -1140,7 +1182,7 @@ then writes the current slot state into the buffer.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IEnumerator</span>&lt;<a class="xref" href="KSP.Sim.ResourceSystem.ResourceDefinitionID.html">ResourceDefinitionID</a>&gt;</td>
+        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceContainer.html">ResourceContainer</a>.<a class="xref" href="KSP.Sim.ResourceSystem.ResourceContainer.ResourceIdView.html">ResourceIdView</a>.<a class="xref" href="KSP.Sim.ResourceSystem.ResourceContainer.ResourceIdView.Enumerator.html">Enumerator</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -2562,18 +2604,6 @@ then writes the current slot state into the buffer.</p>
       </tr>
     </tbody>
   </table>
-
-
-  <a id="KSP_Sim_ResourceSystem_ResourceContainer_Unbind_" data-uid="KSP.Sim.ResourceSystem.ResourceContainer.Unbind*"></a>
-  <h4 id="KSP_Sim_ResourceSystem_ResourceContainer_Unbind" data-uid="KSP.Sim.ResourceSystem.ResourceContainer.Unbind">Unbind()</h4>
-  <div class="markdown level1 summary"><p>Stops mirroring slot mutations into an entity buffer. Reads and
-managed mutations continue to behave exactly as an unbound container.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Unbind()</code></pre>
-  </div>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.Sim.ResourceSystem.IResourceContainer.html">IResourceContainer</a>
