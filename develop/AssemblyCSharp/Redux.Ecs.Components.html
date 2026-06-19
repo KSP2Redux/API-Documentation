@@ -158,14 +158,17 @@ entity holds all of its children. Rebuilt by
       <section><p>Unmanaged source of truth for the plain (blittable) state of a part owner, exposed as accessor properties on
 <a class="xref" href="KSP.Sim.impl.PartOwnerComponent.html">PartOwnerComponent</a>.</p>
 </section>
-      <h4><a class="xref" href="Redux.Ecs.Components.PartOwnerPartList.html">PartOwnerPartList</a></h4>
-      <section><p>Buffer of the part entities owned by a part owner, mirroring <a class="xref" href="KSP.Sim.impl.PartOwnerComponent.html">PartOwnerComponent</a>'s
-managed part collection so ECS systems can enumerate a vessel's parts without touching managed state.</p>
-</section>
       <h4><a class="xref" href="Redux.Ecs.Components.PartParent.html">PartParent</a></h4>
       <section><p>The attachment-tree parent of a part within its part owner, as an entity reference
 (<span class="xref">Unity.Entities.Entity.Null</span> for the root or a part with no parent). Rebuilt by
 <a class="xref" href="KSP.Sim.impl.PartOwnerComponent.html#KSP_Sim_impl_PartOwnerComponent_UpdatePartRelationships">UpdatePartRelationships()</a>.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.PartVessel.html">PartVessel</a></h4>
+      <section><p>The part-owner (vessel) entity that a part belongs to, as a shared component so that all parts of a
+single vessel are grouped into the same chunks. This lets a query filter a vessel's parts with
+<code>SetSharedComponentFilter</code> and reduce a per-part component across the whole vessel without
+walking managed state. Stamped and stripped alongside the
+<a class="xref" href="KSP.Sim.impl.PartOwnerComponent.html">PartOwnerComponent</a> membership buffer.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.PatchedConicsOrbitData.html">PatchedConicsOrbitData</a></h4>
       <section><p>Unmanaged Keplerian state for a patched-conics orbit: the orbital elements plus the values derived from them
