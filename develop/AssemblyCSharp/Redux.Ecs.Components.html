@@ -114,11 +114,18 @@ frame-bound <a class="xref" href="Redux.Ecs.Components.VectorD.html">VectorD</a>
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.BoundViewObject.html">BoundViewObject</a></h4>
       <section></section>
+      <h4><a class="xref" href="Redux.Ecs.Components.CelestialBodyChild.html">CelestialBodyChild</a></h4>
+      <section><p>One orbiting child of a celestial body. Each body holds a buffer of its children; the
+<a class="xref" href="Redux.Ecs.Components.CelestialBodyHierarchyRoot.html">CelestialBodyHierarchyRoot</a> singleton holds the stars.</p>
+</section>
       <h4><a class="xref" href="Redux.Ecs.Components.CelestialBodyHasRotationUpdate.html">CelestialBodyHasRotationUpdate</a></h4>
       <section><p>Marks that a body's rotation changed this tick. The celestial-body ordered update owns the flag: it
 clears it at the start of each update and re-enables it only when it recomputes the rotation. The legacy
 fixed update reads it to raise <code>CelestialBodyComponent.RotationUpdated</code> and
 <code>CelestialBodyComponent.AngularVelocityUpdated</code>.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.CelestialBodyHierarchyRoot.html">CelestialBodyHierarchyRoot</a></h4>
+      <section><p>Singleton root of the celestial-body tree; its <a class="xref" href="Redux.Ecs.Components.CelestialBodyChild.html">CelestialBodyChild</a> buffer holds the stars.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.CelestialBodySimData.html">CelestialBodySimData</a></h4>
       <section><p>Unmanaged source of truth for the celestial-body fields driven by <code>CelestialBodyOrderedUpdateSystem</code>,
@@ -133,6 +140,14 @@ exposed as accessor properties on <a class="xref" href="KSP.Sim.impl.CelestialBo
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.OrbiterData.html">OrbiterData</a></h4>
       <section><p>Authoritative unmanaged state for <a class="xref" href="KSP.Sim.impl.OrbiterComponent.html">OrbiterComponent</a>.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.OrbiterFrame.html">OrbiterFrame</a></h4>
+      <section><p>The orbiter's own celestial frame entity; its <a class="xref" href="Redux.Ecs.Components.Transformd.html">Transformd</a> holds the live (physics-driven) position
+the orbit-driver job resolves the owning body from when the orbiter is off-rails.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.OrbiterMainBody.html">OrbiterMainBody</a></h4>
+      <section><p>The body whose SOI owns this orbiter, resolved each tick by the orbit-driver job. <span class="xref">Unity.Entities.Entity.Null</span> when
+unresolved this tick: a celestial body, no reference body, or the job has not run yet.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.PartChild.html">PartChild</a></h4>
       <section><p>One attachment-tree child of a part within its part owner, as an entity reference. The buffer on a part
