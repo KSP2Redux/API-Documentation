@@ -149,6 +149,10 @@ the orbit-driver job resolves the owning body from when the orbiter is off-rails
       <section><p>The body whose SOI owns this orbiter, resolved each tick by the orbit-driver job. <span class="xref">Unity.Entities.Entity.Null</span> when
 unresolved this tick: a celestial body, no reference body, or the job has not run yet.</p>
 </section>
+      <h4><a class="xref" href="Redux.Ecs.Components.OverheatEvent.html">OverheatEvent</a></h4>
+      <section><p>Emitted by the thermal finalize job when a part's temperature exceeds its maximum, so a later managed
+system can destroy it without the Burst pipeline taking a sync point.</p>
+</section>
       <h4><a class="xref" href="Redux.Ecs.Components.PartChild.html">PartChild</a></h4>
       <section><p>One attachment-tree child of a part within its part owner, as an entity reference. The buffer on a part
 entity holds all of its children. Rebuilt by
@@ -157,6 +161,10 @@ entity holds all of its children. Rebuilt by
       <h4><a class="xref" href="Redux.Ecs.Components.PartOwnerData.html">PartOwnerData</a></h4>
       <section><p>Unmanaged source of truth for the plain (blittable) state of a part owner, exposed as accessor properties on
 <a class="xref" href="KSP.Sim.impl.PartOwnerComponent.html">PartOwnerComponent</a>.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.PartOwnerRef.html">PartOwnerRef</a></h4>
+      <section><p>The part owner entity a part belongs to (<span class="xref">Unity.Entities.Entity.Null</span> when unowned). Maintained alongside
+the part's <a class="xref" href="Redux.Ecs.Components.PartVessel.html">PartVessel</a> shared component as parts are added to and removed from owners.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.PartParent.html">PartParent</a></h4>
       <section><p>The attachment-tree parent of a part within its part owner, as an entity reference
@@ -211,6 +219,16 @@ entity it is expressed in.</p>
       <h4><a class="xref" href="Redux.Ecs.Components.TelemetryData.html">TelemetryData</a></h4>
       <section><p>Unmanaged source of truth for the plain flight-telemetry state of a simulation object, exposed as accessor
 properties on <a class="xref" href="KSP.Sim.impl.TelemetryComponent.html">TelemetryComponent</a>.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.ThermalBodyContext.html">ThermalBodyContext</a></h4>
+      <section><p>One celestial body in a part's main-body chain: the index into
+<a class="xref" href="KSP.Sim.Util.CelestialBodyThermalJobData.html">CelestialBodyThermalJobData</a>'s body data array, the part's altitude above that
+body, and the body's surface-flux-map sample at the vessel's location. The buffer on a part entity holds
+the chain from its main body up to the root, refreshed each thermal tick.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.ThermalOwnerData.html">ThermalOwnerData</a></h4>
+      <section><p>Per-vessel thermal aggregates on the part owner entity: the sum of per-part cooling demand, and the main
+body's atmospheric temperature at the vessel's altitude.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.Transformd.html">Transformd</a></h4>
       <section><p>Struct representing ECS transform data.</p>

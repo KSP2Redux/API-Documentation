@@ -8,7 +8,7 @@
     "baseUrl": "https://api.ksp2redux.org/",
     "changefreq": "weekly"
   },
-  "source_base_path": "C:/GitLab-Runner/builds/aFf68Pzn9/1/rendezvous-entertainment/ksp2redux/Documentation",
+  "source_base_path": "C:/GitLab-Runner/builds/15_l7KBF6/1/rendezvous-entertainment/ksp2redux/Documentation",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -59269,20 +59269,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/KSP.Sim.Util.ThermalComponentJob.yml",
-      "output": {
-        ".html": {
-          "relative_path": "AssemblyCSharp/KSP.Sim.Util.ThermalComponentJob.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "KSP.Sim.Util.ThermalComponentJob",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/KSP.Sim.Util.ThermalComponentJob.yml\" sourcestartlinenumber=\"1\">Manages the scheduling and completion of burst-compiled Unity parallel jobs that compute per-part thermal simulation.</p>\n"
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "AssemblyCSharp/KSP.Sim.Util.TransformModelUtil.yml",
       "output": {
         ".html": {
@@ -62905,7 +62891,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "KSP.Sim.impl.ThermalComponent",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/KSP.Sim.impl.ThermalComponent.yml\" sourcestartlinenumber=\"1\">ObjectComponent that manages per-part thermal simulation for a vessel, computing heat fluxes, applying cooling energy, and destroying overheated parts.</p>\n"
+      "Summary": "<p sourcefile=\"AssemblyCSharp/KSP.Sim.impl.ThermalComponent.yml\" sourcestartlinenumber=\"1\">ObjectComponent that manages per-part thermal simulation for a vessel. Each tick it refreshes the part\nentities' thermal input state (managed module updates, cooler energy, body context) for the entity-wide\n<xref href=\"Redux.Ecs.Systems.ThermalSimSystem\" data-throw-if-not-resolved=\"false\"></xref> Burst pipeline, then reads back the results and destroys\noverheated parts.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -63759,7 +63745,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "KSP.ThermalData",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/KSP.ThermalData.yml\" sourcestartlinenumber=\"1\">Represents a snapshot of thermal and aerodynamic state for a single part.</p>\n"
+      "Summary": "<p sourcefile=\"AssemblyCSharp/KSP.ThermalData.yml\" sourcestartlinenumber=\"1\">Unmanaged source of truth for the thermal and aerodynamic state of a single part, backed by the part's entity\nand exposed through the <xref href=\"KSP.Sim.impl.PartComponent.ThermalData\" data-throw-if-not-resolved=\"false\"></xref> accessor.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -78505,6 +78491,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/Redux.Ecs.Components.OverheatEvent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/Redux.Ecs.Components.OverheatEvent.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Redux.Ecs.Components.OverheatEvent",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/Redux.Ecs.Components.OverheatEvent.yml\" sourcestartlinenumber=\"1\">Emitted by the thermal finalize job when a part's temperature exceeds its maximum, so a later managed\nsystem can destroy it without the Burst pipeline taking a sync point.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "AssemblyCSharp/Redux.Ecs.Components.PartChild.yml",
       "output": {
         ".html": {
@@ -78530,6 +78530,20 @@
       "IsMRef": true,
       "Title": "Redux.Ecs.Components.PartOwnerData",
       "Summary": "<p sourcefile=\"AssemblyCSharp/Redux.Ecs.Components.PartOwnerData.yml\" sourcestartlinenumber=\"1\">Unmanaged source of truth for the plain (blittable) state of a part owner, exposed as accessor properties on\n<xref href=\"KSP.Sim.impl.PartOwnerComponent\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/Redux.Ecs.Components.PartOwnerRef.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/Redux.Ecs.Components.PartOwnerRef.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Redux.Ecs.Components.PartOwnerRef",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/Redux.Ecs.Components.PartOwnerRef.yml\" sourcestartlinenumber=\"1\">The part owner entity a part belongs to (<xref href=\"Unity.Entities.Entity.Null\" data-throw-if-not-resolved=\"false\"></xref> when unowned). Maintained alongside\nthe part's <xref href=\"Redux.Ecs.Components.PartVessel\" data-throw-if-not-resolved=\"false\"></xref> shared component as parts are added to and removed from owners.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -78740,6 +78754,34 @@
       "IsMRef": true,
       "Title": "Redux.Ecs.Components.TelemetryData",
       "Summary": "<p sourcefile=\"AssemblyCSharp/Redux.Ecs.Components.TelemetryData.yml\" sourcestartlinenumber=\"1\">Unmanaged source of truth for the plain flight-telemetry state of a simulation object, exposed as accessor\nproperties on <xref href=\"KSP.Sim.impl.TelemetryComponent\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/Redux.Ecs.Components.ThermalBodyContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/Redux.Ecs.Components.ThermalBodyContext.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Redux.Ecs.Components.ThermalBodyContext",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/Redux.Ecs.Components.ThermalBodyContext.yml\" sourcestartlinenumber=\"1\">One celestial body in a part's main-body chain: the index into\n<xref href=\"KSP.Sim.Util.CelestialBodyThermalJobData\" data-throw-if-not-resolved=\"false\"></xref>'s body data array, the part's altitude above that\nbody, and the body's surface-flux-map sample at the vessel's location. The buffer on a part entity holds\nthe chain from its main body up to the root, refreshed each thermal tick.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/Redux.Ecs.Components.ThermalOwnerData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/Redux.Ecs.Components.ThermalOwnerData.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Redux.Ecs.Components.ThermalOwnerData",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/Redux.Ecs.Components.ThermalOwnerData.yml\" sourcestartlinenumber=\"1\">Per-vessel thermal aggregates on the part owner entity: the sum of per-part cooling demand, and the main\nbody's atmospheric temperature at the vessel's altitude.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -79482,6 +79524,34 @@
       "IsMRef": true,
       "Title": "Redux.Ecs.Systems.SurfaceAnchorUnityWriteSystem",
       "Summary": "<p sourcefile=\"AssemblyCSharp/Redux.Ecs.Systems.SurfaceAnchorUnityWriteSystem.yml\" sourcestartlinenumber=\"1\">Pushes each surface-anchor entity's world pose onto its managed Unity <xref href=\"UnityEngine.Transform\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/Redux.Ecs.Systems.ThermalReadbackSystem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/Redux.Ecs.Systems.ThermalReadbackSystem.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Redux.Ecs.Systems.ThermalReadbackSystem",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/Redux.Ecs.Systems.ThermalReadbackSystem.yml\" sourcestartlinenumber=\"1\">Reads the thermal pipeline's results back on the main thread: syncs each part's temperature from its\nentity and destroys parts the finalize job flagged via <xref href=\"Redux.Ecs.Components.OverheatEvent\" data-throw-if-not-resolved=\"false\"></xref>. Runs after\n<xref href=\"Redux.Ecs.Systems.ThermalSimSystem\" data-throw-if-not-resolved=\"false\"></xref> so the sync point lives here, not in the scheduling system.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/Redux.Ecs.Systems.ThermalSimSystem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/Redux.Ecs.Systems.ThermalSimSystem.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Redux.Ecs.Systems.ThermalSimSystem",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/Redux.Ecs.Systems.ThermalSimSystem.yml\" sourcestartlinenumber=\"1\">Drives the per-vessel thermal simulation as an entity-wide Burst pipeline. Each tick the managed\nThermalComponent bookends (PrepareThermalTick, RunThermalInputs, FinishThermalTick) refresh the part\nentities' input state, then three nested IJobEntity passes compute the result: per-part iteration\n(environment/reentry flux and temperature), a per-owner cooling-demand reduce, and per-part finalize\n(cooler flux, temperature floor, overheat flag).</p>\n"
     },
     {
       "type": "ManagedReference",

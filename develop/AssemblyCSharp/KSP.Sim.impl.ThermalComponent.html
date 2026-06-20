@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class ThermalComponent | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="ObjectComponent that manages per-part thermal simulation for a vessel, computing heat fluxes, applying cooling energy, and destroying overheated parts.">
+    <meta name="description" content="ObjectComponent that manages per-part thermal simulation for a vessel. Each tick it refreshes the part entities&#39; thermal input state (managed module updates, cooler energy, body context) for the entity-wide  Burst pipeline, then reads back the results and destroys overheated parts.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,10 @@
 
 
   <h1 id="KSP_Sim_impl_ThermalComponent" data-uid="KSP.Sim.impl.ThermalComponent" class="text-break">Class ThermalComponent</h1>
-  <div class="markdown level0 summary"><p>ObjectComponent that manages per-part thermal simulation for a vessel, computing heat fluxes, applying cooling energy, and destroying overheated parts.</p>
+  <div class="markdown level0 summary"><p>ObjectComponent that manages per-part thermal simulation for a vessel. Each tick it refreshes the part
+entities' thermal input state (managed module updates, cooler energy, body context) for the entity-wide
+<a class="xref" href="Redux.Ecs.Systems.ThermalSimSystem.html">ThermalSimSystem</a> Burst pipeline, then reads back the results and destroys
+overheated parts.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -110,6 +113,9 @@
     </div>
     <div>
       <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnFixedUpdate_System_Double_System_Double_">ObjectComponent.OnFixedUpdate(double, double)</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnUpdate_System_Double_System_Double_">ObjectComponent.OnUpdate(double, double)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnLateUpdate_System_Double_">ObjectComponent.OnLateUpdate(double)</a>
@@ -353,16 +359,6 @@ public override Type ViewObjectComponentType { get; }</code></pre>
   </div>
 
 
-  <a id="KSP_Sim_impl_ThermalComponent_Finalize_" data-uid="KSP.Sim.impl.ThermalComponent.Finalize*"></a>
-  <h4 id="KSP_Sim_impl_ThermalComponent_Finalize" data-uid="KSP.Sim.impl.ThermalComponent.Finalize">~ThermalComponent()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected ~ThermalComponent()</code></pre>
-  </div>
-
-
   <a id="KSP_Sim_impl_ThermalComponent_GetDefinition_" data-uid="KSP.Sim.impl.ThermalComponent.GetDefinition*"></a>
   <h4 id="KSP_Sim_impl_ThermalComponent_GetDefinition" data-uid="KSP.Sim.impl.ThermalComponent.GetDefinition">GetDefinition()</h4>
   <div class="markdown level1 summary"></div>
@@ -480,13 +476,55 @@ public override Type ViewObjectComponentType { get; }</code></pre>
   <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnStart_System_Double_">ObjectComponent.OnStart(double)</a></div>
 
 
-  <a id="KSP_Sim_impl_ThermalComponent_OnUpdate_" data-uid="KSP.Sim.impl.ThermalComponent.OnUpdate*"></a>
-  <h4 id="KSP_Sim_impl_ThermalComponent_OnUpdate_System_Double_System_Double_" data-uid="KSP.Sim.impl.ThermalComponent.OnUpdate(System.Double,System.Double)">OnUpdate(double, double)</h4>
-  <div class="markdown level1 summary"></div>
+  <a id="KSP_Sim_impl_ThermalComponent_PrepareThermalTick_" data-uid="KSP.Sim.impl.ThermalComponent.PrepareThermalTick*"></a>
+  <h4 id="KSP_Sim_impl_ThermalComponent_PrepareThermalTick" data-uid="KSP.Sim.impl.ThermalComponent.PrepareThermalTick">PrepareThermalTick()</h4>
+  <div class="markdown level1 summary"><p>Gates the vessel for this thermal tick and refreshes its main-body context. Returns whether the
+vessel participates; non-participating vessels have their parts' body context cleared so the Burst
+pipeline skips them. Driven by <a class="xref" href="Redux.Ecs.Systems.ThermalSimSystem.html">ThermalSimSystem</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void OnUpdate(double universalTime, double deltaUniversalTime)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool PrepareThermalTick()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_ThermalComponent_ReadbackTemperatures_" data-uid="KSP.Sim.impl.ThermalComponent.ReadbackTemperatures*"></a>
+  <h4 id="KSP_Sim_impl_ThermalComponent_ReadbackTemperatures" data-uid="KSP.Sim.impl.ThermalComponent.ReadbackTemperatures">ReadbackTemperatures()</h4>
+  <div class="markdown level1 summary"><p>Syncs each part's temperature from its entity after the Burst pipeline has run. Driven by
+<a class="xref" href="Redux.Ecs.Systems.ThermalReadbackSystem.html">ThermalReadbackSystem</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ReadbackTemperatures()</code></pre>
+  </div>
+
+
+  <a id="KSP_Sim_impl_ThermalComponent_RunThermalInputs_" data-uid="KSP.Sim.impl.ThermalComponent.RunThermalInputs*"></a>
+  <h4 id="KSP_Sim_impl_ThermalComponent_RunThermalInputs_System_Double_" data-uid="KSP.Sim.impl.ThermalComponent.RunThermalInputs(System.Double)">RunThermalInputs(double)</h4>
+  <div class="markdown level1 summary"><p>Runs the managed per-part module thermal updates and cooler aggregation, then refreshes each part
+entity's thermal input state and body context for this tick's Burst pipeline.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RunThermalInputs(double deltaUniversalTime)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -500,18 +538,11 @@ public override Type ViewObjectComponentType { get; }</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">double</span></td>
-        <td><span class="parametername">universalTime</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">double</span></td>
         <td><span class="parametername">deltaUniversalTime</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnUpdate_System_Double_System_Double_">ObjectComponent.OnUpdate(double, double)</a></div>
 
 
   <a id="KSP_Sim_impl_ThermalComponent_SetState_" data-uid="KSP.Sim.impl.ThermalComponent.SetState*"></a>

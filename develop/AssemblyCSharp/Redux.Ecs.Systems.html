@@ -108,6 +108,18 @@ and baked surface sample.</p>
       <h4><a class="xref" href="Redux.Ecs.Systems.SurfaceAnchorUnityWriteSystem.html">SurfaceAnchorUnityWriteSystem</a></h4>
       <section><p>Pushes each surface-anchor entity's world pose onto its managed Unity <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a>.</p>
 </section>
+      <h4><a class="xref" href="Redux.Ecs.Systems.ThermalReadbackSystem.html">ThermalReadbackSystem</a></h4>
+      <section><p>Reads the thermal pipeline's results back on the main thread: syncs each part's temperature from its
+entity and destroys parts the finalize job flagged via <a class="xref" href="Redux.Ecs.Components.OverheatEvent.html">OverheatEvent</a>. Runs after
+<a class="xref" href="Redux.Ecs.Systems.ThermalSimSystem.html">ThermalSimSystem</a> so the sync point lives here, not in the scheduling system.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Systems.ThermalSimSystem.html">ThermalSimSystem</a></h4>
+      <section><p>Drives the per-vessel thermal simulation as an entity-wide Burst pipeline. Each tick the managed
+ThermalComponent bookends (PrepareThermalTick, RunThermalInputs, FinishThermalTick) refresh the part
+entities' input state, then three nested IJobEntity passes compute the result: per-part iteration
+(environment/reentry flux and temperature), a per-owner cooling-demand reduce, and per-part finalize
+(cooler flux, temperature floor, overheat flag).</p>
+</section>
       <h4><a class="xref" href="Redux.Ecs.Systems.ViewLegacyFixedUpdateSystem.html">ViewLegacyFixedUpdateSystem</a></h4>
       <section></section>
       <h4><a class="xref" href="Redux.Ecs.Systems.ViewLegacyUpdateSystem.html">ViewLegacyUpdateSystem</a></h4>
