@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class ModScriptRuntime | KSP2Redux API (Develop) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class ModScriptRuntime | KSP2Redux API (Develop) ">
+    
+    <meta name="description" content="The SpaceWarp-owned Lua mod runtime. Forks per-mod environments off the game&#39;s root runtime (), contributes the general mod-loading globals, runs registered s, and executes mod bodies.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="SpaceWarp2.API.Lifecycle.ModScriptRuntime">
+
+
+
+  <h1 id="SpaceWarp2_API_Lifecycle_ModScriptRuntime" data-uid="SpaceWarp2.API.Lifecycle.ModScriptRuntime" class="text-break">Class ModScriptRuntime</h1>
+  <div class="markdown level0 summary"><p>The SpaceWarp-owned Lua mod runtime. Forks per-mod environments off the game's root runtime
+(<a class="xref" href="../ReduxLib/ReduxLib.GameInterfaces.IScriptRuntime.html">IScriptRuntime</a>), contributes the general mod-loading globals, runs registered
+<a class="xref" href="../ReduxLib/ReduxLib.GameInterfaces.IModEnvContributor.html">IModEnvContributor</a>s, and executes mod bodies.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><span class="xref">ModScriptRuntime</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="SpaceWarp2.html">SpaceWarp2</a>.<a class="xref" href="SpaceWarp2.API.html">API</a>.<a class="xref" href="SpaceWarp2.API.Lifecycle.html">Lifecycle</a></h6>
+  <h6><strong>Assembly</strong>: SpaceWarp2.dll</h6>
+  <h5 id="SpaceWarp2_API_Lifecycle_ModScriptRuntime_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class ModScriptRuntime</code></pre>
+  </div>
+  <h5 id="SpaceWarp2_API_Lifecycle_ModScriptRuntime_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>SpaceWarp owns env creation and execution. PatchManager and others contribute their own globals through
+<a class="xref" href="../ReduxLib/ReduxLib.GameInterfaces.IModEnvContributor.html">IModEnvContributor</a>. A mod that runs several files in one environment uses
+<a class="xref" href="SpaceWarp2.API.Lifecycle.ModScriptRuntime.html#SpaceWarp2_API_Lifecycle_ModScriptRuntime_CreateModEnv_SpaceWarp2_API_Mods_SpaceWarpPluginDescriptor_">CreateModEnv(SpaceWarpPluginDescriptor)</a> once and <a class="xref" href="SpaceWarp2.API.Lifecycle.ModScriptRuntime.html#SpaceWarp2_API_Lifecycle_ModScriptRuntime_RunBodyIn_MoonSharp_Interpreter_Table_System_String_System_String_">RunBodyIn(Table, string, string)</a> per file.</p>
+</div>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="SpaceWarp2_API_Lifecycle_ModScriptRuntime_CreateConsoleEnv_" data-uid="SpaceWarp2.API.Lifecycle.ModScriptRuntime.CreateConsoleEnv*"></a>
+  <h4 id="SpaceWarp2_API_Lifecycle_ModScriptRuntime_CreateConsoleEnv" data-uid="SpaceWarp2.API.Lifecycle.ModScriptRuntime.CreateConsoleEnv">CreateConsoleEnv()</h4>
+  <div class="markdown level1 summary"><p>Forks the shared console environment, carrying the same globals a mod environment gets.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Table CreateConsoleEnv()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Table</span></td>
+        <td><p>The console environment's globals table.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="SpaceWarp2_API_Lifecycle_ModScriptRuntime_CreateConsoleEnv_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The in-game console runs its scripts on this environment, so a console script sees the same Lua surface
+(<code>SW</code>, <code>Game</code>, <code>Config</code>, contributor globals) a mod does. Its <code>Location</code> is the Lua
+folder, so console scripts can <code>require</code> libraries kept there.</p>
+</div>
+
+
+  <a id="SpaceWarp2_API_Lifecycle_ModScriptRuntime_CreateCoroutine_" data-uid="SpaceWarp2.API.Lifecycle.ModScriptRuntime.CreateCoroutine*"></a>
+  <h4 id="SpaceWarp2_API_Lifecycle_ModScriptRuntime_CreateCoroutine_MoonSharp_Interpreter_Table_System_String_System_String_" data-uid="SpaceWarp2.API.Lifecycle.ModScriptRuntime.CreateCoroutine(MoonSharp.Interpreter.Table,System.String,System.String)">CreateCoroutine(Table, string, string)</h4>
+  <div class="markdown level1 summary"><p>Loads Lua source as a coroutine on the given environment, suspended at its start and ready to resume.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static DynValue CreateCoroutine(Table env, string code, string chunkName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Table</span></td>
+        <td><span class="parametername">env</span></td>
+        <td><p>The environment to load the coroutine on.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">code</span></td>
+        <td><p>The Lua source to run.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">chunkName</span></td>
+        <td><p>A name for the chunk, used in error messages.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><p>The coroutine value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="SpaceWarp2_API_Lifecycle_ModScriptRuntime_CreateModEnv_" data-uid="SpaceWarp2.API.Lifecycle.ModScriptRuntime.CreateModEnv*"></a>
+  <h4 id="SpaceWarp2_API_Lifecycle_ModScriptRuntime_CreateModEnv_SpaceWarp2_API_Mods_SpaceWarpPluginDescriptor_" data-uid="SpaceWarp2.API.Lifecycle.ModScriptRuntime.CreateModEnv(SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor)">CreateModEnv(SpaceWarpPluginDescriptor)</h4>
+  <div class="markdown level1 summary"><p>Forks a per-mod environment and contributes its globals, without running anything.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Table CreateModEnv(SpaceWarpPluginDescriptor descriptor)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.html">SpaceWarpPluginDescriptor</a></td>
+        <td><span class="parametername">descriptor</span></td>
+        <td><p>The mod to fork an environment for.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Table</span></td>
+        <td><p>The forked environment's globals table.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="SpaceWarp2_API_Lifecycle_ModScriptRuntime_CreateModEnv_SpaceWarp2_API_Mods_SpaceWarpPluginDescriptor__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Reads fall through to the root globals, writes stay local to the child, so each mod is isolated on the
+one shared VM. The runtime contributes the general mod-loading globals (<code>ModId</code>, <code>Location</code>, the
+<code>require</code> loader, and the <code>Log</code> logger), then runs every registered contributor.</p>
+</div>
+
+
+  <a id="SpaceWarp2_API_Lifecycle_ModScriptRuntime_RegisterConsoleGlobal_" data-uid="SpaceWarp2.API.Lifecycle.ModScriptRuntime.RegisterConsoleGlobal*"></a>
+  <h4 id="SpaceWarp2_API_Lifecycle_ModScriptRuntime_RegisterConsoleGlobal_System_String_MoonSharp_Interpreter_DynValue_" data-uid="SpaceWarp2.API.Lifecycle.ModScriptRuntime.RegisterConsoleGlobal(System.String,MoonSharp.Interpreter.DynValue)">RegisterConsoleGlobal(string, DynValue)</h4>
+  <div class="markdown level1 summary"><p>Registers a value or function as a global on the console environment, so console scripts can use it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void RegisterConsoleGlobal(string name, DynValue value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The global name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The value or function to expose.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="SpaceWarp2_API_Lifecycle_ModScriptRuntime_RegisterConsoleGlobal_System_String_MoonSharp_Interpreter_DynValue__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Applies to the live console environment immediately when one exists, and is replayed onto the console
+environment whenever it is forked.</p>
+</div>
+
+
+  <a id="SpaceWarp2_API_Lifecycle_ModScriptRuntime_RunBodyIn_" data-uid="SpaceWarp2.API.Lifecycle.ModScriptRuntime.RunBodyIn*"></a>
+  <h4 id="SpaceWarp2_API_Lifecycle_ModScriptRuntime_RunBodyIn_MoonSharp_Interpreter_Table_System_String_System_String_" data-uid="SpaceWarp2.API.Lifecycle.ModScriptRuntime.RunBodyIn(MoonSharp.Interpreter.Table,System.String,System.String)">RunBodyIn(Table, string, string)</h4>
+  <div class="markdown level1 summary"><p>Runs a Lua body in an already-forked mod environment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void RunBodyIn(Table env, string code, string chunkName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Table</span></td>
+        <td><span class="parametername">env</span></td>
+        <td><p>An environment from <a class="xref" href="SpaceWarp2.API.Lifecycle.ModScriptRuntime.html#SpaceWarp2_API_Lifecycle_ModScriptRuntime_CreateModEnv_SpaceWarp2_API_Mods_SpaceWarpPluginDescriptor_">CreateModEnv(SpaceWarpPluginDescriptor)</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">code</span></td>
+        <td><p>The Lua body to run.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">chunkName</span></td>
+        <td><p>A name for the chunk, used in error messages.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="SpaceWarp2_API_Lifecycle_ModScriptRuntime_RunConsole_" data-uid="SpaceWarp2.API.Lifecycle.ModScriptRuntime.RunConsole*"></a>
+  <h4 id="SpaceWarp2_API_Lifecycle_ModScriptRuntime_RunConsole_System_String_" data-uid="SpaceWarp2.API.Lifecycle.ModScriptRuntime.RunConsole(System.String)">RunConsole(string)</h4>
+  <div class="markdown level1 summary"><p>Starts a console Lua run: a coroutine of <code class="paramref">code</code> on the shared console environment, which
+is forked on first use.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ConsoleScriptRun RunConsole(string code)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">code</span></td>
+        <td><p>The Lua source to run.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="SpaceWarp2.API.Lifecycle.ConsoleScriptRun.html">ConsoleScriptRun</a></td>
+        <td><p>The run, which the console resumes each frame.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="SpaceWarp2_API_Lifecycle_ModScriptRuntime_RunMod_" data-uid="SpaceWarp2.API.Lifecycle.ModScriptRuntime.RunMod*"></a>
+  <h4 id="SpaceWarp2_API_Lifecycle_ModScriptRuntime_RunMod_SpaceWarp2_API_Mods_SpaceWarpPluginDescriptor_" data-uid="SpaceWarp2.API.Lifecycle.ModScriptRuntime.RunMod(SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor)">RunMod(SpaceWarpPluginDescriptor)</h4>
+  <div class="markdown level1 summary"><p>Runs every script file the descriptor declared at discovery, in one forked environment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void RunMod(SpaceWarpPluginDescriptor descriptor)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.html">SpaceWarpPluginDescriptor</a></td>
+        <td><span class="parametername">descriptor</span></td>
+        <td><p>The mod whose <a class="xref" href="SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.html#SpaceWarp2_API_Mods_SpaceWarpPluginDescriptor_ScriptFiles">ScriptFiles</a> to run.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="SpaceWarp2_API_Lifecycle_ModScriptRuntime_RunModSources_" data-uid="SpaceWarp2.API.Lifecycle.ModScriptRuntime.RunModSources*"></a>
+  <h4 id="SpaceWarp2_API_Lifecycle_ModScriptRuntime_RunModSources_SpaceWarp2_API_Mods_SpaceWarpPluginDescriptor_System_Collections_Generic_IReadOnlyList_System_ValueTuple_System_String_System_String___" data-uid="SpaceWarp2.API.Lifecycle.ModScriptRuntime.RunModSources(SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor,System.Collections.Generic.IReadOnlyList{System.ValueTuple{System.String,System.String}})">RunModSources(SpaceWarpPluginDescriptor, IReadOnlyList&lt;(string key, string content)&gt;)</h4>
+  <div class="markdown level1 summary"><p>Runs a set of named script sources for the descriptor in one forked environment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void RunModSources(SpaceWarpPluginDescriptor descriptor, IReadOnlyList&lt;(string key, string content)&gt; sources)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.html">SpaceWarpPluginDescriptor</a></td>
+        <td><span class="parametername">descriptor</span></td>
+        <td><p>The mod the sources belong to.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">IReadOnlyList</span>&lt;(<span class="xref">string</span> <span class="xref">key</span>, <span class="xref">string</span> <span class="xref">content</span>)&gt;</td>
+        <td><span class="parametername">sources</span></td>
+        <td><p>The script sources, each a (key, content) pair.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="SpaceWarp2_API_Lifecycle_ModScriptRuntime_RunModSources_SpaceWarp2_API_Mods_SpaceWarpPluginDescriptor_System_Collections_Generic_IReadOnlyList_System_ValueTuple_System_String_System_String____remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>For sources that are not files on disk, such as addressable text assets loaded by the owning subsystem.</p>
+</div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from develop
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

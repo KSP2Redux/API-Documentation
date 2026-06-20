@@ -140,13 +140,13 @@ public class ScienceLuaModule</code></pre>
 
 
   <a id="PatchManager_Science_ScienceLuaModule_AddPartsToTechNode_" data-uid="PatchManager.Science.ScienceLuaModule.AddPartsToTechNode*"></a>
-  <h4 id="PatchManager_Science_ScienceLuaModule_AddPartsToTechNode_MoonSharp_Interpreter_Script_System_String_System_String___" data-uid="PatchManager.Science.ScienceLuaModule.AddPartsToTechNode(MoonSharp.Interpreter.Script,System.String,System.String[])">AddPartsToTechNode(Script, string, params string[])</h4>
+  <h4 id="PatchManager_Science_ScienceLuaModule_AddPartsToTechNode_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_String___" data-uid="PatchManager.Science.ScienceLuaModule.AddPartsToTechNode(MoonSharp.Interpreter.ScriptExecutionContext,System.String,System.String[])">AddPartsToTechNode(ScriptExecutionContext, string, params string[])</h4>
   <div class="markdown level1 summary"><p>Adds the given part IDs to the tech node named <code class="paramref">nodeName</code>'s <code>UnlockedPartIds</code> list.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void AddPartsToTechNode(Script script, string nodeName, params string[] parts)</code></pre>
+    <pre><code class="lang-csharp hljs">public void AddPartsToTechNode(ScriptExecutionContext context, string nodeName, params string[] parts)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -159,9 +159,9 @@ public class ScienceLuaModule</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Script</span></td>
-        <td><span class="parametername">script</span></td>
-        <td><p>The host Lua script.</p>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context.</p>
 </td>
       </tr>
       <tr>
@@ -181,14 +181,14 @@ public class ScienceLuaModule</code></pre>
 
 
   <a id="PatchManager_Science_ScienceLuaModule_NewExperiment_" data-uid="PatchManager.Science.ScienceLuaModule.NewExperiment*"></a>
-  <h4 id="PatchManager_Science_ScienceLuaModule_NewExperiment_MoonSharp_Interpreter_Script_System_String_System_Action_PatchManager_Science_UserData_ExperimentUserData__" data-uid="PatchManager.Science.ScienceLuaModule.NewExperiment(MoonSharp.Interpreter.Script,System.String,System.Action{PatchManager.Science.UserData.ExperimentUserData})">NewExperiment(Script, string, Action&lt;ExperimentUserData&gt;)</h4>
+  <h4 id="PatchManager_Science_ScienceLuaModule_NewExperiment_System_String_System_Action_PatchManager_Science_UserData_ExperimentUserData__" data-uid="PatchManager.Science.ScienceLuaModule.NewExperiment(System.String,System.Action{PatchManager.Science.UserData.ExperimentUserData})">NewExperiment(string, Action&lt;ExperimentUserData&gt;)</h4>
   <div class="markdown level1 summary"><p>Creates a new science experiment with the given name and runs <code class="paramref">callback</code> against it for
 further configuration.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void NewExperiment(Script script, string name, Action&lt;ExperimentUserData&gt; callback)</code></pre>
+    <pre><code class="lang-csharp hljs">public void NewExperiment(string name, Action&lt;ExperimentUserData&gt; callback)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -200,12 +200,6 @@ further configuration.</p>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td><span class="xref">Script</span></td>
-        <td><span class="parametername">script</span></td>
-        <td><p>The host Lua script.</p>
-</td>
-      </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">name</span></td>
@@ -223,13 +217,13 @@ further configuration.</p>
 
 
   <a id="PatchManager_Science_ScienceLuaModule_PatchDiscoverables_" data-uid="PatchManager.Science.ScienceLuaModule.PatchDiscoverables*"></a>
-  <h4 id="PatchManager_Science_ScienceLuaModule_PatchDiscoverables_MoonSharp_Interpreter_Script_System_String_" data-uid="PatchManager.Science.ScienceLuaModule.PatchDiscoverables(MoonSharp.Interpreter.Script,System.String)">PatchDiscoverables(Script, string)</h4>
+  <h4 id="PatchManager_Science_ScienceLuaModule_PatchDiscoverables_MoonSharp_Interpreter_ScriptExecutionContext_System_String_" data-uid="PatchManager.Science.ScienceLuaModule.PatchDiscoverables(MoonSharp.Interpreter.ScriptExecutionContext,System.String)">PatchDiscoverables(ScriptExecutionContext, string)</h4>
   <div class="markdown level1 summary"><p>Registers a discoverables-list patch with the given namespaced patch name.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public LuaPatch PatchDiscoverables(Script script, string name)</code></pre>
+    <pre><code class="lang-csharp hljs">public PatchDefinition PatchDiscoverables(ScriptExecutionContext context, string name)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -242,15 +236,15 @@ further configuration.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Script</span></td>
-        <td><span class="parametername">script</span></td>
-        <td><p>The host Lua script; its <code>ModId</code> global is used to namespace <code class="paramref">name</code>.</p>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global namespaces <code class="paramref">name</code>.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">name</span></td>
-        <td><p>The patch's local name; namespaced with the host mod's ID.</p>
+        <td><p>The patch's local name, namespaced with the host mod's ID.</p>
 </td>
       </tr>
     </tbody>
@@ -265,25 +259,25 @@ further configuration.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="PatchManager.LuaPatching.LuaPatch.html">LuaPatch</a></td>
+        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a></td>
         <td><p>The registered patch.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="PatchManager_Science_ScienceLuaModule_PatchDiscoverables_MoonSharp_Interpreter_Script_System_String__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>The patch matches every discoverables asset by default; restrict it via <a class="xref" href="PatchManager.LuaPatching.LuaPatch.html#PatchManager_LuaPatching_LuaPatch_Named_System_String___">Named(params string[])</a>, which supports <code>*</code> and <code>?</code> wildcards.</p>
+  <h5 id="PatchManager_Science_ScienceLuaModule_PatchDiscoverables_MoonSharp_Interpreter_ScriptExecutionContext_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The patch matches every discoverables asset by default. Restrict it via <a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html#PatchManager_LuaPatching_PatchDefinition_Named_System_String___">Named(params string[])</a>, which supports <code>*</code> and <code>?</code> wildcards.</p>
 </div>
 
 
   <a id="PatchManager_Science_ScienceLuaModule_PatchExperiments_" data-uid="PatchManager.Science.ScienceLuaModule.PatchExperiments*"></a>
-  <h4 id="PatchManager_Science_ScienceLuaModule_PatchExperiments_MoonSharp_Interpreter_Script_System_String_" data-uid="PatchManager.Science.ScienceLuaModule.PatchExperiments(MoonSharp.Interpreter.Script,System.String)">PatchExperiments(Script, string)</h4>
+  <h4 id="PatchManager_Science_ScienceLuaModule_PatchExperiments_MoonSharp_Interpreter_ScriptExecutionContext_System_String_" data-uid="PatchManager.Science.ScienceLuaModule.PatchExperiments(MoonSharp.Interpreter.ScriptExecutionContext,System.String)">PatchExperiments(ScriptExecutionContext, string)</h4>
   <div class="markdown level1 summary"><p>Registers a science-experiment patch with the given namespaced patch name.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public LuaPatch PatchExperiments(Script script, string name)</code></pre>
+    <pre><code class="lang-csharp hljs">public PatchDefinition PatchExperiments(ScriptExecutionContext context, string name)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -296,15 +290,15 @@ further configuration.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Script</span></td>
-        <td><span class="parametername">script</span></td>
-        <td><p>The host Lua script; its <code>ModId</code> global is used to namespace <code class="paramref">name</code>.</p>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global namespaces <code class="paramref">name</code>.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">name</span></td>
-        <td><p>The patch's local name; namespaced with the host mod's ID.</p>
+        <td><p>The patch's local name, namespaced with the host mod's ID.</p>
 </td>
       </tr>
     </tbody>
@@ -319,25 +313,25 @@ further configuration.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="PatchManager.LuaPatching.LuaPatch.html">LuaPatch</a></td>
+        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a></td>
         <td><p>The registered patch.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="PatchManager_Science_ScienceLuaModule_PatchExperiments_MoonSharp_Interpreter_Script_System_String__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>The patch matches every experiment by default; restrict it via <a class="xref" href="PatchManager.LuaPatching.LuaPatch.html#PatchManager_LuaPatching_LuaPatch_Named_System_String___">Named(params string[])</a>, which supports <code>*</code> and <code>?</code> wildcards.</p>
+  <h5 id="PatchManager_Science_ScienceLuaModule_PatchExperiments_MoonSharp_Interpreter_ScriptExecutionContext_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The patch matches every experiment by default. Restrict it via <a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html#PatchManager_LuaPatching_PatchDefinition_Named_System_String___">Named(params string[])</a>, which supports <code>*</code> and <code>?</code> wildcards.</p>
 </div>
 
 
   <a id="PatchManager_Science_ScienceLuaModule_PatchRegions_" data-uid="PatchManager.Science.ScienceLuaModule.PatchRegions*"></a>
-  <h4 id="PatchManager_Science_ScienceLuaModule_PatchRegions_MoonSharp_Interpreter_Script_System_String_" data-uid="PatchManager.Science.ScienceLuaModule.PatchRegions(MoonSharp.Interpreter.Script,System.String)">PatchRegions(Script, string)</h4>
+  <h4 id="PatchManager_Science_ScienceLuaModule_PatchRegions_MoonSharp_Interpreter_ScriptExecutionContext_System_String_" data-uid="PatchManager.Science.ScienceLuaModule.PatchRegions(MoonSharp.Interpreter.ScriptExecutionContext,System.String)">PatchRegions(ScriptExecutionContext, string)</h4>
   <div class="markdown level1 summary"><p>Registers a science-region patch with the given namespaced patch name.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public LuaPatch PatchRegions(Script script, string name)</code></pre>
+    <pre><code class="lang-csharp hljs">public PatchDefinition PatchRegions(ScriptExecutionContext context, string name)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -350,15 +344,15 @@ further configuration.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Script</span></td>
-        <td><span class="parametername">script</span></td>
-        <td><p>The host Lua script; its <code>ModId</code> global is used to namespace <code class="paramref">name</code>.</p>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global namespaces <code class="paramref">name</code>.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">name</span></td>
-        <td><p>The patch's local name; namespaced with the host mod's ID.</p>
+        <td><p>The patch's local name, namespaced with the host mod's ID.</p>
 </td>
       </tr>
     </tbody>
@@ -373,25 +367,25 @@ further configuration.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="PatchManager.LuaPatching.LuaPatch.html">LuaPatch</a></td>
+        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a></td>
         <td><p>The registered patch.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="PatchManager_Science_ScienceLuaModule_PatchRegions_MoonSharp_Interpreter_Script_System_String__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>The patch matches every region asset by default; restrict it via <a class="xref" href="PatchManager.LuaPatching.LuaPatch.html#PatchManager_LuaPatching_LuaPatch_Named_System_String___">Named(params string[])</a>, which supports <code>*</code> and <code>?</code> wildcards.</p>
+  <h5 id="PatchManager_Science_ScienceLuaModule_PatchRegions_MoonSharp_Interpreter_ScriptExecutionContext_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The patch matches every region asset by default. Restrict it via <a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html#PatchManager_LuaPatching_PatchDefinition_Named_System_String___">Named(params string[])</a>, which supports <code>*</code> and <code>?</code> wildcards.</p>
 </div>
 
 
   <a id="PatchManager_Science_ScienceLuaModule_PatchTechNodes_" data-uid="PatchManager.Science.ScienceLuaModule.PatchTechNodes*"></a>
-  <h4 id="PatchManager_Science_ScienceLuaModule_PatchTechNodes_MoonSharp_Interpreter_Script_System_String_" data-uid="PatchManager.Science.ScienceLuaModule.PatchTechNodes(MoonSharp.Interpreter.Script,System.String)">PatchTechNodes(Script, string)</h4>
+  <h4 id="PatchManager_Science_ScienceLuaModule_PatchTechNodes_MoonSharp_Interpreter_ScriptExecutionContext_System_String_" data-uid="PatchManager.Science.ScienceLuaModule.PatchTechNodes(MoonSharp.Interpreter.ScriptExecutionContext,System.String)">PatchTechNodes(ScriptExecutionContext, string)</h4>
   <div class="markdown level1 summary"><p>Registers a tech-tree-node patch with the given namespaced patch name.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public LuaPatch PatchTechNodes(Script script, string name)</code></pre>
+    <pre><code class="lang-csharp hljs">public PatchDefinition PatchTechNodes(ScriptExecutionContext context, string name)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -404,15 +398,15 @@ further configuration.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Script</span></td>
-        <td><span class="parametername">script</span></td>
-        <td><p>The host Lua script; its <code>ModId</code> global is used to namespace <code class="paramref">name</code>.</p>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global namespaces <code class="paramref">name</code>.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">name</span></td>
-        <td><p>The patch's local name; namespaced with the host mod's ID.</p>
+        <td><p>The patch's local name, namespaced with the host mod's ID.</p>
 </td>
       </tr>
     </tbody>
@@ -427,14 +421,14 @@ further configuration.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="PatchManager.LuaPatching.LuaPatch.html">LuaPatch</a></td>
+        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a></td>
         <td><p>The registered patch.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="PatchManager_Science_ScienceLuaModule_PatchTechNodes_MoonSharp_Interpreter_Script_System_String__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>The patch matches every tech-tree node by default; restrict it via <a class="xref" href="PatchManager.LuaPatching.LuaPatch.html#PatchManager_LuaPatching_LuaPatch_Named_System_String___">Named(params string[])</a>, which supports <code>*</code> and <code>?</code> wildcards.</p>
+  <h5 id="PatchManager_Science_ScienceLuaModule_PatchTechNodes_MoonSharp_Interpreter_ScriptExecutionContext_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The patch matches every tech-tree node by default. Restrict it via <a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html#PatchManager_LuaPatching_PatchDefinition_Named_System_String___">Named(params string[])</a>, which supports <code>*</code> and <code>?</code> wildcards.</p>
 </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Namespace SpaceWarp2.API.Config | KSP2Redux API (Develop) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Namespace SpaceWarp2.API.Config | KSP2Redux API (Develop) ">
+    
+    
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="SpaceWarp2.API.Config">
+
+  <h1 id="SpaceWarp2_API_Config" data-uid="SpaceWarp2.API.Config" class="text-break">Namespace SpaceWarp2.API.Config</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">
+Classes
+</h3>
+      <h4><a class="xref" href="SpaceWarp2.API.Config.BooleanType.html">BooleanType</a></h4>
+      <section><p>A boolean config value, stored as a bool.</p>
+</section>
+      <h4><a class="xref" href="SpaceWarp2.API.Config.ColorType.html">ColorType</a></h4>
+      <section><p>A color config value: a <a class="xref" href="SpaceWarp2.API.Config.LuaColor.html">LuaColor</a> on the script side, a <code>UnityEngine.Color</code> in storage
+so the settings menu renders it as a color picker. Accepts a <a class="xref" href="SpaceWarp2.API.Config.LuaColor.html">LuaColor</a> or a table (keyed
+<code>{r=, g=, b=, a=}</code> or indexed <code>{1, 0.5, 0, 1}</code>) when serializing.</p>
+</section>
+      <h4><a class="xref" href="SpaceWarp2.API.Config.ConfigBuilder.html">ConfigBuilder</a></h4>
+      <section><p>Fluent builder for a config entry. Accumulates the entry's shape and binds it at <a class="xref" href="SpaceWarp2.API.Config.ConfigBuilder.html#SpaceWarp2_API_Config_ConfigBuilder_Bind">Bind()</a>,
+returning a live <a class="xref" href="SpaceWarp2.API.Config.ConfigHandle.html">ConfigHandle</a>.</p>
+</section>
+      <h4><a class="xref" href="SpaceWarp2.API.Config.ConfigHandle.html">ConfigHandle</a></h4>
+      <section><p>A live view over a bound config entry. Reads and writes go through the entry's config type, so scripts see
+rich values while storage holds the C# value the settings menu renders.</p>
+</section>
+      <h4><a class="xref" href="SpaceWarp2.API.Config.ConfigTypeAttribute.html">ConfigTypeAttribute</a></h4>
+      <section><p>Marks an <a class="xref" href="SpaceWarp2.API.Config.IConfigType.html">IConfigType</a> implementation as a config type and names the Lua global it is exposed
+under. Discovered across every loaded assembly, so a mod ships its own config types by tagging them.</p>
+</section>
+      <h4><a class="xref" href="SpaceWarp2.API.Config.ConfigTypes.html">ConfigTypes</a></h4>
+      <section><p>The registry of config types. Discovers every <a class="xref" href="SpaceWarp2.API.Config.IConfigType.html">IConfigType</a> tagged with
+<a class="xref" href="SpaceWarp2.API.Config.ConfigTypeAttribute.html">ConfigTypeAttribute</a> across the loaded assemblies, contributes them as globals on a mod
+environment, and resolves a stored value's C# type back to its config type for cross-mod reads.</p>
+</section>
+      <h4><a class="xref" href="SpaceWarp2.API.Config.ConfigView.html">ConfigView</a></h4>
+      <section><p>A read/write view over a config file - a mod's own, or another mod's via <code>Config:Mod(id)</code>. Reaches
+existing entries with <a class="xref" href="SpaceWarp2.API.Config.ConfigView.html#SpaceWarp2_API_Config_ConfigView_Get_System_String_System_String_">Get(string, string)</a>; it cannot define new ones (defining is an own-config operation).</p>
+</section>
+      <h4><a class="xref" href="SpaceWarp2.API.Config.DoubleType.html">DoubleType</a></h4>
+      <section><p>A floating-point config value, stored as a double.</p>
+</section>
+      <h4><a class="xref" href="SpaceWarp2.API.Config.IntegerType.html">IntegerType</a></h4>
+      <section><p>An integer config value, stored as an int.</p>
+</section>
+      <h4><a class="xref" href="SpaceWarp2.API.Config.LuaColor.html">LuaColor</a></h4>
+      <section><p>The Lua-side representation of a color config value.</p>
+</section>
+      <h4><a class="xref" href="SpaceWarp2.API.Config.ModConfig.html">ModConfig</a></h4>
+      <section><p>The Lua <code>Config</code> global - a mod's own config namespace. Declare entries through <a class="xref" href="SpaceWarp2.API.Config.ModConfig.html#SpaceWarp2_API_Config_ModConfig_Define_System_String_System_String_">Define(string, string)</a>,
+fetch existing ones through <a class="xref" href="SpaceWarp2.API.Config.ModConfig.html#SpaceWarp2_API_Config_ModConfig_Get_System_String_System_String_">Get(string, string)</a>, and reach another mod's config through <a class="xref" href="SpaceWarp2.API.Config.ModConfig.html#SpaceWarp2_API_Config_ModConfig_Mod_System_String_">Mod(string)</a>.</p>
+</section>
+      <h4><a class="xref" href="SpaceWarp2.API.Config.StringType.html">StringType</a></h4>
+      <section><p>A string config value, stored as a string.</p>
+</section>
+    <h3 id="interfaces">
+Interfaces
+</h3>
+      <h4><a class="xref" href="SpaceWarp2.API.Config.IConfigType.html">IConfigType</a></h4>
+      <section><p>Maps a mod's rich Lua config value to the C# storage value an <code>IConfigEntry</code> holds, and back.</p>
+</section>
+
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from develop
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

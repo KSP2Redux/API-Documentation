@@ -166,6 +166,58 @@
 </h3>
 
 
+  <h4 id="SpaceWarp2_API_Mods_SpaceWarpPluginDescriptor_AddressableScriptLabel" data-uid="SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.AddressableScriptLabel">AddressableScriptLabel</h4>
+  <div class="markdown level1 summary"><p>An addressables label whose text assets are this mod's scripts, for mods that ship their scripts as
+addressables rather than loose files. Null for file-based mods.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? AddressableScriptLabel</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="SpaceWarp2_API_Mods_SpaceWarpPluginDescriptor_Assemblies" data-uid="SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.Assemblies">Assemblies</h4>
+  <div class="markdown level1 summary"><p>Every assembly that belongs to this mod - its main assembly plus any libraries loaded from its lib folder.
+Used to attribute code, such as PatchManager C# patches, back to this mod.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly List&lt;Assembly&gt; Assemblies</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<span class="xref">Assembly</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <h4 id="SpaceWarp2_API_Mods_SpaceWarpPluginDescriptor_ConfigFile" data-uid="SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.ConfigFile">ConfigFile</h4>
   <div class="markdown level1 summary"><p>The plugin's config file.</p>
 </div>
@@ -266,8 +318,37 @@
   </table>
 
 
+  <h4 id="SpaceWarp2_API_Mods_SpaceWarpPluginDescriptor_InitHooks" data-uid="SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.InitHooks">InitHooks</h4>
+  <div class="markdown level1 summary"><p>Lua lifecycle closures registered by this mod's scripts via the SW global, fired during the Init phase
+before the C# OnInitialized.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly List&lt;Action&gt; InitHooks</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<span class="xref">Action</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="SpaceWarp2_API_Mods_SpaceWarpPluginDescriptor_InitHooks_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Populated game-side. Plain Actions so the descriptor never needs to name a game-side script type.</p>
+</div>
+
+
   <h4 id="SpaceWarp2_API_Mods_SpaceWarpPluginDescriptor_IsCore" data-uid="SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.IsCore">IsCore</h4>
-  <div class="markdown level1 summary"><p>Is this a core mod (as in which part of the mod list does it go into)</p>
+  <div class="markdown level1 summary"><p>Whether this is a core mod (controls which part of the mod list it goes into).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -339,6 +420,35 @@
       </tr>
     </tbody>
   </table>
+
+
+  <h4 id="SpaceWarp2_API_Mods_SpaceWarpPluginDescriptor_LoadedScripts" data-uid="SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.LoadedScripts">LoadedScripts</h4>
+  <div class="markdown level1 summary"><p>The script sources the runtime ran for this mod, keyed by source identity with the script text as the
+value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly Dictionary&lt;string, string&gt; LoadedScripts</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Dictionary</span>&lt;<span class="xref">string</span>, <span class="xref">string</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="SpaceWarp2_API_Mods_SpaceWarpPluginDescriptor_LoadedScripts_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Read by PatchManager to feed its patch-cache checksum without re-reading the files.</p>
+</div>
 
 
   <h4 id="SpaceWarp2_API_Mods_SpaceWarpPluginDescriptor_Name" data-uid="SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.Name">Name</h4>
@@ -416,6 +526,31 @@
   </table>
 
 
+  <h4 id="SpaceWarp2_API_Mods_SpaceWarpPluginDescriptor_PostInitHooks" data-uid="SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.PostInitHooks">PostInitHooks</h4>
+  <div class="markdown level1 summary"><p>Lua lifecycle closures fired during the PostInit phase, before the C# OnPostInitialized.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly List&lt;Action&gt; PostInitHooks</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<span class="xref">Action</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <h4 id="SpaceWarp2_API_Mods_SpaceWarpPluginDescriptor_SWInfo" data-uid="SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.SWInfo">SWInfo</h4>
   <div class="markdown level1 summary"><p>The plugin's swinfo.</p>
 </div>
@@ -435,6 +570,59 @@
     <tbody>
       <tr>
         <td><a class="xref" href="SpaceWarp2.API.Mods.JSON.ModInfo.html">ModInfo</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="SpaceWarp2_API_Mods_SpaceWarpPluginDescriptor_ScriptErrors" data-uid="SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.ScriptErrors">ScriptErrors</h4>
+  <div class="markdown level1 summary"><p>Errors thrown by this mod's scripts while the runtime ran them, keyed by source identity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly List&lt;(string key, string reason)&gt; ScriptErrors</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;(<span class="xref">string</span> <span class="xref">key</span>, <span class="xref">string</span> <span class="xref">reason</span>)&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="SpaceWarp2_API_Mods_SpaceWarpPluginDescriptor_ScriptErrors_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Read by PatchManager into its patch summary.</p>
+</div>
+
+
+  <h4 id="SpaceWarp2_API_Mods_SpaceWarpPluginDescriptor_ScriptFiles" data-uid="SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.ScriptFiles">ScriptFiles</h4>
+  <div class="markdown level1 summary"><p>Lua script files belonging to this mod that the runtime runs, set at discovery.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly List&lt;string&gt; ScriptFiles</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<span class="xref">string</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -464,6 +652,39 @@
       </tr>
     </tbody>
   </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="SpaceWarp2_API_Mods_SpaceWarpPluginDescriptor_Logger_" data-uid="SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.Logger*"></a>
+  <h4 id="SpaceWarp2_API_Mods_SpaceWarpPluginDescriptor_Logger" data-uid="SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.Logger">Logger</h4>
+  <div class="markdown level1 summary"><p>Gets or sets this mod's logger, resolved lazily from its <a class="xref" href="SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.html#SpaceWarp2_API_Mods_SpaceWarpPluginDescriptor_Guid">Guid</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ILogger Logger { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="../ReduxLib/ReduxLib.Logging.ILogger.html">ILogger</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="SpaceWarp2_API_Mods_SpaceWarpPluginDescriptor_Logger_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Always present, unlike <a class="xref" href="SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.html#SpaceWarp2_API_Mods_SpaceWarpPluginDescriptor_Plugin">Plugin</a> (an asset-only mod has no plugin), so loading code logs
+through the descriptor rather than the optional plugin. The plugin's own <code>SWLogger</code> is injected
+from this when the plugin is created.</p>
+</div>
 
 </article>
           </div>

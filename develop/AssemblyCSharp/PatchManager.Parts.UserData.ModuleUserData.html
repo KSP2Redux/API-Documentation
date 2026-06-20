@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class ModuleUserData | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="Standalone wrapper for a part module&#39;s serialized JSON, exposing each ModuleData entry by name with a typed adapter when one is registered for the data type.">
+    <meta name="description" content="Wrapper for a part module&#39;s serialized JSON, exposing each ModuleData entry by name (and by 1-based position from Lua) with a typed adapter when one is registered for the data type. Backed by the module&#39;s ModuleData array as a name-indexed list.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,21 +81,117 @@
 
 
   <h1 id="PatchManager_Parts_UserData_ModuleUserData" data-uid="PatchManager.Parts.UserData.ModuleUserData" class="text-break">Class ModuleUserData</h1>
-  <div class="markdown level0 summary"><p>Standalone wrapper for a part module's serialized JSON, exposing each <code>ModuleData</code> entry by name with a
-typed adapter when one is registered for the data type.</p>
+  <div class="markdown level0 summary"><p>Wrapper for a part module's serialized JSON, exposing each <code>ModuleData</code> entry by name (and by 1-based
+position from Lua) with a typed adapter when one is registered for the data type. Backed by the module's
+<code>ModuleData</code> array as a name-indexed list.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">object</span></div>
-    <div class="level1"><span class="xref">ModuleUserData</span></div>
+    <div class="level1"><a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a></div>
+    <div class="level2"><a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html">IndexedListUserData</a></div>
+    <div class="level3"><span class="xref">ModuleUserData</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html#PatchManager_LuaPatching_Utility_IndexedListUserData_List">IndexedListUserData.List</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html#PatchManager_LuaPatching_Utility_IndexedListUserData_Indices">IndexedListUserData.Indices</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html#PatchManager_LuaPatching_Utility_IndexedListUserData_Conversions">IndexedListUserData.Conversions</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html#PatchManager_LuaPatching_Utility_IndexedListUserData_HardRefresh">IndexedListUserData.HardRefresh()</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html#PatchManager_LuaPatching_Utility_IndexedListUserData_SoftRefresh">IndexedListUserData.SoftRefresh()</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html#PatchManager_LuaPatching_Utility_IndexedListUserData_Keys">IndexedListUserData.Keys()</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html#PatchManager_LuaPatching_Utility_IndexedListUserData_Pairs">IndexedListUserData.Pairs()</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html#PatchManager_LuaPatching_Utility_IndexedListUserData_Remove_System_String_">IndexedListUserData.Remove(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html#PatchManager_LuaPatching_Utility_IndexedListUserData_RemoveAt_PatchManager_LuaPatching_LuaIndex_">IndexedListUserData.RemoveAt(LuaIndex)</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html#PatchManager_LuaPatching_Utility_IndexedListUserData_RemoveWhere_System_Func_MoonSharp_Interpreter_DynValue_System_Boolean__">IndexedListUserData.RemoveWhere(Func&lt;DynValue, bool&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html#PatchManager_LuaPatching_Utility_IndexedListUserData_Clear">IndexedListUserData.Clear()</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html#PatchManager_LuaPatching_Utility_IndexedListUserData_Append_MoonSharp_Interpreter_DynValue_">IndexedListUserData.Append(DynValue)</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html#PatchManager_LuaPatching_Utility_IndexedListUserData_Insert_PatchManager_LuaPatching_LuaIndex_MoonSharp_Interpreter_DynValue_">IndexedListUserData.Insert(LuaIndex, DynValue)</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html#PatchManager_LuaPatching_Utility_IndexedListUserData_Patch_System_String_System_Action_MoonSharp_Interpreter_DynValue__">IndexedListUserData.Patch(string, Action&lt;DynValue&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_Token">JsonUserData.Token</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_GetJTokenForDynValue_MoonSharp_Interpreter_DynValue_">JsonUserData.GetJTokenForDynValue(DynValue)</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_Wrap_MoonSharp_Interpreter_DynValue_">JsonUserData.Wrap(DynValue)</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_GetJTokenForDynValue_Newtonsoft_Json_Linq_JToken_MoonSharp_Interpreter_DynValue_">JsonUserData.GetJTokenForDynValue(JToken, DynValue)</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_RequireArray_Newtonsoft_Json_Linq_JToken_System_String_">JsonUserData.RequireArray(JToken, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_RequireObject_Newtonsoft_Json_Linq_JToken_System_String_">JsonUserData.RequireObject(JToken, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_RequireString_Newtonsoft_Json_Linq_JToken_System_String_">JsonUserData.RequireString(JToken, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_LuaGet_MoonSharp_Interpreter_DynValue_">JsonUserData.LuaGet(DynValue)</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_LuaSet_MoonSharp_Interpreter_DynValue_MoonSharp_Interpreter_DynValue_">JsonUserData.LuaSet(DynValue, DynValue)</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_Insert_PatchManager_LuaPatching_LuaIndex_PatchManager_LuaPatching_JsonUserData_">JsonUserData.Insert(LuaIndex, JsonUserData)</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_Append_PatchManager_LuaPatching_JsonUserData_">JsonUserData.Append(JsonUserData)</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_HasKey_System_String_">JsonUserData.HasKey(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_GetFromJToken_Newtonsoft_Json_Linq_JToken_">JsonUserData.GetFromJToken(JToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_Item_System_String_">JsonUserData.this[string]</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_Item_PatchManager_LuaPatching_LuaIndex_">JsonUserData.this[LuaIndex]</a>
+    </div>
+    <div>
+      <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_Count">JsonUserData.Count</a>
+    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PatchManager.html">PatchManager</a>.<a class="xref" href="PatchManager.Parts.html">Parts</a>.<a class="xref" href="PatchManager.Parts.UserData.html">UserData</a></h6>
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="PatchManager_Parts_UserData_ModuleUserData_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[MoonSharpUserData]
-public class ModuleUserData</code></pre>
+public class ModuleUserData : IndexedListUserData</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -103,7 +199,7 @@ public class ModuleUserData</code></pre>
 
   <a id="PatchManager_Parts_UserData_ModuleUserData__ctor_" data-uid="PatchManager.Parts.UserData.ModuleUserData.#ctor*"></a>
   <h4 id="PatchManager_Parts_UserData_ModuleUserData__ctor_Newtonsoft_Json_Linq_JToken_" data-uid="PatchManager.Parts.UserData.ModuleUserData.#ctor(Newtonsoft.Json.Linq.JToken)">ModuleUserData(JToken)</h4>
-  <div class="markdown level1 summary"><p>Creates the wrapper around the module's serialized JSON.</p>
+  <div class="markdown level1 summary"><p>Creates the wrapper over the module's <code>ModuleData</code> array.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -123,157 +219,7 @@ public class ModuleUserData</code></pre>
       <tr>
         <td><span class="xref">JToken</span></td>
         <td><span class="parametername">token</span></td>
-        <td><p>The module's serialized JSON.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="properties">Properties
-</h3>
-
-
-  <a id="PatchManager_Parts_UserData_ModuleUserData_Count_" data-uid="PatchManager.Parts.UserData.ModuleUserData.Count*"></a>
-  <h4 id="PatchManager_Parts_UserData_ModuleUserData_Count" data-uid="PatchManager.Parts.UserData.ModuleUserData.Count">Count</h4>
-  <div class="markdown level1 summary"><p>Gets the number of data entries on this module.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int Count { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">int</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="PatchManager_Parts_UserData_ModuleUserData_Item_" data-uid="PatchManager.Parts.UserData.ModuleUserData.Item*"></a>
-  <h4 id="PatchManager_Parts_UserData_ModuleUserData_Item_System_Int32_" data-uid="PatchManager.Parts.UserData.ModuleUserData.Item(System.Int32)">this[int]</h4>
-  <div class="markdown level1 summary"><p>Gets or sets the module-data entry at the given 1-indexed position.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DynValue this[int idx] { get; set; }</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">int</span></td>
-        <td><span class="parametername">idx</span></td>
-        <td><p>The 1-indexed position.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">DynValue</span></td>
-        <td><p>The data entry's wrapper, or <span class="xref">MoonSharp.Interpreter.DynValue.Nil</span> if out of range.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Exception</span></td>
-        <td><p>Thrown when setting an out-of-range position.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="PatchManager_Parts_UserData_ModuleUserData_Item_" data-uid="PatchManager.Parts.UserData.ModuleUserData.Item*"></a>
-  <h4 id="PatchManager_Parts_UserData_ModuleUserData_Item_System_String_" data-uid="PatchManager.Parts.UserData.ModuleUserData.Item(System.String)">this[string]</h4>
-  <div class="markdown level1 summary"><p>Gets or sets the module-data entry with the given name.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DynValue this[string idx] { get; set; }</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">string</span></td>
-        <td><span class="parametername">idx</span></td>
-        <td><p>The data entry's name.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">DynValue</span></td>
-        <td><p>The data entry's wrapper, or <span class="xref">MoonSharp.Interpreter.DynValue.Nil</span> if absent.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Exception</span></td>
-        <td><p>Thrown when setting a name that does not exist; use <a class="xref" href="PatchManager.Parts.UserData.ModuleUserData.html#PatchManager_Parts_UserData_ModuleUserData_AddData_System_String_System_Action_MoonSharp_Interpreter_DynValue__">AddData(string, Action&lt;DynValue&gt;)</a> to insert.</p>
+        <td><p>The module's serialized JSON object.</p>
 </td>
       </tr>
     </tbody>
@@ -325,12 +271,64 @@ public class ModuleUserData</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Exception</span></td>
+        <td><span class="xref">ScriptRuntimeException</span></td>
         <td><p>Thrown when <code class="paramref">type</code> is not a registered data module.</p>
 </td>
       </tr>
     </tbody>
   </table>
+
+
+  <a id="PatchManager_Parts_UserData_ModuleUserData_Convert_" data-uid="PatchManager.Parts.UserData.ModuleUserData.Convert*"></a>
+  <h4 id="PatchManager_Parts_UserData_ModuleUserData_Convert_Newtonsoft_Json_Linq_JToken_" data-uid="PatchManager.Parts.UserData.ModuleUserData.Convert(Newtonsoft.Json.Linq.JToken)">Convert(JToken)</h4>
+  <div class="markdown level1 summary"><p>Wraps an item's JSON token in the Lua-facing value cached for that slot.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+public override DynValue Convert(JToken source)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">JToken</span></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The item's JSON token.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><p>The cached Lua value for the item.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html#PatchManager_LuaPatching_Utility_IndexedListUserData_Convert_Newtonsoft_Json_Linq_JToken_">IndexedListUserData.Convert(JToken)</a></div>
+  <h5 id="PatchManager_Parts_UserData_ModuleUserData_Convert_Newtonsoft_Json_Linq_JToken__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The default returns whatever <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_GetFromJToken_Newtonsoft_Json_Linq_JToken_">GetFromJToken(JToken)</a> produces. Subclasses may override
+to wrap each item in a specialized <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a> subtype.</p>
+</div>
 
 
   <a id="PatchManager_Parts_UserData_ModuleUserData_EnsureData_" data-uid="PatchManager.Parts.UserData.ModuleUserData.EnsureData*"></a>
@@ -370,7 +368,8 @@ public class ModuleUserData</code></pre>
 
   <a id="PatchManager_Parts_UserData_ModuleUserData_EnsureDataObject_" data-uid="PatchManager.Parts.UserData.ModuleUserData.EnsureDataObject*"></a>
   <h4 id="PatchManager_Parts_UserData_ModuleUserData_EnsureDataObject_System_String_System_Action_Newtonsoft_Json_Linq_JObject__" data-uid="PatchManager.Parts.UserData.ModuleUserData.EnsureDataObject(System.String,System.Action{Newtonsoft.Json.Linq.JObject})">EnsureDataObject(string, Action&lt;JObject&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Ensures a data entry of the given type exists, then runs <code class="paramref">callback</code> against its raw DataObject JSON.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -390,12 +389,14 @@ public void EnsureDataObject(string type, Action&lt;JObject&gt; callback)</code>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">type</span></td>
-        <td></td>
+        <td><p>The data module's short name.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">JObject</span>&gt;</td>
         <td><span class="parametername">callback</span></td>
-        <td></td>
+        <td><p>Callback that receives the entry's DataObject for further configuration.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -403,7 +404,8 @@ public void EnsureDataObject(string type, Action&lt;JObject&gt; callback)</code>
 
   <a id="PatchManager_Parts_UserData_ModuleUserData_GetDataObject_" data-uid="PatchManager.Parts.UserData.ModuleUserData.GetDataObject*"></a>
   <h4 id="PatchManager_Parts_UserData_ModuleUserData_GetDataObject_System_String_" data-uid="PatchManager.Parts.UserData.ModuleUserData.GetDataObject(System.String)">GetDataObject(string)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the raw DataObject JSON for the data entry of the given type.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -423,7 +425,8 @@ public JObject GetDataObject(string type)</code></pre>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">type</span></td>
-        <td></td>
+        <td><p>The data module's short name.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -438,7 +441,117 @@ public JObject GetDataObject(string type)</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">JObject</span></td>
+        <td><p>The entry's DataObject.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptRuntimeException</span></td>
+        <td><p>Thrown when no entry of the given type exists.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_Parts_UserData_ModuleUserData_GetData_" data-uid="PatchManager.Parts.UserData.ModuleUserData.GetData*"></a>
+  <h4 id="PatchManager_Parts_UserData_ModuleUserData_GetData__1" data-uid="PatchManager.Parts.UserData.ModuleUserData.GetData``1">GetData&lt;TData&gt;()</h4>
+  <div class="markdown level1 summary"><p>Returns the data entry for data type <code class="typeparamref">TData</code> as a JsonUserData, or null when absent.
+The instance is the registered typed adapter when one exists for the data type, otherwise a raw wrapper.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+public JsonUserData GetData&lt;TData&gt;()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a></td>
         <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TData</span></td>
+        <td><p>The Data_* class identifying the entry.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_Parts_UserData_ModuleUserData_GetData_" data-uid="PatchManager.Parts.UserData.ModuleUserData.GetData*"></a>
+  <h4 id="PatchManager_Parts_UserData_ModuleUserData_GetData__2" data-uid="PatchManager.Parts.UserData.ModuleUserData.GetData``2">GetData&lt;TData, TAdapter&gt;()</h4>
+  <div class="markdown level1 summary"><p>Returns the data entry for data type <code class="typeparamref">TData</code> cast to its adapter type, or null when
+absent or not of that type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+public TAdapter GetData&lt;TData, TAdapter&gt;() where TAdapter : class</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TAdapter</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TData</span></td>
+        <td><p>The Data_* class identifying the entry.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TAdapter</span></td>
+        <td><p>The adapter type to cast the entry to.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -489,16 +602,33 @@ public JObject GetDataObject(string type)</code></pre>
   </table>
 
 
-  <a id="PatchManager_Parts_UserData_ModuleUserData_Pairs_" data-uid="PatchManager.Parts.UserData.ModuleUserData.Pairs*"></a>
-  <h4 id="PatchManager_Parts_UserData_ModuleUserData_Pairs" data-uid="PatchManager.Parts.UserData.ModuleUserData.Pairs">Pairs()</h4>
-  <div class="markdown level1 summary"><p>Returns an iterator yielding each <code>(name, value)</code> pair in declaration order.</p>
+  <a id="PatchManager_Parts_UserData_ModuleUserData_Name_" data-uid="PatchManager.Parts.UserData.ModuleUserData.Name*"></a>
+  <h4 id="PatchManager_Parts_UserData_ModuleUserData_Name_Newtonsoft_Json_Linq_JToken_" data-uid="PatchManager.Parts.UserData.ModuleUserData.Name(Newtonsoft.Json.Linq.JToken)">Name(JToken)</h4>
+  <div class="markdown level1 summary"><p>Returns the lookup name for the given item.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[MoonSharpUserDataMetamethod(&quot;__pairs&quot;)]
-public DynValue Pairs()</code></pre>
+    <pre><code class="lang-csharp hljs">public override string Name(JToken source)</code></pre>
   </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">JToken</span></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The item to extract the name from.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-condensed">
     <thead>
@@ -509,12 +639,18 @@ public DynValue Pairs()</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DynValue</span></td>
-        <td><p>The iterator callback.</p>
+        <td><span class="xref">string</span></td>
+        <td><p>The lookup name for the item.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html#PatchManager_LuaPatching_Utility_IndexedListUserData_Name_Newtonsoft_Json_Linq_JToken_">IndexedListUserData.Name(JToken)</a></div>
+  <h5 id="PatchManager_Parts_UserData_ModuleUserData_Name_Newtonsoft_Json_Linq_JToken__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Implementations typically read a known property off <code class="paramref">source</code> (for example <code>&quot;name&quot;</code>
+or <code>&quot;engineID&quot;</code>). The returned string becomes the key Lua scripts use to address the item.</p>
+</div>
 
 
   <a id="PatchManager_Parts_UserData_ModuleUserData_PatchData_" data-uid="PatchManager.Parts.UserData.ModuleUserData.PatchData*"></a>
@@ -552,23 +688,9 @@ public DynValue Pairs()</code></pre>
   </table>
 
 
-  <a id="PatchManager_Parts_UserData_ModuleUserData_RefreshData_" data-uid="PatchManager.Parts.UserData.ModuleUserData.RefreshData*"></a>
-  <h4 id="PatchManager_Parts_UserData_ModuleUserData_RefreshData" data-uid="PatchManager.Parts.UserData.ModuleUserData.RefreshData">RefreshData()</h4>
-  <div class="markdown level1 summary"><p>Refreshes the data-name and conversion caches from the current state of the module's <code>ModuleData</code> array.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void RefreshData()</code></pre>
-  </div>
-  <h5 id="PatchManager_Parts_UserData_ModuleUserData_RefreshData_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Call after a Lua script clears or rewrites <code>ModuleData</code> directly. Most mutators on this type already refresh.</p>
-</div>
-
-
   <a id="PatchManager_Parts_UserData_ModuleUserData_RemoveData_" data-uid="PatchManager.Parts.UserData.ModuleUserData.RemoveData*"></a>
   <h4 id="PatchManager_Parts_UserData_ModuleUserData_RemoveData_System_String_" data-uid="PatchManager.Parts.UserData.ModuleUserData.RemoveData(System.String)">RemoveData(string)</h4>
-  <div class="markdown level1 summary"><p>Removes the data entry of the given type from the module.</p>
+  <div class="markdown level1 summary"><p>Removes the data entry of the given type from the module, doing nothing if absent.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -593,6 +715,110 @@ public DynValue Pairs()</code></pre>
       </tr>
     </tbody>
   </table>
+
+
+  <a id="PatchManager_Parts_UserData_ModuleUserData_TryGetVirtual_" data-uid="PatchManager.Parts.UserData.ModuleUserData.TryGetVirtual*"></a>
+  <h4 id="PatchManager_Parts_UserData_ModuleUserData_TryGetVirtual_MoonSharp_Interpreter_DynValue_" data-uid="PatchManager.Parts.UserData.ModuleUserData.TryGetVirtual(MoonSharp.Interpreter.DynValue)">TryGetVirtual(DynValue)</h4>
+  <div class="markdown level1 summary"><p>Subclass read intercept: returns a value for keys the subclass synthesizes (name-indexed list elements,
+virtual or computed properties), or <code>null</code> to fall through to the raw JSON. The base layers nothing.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+protected override DynValue TryGetVirtual(DynValue key)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><span class="parametername">key</span></td>
+        <td><p>The index being read.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><p>The intercepted value, or <code>null</code> when not subclass-handled.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html#PatchManager_LuaPatching_Utility_IndexedListUserData_TryGetVirtual_MoonSharp_Interpreter_DynValue_">IndexedListUserData.TryGetVirtual(DynValue)</a></div>
+
+
+  <a id="PatchManager_Parts_UserData_ModuleUserData_TrySetVirtual_" data-uid="PatchManager.Parts.UserData.ModuleUserData.TrySetVirtual*"></a>
+  <h4 id="PatchManager_Parts_UserData_ModuleUserData_TrySetVirtual_MoonSharp_Interpreter_DynValue_MoonSharp_Interpreter_DynValue_" data-uid="PatchManager.Parts.UserData.ModuleUserData.TrySetVirtual(MoonSharp.Interpreter.DynValue,MoonSharp.Interpreter.DynValue)">TrySetVirtual(DynValue, DynValue)</h4>
+  <div class="markdown level1 summary"><p>Subclass write intercept: returns true when the subclass consumed the assignment, false to fall through to
+the raw JSON write. The base layers nothing.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+protected override bool TrySetVirtual(DynValue key, DynValue value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><span class="parametername">key</span></td>
+        <td><p>The index being written.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The value being assigned.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True when the subclass handled the write.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html#PatchManager_LuaPatching_Utility_IndexedListUserData_TrySetVirtual_MoonSharp_Interpreter_DynValue_MoonSharp_Interpreter_DynValue_">IndexedListUserData.TrySetVirtual(DynValue, DynValue)</a></div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>

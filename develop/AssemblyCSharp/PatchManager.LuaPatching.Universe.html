@@ -102,7 +102,7 @@ which populates <a class="xref" href="PatchManager.LuaPatching.Universe.html#Pat
 assembly. Each universe instance then constructs its own <a class="xref" href="PatchManager.LuaPatching.Builtin.PatchManagerCore.html">PatchManagerCore</a> and live
 submodule instances, exposes them as the global <code>PM</code> table, and tracks per-mod patch state. Mods
 load Lua patches via the <code>LoadPatch*</code> methods, which are expected to register patches and stages
-through <code>PM</code>; once loading is done, <a class="xref" href="PatchManager.LuaPatching.Universe.html#PatchManager_LuaPatching_Universe_SetupPatchesForRun">SetupPatchesForRun()</a> finalizes ordering and the
+through <code>PM</code>. Once loading is done, <a class="xref" href="PatchManager.LuaPatching.Universe.html#PatchManager_LuaPatching_Universe_SetupPatchesForRun">SetupPatchesForRun()</a> finalizes ordering and the
 <code>RunAllPatchesFor</code> overloads execute the chain against each asset.</p>
 </div>
   <h3 id="constructors">Constructors
@@ -111,7 +111,7 @@ through <code>PM</code>; once loading is done, <a class="xref" href="PatchManage
 
   <a id="PatchManager_LuaPatching_Universe__ctor_" data-uid="PatchManager.LuaPatching.Universe.#ctor*"></a>
   <h4 id="PatchManager_LuaPatching_Universe__ctor_System_Action_System_String__System_Action_System_String__System_Collections_Generic_List_System_String__" data-uid="PatchManager.LuaPatching.Universe.#ctor(System.Action{System.String},System.Action{System.String},System.Collections.Generic.List{System.String})">Universe(Action&lt;string&gt;, Action&lt;string&gt;, List&lt;string&gt;)</h4>
-  <div class="markdown level1 summary"><p>Creates a new universe, instantiates each registered submodule, and seeds the per-mod stage priorities.</p>
+  <div class="markdown level1 summary"><p>Creates a new universe, instantiates each registered submodule, and initializes the per-mod stage state.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -209,7 +209,7 @@ through <code>PM</code>; once loading is done, <a class="xref" href="PatchManage
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, List&lt;LuaPatch&gt;&gt; AllPatches</code></pre>
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, List&lt;PatchDefinition&gt;&gt; AllPatches</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -221,7 +221,7 @@ through <code>PM</code>; once loading is done, <a class="xref" href="PatchManage
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Dictionary</span>&lt;<span class="xref">string</span>, <span class="xref">List</span>&lt;<a class="xref" href="PatchManager.LuaPatching.LuaPatch.html">LuaPatch</a>&gt;&gt;</td>
+        <td><span class="xref">Dictionary</span>&lt;<span class="xref">string</span>, <span class="xref">List</span>&lt;<a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a>&gt;&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -235,7 +235,7 @@ pass execution iterates only the patches in that pass.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, Dictionary&lt;LuaPatch.PatchPass, Universe.LabelPatchBuckets&gt;&gt; AllPatchesBuckets</code></pre>
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, Dictionary&lt;PatchDefinition.PatchPass, Universe.LabelPatchBuckets&gt;&gt; AllPatchesBuckets</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -247,7 +247,7 @@ pass execution iterates only the patches in that pass.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Dictionary</span>&lt;<span class="xref">string</span>, <span class="xref">Dictionary</span>&lt;<a class="xref" href="PatchManager.LuaPatching.LuaPatch.html">LuaPatch</a>.<a class="xref" href="PatchManager.LuaPatching.LuaPatch.PatchPass.html">PatchPass</a>, <a class="xref" href="PatchManager.LuaPatching.Universe.html">Universe</a>.<a class="xref" href="PatchManager.LuaPatching.Universe.LabelPatchBuckets.html">LabelPatchBuckets</a>&gt;&gt;</td>
+        <td><span class="xref">Dictionary</span>&lt;<span class="xref">string</span>, <span class="xref">Dictionary</span>&lt;<a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a>.<a class="xref" href="PatchManager.LuaPatching.PatchDefinition.PatchPass.html">PatchPass</a>, <a class="xref" href="PatchManager.LuaPatching.Universe.html">Universe</a>.<a class="xref" href="PatchManager.LuaPatching.Universe.LabelPatchBuckets.html">LabelPatchBuckets</a>&gt;&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -357,31 +357,6 @@ chain stages declared by the same mod.</p>
   </table>
 
 
-  <h4 id="PatchManager_LuaPatching_Universe_LibraryCount" data-uid="PatchManager.LuaPatching.Universe.LibraryCount">LibraryCount</h4>
-  <div class="markdown level1 summary"><p>Number of Lua library files (filenames starting with <code>_</code>) discovered across loaded patch directories.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int LibraryCount</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">int</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
   <h4 id="PatchManager_LuaPatching_Universe_MessageLogger" data-uid="PatchManager.LuaPatching.Universe.MessageLogger">MessageLogger</h4>
   <div class="markdown level1 summary"><p>Logs an informational message from patch loading or execution. Supplied by the host.</p>
 </div>
@@ -458,6 +433,33 @@ chain stages declared by the same mod.</p>
   </table>
 
 
+  <h4 id="PatchManager_LuaPatching_Universe_RegistrationOpen" data-uid="PatchManager.LuaPatching.Universe.RegistrationOpen">RegistrationOpen</h4>
+  <div class="markdown level1 summary"><p>True while patch definitions are being registered. The loading lifecycle closes it once every mod
+body has run, after which the Lua definition entrypoints (<code>PM:Patch</code>/<code>PM:New</code>) throw. Patch
+application (Do callbacks) and builder/query helpers stay valid regardless of this flag.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool RegistrationOpen</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <h4 id="PatchManager_LuaPatching_Universe_SubmoduleTypes" data-uid="PatchManager.LuaPatching.Universe.SubmoduleTypes">SubmoduleTypes</h4>
   <div class="markdown level1 summary"><p>Submodule types discovered at module-init time by <a class="xref" href="PatchManager.LuaPatching.LuaPatchingModule.html">LuaPatchingModule</a>, keyed by their
 <a class="xref" href="PatchManager.LuaPatching.Attributes.PatchManagerModuleAttribute.html#PatchManager_LuaPatching_Attributes_PatchManagerModuleAttribute_SubmoduleName">SubmoduleName</a>.</p>
@@ -510,7 +512,8 @@ chain stages declared by the same mod.</p>
 
 
   <h4 id="PatchManager_LuaPatching_Universe_Summary" data-uid="PatchManager.LuaPatching.Universe.Summary">Summary</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Accumulates per-patch apply, skip, removal, and error events across a patching run.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -590,13 +593,13 @@ chain stages declared by the same mod.</p>
 
 
   <a id="PatchManager_LuaPatching_Universe_AddPatch_" data-uid="PatchManager.LuaPatching.Universe.AddPatch*"></a>
-  <h4 id="PatchManager_LuaPatching_Universe_AddPatch_PatchManager_LuaPatching_LuaPatch_" data-uid="PatchManager.LuaPatching.Universe.AddPatch(PatchManager.LuaPatching.LuaPatch)">AddPatch(LuaPatch)</h4>
+  <h4 id="PatchManager_LuaPatching_Universe_AddPatch_PatchManager_LuaPatching_PatchDefinition_" data-uid="PatchManager.LuaPatching.Universe.AddPatch(PatchManager.LuaPatching.PatchDefinition)">AddPatch(PatchDefinition)</h4>
   <div class="markdown level1 summary"><p>Registers a patch and records its label in <a class="xref" href="PatchManager.LuaPatching.Universe.html#PatchManager_LuaPatching_Universe_PatchedLabels">PatchedLabels</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void AddPatch(LuaPatch patch)</code></pre>
+    <pre><code class="lang-csharp hljs">public void AddPatch(PatchDefinition patch)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -609,7 +612,7 @@ chain stages declared by the same mod.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="PatchManager.LuaPatching.LuaPatch.html">LuaPatch</a></td>
+        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a></td>
         <td><span class="parametername">patch</span></td>
         <td><p>The patch to register.</p>
 </td>
@@ -658,7 +661,7 @@ extension).</p>
     <tbody>
       <tr>
         <td><span class="xref">Dictionary</span>&lt;<span class="xref">string</span>, <span class="xref">string</span>&gt;</td>
-        <td><p>A map from asset Unity name to primary address; empty when the label resolves to nothing.</p>
+        <td><p>A map from asset Unity name to primary address, empty when the label resolves to nothing.</p>
 </td>
       </tr>
     </tbody>
@@ -666,14 +669,14 @@ extension).</p>
 
 
   <a id="PatchManager_LuaPatching_Universe_GetAllSortedPatchesFor_" data-uid="PatchManager.LuaPatching.Universe.GetAllSortedPatchesFor*"></a>
-  <h4 id="PatchManager_LuaPatching_Universe_GetAllSortedPatchesFor_System_String_System_String_PatchManager_LuaPatching_LuaPatch_PatchPass_" data-uid="PatchManager.LuaPatching.Universe.GetAllSortedPatchesFor(System.String,System.String,PatchManager.LuaPatching.LuaPatch.PatchPass)">GetAllSortedPatchesFor(string, string, PatchPass)</h4>
+  <h4 id="PatchManager_LuaPatching_Universe_GetAllSortedPatchesFor_System_String_System_String_PatchManager_LuaPatching_PatchDefinition_PatchPass_" data-uid="PatchManager.LuaPatching.Universe.GetAllSortedPatchesFor(System.String,System.String,PatchManager.LuaPatching.PatchDefinition.PatchPass)">GetAllSortedPatchesFor(string, string, PatchPass)</h4>
   <div class="markdown level1 summary"><p>Returns the patches registered for <code class="paramref">label</code> in <code class="paramref">pass</code>, in
 stage-sorted order, filtered by name pattern.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IEnumerable&lt;LuaPatch&gt; GetAllSortedPatchesFor(string label, string name, LuaPatch.PatchPass pass)</code></pre>
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;PatchDefinition&gt; GetAllSortedPatchesFor(string label, string name, PatchDefinition.PatchPass pass)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -694,11 +697,11 @@ stage-sorted order, filtered by name pattern.</p>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">name</span></td>
-        <td><p>The asset's addressables address; matched against each patch's name pattern.</p>
+        <td><p>The asset's addressables address, matched against each patch's name pattern.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="PatchManager.LuaPatching.LuaPatch.html">LuaPatch</a>.<a class="xref" href="PatchManager.LuaPatching.LuaPatch.PatchPass.html">PatchPass</a></td>
+        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a>.<a class="xref" href="PatchManager.LuaPatching.PatchDefinition.PatchPass.html">PatchPass</a></td>
         <td><span class="parametername">pass</span></td>
         <td><p>The pass to look up.</p>
 </td>
@@ -715,7 +718,7 @@ stage-sorted order, filtered by name pattern.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="PatchManager.LuaPatching.LuaPatch.html">LuaPatch</a>&gt;</td>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a>&gt;</td>
         <td><p>The matching patches, or an empty sequence when no patches are registered for the label in this pass.</p>
 </td>
       </tr>
@@ -725,7 +728,7 @@ stage-sorted order, filtered by name pattern.</p>
 
   <a id="PatchManager_LuaPatching_Universe_HasAnyPatchFor_" data-uid="PatchManager.LuaPatching.Universe.HasAnyPatchFor*"></a>
   <h4 id="PatchManager_LuaPatching_Universe_HasAnyPatchFor_System_String_System_String_" data-uid="PatchManager.LuaPatching.Universe.HasAnyPatchFor(System.String,System.String)">HasAnyPatchFor(string, string)</h4>
-  <div class="markdown level1 summary"><p>Check if there are any patches that match the given label/name combo</p>
+  <div class="markdown level1 summary"><p>Checks whether any patch matches the given label and name across every pass.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -745,13 +748,13 @@ stage-sorted order, filtered by name pattern.</p>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">label</span></td>
-        <td><p>The label</p>
+        <td><p>The addressables label.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">name</span></td>
-        <td><p>The name</p>
+        <td><p>The asset's addressables address.</p>
 </td>
       </tr>
     </tbody>
@@ -767,7 +770,7 @@ stage-sorted order, filtered by name pattern.</p>
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td><p>true if any patches match</p>
+        <td><p>True if any patch matches, false otherwise.</p>
 </td>
       </tr>
     </tbody>
@@ -775,13 +778,13 @@ stage-sorted order, filtered by name pattern.</p>
 
 
   <a id="PatchManager_LuaPatching_Universe_HasAnyPatchInPass_" data-uid="PatchManager.LuaPatching.Universe.HasAnyPatchInPass*"></a>
-  <h4 id="PatchManager_LuaPatching_Universe_HasAnyPatchInPass_System_String_System_String_PatchManager_LuaPatching_LuaPatch_PatchPass_" data-uid="PatchManager.LuaPatching.Universe.HasAnyPatchInPass(System.String,System.String,PatchManager.LuaPatching.LuaPatch.PatchPass)">HasAnyPatchInPass(string, string, PatchPass)</h4>
+  <h4 id="PatchManager_LuaPatching_Universe_HasAnyPatchInPass_System_String_System_String_PatchManager_LuaPatching_PatchDefinition_PatchPass_" data-uid="PatchManager.LuaPatching.Universe.HasAnyPatchInPass(System.String,System.String,PatchManager.LuaPatching.PatchDefinition.PatchPass)">HasAnyPatchInPass(string, string, PatchPass)</h4>
   <div class="markdown level1 summary"><p>Checks whether any patch in <code class="paramref">pass</code> matches the given label and name.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool HasAnyPatchInPass(string label, string name, LuaPatch.PatchPass pass)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool HasAnyPatchInPass(string label, string name, PatchDefinition.PatchPass pass)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -806,7 +809,7 @@ stage-sorted order, filtered by name pattern.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="PatchManager.LuaPatching.LuaPatch.html">LuaPatch</a>.<a class="xref" href="PatchManager.LuaPatching.LuaPatch.PatchPass.html">PatchPass</a></td>
+        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a>.<a class="xref" href="PatchManager.LuaPatching.PatchDefinition.PatchPass.html">PatchPass</a></td>
         <td><span class="parametername">pass</span></td>
         <td><p>The pass to check.</p>
 </td>
@@ -831,125 +834,15 @@ stage-sorted order, filtered by name pattern.</p>
   </table>
 
 
-  <a id="PatchManager_LuaPatching_Universe_LoadPatchAsset_" data-uid="PatchManager.LuaPatching.Universe.LoadPatchAsset*"></a>
-  <h4 id="PatchManager_LuaPatching_Universe_LoadPatchAsset_UnityEngine_TextAsset_System_String_" data-uid="PatchManager.LuaPatching.Universe.LoadPatchAsset(UnityEngine.TextAsset,System.String)">LoadPatchAsset(TextAsset, string)</h4>
-  <div class="markdown level1 summary"><p>Loads and runs a single Lua patch from a <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/TextAsset.html">TextAsset</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void LoadPatchAsset(TextAsset textAsset, string modId)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/TextAsset.html">TextAsset</a></td>
-        <td><span class="parametername">textAsset</span></td>
-        <td><p>The text asset whose contents are the patch script.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">string</span></td>
-        <td><span class="parametername">modId</span></td>
-        <td><p>The mod ID; exposed to the script as the <code>ModId</code> global.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="PatchManager_LuaPatching_Universe_LoadPatchesInDirectory_" data-uid="PatchManager.LuaPatching.Universe.LoadPatchesInDirectory*"></a>
-  <h4 id="PatchManager_LuaPatching_Universe_LoadPatchesInDirectory_System_IO_DirectoryInfo_System_String_" data-uid="PatchManager.LuaPatching.Universe.LoadPatchesInDirectory(System.IO.DirectoryInfo,System.String)">LoadPatchesInDirectory(DirectoryInfo, string)</h4>
-  <div class="markdown level1 summary"><p>Loads every <code>.lua</code> file under the given directory (excluding files starting with <code>_</code>) and runs
-each one to register its patches.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void LoadPatchesInDirectory(DirectoryInfo directory, string modId)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">DirectoryInfo</span></td>
-        <td><span class="parametername">directory</span></td>
-        <td><p>The directory containing the patch files.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">string</span></td>
-        <td><span class="parametername">modId</span></td>
-        <td><p>The mod ID; exposed to scripts as the <code>ModId</code> global and used as their default stage.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="PatchManager_LuaPatching_Universe_LoadPatchesInDirectory_System_IO_DirectoryInfo_System_String__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Library files (filenames starting with <code>_</code>) are not executed but counted in <a class="xref" href="PatchManager.LuaPatching.Universe.html#PatchManager_LuaPatching_Universe_LibraryCount">LibraryCount</a>.
-All scripts share a single <span class="xref">MoonSharp.Interpreter.Script</span> with the given <code class="paramref">modId</code>.</p>
-</div>
-
-
-  <a id="PatchManager_LuaPatching_Universe_LoadSinglePatchFile_" data-uid="PatchManager.LuaPatching.Universe.LoadSinglePatchFile*"></a>
-  <h4 id="PatchManager_LuaPatching_Universe_LoadSinglePatchFile_System_IO_FileInfo_System_IO_DirectoryInfo_" data-uid="PatchManager.LuaPatching.Universe.LoadSinglePatchFile(System.IO.FileInfo,System.IO.DirectoryInfo)">LoadSinglePatchFile(FileInfo, DirectoryInfo)</h4>
-  <div class="markdown level1 summary"><p>Loads and runs a single <code>.lua</code> patch file, registering whatever patches it declares.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void LoadSinglePatchFile(FileInfo file, DirectoryInfo directoryInfo)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">FileInfo</span></td>
-        <td><span class="parametername">file</span></td>
-        <td><p>The patch file to load.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">DirectoryInfo</span></td>
-        <td><span class="parametername">directoryInfo</span></td>
-        <td><p>The directory the patch was discovered in; exposed to the script as the <code>Location</code> global.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-
-
   <a id="PatchManager_LuaPatching_Universe_RunAllPatchesFor_" data-uid="PatchManager.LuaPatching.Universe.RunAllPatchesFor*"></a>
-  <h4 id="PatchManager_LuaPatching_Universe_RunAllPatchesFor_PatchManager_LuaPatching_LuaAsset_PatchManager_LuaPatching_LuaPatch_PatchPass_System_Int32__System_Int32__" data-uid="PatchManager.LuaPatching.Universe.RunAllPatchesFor(PatchManager.LuaPatching.LuaAsset,PatchManager.LuaPatching.LuaPatch.PatchPass,System.Int32@,System.Int32@)">RunAllPatchesFor(LuaAsset, PatchPass, out int, out int)</h4>
+  <h4 id="PatchManager_LuaPatching_Universe_RunAllPatchesFor_PatchManager_LuaPatching_LuaAsset_PatchManager_LuaPatching_PatchDefinition_PatchPass_System_Int32__System_Int32__" data-uid="PatchManager.LuaPatching.Universe.RunAllPatchesFor(PatchManager.LuaPatching.LuaAsset,PatchManager.LuaPatching.PatchDefinition.PatchPass,System.Int32@,System.Int32@)">RunAllPatchesFor(LuaAsset, PatchPass, out int, out int)</h4>
   <div class="markdown level1 summary"><p>Runs every patch matching the given new asset in <code class="paramref">pass</code> against its
 <a class="xref" href="PatchManager.LuaPatching.LuaAsset.html#PatchManager_LuaPatching_LuaAsset_CurrentValue">CurrentValue</a>, returning the final JSON.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public JToken RunAllPatchesFor(LuaAsset asset, LuaPatch.PatchPass pass, out int patchCount, out int errorCount)</code></pre>
+    <pre><code class="lang-csharp hljs">public JToken RunAllPatchesFor(LuaAsset asset, PatchDefinition.PatchPass pass, out int patchCount, out int errorCount)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -968,7 +861,7 @@ All scripts share a single <span class="xref">MoonSharp.Interpreter.Script</span
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="PatchManager.LuaPatching.LuaPatch.html">LuaPatch</a>.<a class="xref" href="PatchManager.LuaPatching.LuaPatch.PatchPass.html">PatchPass</a></td>
+        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a>.<a class="xref" href="PatchManager.LuaPatching.PatchDefinition.PatchPass.html">PatchPass</a></td>
         <td><span class="parametername">pass</span></td>
         <td><p>The pass to run.</p>
 </td>
@@ -1006,14 +899,14 @@ All scripts share a single <span class="xref">MoonSharp.Interpreter.Script</span
 
 
   <a id="PatchManager_LuaPatching_Universe_RunAllPatchesFor_" data-uid="PatchManager.LuaPatching.Universe.RunAllPatchesFor*"></a>
-  <h4 id="PatchManager_LuaPatching_Universe_RunAllPatchesFor_System_String_System_String_Newtonsoft_Json_Linq_JToken_PatchManager_LuaPatching_LuaPatch_PatchPass_System_Int32__System_Int32__" data-uid="PatchManager.LuaPatching.Universe.RunAllPatchesFor(System.String,System.String,Newtonsoft.Json.Linq.JToken,PatchManager.LuaPatching.LuaPatch.PatchPass,System.Int32@,System.Int32@)">RunAllPatchesFor(string, string, JToken, PatchPass, out int, out int)</h4>
+  <h4 id="PatchManager_LuaPatching_Universe_RunAllPatchesFor_System_String_System_String_Newtonsoft_Json_Linq_JToken_PatchManager_LuaPatching_PatchDefinition_PatchPass_System_Int32__System_Int32__" data-uid="PatchManager.LuaPatching.Universe.RunAllPatchesFor(System.String,System.String,Newtonsoft.Json.Linq.JToken,PatchManager.LuaPatching.PatchDefinition.PatchPass,System.Int32@,System.Int32@)">RunAllPatchesFor(string, string, JToken, PatchPass, out int, out int)</h4>
   <div class="markdown level1 summary"><p>Runs every patch matching <code class="paramref">label</code> / <code class="paramref">name</code> in
 <code class="paramref">pass</code> against the given JSON, returning the final result.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public JToken RunAllPatchesFor(string label, string name, JToken data, LuaPatch.PatchPass pass, out int patchCount, out int errorCount)</code></pre>
+    <pre><code class="lang-csharp hljs">public JToken RunAllPatchesFor(string label, string name, JToken data, PatchDefinition.PatchPass pass, out int patchCount, out int errorCount)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -1044,7 +937,7 @@ All scripts share a single <span class="xref">MoonSharp.Interpreter.Script</span
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="PatchManager.LuaPatching.LuaPatch.html">LuaPatch</a>.<a class="xref" href="PatchManager.LuaPatching.LuaPatch.PatchPass.html">PatchPass</a></td>
+        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a>.<a class="xref" href="PatchManager.LuaPatching.PatchDefinition.PatchPass.html">PatchPass</a></td>
         <td><span class="parametername">pass</span></td>
         <td><p>The pass to run.</p>
 </td>
@@ -1079,10 +972,10 @@ All scripts share a single <span class="xref">MoonSharp.Interpreter.Script</span
       </tr>
     </tbody>
   </table>
-  <h5 id="PatchManager_LuaPatching_Universe_RunAllPatchesFor_System_String_System_String_Newtonsoft_Json_Linq_JToken_PatchManager_LuaPatching_LuaPatch_PatchPass_System_Int32__System_Int32___remarks">Remarks</h5>
+  <h5 id="PatchManager_LuaPatching_Universe_RunAllPatchesFor_System_String_System_String_Newtonsoft_Json_Linq_JToken_PatchManager_LuaPatching_PatchDefinition_PatchPass_System_Int32__System_Int32___remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>Patches are chained: each one operates on the previous patch's <span class="xref">MoonSharp.Interpreter.DynValue</span> when the converters
 match, otherwise the chain is flushed back to JSON, lifted by the new converter, and chaining resumes.
-Returns <code class="paramref">data</code> unchanged when no patch applied; returns <code>null</code> when a patch
+Returns <code class="paramref">data</code> unchanged when no patch applied. Returns <code>null</code> when a patch
 removed the asset.</p>
 </div>
 
