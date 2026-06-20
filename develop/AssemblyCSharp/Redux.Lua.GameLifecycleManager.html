@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class GameLifecycleManager | KSP2Redux API (Develop) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class GameLifecycleManager | KSP2Redux API (Develop) ">
+    
+    <meta name="description" content="Drives the live-game Lua lifecycle phases for mod scripts.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Redux.Lua.GameLifecycleManager">
+
+
+
+  <h1 id="Redux_Lua_GameLifecycleManager" data-uid="Redux.Lua.GameLifecycleManager" class="text-break">Class GameLifecycleManager</h1>
+  <div class="markdown level0 summary"><p>Drives the live-game Lua lifecycle phases for mod scripts.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><span class="xref">GameLifecycleManager</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a></div>
+    <div><a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.Lua.html">Lua</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="Redux_Lua_GameLifecycleManager_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class GameLifecycleManager : IUpdate, IFixedUpdate</code></pre>
+  </div>
+  <h5 id="Redux_Lua_GameLifecycleManager_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>Mod scripts register closures through the <code>Game</code> global (Update, FixedUpdate, SceneEnter, SceneExit,
+the named scene wrappers, and the active-vessel event). This manager fires them from the running game's
+own frame and physics drivers (<a class="xref" href="IUpdate.html">IUpdate</a> / <a class="xref" href="IFixedUpdate.html">IFixedUpdate</a>) and its game-state
+and vessel messages. A single session-long instance accumulates the closures, attaches its drivers to the
+live game instance, and fans each phase out. One mod's error never aborts the phase for the rest.</p>
+</div>
+  <h3 id="fields">Fields
+</h3>
+
+
+  <h4 id="Redux_Lua_GameLifecycleManager_Instance" data-uid="Redux.Lua.GameLifecycleManager.Instance">Instance</h4>
+  <div class="markdown level1 summary"><p>The shared session-long manager instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly GameLifecycleManager Instance</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Lua.GameLifecycleManager.html">GameLifecycleManager</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="Redux_Lua_GameLifecycleManager_AddActiveVesselChanged_" data-uid="Redux.Lua.GameLifecycleManager.AddActiveVesselChanged*"></a>
+  <h4 id="Redux_Lua_GameLifecycleManager_AddActiveVesselChanged_System_String_MoonSharp_Interpreter_Closure_" data-uid="Redux.Lua.GameLifecycleManager.AddActiveVesselChanged(System.String,MoonSharp.Interpreter.Closure)">AddActiveVesselChanged(string, Closure)</h4>
+  <div class="markdown level1 summary"><p>Registers a closure that fires when the active vessel changes, for the given mod.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddActiveVesselChanged(string modId, Closure fn)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">modId</span></td>
+        <td><p>The id of the registering mod.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Closure</span></td>
+        <td><span class="parametername">fn</span></td>
+        <td><p>The closure to fire with the new active vessel.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Lua_GameLifecycleManager_AddFixedUpdate_" data-uid="Redux.Lua.GameLifecycleManager.AddFixedUpdate*"></a>
+  <h4 id="Redux_Lua_GameLifecycleManager_AddFixedUpdate_System_String_MoonSharp_Interpreter_Closure_" data-uid="Redux.Lua.GameLifecycleManager.AddFixedUpdate(System.String,MoonSharp.Interpreter.Closure)">AddFixedUpdate(string, Closure)</h4>
+  <div class="markdown level1 summary"><p>Registers a per-physics-step FixedUpdate closure for the given mod.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddFixedUpdate(string modId, Closure fn)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">modId</span></td>
+        <td><p>The id of the registering mod.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Closure</span></td>
+        <td><span class="parametername">fn</span></td>
+        <td><p>The closure to fire each physics step.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Lua_GameLifecycleManager_AddSceneEnter_" data-uid="Redux.Lua.GameLifecycleManager.AddSceneEnter*"></a>
+  <h4 id="Redux_Lua_GameLifecycleManager_AddSceneEnter_System_String_MoonSharp_Interpreter_Closure_" data-uid="Redux.Lua.GameLifecycleManager.AddSceneEnter(System.String,MoonSharp.Interpreter.Closure)">AddSceneEnter(string, Closure)</h4>
+  <div class="markdown level1 summary"><p>Registers a scene-enter closure that fires on every game state, for the given mod.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddSceneEnter(string modId, Closure fn)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">modId</span></td>
+        <td><p>The id of the registering mod.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Closure</span></td>
+        <td><span class="parametername">fn</span></td>
+        <td><p>The closure to fire when a game state is entered.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Lua_GameLifecycleManager_AddSceneEnter_" data-uid="Redux.Lua.GameLifecycleManager.AddSceneEnter*"></a>
+  <h4 id="Redux_Lua_GameLifecycleManager_AddSceneEnter_System_String_MoonSharp_Interpreter_Closure_KSP_Game_GameState_" data-uid="Redux.Lua.GameLifecycleManager.AddSceneEnter(System.String,MoonSharp.Interpreter.Closure,KSP.Game.GameState)">AddSceneEnter(string, Closure, GameState)</h4>
+  <div class="markdown level1 summary"><p>Registers a scene-enter closure that fires only when the given game state is entered.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddSceneEnter(string modId, Closure fn, GameState filter)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">modId</span></td>
+        <td><p>The id of the registering mod.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Closure</span></td>
+        <td><span class="parametername">fn</span></td>
+        <td><p>The closure to fire when the filtered game state is entered.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Game.GameState.html">GameState</a></td>
+        <td><span class="parametername">filter</span></td>
+        <td><p>The game state the closure is restricted to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Lua_GameLifecycleManager_AddSceneExit_" data-uid="Redux.Lua.GameLifecycleManager.AddSceneExit*"></a>
+  <h4 id="Redux_Lua_GameLifecycleManager_AddSceneExit_System_String_MoonSharp_Interpreter_Closure_" data-uid="Redux.Lua.GameLifecycleManager.AddSceneExit(System.String,MoonSharp.Interpreter.Closure)">AddSceneExit(string, Closure)</h4>
+  <div class="markdown level1 summary"><p>Registers a scene-exit closure that fires on every game state, for the given mod.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddSceneExit(string modId, Closure fn)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">modId</span></td>
+        <td><p>The id of the registering mod.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Closure</span></td>
+        <td><span class="parametername">fn</span></td>
+        <td><p>The closure to fire when a game state is left.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Lua_GameLifecycleManager_AddUpdate_" data-uid="Redux.Lua.GameLifecycleManager.AddUpdate*"></a>
+  <h4 id="Redux_Lua_GameLifecycleManager_AddUpdate_System_String_MoonSharp_Interpreter_Closure_" data-uid="Redux.Lua.GameLifecycleManager.AddUpdate(System.String,MoonSharp.Interpreter.Closure)">AddUpdate(string, Closure)</h4>
+  <div class="markdown level1 summary"><p>Registers a per-frame Update closure for the given mod.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddUpdate(string modId, Closure fn)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">modId</span></td>
+        <td><p>The id of the registering mod.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Closure</span></td>
+        <td><span class="parametername">fn</span></td>
+        <td><p>The closure to fire each frame.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Lua_GameLifecycleManager_Attach_" data-uid="Redux.Lua.GameLifecycleManager.Attach*"></a>
+  <h4 id="Redux_Lua_GameLifecycleManager_Attach_KSP_Game_GameInstance_" data-uid="Redux.Lua.GameLifecycleManager.Attach(KSP.Game.GameInstance)">Attach(GameInstance)</h4>
+  <div class="markdown level1 summary"><p>Wires the manager to a live game instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Attach(GameInstance game)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Game.GameInstance.html">GameInstance</a></td>
+        <td><span class="parametername">game</span></td>
+        <td><p>The active game instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Lua_GameLifecycleManager_Attach_KSP_Game_GameInstance__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Registers the frame and physics drivers and subscribes to the game-state and active-vessel messages.
+Call once the game instance exists.</p>
+</div>
+
+
+  <a id="Redux_Lua_GameLifecycleManager_OnFixedUpdate_" data-uid="Redux.Lua.GameLifecycleManager.OnFixedUpdate*"></a>
+  <h4 id="Redux_Lua_GameLifecycleManager_OnFixedUpdate_System_Single_" data-uid="Redux.Lua.GameLifecycleManager.OnFixedUpdate(System.Single)">OnFixedUpdate(float)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnFixedUpdate(float deltaTime)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">deltaTime</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Lua_GameLifecycleManager_OnUpdate_" data-uid="Redux.Lua.GameLifecycleManager.OnUpdate*"></a>
+  <h4 id="Redux_Lua_GameLifecycleManager_OnUpdate_System_Single_" data-uid="Redux.Lua.GameLifecycleManager.OnUpdate(System.Single)">OnUpdate(float)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnUpdate(float deltaTime)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">deltaTime</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetField__2___0_System_String_">Util.GetField&lt;T, R&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetField__2___0_System_String___1_">Util.SetField&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromProperties_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromProperties(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetFieldValue__1_System_Object_System_String_">Util.GetFieldValue&lt;T&gt;(object, string)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from develop
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
