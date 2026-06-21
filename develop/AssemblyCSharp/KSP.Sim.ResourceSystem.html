@@ -101,9 +101,6 @@ with factory methods for creating attachment, decoupler, fuel line, and strut ed
       <h4><a class="xref" href="KSP.Sim.ResourceSystem.FlowInstructionConfig.html">FlowInstructionConfig</a></h4>
       <section><p>Represents the configuration for a resource flow instruction, including the target node, resource, flow mode, direction, priority, and flow unit values.</p>
 </section>
-      <h4><a class="xref" href="KSP.Sim.ResourceSystem.FlowRequestExtensions.html">FlowRequestExtensions</a></h4>
-      <section><p>Extension methods for searching resource flow request handle dictionaries.</p>
-</section>
       <h4><a class="xref" href="KSP.Sim.ResourceSystem.IFlowEdgeExtensions.html">IFlowEdgeExtensions</a></h4>
       <section><p>Extension methods for <a class="xref" href="KSP.Sim.ResourceSystem.IFlowEdge.html">IFlowEdge</a>.</p>
 </section>
@@ -156,16 +153,19 @@ with factory methods for creating attachment, decoupler, fuel line, and strut ed
       <section><p>Solves priority-grouped resource flow queries over a directed flow graph, computing inbound and outbound node orderings by distance from a root node.</p>
 </section>
       <h4><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.html">ResourceFlowRequestBroker</a></h4>
-      <section><p>Mediates resource flow request allocation and lifecycle for a single <a class="xref" href="KSP.Sim.ResourceSystem.IFlowNode.html">IFlowNode</a> through a <a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.html">ResourceFlowRequestManager</a>.</p>
+      <section><p>Mediates resource flow request allocation and lifecycle for a single <a class="xref" href="KSP.Sim.ResourceSystem.IFlowNode.html">IFlowNode</a> through a
+<a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.html">ResourceFlowRequestManager</a>. A request is identified by its ECS <span class="xref">Unity.Entities.Entity</span>,
+which the caller stores and passes back; there is no handle and no string identifier.</p>
 </section>
       <h4><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestCommandConfig.html">ResourceFlowRequestCommandConfig</a></h4>
       <section><p>Represents the configuration for a resource flow request command.</p>
 </section>
       <h4><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.html">ResourceFlowRequestManager</a></h4>
-      <section><p>Manages resource flow requests for a part owner, coordinating request registration, prioritization, and delivery via a flow graph.</p>
-</section>
-      <h4><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.ManagedRequestWrapper.html">ResourceFlowRequestManager.ManagedRequestWrapper</a></h4>
-      <section><p>Wraps a resource flow request, tracking its handle, target node, commands, instructions, and resolution state.</p>
+      <section><p>Manages resource flow requests for a part owner, coordinating request registration, prioritization, and
+delivery via a flow graph. Each request is its own ECS entity (the entity is the request's identity);
+this manager creates, drives, and tears those entities down and runs the managed delivery solve over
+them. Request inputs live in each entity's <a class="xref" href="Redux.Ecs.Components.ResourceFlowInstructionData.html">ResourceFlowInstructionData</a> buffer and outputs
+in its <a class="xref" href="Redux.Ecs.Components.ResourceFlowResponse.html">ResourceFlowResponse</a> (+ <a class="xref" href="Redux.Ecs.Components.ResourceFlowFailedResource.html">ResourceFlowFailedResource</a> buffer).</p>
 </section>
       <h4><a class="xref" href="KSP.Sim.ResourceSystem.ResourceRecipeIngredientDefinitionOverride.html">ResourceRecipeIngredientDefinitionOverride</a></h4>
       <section><p>Represents a serializable override for a resource recipe ingredient definition, specifying name, units per recipe unit, and flow mode.</p>
@@ -201,9 +201,6 @@ Structs
 </section>
       <h4><a class="xref" href="KSP.Sim.ResourceSystem.ResourceDefinitionID.html">ResourceDefinitionID</a></h4>
       <section><p>Represents a unique identifier for a resource definition.</p>
-</section>
-      <h4><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestHandle.html">ResourceFlowRequestHandle</a></h4>
-      <section><p>Represents an immutable handle that uniquely identifies a resource flow request by its numeric ID.</p>
 </section>
       <h4><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.RequestPriorityContainerGroupKey.html">ResourceFlowRequestManager.RequestPriorityContainerGroupKey</a></h4>
       <section><p>Composite key pairing an <a class="xref" href="KSP.Sim.ResourceSystem.IFlowNode.html">IFlowNode</a> and a priority value, used to group resource flow requests by node and priority level.</p>

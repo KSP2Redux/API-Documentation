@@ -104,6 +104,17 @@ resolved to a <a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">Ce
 attachment-tree placeholders) on a part entity, shared by flight
 (<a class="xref" href="KSP.Sim.impl.PartOwnerComponent.html">PartOwnerComponent</a>) and the editor (<a class="xref" href="KSP.OAB.ObjectAssembly.html">ObjectAssembly</a>).</p>
 </section>
+      <h4><a class="xref" href="Redux.Ecs.Components.ResourceRequestEntity.html">ResourceRequestEntity</a></h4>
+      <section><p>Creates and tears down resource-flow request entities and toggles their active flag. A request entity
+is the sole identity of a request: it carries <a class="xref" href="Redux.Ecs.Components.RequestVessel.html">RequestVessel</a> (shared, the solve filter),
+<a class="xref" href="Redux.Ecs.Components.RequestPart.html">RequestPart</a>, a <a class="xref" href="Redux.Ecs.Components.ResourceFlowRequest.html">ResourceFlowRequest</a> header, its own
+<a class="xref" href="Redux.Ecs.Components.ResourceFlowInstructionData.html">ResourceFlowInstructionData</a> buffer, a <a class="xref" href="Redux.Ecs.Components.ResourceFlowResponse.html">ResourceFlowResponse</a>, and a
+<a class="xref" href="Redux.Ecs.Components.ResourceFlowFailedResource.html">ResourceFlowFailedResource</a> buffer.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.ResourceRequestIndex.html">ResourceRequestIndex</a></h4>
+      <section><p>Reserved values for <a class="xref" href="Redux.Ecs.Components.ResourceFlowRequest.html#Redux_Ecs_Components_ResourceFlowRequest_Index">Index</a>. The index is a caller-defined
+discriminator, never an identity or dedup key.</p>
+</section>
       <h4><a class="xref" href="Redux.Ecs.Components.SimObjectManagedData.html">SimObjectManagedData</a></h4>
       <section></section>
       <h4><a class="xref" href="Redux.Ecs.Components.SurfaceAnchorUnityLink.html">SurfaceAnchorUnityLink</a></h4>
@@ -200,12 +211,39 @@ can perform the velocity/angular conversions otherwise only available on the man
       <section><p>Unmanaged equivalent of <a class="xref" href="KSP.Sim.Position.html">Position</a>: a position value plus the transform-frame entity it
 is expressed in.</p>
 </section>
+      <h4><a class="xref" href="Redux.Ecs.Components.RequestPart.html">RequestPart</a></h4>
+      <section><p>The part entity a resource-flow request flows against. Doubles as the plan-lookup flow target.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.RequestVessel.html">RequestVessel</a></h4>
+      <section><p>The part-owner (vessel) entity that a resource-flow request belongs to, as a shared component so all of
+a vessel's request entities are grouped into the same chunks. The solve filters a vessel's requests with
+<code>SetSharedComponentFilter</code>. Derived from the request's <a class="xref" href="Redux.Ecs.Components.RequestPart.html">RequestPart</a>'s
+<a class="xref" href="Redux.Ecs.Components.PartVessel.html">PartVessel</a> and reconciled when the part changes owner (docking, re-parent).</p>
+</section>
       <h4><a class="xref" href="Redux.Ecs.Components.ResourceDefinitionRow.html">ResourceDefinitionRow</a></h4>
       <section><p>An unmanaged mirror of <a class="xref" href="KSP.Sim.ResourceSystem.ResourceDefinitionData.html">ResourceDefinitionData</a>.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.ResourceDefinitionsCacheTag.html">ResourceDefinitionsCacheTag</a></h4>
       <section><p>Tag identifying the singleton entity that carries the baked resource definition
 buffers (<a class="xref" href="Redux.Ecs.Components.ResourceDefinitionRow.html">ResourceDefinitionRow</a> and <a class="xref" href="Redux.Ecs.Components.ResourceIngredientRow.html">ResourceIngredientRow</a>).</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.ResourceFlowFailedResource.html">ResourceFlowFailedResource</a></h4>
+      <section><p>One resource a request failed to process this tick. Populated only on rejection; cleared before each
+solve.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.ResourceFlowInstructionData.html">ResourceFlowInstructionData</a></h4>
+      <section><p>One compiled flow instruction on a request entity. The buffer holds exactly this request's
+instructions — one buffer is one request, so there are no slice fields. The flow target is not stored
+here; it is the request's <a class="xref" href="Redux.Ecs.Components.RequestPart.html">RequestPart</a>.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.ResourceFlowRequest.html">ResourceFlowRequest</a></h4>
+      <section><p>Header for a resource-flow request entity: a control flag plus a non-identity discriminator. The
+request's instructions live in its own <a class="xref" href="Redux.Ecs.Components.ResourceFlowInstructionData.html">ResourceFlowInstructionData</a> buffer and the
+entity is the identity, so there is no handle and no buffer slice.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.ResourceFlowResponse.html">ResourceFlowResponse</a></h4>
+      <section><p>Output of the solve for a request entity. Rejected resources are recorded in the
+<a class="xref" href="Redux.Ecs.Components.ResourceFlowFailedResource.html">ResourceFlowFailedResource</a> buffer.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.ResourceIngredientRow.html">ResourceIngredientRow</a></h4>
       <section><p>One recipe ingredient: the resource moved per unit of the recipe resource.
