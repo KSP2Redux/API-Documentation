@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class OrderManager | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="Provides functionality to manage and maintain the sorting order of PanelSettings instances, allowing them to be registered, brought to the front, and unregistered.">
+    <meta name="description" content="Provides functionality to manage and maintain the sorting order of per-window  instances (and Canvases), allowing them to be registered, brought to the front, and unregistered. Each window owns its PanelSettings, and that asset&#39;s sortingOrder is what governs z-order both among UITK panels and relative to uGUI canvases. The  overloads operate on the renderer&#39;s PanelSettings.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,8 +81,10 @@
 
 
   <h1 id="UitkForKsp2_API_Order_OrderManager" data-uid="UitkForKsp2.API.Order.OrderManager" class="text-break">Class OrderManager</h1>
-  <div class="markdown level0 summary"><p>Provides functionality to manage and maintain the sorting order of PanelSettings
-instances, allowing them to be registered, brought to the front, and unregistered.</p>
+  <div class="markdown level0 summary"><p>Provides functionality to manage and maintain the sorting order of per-window <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/UIElements.PanelSettings.html">PanelSettings</a>
+instances (and Canvases), allowing them to be registered, brought to the front, and unregistered. Each window
+owns its PanelSettings, and that asset's <code>sortingOrder</code> is what governs z-order both among UITK panels and
+relative to uGUI canvases. The <span class="xref">UnityEngine.UIElements.PanelRenderer</span> overloads operate on the renderer's PanelSettings.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -123,6 +125,36 @@ instances, allowing them to be registered, brought to the front, and unregistere
         <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Canvas.html">Canvas</a></td>
         <td><span class="parametername">canvas</span></td>
         <td><p>The Canvas instance to bring to the front. If null or not registered, no action is taken.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="UitkForKsp2_API_Order_OrderManager_BringToFront_" data-uid="UitkForKsp2.API.Order.OrderManager.BringToFront*"></a>
+  <h4 id="UitkForKsp2_API_Order_OrderManager_BringToFront_UnityEngine_UIElements_PanelRenderer_" data-uid="UitkForKsp2.API.Order.OrderManager.BringToFront(UnityEngine.UIElements.PanelRenderer)">BringToFront(PanelRenderer)</h4>
+  <div class="markdown level1 summary"><p>Brings a registered <span class="xref">UnityEngine.UIElements.PanelRenderer</span> window to the front by assigning its PanelSettings the
+highest sorting order.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void BringToFront(PanelRenderer renderer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">PanelRenderer</span></td>
+        <td><span class="parametername">renderer</span></td>
+        <td><p>The window renderer to bring to the front. If null or not registered, no action is taken.</p>
 </td>
       </tr>
     </tbody>
@@ -188,6 +220,35 @@ instances, allowing them to be registered, brought to the front, and unregistere
 
 
   <a id="UitkForKsp2_API_Order_OrderManager_Register_" data-uid="UitkForKsp2.API.Order.OrderManager.Register*"></a>
+  <h4 id="UitkForKsp2_API_Order_OrderManager_Register_UnityEngine_UIElements_PanelRenderer_" data-uid="UitkForKsp2.API.Order.OrderManager.Register(UnityEngine.UIElements.PanelRenderer)">Register(PanelRenderer)</h4>
+  <div class="markdown level1 summary"><p>Registers a <span class="xref">UnityEngine.UIElements.PanelRenderer</span> window to the order manager by its PanelSettings.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Register(PanelRenderer renderer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">PanelRenderer</span></td>
+        <td><span class="parametername">renderer</span></td>
+        <td><p>The window renderer to register. If null, no action is taken.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="UitkForKsp2_API_Order_OrderManager_Register_" data-uid="UitkForKsp2.API.Order.OrderManager.Register*"></a>
   <h4 id="UitkForKsp2_API_Order_OrderManager_Register_UnityEngine_UIElements_PanelSettings_" data-uid="UitkForKsp2.API.Order.OrderManager.Register(UnityEngine.UIElements.PanelSettings)">Register(PanelSettings)</h4>
   <div class="markdown level1 summary"><p>Registers a PanelSettings instance to the SortManager.</p>
 </div>
@@ -239,6 +300,35 @@ instances, allowing them to be registered, brought to the front, and unregistere
         <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Canvas.html">Canvas</a></td>
         <td><span class="parametername">canvas</span></td>
         <td><p>The Canvas instance to unregister. If null or not registered, no action is taken.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="UitkForKsp2_API_Order_OrderManager_Unregister_" data-uid="UitkForKsp2.API.Order.OrderManager.Unregister*"></a>
+  <h4 id="UitkForKsp2_API_Order_OrderManager_Unregister_UnityEngine_UIElements_PanelRenderer_" data-uid="UitkForKsp2.API.Order.OrderManager.Unregister(UnityEngine.UIElements.PanelRenderer)">Unregister(PanelRenderer)</h4>
+  <div class="markdown level1 summary"><p>Unregisters a <span class="xref">UnityEngine.UIElements.PanelRenderer</span> window from the order manager by its PanelSettings.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Unregister(PanelRenderer renderer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">PanelRenderer</span></td>
+        <td><span class="parametername">renderer</span></td>
+        <td><p>The window renderer to unregister. If null or not registered, no action is taken.</p>
 </td>
       </tr>
     </tbody>

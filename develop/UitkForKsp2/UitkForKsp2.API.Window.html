@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class Window | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="Contains methods for creating UIDocument windows.">
+    <meta name="description" content="Contains methods for creating UI Toolkit windows backed by .">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,7 @@
 
 
   <h1 id="UitkForKsp2_API_Window" data-uid="UitkForKsp2.API.Window" class="text-break">Class Window</h1>
-  <div class="markdown level0 summary"><p>Contains methods for creating UIDocument windows.</p>
+  <div class="markdown level0 summary"><p>Contains methods for creating UI Toolkit windows backed by <span class="xref">UnityEngine.UIElements.PanelRenderer</span>.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -101,12 +101,12 @@
 
   <a id="UitkForKsp2_API_Window_Create_" data-uid="UitkForKsp2.API.Window.Create*"></a>
   <h4 id="UitkForKsp2_API_Window_Create_UitkForKsp2_API_WindowOptions_UnityEngine_UIElements_VisualElement_" data-uid="UitkForKsp2.API.Window.Create(UitkForKsp2.API.WindowOptions,UnityEngine.UIElements.VisualElement)">Create(WindowOptions, VisualElement?)</h4>
-  <div class="markdown level1 summary"><p>Creates an empty UIDocument.</p>
+  <div class="markdown level1 summary"><p>Creates an empty window.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static UIDocument Create(WindowOptions options, VisualElement? root = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public static PanelRenderer Create(WindowOptions options, VisualElement? root = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -127,7 +127,7 @@
       <tr>
         <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/UIElements.VisualElement.html">VisualElement</a></td>
         <td><span class="parametername">root</span></td>
-        <td><p>Root element of the UIDocument. If null, a new empty VisualElement is created.</p>
+        <td><p>Root element of the window. If null, a new empty VisualElement is created.</p>
 </td>
       </tr>
     </tbody>
@@ -142,8 +142,8 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/UIElements.UIDocument.html">UIDocument</a></td>
-        <td><p>New empty UIDocument.</p>
+        <td><span class="xref">PanelRenderer</span></td>
+        <td><p>The <span class="xref">UnityEngine.UIElements.PanelRenderer</span> driving the new window.</p>
 </td>
       </tr>
     </tbody>
@@ -152,12 +152,12 @@
 
   <a id="UitkForKsp2_API_Window_Create_" data-uid="UitkForKsp2.API.Window.Create*"></a>
   <h4 id="UitkForKsp2_API_Window_Create_UitkForKsp2_API_WindowOptions_UnityEngine_UIElements_VisualTreeAsset_" data-uid="UitkForKsp2.API.Window.Create(UitkForKsp2.API.WindowOptions,UnityEngine.UIElements.VisualTreeAsset)">Create(WindowOptions, VisualTreeAsset)</h4>
-  <div class="markdown level1 summary"><p>Creates a new UIDocument from a UXML asset.</p>
+  <div class="markdown level1 summary"><p>Creates a new window from a UXML asset.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static UIDocument Create(WindowOptions options, VisualTreeAsset uxml)</code></pre>
+    <pre><code class="lang-csharp hljs">public static PanelRenderer Create(WindowOptions options, VisualTreeAsset uxml)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -193,46 +193,9 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/UIElements.UIDocument.html">UIDocument</a></td>
-        <td><p>UIDocument with the UI defined in UXML.</p>
+        <td><span class="xref">PanelRenderer</span></td>
+        <td><p>The <span class="xref">UnityEngine.UIElements.PanelRenderer</span> driving the new window.</p>
 </td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="UitkForKsp2_API_Window_SetupRootElement_" data-uid="UitkForKsp2.API.Window.SetupRootElement*"></a>
-  <h4 id="UitkForKsp2_API_Window_SetupRootElement_UnityEngine_UIElements_VisualElement_UnityEngine_UIElements_UIDocument_UitkForKsp2_API_WindowOptions_" data-uid="UitkForKsp2.API.Window.SetupRootElement(UnityEngine.UIElements.VisualElement,UnityEngine.UIElements.UIDocument,UitkForKsp2.API.WindowOptions)">SetupRootElement(VisualElement?, UIDocument, WindowOptions)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void SetupRootElement(VisualElement? root, UIDocument document, WindowOptions options)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/UIElements.VisualElement.html">VisualElement</a></td>
-        <td><span class="parametername">root</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/UIElements.UIDocument.html">UIDocument</a></td>
-        <td><span class="parametername">document</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="UitkForKsp2.API.WindowOptions.html">WindowOptions</a></td>
-        <td><span class="parametername">options</span></td>
-        <td></td>
       </tr>
     </tbody>
   </table>
