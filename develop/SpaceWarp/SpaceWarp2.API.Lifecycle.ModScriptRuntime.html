@@ -245,6 +245,62 @@ one shared VM. The runtime contributes the general mod-loading globals (<code>Mo
 </div>
 
 
+  <a id="SpaceWarp2_API_Lifecycle_ModScriptRuntime_EvalConsoleSync_" data-uid="SpaceWarp2.API.Lifecycle.ModScriptRuntime.EvalConsoleSync*"></a>
+  <h4 id="SpaceWarp2_API_Lifecycle_ModScriptRuntime_EvalConsoleSync_System_String_System_String_" data-uid="SpaceWarp2.API.Lifecycle.ModScriptRuntime.EvalConsoleSync(System.String,System.String)">EvalConsoleSync(string, string)</h4>
+  <div class="markdown level1 summary"><p>Runs Lua synchronously on the shared console environment and returns its result, for callers that need an
+immediate value (such as the CLI eval bridge) rather than the frame-resumed coroutine <a class="xref" href="SpaceWarp2.API.Lifecycle.ModScriptRuntime.html#SpaceWarp2_API_Lifecycle_ModScriptRuntime_RunConsole_System_String_">RunConsole(string)</a> returns.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static DynValue EvalConsoleSync(string code, string chunkName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">code</span></td>
+        <td><p>The Lua source to evaluate.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">chunkName</span></td>
+        <td><p>A name for the chunk, used in error messages.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><p>The value the chunk returned.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="SpaceWarp2_API_Lifecycle_ModScriptRuntime_EvalConsoleSync_System_String_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The console environment carries the same contributed surface a mod gets, so evaluated code sees the SW,
+Game, Config, and other contributor globals - not just the root globals.</p>
+</div>
+
+
   <a id="SpaceWarp2_API_Lifecycle_ModScriptRuntime_RegisterConsoleGlobal_" data-uid="SpaceWarp2.API.Lifecycle.ModScriptRuntime.RegisterConsoleGlobal*"></a>
   <h4 id="SpaceWarp2_API_Lifecycle_ModScriptRuntime_RegisterConsoleGlobal_System_String_MoonSharp_Interpreter_DynValue_" data-uid="SpaceWarp2.API.Lifecycle.ModScriptRuntime.RegisterConsoleGlobal(System.String,MoonSharp.Interpreter.DynValue)">RegisterConsoleGlobal(string, DynValue)</h4>
   <div class="markdown level1 summary"><p>Registers a value or function as a global on the console environment, so console scripts can use it.</p>
