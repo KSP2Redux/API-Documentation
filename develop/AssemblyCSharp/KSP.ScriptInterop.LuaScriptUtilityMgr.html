@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class LuaScriptUtilityMgr | KSP2Redux API (Develop) ">
     
-    
+    <meta name="description" content="Reflection facade for the script-run lifecycle, kept at this type name for the SpaceWarp console.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,51 +81,35 @@
 
 
   <h1 id="KSP_ScriptInterop_LuaScriptUtilityMgr" data-uid="KSP.ScriptInterop.LuaScriptUtilityMgr" class="text-break">Class LuaScriptUtilityMgr</h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>Reflection facade for the script-run lifecycle, kept at this type name for the SpaceWarp console.</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">object</span></div>
-    <div class="level1"><a class="xref" href="KSP.Game.KerbalMonoBehaviour.html">KerbalMonoBehaviour</a></div>
-    <div class="level2"><span class="xref">LuaScriptUtilityMgr</span></div>
-  </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Game">KerbalMonoBehaviour.Game</a>
-    </div>
-    <div>
-      <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Messages">KerbalMonoBehaviour.Messages</a>
-    </div>
-    <div>
-      <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_CFXSystem">KerbalMonoBehaviour.CFXSystem</a>
-    </div>
+    <div class="level1"><span class="xref">LuaScriptUtilityMgr</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.ScriptInterop.html">ScriptInterop</a></h6>
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_ScriptInterop_LuaScriptUtilityMgr_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class LuaScriptUtilityMgr : KerbalMonoBehaviour</code></pre>
+    <pre><code class="lang-csharp hljs">public static class LuaScriptUtilityMgr</code></pre>
   </div>
-  <h3 id="constructors">Constructors
-</h3>
-
-
-  <a id="KSP_ScriptInterop_LuaScriptUtilityMgr__ctor_" data-uid="KSP.ScriptInterop.LuaScriptUtilityMgr.#ctor*"></a>
-  <h4 id="KSP_ScriptInterop_LuaScriptUtilityMgr__ctor" data-uid="KSP.ScriptInterop.LuaScriptUtilityMgr.#ctor">LuaScriptUtilityMgr()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public LuaScriptUtilityMgr()</code></pre>
-  </div>
+  <h5 id="KSP_ScriptInterop_LuaScriptUtilityMgr_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>The console lives in a SpaceWarp package that cannot reference this game assembly, so it drives script
+runs by reflecting these static methods by name. The real state lives in
+<a class="xref" href="Redux.Lua.Scripting.ScriptRunRegistry.html">ScriptRunRegistry</a>. The Lua surface this manager used to register (Input, Script, Log, Wait,
+Files) moved to the contributed libraries in <code>Redux.Lua</code>. Do not rename or change these signatures
+without updating the console's reflection in SpaceWarpConsoleLuaService.</p>
+</div>
   <h3 id="methods">Methods
 </h3>
 
 
   <a id="KSP_ScriptInterop_LuaScriptUtilityMgr_BeginScriptRun_" data-uid="KSP.ScriptInterop.LuaScriptUtilityMgr.BeginScriptRun*"></a>
   <h4 id="KSP_ScriptInterop_LuaScriptUtilityMgr_BeginScriptRun_System_String_System_String_System_String_" data-uid="KSP.ScriptInterop.LuaScriptUtilityMgr.BeginScriptRun(System.String,System.String,System.String)">BeginScriptRun(string, string, string)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Opens a run and returns its id. A blank id is replaced with a generated one.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -144,17 +128,20 @@
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">id</span></td>
-        <td></td>
+        <td><p>The desired run id, or null/blank to generate one.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">name</span></td>
-        <td></td>
+        <td><p>A display name for the run.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">kind</span></td>
-        <td></td>
+        <td><p>A category for the run (for example &quot;UI&quot;).</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -169,7 +156,8 @@
     <tbody>
       <tr>
         <td><span class="xref">string</span></td>
-        <td></td>
+        <td><p>The run id, generated when none was supplied.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -177,7 +165,8 @@
 
   <a id="KSP_ScriptInterop_LuaScriptUtilityMgr_CancelScriptRun_" data-uid="KSP.ScriptInterop.LuaScriptUtilityMgr.CancelScriptRun*"></a>
   <h4 id="KSP_ScriptInterop_LuaScriptUtilityMgr_CancelScriptRun_System_String_" data-uid="KSP.ScriptInterop.LuaScriptUtilityMgr.CancelScriptRun(System.String)">CancelScriptRun(string)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Cancels a run and stops every coroutine it started.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -196,7 +185,8 @@
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">runId</span></td>
-        <td></td>
+        <td><p>The run id to cancel.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -211,7 +201,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if a run with that id existed.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -219,7 +210,8 @@
 
   <a id="KSP_ScriptInterop_LuaScriptUtilityMgr_ClearCurrentScriptRun_" data-uid="KSP.ScriptInterop.LuaScriptUtilityMgr.ClearCurrentScriptRun*"></a>
   <h4 id="KSP_ScriptInterop_LuaScriptUtilityMgr_ClearCurrentScriptRun_System_String_" data-uid="KSP.ScriptInterop.LuaScriptUtilityMgr.ClearCurrentScriptRun(System.String)">ClearCurrentScriptRun(string)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Clears the current run if it matches the given id.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -238,7 +230,8 @@
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">runId</span></td>
-        <td></td>
+        <td><p>The run id to clear.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -246,7 +239,8 @@
 
   <a id="KSP_ScriptInterop_LuaScriptUtilityMgr_CompleteScriptRun_" data-uid="KSP.ScriptInterop.LuaScriptUtilityMgr.CompleteScriptRun*"></a>
   <h4 id="KSP_ScriptInterop_LuaScriptUtilityMgr_CompleteScriptRun_System_String_" data-uid="KSP.ScriptInterop.LuaScriptUtilityMgr.CompleteScriptRun(System.String)">CompleteScriptRun(string)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Closes a run's top-level body. The run stays &quot;active&quot; while it still owns running coroutines.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -265,7 +259,8 @@
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">runId</span></td>
-        <td></td>
+        <td><p>The run id to complete.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -273,7 +268,8 @@
 
   <a id="KSP_ScriptInterop_LuaScriptUtilityMgr_IsScriptRunActive_" data-uid="KSP.ScriptInterop.LuaScriptUtilityMgr.IsScriptRunActive*"></a>
   <h4 id="KSP_ScriptInterop_LuaScriptUtilityMgr_IsScriptRunActive_System_String_" data-uid="KSP.ScriptInterop.LuaScriptUtilityMgr.IsScriptRunActive(System.String)">IsScriptRunActive(string)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Whether a run is still going: its body is registered and not cancelled, or it still owns coroutines.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -292,7 +288,8 @@
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">runId</span></td>
-        <td></td>
+        <td><p>The run id to test.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -307,34 +304,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="KSP_ScriptInterop_LuaScriptUtilityMgr_RegisterEnvironment_" data-uid="KSP.ScriptInterop.LuaScriptUtilityMgr.RegisterEnvironment*"></a>
-  <h4 id="KSP_ScriptInterop_LuaScriptUtilityMgr_RegisterEnvironment_KSP_ScriptInterop_IScriptEnvironment_" data-uid="KSP.ScriptInterop.LuaScriptUtilityMgr.RegisterEnvironment(KSP.ScriptInterop.IScriptEnvironment)">RegisterEnvironment(IScriptEnvironment)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void RegisterEnvironment(IScriptEnvironment scriptEnvironment)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="KSP.ScriptInterop.IScriptEnvironment.html">IScriptEnvironment</a></td>
-        <td><span class="parametername">scriptEnvironment</span></td>
-        <td></td>
+        <td><p>True while the run or any coroutine it started is alive.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -342,7 +313,8 @@
 
   <a id="KSP_ScriptInterop_LuaScriptUtilityMgr_SetCurrentScriptRun_" data-uid="KSP.ScriptInterop.LuaScriptUtilityMgr.SetCurrentScriptRun*"></a>
   <h4 id="KSP_ScriptInterop_LuaScriptUtilityMgr_SetCurrentScriptRun_System_String_" data-uid="KSP.ScriptInterop.LuaScriptUtilityMgr.SetCurrentScriptRun(System.String)">SetCurrentScriptRun(string)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Marks the given run as the one currently executing, so the <code>Script</code> global reads from it.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -361,67 +333,11 @@
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">runId</span></td>
-        <td></td>
+        <td><p>The run id to make current.</p>
+</td>
       </tr>
     </tbody>
   </table>
-  <h3 id="events">Events
-</h3>
-
-
-  <h4 id="KSP_ScriptInterop_LuaScriptUtilityMgr_OutputLogged" data-uid="KSP.ScriptInterop.LuaScriptUtilityMgr.OutputLogged">OutputLogged</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static event Action&lt;string&gt; OutputLogged</code></pre>
-  </div>
-  <h5 class="eventType">Event Type</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Action</span>&lt;<span class="xref">string</span>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="extensionmethods">Extension Methods</h3>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
-  </div>
-  <div>
-      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
-  </div>
-  <div>
-      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetField__2___0_System_String_">Util.GetField&lt;T, R&gt;(T, string)</a>
-  </div>
-  <div>
-      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetField__2___0_System_String___1_">Util.SetField&lt;T, V&gt;(T, string, V)</a>
-  </div>
-  <div>
-      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
-  </div>
-  <div>
-      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>
-  </div>
-  <div>
-      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromProperties_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromProperties(object, object, bool)</a>
-  </div>
-  <div>
-      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetFieldValue__1_System_Object_System_String_">Util.GetFieldValue&lt;T&gt;(object, string)</a>
-  </div>
 
 </article>
           </div>

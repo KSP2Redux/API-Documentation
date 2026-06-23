@@ -99,6 +99,51 @@
 </h3>
 
 
+  <a id="Redux_Lua_ModCoroutineRunner_HasActiveForMod_" data-uid="Redux.Lua.ModCoroutineRunner.HasActiveForMod*"></a>
+  <h4 id="Redux_Lua_ModCoroutineRunner_HasActiveForMod_System_String_" data-uid="Redux.Lua.ModCoroutineRunner.HasActiveForMod(System.String)">HasActiveForMod(string)</h4>
+  <div class="markdown level1 summary"><p>Whether any active coroutine belongs to the given mod or run id.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool HasActiveForMod(string modId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">modId</span></td>
+        <td><p>The mod or run id to test.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True while at least one of its coroutines is still running.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="Redux_Lua_ModCoroutineRunner_Start_" data-uid="Redux.Lua.ModCoroutineRunner.Start*"></a>
   <h4 id="Redux_Lua_ModCoroutineRunner_Start_System_String_MoonSharp_Interpreter_Closure_" data-uid="Redux.Lua.ModCoroutineRunner.Start(System.String,MoonSharp.Interpreter.Closure)">Start(string, Closure)</h4>
   <div class="markdown level1 summary"><p>Starts a coroutine over the given function, resumed every frame until it finishes or is stopped.</p>
@@ -153,7 +198,7 @@
   <a id="Redux_Lua_ModCoroutineRunner_StopAll_" data-uid="Redux.Lua.ModCoroutineRunner.StopAll*"></a>
   <h4 id="Redux_Lua_ModCoroutineRunner_StopAll" data-uid="Redux.Lua.ModCoroutineRunner.StopAll">StopAll()</h4>
   <div class="markdown level1 summary"><p>Drops every active coroutine. Called at each Play Mode boot so coroutines started by a previous
-session's scripts do not keep ticking after a play→stop→play cycle when Domain Reload is disabled
+session's scripts do not keep ticking after a play-stop-play cycle when Domain Reload is disabled
 (this static list otherwise persists, leaving stale handles bound to a dead Script). The driver
 GameObject is left alone: it is destroyed on play exit and <span class="xref">Redux.Lua.ModCoroutineRunner.EnsureDriver</span> recreates it.</p>
 </div>
@@ -162,6 +207,40 @@ GameObject is left alone: it is destroyed on play exit and <span class="xref">Re
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static void StopAll()</code></pre>
   </div>
+
+
+  <a id="Redux_Lua_ModCoroutineRunner_StopForMod_" data-uid="Redux.Lua.ModCoroutineRunner.StopForMod*"></a>
+  <h4 id="Redux_Lua_ModCoroutineRunner_StopForMod_System_String_" data-uid="Redux.Lua.ModCoroutineRunner.StopForMod(System.String)">StopForMod(string)</h4>
+  <div class="markdown level1 summary"><p>Stops every active coroutine started for the given mod or run id, dropping them on the next tick.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void StopForMod(string modId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">modId</span></td>
+        <td><p>The mod or run id whose coroutines to stop.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Lua_ModCoroutineRunner_StopForMod_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Lets a host cancel just the coroutines one mod or console run spawned, without touching others. The
+console run id and its environment's ModId are the same string, so cancelling a console run stops the
+coroutines its Wait callbacks started.</p>
+</div>
 
 
   <a id="Redux_Lua_ModCoroutineRunner_Tick_" data-uid="Redux.Lua.ModCoroutineRunner.Tick*"></a>
