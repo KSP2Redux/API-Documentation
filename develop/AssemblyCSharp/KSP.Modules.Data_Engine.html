@@ -90,6 +90,10 @@
     <div class="level1"><a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a></div>
     <div class="level2"><span class="xref">Data_Engine</span></div>
   </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Redux.Ecs.CompilerServices.IPartModuleNotifier.html">IPartModuleNotifier</a></div>
+  </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
@@ -133,9 +137,6 @@
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_UpdateGuids_System_Collections_Generic_Dictionary_KSP_Sim_impl_IGGuid_KSP_Sim_impl_IGGuid__">ModuleData.UpdateGuids(Dictionary&lt;IGGuid, IGGuid&gt;)</a>
-    </div>
-    <div>
-      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_">ModuleData.BindToEntity(EntityManager, Entity)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RebuildDataContext">ModuleData.RebuildDataContext()</a>
@@ -214,7 +215,7 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Data_Engine_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class Data_Engine : ModuleData</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class Data_Engine : ModuleData, IPartModuleNotifier</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -365,7 +366,7 @@ public FloatCurve EmissiveTemperatureCurve</code></pre>
     <pre><code class="lang-csharp hljs">[LocalizedField(&quot;PartModules/Engine/AutoSwitch&quot;)]
 [PAMDisplayControl(SortIndex = 4)]
 [KSPState]
-public ModuleProperty&lt;bool&gt; EngineAutoSwitchMode</code></pre>
+public EntityModuleProperty&lt;EngineData, bool&gt; EngineAutoSwitchMode</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -377,7 +378,7 @@ public ModuleProperty&lt;bool&gt; EngineAutoSwitchMode</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">bool</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.EngineData.html">EngineData</a>, <span class="xref">bool</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -642,7 +643,7 @@ public ModuleProperty&lt;float&gt; HeatProduced</code></pre>
     <pre><code class="lang-csharp hljs">[LocalizedField(&quot;PartModules/Engine/IndependentThrottle&quot;)]
 [KSPState(CopyToSymmetrySet = true)]
 [PAMDisplayControl(SortIndex = 12)]
-public ModuleProperty&lt;bool&gt; IndependentThrottle</code></pre>
+public EntityModuleProperty&lt;EngineData, bool&gt; IndependentThrottle</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -654,7 +655,7 @@ public ModuleProperty&lt;bool&gt; IndependentThrottle</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">bool</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.EngineData.html">EngineData</a>, <span class="xref">bool</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -670,7 +671,7 @@ public ModuleProperty&lt;bool&gt; IndependentThrottle</code></pre>
 [KSPState(CopyToSymmetrySet = true)]
 [PAMDisplayControl(SortIndex = 13)]
 [SteppedRange(0, 100, 1)]
-public ModuleProperty&lt;float&gt; IndependentThrottlePercentage</code></pre>
+public EntityModuleProperty&lt;EngineData, float&gt; IndependentThrottlePercentage</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -682,7 +683,7 @@ public ModuleProperty&lt;float&gt; IndependentThrottlePercentage</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">float</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.EngineData.html">EngineData</a>, <span class="xref">float</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -1166,7 +1167,7 @@ public bool staged</code></pre>
     <pre><code class="lang-csharp hljs">[LocalizedField(&quot;PartModules/Engine/EngineStaging&quot;)]
 [PAMDisplayControl(SortIndex = 11)]
 [KSPState]
-public ModuleProperty&lt;bool&gt; stagingOn</code></pre>
+public EntityModuleProperty&lt;EngineData, bool&gt; stagingOn</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -1178,7 +1179,7 @@ public ModuleProperty&lt;bool&gt; stagingOn</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">bool</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.EngineData.html">EngineData</a>, <span class="xref">bool</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -1244,7 +1245,7 @@ public float thrustCurveRatio</code></pre>
 [PAMDisplayControl(SortIndex = 7)]
 [KSPState(CopyToSymmetrySet = true)]
 [SteppedRange(0, 100, 1)]
-public ModuleProperty&lt;float&gt; thrustPercentage</code></pre>
+public EntityModuleProperty&lt;EngineData, float&gt; thrustPercentage</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -1256,7 +1257,7 @@ public ModuleProperty&lt;float&gt; thrustPercentage</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">float</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.EngineData.html">EngineData</a>, <span class="xref">float</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -1392,6 +1393,41 @@ public ModuleProperty&lt;float&gt; thrustPercentage</code></pre>
   </table>
   <h3 id="methods">Methods
 </h3>
+
+
+  <a id="KSP_Modules_Data_Engine_BindToEntity_" data-uid="KSP.Modules.Data_Engine.BindToEntity*"></a>
+  <h4 id="KSP_Modules_Data_Engine_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_" data-uid="KSP.Modules.Data_Engine.BindToEntity(Unity.Entities.EntityManager,Unity.Entities.Entity)">BindToEntity(EntityManager, Entity)</h4>
+  <div class="markdown level1 summary"><p>Binds this module's state and config to its part entity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void BindToEntity(EntityManager em, Entity entity)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">entity</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_">ModuleData.BindToEntity(EntityManager, Entity)</a></div>
 
 
   <a id="KSP_Modules_Data_Engine_GetHeatString_" data-uid="KSP.Modules.Data_Engine.GetHeatString*"></a>
@@ -1898,6 +1934,39 @@ public ModuleProperty&lt;float&gt; thrustPercentage</code></pre>
   </table>
 
 
+  <a id="KSP_Modules_Data_Engine_NotifyChanged_" data-uid="KSP.Modules.Data_Engine.NotifyChanged*"></a>
+  <h4 id="KSP_Modules_Data_Engine_NotifyChanged_Unity_Entities_EntityManager_Unity_Entities_Entity_" data-uid="KSP.Modules.Data_Engine.NotifyChanged(Unity.Entities.EntityManager,Unity.Entities.Entity)">NotifyChanged(EntityManager, Entity)</h4>
+  <div class="markdown level1 summary"><p>Raises OnChanged for each changed property on the part's EngineData.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void NotifyChanged(EntityManager em, Entity entity)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">entity</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Modules_Data_Engine_OABGetThrust_" data-uid="KSP.Modules.Data_Engine.OABGetThrust*"></a>
   <h4 id="KSP_Modules_Data_Engine_OABGetThrust_KSP_Modules_Data_Engine_EngineMode_System_Single_System_Single_" data-uid="KSP.Modules.Data_Engine.OABGetThrust(KSP.Modules.Data_Engine.EngineMode,System.Single,System.Single)">OABGetThrust(EngineMode, float, float)</h4>
   <div class="markdown level1 summary"></div>
@@ -2044,6 +2113,10 @@ public ModuleProperty&lt;float&gt; thrustPercentage</code></pre>
       </tr>
     </tbody>
   </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Redux.Ecs.CompilerServices.IPartModuleNotifier.html">IPartModuleNotifier</a>
+  </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
