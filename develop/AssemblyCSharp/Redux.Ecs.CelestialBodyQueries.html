@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class CelestialBodyQueries | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="Burst sphere-of-influence queries over the celestial-body tree.">
+    <meta name="description" content="Burst queries over the celestial-body tree (sphere-of-influence descent, altitude).">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,7 @@
 
 
   <h1 id="Redux_Ecs_CelestialBodyQueries" data-uid="Redux.Ecs.CelestialBodyQueries" class="text-break">Class CelestialBodyQueries</h1>
-  <div class="markdown level0 summary"><p>Burst sphere-of-influence queries over the celestial-body tree.</p>
+  <div class="markdown level0 summary"><p>Burst queries over the celestial-body tree (sphere-of-influence descent, altitude).</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -98,6 +98,119 @@ public static class CelestialBodyQueries</code></pre>
   </div>
   <h3 id="methods">Methods
 </h3>
+
+
+  <a id="Redux_Ecs_CelestialBodyQueries_GetAltitudeFromRadius_" data-uid="Redux.Ecs.CelestialBodyQueries.GetAltitudeFromRadius*"></a>
+  <h4 id="Redux_Ecs_CelestialBodyQueries_GetAltitudeFromRadius_Unity_Entities_Entity__Unity_Entities_ComponentLookup_Redux_Ecs_Components_CelestialBodySimData___Unity_Entities_ComponentLookup_Redux_Ecs_Components_Transformd___Unity_Entities_BufferLookup_Redux_Ecs_Components_AncestorList___Unity_Entities_Entity__Vector3d__System_Double__" data-uid="Redux.Ecs.CelestialBodyQueries.GetAltitudeFromRadius(Unity.Entities.Entity@,Unity.Entities.ComponentLookup{Redux.Ecs.Components.CelestialBodySimData}@,Unity.Entities.ComponentLookup{Redux.Ecs.Components.Transformd}@,Unity.Entities.BufferLookup{Redux.Ecs.Components.AncestorList}@,Unity.Entities.Entity@,Vector3d@,System.Double@)">GetAltitudeFromRadius(in Entity, in ComponentLookup&lt;CelestialBodySimData&gt;, in ComponentLookup&lt;Transformd&gt;, in BufferLookup&lt;AncestorList&gt;, in Entity, in Vector3d, out double)</h4>
+  <div class="markdown level1 summary"><p>Job-callable overload of
+<a class="xref" href="Redux.Ecs.CelestialBodyQueries.html#Redux_Ecs_CelestialBodyQueries_GetAltitudeFromRadius_Unity_Entities_EntityManager__Unity_Entities_Entity__Unity_Entities_Entity__Vector3d__System_Double__">GetAltitudeFromRadius(in EntityManager, in Entity, in Entity, in Vector3d, out double)</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[BurstCompile]
+public static void GetAltitudeFromRadius(in Entity body, in ComponentLookup&lt;CelestialBodySimData&gt; bodies, in ComponentLookup&lt;Transformd&gt; transforms, in BufferLookup&lt;AncestorList&gt; ancestors, in Entity coordinateSystemEntity, in Vector3d localPosition, out double altitude)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">body</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">ComponentLookup</span>&lt;<a class="xref" href="Redux.Ecs.Components.CelestialBodySimData.html">CelestialBodySimData</a>&gt;</td>
+        <td><span class="parametername">bodies</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">ComponentLookup</span>&lt;<a class="xref" href="Redux.Ecs.Components.Transformd.html">Transformd</a>&gt;</td>
+        <td><span class="parametername">transforms</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">BufferLookup</span>&lt;<a class="xref" href="Redux.Ecs.Components.AncestorList.html">AncestorList</a>&gt;</td>
+        <td><span class="parametername">ancestors</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">coordinateSystemEntity</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">localPosition</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">altitude</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Ecs_CelestialBodyQueries_GetAltitudeFromRadius_" data-uid="Redux.Ecs.CelestialBodyQueries.GetAltitudeFromRadius*"></a>
+  <h4 id="Redux_Ecs_CelestialBodyQueries_GetAltitudeFromRadius_Unity_Entities_EntityManager__Unity_Entities_Entity__Unity_Entities_Entity__Vector3d__System_Double__" data-uid="Redux.Ecs.CelestialBodyQueries.GetAltitudeFromRadius(Unity.Entities.EntityManager@,Unity.Entities.Entity@,Unity.Entities.Entity@,Vector3d@,System.Double@)">GetAltitudeFromRadius(in EntityManager, in Entity, in Entity, in Vector3d, out double)</h4>
+  <div class="markdown level1 summary"><p>The altitude of <code class="paramref">localPosition</code> (given in <code class="paramref">coordinateSystemEntity</code>'s
+frame) above <code class="paramref">body</code>'s surface, i.e. the distance from the body centre minus its radius.
+Returns 0 for a body that is missing or has no celestial-frame entity. The position is expressed relative
+to the body's celestial frame, so as a part's own transform entity is itself a frame, a part altitude is
+<code>GetAltitudeFromRadius(body, em, partEntity, Vector3d.zero, out altitude)</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[BurstCompile]
+public static void GetAltitudeFromRadius(in EntityManager em, in Entity body, in Entity coordinateSystemEntity, in Vector3d localPosition, out double altitude)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">body</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">coordinateSystemEntity</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">localPosition</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">altitude</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <a id="Redux_Ecs_CelestialBodyQueries_GetMainBody_" data-uid="Redux.Ecs.CelestialBodyQueries.GetMainBody*"></a>
