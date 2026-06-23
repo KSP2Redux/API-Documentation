@@ -90,6 +90,10 @@
     <div class="level1"><a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a></div>
     <div class="level2"><span class="xref">Data_Drag</span></div>
   </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Redux.Ecs.CompilerServices.IPartModuleNotifier.html">IPartModuleNotifier</a></div>
+  </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
@@ -136,9 +140,6 @@
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_OnPartBehaviourModuleInit">ModuleData.OnPartBehaviourModuleInit()</a>
-    </div>
-    <div>
-      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_">ModuleData.BindToEntity(EntityManager, Entity)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RebuildDataContext">ModuleData.RebuildDataContext()</a>
@@ -217,7 +218,7 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Data_Drag_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class Data_Drag : ModuleData</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class Data_Drag : ModuleData, IPartModuleNotifier</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -233,6 +234,31 @@
   </div>
   <h3 id="fields">Fields
 </h3>
+
+
+  <h4 id="KSP_Modules_Data_Drag_AirstreamArea" data-uid="KSP.Modules.Data_Drag.AirstreamArea">AirstreamArea</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PAMDisplayControl(ExcludeFromContext = true)]
+public EntityModuleProperty&lt;DragData, float&gt; AirstreamArea</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.DragData.html">DragData</a>, <span class="xref">float</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <h4 id="KSP_Modules_Data_Drag_BodyLiftEnabled" data-uid="KSP.Modules.Data_Drag.BodyLiftEnabled">BodyLiftEnabled</h4>
@@ -292,7 +318,7 @@ public bool DragEnabled</code></pre>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[LocalizedField(&quot;PartModules/Drag/DragDirection&quot;)]
 [PAMDisplayControl(SortIndex = 0)]
-public ModuleProperty&lt;Vector3&gt; DragForceDirection</code></pre>
+public EntityModuleProperty&lt;DragData, Vector3&gt; DragForceDirection</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -304,7 +330,7 @@ public ModuleProperty&lt;Vector3&gt; DragForceDirection</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">Vector3</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.DragData.html">DragData</a>, <span class="xref">Vector3</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -318,7 +344,7 @@ public ModuleProperty&lt;Vector3&gt; DragForceDirection</code></pre>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[LocalizedField(&quot;PartModules/Drag/DragMagnitude&quot;)]
 [PAMDisplayControl(SortIndex = 1)]
-public ModuleProperty&lt;float&gt; DragForceMagnitude</code></pre>
+public EntityModuleProperty&lt;DragData, float&gt; DragForceMagnitude</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -330,7 +356,7 @@ public ModuleProperty&lt;float&gt; DragForceMagnitude</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">float</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.DragData.html">DragData</a>, <span class="xref">float</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -344,7 +370,7 @@ public ModuleProperty&lt;float&gt; DragForceMagnitude</code></pre>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[LocalizedField(&quot;PartModules/Drag/ExposedArea&quot;)]
 [PAMDisplayControl(SortIndex = 5)]
-public ModuleProperty&lt;float&gt; ExposedArea</code></pre>
+public EntityModuleProperty&lt;DragData, float&gt; ExposedArea</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -356,7 +382,7 @@ public ModuleProperty&lt;float&gt; ExposedArea</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">float</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.DragData.html">DragData</a>, <span class="xref">float</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -370,7 +396,7 @@ public ModuleProperty&lt;float&gt; ExposedArea</code></pre>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[LocalizedField(&quot;PartModules/Drag/LiftDirection&quot;)]
 [PAMDisplayControl(SortIndex = 2)]
-public ModuleProperty&lt;Vector3&gt; LiftForceDirection</code></pre>
+public EntityModuleProperty&lt;DragData, Vector3&gt; LiftForceDirection</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -382,7 +408,7 @@ public ModuleProperty&lt;Vector3&gt; LiftForceDirection</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">Vector3</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.DragData.html">DragData</a>, <span class="xref">Vector3</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -396,7 +422,7 @@ public ModuleProperty&lt;Vector3&gt; LiftForceDirection</code></pre>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[LocalizedField(&quot;PartModules/Drag/LiftMagnitude&quot;)]
 [PAMDisplayControl(SortIndex = 3)]
-public ModuleProperty&lt;float&gt; LiftForceMagnitude</code></pre>
+public EntityModuleProperty&lt;DragData, float&gt; LiftForceMagnitude</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -408,7 +434,7 @@ public ModuleProperty&lt;float&gt; LiftForceMagnitude</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">float</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.DragData.html">DragData</a>, <span class="xref">float</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -422,7 +448,7 @@ public ModuleProperty&lt;float&gt; LiftForceMagnitude</code></pre>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[LocalizedField(&quot;PartModules/Drag/ReferenceArea&quot;)]
 [PAMDisplayControl(SortIndex = 4)]
-public ModuleProperty&lt;float&gt; ReferenceArea</code></pre>
+public EntityModuleProperty&lt;DragData, float&gt; ReferenceArea</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -434,7 +460,7 @@ public ModuleProperty&lt;float&gt; ReferenceArea</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">float</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.DragData.html">DragData</a>, <span class="xref">float</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -448,7 +474,7 @@ public ModuleProperty&lt;float&gt; ReferenceArea</code></pre>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[LocalizedField(&quot;PartModules/Drag/TotalArea&quot;)]
 [PAMDisplayControl(SortIndex = 6)]
-public ModuleProperty&lt;float&gt; TotalArea</code></pre>
+public EntityModuleProperty&lt;DragData, float&gt; TotalArea</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -460,7 +486,7 @@ public ModuleProperty&lt;float&gt; TotalArea</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">float</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.DragData.html">DragData</a>, <span class="xref">float</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -822,6 +848,41 @@ public Vector3 weightedSize</code></pre>
 </h3>
 
 
+  <a id="KSP_Modules_Data_Drag_BindToEntity_" data-uid="KSP.Modules.Data_Drag.BindToEntity*"></a>
+  <h4 id="KSP_Modules_Data_Drag_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_" data-uid="KSP.Modules.Data_Drag.BindToEntity(Unity.Entities.EntityManager,Unity.Entities.Entity)">BindToEntity(EntityManager, Entity)</h4>
+  <div class="markdown level1 summary"><p>Binds this module's state and config to its part entity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void BindToEntity(EntityManager em, Entity entity)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">entity</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_">ModuleData.BindToEntity(EntityManager, Entity)</a></div>
+
+
   <a id="KSP_Modules_Data_Drag_GetAeroDataForDirection_" data-uid="KSP.Modules.Data_Drag.GetAeroDataForDirection*"></a>
   <h4 id="KSP_Modules_Data_Drag_GetAeroDataForDirection_UnityEngine_Vector3_System_Single_KSP_Modules_Data_Drag_CubeData__" data-uid="KSP.Modules.Data_Drag.GetAeroDataForDirection(UnityEngine.Vector3,System.Single,KSP.Modules.Data_Drag.CubeData@)">GetAeroDataForDirection(Vector3, float, ref CubeData)</h4>
   <div class="markdown level1 summary"></div>
@@ -906,6 +967,39 @@ public Vector3 weightedSize</code></pre>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_GetPartInfoEntries_System_Type_System_Collections_Generic_List_OABPartData_PartInfoModuleEntry__">ModuleData.GetPartInfoEntries(Type, List&lt;OABPartData.PartInfoModuleEntry&gt;)</a></div>
+
+
+  <a id="KSP_Modules_Data_Drag_NotifyChanged_" data-uid="KSP.Modules.Data_Drag.NotifyChanged*"></a>
+  <h4 id="KSP_Modules_Data_Drag_NotifyChanged_Unity_Entities_EntityManager_Unity_Entities_Entity_" data-uid="KSP.Modules.Data_Drag.NotifyChanged(Unity.Entities.EntityManager,Unity.Entities.Entity)">NotifyChanged(EntityManager, Entity)</h4>
+  <div class="markdown level1 summary"><p>Raises OnChanged for each changed property on the part's DragData.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void NotifyChanged(EntityManager em, Entity entity)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">entity</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <a id="KSP_Modules_Data_Drag_SetCubeArray_" data-uid="KSP.Modules.Data_Drag.SetCubeArray*"></a>
@@ -1066,6 +1160,10 @@ public Vector3 weightedSize</code></pre>
       </tr>
     </tbody>
   </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Redux.Ecs.CompilerServices.IPartModuleNotifier.html">IPartModuleNotifier</a>
+  </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
