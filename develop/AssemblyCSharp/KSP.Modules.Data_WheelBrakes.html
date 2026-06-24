@@ -90,6 +90,10 @@
     <div class="level1"><a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a></div>
     <div class="level2"><span class="xref">Data_WheelBrakes</span></div>
   </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Redux.Ecs.CompilerServices.IPartModuleNotifier.html">IPartModuleNotifier</a></div>
+  </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
@@ -136,9 +140,6 @@
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_OnPartBehaviourModuleInit">ModuleData.OnPartBehaviourModuleInit()</a>
-    </div>
-    <div>
-      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_">ModuleData.BindToEntity(EntityManager, Entity)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RebuildDataContext">ModuleData.RebuildDataContext()</a>
@@ -217,7 +218,7 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Data_WheelBrakes_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class Data_WheelBrakes : ModuleData</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class Data_WheelBrakes : ModuleData, IPartModuleNotifier</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -295,7 +296,7 @@ public float BrakeResponse</code></pre>
 [LocalizedField(&quot;PartModules/Wheels/Brakes&quot;)]
 [PAMDisplayControl(SortIndex = 11)]
 [SteppedRange(0, 200, 1)]
-public ModuleProperty&lt;float&gt; BrakeTweakable</code></pre>
+public EntityModuleProperty&lt;WheelBrakesData, float&gt; BrakeTweakable</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -307,7 +308,7 @@ public ModuleProperty&lt;float&gt; BrakeTweakable</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">float</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.WheelBrakesData.html">WheelBrakesData</a>, <span class="xref">float</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -320,7 +321,7 @@ public ModuleProperty&lt;float&gt; BrakeTweakable</code></pre>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[PAMDisplayControl(ExcludeFromContext = true)]
-public ModuleProperty&lt;bool&gt; IsBraking</code></pre>
+public EntityModuleProperty&lt;WheelBrakesData, bool&gt; IsBraking</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -332,7 +333,7 @@ public ModuleProperty&lt;bool&gt; IsBraking</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">bool</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.WheelBrakesData.html">WheelBrakesData</a>, <span class="xref">bool</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -394,6 +395,41 @@ public float MaxBrakeTorque</code></pre>
   <div><a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_ModuleType">ModuleData.ModuleType</a></div>
   <h3 id="methods">Methods
 </h3>
+
+
+  <a id="KSP_Modules_Data_WheelBrakes_BindToEntity_" data-uid="KSP.Modules.Data_WheelBrakes.BindToEntity*"></a>
+  <h4 id="KSP_Modules_Data_WheelBrakes_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_" data-uid="KSP.Modules.Data_WheelBrakes.BindToEntity(Unity.Entities.EntityManager,Unity.Entities.Entity)">BindToEntity(EntityManager, Entity)</h4>
+  <div class="markdown level1 summary"><p>Binds this module's state and config to its part entity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void BindToEntity(EntityManager em, Entity entity)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">entity</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_">ModuleData.BindToEntity(EntityManager, Entity)</a></div>
 
 
   <a id="KSP_Modules_Data_WheelBrakes_GetBrakeString_" data-uid="KSP.Modules.Data_WheelBrakes.GetBrakeString*"></a>
@@ -485,6 +521,43 @@ public float MaxBrakeTorque</code></pre>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_GetPartInfoEntries_System_Type_System_Collections_Generic_List_OABPartData_PartInfoModuleEntry__">ModuleData.GetPartInfoEntries(Type, List&lt;OABPartData.PartInfoModuleEntry&gt;)</a></div>
+
+
+  <a id="KSP_Modules_Data_WheelBrakes_NotifyChanged_" data-uid="KSP.Modules.Data_WheelBrakes.NotifyChanged*"></a>
+  <h4 id="KSP_Modules_Data_WheelBrakes_NotifyChanged_Unity_Entities_EntityManager_Unity_Entities_Entity_" data-uid="KSP.Modules.Data_WheelBrakes.NotifyChanged(Unity.Entities.EntityManager,Unity.Entities.Entity)">NotifyChanged(EntityManager, Entity)</h4>
+  <div class="markdown level1 summary"><p>Raises OnChanged for each changed property on the part's WheelBrakesData.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void NotifyChanged(EntityManager em, Entity entity)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">entity</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Redux.Ecs.CompilerServices.IPartModuleNotifier.html">IPartModuleNotifier</a>
+  </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>

@@ -90,6 +90,10 @@
     <div class="level1"><a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a></div>
     <div class="level2"><span class="xref">Data_RCS</span></div>
   </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Redux.Ecs.CompilerServices.IPartModuleNotifier.html">IPartModuleNotifier</a></div>
+  </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
@@ -133,9 +137,6 @@
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_UpdateGuids_System_Collections_Generic_Dictionary_KSP_Sim_impl_IGGuid_KSP_Sim_impl_IGGuid__">ModuleData.UpdateGuids(Dictionary&lt;IGGuid, IGGuid&gt;)</a>
-    </div>
-    <div>
-      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_">ModuleData.BindToEntity(EntityManager, Entity)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RebuildDataContext">ModuleData.RebuildDataContext()</a>
@@ -214,7 +215,7 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Data_RCS_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class Data_RCS : ModuleData</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class Data_RCS : ModuleData, IPartModuleNotifier</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -392,7 +393,7 @@ public bool disableUnderwater</code></pre>
     <pre><code class="lang-csharp hljs">[LocalizedField(&quot;PartModules/RCS/Pitch&quot;)]
 [KSPState(CopyToSymmetrySet = true)]
 [PAMDisplayControl(SortIndex = 5)]
-public ModuleProperty&lt;bool&gt; enablePitch</code></pre>
+public EntityModuleProperty&lt;RCSData, bool&gt; enablePitch</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -404,7 +405,7 @@ public ModuleProperty&lt;bool&gt; enablePitch</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">bool</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.RCSData.html">RCSData</a>, <span class="xref">bool</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -419,7 +420,7 @@ public ModuleProperty&lt;bool&gt; enablePitch</code></pre>
     <pre><code class="lang-csharp hljs">[LocalizedField(&quot;PartModules/RCS/Roll&quot;)]
 [KSPState(CopyToSymmetrySet = true)]
 [PAMDisplayControl(SortIndex = 7)]
-public ModuleProperty&lt;bool&gt; enableRoll</code></pre>
+public EntityModuleProperty&lt;RCSData, bool&gt; enableRoll</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -431,7 +432,7 @@ public ModuleProperty&lt;bool&gt; enableRoll</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">bool</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.RCSData.html">RCSData</a>, <span class="xref">bool</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -446,7 +447,7 @@ public ModuleProperty&lt;bool&gt; enableRoll</code></pre>
     <pre><code class="lang-csharp hljs">[LocalizedField(&quot;PartModules/RCS/PortStarboard&quot;)]
 [KSPState(CopyToSymmetrySet = true)]
 [PAMDisplayControl(SortIndex = 8)]
-public ModuleProperty&lt;bool&gt; enableX</code></pre>
+public EntityModuleProperty&lt;RCSData, bool&gt; enableX</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -458,7 +459,7 @@ public ModuleProperty&lt;bool&gt; enableX</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">bool</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.RCSData.html">RCSData</a>, <span class="xref">bool</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -473,7 +474,7 @@ public ModuleProperty&lt;bool&gt; enableX</code></pre>
     <pre><code class="lang-csharp hljs">[LocalizedField(&quot;PartModules/RCS/DorsalVentral&quot;)]
 [KSPState(CopyToSymmetrySet = true)]
 [PAMDisplayControl(SortIndex = 9)]
-public ModuleProperty&lt;bool&gt; enableY</code></pre>
+public EntityModuleProperty&lt;RCSData, bool&gt; enableY</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -485,7 +486,7 @@ public ModuleProperty&lt;bool&gt; enableY</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">bool</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.RCSData.html">RCSData</a>, <span class="xref">bool</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -500,7 +501,7 @@ public ModuleProperty&lt;bool&gt; enableY</code></pre>
     <pre><code class="lang-csharp hljs">[LocalizedField(&quot;PartModules/RCS/Yaw&quot;)]
 [KSPState(CopyToSymmetrySet = true)]
 [PAMDisplayControl(SortIndex = 6)]
-public ModuleProperty&lt;bool&gt; enableYaw</code></pre>
+public EntityModuleProperty&lt;RCSData, bool&gt; enableYaw</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -512,7 +513,7 @@ public ModuleProperty&lt;bool&gt; enableYaw</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">bool</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.RCSData.html">RCSData</a>, <span class="xref">bool</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -527,7 +528,7 @@ public ModuleProperty&lt;bool&gt; enableYaw</code></pre>
     <pre><code class="lang-csharp hljs">[LocalizedField(&quot;PartModules/RCS/ForeAft&quot;)]
 [KSPState(CopyToSymmetrySet = true)]
 [PAMDisplayControl(SortIndex = 10)]
-public ModuleProperty&lt;bool&gt; enableZ</code></pre>
+public EntityModuleProperty&lt;RCSData, bool&gt; enableZ</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -539,7 +540,7 @@ public ModuleProperty&lt;bool&gt; enableZ</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">bool</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.RCSData.html">RCSData</a>, <span class="xref">bool</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -554,7 +555,7 @@ public ModuleProperty&lt;bool&gt; enableZ</code></pre>
     <pre><code class="lang-csharp hljs">[LocalizedField(&quot;PartModules/RCS/ForeByThrottle&quot;)]
 [KSPState(CopyToSymmetrySet = true)]
 [PAMDisplayControl(SortIndex = 11)]
-public ModuleProperty&lt;bool&gt; foreByThrottle</code></pre>
+public EntityModuleProperty&lt;RCSData, bool&gt; foreByThrottle</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -566,7 +567,7 @@ public ModuleProperty&lt;bool&gt; foreByThrottle</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">bool</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.RCSData.html">RCSData</a>, <span class="xref">bool</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -581,7 +582,7 @@ public ModuleProperty&lt;bool&gt; foreByThrottle</code></pre>
     <pre><code class="lang-csharp hljs">[LocalizedField(&quot;PartModules/RCS/AlwaysFullAction&quot;)]
 [KSPState(CopyToSymmetrySet = true)]
 [PAMDisplayControl(SortIndex = 12)]
-public ModuleProperty&lt;bool&gt; fullThrust</code></pre>
+public EntityModuleProperty&lt;RCSData, bool&gt; fullThrust</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -593,7 +594,7 @@ public ModuleProperty&lt;bool&gt; fullThrust</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">bool</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.RCSData.html">RCSData</a>, <span class="xref">bool</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -633,7 +634,7 @@ public float fullThrustMin</code></pre>
     <pre><code class="lang-csharp hljs">[LocalizedField(&quot;PartModules/RCS/IsEnabled&quot;)]
 [KSPState(CopyToSymmetrySet = true)]
 [PAMDisplayControl(SortIndex = 2)]
-public ModuleProperty&lt;bool&gt; isEnabled</code></pre>
+public EntityModuleProperty&lt;RCSData, bool&gt; isEnabled</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -645,7 +646,7 @@ public ModuleProperty&lt;bool&gt; isEnabled</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">bool</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.RCSData.html">RCSData</a>, <span class="xref">bool</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -737,7 +738,7 @@ public FloatCurve thrustCurve</code></pre>
 [KSPState(CopyToSymmetrySet = true)]
 [PAMDisplayControl(SortIndex = 3)]
 [SteppedRange(0, 100, 1)]
-public ModuleProperty&lt;float&gt; thrustPercentage</code></pre>
+public EntityModuleProperty&lt;RCSData, float&gt; thrustPercentage</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -749,7 +750,7 @@ public ModuleProperty&lt;float&gt; thrustPercentage</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">float</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.RCSData.html">RCSData</a>, <span class="xref">float</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -835,6 +836,41 @@ public bool useThrustCurve</code></pre>
   <div><a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_ModuleType">ModuleData.ModuleType</a></div>
   <h3 id="methods">Methods
 </h3>
+
+
+  <a id="KSP_Modules_Data_RCS_BindToEntity_" data-uid="KSP.Modules.Data_RCS.BindToEntity*"></a>
+  <h4 id="KSP_Modules_Data_RCS_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_" data-uid="KSP.Modules.Data_RCS.BindToEntity(Unity.Entities.EntityManager,Unity.Entities.Entity)">BindToEntity(EntityManager, Entity)</h4>
+  <div class="markdown level1 summary"><p>Binds this module's state and config to its part entity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void BindToEntity(EntityManager em, Entity entity)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">entity</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_">ModuleData.BindToEntity(EntityManager, Entity)</a></div>
 
 
   <a id="KSP_Modules_Data_RCS_GetIspStrings_" data-uid="KSP.Modules.Data_RCS.GetIspStrings*"></a>
@@ -970,6 +1006,39 @@ public bool useThrustCurve</code></pre>
   </table>
 
 
+  <a id="KSP_Modules_Data_RCS_NotifyChanged_" data-uid="KSP.Modules.Data_RCS.NotifyChanged*"></a>
+  <h4 id="KSP_Modules_Data_RCS_NotifyChanged_Unity_Entities_EntityManager_Unity_Entities_Entity_" data-uid="KSP.Modules.Data_RCS.NotifyChanged(Unity.Entities.EntityManager,Unity.Entities.Entity)">NotifyChanged(EntityManager, Entity)</h4>
+  <div class="markdown level1 summary"><p>Raises OnChanged for each changed property on the part's RCSData.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void NotifyChanged(EntityManager em, Entity entity)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">entity</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Modules_Data_RCS_OnPartBehaviourModuleInit_" data-uid="KSP.Modules.Data_RCS.OnPartBehaviourModuleInit*"></a>
   <h4 id="KSP_Modules_Data_RCS_OnPartBehaviourModuleInit" data-uid="KSP.Modules.Data_RCS.OnPartBehaviourModuleInit">OnPartBehaviourModuleInit()</h4>
   <div class="markdown level1 summary"></div>
@@ -1017,6 +1086,10 @@ public bool useThrustCurve</code></pre>
       </tr>
     </tbody>
   </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Redux.Ecs.CompilerServices.IPartModuleNotifier.html">IPartModuleNotifier</a>
+  </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
