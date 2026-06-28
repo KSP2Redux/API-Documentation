@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class ModulePropertyAttribute | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="Marks a private field on a [PartModuleDefinition] class as a tracked per-tick property. Codegen copies the field into the generated state component and builds a change-tracking property wrapper plus a PAW binding on the managed Data_*.">
+    <meta name="description" content="Marks a field on a [PartModuleDefinition] class or component as a property visible in the PAW.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,9 +81,8 @@
 
 
   <h1 id="Redux_Ecs_ModulePropertyAttribute" data-uid="Redux.Ecs.ModulePropertyAttribute" class="text-break">Class ModulePropertyAttribute</h1>
-  <div class="markdown level0 summary"><p>Marks a private field on a <code>[PartModuleDefinition]</code> class as a tracked per-tick property.
-Codegen copies the field into the generated state component and builds a change-tracking
-property wrapper plus a PAW binding on the managed <code>Data_*</code>.</p>
+  <div class="markdown level0 summary"><p>Marks a field on a <code>[PartModuleDefinition]</code> class or component as
+a property visible in the PAW.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -99,6 +98,13 @@ property wrapper plus a PAW binding on the managed <code>Data_*</code>.</p>
     <pre><code class="lang-csharp hljs">[AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
 public sealed class ModulePropertyAttribute : Attribute</code></pre>
   </div>
+  <h5 id="Redux_Ecs_ModulePropertyAttribute_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>Codegen will automatically generate a <a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty&lt;T&gt;</a>
+field on the corresponding <code>Data_</code> class and will also generate code
+to track when the field is changed on the component. Properties declared
+on the component are added there, ones defined in the definition class
+will only be added to the managed component.</p>
+</div>
   <h3 id="constructors">Constructors
 </h3>
 
@@ -123,32 +129,6 @@ public sealed class ModulePropertyAttribute : Attribute</code></pre>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public bool IsReadOnly { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">bool</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="Redux_Ecs_ModulePropertyAttribute_ManagedOnly_" data-uid="Redux.Ecs.ModulePropertyAttribute.ManagedOnly*"></a>
-  <h4 id="Redux_Ecs_ModulePropertyAttribute_ManagedOnly" data-uid="Redux.Ecs.ModulePropertyAttribute.ManagedOnly">ManagedOnly</h4>
-  <div class="markdown level1 summary"><p>When true, this field will not be added to the generated ECS data component.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool ManagedOnly { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-condensed">

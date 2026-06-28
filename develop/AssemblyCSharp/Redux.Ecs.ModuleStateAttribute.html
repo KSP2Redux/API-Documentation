@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class ModuleStateAttribute | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="Marks a field on a [PartModuleDefinition] class as a regular state field.">
+    <meta name="description" content="Marks a field on a part module component as a plain (untracked) value.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,7 @@
 
 
   <h1 id="Redux_Ecs_ModuleStateAttribute" data-uid="Redux.Ecs.ModuleStateAttribute" class="text-break">Class ModuleStateAttribute</h1>
-  <div class="markdown level0 summary"><p>Marks a field on a <code>[PartModuleDefinition]</code> class as a regular state field.</p>
+  <div class="markdown level0 summary"><p>Marks a field on a part module component as a plain (untracked) value.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -98,8 +98,9 @@
 public sealed class ModuleStateAttribute : Attribute</code></pre>
   </div>
   <h5 id="Redux_Ecs_ModuleStateAttribute_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>Codegen will add the field to the both the unmanaged component and also generate
-a forwarding property on the <code>Data_</code> class.</p>
+  <div class="markdown level0 remarks"><p>Codegen will then emit a managed passthrough property on the corresponding <code>Data_</code>
+class and the generated state class. You can opt into the field being serializable by
+setting <a class="xref" href="Redux.Ecs.ModuleStateAttribute.html#Redux_Ecs_ModuleStateAttribute_Serialized">Serialized</a> to <code>true</code>.</p>
 </div>
   <h3 id="constructors">Constructors
 </h3>
