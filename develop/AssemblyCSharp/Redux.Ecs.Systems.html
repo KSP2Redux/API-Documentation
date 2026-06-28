@@ -108,29 +108,6 @@ and baked surface sample.</p>
       <h4><a class="xref" href="Redux.Ecs.Systems.SurfaceAnchorUnityWriteSystem.html">SurfaceAnchorUnityWriteSystem</a></h4>
       <section><p>Pushes each surface-anchor entity's world pose onto its managed Unity <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a>.</p>
 </section>
-      <h4><a class="xref" href="Redux.Ecs.Systems.ThermalComputeSystem.html">ThermalComputeSystem</a></h4>
-      <section><p>The compute core. Schedules the staging jobs (per-owner body-altitude temperature, per-part body
-context) then the per-part flux integration (environment / reentry flux → temperature), the
-per-owner cooling-demand reduce, and per-part finalize (cooler rationing, temperature floor,
-overheat flag). The next tick's harvest reads the results back.</p>
-</section>
-      <h4><a class="xref" href="Redux.Ecs.Systems.ThermalHarvestSystem.html">ThermalHarvestSystem</a></h4>
-      <section><p>Front of the thermal tick: destroys parts flagged by <a class="xref" href="Redux.Ecs.Components.OverheatEvent.html">OverheatEvent</a> from the previous
-tick's compute. No-op until the first compute has run.</p>
-</section>
-      <h4><a class="xref" href="Redux.Ecs.Systems.ThermalManagedInputSystem.html">ThermalManagedInputSystem</a></h4>
-      <section><p>Computes this tick's universe delta and runs the still-managed per-part inputs via
-<a class="xref" href="KSP.Sim.impl.ThermalComponent.html#KSP_Sim_impl_ThermalComponent_RunThermalInputs_System_Double_">RunThermalInputs(double)</a> (module <code>ThermalUpdate</code> flux, cooler
-aggregation, aero/temperature copies) for every thermal vessel. Publishes the tick parameters the
-compute phase reads; <span class="xref">Redux.Ecs.Systems.ThermalManagedInputSystem.Active</span> is false on ticks where thermal is disabled or paused.</p>
-</section>
-      <h4><a class="xref" href="Redux.Ecs.Systems.ThermalSimGroup.html">ThermalSimGroup</a></h4>
-      <section><p>Hosts the per-tick thermal pipeline as three ordered phase systems:
-<a class="xref" href="Redux.Ecs.Systems.ThermalHarvestSystem.html">ThermalHarvestSystem</a> reads back the previous tick's results,
-<a class="xref" href="Redux.Ecs.Systems.ThermalManagedInputSystem.html">ThermalManagedInputSystem</a> runs the managed per-part inputs, and
-<a class="xref" href="Redux.Ecs.Systems.ThermalComputeSystem.html">ThermalComputeSystem</a> runs the staging and compute jobs. Each tick's compute is
-read back at the front of the next tick, so results are applied one tick later.</p>
-</section>
       <h4><a class="xref" href="Redux.Ecs.Systems.ViewLegacyFixedUpdateSystem.html">ViewLegacyFixedUpdateSystem</a></h4>
       <section></section>
       <h4><a class="xref" href="Redux.Ecs.Systems.ViewLegacyUpdateSystem.html">ViewLegacyUpdateSystem</a></h4>

@@ -62891,7 +62891,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "KSP.Sim.impl.ThermalComponent",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/KSP.Sim.impl.ThermalComponent.yml\" sourcestartlinenumber=\"1\">ObjectComponent that manages per-part thermal simulation for a vessel. Each tick it refreshes the part\nentities' thermal input state (managed module updates, cooler energy, body context) for the entity-wide\n<xref href=\"Redux.Ecs.Systems.ThermalSimGroup\" data-throw-if-not-resolved=\"false\"></xref> Burst pipeline, then reads back the results and destroys\noverheated parts. The managed bookend methods are driven by the group's phase systems.</p>\n"
+      "Summary": "<p sourcefile=\"AssemblyCSharp/KSP.Sim.impl.ThermalComponent.yml\" sourcestartlinenumber=\"1\">ObjectComponent that manages per-part thermal simulation for a vessel. Each tick it refreshes the part\nentities' thermal input state (managed module updates, cooler energy, body context) for the entity-wide\nRedux.Ecs.Systems.ThermalSimGroup Burst pipeline, then reads back the results and destroys\noverheated parts. The managed bookend methods are driven by the group's phase systems.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -80325,6 +80325,34 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/Redux.Ecs.Singletons.SimUpdateTime.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/Redux.Ecs.Singletons.SimUpdateTime.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Redux.Ecs.Singletons.SimUpdateTime",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/Redux.Ecs.Singletons.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/Redux.Ecs.Singletons.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Redux.Ecs.Singletons",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "AssemblyCSharp/Redux.Ecs.Systems.AuxPhysicsUpdate.yml",
       "output": {
         ".html": {
@@ -80661,59 +80689,101 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/Redux.Ecs.Systems.ThermalComputeSystem.yml",
+      "source_relative_path": "AssemblyCSharp/Redux.Ecs.Systems.ThermalUpdate.ThermalLegacySystem.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/Redux.Ecs.Systems.ThermalComputeSystem.html"
+          "relative_path": "AssemblyCSharp/Redux.Ecs.Systems.ThermalUpdate.ThermalLegacySystem.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Redux.Ecs.Systems.ThermalComputeSystem",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/Redux.Ecs.Systems.ThermalComputeSystem.yml\" sourcestartlinenumber=\"1\">The compute core. Schedules the staging jobs (per-owner body-altitude temperature, per-part body\ncontext) then the per-part flux integration (environment / reentry flux → temperature), the\nper-owner cooling-demand reduce, and per-part finalize (cooler rationing, temperature floor,\noverheat flag). The next tick's harvest reads the results back.</p>\n"
+      "Title": "Redux.Ecs.Systems.ThermalUpdate.ThermalLegacySystem",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/Redux.Ecs.Systems.ThermalHarvestSystem.yml",
+      "source_relative_path": "AssemblyCSharp/Redux.Ecs.Systems.ThermalUpdate.ThermalPartDestructionSystem.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/Redux.Ecs.Systems.ThermalHarvestSystem.html"
+          "relative_path": "AssemblyCSharp/Redux.Ecs.Systems.ThermalUpdate.ThermalPartDestructionSystem.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Redux.Ecs.Systems.ThermalHarvestSystem",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/Redux.Ecs.Systems.ThermalHarvestSystem.yml\" sourcestartlinenumber=\"1\">Front of the thermal tick: destroys parts flagged by <xref href=\"Redux.Ecs.Components.OverheatEvent\" data-throw-if-not-resolved=\"false\"></xref> from the previous\ntick's compute. No-op until the first compute has run.</p>\n"
+      "Title": "Redux.Ecs.Systems.ThermalUpdate.ThermalPartDestructionSystem",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/Redux.Ecs.Systems.ThermalUpdate.ThermalPartDestructionSystem.yml\" sourcestartlinenumber=\"1\">Destroy parts that overheated during the last update.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/Redux.Ecs.Systems.ThermalManagedInputSystem.yml",
+      "source_relative_path": "AssemblyCSharp/Redux.Ecs.Systems.ThermalUpdate.ThermalSimGroup.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/Redux.Ecs.Systems.ThermalManagedInputSystem.html"
+          "relative_path": "AssemblyCSharp/Redux.Ecs.Systems.ThermalUpdate.ThermalSimGroup.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Redux.Ecs.Systems.ThermalManagedInputSystem",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/Redux.Ecs.Systems.ThermalManagedInputSystem.yml\" sourcestartlinenumber=\"1\">Computes this tick's universe delta and runs the still-managed per-part inputs via\n<xref href=\"KSP.Sim.impl.ThermalComponent.RunThermalInputs(System.Double)\" data-throw-if-not-resolved=\"false\"></xref> (module <code>ThermalUpdate</code> flux, cooler\naggregation, aero/temperature copies) for every thermal vessel. Publishes the tick parameters the\ncompute phase reads; <xref href=\"Redux.Ecs.Systems.ThermalManagedInputSystem.Active\" data-throw-if-not-resolved=\"false\"></xref> is false on ticks where thermal is disabled or paused.</p>\n"
+      "Title": "Redux.Ecs.Systems.ThermalUpdate.ThermalSimGroup",
+      "Summary": "<p sourcefile=\"AssemblyCSharp/Redux.Ecs.Systems.ThermalUpdate.ThermalSimGroup.yml\" sourcestartlinenumber=\"1\">A system group for running thermal update systems. Run your custom thermal\nupdates for part modules as part of this group.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "AssemblyCSharp/Redux.Ecs.Systems.ThermalSimGroup.yml",
+      "source_relative_path": "AssemblyCSharp/Redux.Ecs.Systems.ThermalUpdate.ThermalUpdateSystem.yml",
       "output": {
         ".html": {
-          "relative_path": "AssemblyCSharp/Redux.Ecs.Systems.ThermalSimGroup.html"
+          "relative_path": "AssemblyCSharp/Redux.Ecs.Systems.ThermalUpdate.ThermalUpdateSystem.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Redux.Ecs.Systems.ThermalSimGroup",
-      "Summary": "<p sourcefile=\"AssemblyCSharp/Redux.Ecs.Systems.ThermalSimGroup.yml\" sourcestartlinenumber=\"1\">Hosts the per-tick thermal pipeline as three ordered phase systems:\n<xref href=\"Redux.Ecs.Systems.ThermalHarvestSystem\" data-throw-if-not-resolved=\"false\"></xref> reads back the previous tick's results,\n<xref href=\"Redux.Ecs.Systems.ThermalManagedInputSystem\" data-throw-if-not-resolved=\"false\"></xref> runs the managed per-part inputs, and\n<xref href=\"Redux.Ecs.Systems.ThermalComputeSystem\" data-throw-if-not-resolved=\"false\"></xref> runs the staging and compute jobs. Each tick's compute is\nread back at the front of the next tick, so results are applied one tick later.</p>\n"
+      "Title": "Redux.Ecs.Systems.ThermalUpdate.ThermalUpdateSystem",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/Redux.Ecs.Systems.ThermalUpdate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/Redux.Ecs.Systems.ThermalUpdate.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Redux.Ecs.Systems.ThermalUpdate",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/Redux.Ecs.Systems.Update.SimUniverseTimeUpdateSystem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/Redux.Ecs.Systems.Update.SimUniverseTimeUpdateSystem.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Redux.Ecs.Systems.Update.SimUniverseTimeUpdateSystem",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "AssemblyCSharp/Redux.Ecs.Systems.Update.yml",
+      "output": {
+        ".html": {
+          "relative_path": "AssemblyCSharp/Redux.Ecs.Systems.Update.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Redux.Ecs.Systems.Update",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
