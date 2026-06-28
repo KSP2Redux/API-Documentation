@@ -99,16 +99,10 @@ keyed by its content hash. Backed by <span class="xref">Unity.Entities.BlobAsset
 disposes them all when the world tears down (via <a class="xref" href="Redux.Ecs.CompilerServices.ModuleConfigCleanupSystem.html">ModuleConfigCleanupSystem</a>).</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.CompilerServices.ModuleNotifyFixedGroup.html">ModuleNotifyFixedGroup</a></h4>
-      <section><p>Holds the per-type module notify systems; runs after the scan group, before the reset group.</p>
+      <section><p>Holds the per-type module notify systems; runs after the scan group.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.CompilerServices.ModuleNotifyUpdateGroup.html">ModuleNotifyUpdateGroup</a></h4>
       <section><p>Per-frame counterpart of <a class="xref" href="Redux.Ecs.CompilerServices.ModuleNotifyFixedGroup.html">ModuleNotifyFixedGroup</a> under SimUpdateGroup.</p>
-</section>
-      <h4><a class="xref" href="Redux.Ecs.CompilerServices.ModuleResetFixedGroup.html">ModuleResetFixedGroup</a></h4>
-      <section><p>Holds the per-type module reset systems; runs last so the bitset survives until notify.</p>
-</section>
-      <h4><a class="xref" href="Redux.Ecs.CompilerServices.ModuleResetUpdateGroup.html">ModuleResetUpdateGroup</a></h4>
-      <section><p>Per-frame counterpart of <a class="xref" href="Redux.Ecs.CompilerServices.ModuleResetFixedGroup.html">ModuleResetFixedGroup</a> under SimUpdateGroup.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.CompilerServices.ModuleScanFixedGroup.html">ModuleScanFixedGroup</a></h4>
       <section><p>Holds the per-type module change scan systems at the end of the sim fixed-update tick.</p>
@@ -133,25 +127,19 @@ The system does no per-frame work; it exists only so its <a class="xref" href="R
 resolve to the same shared blob in <a class="xref" href="Redux.Ecs.CompilerServices.ModuleConfigBlobRegistry.html">ModuleConfigBlobRegistry</a>. Codegen
 feeds every blob-bound field through the matching <code>Add</code> overload.</p>
 </section>
-      <h4><a class="xref" href="Redux.Ecs.CompilerServices.ModuleNotifyFixedSystem-2.html">ModuleNotifyFixedSystem&lt;TData, TBinding&gt;</a></h4>
-      <section><p>Notify pass at the end of the sim fixed-update tick, after scan and before reset.</p>
+      <h4><a class="xref" href="Redux.Ecs.CompilerServices.ModuleNotifyFixedSystem-3.html">ModuleNotifyFixedSystem&lt;TData, TChangeset, TBinding&gt;</a></h4>
+      <section><p>Notify pass at the end of the sim fixed-update tick, after the scan pass.</p>
 </section>
-      <h4><a class="xref" href="Redux.Ecs.CompilerServices.ModuleNotifyUpdateSystem-2.html">ModuleNotifyUpdateSystem&lt;TData, TBinding&gt;</a></h4>
+      <h4><a class="xref" href="Redux.Ecs.CompilerServices.ModuleNotifyUpdateSystem-3.html">ModuleNotifyUpdateSystem&lt;TData, TChangeset, TBinding&gt;</a></h4>
       <section><p>Per-frame notify pass under SimUpdateGroup.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.CompilerServices.ModulePropertyState-1.html">ModulePropertyState&lt;T&gt;</a></h4>
       <section><p>A serializable type that has the same shape as <a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty&lt;T&gt;</a>.</p>
 </section>
-      <h4><a class="xref" href="Redux.Ecs.CompilerServices.ModuleResetFixedSystem-1.html">ModuleResetFixedSystem&lt;T&gt;</a></h4>
-      <section><p>Reset pass at the end of the sim fixed-update tick.</p>
-</section>
-      <h4><a class="xref" href="Redux.Ecs.CompilerServices.ModuleResetUpdateSystem-1.html">ModuleResetUpdateSystem&lt;T&gt;</a></h4>
-      <section><p>Per-frame reset pass under SimUpdateGroup.</p>
-</section>
-      <h4><a class="xref" href="Redux.Ecs.CompilerServices.ModuleScanFixedSystem-1.html">ModuleScanFixedSystem&lt;T&gt;</a></h4>
+      <h4><a class="xref" href="Redux.Ecs.CompilerServices.ModuleScanFixedSystem-2.html">ModuleScanFixedSystem&lt;TData, TChangeset&gt;</a></h4>
       <section><p>Scan pass at the end of the sim fixed-update tick.</p>
 </section>
-      <h4><a class="xref" href="Redux.Ecs.CompilerServices.ModuleScanUpdateSystem-1.html">ModuleScanUpdateSystem&lt;T&gt;</a></h4>
+      <h4><a class="xref" href="Redux.Ecs.CompilerServices.ModuleScanUpdateSystem-2.html">ModuleScanUpdateSystem&lt;TData, TChangeset&gt;</a></h4>
       <section><p>Per-frame scan pass under SimUpdateGroup.</p>
 </section>
     <h3 id="interfaces">
@@ -161,7 +149,7 @@ Interfaces
       <section><p>Interface indicating that a type has a custom &quot;state type&quot; that it uses
 for serialization.</p>
 </section>
-      <h4><a class="xref" href="Redux.Ecs.CompilerServices.IPartModuleNotifier.html">IPartModuleNotifier</a></h4>
+      <h4><a class="xref" href="Redux.Ecs.CompilerServices.IPartModuleNotifier-1.html">IPartModuleNotifier&lt;TChangeset&gt;</a></h4>
       <section><p>An interface implemented by generated managed module bindings.
 You should never need to use this directly.</p>
 </section>

@@ -92,7 +92,7 @@
   </div>
   <div class="implements">
     <h5>Implements</h5>
-    <div><a class="xref" href="Redux.Ecs.CompilerServices.IPartModuleNotifier.html">IPartModuleNotifier</a></div>
+    <div><a class="xref" href="Redux.Ecs.CompilerServices.IPartModuleNotifier-1.html">IPartModuleNotifier</a>&lt;<a class="xref" href="Redux.Ecs.Modules.EngineData.html">EngineData</a>.<a class="xref" href="Redux.Ecs.Modules.EngineData.Changeset.html">Changeset</a>&gt;</div>
     <div><a class="xref" href="Redux.Ecs.CompilerServices.IModuleStateSerializable.html">IModuleStateSerializable</a></div>
   </div>
   <div class="inheritedMembers">
@@ -216,7 +216,7 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Data_Engine_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class Data_Engine : ModuleData, IPartModuleNotifier, IModuleStateSerializable</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class Data_Engine : ModuleData, IPartModuleNotifier&lt;EngineData.Changeset&gt;, IModuleStateSerializable</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -1936,13 +1936,14 @@ public EntityModuleProperty&lt;EngineData, float&gt; thrustPercentage</code></pr
 
 
   <a id="KSP_Modules_Data_Engine_NotifyChanged_" data-uid="KSP.Modules.Data_Engine.NotifyChanged*"></a>
-  <h4 id="KSP_Modules_Data_Engine_NotifyChanged_Unity_Entities_EntityManager_Unity_Entities_Entity_" data-uid="KSP.Modules.Data_Engine.NotifyChanged(Unity.Entities.EntityManager,Unity.Entities.Entity)">NotifyChanged(EntityManager, Entity)</h4>
-  <div class="markdown level1 summary"><p>Raises OnChanged for each changed property on the part's EngineData.</p>
+  <h4 id="KSP_Modules_Data_Engine_NotifyChanged_Unity_Entities_EntityManager_Unity_Entities_Entity_Redux_Ecs_Modules_EngineData_Changeset_" data-uid="KSP.Modules.Data_Engine.NotifyChanged(Unity.Entities.EntityManager,Unity.Entities.Entity,Redux.Ecs.Modules.EngineData.Changeset)">NotifyChanged(EntityManager, Entity, Changeset)</h4>
+  <div class="markdown level1 summary"><p>Raises OnChanged for each changed property on the part's EngineData, driven by
+the changeset the scan pass captured. Live values are read from the component.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void NotifyChanged(EntityManager em, Entity entity)</code></pre>
+    <pre><code class="lang-csharp hljs">public void NotifyChanged(EntityManager em, Entity entity, EngineData.Changeset __changeset)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -1962,6 +1963,11 @@ public EntityModuleProperty&lt;EngineData, float&gt; thrustPercentage</code></pr
       <tr>
         <td><span class="xref">Entity</span></td>
         <td><span class="parametername">entity</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Redux.Ecs.Modules.EngineData.html">EngineData</a>.<a class="xref" href="Redux.Ecs.Modules.EngineData.Changeset.html">Changeset</a></td>
+        <td><span class="parametername">__changeset</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -2116,7 +2122,7 @@ public EntityModuleProperty&lt;EngineData, float&gt; thrustPercentage</code></pr
   </table>
   <h3 id="implements">Implements</h3>
   <div>
-      <a class="xref" href="Redux.Ecs.CompilerServices.IPartModuleNotifier.html">IPartModuleNotifier</a>
+      <a class="xref" href="Redux.Ecs.CompilerServices.IPartModuleNotifier-1.html">IPartModuleNotifier&lt;TChangeset&gt;</a>
   </div>
   <div>
       <a class="xref" href="Redux.Ecs.CompilerServices.IModuleStateSerializable.html">IModuleStateSerializable</a>
