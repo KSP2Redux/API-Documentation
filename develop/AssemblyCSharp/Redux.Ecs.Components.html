@@ -154,6 +154,10 @@ exposed as accessor properties on <a class="xref" href="KSP.Sim.impl.CelestialBo
       <h4><a class="xref" href="Redux.Ecs.Components.ContainerOwner.html">ContainerOwner</a></h4>
       <section><p>Links a resource-container entity to the part entity that owns it.</p>
 </section>
+      <h4><a class="xref" href="Redux.Ecs.Components.MassModifierData.html">MassModifierData</a></h4>
+      <section><p>Per-module mass contribution, written on a module entity by its part-module system and scattered into the
+owning part's <a class="xref" href="Redux.Ecs.Components.PartMassModifier.html">PartMassModifier</a> by MassAggregateSystem.</p>
+</section>
       <h4><a class="xref" href="Redux.Ecs.Components.ModulePart.html">ModulePart</a></h4>
       <section><p>The part entity that a part-module entity belongs to. A module instance lives on its own entity
 and resolves its owning part's data through this back-reference.</p>
@@ -185,6 +189,10 @@ entity holds all of its children. Rebuilt by
       <h4><a class="xref" href="Redux.Ecs.Components.PartComponentData.html">PartComponentData</a></h4>
       <section><p>Unmanaged source of truth for the blittable state of a part, exposed as accessor properties on
 <a class="xref" href="KSP.Sim.impl.PartComponent.html">PartComponent</a>.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.PartMassModifier.html">PartMassModifier</a></h4>
+      <section><p>A per-part component that is used by the mass update to sum up all
+mass modifiers on the part.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.PartModuleRef.html">PartModuleRef</a></h4>
       <section><p>One part-module entity owned by a part, as an entity reference. The buffer on a part entity holds
@@ -219,6 +227,13 @@ Keplerian math is (being) moved onto this struct as instance methods so it can l
       <h4><a class="xref" href="Redux.Ecs.Components.PhysicsSpaceFrame.html">PhysicsSpaceFrame</a></h4>
       <section><p>Singleton exposing the inertial reference frame entity (the PhysX/floating-origin frame) to Burst jobs, so they
 can perform the velocity/angular conversions otherwise only available on the managed PhysicsSpace provider.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.PhysicsStatsDirty.html">PhysicsStatsDirty</a></h4>
+      <section><p>Enableable tag on part-owner and part entities: enabled means the owner's physics stats need recomputing.
+Set on the owner by PartOwnerComponent (per-frame in OnLateUpdate, on structural changes, and by the forced
+recalculation path), broadcast onto the owner's parts by BroadcastDirtyFlagSystem, and cleared once the
+physics reduce has recomputed the owner. The part-level and owner-level reduce jobs filter on it, so clean
+owners are skipped entirely.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.PositionD.html">PositionD</a></h4>
       <section><p>Unmanaged equivalent of <a class="xref" href="KSP.Sim.Position.html">Position</a>: a position value plus the transform-frame entity it
@@ -272,6 +287,10 @@ Referenced by <a class="xref" href="Redux.Ecs.Components.ResourceDefinitionRow.h
       <h4><a class="xref" href="Redux.Ecs.Components.RotationD.html">RotationD</a></h4>
       <section><p>Unmanaged equivalent of <a class="xref" href="KSP.Sim.Rotation.html">Rotation</a>: a local rotation value plus the transform-frame
 entity it is expressed in.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.SimObjectData.html">SimObjectData</a></h4>
+      <section><p>Unmanaged type flags for a <a class="xref" href="KSP.Sim.impl.SimulationObjectModel.html">SimulationObjectModel</a>, packed into a single
+bitset and exposed as boolean accessors.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.SurfaceAnchorData.html">SurfaceAnchorData</a></h4>
       <section><p>Per-anchor data for a surface-anchored entity managed by <code>SurfaceAnchorTransformSystem</code>.</p>
