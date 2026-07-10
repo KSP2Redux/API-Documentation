@@ -117,7 +117,7 @@ public struct ModuleScanFixedSystem&lt;TData, TChangeset&gt; where TData : unman
 
   <a id="Redux_Ecs_CompilerServices_ModuleScanFixedSystem_2_OnCreate_" data-uid="Redux.Ecs.CompilerServices.ModuleScanFixedSystem`2.OnCreate*"></a>
   <h4 id="Redux_Ecs_CompilerServices_ModuleScanFixedSystem_2_OnCreate_Unity_Entities_SystemState__" data-uid="Redux.Ecs.CompilerServices.ModuleScanFixedSystem`2.OnCreate(Unity.Entities.SystemState@)">OnCreate(ref SystemState)</h4>
-  <div class="markdown level1 summary"><p>Called when this system is created.</p>
+  <div class="markdown level1 summary"><p>Initializes the system by delegating setup to the shared scan state.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -138,16 +138,11 @@ public void OnCreate(ref SystemState state)</code></pre>
       <tr>
         <td><span class="xref">SystemState</span></td>
         <td><span class="parametername">state</span></td>
-        <td><p>The <span class="xref">Unity.Entities.SystemState</span> backing this system instance</p>
+        <td><p>A reference to the system's state.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Redux_Ecs_CompilerServices_ModuleScanFixedSystem_2_OnCreate_Unity_Entities_SystemState___remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Implement an <code>OnCreate</code> function to set up system resources when it is created.</p>
-<p><code>OnCreate</code> is invoked before the the first time <span class="xref">Unity.Entities.ISystemStartStop.OnStartRunning(ref Unity.Entities.SystemState)</span>
-and <span class="xref">Unity.Entities.ISystem.OnUpdate(ref Unity.Entities.SystemState)</span> are invoked.</p>
-</div>
 
 
   <a id="Redux_Ecs_CompilerServices_ModuleScanFixedSystem_2_OnCreateForCompiler_" data-uid="Redux.Ecs.CompilerServices.ModuleScanFixedSystem`2.OnCreateForCompiler*"></a>
@@ -181,7 +176,7 @@ and <span class="xref">Unity.Entities.ISystem.OnUpdate(ref Unity.Entities.System
 
   <a id="Redux_Ecs_CompilerServices_ModuleScanFixedSystem_2_OnDestroy_" data-uid="Redux.Ecs.CompilerServices.ModuleScanFixedSystem`2.OnDestroy*"></a>
   <h4 id="Redux_Ecs_CompilerServices_ModuleScanFixedSystem_2_OnDestroy_Unity_Entities_SystemState__" data-uid="Redux.Ecs.CompilerServices.ModuleScanFixedSystem`2.OnDestroy(Unity.Entities.SystemState@)">OnDestroy(ref SystemState)</h4>
-  <div class="markdown level1 summary"><p>Called when this system is destroyed.</p>
+  <div class="markdown level1 summary"><p>Releases resources held by the shared scan state when the system is destroyed.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -202,21 +197,16 @@ public void OnDestroy(ref SystemState state)</code></pre>
       <tr>
         <td><span class="xref">SystemState</span></td>
         <td><span class="parametername">state</span></td>
-        <td><p>The <span class="xref">Unity.Entities.SystemState</span> backing this system instance</p>
+        <td><p>A reference to the system's state.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Redux_Ecs_CompilerServices_ModuleScanFixedSystem_2_OnDestroy_Unity_Entities_SystemState___remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Systems are destroyed when the application shuts down, the World is destroyed, or you
-call <span class="xref">Unity.Entities.World.DestroySystem(Unity.Entities.SystemHandle)</span>. In the Unity Editor, system destruction occurs when you exit
-Play Mode and when scripts are reloaded.</p>
-</div>
 
 
   <a id="Redux_Ecs_CompilerServices_ModuleScanFixedSystem_2_OnUpdate_" data-uid="Redux.Ecs.CompilerServices.ModuleScanFixedSystem`2.OnUpdate*"></a>
   <h4 id="Redux_Ecs_CompilerServices_ModuleScanFixedSystem_2_OnUpdate_Unity_Entities_SystemState__" data-uid="Redux.Ecs.CompilerServices.ModuleScanFixedSystem`2.OnUpdate(Unity.Entities.SystemState@)">OnUpdate(ref SystemState)</h4>
-  <div class="markdown level1 summary"><p>Implement <code>OnUpdate</code> to perform the major work of this system.</p>
+  <div class="markdown level1 summary"><p>Schedules the parallel module-scan job for the current fixed-update tick via the shared scan state.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -237,28 +227,11 @@ public void OnUpdate(ref SystemState state)</code></pre>
       <tr>
         <td><span class="xref">SystemState</span></td>
         <td><span class="parametername">state</span></td>
-        <td><p>The <span class="xref">Unity.Entities.SystemState</span> backing this system instance</p>
+        <td><p>A reference to the system's state.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Redux_Ecs_CompilerServices_ModuleScanFixedSystem_2_OnUpdate_Unity_Entities_SystemState___remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>
-By default, the system invokes `OnUpdate` once every frame on the main thread.
-To skip OnUpdate if all of the system's [EntityQueries] are empty, use the
-[RequireMatchingQueriesForUpdateAttribute]. To limit when OnUpdate is invoked, you can
-specify components that must exist, or queries that match specific Entities. To do
-this, call <span class="xref">Unity.Entities.SystemState.RequireForUpdate&lt;T&gt;()</span> or
-<span class="xref">Unity.Entities.SystemState.RequireForUpdate(Unity.Entities.EntityQuery)</span>
-in the system's OnCreate method. For more information, see <span class="xref">Unity.Entities.SystemState.ShouldRunSystem()</span>.
-</p>
-<p>
-You can instantiate and schedule an <span class="xref">Unity.Entities.IJobChunk</span> instance; you can use the
-[C# Job System] or you can perform work on the main thread. If you call <span class="xref">Unity.Entities.EntityManager</span> methods
-that perform structural changes on the main thread, be sure to arrange the system order to minimize the
-performance impact of the resulting [sync points].
-</p>
-</div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>

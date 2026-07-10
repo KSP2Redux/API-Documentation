@@ -116,7 +116,8 @@ public class ViewLegacyFixedUpdateSystem : SystemBase</code></pre>
 
   <a id="Redux_Ecs_Systems_ViewLegacyFixedUpdateSystem_FlightInputHandler_" data-uid="Redux.Ecs.Systems.ViewLegacyFixedUpdateSystem.FlightInputHandler*"></a>
   <h4 id="Redux_Ecs_Systems_ViewLegacyFixedUpdateSystem_FlightInputHandler" data-uid="Redux.Ecs.Systems.ViewLegacyFixedUpdateSystem.FlightInputHandler">FlightInputHandler</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets the flight input handler that processes controller input states during fixed updates.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -141,7 +142,8 @@ public class ViewLegacyFixedUpdateSystem : SystemBase</code></pre>
 
   <a id="Redux_Ecs_Systems_ViewLegacyFixedUpdateSystem_UniverseView_" data-uid="Redux.Ecs.Systems.ViewLegacyFixedUpdateSystem.UniverseView*"></a>
   <h4 id="Redux_Ecs_Systems_ViewLegacyFixedUpdateSystem_UniverseView" data-uid="Redux.Ecs.Systems.ViewLegacyFixedUpdateSystem.UniverseView">UniverseView</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets the universe view that receives fixed update callbacks.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -168,7 +170,7 @@ public class ViewLegacyFixedUpdateSystem : SystemBase</code></pre>
 
   <a id="Redux_Ecs_Systems_ViewLegacyFixedUpdateSystem_OnCreate_" data-uid="Redux.Ecs.Systems.ViewLegacyFixedUpdateSystem.OnCreate*"></a>
   <h4 id="Redux_Ecs_Systems_ViewLegacyFixedUpdateSystem_OnCreate" data-uid="Redux.Ecs.Systems.ViewLegacyFixedUpdateSystem.OnCreate">OnCreate()</h4>
-  <div class="markdown level1 summary"><p>Called when this system is created.</p>
+  <div class="markdown level1 summary"><p>Creates entity queries for part entities and vessel entities that have bound view objects.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -177,10 +179,6 @@ public class ViewLegacyFixedUpdateSystem : SystemBase</code></pre>
   </div>
   <h5 class="overrides">Overrides</h5>
   <div><span class="xref">Unity.Entities.ComponentSystemBase.OnCreate()</span></div>
-  <h5 id="Redux_Ecs_Systems_ViewLegacyFixedUpdateSystem_OnCreate_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Implement an OnCreate() function to set up system resources when it is created.</p>
-<p>OnCreate is invoked before the the first time <span class="xref">Unity.Entities.ComponentSystemBase.OnStartRunning()</span> and OnUpdate are invoked.</p>
-</div>
 
 
   <a id="Redux_Ecs_Systems_ViewLegacyFixedUpdateSystem_OnCreateForCompiler_" data-uid="Redux.Ecs.Systems.ViewLegacyFixedUpdateSystem.OnCreateForCompiler*"></a>
@@ -197,7 +195,7 @@ public class ViewLegacyFixedUpdateSystem : SystemBase</code></pre>
 
   <a id="Redux_Ecs_Systems_ViewLegacyFixedUpdateSystem_OnUpdate_" data-uid="Redux.Ecs.Systems.ViewLegacyFixedUpdateSystem.OnUpdate*"></a>
   <h4 id="Redux_Ecs_Systems_ViewLegacyFixedUpdateSystem_OnUpdate" data-uid="Redux.Ecs.Systems.ViewLegacyFixedUpdateSystem.OnUpdate">OnUpdate()</h4>
-  <div class="markdown level1 summary"><p>Implement <code>OnUpdate()</code> to perform the major work of this system.</p>
+  <div class="markdown level1 summary"><p>Invokes fixed update callbacks on part behaviors, part behavior modules, the flight input handler, vessel behaviors, and the universe view.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -206,23 +204,6 @@ public class ViewLegacyFixedUpdateSystem : SystemBase</code></pre>
   </div>
   <h5 class="overrides">Overrides</h5>
   <div><span class="xref">Unity.Entities.SystemBase.OnUpdate()</span></div>
-  <h5 id="Redux_Ecs_Systems_ViewLegacyFixedUpdateSystem_OnUpdate_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>
-By default, the system invokes `OnUpdate()` once every frame on the main thread.
-To skip OnUpdate if all of the system's [EntityQueries] are empty, use the
-[RequireMatchingQueriesForUpdateAttribute]. To limit when OnUpdate is invoked, you can
-specify components that must exist, or queries that match specific Entities. To do
-this, call <span class="xref">Unity.Entities.ComponentSystemBase.RequireForUpdate&lt;T&gt;()</span> or
-<span class="xref">Unity.Entities.ComponentSystemBase.RequireForUpdate(Unity.Entities.EntityQuery)</span>
-in the system's OnCreate method. For more information, see [ShouldRunSystem].
-</p>
-<p>
-Use [IJobEntity] or <span class="xref">Unity.Entities.SystemAPI.Query&lt;T1&gt;()</span> for common iteration patterns. You can also instantiate and schedule an <span class="xref">Unity.Entities.IJobChunk</span> instance;
-implement other <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Jobs.html">Unity.Jobs</a> interfaces or perform work on the main thread. If you call <span class="xref">Unity.Entities.EntityManager</span> methods
-that perform structural changes on the main thread, be sure to arrange the system order to minimize the
-performance impact of the resulting [sync points].
-</p>
-</div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
