@@ -90,13 +90,22 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public struct SerializedModuleData</code></pre>
   </div>
+  <h5 id="KSP_Sim_Definitions_SerializedModuleData_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>The module payload lives in one of two slots: <a class="xref" href="KSP.Sim.Definitions.SerializedModuleData.html#KSP_Sim_Definitions_SerializedModuleData_StateJson">StateJson</a> carries parsed JSON
+verbatim (save files, part definitions) without materializing a <a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a>,
+while the object slot holds a live instance for authoring paths (KSP1 import, captures of
+in-memory modules). <a class="xref" href="KSP.IO.SerializedModuleDataJsonConverter.html">SerializedModuleDataJsonConverter</a> keeps the on-disk
+shape identical for both slots.</p>
+</div>
   <h3 id="constructors">Constructors
 </h3>
 
 
   <a id="KSP_Sim_Definitions_SerializedModuleData__ctor_" data-uid="KSP.Sim.Definitions.SerializedModuleData.#ctor*"></a>
   <h4 id="KSP_Sim_Definitions_SerializedModuleData__ctor_KSP_Sim_Definitions_ModuleData_" data-uid="KSP.Sim.Definitions.SerializedModuleData.#ctor(KSP.Sim.Definitions.ModuleData)">SerializedModuleData(ModuleData)</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="KSP.Sim.Definitions.SerializedModuleData.html">SerializedModuleData</a> struct from the given module data.</p>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="KSP.Sim.Definitions.SerializedModuleData.html">SerializedModuleData</a> struct aliasing the
+given live module data; later mutations of the instance are reflected when this entry is
+serialized.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -126,12 +135,12 @@
 
 
   <h4 id="KSP_Sim_Definitions_SerializedModuleData_Data" data-uid="KSP.Sim.Definitions.SerializedModuleData.Data">Data</h4>
-  <div class="markdown level1 summary"><p>The raw serialized data string for this module entry, superseded by <a class="xref" href="KSP.Sim.Definitions.SerializedModuleData.html#KSP_Sim_Definitions_SerializedModuleData_DataObject">DataObject</a>.</p>
+  <div class="markdown level1 summary"><p>The raw serialized data string for this module entry, superseded by <a class="xref" href="KSP.Sim.Definitions.SerializedModuleData.html#KSP_Sim_Definitions_SerializedModuleData_StateJson">StateJson</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated. Use DataObject instead&quot;)]
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated. Use StateJson instead&quot;)]
 public string Data</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -145,31 +154,6 @@ public string Data</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">string</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="KSP_Sim_Definitions_SerializedModuleData_DataObject" data-uid="KSP.Sim.Definitions.SerializedModuleData.DataObject">DataObject</h4>
-  <div class="markdown level1 summary"><p>The deserialized <a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a> instance for this module entry.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ModuleData DataObject</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -247,6 +231,158 @@ public Type ModuleType</code></pre>
       <tr>
         <td><span class="xref">string</span></td>
         <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Sim_Definitions_SerializedModuleData_StateJson" data-uid="KSP.Sim.Definitions.SerializedModuleData.StateJson">StateJson</h4>
+  <div class="markdown level1 summary"><p>The module payload as parsed JSON, serialized under the &quot;DataObject&quot; name. Populated when
+this entry is deserialized from disk; the JSON is applied to a live module only at entity
+bind time, never to an unbound instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JObject StateJson</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">JObject</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="KSP_Sim_Definitions_SerializedModuleData_DataObject_" data-uid="KSP.Sim.Definitions.SerializedModuleData.DataObject*"></a>
+  <h4 id="KSP_Sim_Definitions_SerializedModuleData_DataObject" data-uid="KSP.Sim.Definitions.SerializedModuleData.DataObject">DataObject</h4>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a> instance for this module entry. Returns the live authored
+instance when one was assigned; otherwise materializes (and caches) a read-only unbound
+instance from <a class="xref" href="KSP.Sim.Definitions.SerializedModuleData.html#KSP_Sim_Definitions_SerializedModuleData_StateJson">StateJson</a>. Assigning stores a live reference that is
+serialized at write time.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ModuleData DataObject { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="KSP_Sim_Definitions_SerializedModuleData_CaptureStateJson_" data-uid="KSP.Sim.Definitions.SerializedModuleData.CaptureStateJson*"></a>
+  <h4 id="KSP_Sim_Definitions_SerializedModuleData_CaptureStateJson_KSP_Sim_Definitions_ModuleData_" data-uid="KSP.Sim.Definitions.SerializedModuleData.CaptureStateJson(KSP.Sim.Definitions.ModuleData)">CaptureStateJson(ModuleData)</h4>
+  <div class="markdown level1 summary"><p>Serializes a live module to the same JSON shape its &quot;DataObject&quot; slot has on disk,
+including the type discriminator.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static JObject CaptureStateJson(ModuleData moduleData)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a></td>
+        <td><span class="parametername">moduleData</span></td>
+        <td><p>The live <a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a> to serialize.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">JObject</span></td>
+        <td><p>The captured JSON payload.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_Definitions_SerializedModuleData_Snapshot_" data-uid="KSP.Sim.Definitions.SerializedModuleData.Snapshot*"></a>
+  <h4 id="KSP_Sim_Definitions_SerializedModuleData_Snapshot_KSP_Sim_Definitions_ModuleData_" data-uid="KSP.Sim.Definitions.SerializedModuleData.Snapshot(KSP.Sim.Definitions.ModuleData)">Snapshot(ModuleData)</h4>
+  <div class="markdown level1 summary"><p>Creates an entry holding an independent JSON snapshot of the given live module's current
+values, decoupled from the source instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static SerializedModuleData Snapshot(ModuleData moduleData)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a></td>
+        <td><span class="parametername">moduleData</span></td>
+        <td><p>The live <a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a> to capture.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.Definitions.SerializedModuleData.html">SerializedModuleData</a></td>
+        <td><p>A <a class="xref" href="KSP.Sim.Definitions.SerializedModuleData.html">SerializedModuleData</a> whose payload is a value snapshot.</p>
+</td>
       </tr>
     </tbody>
   </table>

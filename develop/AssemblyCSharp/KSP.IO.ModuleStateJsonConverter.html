@@ -112,6 +112,93 @@ to the type specified by <a class="xref" href="Redux.Ecs.CompilerServices.IModul
 </h3>
 
 
+  <a id="KSP_IO_ModuleStateJsonConverter_ApplyConfig_" data-uid="KSP.IO.ModuleStateJsonConverter.ApplyConfig*"></a>
+  <h4 id="KSP_IO_ModuleStateJsonConverter_ApplyConfig_Newtonsoft_Json_Linq_JObject_KSP_Sim_Definitions_ModuleData_Newtonsoft_Json_JsonSerializer_" data-uid="KSP.IO.ModuleStateJsonConverter.ApplyConfig(Newtonsoft.Json.Linq.JObject,KSP.Sim.Definitions.ModuleData,Newtonsoft.Json.JsonSerializer)">ApplyConfig(JObject, ModuleData, JsonSerializer)</h4>
+  <div class="markdown level1 summary"><p>Applies the non-state partition of <code class="paramref">payload</code> (config + base tail) to a
+live module via native population. Safe to run before entity bind: it never touches
+entity-backed state members.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void ApplyConfig(JObject payload, ModuleData target, JsonSerializer serializer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">JObject</span></td>
+        <td><span class="parametername">payload</span></td>
+        <td><p>The module's serialized JSON payload.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a></td>
+        <td><span class="parametername">target</span></td>
+        <td><p>The live module to apply config to.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">JsonSerializer</span></td>
+        <td><span class="parametername">serializer</span></td>
+        <td><p>The serializer whose contract resolver partitions the payload.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_IO_ModuleStateJsonConverter_ApplyState_" data-uid="KSP.IO.ModuleStateJsonConverter.ApplyState*"></a>
+  <h4 id="KSP_IO_ModuleStateJsonConverter_ApplyState_Newtonsoft_Json_Linq_JObject_KSP_Sim_Definitions_ModuleData_Newtonsoft_Json_JsonSerializer_" data-uid="KSP.IO.ModuleStateJsonConverter.ApplyState(Newtonsoft.Json.Linq.JObject,KSP.Sim.Definitions.ModuleData,Newtonsoft.Json.JsonSerializer)">ApplyState(JObject, ModuleData, JsonSerializer)</h4>
+  <div class="markdown level1 summary"><p>Applies the state partition of <code class="paramref">payload</code> to a live module: routed
+through the module state for generated modules (writing through the properties, so a
+bound module receives the values in ECS), or a native populate of the [KSPState] members
+for legacy modules.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void ApplyState(JObject payload, ModuleData target, JsonSerializer serializer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">JObject</span></td>
+        <td><span class="parametername">payload</span></td>
+        <td><p>The module's serialized JSON payload.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a></td>
+        <td><span class="parametername">target</span></td>
+        <td><p>The live module to apply state to.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">JsonSerializer</span></td>
+        <td><span class="parametername">serializer</span></td>
+        <td><p>The serializer whose contract resolver partitions the payload.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_IO_ModuleStateJsonConverter_CanConvert_" data-uid="KSP.IO.ModuleStateJsonConverter.CanConvert*"></a>
   <h4 id="KSP_IO_ModuleStateJsonConverter_CanConvert_System_Type_" data-uid="KSP.IO.ModuleStateJsonConverter.CanConvert(System.Type)">CanConvert(Type)</h4>
   <div class="markdown level1 summary"><p>Determines whether this converter can convert the specified type.</p>
@@ -151,6 +238,112 @@ to the type specified by <a class="xref" href="Redux.Ecs.CompilerServices.IModul
       <tr>
         <td><span class="xref">bool</span></td>
         <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if <code class="paramref">objectType</code> is assignable to <a class="xref" href="Redux.Ecs.CompilerServices.IModuleStateSerializable.html">IModuleStateSerializable</a>; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_IO_ModuleStateJsonConverter_GetStateMemberNames_" data-uid="KSP.IO.ModuleStateJsonConverter.GetStateMemberNames*"></a>
+  <h4 id="KSP_IO_ModuleStateJsonConverter_GetStateMemberNames_System_Type_Newtonsoft_Json_JsonSerializer_" data-uid="KSP.IO.ModuleStateJsonConverter.GetStateMemberNames(System.Type,Newtonsoft.Json.JsonSerializer)">GetStateMemberNames(Type, JsonSerializer)</h4>
+  <div class="markdown level1 summary"><p>Returns the on-disk names of a module type's persisted-state members: the module state
+members (for generated modules) united with the [KSPState]-attributed members.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static HashSet&lt;string&gt; GetStateMemberNames(Type dataType, JsonSerializer serializer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Type</span></td>
+        <td><span class="parametername">dataType</span></td>
+        <td><p>The concrete <a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a> type.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">JsonSerializer</span></td>
+        <td><span class="parametername">serializer</span></td>
+        <td><p>The serializer whose contract resolver names the members.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">HashSet</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td><p>The set of state member names.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_IO_ModuleStateJsonConverter_Partition_" data-uid="KSP.IO.ModuleStateJsonConverter.Partition*"></a>
+  <h4 id="KSP_IO_ModuleStateJsonConverter_Partition_Newtonsoft_Json_Linq_JObject_System_Type_Newtonsoft_Json_JsonSerializer_Newtonsoft_Json_Linq_JObject__Newtonsoft_Json_Linq_JObject__" data-uid="KSP.IO.ModuleStateJsonConverter.Partition(Newtonsoft.Json.Linq.JObject,System.Type,Newtonsoft.Json.JsonSerializer,Newtonsoft.Json.Linq.JObject@,Newtonsoft.Json.Linq.JObject@)">Partition(JObject, Type, JsonSerializer, out JObject, out JObject)</h4>
+  <div class="markdown level1 summary"><p>Splits a module JSON payload into its persisted-state members and everything else,
+dropping the type discriminator.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Partition(JObject payload, Type dataType, JsonSerializer serializer, out JObject state, out JObject rest)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">JObject</span></td>
+        <td><span class="parametername">payload</span></td>
+        <td><p>The module's serialized JSON payload.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Type</span></td>
+        <td><span class="parametername">dataType</span></td>
+        <td><p>The concrete <a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a> type of the payload.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">JsonSerializer</span></td>
+        <td><span class="parametername">serializer</span></td>
+        <td><p>The serializer whose contract resolver names the members.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">JObject</span></td>
+        <td><span class="parametername">state</span></td>
+        <td><p>The state partition.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">JObject</span></td>
+        <td><span class="parametername">rest</span></td>
+        <td><p>The non-state partition (config + base tail).</p>
 </td>
       </tr>
     </tbody>

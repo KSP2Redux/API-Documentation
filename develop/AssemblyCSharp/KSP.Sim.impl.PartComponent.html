@@ -2203,13 +2203,15 @@ public PartProperties partProperties { get; }</code></pre>
 
 
   <a id="KSP_Sim_impl_PartComponent_AddModule_" data-uid="KSP.Sim.impl.PartComponent.AddModule*"></a>
-  <h4 id="KSP_Sim_impl_PartComponent_AddModule_System_Type_KSP_Sim_impl_PartComponentModule_" data-uid="KSP.Sim.impl.PartComponent.AddModule(System.Type,KSP.Sim.impl.PartComponentModule)">AddModule(Type, PartComponentModule)</h4>
-  <div class="markdown level1 summary"><p>Adds a <a class="xref" href="KSP.Sim.impl.PartComponentModule.html">PartComponentModule</a> to this part and registers it with the ECS layer.</p>
+  <h4 id="KSP_Sim_impl_PartComponent_AddModule_System_Type_KSP_Sim_impl_PartComponentModule_System_Collections_Generic_IReadOnlyDictionary_System_Type_Newtonsoft_Json_Linq_JObject__" data-uid="KSP.Sim.impl.PartComponent.AddModule(System.Type,KSP.Sim.impl.PartComponentModule,System.Collections.Generic.IReadOnlyDictionary{System.Type,Newtonsoft.Json.Linq.JObject})">AddModule(Type, PartComponentModule, IReadOnlyDictionary&lt;Type, JObject&gt;)</h4>
+  <div class="markdown level1 summary"><p>Adds a <a class="xref" href="KSP.Sim.impl.PartComponentModule.html">PartComponentModule</a> to this part and registers it with the ECS layer.
+Serialized state in <code class="paramref">pendingStateJson</code> (keyed by data type) is applied to
+each data object right after its entity bind.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void AddModule(Type type, PartComponentModule module)</code></pre>
+    <pre><code class="lang-csharp hljs">public void AddModule(Type type, PartComponentModule module, IReadOnlyDictionary&lt;Type, JObject&gt; pendingStateJson = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -2231,6 +2233,12 @@ public PartProperties partProperties { get; }</code></pre>
         <td><a class="xref" href="KSP.Sim.impl.PartComponentModule.html">PartComponentModule</a></td>
         <td><span class="parametername">module</span></td>
         <td><p>The module instance to add.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">IReadOnlyDictionary</span>&lt;<span class="xref">Type</span>, <span class="xref">JObject</span>&gt;</td>
+        <td><span class="parametername">pendingStateJson</span></td>
+        <td><p>Optional serialized state to apply post-bind.</p>
 </td>
       </tr>
     </tbody>
@@ -3154,7 +3162,8 @@ public PartProperties partProperties { get; }</code></pre>
 
   <a id="KSP_Sim_impl_PartComponent_RemoveModule_" data-uid="KSP.Sim.impl.PartComponent.RemoveModule*"></a>
   <h4 id="KSP_Sim_impl_PartComponent_RemoveModule_System_Type_" data-uid="KSP.Sim.impl.PartComponent.RemoveModule(System.Type)">RemoveModule(Type)</h4>
-  <div class="markdown level1 summary"><p>Removes the <a class="xref" href="KSP.Sim.impl.PartComponentModule.html">PartComponentModule</a> registered under the specified type and destroys its ECS entity.</p>
+  <div class="markdown level1 summary"><p>Removes the <a class="xref" href="KSP.Sim.impl.PartComponentModule.html">PartComponentModule</a> registered under the specified type,
+unbinds its data modules, and destroys its ECS entity.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>

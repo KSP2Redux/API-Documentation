@@ -177,8 +177,9 @@ unmanaged ECS component <code class="typeparamref">TComponent</code>.</p>
     </tbody>
   </table>
   <h5 id="Redux_Ecs_EntityModuleProperty_2_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>Currently it is possible for the property to be written to before it is
-bound to an entity. In that case it is saved until entity bind.</p>
+  <div class="markdown level0 remarks"><p>While unbound (never-bound template instances, or after <a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html#Redux_Ecs_EntityModuleProperty_2_Unbind">Unbind()</a>), reads and
+writes use the inherited <code>storedValue</code>; <a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html#Redux_Ecs_EntityModuleProperty_2_Bind_Unity_Entities_EntityManager_Unity_Entities_Entity_Redux_Ecs_EntityModuleProperty__0__1__Getter_Redux_Ecs_EntityModuleProperty__0__1__Setter_">Bind(EntityManager, Entity, Getter, Setter)</a> seeds the component from it
+once.</p>
 </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -240,18 +241,17 @@ bound to an entity. In that case it is saved until entity bind.</p>
 
 
   <a id="Redux_Ecs_EntityModuleProperty_2_Bind_" data-uid="Redux.Ecs.EntityModuleProperty`2.Bind*"></a>
-  <h4 id="Redux_Ecs_EntityModuleProperty_2_Bind_Unity_Entities_EntityManager_Unity_Entities_Entity_Redux_Ecs_EntityModuleProperty__0__1__Getter_Redux_Ecs_EntityModuleProperty__0__1__Setter_System_Boolean_" data-uid="Redux.Ecs.EntityModuleProperty`2.Bind(Unity.Entities.EntityManager,Unity.Entities.Entity,Redux.Ecs.EntityModuleProperty{`0,`1}.Getter,Redux.Ecs.EntityModuleProperty{`0,`1}.Setter,System.Boolean)">Bind(EntityManager, Entity, Getter, Setter, bool)</h4>
-  <div class="markdown level1 summary"><p>Points this property at <code class="paramref">entity</code>'s component. When <code class="paramref">seed</code>
-is true the component's field is seeded from the pre-bind <code>storedValue</code>; when false the
-component is left as-is (the caller already assembled the whole component value from the
-module's loaded ModuleState). The accessors are passed in (not assumed from construction)
-because deserialization can reconstruct this instance without running the field initializer
-that wires them; the generated binding always supplies them from its static delegates.</p>
+  <h4 id="Redux_Ecs_EntityModuleProperty_2_Bind_Unity_Entities_EntityManager_Unity_Entities_Entity_Redux_Ecs_EntityModuleProperty__0__1__Getter_Redux_Ecs_EntityModuleProperty__0__1__Setter_" data-uid="Redux.Ecs.EntityModuleProperty`2.Bind(Unity.Entities.EntityManager,Unity.Entities.Entity,Redux.Ecs.EntityModuleProperty{`0,`1}.Getter,Redux.Ecs.EntityModuleProperty{`0,`1}.Setter)">Bind(EntityManager, Entity, Getter, Setter)</h4>
+  <div class="markdown level1 summary"><p>Points this property at <code class="paramref">entity</code>'s component and seeds the component's
+field from the unbound <code>storedValue</code>. The accessors are passed in (not assumed from
+construction) because deserialization can reconstruct this instance without running the
+field initializer that wires them; the generated binding always supplies them from its
+static delegates.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Bind(EntityManager em, Entity entity, EntityModuleProperty&lt;TComponent, TValue&gt;.Getter getter, EntityModuleProperty&lt;TComponent, TValue&gt;.Setter setter, bool seed = true)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Bind(EntityManager em, Entity entity, EntityModuleProperty&lt;TComponent, TValue&gt;.Getter getter, EntityModuleProperty&lt;TComponent, TValue&gt;.Setter setter)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -281,11 +281,6 @@ that wires them; the generated binding always supplies them from its static dele
       <tr>
         <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;TComponent, TValue&gt;.<a class="xref" href="Redux.Ecs.EntityModuleProperty-2.Setter.html">Setter</a></td>
         <td><span class="parametername">setter</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">bool</span></td>
-        <td><span class="parametername">seed</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -391,7 +386,7 @@ that wires them; the generated binding always supplies them from its static dele
   <h4 id="Redux_Ecs_EntityModuleProperty_2_Unbind" data-uid="Redux.Ecs.EntityModuleProperty`2.Unbind">Unbind()</h4>
   <div class="markdown level1 summary"><p>Detaches this property from its entity: the component's current field value is snapshotted
 into the inherited <code>storedValue</code> (when the entity is still alive), which serves reads,
-writes, and serialization until the next <a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html#Redux_Ecs_EntityModuleProperty_2_Bind_Unity_Entities_EntityManager_Unity_Entities_Entity_Redux_Ecs_EntityModuleProperty__0__1__Getter_Redux_Ecs_EntityModuleProperty__0__1__Setter_System_Boolean_">Bind(EntityManager, Entity, Getter, Setter, bool)</a>.</p>
+writes, and serialization until the next <a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html#Redux_Ecs_EntityModuleProperty_2_Bind_Unity_Entities_EntityManager_Unity_Entities_Entity_Redux_Ecs_EntityModuleProperty__0__1__Getter_Redux_Ecs_EntityModuleProperty__0__1__Setter_">Bind(EntityManager, Entity, Getter, Setter)</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>

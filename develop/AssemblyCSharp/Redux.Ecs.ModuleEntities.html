@@ -105,16 +105,18 @@ binding paths.</p>
 
 
   <a id="Redux_Ecs_ModuleEntities_Create_" data-uid="Redux.Ecs.ModuleEntities.Create*"></a>
-  <h4 id="Redux_Ecs_ModuleEntities_Create_Unity_Entities_EntityManager_Unity_Entities_Entity_System_Object_KSP_Sim_Definitions_ModuleDataList_" data-uid="Redux.Ecs.ModuleEntities.Create(Unity.Entities.EntityManager,Unity.Entities.Entity,System.Object,KSP.Sim.Definitions.ModuleDataList)">Create(EntityManager, Entity, object, ModuleDataList)</h4>
+  <h4 id="Redux_Ecs_ModuleEntities_Create_Unity_Entities_EntityManager_Unity_Entities_Entity_System_Object_KSP_Sim_Definitions_ModuleDataList_System_Collections_Generic_IReadOnlyDictionary_System_Type_Newtonsoft_Json_Linq_JObject__" data-uid="Redux.Ecs.ModuleEntities.Create(Unity.Entities.EntityManager,Unity.Entities.Entity,System.Object,KSP.Sim.Definitions.ModuleDataList,System.Collections.Generic.IReadOnlyDictionary{System.Type,Newtonsoft.Json.Linq.JObject})">Create(EntityManager, Entity, object, ModuleDataList, IReadOnlyDictionary&lt;Type, JObject&gt;)</h4>
   <div class="markdown level1 summary"><p>Creates the module entity for <code class="paramref">module</code>, links it to <code class="paramref">partEntity</code>,
 mirrors the part's current vessel membership onto it, binds each of the module's
 <a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a>, and appends it to the part's <a class="xref" href="Redux.Ecs.Components.PartModuleRef.html">PartModuleRef</a> buffer.
+Serialized state carried in <code class="paramref">pendingStateJson</code> (keyed by data type) is
+applied to each data object immediately after its bind, so the values land directly in ECS.
 Returns the new module entity.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Entity Create(EntityManager em, Entity partEntity, object module, ModuleDataList dataModules)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Entity Create(EntityManager em, Entity partEntity, object module, ModuleDataList dataModules, IReadOnlyDictionary&lt;Type, JObject&gt; pendingStateJson = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -144,6 +146,11 @@ Returns the new module entity.</p>
       <tr>
         <td><a class="xref" href="KSP.Sim.Definitions.ModuleDataList.html">ModuleDataList</a></td>
         <td><span class="parametername">dataModules</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">IReadOnlyDictionary</span>&lt;<span class="xref">Type</span>, <span class="xref">JObject</span>&gt;</td>
+        <td><span class="parametername">pendingStateJson</span></td>
         <td></td>
       </tr>
     </tbody>

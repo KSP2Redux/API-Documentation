@@ -438,6 +438,34 @@
   </table>
 
 
+  <a id="KSP_Sim_Definitions_PartBehaviourModule_PendingStateJson_" data-uid="KSP.Sim.Definitions.PartBehaviourModule.PendingStateJson*"></a>
+  <h4 id="KSP_Sim_Definitions_PartBehaviourModule_PendingStateJson" data-uid="KSP.Sim.Definitions.PartBehaviourModule.PendingStateJson">PendingStateJson</h4>
+  <div class="markdown level1 summary"><p>Serialized state stashed for application right after this module's entity bind, keyed by
+data type. Retained across rebinds so a recreated entity is re-seeded with the same
+loaded values.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyDictionary&lt;Type, JObject&gt; PendingStateJson { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IReadOnlyDictionary</span>&lt;<span class="xref">Type</span>, <span class="xref">JObject</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Sim_Definitions_PartBehaviourModule_executedAction_" data-uid="KSP.Sim.Definitions.PartBehaviourModule.executedAction*"></a>
   <h4 id="KSP_Sim_Definitions_PartBehaviourModule_executedAction" data-uid="KSP.Sim.Definitions.PartBehaviourModule.executedAction">executedAction</h4>
   <div class="markdown level1 summary"><p>Gets or sets the most recently executed <a class="xref" href="KSP.Sim.Definitions.ModuleAction.html">ModuleAction</a> for this module.</p>
@@ -1334,7 +1362,9 @@ public void OnActive()</code></pre>
 
   <a id="KSP_Sim_Definitions_PartBehaviourModule_SetDataModuleValues_" data-uid="KSP.Sim.Definitions.PartBehaviourModule.SetDataModuleValues*"></a>
   <h4 id="KSP_Sim_Definitions_PartBehaviourModule_SetDataModuleValues_KSP_Sim_Definitions_SerializedPartModule_" data-uid="KSP.Sim.Definitions.PartBehaviourModule.SetDataModuleValues(KSP.Sim.Definitions.SerializedPartModule)">SetDataModuleValues(SerializedPartModule)</h4>
-  <div class="markdown level1 summary"><p>Applies serialized module data from a <a class="xref" href="KSP.Sim.Definitions.SerializedPartModule.html">SerializedPartModule</a> onto the corresponding entries in <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_DataModules">DataModules</a>.</p>
+  <div class="markdown level1 summary"><p>Applies serialized module data from a <a class="xref" href="KSP.Sim.Definitions.SerializedPartModule.html">SerializedPartModule</a> onto the corresponding entries in <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_DataModules">DataModules</a>.
+Config members are applied immediately; state members are stashed and applied only after
+the module's entity bind, writing through to ECS.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -1405,6 +1435,41 @@ public void OnActive()</code></pre>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void Shutdown()</code></pre>
   </div>
+
+
+  <a id="KSP_Sim_Definitions_PartBehaviourModule_StashPendingStateJson_" data-uid="KSP.Sim.Definitions.PartBehaviourModule.StashPendingStateJson*"></a>
+  <h4 id="KSP_Sim_Definitions_PartBehaviourModule_StashPendingStateJson_System_Type_Newtonsoft_Json_Linq_JObject_" data-uid="KSP.Sim.Definitions.PartBehaviourModule.StashPendingStateJson(System.Type,Newtonsoft.Json.Linq.JObject)">StashPendingStateJson(Type, JObject)</h4>
+  <div class="markdown level1 summary"><p>Records serialized state for <code class="paramref">dataType</code> to be applied after entity bind.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void StashPendingStateJson(Type dataType, JObject payload)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Type</span></td>
+        <td><span class="parametername">dataType</span></td>
+        <td><p>The module data type the payload belongs to.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">JObject</span></td>
+        <td><span class="parametername">payload</span></td>
+        <td><p>The module's serialized JSON payload.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <a id="KSP_Sim_Definitions_PartBehaviourModule_ThermalUpdate_" data-uid="KSP.Sim.Definitions.PartBehaviourModule.ThermalUpdate*"></a>
