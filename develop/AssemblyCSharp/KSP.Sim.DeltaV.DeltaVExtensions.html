@@ -151,6 +151,69 @@
 </h3>
 
 
+  <a id="KSP_Sim_DeltaV_DeltaVExtensions_ClampSituationToBody_" data-uid="KSP.Sim.DeltaV.DeltaVExtensions.ClampSituationToBody*"></a>
+  <h4 id="KSP_Sim_DeltaV_DeltaVExtensions_ClampSituationToBody_KSP_Sim_State_DeltaVSituation_System_Double_System_Double_" data-uid="KSP.Sim.DeltaV.DeltaVExtensions.ClampSituationToBody(KSP.Sim.State.DeltaVSituation,System.Double,System.Double)">ClampSituationToBody(DeltaVSituation, double, double)</h4>
+  <div class="markdown level1 summary"><p>Coerces a situation into a combination the given body actually supports: airless bodies force vacuum at
+zero altitude, and altitudes are clamped to the body's atmosphere or terrain ceiling.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static DeltaVSituation ClampSituationToBody(DeltaVSituation situation, double atmosphereDepth, double maxTerrainHeight)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.State.DeltaVSituation.html">DeltaVSituation</a></td>
+        <td><span class="parametername">situation</span></td>
+        <td><p>The situation to coerce.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">atmosphereDepth</span></td>
+        <td><p>The body's atmosphere depth in meters; zero or less means airless.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">maxTerrainHeight</span></td>
+        <td><p>The body's highest terrain in meters.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.State.DeltaVSituation.html">DeltaVSituation</a></td>
+        <td><p>The coerced situation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Sim_DeltaV_DeltaVExtensions_ClampSituationToBody_KSP_Sim_State_DeltaVSituation_System_Double_System_Double__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Defensive (#1000): mirrors the clamping the delta-V tool applies when a body is picked, so a situation
+read from a craft file cannot feed the delta-V maths values the UI would never produce and then displays
+clamped, making the shown altitude disagree with the computed one.</p>
+</div>
+
+
   <a id="KSP_Sim_DeltaV_DeltaVExtensions_CurrentStage_" data-uid="KSP.Sim.DeltaV.DeltaVExtensions.CurrentStage*"></a>
   <h4 id="KSP_Sim_DeltaV_DeltaVExtensions_CurrentStage_KSP_Sim_DeltaV_VesselDeltaVComponent_" data-uid="KSP.Sim.DeltaV.DeltaVExtensions.CurrentStage(KSP.Sim.DeltaV.VesselDeltaVComponent)">CurrentStage(VesselDeltaVComponent)</h4>
   <div class="markdown level1 summary"><p>Returns the index of the current active staging group for a vessel in flight.</p>
@@ -314,6 +377,57 @@
       <tr>
         <td><span class="parametername">T</span></td>
         <td><p>The type of the value to select.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_DeltaV_DeltaVExtensions_IsCustomisedSituation_" data-uid="KSP.Sim.DeltaV.DeltaVExtensions.IsCustomisedSituation*"></a>
+  <h4 id="KSP_Sim_DeltaV_DeltaVExtensions_IsCustomisedSituation_KSP_Sim_State_DeltaVSituation_KSP_Sim_State_DeltaVSituation_" data-uid="KSP.Sim.DeltaV.DeltaVExtensions.IsCustomisedSituation(KSP.Sim.State.DeltaVSituation,KSP.Sim.State.DeltaVSituation)">IsCustomisedSituation(DeltaVSituation, DeltaVSituation)</h4>
+  <div class="markdown level1 summary"><p>Determines whether a situation differs from the builder default, i.e. whether a player configured it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsCustomisedSituation(DeltaVSituation situation, DeltaVSituation defaultSituation)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.State.DeltaVSituation.html">DeltaVSituation</a></td>
+        <td><span class="parametername">situation</span></td>
+        <td><p>The situation to test.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.State.DeltaVSituation.html">DeltaVSituation</a></td>
+        <td><span class="parametername">defaultSituation</span></td>
+        <td><p>The builder default to compare against.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True when the situation names a body and differs from the default, false otherwise.</p>
 </td>
       </tr>
     </tbody>
@@ -498,6 +612,468 @@
       </tr>
     </tbody>
   </table>
+
+
+  <a id="KSP_Sim_DeltaV_DeltaVExtensions_SanitizeSituation_" data-uid="KSP.Sim.DeltaV.DeltaVExtensions.SanitizeSituation*"></a>
+  <h4 id="KSP_Sim_DeltaV_DeltaVExtensions_SanitizeSituation_KSP_Sim_State_DeltaVSituation_KSP_Sim_State_DeltaVSituation_" data-uid="KSP.Sim.DeltaV.DeltaVExtensions.SanitizeSituation(KSP.Sim.State.DeltaVSituation,KSP.Sim.State.DeltaVSituation)">SanitizeSituation(DeltaVSituation, DeltaVSituation)</h4>
+  <div class="markdown level1 summary"><p>Validates a situation against the current universe, coercing it to what its body supports.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static DeltaVSituation SanitizeSituation(DeltaVSituation situation, DeltaVSituation fallback)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.State.DeltaVSituation.html">DeltaVSituation</a></td>
+        <td><span class="parametername">situation</span></td>
+        <td><p>The situation to validate, typically read from a craft file.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.State.DeltaVSituation.html">DeltaVSituation</a></td>
+        <td><span class="parametername">fallback</span></td>
+        <td><p>The situation to return when the named body is not in the current universe.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.State.DeltaVSituation.html">DeltaVSituation</a></td>
+        <td><p>The coerced situation, or <code class="paramref">fallback</code> when the body is unknown.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Sim_DeltaV_DeltaVExtensions_SanitizeSituation_KSP_Sim_State_DeltaVSituation_KSP_Sim_State_DeltaVSituation__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Defensive (#1000): craft files can name bodies this install does not have, and can carry
+atmosphere/altitude combinations no longer valid for a body whose data changed.</p>
+</div>
+
+
+  <a id="KSP_Sim_DeltaV_DeltaVExtensions_SetStageDeltaVSituation_" data-uid="KSP.Sim.DeltaV.DeltaVExtensions.SetStageDeltaVSituation*"></a>
+  <h4 id="KSP_Sim_DeltaV_DeltaVExtensions_SetStageDeltaVSituation_KSP_OAB_IObjectAssembly_System_Int32_KSP_Sim_State_DeltaVSituation_" data-uid="KSP.Sim.DeltaV.DeltaVExtensions.SetStageDeltaVSituation(KSP.OAB.IObjectAssembly,System.Int32,KSP.Sim.State.DeltaVSituation)">SetStageDeltaVSituation(IObjectAssembly, int, DeltaVSituation)</h4>
+  <div class="markdown level1 summary"><p>Stores the delta-V situation for a vessel stage of an assembly.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool SetStageDeltaVSituation(this IObjectAssembly assembly, int vesselStageId, DeltaVSituation situation)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.OAB.IObjectAssembly.html">IObjectAssembly</a></td>
+        <td><span class="parametername">assembly</span></td>
+        <td><p>The assembly whose stage situations are written.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">vesselStageId</span></td>
+        <td><p>The one-based vessel stage id to write.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.State.DeltaVSituation.html">DeltaVSituation</a></td>
+        <td><span class="parametername">situation</span></td>
+        <td><p>The situation to store for that stage.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True when the stage exists in the list and was written, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_DeltaV_DeltaVExtensions_SetStageDeltaVSituation_" data-uid="KSP.Sim.DeltaV.DeltaVExtensions.SetStageDeltaVSituation*"></a>
+  <h4 id="KSP_Sim_DeltaV_DeltaVExtensions_SetStageDeltaVSituation_System_Collections_Generic_List_KSP_Sim_State_DeltaVSituation__System_Int32_KSP_Sim_State_DeltaVSituation_" data-uid="KSP.Sim.DeltaV.DeltaVExtensions.SetStageDeltaVSituation(System.Collections.Generic.List{KSP.Sim.State.DeltaVSituation},System.Int32,KSP.Sim.State.DeltaVSituation)">SetStageDeltaVSituation(List&lt;DeltaVSituation&gt;, int, DeltaVSituation)</h4>
+  <div class="markdown level1 summary"><p>Stores the delta-V situation for a vessel stage in a stage situation list.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool SetStageDeltaVSituation(this List&lt;DeltaVSituation&gt; situations, int vesselStageId, DeltaVSituation situation)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="KSP.Sim.State.DeltaVSituation.html">DeltaVSituation</a>&gt;</td>
+        <td><span class="parametername">situations</span></td>
+        <td><p>The stage situation list to write, ordered highest stage id first.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">vesselStageId</span></td>
+        <td><p>The one-based vessel stage id to write.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.State.DeltaVSituation.html">DeltaVSituation</a></td>
+        <td><span class="parametername">situation</span></td>
+        <td><p>The situation to store for that stage.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True when the stage exists in the list and was written, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_DeltaV_DeltaVExtensions_StageDeltaVSituationIndex_" data-uid="KSP.Sim.DeltaV.DeltaVExtensions.StageDeltaVSituationIndex*"></a>
+  <h4 id="KSP_Sim_DeltaV_DeltaVExtensions_StageDeltaVSituationIndex_System_Int32_System_Int32_" data-uid="KSP.Sim.DeltaV.DeltaVExtensions.StageDeltaVSituationIndex(System.Int32,System.Int32)">StageDeltaVSituationIndex(int, int)</h4>
+  <div class="markdown level1 summary"><p>Returns the <a class="xref" href="KSP.OAB.IObjectAssembly.html#KSP_OAB_IObjectAssembly_StageDeltaVSituation">StageDeltaVSituation</a> index holding the situation for a vessel
+stage id. That list runs from the highest stage id at index 0 down to stage 1 at the last index, so an
+entry's index depends on how many stages the assembly currently has. Stage 0 has no entry.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int StageDeltaVSituationIndex(int situationCount, int vesselStageId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">situationCount</span></td>
+        <td><p>The number of entries currently in the situation list.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">vesselStageId</span></td>
+        <td><p>The one-based vessel stage id, matching <a class="xref" href="KSP.Sim.DeltaV.DeltaVStageInfo.html#KSP_Sim_DeltaV_DeltaVStageInfo_Stage">Stage</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><p>The list index for the stage, or -1 when the stage has no entry.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_DeltaV_DeltaVExtensions_StageDeltaVSituationIndexForStackIndex_" data-uid="KSP.Sim.DeltaV.DeltaVExtensions.StageDeltaVSituationIndexForStackIndex*"></a>
+  <h4 id="KSP_Sim_DeltaV_DeltaVExtensions_StageDeltaVSituationIndexForStackIndex_System_Int32_System_Int32_" data-uid="KSP.Sim.DeltaV.DeltaVExtensions.StageDeltaVSituationIndexForStackIndex(System.Int32,System.Int32)">StageDeltaVSituationIndexForStackIndex(int, int)</h4>
+  <div class="markdown level1 summary"><p>Returns the <a class="xref" href="KSP.OAB.IObjectAssembly.html#KSP_OAB_IObjectAssembly_StageDeltaVSituation">StageDeltaVSituation</a> index holding the situation for the stage
+sitting at a staging-stack position, where stack index 0 is vessel stage 1.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int StageDeltaVSituationIndexForStackIndex(int stageCount, int stackIndex)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">stageCount</span></td>
+        <td><p>The number of stages the stack position is relative to.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">stackIndex</span></td>
+        <td><p>The zero-based staging-stack index.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><p>The list index for that stack position, or -1 when out of range.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_DeltaV_DeltaVExtensions_TryGetStageDeltaVSituation_" data-uid="KSP.Sim.DeltaV.DeltaVExtensions.TryGetStageDeltaVSituation*"></a>
+  <h4 id="KSP_Sim_DeltaV_DeltaVExtensions_TryGetStageDeltaVSituation_KSP_OAB_IObjectAssembly_System_Int32_KSP_Sim_State_DeltaVSituation__" data-uid="KSP.Sim.DeltaV.DeltaVExtensions.TryGetStageDeltaVSituation(KSP.OAB.IObjectAssembly,System.Int32,KSP.Sim.State.DeltaVSituation@)">TryGetStageDeltaVSituation(IObjectAssembly, int, out DeltaVSituation)</h4>
+  <div class="markdown level1 summary"><p>Reads the stored delta-V situation for a vessel stage of an assembly.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool TryGetStageDeltaVSituation(this IObjectAssembly assembly, int vesselStageId, out DeltaVSituation situation)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.OAB.IObjectAssembly.html">IObjectAssembly</a></td>
+        <td><span class="parametername">assembly</span></td>
+        <td><p>The assembly whose stage situations are queried.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">vesselStageId</span></td>
+        <td><p>The one-based vessel stage id to read.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.State.DeltaVSituation.html">DeltaVSituation</a></td>
+        <td><span class="parametername">situation</span></td>
+        <td><p>The stored situation when one exists; otherwise the default value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True when the stage has a stored situation naming a celestial body, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_DeltaV_DeltaVExtensions_TryGetStageDeltaVSituation_" data-uid="KSP.Sim.DeltaV.DeltaVExtensions.TryGetStageDeltaVSituation*"></a>
+  <h4 id="KSP_Sim_DeltaV_DeltaVExtensions_TryGetStageDeltaVSituation_System_Collections_Generic_List_KSP_Sim_State_DeltaVSituation__System_Int32_KSP_Sim_State_DeltaVSituation__" data-uid="KSP.Sim.DeltaV.DeltaVExtensions.TryGetStageDeltaVSituation(System.Collections.Generic.List{KSP.Sim.State.DeltaVSituation},System.Int32,KSP.Sim.State.DeltaVSituation@)">TryGetStageDeltaVSituation(List&lt;DeltaVSituation&gt;, int, out DeltaVSituation)</h4>
+  <div class="markdown level1 summary"><p>Reads the stored delta-V situation for a vessel stage from a stage situation list.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool TryGetStageDeltaVSituation(this List&lt;DeltaVSituation&gt; situations, int vesselStageId, out DeltaVSituation situation)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="KSP.Sim.State.DeltaVSituation.html">DeltaVSituation</a>&gt;</td>
+        <td><span class="parametername">situations</span></td>
+        <td><p>The stage situation list to read, ordered highest stage id first.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">vesselStageId</span></td>
+        <td><p>The one-based vessel stage id to read.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.State.DeltaVSituation.html">DeltaVSituation</a></td>
+        <td><span class="parametername">situation</span></td>
+        <td><p>The stored situation when one exists; otherwise the default value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True when the stage has a stored situation naming a celestial body, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_DeltaV_DeltaVExtensions_TrySyncStageDeltaVSituationLength_" data-uid="KSP.Sim.DeltaV.DeltaVExtensions.TrySyncStageDeltaVSituationLength*"></a>
+  <h4 id="KSP_Sim_DeltaV_DeltaVExtensions_TrySyncStageDeltaVSituationLength_System_Collections_Generic_List_KSP_Sim_State_DeltaVSituation__System_Int32_KSP_Sim_State_DeltaVSituation_System_Boolean_System_Collections_Generic_List_KSP_Sim_State_DeltaVSituation__" data-uid="KSP.Sim.DeltaV.DeltaVExtensions.TrySyncStageDeltaVSituationLength(System.Collections.Generic.List{KSP.Sim.State.DeltaVSituation},System.Int32,KSP.Sim.State.DeltaVSituation,System.Boolean,System.Collections.Generic.List{KSP.Sim.State.DeltaVSituation})">TrySyncStageDeltaVSituationLength(List&lt;DeltaVSituation&gt;, int, DeltaVSituation, bool, List&lt;DeltaVSituation&gt;)</h4>
+  <div class="markdown level1 summary"><p>Reconciles a stage situation list against the number of stages in the staging stack, padding with
+<code class="paramref">padding</code> when short and trimming from the tail when long.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool TrySyncStageDeltaVSituationLength(List&lt;DeltaVSituation&gt; situations, int stageCount, DeltaVSituation padding, bool isLoadingCraft, List&lt;DeltaVSituation&gt; droppedEntries = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="KSP.Sim.State.DeltaVSituation.html">DeltaVSituation</a>&gt;</td>
+        <td><span class="parametername">situations</span></td>
+        <td><p>The stage situation list to reconcile.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">stageCount</span></td>
+        <td><p>The number of stages the list must describe.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.State.DeltaVSituation.html">DeltaVSituation</a></td>
+        <td><span class="parametername">padding</span></td>
+        <td><p>The situation to add for stages that have no entry yet.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">isLoadingCraft</span></td>
+        <td><p>True while a craft is loading, which skips the reconciliation entirely.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="KSP.Sim.State.DeltaVSituation.html">DeltaVSituation</a>&gt;</td>
+        <td><span class="parametername">droppedEntries</span></td>
+        <td><p>Optional list that receives the trimmed entries, tail first.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True when the list was modified, false when it already matched or was left alone.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Sim_DeltaV_DeltaVExtensions_TrySyncStageDeltaVSituationLength_System_Collections_Generic_List_KSP_Sim_State_DeltaVSituation__System_Int32_KSP_Sim_State_DeltaVSituation_System_Boolean_System_Collections_Generic_List_KSP_Sim_State_DeltaVSituation___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Fixes #1000: the staging stack is rebuilt one stage at a time while a craft loads, so reconciling against
+its transient count trims the situations just restored from the craft file off the tail.</p>
+</div>
 
 </article>
           </div>
