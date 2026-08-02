@@ -96,14 +96,14 @@
     <pre><code class="lang-csharp hljs">public class ReduxSurfaceSpawner : MonoBehaviour</code></pre>
   </div>
   <h5 id="Redux_CelestialBody_ReduxSurfaceSpawner_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>The spawn is backed by a standalone ECS entity parented to the body's <code>celestialFrame</code>
-entity in <a class="xref" href="Redux.Ecs.UniverseSimWorld.html">UniverseSimWorld</a>. Systems.SurfaceAnchorTransformSystem
-computes the body-local TRS each frame from authored lat/lon/altitude in double precision,
-and Systems.SurfaceAnchorUnityWriteSystem walks the reference-frame hierarchy
-down to physics space and writes the resulting world pose onto the spawned instance's
-<a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a>. All math happens in <code>Vector3d</code> / <a class="xref" href="QuaternionD.html">QuaternionD</a> -
-only the final cast to <code>Vector3</code> loses precision, and that cast happens near the
-floating origin where float precision is centimeter-scale.</p>
+  <div class="markdown level0 remarks"><p>The instance's world pose is recomputed each frame in <span class="xref">Redux.CelestialBody.ReduxSurfaceSpawner.LateUpdate</span>. The authored
+lat/lon/altitude and the surface radius sampled once at spawn give a body-local position and
+rotation in double precision, which the active <a class="xref" href="KSP.Sim.IPhysicsSpaceProvider.html">IPhysicsSpaceProvider</a> converts
+into Unity physics space. That conversion applies the floating-origin offset, so it is the
+only correct way to reach world space - walking the body transform hierarchy would miss it.
+All math happens in <code>Vector3d</code> / <a class="xref" href="QuaternionD.html">QuaternionD</a>, and the only precision loss
+is the final implicit cast to <code>Vector3</code> near the floating origin where float precision
+is centimeter-scale.</p>
 <p>The addressable handle is released as soon as the prefab is instantiated. The instance is a
 runtime copy that survives the release. Subsequent spawn cycles re-load the addressable -
 the trade-off is more I/O on respawn for less memory held while no instance is active.</p>
