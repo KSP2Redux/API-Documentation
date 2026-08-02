@@ -941,6 +941,11 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void CollapseAllStages()</code></pre>
   </div>
+  <h5 id="KSP_Game_StagingDataProvider_CollapseAllStages_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Nothing in Redux calls this since the delta-V tool moved to
+<a class="xref" href="KSP.Game.StagingDataProvider.html#KSP_Game_StagingDataProvider_RestoreExpandedStateAfterDeltaVTool">RestoreExpandedStateAfterDeltaVTool()</a>. It is kept because it is stock public API that mods
+may call, and because it is the unconditional collapse a caller wanting that behaviour still needs.</p>
+</div>
 
 
   <a id="KSP_Game_StagingDataProvider_EngineModeChanged_" data-uid="KSP.Game.StagingDataProvider.EngineModeChanged*"></a>
@@ -970,6 +975,17 @@
       </tr>
     </tbody>
   </table>
+
+
+  <a id="KSP_Game_StagingDataProvider_ExpandAllStagesForDeltaVTool_" data-uid="KSP.Game.StagingDataProvider.ExpandAllStagesForDeltaVTool*"></a>
+  <h4 id="KSP_Game_StagingDataProvider_ExpandAllStagesForDeltaVTool" data-uid="KSP.Game.StagingDataProvider.ExpandAllStagesForDeltaVTool">ExpandAllStagesForDeltaVTool()</h4>
+  <div class="markdown level1 summary"><p>Expands all stages for the delta-V tool, remembering the display state to return to when the tool closes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ExpandAllStagesForDeltaVTool()</code></pre>
+  </div>
 
 
   <a id="KSP_Game_StagingDataProvider_ExpandedAllStages_" data-uid="KSP.Game.StagingDataProvider.ExpandedAllStages*"></a>
@@ -1022,6 +1038,63 @@
       <tr>
         <td><a class="xref" href="KSP.Game.PartSymmetrySet.html">PartSymmetrySet</a></td>
         <td><p>The matching <a class="xref" href="KSP.Game.PartSymmetrySet.html">PartSymmetrySet</a>, or null if the part does not belong to any symmetry set.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Game_StagingDataProvider_GetExpandedStateWhenDeltaVToolCloses_" data-uid="KSP.Game.StagingDataProvider.GetExpandedStateWhenDeltaVToolCloses*"></a>
+  <h4 id="KSP_Game_StagingDataProvider_GetExpandedStateWhenDeltaVToolCloses_System_Nullable_KSP_OAB_StageExpandedState__KSP_OAB_StageExpandedState_System_Boolean_" data-uid="KSP.Game.StagingDataProvider.GetExpandedStateWhenDeltaVToolCloses(System.Nullable{KSP.OAB.StageExpandedState},KSP.OAB.StageExpandedState,System.Boolean)">GetExpandedStateWhenDeltaVToolCloses(StageExpandedState?, StageExpandedState, bool)</h4>
+  <div class="markdown level1 summary"><p>Works out the display state the stage panel takes when the delta-V tool closes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static StageExpandedState GetExpandedStateWhenDeltaVToolCloses(StageExpandedState? stateBeforeToolOpened, StageExpandedState currentState, bool isStagingExpanded)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.OAB.StageExpandedState.html">StageExpandedState</a>?</td>
+        <td><span class="parametername">stateBeforeToolOpened</span></td>
+        <td><p>The state captured when the tool opened, or <code>null</code> when the tool never drove this panel.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.OAB.StageExpandedState.html">StageExpandedState</a></td>
+        <td><span class="parametername">currentState</span></td>
+        <td><p>The state the panel holds now.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">isStagingExpanded</span></td>
+        <td><p>Whether the panel is still expanded.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.OAB.StageExpandedState.html">StageExpandedState</a></td>
+        <td><p>The state to apply to the panel.</p>
 </td>
       </tr>
     </tbody>
@@ -1447,6 +1520,21 @@ fires that means another desync is happening</p>
   </div>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="KSP.Game.DataBus-1.html#KSP_Game_DataBus_1_Reset">DataBus&lt;StagingComponent&gt;.Reset()</a></div>
+
+
+  <a id="KSP_Game_StagingDataProvider_RestoreExpandedStateAfterDeltaVTool_" data-uid="KSP.Game.StagingDataProvider.RestoreExpandedStateAfterDeltaVTool*"></a>
+  <h4 id="KSP_Game_StagingDataProvider_RestoreExpandedStateAfterDeltaVTool" data-uid="KSP.Game.StagingDataProvider.RestoreExpandedStateAfterDeltaVTool">RestoreExpandedStateAfterDeltaVTool()</h4>
+  <div class="markdown level1 summary"><p>Returns the stage panel to the display state it held before the delta-V tool opened, and clears the tool's stage focus.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RestoreExpandedStateAfterDeltaVTool()</code></pre>
+  </div>
+  <h5 id="KSP_Game_StagingDataProvider_RestoreExpandedStateAfterDeltaVTool_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Fixes #999. A change the player made to the panel while the tool was open outranks the remembered state, so
+collapsing the panel from under an open tool is not undone by the close that same action triggers.</p>
+</div>
 
 
   <a id="KSP_Game_StagingDataProvider_SyncTo_" data-uid="KSP.Game.StagingDataProvider.SyncTo*"></a>
