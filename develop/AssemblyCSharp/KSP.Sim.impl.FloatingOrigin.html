@@ -286,7 +286,7 @@ public class FloatingOrigin : SystemBase, IFloatingOrigin</code></pre>
 
   <a id="KSP_Sim_impl_FloatingOrigin_OnUpdate_" data-uid="KSP.Sim.impl.FloatingOrigin.OnUpdate*"></a>
   <h4 id="KSP_Sim_impl_FloatingOrigin_OnUpdate" data-uid="KSP.Sim.impl.FloatingOrigin.OnUpdate">OnUpdate()</h4>
-  <div class="markdown level1 summary"><p>Invokes <a class="xref" href="KSP.Sim.impl.FloatingOrigin.html#KSP_Sim_impl_FloatingOrigin_ResolveFloatingOrigin">ResolveFloatingOrigin()</a> each simulation step when the universe view is available.</p>
+  <div class="markdown level1 summary"><p>Forces an inertial reference frame snap when the physics space reference frame has changed, and records that the physics step ran this frame.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -295,6 +295,9 @@ public class FloatingOrigin : SystemBase, IFloatingOrigin</code></pre>
   </div>
   <h5 class="overrides">Overrides</h5>
   <div><span class="xref">Unity.Entities.SystemBase.OnUpdate()</span></div>
+  <h5 id="KSP_Sim_impl_FloatingOrigin_OnUpdate_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The position and velocity threshold check deliberately does not run here. It runs once per rendered frame from <a class="xref" href="KSP.Sim.impl.FloatingOrigin.html#KSP_Sim_impl_FloatingOrigin_ResolveOnUpdate">ResolveOnUpdate()</a>, after the physics step has completed. Snapping the origin from the physics step teleports every rigidbody across the frame change immediately before <code>Physics.Simulate</code>, which parts running continuous collision detection register as a high velocity contact.</p>
+</div>
 
 
   <a id="KSP_Sim_impl_FloatingOrigin_ResolveFloatingOrigin_" data-uid="KSP.Sim.impl.FloatingOrigin.ResolveFloatingOrigin*"></a>
@@ -317,7 +320,34 @@ public class FloatingOrigin : SystemBase, IFloatingOrigin</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the inertial reference frame was snapped; <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a> if no snap was needed or prerequisites were not met.</p>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the inertial reference frame was snapped, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a> if no snap was needed or prerequisites were not met.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_FloatingOrigin_ResolveOnUpdate_" data-uid="KSP.Sim.impl.FloatingOrigin.ResolveOnUpdate*"></a>
+  <h4 id="KSP_Sim_impl_FloatingOrigin_ResolveOnUpdate" data-uid="KSP.Sim.impl.FloatingOrigin.ResolveOnUpdate">ResolveOnUpdate()</h4>
+  <div class="markdown level1 summary"><p>Evaluates the position and velocity thresholds once per rendered frame, provided the physics step has run since the last evaluation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ResolveOnUpdate()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the inertial reference frame was snapped, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a> if no snap was needed or the physics step has not run since the last evaluation.</p>
 </td>
       </tr>
     </tbody>
