@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class CameraAnchorBlend | KSP2Redux API (Develop) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class CameraAnchorBlend | KSP2Redux API (Develop) ">
+    
+    <meta name="description" content="Holds the decaying displacement that carries the flight camera anchor from where it sat before a situation change to where the observer sits after it, turning an anchor teleport into a slide.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Redux.Cameras.CameraAnchorBlend">
+
+
+
+  <h1 id="Redux_Cameras_CameraAnchorBlend" data-uid="Redux.Cameras.CameraAnchorBlend" class="text-break">Class CameraAnchorBlend</h1>
+  <div class="markdown level0 summary"><p>Holds the decaying displacement that carries the flight camera anchor from where it sat before a situation
+change to where the observer sits after it, turning an anchor teleport into a slide.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><span class="xref">CameraAnchorBlend</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.Cameras.html">Cameras</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="Redux_Cameras_CameraAnchorBlend_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class CameraAnchorBlend</code></pre>
+  </div>
+  <h5 id="Redux_Cameras_CameraAnchorBlend_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>The displacement is stored in whatever frame the caller recorded the jump in and is never converted here, so
+this type stays free of the simulation transform hierarchy and can be exercised without a running game.</p>
+</div>
+  <h3 id="constructors">Constructors
+</h3>
+
+
+  <a id="Redux_Cameras_CameraAnchorBlend__ctor_" data-uid="Redux.Cameras.CameraAnchorBlend.#ctor*"></a>
+  <h4 id="Redux_Cameras_CameraAnchorBlend__ctor" data-uid="Redux.Cameras.CameraAnchorBlend.#ctor">CameraAnchorBlend()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CameraAnchorBlend()</code></pre>
+  </div>
+  <h3 id="fields">Fields
+</h3>
+
+
+  <h4 id="Redux_Cameras_CameraAnchorBlend_FULL_DURATION_DISTANCE" data-uid="Redux.Cameras.CameraAnchorBlend.FULL_DURATION_DISTANCE">FULL_DURATION_DISTANCE</h4>
+  <div class="markdown level1 summary"><p>The jump distance, in meters, at and above which a blend runs for <a class="xref" href="Redux.Cameras.CameraAnchorBlend.html#Redux_Cameras_CameraAnchorBlend_MAX_DURATION">MAX_DURATION</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const double FULL_DURATION_DISTANCE = 500</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Cameras_CameraAnchorBlend_MAX_ADVANCE_STEP" data-uid="Redux.Cameras.CameraAnchorBlend.MAX_ADVANCE_STEP">MAX_ADVANCE_STEP</h4>
+  <div class="markdown level1 summary"><p>The largest amount of blend progress, in seconds, that any single frame may consume.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const double MAX_ADVANCE_STEP = 0.03333333333333333</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Cameras_CameraAnchorBlend_MAX_ADVANCE_STEP_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Docking stalls the main thread for over a hundred milliseconds while view objects are destroyed and
+physics is unpacked. Advancing by the real elapsed time there spends most of the blend on one frame that
+never renders an intermediate position, which is seen as a hard cut. The blend is a visual transition, so
+it advances in rendered frames rather than wall time.</p>
+</div>
+
+
+  <h4 id="Redux_Cameras_CameraAnchorBlend_MAX_DURATION" data-uid="Redux.Cameras.CameraAnchorBlend.MAX_DURATION">MAX_DURATION</h4>
+  <div class="markdown level1 summary"><p>The longest blend duration, in seconds, that any jump can produce.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const double MAX_DURATION = 0.75</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Cameras_CameraAnchorBlend_MIN_DURATION" data-uid="Redux.Cameras.CameraAnchorBlend.MIN_DURATION">MIN_DURATION</h4>
+  <div class="markdown level1 summary"><p>The blend duration, in seconds, given to the smallest jump that still slides.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const double MIN_DURATION = 0.2</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Cameras_CameraAnchorBlend_MIN_JUMP_DISTANCE" data-uid="Redux.Cameras.CameraAnchorBlend.MIN_JUMP_DISTANCE">MIN_JUMP_DISTANCE</h4>
+  <div class="markdown level1 summary"><p>The smallest jump distance, in meters, that starts a blend.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const double MIN_JUMP_DISTANCE = 0.1</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Cameras_CameraAnchorBlend_MIN_JUMP_DISTANCE_SQUARED" data-uid="Redux.Cameras.CameraAnchorBlend.MIN_JUMP_DISTANCE_SQUARED">MIN_JUMP_DISTANCE_SQUARED</h4>
+  <div class="markdown level1 summary"><p>The square of <a class="xref" href="Redux.Cameras.CameraAnchorBlend.html#Redux_Cameras_CameraAnchorBlend_MIN_JUMP_DISTANCE">MIN_JUMP_DISTANCE</a>, for callers filtering jumps without taking a square root.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const double MIN_JUMP_DISTANCE_SQUARED = 0.010000000000000002</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="Redux_Cameras_CameraAnchorBlend_Duration_" data-uid="Redux.Cameras.CameraAnchorBlend.Duration*"></a>
+  <h4 id="Redux_Cameras_CameraAnchorBlend_Duration" data-uid="Redux.Cameras.CameraAnchorBlend.Duration">Duration</h4>
+  <div class="markdown level1 summary"><p>Gets the total duration, in seconds, of the running blend, or zero when none is running.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double Duration { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Cameras_CameraAnchorBlend_IsBlending_" data-uid="Redux.Cameras.CameraAnchorBlend.IsBlending*"></a>
+  <h4 id="Redux_Cameras_CameraAnchorBlend_IsBlending" data-uid="Redux.Cameras.CameraAnchorBlend.IsBlending">IsBlending</h4>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether a blend is running.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsBlending { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Cameras_CameraAnchorBlend_Offset_" data-uid="Redux.Cameras.CameraAnchorBlend.Offset*"></a>
+  <h4 id="Redux_Cameras_CameraAnchorBlend_Offset" data-uid="Redux.Cameras.CameraAnchorBlend.Offset">Offset</h4>
+  <div class="markdown level1 summary"><p>Gets the displacement currently applied to the camera anchor.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3d Offset { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="Redux_Cameras_CameraAnchorBlend_Advance_" data-uid="Redux.Cameras.CameraAnchorBlend.Advance*"></a>
+  <h4 id="Redux_Cameras_CameraAnchorBlend_Advance_System_Double_" data-uid="Redux.Cameras.CameraAnchorBlend.Advance(System.Double)">Advance(double)</h4>
+  <div class="markdown level1 summary"><p>Advances the running blend and returns the displacement to apply this frame.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3d Advance(double deltaTime)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">deltaTime</span></td>
+        <td><p>The elapsed real time, in seconds, since the previous call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><p>The displacement to apply to the anchor, which is the zero vector once the blend has finished.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Cameras_CameraAnchorBlend_Cancel_" data-uid="Redux.Cameras.CameraAnchorBlend.Cancel*"></a>
+  <h4 id="Redux_Cameras_CameraAnchorBlend_Cancel" data-uid="Redux.Cameras.CameraAnchorBlend.Cancel">Cancel()</h4>
+  <div class="markdown level1 summary"><p>Drops any running blend and its outstanding displacement.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Cancel()</code></pre>
+  </div>
+
+
+  <a id="Redux_Cameras_CameraAnchorBlend_Ease_" data-uid="Redux.Cameras.CameraAnchorBlend.Ease*"></a>
+  <h4 id="Redux_Cameras_CameraAnchorBlend_Ease_System_Double_" data-uid="Redux.Cameras.CameraAnchorBlend.Ease(System.Double)">Ease(double)</h4>
+  <div class="markdown level1 summary"><p>Applies the blend easing curve to a normalized time.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static double Ease(double t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>The normalized time, clamped into the range 0 to 1.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><p>The eased fraction of the blend that has completed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Cameras_CameraAnchorBlend_GetDurationForDistance_" data-uid="Redux.Cameras.CameraAnchorBlend.GetDurationForDistance*"></a>
+  <h4 id="Redux_Cameras_CameraAnchorBlend_GetDurationForDistance_System_Double_" data-uid="Redux.Cameras.CameraAnchorBlend.GetDurationForDistance(System.Double)">GetDurationForDistance(double)</h4>
+  <div class="markdown level1 summary"><p>Returns the blend duration for a jump of the given length.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static double GetDurationForDistance(double distance)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">distance</span></td>
+        <td><p>The jump distance in meters.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><p>The duration in seconds, between <a class="xref" href="Redux.Cameras.CameraAnchorBlend.html#Redux_Cameras_CameraAnchorBlend_MIN_DURATION">MIN_DURATION</a> and <a class="xref" href="Redux.Cameras.CameraAnchorBlend.html#Redux_Cameras_CameraAnchorBlend_MAX_DURATION">MAX_DURATION</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Cameras_CameraAnchorBlend_TryAddJump_" data-uid="Redux.Cameras.CameraAnchorBlend.TryAddJump*"></a>
+  <h4 id="Redux_Cameras_CameraAnchorBlend_TryAddJump_Vector3d_System_Double_" data-uid="Redux.Cameras.CameraAnchorBlend.TryAddJump(Vector3d,System.Double)">TryAddJump(Vector3d, double)</h4>
+  <div class="markdown level1 summary"><p>Records an anchor jump and starts a blend across it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryAddJump(Vector3d jump, double maxJumpDistance)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">jump</span></td>
+        <td><p>The vector from the anchor's new position back to where it was, in the caller's frame.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">maxJumpDistance</span></td>
+        <td><p>The largest jump distance, in meters, worth sliding across. Anything longer is left to snap.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if a blend was started, false if the jump was too small or too large to slide across.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetField__2___0_System_String_">Util.GetField&lt;T, R&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetField__2___0_System_String___1_">Util.SetField&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromProperties_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromProperties(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetFieldValue__1_System_Object_System_String_">Util.GetFieldValue&lt;T&gt;(object, string)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from develop
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
