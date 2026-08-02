@@ -312,10 +312,72 @@
   </table>
 
 
+  <a id="Redux_Managers_ISRUResourceManager_GetDensityAtPosition_" data-uid="Redux.Managers.ISRUResourceManager.GetDensityAtPosition*"></a>
+  <h4 id="Redux_Managers_ISRUResourceManager_GetDensityAtPosition_System_String_System_String_System_Single_System_Single_" data-uid="Redux.Managers.ISRUResourceManager.GetDensityAtPosition(System.String,System.String,System.Single,System.Single)">GetDensityAtPosition(string, string, float, float)</h4>
+  <div class="markdown level1 summary"><p>Returns the resource density at the given normalized longitude/latitude position (0..1 each).
+Returns -1 if the resource has not been scanned, 0 if the map is not loaded.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float GetDensityAtPosition(string cbName, string resourceName, float longNorm, float latNorm)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">cbName</span></td>
+        <td><p>Internal name of the celestial body</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">resourceName</span></td>
+        <td><p>Internal name of the resource</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">longNorm</span></td>
+        <td><p>Normalized longitude in [0, 1], where 0 = -180° and 1 = +180°</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">latNorm</span></td>
+        <td><p>Normalized latitude in [0, 1], where 0 = -90° and 1 = +90°</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="Redux_Managers_ISRUResourceManager_GetLocalDensity_" data-uid="Redux.Managers.ISRUResourceManager.GetLocalDensity*"></a>
   <h4 id="Redux_Managers_ISRUResourceManager_GetLocalDensity_KSP_Sim_impl_VesselComponent_System_String_System_Boolean_" data-uid="Redux.Managers.ISRUResourceManager.GetLocalDensity(KSP.Sim.impl.VesselComponent,System.String,System.Boolean)">GetLocalDensity(VesselComponent, string, bool)</h4>
-  <div class="markdown level1 summary"><p>Samples the resource density at the vessel's current geographic coordinates from the celestial body's density map.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -334,20 +396,17 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.VesselComponent.html">VesselComponent</a></td>
         <td><span class="parametername">vessel</span></td>
-        <td><p>The vessel whose position and main body are used for the density lookup.</p>
-</td>
+        <td></td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">resourceName</span></td>
-        <td><p>Internal name of the resource to sample.</p>
-</td>
+        <td></td>
       </tr>
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">overrideScanning</span></td>
-        <td><p>When true, skips the scan requirement and returns density for unscanned resources.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -362,8 +421,7 @@
     <tbody>
       <tr>
         <td><span class="xref">float</span></td>
-        <td><p>The red-channel value of the density map at the vessel's location, -1 if the resource has not been scanned and <code class="paramref">overrideScanning</code> is false, or 0 if the map is unavailable or coordinates are out of range.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -371,7 +429,8 @@
 
   <a id="Redux_Managers_ISRUResourceManager_IsCBResourceScanned_" data-uid="Redux.Managers.ISRUResourceManager.IsCBResourceScanned*"></a>
   <h4 id="Redux_Managers_ISRUResourceManager_IsCBResourceScanned_System_String_System_String_" data-uid="Redux.Managers.ISRUResourceManager.IsCBResourceScanned(System.String,System.String)">IsCBResourceScanned(string, string)</h4>
-  <div class="markdown level1 summary"><p>Checks whether a specific CB Resource has been scanned.</p>
+  <div class="markdown level1 summary"><p>Checks whether a specific CB Resource has been scanned.
+In sandbox mode, all resources are always considered scanned to remove progression gates.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
