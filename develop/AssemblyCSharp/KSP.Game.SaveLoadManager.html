@@ -724,7 +724,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void GetExtendedSaveFileInfo(string campaignFolder, SaveLoadManager.ExtendedSaveFileLoadFinishedDelegate finished)</code></pre>
+    <pre><code class="lang-csharp hljs">public SaveLoadManager.ExtendedSaveFileInfoRequest GetExtendedSaveFileInfo(string campaignFolder, SaveLoadManager.ExtendedSaveFileLoadFinishedDelegate finished)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -746,6 +746,22 @@
         <td><a class="xref" href="KSP.Game.SaveLoadManager.html">SaveLoadManager</a>.<a class="xref" href="KSP.Game.SaveLoadManager.ExtendedSaveFileLoadFinishedDelegate.html">ExtendedSaveFileLoadFinishedDelegate</a></td>
         <td><span class="parametername">finished</span></td>
         <td><p>Callback invoked with the loaded <a class="xref" href="KSP.Game.ExtendedSaveFileInfo.html">ExtendedSaveFileInfo</a> list when all metadata has been read.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Game.SaveLoadManager.html">SaveLoadManager</a>.<a class="xref" href="KSP.Game.SaveLoadManager.ExtendedSaveFileInfoRequest.html">ExtendedSaveFileInfoRequest</a></td>
+        <td><p>A handle the caller can cancel to abandon the load before it completes.</p>
 </td>
       </tr>
     </tbody>
@@ -801,6 +817,62 @@
       </tr>
     </tbody>
   </table>
+
+
+  <a id="KSP_Game_SaveLoadManager_GetLatestExtendedSaveFileInfo_" data-uid="KSP.Game.SaveLoadManager.GetLatestExtendedSaveFileInfo*"></a>
+  <h4 id="KSP_Game_SaveLoadManager_GetLatestExtendedSaveFileInfo_KSP_Game_SaveFileInfo_KSP_Game_SaveLoadManager_ExtendedSaveFileLoadFinishedDelegate_" data-uid="KSP.Game.SaveLoadManager.GetLatestExtendedSaveFileInfo(KSP.Game.SaveFileInfo,KSP.Game.SaveLoadManager.ExtendedSaveFileLoadFinishedDelegate)">GetLatestExtendedSaveFileInfo(SaveFileInfo, ExtendedSaveFileLoadFinishedDelegate)</h4>
+  <div class="markdown level1 summary"><p>Starts an asynchronous coroutine that loads extended save file data for a save the caller has
+already located, without enumerating its folder again.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SaveLoadManager.ExtendedSaveFileInfoRequest GetLatestExtendedSaveFileInfo(SaveFileInfo save, SaveLoadManager.ExtendedSaveFileLoadFinishedDelegate finished)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Game.SaveFileInfo.html">SaveFileInfo</a></td>
+        <td><span class="parametername">save</span></td>
+        <td><p>The save whose metadata is loaded.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Game.SaveLoadManager.html">SaveLoadManager</a>.<a class="xref" href="KSP.Game.SaveLoadManager.ExtendedSaveFileLoadFinishedDelegate.html">ExtendedSaveFileLoadFinishedDelegate</a></td>
+        <td><span class="parametername">finished</span></td>
+        <td><p>Callback invoked with a single entry list holding the loaded metadata.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Game.SaveLoadManager.html">SaveLoadManager</a>.<a class="xref" href="KSP.Game.SaveLoadManager.ExtendedSaveFileInfoRequest.html">ExtendedSaveFileInfoRequest</a></td>
+        <td><p>A handle the caller can cancel to abandon the load before it completes.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Game_SaveLoadManager_GetLatestExtendedSaveFileInfo_KSP_Game_SaveFileInfo_KSP_Game_SaveLoadManager_ExtendedSaveFileLoadFinishedDelegate__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Callers that only display a campaign summary should prefer this over
+<a class="xref" href="KSP.Game.SaveLoadManager.html#KSP_Game_SaveLoadManager_GetExtendedSaveFileInfo_System_String_KSP_Game_SaveLoadManager_ExtendedSaveFileLoadFinishedDelegate_">GetExtendedSaveFileInfo(string, ExtendedSaveFileLoadFinishedDelegate)</a>, which reads the metadata of every save in the folder.</p>
+</div>
 
 
   <a id="KSP_Game_SaveLoadManager_GetNextSaveIndex_" data-uid="KSP.Game.SaveLoadManager.GetNextSaveIndex*"></a>
@@ -1152,13 +1224,13 @@
 
 
   <a id="KSP_Game_SaveLoadManager_LoadExtendedSaveFileInfo_" data-uid="KSP.Game.SaveLoadManager.LoadExtendedSaveFileInfo*"></a>
-  <h4 id="KSP_Game_SaveLoadManager_LoadExtendedSaveFileInfo_System_String_KSP_Game_SaveLoadManager_ExtendedSaveFileLoadFinishedDelegate_" data-uid="KSP.Game.SaveLoadManager.LoadExtendedSaveFileInfo(System.String,KSP.Game.SaveLoadManager.ExtendedSaveFileLoadFinishedDelegate)">LoadExtendedSaveFileInfo(string, ExtendedSaveFileLoadFinishedDelegate)</h4>
+  <h4 id="KSP_Game_SaveLoadManager_LoadExtendedSaveFileInfo_System_String_KSP_Game_SaveLoadManager_ExtendedSaveFileLoadFinishedDelegate_KSP_Game_SaveLoadManager_ExtendedSaveFileInfoRequest_" data-uid="KSP.Game.SaveLoadManager.LoadExtendedSaveFileInfo(System.String,KSP.Game.SaveLoadManager.ExtendedSaveFileLoadFinishedDelegate,KSP.Game.SaveLoadManager.ExtendedSaveFileInfoRequest)">LoadExtendedSaveFileInfo(string, ExtendedSaveFileLoadFinishedDelegate, ExtendedSaveFileInfoRequest)</h4>
   <div class="markdown level1 summary"><p>Enumerates save files in a campaign folder, loads metadata for each one, and invokes a callback with the extended results.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IEnumerator LoadExtendedSaveFileInfo(string campaignFolder, SaveLoadManager.ExtendedSaveFileLoadFinishedDelegate finished)</code></pre>
+    <pre><code class="lang-csharp hljs">public IEnumerator LoadExtendedSaveFileInfo(string campaignFolder, SaveLoadManager.ExtendedSaveFileLoadFinishedDelegate finished, SaveLoadManager.ExtendedSaveFileInfoRequest request = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -1180,6 +1252,12 @@
         <td><a class="xref" href="KSP.Game.SaveLoadManager.html">SaveLoadManager</a>.<a class="xref" href="KSP.Game.SaveLoadManager.ExtendedSaveFileLoadFinishedDelegate.html">ExtendedSaveFileLoadFinishedDelegate</a></td>
         <td><span class="parametername">finished</span></td>
         <td><p>Callback invoked with the completed list of <a class="xref" href="KSP.Game.ExtendedSaveFileInfo.html">ExtendedSaveFileInfo</a> entries.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Game.SaveLoadManager.html">SaveLoadManager</a>.<a class="xref" href="KSP.Game.SaveLoadManager.ExtendedSaveFileInfoRequest.html">ExtendedSaveFileInfoRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>Handle whose cancellation suppresses the callback, or null when the load cannot be cancelled.</p>
 </td>
       </tr>
     </tbody>
@@ -1441,6 +1519,63 @@
         <td><a class="xref" href="KSP.Game.SaveLoadManager.html">SaveLoadManager</a>.<a class="xref" href="KSP.Game.SaveLoadManager.GameMetadataFinishedDelegate.html">GameMetadataFinishedDelegate</a></td>
         <td><span class="parametername">finishedCallback</span></td>
         <td><p>Callback invoked with the success flag and deserialized <a class="xref" href="KSP.Sim.SerializedSaveGameMetadata.html">SerializedSaveGameMetadata</a> when loading completes.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Game_SaveLoadManager_LoadKnownExtendedSaveFileInfo_" data-uid="KSP.Game.SaveLoadManager.LoadKnownExtendedSaveFileInfo*"></a>
+  <h4 id="KSP_Game_SaveLoadManager_LoadKnownExtendedSaveFileInfo_KSP_Game_SaveFileInfo_KSP_Game_SaveLoadManager_ExtendedSaveFileLoadFinishedDelegate_KSP_Game_SaveLoadManager_ExtendedSaveFileInfoRequest_" data-uid="KSP.Game.SaveLoadManager.LoadKnownExtendedSaveFileInfo(KSP.Game.SaveFileInfo,KSP.Game.SaveLoadManager.ExtendedSaveFileLoadFinishedDelegate,KSP.Game.SaveLoadManager.ExtendedSaveFileInfoRequest)">LoadKnownExtendedSaveFileInfo(SaveFileInfo, ExtendedSaveFileLoadFinishedDelegate, ExtendedSaveFileInfoRequest)</h4>
+  <div class="markdown level1 summary"><p>Reads the metadata of a known save and invokes a callback with it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerator LoadKnownExtendedSaveFileInfo(SaveFileInfo save, SaveLoadManager.ExtendedSaveFileLoadFinishedDelegate finished, SaveLoadManager.ExtendedSaveFileInfoRequest request = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Game.SaveFileInfo.html">SaveFileInfo</a></td>
+        <td><span class="parametername">save</span></td>
+        <td><p>The save whose metadata is loaded.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Game.SaveLoadManager.html">SaveLoadManager</a>.<a class="xref" href="KSP.Game.SaveLoadManager.ExtendedSaveFileLoadFinishedDelegate.html">ExtendedSaveFileLoadFinishedDelegate</a></td>
+        <td><span class="parametername">finished</span></td>
+        <td><p>Callback invoked with the completed single entry list.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Game.SaveLoadManager.html">SaveLoadManager</a>.<a class="xref" href="KSP.Game.SaveLoadManager.ExtendedSaveFileInfoRequest.html">ExtendedSaveFileInfoRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>Handle whose cancellation suppresses the callback, or null when the load cannot be cancelled.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IEnumerator</span></td>
+        <td><p>An <span class="xref">System.Collections.IEnumerator</span> suitable for use as a Unity coroutine.</p>
 </td>
       </tr>
     </tbody>
@@ -1903,7 +2038,7 @@
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">path</span></td>
-        <td><p>When this method returns <code>true</code>, the absolute path of the most recent save file; otherwise, an empty string.</p>
+        <td><p>When this method returns <code>true</code>, the absolute path of the most recent save file, otherwise an empty string.</p>
 </td>
       </tr>
     </tbody>
