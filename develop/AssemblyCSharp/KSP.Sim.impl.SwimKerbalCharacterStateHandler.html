@@ -244,6 +244,66 @@
   <div><a class="xref" href="KSP.Sim.impl.KerbalCharacterStateHandler.html#KSP_Sim_impl_KerbalCharacterStateHandler_CanBeDeactivatedByLocomotionHandler_KSP_Sim_impl_KerbalCharacterStateHandler_">KerbalCharacterStateHandler.CanBeDeactivatedByLocomotionHandler(KerbalCharacterStateHandler)</a></div>
 
 
+  <a id="KSP_Sim_impl_SwimKerbalCharacterStateHandler_ComputeSwimMoveDirection_" data-uid="KSP.Sim.impl.SwimKerbalCharacterStateHandler.ComputeSwimMoveDirection*"></a>
+  <h4 id="KSP_Sim_impl_SwimKerbalCharacterStateHandler_ComputeSwimMoveDirection_UnityEngine_Vector3_UnityEngine_Vector3_System_Single_" data-uid="KSP.Sim.impl.SwimKerbalCharacterStateHandler.ComputeSwimMoveDirection(UnityEngine.Vector3,UnityEngine.Vector3,System.Single)">ComputeSwimMoveDirection(Vector3, Vector3, float)</h4>
+  <div class="markdown level1 summary"><p>Combines the camera relative swim input with the vertical dive input into a single world space swim direction.
+The horizontal part is flattened onto the horizon plane, exactly as surface swimming has always done, and the
+vertical part is applied along the horizon up axis. The result is normalized, so diving diagonally moves the
+kerbal at the same speed as swimming straight forward.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Vector3 ComputeSwimMoveDirection(Vector3 cameraMoveWorldSpace, Vector3 horizonUp, float verticalInput)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">cameraMoveWorldSpace</span></td>
+        <td><p>The horizontal swim input, already rotated into world space by the flight camera.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">horizonUp</span></td>
+        <td><p>The world space horizon up axis at the kerbal's position.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">verticalInput</span></td>
+        <td><p>The vertical input, positive to swim up and negative to swim down.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><p>A unit length world space swim direction, or <span class="xref">UnityEngine.Vector3.zero</span> when there is no usable input.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Sim_impl_SwimKerbalCharacterStateHandler_FixedUpdate_" data-uid="KSP.Sim.impl.SwimKerbalCharacterStateHandler.FixedUpdate*"></a>
   <h4 id="KSP_Sim_impl_SwimKerbalCharacterStateHandler_FixedUpdate_System_Single_" data-uid="KSP.Sim.impl.SwimKerbalCharacterStateHandler.FixedUpdate(System.Single)">FixedUpdate(float)</h4>
   <div class="markdown level1 summary"><p>Performs physics-step logic for this character state.</p>
