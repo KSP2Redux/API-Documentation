@@ -369,6 +369,64 @@ public NativeQueue&lt;int&gt; quadCache</code></pre>
   </table>
 
 
+  <a id="KSP_Rendering_Planets_PQData_FaceRotation_" data-uid="KSP.Rendering.Planets.PQData.FaceRotation*"></a>
+  <h4 id="KSP_Rendering_Planets_PQData_FaceRotation_UnityEngine_Vector3_" data-uid="KSP.Rendering.Planets.PQData.FaceRotation(UnityEngine.Vector3)">FaceRotation(Vector3)</h4>
+  <div class="markdown level1 summary"><p>Returns the rotation taking a root face's local frame onto the given outward face normal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Quaternion FaceRotation(Vector3 faceNormal)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">faceNormal</span></td>
+        <td><p>The unit outward normal of the root face.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Quaternion.html">Quaternion</a></td>
+        <td><p>The rotation from the local frame to the face's orientation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Rendering_Planets_PQData_FaceRotation_UnityEngine_Vector3__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p><code>Quaternion.FromToRotation</code> leaves the rotation axis undefined when its arguments are
+antiparallel, so the engine picks one. The <code>yNeg</code> face normal is exactly
+<code>(0, -1, 0)</code> and is the only one of the six roots that hits that case. Unity 6.4 and
+earlier resolved it as 180 degrees about X, and Unity 6.5 resolves it as 180 degrees about
+Z, which yaws that face 180 degrees and points all four of its entries in the root
+adjacency table at the opposite face. Quads along the face seam then wait forever on a
+neighbour half a world away that never subdivides, so terrain in a band around the seam
+stalls at a coarse subdivision level and produces no colliders.</p>
+<p>Pinning the antiparallel case keeps the frame the adjacency table in
+<a class="xref" href="KSP.Rendering.Planets.PQData.html#KSP_Rendering_Planets_PQData_CreateQuads_KSP_Rendering_Planets_PQS_">CreateQuads(PQS)</a> was authored against, rather than inheriting whichever axis the
+engine happens to choose.</p>
+</div>
+
+
   <a id="KSP_Rendering_Planets_PQData_UpdateTargetRelativity_" data-uid="KSP.Rendering.Planets.PQData.UpdateTargetRelativity*"></a>
   <h4 id="KSP_Rendering_Planets_PQData_UpdateTargetRelativity_KSP_Rendering_Planets_PQS_KSP_Rendering_Planets_PQJob_PQ__" data-uid="KSP.Rendering.Planets.PQData.UpdateTargetRelativity(KSP.Rendering.Planets.PQS,KSP.Rendering.Planets.PQJob.PQ@)">UpdateTargetRelativity(PQS, ref PQ)</h4>
   <div class="markdown level1 summary"><p>Updates the great-circle distance metrics on a quad relative to the primary observer target position.</p>
