@@ -101,7 +101,8 @@
 
   <a id="KSP_Modules_PartAirStreamShield_FindNearbyColliders_" data-uid="KSP.Modules.PartAirStreamShield.FindNearbyColliders*"></a>
   <h4 id="KSP_Modules_PartAirStreamShield_FindNearbyColliders_KSP_Sim_impl_PartBehavior_System_Single_UnityEngine_Vector3_UnityEngine_Vector3_" data-uid="KSP.Modules.PartAirStreamShield.FindNearbyColliders(KSP.Sim.impl.PartBehavior,System.Single,UnityEngine.Vector3,UnityEngine.Vector3)">FindNearbyColliders(PartBehavior, float, Vector3, Vector3)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns all colliders within a capsule-shaped region centered on the given part, oriented along the bay direction axis.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -120,22 +121,26 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.PartBehavior.html">PartBehavior</a></td>
         <td><span class="parametername">part</span></td>
-        <td></td>
+        <td><p>The part whose local transform is used to convert <code class="paramref">center</code> and <code class="paramref">bayDirection</code> into world space.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">radius</span></td>
-        <td></td>
+        <td><p>The radius of the overlap capsule in world units. Returns an empty array when zero.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Vector3</span></td>
         <td><span class="parametername">center</span></td>
-        <td></td>
+        <td><p>The local-space midpoint of the capsule relative to <code class="paramref">part</code>.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Vector3</span></td>
         <td><span class="parametername">bayDirection</span></td>
-        <td></td>
+        <td><p>The local-space half-extent vector along the capsule axis, pointing from the center toward one end cap.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -150,7 +155,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Collider.html">Collider</a>[]</td>
-        <td></td>
+        <td><p>An array of colliders that overlap the capsule, or an empty array if <code class="paramref">radius</code> is zero.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -158,7 +164,8 @@
 
   <a id="KSP_Modules_PartAirStreamShield_PartWithinBounds_" data-uid="KSP.Modules.PartAirStreamShield.PartWithinBounds*"></a>
   <h4 id="KSP_Modules_PartAirStreamShield_PartWithinBounds_KSP_Sim_impl_PartBehavior_KSP_Sim_impl_PartBehavior_System_Collections_Generic_List_KSP_Modules_PartCollider__UnityEngine_Collider_KSP_Modules_Data_CargoBay_KSP_Modules_Data_Fairing_" data-uid="KSP.Modules.PartAirStreamShield.PartWithinBounds(KSP.Sim.impl.PartBehavior,KSP.Sim.impl.PartBehavior,System.Collections.Generic.List{KSP.Modules.PartCollider},UnityEngine.Collider,KSP.Modules.Data_CargoBay,KSP.Modules.Data_Fairing)">PartWithinBounds(PartBehavior, PartBehavior, List&lt;PartCollider&gt;, Collider, Data_CargoBay, Data_Fairing)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Determines whether a candidate part lies spatially within the shielded volume of a cargo bay or fairing part.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -177,32 +184,38 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.PartBehavior.html">PartBehavior</a></td>
         <td><span class="parametername">part</span></td>
-        <td></td>
+        <td><p>The shielding part that owns the enclosed volume.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.PartBehavior.html">PartBehavior</a></td>
         <td><span class="parametername">potentialPartInBounds</span></td>
-        <td></td>
+        <td><p>The part being tested to see if it falls inside the shielded volume.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="KSP.Modules.PartCollider.html">PartCollider</a>&gt;</td>
         <td><span class="parametername">ownColliders</span></td>
-        <td></td>
+        <td><p>The list of <a class="xref" href="KSP.Modules.PartCollider.html">PartCollider</a> instances belonging to <code class="paramref">part</code>, used when testing fairing containment via per-collider raycasts.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Collider.html">Collider</a></td>
         <td><span class="parametername">bayCollider</span></td>
-        <td></td>
+        <td><p>The single collider representing the cargo bay enclosure, used when the bay container mode is active.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Modules.Data_CargoBay.html">Data_CargoBay</a></td>
         <td><span class="parametername">dataCargoBay</span></td>
-        <td></td>
+        <td><p>The cargo bay module data for <code class="paramref">part</code>, or <code>null</code> if the shielding part is a fairing.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Modules.Data_Fairing.html">Data_Fairing</a></td>
         <td><span class="parametername">dataFairing</span></td>
-        <td></td>
+        <td><p>The fairing module data for <code class="paramref">part</code>, or <code>null</code> if the shielding part is a cargo bay.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -217,7 +230,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if <code class="paramref">potentialPartInBounds</code> is enclosed within the shielded volume; otherwise false.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -225,7 +239,8 @@
 
   <a id="KSP_Modules_PartAirStreamShield_ResolveFrontierCollision_" data-uid="KSP.Modules.PartAirStreamShield.ResolveFrontierCollision*"></a>
   <h4 id="KSP_Modules_PartAirStreamShield_ResolveFrontierCollision_KSP_Sim_impl_PartBehavior_KSP_Sim_impl_PartBehavior_System_Collections_Generic_List_System_String__UnityEngine_Vector3_UnityEngine_Vector3_" data-uid="KSP.Modules.PartAirStreamShield.ResolveFrontierCollision(KSP.Sim.impl.PartBehavior,KSP.Sim.impl.PartBehavior,System.Collections.Generic.List{System.String},UnityEngine.Vector3,UnityEngine.Vector3)">ResolveFrontierCollision(PartBehavior, PartBehavior, List&lt;string&gt;, Vector3, Vector3)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Determines whether a containee part is truly within the bounds of a containing part by examining attach node relationships and geometry at a raycast hit point.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -244,27 +259,32 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.PartBehavior.html">PartBehavior</a></td>
         <td><span class="parametername">containingPart</span></td>
-        <td></td>
+        <td><p>The shielding part, such as a cargo bay or fairing, that potentially contains the other part.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.PartBehavior.html">PartBehavior</a></td>
         <td><span class="parametername">containeePart</span></td>
-        <td></td>
+        <td><p>The part being tested for containment within <code class="paramref">containingPart</code>.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">List</span>&lt;<span class="xref">string</span>&gt;</td>
         <td><span class="parametername">nodeTags</span></td>
-        <td></td>
+        <td><p>The set of attach node identifiers on <code class="paramref">containingPart</code> that define its frontier boundary.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Vector3</span></td>
         <td><span class="parametername">hitPoint</span></td>
-        <td></td>
+        <td><p>The world-space point where a raycast struck the surface of the shielding part.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Vector3</span></td>
         <td><span class="parametername">partFarthestPoint</span></td>
-        <td></td>
+        <td><p>The world-space point on <code class="paramref">containeePart</code> that is farthest from the ray origin, used to gauge proximity to the frontier.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -279,7 +299,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the containee part is considered within the shielding boundary at the collision point; otherwise false.</p>
+</td>
       </tr>
     </tbody>
   </table>

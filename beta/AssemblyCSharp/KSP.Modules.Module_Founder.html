@@ -95,9 +95,6 @@
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a></div>
     <div><a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a></div>
     <div><a class="xref" href="GlobalAssemblyCSharp.IMultipleDragCube.html">IMultipleDragCube</a></div>
     <div><a class="xref" href="GlobalAssemblyCSharp.ILateUpdate.html">ILateUpdate</a></div>
@@ -249,6 +246,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsStageable">PartBehaviourModule.IsStageable()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnViewUnload">PartBehaviourModule.OnViewUnload()</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnActive">PartBehaviourModule.OnActive()</a>
     </div>
     <div>
@@ -270,13 +270,16 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForDataModules">PartBehaviourModule.InitForDataModules()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_StashPendingStateJson_System_Type_Newtonsoft_Json_Linq_JObject_">PartBehaviourModule.StashPendingStateJson(Type, JObject)</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_SetDataModuleValues_KSP_Sim_Definitions_SerializedPartModule_">PartBehaviourModule.SetDataModuleValues(SerializedPartModule)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForNewOABPart">PartBehaviourModule.InitForNewOABPart()</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_">PartBehaviourModule.RemoveResourceRequest(ResourceFlowRequestHandle)</a>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_Unity_Entities_Entity_">PartBehaviourModule.RemoveResourceRequest(Entity)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnAnimStateExit_UnityEngine_Animator_System_Int32_">PartBehaviourModule.OnAnimStateExit(Animator, int)</a>
@@ -363,6 +366,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsLocallyAuthorized">PartBehaviourModule.IsLocallyAuthorized</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_PendingStateJson">PartBehaviourModule.PendingStateJson</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Game">KerbalMonoBehaviour.Game</a>
     </div>
     <div>
@@ -382,7 +388,10 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Module_Founder_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Module_Founder : Module_Deployable, IPartModule, IFixedUpdate, IPriorityOverride, IUpdate, IObjectAssemblyPartModule, IMultipleDragCube, ILateUpdate</code></pre>
+    <pre><code class="lang-csharp hljs">[ModuleCategory(&quot;Colony&quot;)]
+[ModuleDescription(&quot;Establishes a colony at the part&#39;s landing site&quot;)]
+[ModuleHidden]
+public class Module_Founder : Module_Deployable, IPartModule, IObjectAssemblyPartModule, IMultipleDragCube, ILateUpdate</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -401,7 +410,8 @@
 
 
   <h4 id="KSP_Modules_Module_Founder__moduleData" data-uid="KSP.Modules.Module_Founder._moduleData">_moduleData</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The data module instance holding the founder-specific configuration and state.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -428,7 +438,8 @@
 
   <a id="KSP_Modules_Module_Founder_PartComponentModuleType_" data-uid="KSP.Modules.Module_Founder.PartComponentModuleType*"></a>
   <h4 id="KSP_Modules_Module_Founder_PartComponentModuleType" data-uid="KSP.Modules.Module_Founder.PartComponentModuleType">PartComponentModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <span class="xref">System.Type</span> of the backing part component module for this behaviour module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -457,7 +468,8 @@
 
   <a id="KSP_Modules_Module_Founder_AddDataModules_" data-uid="KSP.Modules.Module_Founder.AddDataModules*"></a>
   <h4 id="KSP_Modules_Module_Founder_AddDataModules" data-uid="KSP.Modules.Module_Founder.AddDataModules">AddDataModules()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers the <a class="xref" href="KSP.Modules.Data_Deployable.html">Data_Deployable</a> data module with the part's data module collection.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -469,7 +481,8 @@
 
   <a id="KSP_Modules_Module_Founder_OnEnterBAE_" data-uid="KSP.Modules.Module_Founder.OnEnterBAE*"></a>
   <h4 id="KSP_Modules_Module_Founder_OnEnterBAE" data-uid="KSP.Modules.Module_Founder.OnEnterBAE">OnEnterBAE()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Opens the Base Assembly Editor for the colony associated with this part.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -479,7 +492,8 @@
 
   <a id="KSP_Modules_Module_Founder_OnFoundColony_" data-uid="KSP.Modules.Module_Founder.OnFoundColony*"></a>
   <h4 id="KSP_Modules_Module_Founder_OnFoundColony" data-uid="KSP.Modules.Module_Founder.OnFoundColony">OnFoundColony()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Displays a confirmation dialog prompting the player to found a colony at the current landing site.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -489,7 +503,8 @@
 
   <a id="KSP_Modules_Module_Founder_OnInitialize_" data-uid="KSP.Modules.Module_Founder.OnInitialize*"></a>
   <h4 id="KSP_Modules_Module_Founder_OnInitialize" data-uid="KSP.Modules.Module_Founder.OnInitialize">OnInitialize()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes the deployable module, setting up drag, visuals, action groups, and event subscriptions.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -500,15 +515,6 @@
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a>
   </div>
   <div>
       <a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a>

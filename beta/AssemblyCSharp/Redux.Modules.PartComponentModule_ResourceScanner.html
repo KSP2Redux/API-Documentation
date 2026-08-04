@@ -104,16 +104,16 @@
       <a class="xref" href="KSP.Sim.impl.PartComponentModule.html#KSP_Sim_impl_PartComponentModule_ClearPart">PartComponentModule.ClearPart()</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.impl.PartComponentModule.html#KSP_Sim_impl_PartComponentModule_ThermalUpdate_System_Double_">PartComponentModule.ThermalUpdate(double)</a>
-    </div>
-    <div>
       <a class="xref" href="KSP.Sim.impl.PartComponentModule.html#KSP_Sim_impl_PartComponentModule_OnFinalizeCreation_System_Double_">PartComponentModule.OnFinalizeCreation(double)</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.impl.PartComponentModule.html#KSP_Sim_impl_PartComponentModule_RemoveResourceRequest_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_">PartComponentModule.RemoveResourceRequest(ResourceFlowRequestHandle)</a>
+      <a class="xref" href="KSP.Sim.impl.PartComponentModule.html#KSP_Sim_impl_PartComponentModule_RemoveResourceRequest_Unity_Entities_Entity_">PartComponentModule.RemoveResourceRequest(Entity)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.impl.PartComponentModule.html#KSP_Sim_impl_PartComponentModule_Part">PartComponentModule.Part</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.impl.PartComponentModule.html#KSP_Sim_impl_PartComponentModule_ModuleEntity">PartComponentModule.ModuleEntity</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.impl.PartComponentModule.html#KSP_Sim_impl_PartComponentModule_Game">PartComponentModule.Game</a>
@@ -148,7 +148,8 @@
 
 
   <h4 id="Redux_Modules_PartComponentModule_ResourceScanner__dataResourceScanner" data-uid="Redux.Modules.PartComponentModule_ResourceScanner._dataResourceScanner">_dataResourceScanner</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Data module instance containing configuration and runtime state for the resource scanner.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -175,7 +176,8 @@
 
   <a id="Redux_Modules_PartComponentModule_ResourceScanner_PartBehaviourModuleType_" data-uid="Redux.Modules.PartComponentModule_ResourceScanner.PartBehaviourModuleType*"></a>
   <h4 id="Redux_Modules_PartComponentModule_ResourceScanner_PartBehaviourModuleType" data-uid="Redux.Modules.PartComponentModule_ResourceScanner.PartBehaviourModuleType">PartBehaviourModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the runtime <span class="xref">System.Type</span> of the part behaviour module that corresponds to this simulation module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -198,6 +200,33 @@
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="KSP.Sim.impl.PartComponentModule.html#KSP_Sim_impl_PartComponentModule_PartBehaviourModuleType">PartComponentModule.PartBehaviourModuleType</a></div>
+
+
+  <a id="Redux_Modules_PartComponentModule_ResourceScanner_ScannerStatus_" data-uid="Redux.Modules.PartComponentModule_ResourceScanner.ScannerStatus*"></a>
+  <h4 id="Redux_Modules_PartComponentModule_ResourceScanner_ScannerStatus" data-uid="Redux.Modules.PartComponentModule_ResourceScanner.ScannerStatus">ScannerStatus</h4>
+  <div class="markdown level1 summary"><p>The scanner's current operating status, as tracked by its data module. The Resource Gathering
+window reads this to tell a retracted scanner apart from one that simply cannot scan here.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ResourceScannerStatus ScannerStatus { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Modules.ResourceScannerStatus.html">ResourceScannerStatus</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="methods">Methods
 </h3>
 
@@ -229,7 +258,8 @@
 
   <a id="Redux_Modules_PartComponentModule_ResourceScanner_GetRemainingTime_" data-uid="Redux.Modules.PartComponentModule_ResourceScanner.GetRemainingTime*"></a>
   <h4 id="Redux_Modules_PartComponentModule_ResourceScanner_GetRemainingTime" data-uid="Redux.Modules.PartComponentModule_ResourceScanner.GetRemainingTime">GetRemainingTime()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the remaining time until the current scan completes.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -246,7 +276,8 @@
     <tbody>
       <tr>
         <td><span class="xref">double</span></td>
-        <td></td>
+        <td><p>The number of seconds remaining before the active scan finishes.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -254,7 +285,8 @@
 
   <a id="Redux_Modules_PartComponentModule_ResourceScanner_GetScannableResourceList_" data-uid="Redux.Modules.PartComponentModule_ResourceScanner.GetScannableResourceList*"></a>
   <h4 id="Redux_Modules_PartComponentModule_ResourceScanner_GetScannableResourceList" data-uid="Redux.Modules.PartComponentModule_ResourceScanner.GetScannableResourceList">GetScannableResourceList()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns a deduplicated list of resource names that this scanner is configured to detect.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -271,7 +303,8 @@
     <tbody>
       <tr>
         <td><span class="xref">List</span>&lt;<span class="xref">string</span>&gt;</td>
-        <td></td>
+        <td><p>A list of unique resource name strings drawn from the scanner's scannable resource settings.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -279,7 +312,8 @@
 
   <a id="Redux_Modules_PartComponentModule_ResourceScanner_OnShutdown_" data-uid="Redux.Modules.PartComponentModule_ResourceScanner.OnShutdown*"></a>
   <h4 id="Redux_Modules_PartComponentModule_ResourceScanner_OnShutdown" data-uid="Redux.Modules.PartComponentModule_ResourceScanner.OnShutdown">OnShutdown()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called when the module is shutting down, allowing derived modules to release resources and detach from systems.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -291,7 +325,8 @@
 
   <a id="Redux_Modules_PartComponentModule_ResourceScanner_OnStart_" data-uid="Redux.Modules.PartComponentModule_ResourceScanner.OnStart*"></a>
   <h4 id="Redux_Modules_PartComponentModule_ResourceScanner_OnStart_System_Double_" data-uid="Redux.Modules.PartComponentModule_ResourceScanner.OnStart(System.Double)">OnStart(double)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called once when the module begins simulating, allowing derived modules to perform startup work.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -310,7 +345,8 @@
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">universalTime</span></td>
-        <td></td>
+        <td><p>The current universal time, in seconds, at which the module starts.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -320,7 +356,8 @@
 
   <a id="Redux_Modules_PartComponentModule_ResourceScanner_OnUpdate_" data-uid="Redux.Modules.PartComponentModule_ResourceScanner.OnUpdate*"></a>
   <h4 id="Redux_Modules_PartComponentModule_ResourceScanner_OnUpdate_System_Double_System_Double_" data-uid="Redux.Modules.PartComponentModule_ResourceScanner.OnUpdate(System.Double,System.Double)">OnUpdate(double, double)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called each simulation tick on modules that register for updates. Derived classes must override this method when registering for updates; the base implementation throws <span class="xref">System.NotImplementedException</span>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -339,12 +376,14 @@
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">universalTime</span></td>
-        <td></td>
+        <td><p>The current universal time, in seconds.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">deltaUniversalTime</span></td>
-        <td></td>
+        <td><p>The elapsed universal time, in seconds, since the previous update.</p>
+</td>
       </tr>
     </tbody>
   </table>

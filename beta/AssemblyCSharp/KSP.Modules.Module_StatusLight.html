@@ -94,9 +94,6 @@
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a></div>
     <div><a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a></div>
   </div>
   <div class="inheritedMembers">
@@ -118,6 +115,9 @@
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsStageable">PartBehaviourModule.IsStageable()</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnViewUnload">PartBehaviourModule.OnViewUnload()</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnActive">PartBehaviourModule.OnActive()</a>
@@ -144,13 +144,16 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForDataModules">PartBehaviourModule.InitForDataModules()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_StashPendingStateJson_System_Type_Newtonsoft_Json_Linq_JObject_">PartBehaviourModule.StashPendingStateJson(Type, JObject)</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_SetDataModuleValues_KSP_Sim_Definitions_SerializedPartModule_">PartBehaviourModule.SetDataModuleValues(SerializedPartModule)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForNewOABPart">PartBehaviourModule.InitForNewOABPart()</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_">PartBehaviourModule.RemoveResourceRequest(ResourceFlowRequestHandle)</a>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_Unity_Entities_Entity_">PartBehaviourModule.RemoveResourceRequest(Entity)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnAnimStateEnter_UnityEngine_Animator_System_Int32_">PartBehaviourModule.OnAnimStateEnter(Animator, int)</a>
@@ -246,6 +249,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsLocallyAuthorized">PartBehaviourModule.IsLocallyAuthorized</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_PendingStateJson">PartBehaviourModule.PendingStateJson</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Game">KerbalMonoBehaviour.Game</a>
     </div>
     <div>
@@ -265,7 +271,9 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Module_StatusLight_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Module_StatusLight : PartBehaviourModule, IPartModule, IFixedUpdate, IPriorityOverride, IUpdate, IObjectAssemblyPartModule</code></pre>
+    <pre><code class="lang-csharp hljs">[ModuleCategory(&quot;Electrical&quot;)]
+[ModuleDescription(&quot;Indicator light that changes color based on part state&quot;)]
+public class Module_StatusLight : PartBehaviourModule, IPartModule, IObjectAssemblyPartModule</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -284,7 +292,8 @@
 
 
   <h4 id="KSP_Modules_Module_StatusLight_dataStatusLight" data-uid="KSP.Modules.Module_StatusLight.dataStatusLight">dataStatusLight</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The serialized data module instance holding configuration and state for this status light.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -311,7 +320,8 @@
 
   <a id="KSP_Modules_Module_StatusLight_IsOn_" data-uid="KSP.Modules.Module_StatusLight.IsOn*"></a>
   <h4 id="KSP_Modules_Module_StatusLight_IsOn" data-uid="KSP.Modules.Module_StatusLight.IsOn">IsOn</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the status light is currently on.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -336,7 +346,8 @@
 
   <a id="KSP_Modules_Module_StatusLight_PartComponentModuleType_" data-uid="KSP.Modules.Module_StatusLight.PartComponentModuleType*"></a>
   <h4 id="KSP_Modules_Module_StatusLight_PartComponentModuleType" data-uid="KSP.Modules.Module_StatusLight.PartComponentModuleType">PartComponentModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <span class="xref">System.Type</span> of the corresponding simulation-side <a class="xref" href="KSP.Sim.impl.PartComponentModule.html">PartComponentModule</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -365,7 +376,8 @@
 
   <a id="KSP_Modules_Module_StatusLight_AddDataModules_" data-uid="KSP.Modules.Module_StatusLight.AddDataModules*"></a>
   <h4 id="KSP_Modules_Module_StatusLight_AddDataModules" data-uid="KSP.Modules.Module_StatusLight.AddDataModules">AddDataModules()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers data modules with <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_DataModules">DataModules</a> for this part behaviour module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -377,7 +389,8 @@
 
   <a id="KSP_Modules_Module_StatusLight_OnInitialize_" data-uid="KSP.Modules.Module_StatusLight.OnInitialize*"></a>
   <h4 id="KSP_Modules_Module_StatusLight_OnInitialize" data-uid="KSP.Modules.Module_StatusLight.OnInitialize">OnInitialize()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called during initialization to allow derived classes to perform custom setup after data modules are registered.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -389,7 +402,8 @@
 
   <a id="KSP_Modules_Module_StatusLight_SetStatus_" data-uid="KSP.Modules.Module_StatusLight.SetStatus*"></a>
   <h4 id="KSP_Modules_Module_StatusLight_SetStatus_System_Boolean_" data-uid="KSP.Modules.Module_StatusLight.SetStatus(System.Boolean)">SetStatus(bool)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Sets the active state of the status light, updating the light color and material to match the on or off state.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -408,22 +422,14 @@
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">status</span></td>
-        <td></td>
+        <td><p>The state to apply; <code>true</code> activates the on color and material, <code>false</code> activates the off color and material.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a>
   </div>
   <div>
       <a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a>

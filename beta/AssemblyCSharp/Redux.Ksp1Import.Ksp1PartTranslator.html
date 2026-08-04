@@ -99,12 +99,13 @@
 
 
   <a id="Redux_Ksp1Import_Ksp1PartTranslator__ctor_" data-uid="Redux.Ksp1Import.Ksp1PartTranslator.#ctor*"></a>
-  <h4 id="Redux_Ksp1Import_Ksp1PartTranslator__ctor_Redux_Ksp1Import_Ksp1B9TankCatalog_Redux_Ksp1Import_Model_Ksp1EnginePlumeCatalog_" data-uid="Redux.Ksp1Import.Ksp1PartTranslator.#ctor(Redux.Ksp1Import.Ksp1B9TankCatalog,Redux.Ksp1Import.Model.Ksp1EnginePlumeCatalog)">Ksp1PartTranslator(Ksp1B9TankCatalog, Ksp1EnginePlumeCatalog)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Redux_Ksp1Import_Ksp1PartTranslator__ctor_Redux_Ksp1Import_Ksp1B9TankCatalog_Redux_Ksp1Import_Model_Ksp1EnginePlumeCatalog_Redux_Ksp1Import_Ksp1ResourceMapper_Ksp2ResourceMassLookup_Redux_Ksp1Import_Ksp1LocalizationCatalog_Redux_Ksp1Import_Ksp1PartTranslator_CategoryMode_" data-uid="Redux.Ksp1Import.Ksp1PartTranslator.#ctor(Redux.Ksp1Import.Ksp1B9TankCatalog,Redux.Ksp1Import.Model.Ksp1EnginePlumeCatalog,Redux.Ksp1Import.Ksp1ResourceMapper.Ksp2ResourceMassLookup,Redux.Ksp1Import.Ksp1LocalizationCatalog,Redux.Ksp1Import.Ksp1PartTranslator.CategoryMode)">Ksp1PartTranslator(Ksp1B9TankCatalog, Ksp1EnginePlumeCatalog, Ksp2ResourceMassLookup, Ksp1LocalizationCatalog, CategoryMode)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Redux.Ksp1Import.Ksp1PartTranslator.html">Ksp1PartTranslator</a> class.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Ksp1PartTranslator(Ksp1B9TankCatalog b9TankCatalog = null, Ksp1EnginePlumeCatalog plumeCatalog = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public Ksp1PartTranslator(Ksp1B9TankCatalog b9TankCatalog = null, Ksp1EnginePlumeCatalog plumeCatalog = null, Ksp1ResourceMapper.Ksp2ResourceMassLookup resourceMassLookup = null, Ksp1LocalizationCatalog localizationCatalog = null, Ksp1PartTranslator.CategoryMode categoryMode = CategoryMode.RuntimeModCategories)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -119,12 +120,32 @@
       <tr>
         <td><a class="xref" href="Redux.Ksp1Import.Ksp1B9TankCatalog.html">Ksp1B9TankCatalog</a></td>
         <td><span class="parametername">b9TankCatalog</span></td>
-        <td></td>
+        <td><p>Catalog of B9 Part Switch tank definitions used to resolve switched resource nodes, or null to skip B9 tank processing.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="Redux.Ksp1Import.Model.Ksp1EnginePlumeCatalog.html">Ksp1EnginePlumeCatalog</a></td>
         <td><span class="parametername">plumeCatalog</span></td>
-        <td></td>
+        <td><p>Catalog of engine plume assets used to configure visual plume effects on imported engines, or null to skip plume setup.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Redux.Ksp1Import.Ksp1ResourceMapper.html">Ksp1ResourceMapper</a>.<a class="xref" href="Redux.Ksp1Import.Ksp1ResourceMapper.Ksp2ResourceMassLookup.html">Ksp2ResourceMassLookup</a></td>
+        <td><span class="parametername">resourceMassLookup</span></td>
+        <td><p>KSP2 resource mass lookup table for mapping imported resource quantities to mass values, or null to use built-in defaults.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Redux.Ksp1Import.Ksp1LocalizationCatalog.html">Ksp1LocalizationCatalog</a></td>
+        <td><span class="parametername">localizationCatalog</span></td>
+        <td><p>Catalog for resolving KSP1 localization tokens in part tags and display names, or null to skip localization.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Redux.Ksp1Import.Ksp1PartTranslator.html">Ksp1PartTranslator</a>.<a class="xref" href="Redux.Ksp1Import.Ksp1PartTranslator.CategoryMode.html">CategoryMode</a></td>
+        <td><span class="parametername">categoryMode</span></td>
+        <td><p>Determines whether the part category is taken from the part config or assigned from the mod registry at runtime.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -134,7 +155,8 @@
 
   <a id="Redux_Ksp1Import_Ksp1PartTranslator_RebuildRegisteredPrefab_" data-uid="Redux.Ksp1Import.Ksp1PartTranslator.RebuildRegisteredPrefab*"></a>
   <h4 id="Redux_Ksp1Import_Ksp1PartTranslator_RebuildRegisteredPrefab_Redux_Ksp1Import_Ksp1ConfigFile_Redux_Ksp1Import_Config_Ksp1ConfigNode_KSP_Sim_Definitions_PartCore_Redux_Ksp1Import_Ksp1ImportReport_System_Collections_Generic_IReadOnlyList_System_String__" data-uid="Redux.Ksp1Import.Ksp1PartTranslator.RebuildRegisteredPrefab(Redux.Ksp1Import.Ksp1ConfigFile,Redux.Ksp1Import.Config.Ksp1ConfigNode,KSP.Sim.Definitions.PartCore,Redux.Ksp1Import.Ksp1ImportReport,System.Collections.Generic.IReadOnlyList{System.String})">RebuildRegisteredPrefab(Ksp1ConfigFile, Ksp1ConfigNode, PartCore, Ksp1ImportReport, IReadOnlyList&lt;string&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Rebuilds and returns the Unity prefab for a previously translated part using the supplied core data.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -153,27 +175,32 @@
       <tr>
         <td><a class="xref" href="Redux.Ksp1Import.Ksp1ConfigFile.html">Ksp1ConfigFile</a></td>
         <td><span class="parametername">file</span></td>
-        <td></td>
+        <td><p>The source config file that originally defined the part.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="Redux.Ksp1Import.Config.Ksp1ConfigNode.html">Ksp1ConfigNode</a></td>
         <td><span class="parametername">partNode</span></td>
-        <td></td>
+        <td><p>The PART config node used to drive prefab configuration.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.Definitions.PartCore.html">PartCore</a></td>
         <td><span class="parametername">core</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="KSP.Sim.Definitions.PartCore.html">PartCore</a> produced by an earlier call to <a class="xref" href="Redux.Ksp1Import.Ksp1PartTranslator.html#Redux_Ksp1Import_Ksp1PartTranslator_TryTranslatePart_Redux_Ksp1Import_Ksp1ConfigFile_Redux_Ksp1Import_Config_Ksp1ConfigNode_Redux_Ksp1Import_Ksp1ImportReport_KSP_Sim_Definitions_PartCore__System_String__">TryTranslatePart(Ksp1ConfigFile, Ksp1ConfigNode, Ksp1ImportReport, out PartCore, out string)</a>.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="Redux.Ksp1Import.Ksp1ImportReport.html">Ksp1ImportReport</a></td>
         <td><span class="parametername">report</span></td>
-        <td></td>
+        <td><p>Report collector that receives warnings and informational messages during prefab construction.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">IReadOnlyList</span>&lt;<span class="xref">string</span>&gt;</td>
         <td><span class="parametername">b9InactiveTransforms</span></td>
-        <td></td>
+        <td><p>Names of transforms that B9 Part Switch should hide on the baseline variant, or null to apply no baseline overrides.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -188,7 +215,8 @@
     <tbody>
       <tr>
         <td><span class="xref">GameObject</span></td>
-        <td></td>
+        <td><p>The configured part prefab <span class="xref">UnityEngine.GameObject</span>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -196,7 +224,8 @@
 
   <a id="Redux_Ksp1Import_Ksp1PartTranslator_TryTranslatePart_" data-uid="Redux.Ksp1Import.Ksp1PartTranslator.TryTranslatePart*"></a>
   <h4 id="Redux_Ksp1Import_Ksp1PartTranslator_TryTranslatePart_Redux_Ksp1Import_Ksp1ConfigFile_Redux_Ksp1Import_Config_Ksp1ConfigNode_Redux_Ksp1Import_Ksp1ImportReport_KSP_Sim_Definitions_PartCore__System_String__" data-uid="Redux.Ksp1Import.Ksp1PartTranslator.TryTranslatePart(Redux.Ksp1Import.Ksp1ConfigFile,Redux.Ksp1Import.Config.Ksp1ConfigNode,Redux.Ksp1Import.Ksp1ImportReport,KSP.Sim.Definitions.PartCore@,System.String@)">TryTranslatePart(Ksp1ConfigFile, Ksp1ConfigNode, Ksp1ImportReport, out PartCore, out string)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Translates a single KSP1 PART config node into a KSP2 <a class="xref" href="KSP.Sim.Definitions.PartCore.html">PartCore</a> and its serialized JSON representation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -215,27 +244,32 @@
       <tr>
         <td><a class="xref" href="Redux.Ksp1Import.Ksp1ConfigFile.html">Ksp1ConfigFile</a></td>
         <td><span class="parametername">file</span></td>
-        <td></td>
+        <td><p>The source config file that contains the part definition.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="Redux.Ksp1Import.Config.Ksp1ConfigNode.html">Ksp1ConfigNode</a></td>
         <td><span class="parametername">partNode</span></td>
-        <td></td>
+        <td><p>The PART config node to translate.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="Redux.Ksp1Import.Ksp1ImportReport.html">Ksp1ImportReport</a></td>
         <td><span class="parametername">report</span></td>
-        <td></td>
+        <td><p>Report collector that receives warnings and informational messages produced during translation.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.Definitions.PartCore.html">PartCore</a></td>
         <td><span class="parametername">core</span></td>
-        <td></td>
+        <td><p>When this method returns true, contains the translated part core; otherwise null.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">rawJson</span></td>
-        <td></td>
+        <td><p>When this method returns true, contains the JSON-serialized form of <code class="paramref">core</code>; otherwise null.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -250,7 +284,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>true if the part was translated, built, and registered successfully; false if the part node has no name or is otherwise invalid.</p>
+</td>
       </tr>
     </tbody>
   </table>

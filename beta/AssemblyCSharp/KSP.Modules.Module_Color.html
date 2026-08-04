@@ -94,9 +94,6 @@
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a></div>
     <div><a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a></div>
   </div>
   <div class="inheritedMembers">
@@ -120,6 +117,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsStageable">PartBehaviourModule.IsStageable()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnViewUnload">PartBehaviourModule.OnViewUnload()</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnActive">PartBehaviourModule.OnActive()</a>
     </div>
     <div>
@@ -141,10 +141,13 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForDataModules">PartBehaviourModule.InitForDataModules()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_StashPendingStateJson_System_Type_Newtonsoft_Json_Linq_JObject_">PartBehaviourModule.StashPendingStateJson(Type, JObject)</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_SetDataModuleValues_KSP_Sim_Definitions_SerializedPartModule_">PartBehaviourModule.SetDataModuleValues(SerializedPartModule)</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_">PartBehaviourModule.RemoveResourceRequest(ResourceFlowRequestHandle)</a>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_Unity_Entities_Entity_">PartBehaviourModule.RemoveResourceRequest(Entity)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnAnimStateEnter_UnityEngine_Animator_System_Int32_">PartBehaviourModule.OnAnimStateEnter(Animator, int)</a>
@@ -234,6 +237,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsLocallyAuthorized">PartBehaviourModule.IsLocallyAuthorized</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_PendingStateJson">PartBehaviourModule.PendingStateJson</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Game">KerbalMonoBehaviour.Game</a>
     </div>
     <div>
@@ -253,7 +259,9 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Module_Color_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Module_Color : PartBehaviourModule, IPartModule, IFixedUpdate, IPriorityOverride, IUpdate, IObjectAssemblyPartModule</code></pre>
+    <pre><code class="lang-csharp hljs">[ModuleCategory(&quot;Cosmetic&quot;)]
+[ModuleDescription(&quot;Per-part base and accent color rendering&quot;)]
+public class Module_Color : PartBehaviourModule, IPartModule, IObjectAssemblyPartModule</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -272,7 +280,8 @@
 
 
   <h4 id="KSP_Modules_Module_Color__dataColor" data-uid="KSP.Modules.Module_Color._dataColor">_dataColor</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The color data module holding the base and accent color values for this part.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -299,7 +308,8 @@
 
   <a id="KSP_Modules_Module_Color_PartComponentModuleType_" data-uid="KSP.Modules.Module_Color.PartComponentModuleType*"></a>
   <h4 id="KSP_Modules_Module_Color_PartComponentModuleType" data-uid="KSP.Modules.Module_Color.PartComponentModuleType">PartComponentModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <span class="xref">System.Type</span> of the corresponding simulation-side <a class="xref" href="KSP.Sim.impl.PartComponentModule.html">PartComponentModule</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -328,7 +338,8 @@
 
   <a id="KSP_Modules_Module_Color_AddDataModules_" data-uid="KSP.Modules.Module_Color.AddDataModules*"></a>
   <h4 id="KSP_Modules_Module_Color_AddDataModules" data-uid="KSP.Modules.Module_Color.AddDataModules">AddDataModules()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers data modules with <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_DataModules">DataModules</a> for this part behaviour module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -340,7 +351,8 @@
 
   <a id="KSP_Modules_Module_Color_GetColors_" data-uid="KSP.Modules.Module_Color.GetColors*"></a>
   <h4 id="KSP_Modules_Module_Color_GetColors" data-uid="KSP.Modules.Module_Color.GetColors">GetColors()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the current base and accent colors from the color data module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -357,7 +369,8 @@
     <tbody>
       <tr>
         <td>(<a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Color.html">Color</a>, <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Color.html">Color</a>)</td>
-        <td></td>
+        <td><p>A tuple containing the base color and the accent color, in that order.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -365,7 +378,8 @@
 
   <a id="KSP_Modules_Module_Color_InitForNewOABPart_" data-uid="KSP.Modules.Module_Color.InitForNewOABPart*"></a>
   <h4 id="KSP_Modules_Module_Color_InitForNewOABPart" data-uid="KSP.Modules.Module_Color.InitForNewOABPart">InitForNewOABPart()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called when this module is attached to a newly created OAB part, allowing derived classes to perform first-time setup.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -377,7 +391,8 @@
 
   <a id="KSP_Modules_Module_Color_OnInitialize_" data-uid="KSP.Modules.Module_Color.OnInitialize*"></a>
   <h4 id="KSP_Modules_Module_Color_OnInitialize" data-uid="KSP.Modules.Module_Color.OnInitialize">OnInitialize()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called during initialization to allow derived classes to perform custom setup after data modules are registered.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -389,7 +404,8 @@
 
   <a id="KSP_Modules_Module_Color_OnModuleOABUpdate_" data-uid="KSP.Modules.Module_Color.OnModuleOABUpdate*"></a>
   <h4 id="KSP_Modules_Module_Color_OnModuleOABUpdate_System_Single_" data-uid="KSP.Modules.Module_Color.OnModuleOABUpdate(System.Single)">OnModuleOABUpdate(float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called each frame update tick while the module is operating in the OAB context.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -418,7 +434,8 @@
 
   <a id="KSP_Modules_Module_Color_OnModuleUpdate_" data-uid="KSP.Modules.Module_Color.OnModuleUpdate*"></a>
   <h4 id="KSP_Modules_Module_Color_OnModuleUpdate_System_Single_" data-uid="KSP.Modules.Module_Color.OnModuleUpdate(System.Single)">OnModuleUpdate(float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called each frame update tick while the module is operating in the flight context.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -437,7 +454,8 @@
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">deltaTime</span></td>
-        <td></td>
+        <td><p>The elapsed frame time in seconds since the last update.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -447,7 +465,8 @@
 
   <a id="KSP_Modules_Module_Color_OnShutdown_" data-uid="KSP.Modules.Module_Color.OnShutdown*"></a>
   <h4 id="KSP_Modules_Module_Color_OnShutdown" data-uid="KSP.Modules.Module_Color.OnShutdown">OnShutdown()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called when the module is shutting down, allowing derived classes to release resources or subscriptions.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -459,7 +478,8 @@
 
   <a id="KSP_Modules_Module_Color_RefreshColors_" data-uid="KSP.Modules.Module_Color.RefreshColors*"></a>
   <h4 id="KSP_Modules_Module_Color_RefreshColors" data-uid="KSP.Modules.Module_Color.RefreshColors">RefreshColors()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Reapplies the current color values to all part renderers if the module and its data are valid.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -469,7 +489,8 @@
 
   <a id="KSP_Modules_Module_Color_SetColors_" data-uid="KSP.Modules.Module_Color.SetColors*"></a>
   <h4 id="KSP_Modules_Module_Color_SetColors_UnityEngine_Color_UnityEngine_Color_" data-uid="KSP.Modules.Module_Color.SetColors(UnityEngine.Color,UnityEngine.Color)">SetColors(Color, Color)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Sets the base and accent colors on the color data module and refreshes all part renderers.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -488,12 +509,14 @@
       <tr>
         <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Color.html">Color</a></td>
         <td><span class="parametername">baseColor</span></td>
-        <td></td>
+        <td><p>The primary base color to apply.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Color.html">Color</a></td>
         <td><span class="parametername">accentColor</span></td>
-        <td></td>
+        <td><p>The secondary accent color to apply.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -502,7 +525,8 @@
 
 
   <h4 id="KSP_Modules_Module_Color_ColorsRefreshed" data-uid="KSP.Modules.Module_Color.ColorsRefreshed">ColorsRefreshed</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Occurs when the part's colors have been refreshed and applied to its renderers.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -526,15 +550,6 @@
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a>
   </div>
   <div>
       <a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a>

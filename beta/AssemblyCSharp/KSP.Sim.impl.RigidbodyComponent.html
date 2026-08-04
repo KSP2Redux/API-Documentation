@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class RigidbodyComponent | KSP2Redux API (Beta) ">
     
-    <meta name="description" content="Represents the rigidbody physics component for a simulation object, tracking forces, torques, and impulses and delegating physics updates to a .">
+    <meta name="description" content="A base class for components that attach to a  and participate in the simulation lifecycle.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,7 @@
 
 
   <h1 id="KSP_Sim_impl_RigidbodyComponent" data-uid="KSP.Sim.impl.RigidbodyComponent" class="text-break">Class RigidbodyComponent</h1>
-  <div class="markdown level0 summary"><p>Represents the rigidbody physics component for a simulation object, tracking forces, torques, and impulses and delegating physics updates to a <a class="xref" href="KSP.Sim.IRigidbodyDriver.html">IRigidbodyDriver</a>.</p>
+  <div class="markdown level0 summary"><p>A base class for components that attach to a <a class="xref" href="KSP.Sim.impl.SimulationObjectModel.html">SimulationObjectModel</a> and participate in the simulation lifecycle.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -109,12 +109,6 @@
     </div>
     <div>
       <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_Is_KSP_Sim_IGuidIdentity_">ObjectComponent.Is(IGuidIdentity)</a>
-    </div>
-    <div>
-      <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnAdded_KSP_Sim_impl_SimulationObjectModel_System_Double_">ObjectComponent.OnAdded(SimulationObjectModel, double)</a>
-    </div>
-    <div>
-      <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnRemoved_KSP_Sim_impl_SimulationObjectModel_System_Double_">ObjectComponent.OnRemoved(SimulationObjectModel, double)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnUpdate_System_Double_System_Double_">ObjectComponent.OnUpdate(double, double)</a>
@@ -177,7 +171,8 @@
 
   <a id="KSP_Sim_impl_RigidbodyComponent__ctor_" data-uid="KSP.Sim.impl.RigidbodyComponent.#ctor*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent__ctor" data-uid="KSP.Sim.impl.RigidbodyComponent.#ctor">RigidbodyComponent()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="KSP.Sim.impl.RigidbodyComponent.html">RigidbodyComponent</a> class.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -187,7 +182,8 @@
 
   <a id="KSP_Sim_impl_RigidbodyComponent__ctor_" data-uid="KSP.Sim.impl.RigidbodyComponent.#ctor*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent__ctor_KSP_Sim_impl_UniverseModel_KSP_Sim_PartPhysicsModes_" data-uid="KSP.Sim.impl.RigidbodyComponent.#ctor(KSP.Sim.impl.UniverseModel,KSP.Sim.PartPhysicsModes)">RigidbodyComponent(UniverseModel, PartPhysicsModes)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="KSP.Sim.impl.RigidbodyComponent.html">RigidbodyComponent</a> class with default physical properties.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -206,38 +202,14 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.UniverseModel.html">UniverseModel</a></td>
         <td><span class="parametername">universeModel</span></td>
-        <td></td>
+        <td><p>The universe model that owns this component.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.PartPhysicsModes.html">PartPhysicsModes</a></td>
         <td><span class="parametername">physicsMode</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="fields">Fields
-</h3>
-
-
-  <h4 id="KSP_Sim_impl_RigidbodyComponent_trackPhysXPositionDriver" data-uid="KSP.Sim.impl.RigidbodyComponent.trackPhysXPositionDriver">trackPhysXPositionDriver</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool trackPhysXPositionDriver</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>The physics simulation mode to use for this rigidbody.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -247,7 +219,8 @@
 
   <a id="KSP_Sim_impl_RigidbodyComponent_AngularVelocity_" data-uid="KSP.Sim.impl.RigidbodyComponent.AngularVelocity*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_AngularVelocity" data-uid="KSP.Sim.impl.RigidbodyComponent.AngularVelocity">AngularVelocity</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets the current angular velocity of this rigidbody, raising <a class="xref" href="KSP.Sim.impl.RigidbodyComponent.html#KSP_Sim_impl_RigidbodyComponent_AngularVelocityUpdated">AngularVelocityUpdated</a> on set.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -272,7 +245,8 @@
 
   <a id="KSP_Sim_impl_RigidbodyComponent_CanAcceptPositionUpdate_" data-uid="KSP.Sim.impl.RigidbodyComponent.CanAcceptPositionUpdate*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_CanAcceptPositionUpdate" data-uid="KSP.Sim.impl.RigidbodyComponent.CanAcceptPositionUpdate">CanAcceptPositionUpdate</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether this rigidbody accepts external position updates.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -297,7 +271,8 @@
 
   <a id="KSP_Sim_impl_RigidbodyComponent_CanAcceptRotationUpdate_" data-uid="KSP.Sim.impl.RigidbodyComponent.CanAcceptRotationUpdate*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_CanAcceptRotationUpdate" data-uid="KSP.Sim.impl.RigidbodyComponent.CanAcceptRotationUpdate">CanAcceptRotationUpdate</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether this rigidbody accepts external rotation updates.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -322,7 +297,8 @@
 
   <a id="KSP_Sim_impl_RigidbodyComponent_DefinitionType_" data-uid="KSP.Sim.impl.RigidbodyComponent.DefinitionType*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_DefinitionType" data-uid="KSP.Sim.impl.RigidbodyComponent.DefinitionType">DefinitionType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the type of the definition data object used by this component.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -350,7 +326,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_Forces_" data-uid="KSP.Sim.impl.RigidbodyComponent.Forces*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_Forces" data-uid="KSP.Sim.impl.RigidbodyComponent.Forces">Forces</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the list of persistent forces applied to this rigidbody each physics step.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -375,7 +352,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_PendingImpulses_" data-uid="KSP.Sim.impl.RigidbodyComponent.PendingImpulses*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_PendingImpulses" data-uid="KSP.Sim.impl.RigidbodyComponent.PendingImpulses">PendingImpulses</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the list of impulses queued for application to this rigidbody.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -400,7 +378,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_PhysXBodyDriver_" data-uid="KSP.Sim.impl.RigidbodyComponent.PhysXBodyDriver*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_PhysXBodyDriver" data-uid="KSP.Sim.impl.RigidbodyComponent.PhysXBodyDriver">PhysXBodyDriver</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets the underlying physics driver that drives this rigidbody's transform.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -425,7 +404,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_PhysicsMode_" data-uid="KSP.Sim.impl.RigidbodyComponent.PhysicsMode*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_PhysicsMode" data-uid="KSP.Sim.impl.RigidbodyComponent.PhysicsMode">PhysicsMode</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the physics simulation mode active for this rigidbody.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -450,7 +430,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_Position_" data-uid="KSP.Sim.impl.RigidbodyComponent.Position*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_Position" data-uid="KSP.Sim.impl.RigidbodyComponent.Position">Position</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets the current world position of this rigidbody, raising <a class="xref" href="KSP.Sim.impl.RigidbodyComponent.html#KSP_Sim_impl_RigidbodyComponent_PositionUpdated">PositionUpdated</a> on set.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -475,7 +456,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_Rotation_" data-uid="KSP.Sim.impl.RigidbodyComponent.Rotation*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_Rotation" data-uid="KSP.Sim.impl.RigidbodyComponent.Rotation">Rotation</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets the current world rotation of this rigidbody, raising <a class="xref" href="KSP.Sim.impl.RigidbodyComponent.html#KSP_Sim_impl_RigidbodyComponent_RotationUpdated">RotationUpdated</a> on set.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -500,7 +482,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_SingleFrameForces_" data-uid="KSP.Sim.impl.RigidbodyComponent.SingleFrameForces*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_SingleFrameForces" data-uid="KSP.Sim.impl.RigidbodyComponent.SingleFrameForces">SingleFrameForces</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the list of forces applied to this rigidbody for a single physics step only.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -525,7 +508,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_StartingLocalPosition_" data-uid="KSP.Sim.impl.RigidbodyComponent.StartingLocalPosition*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_StartingLocalPosition" data-uid="KSP.Sim.impl.RigidbodyComponent.StartingLocalPosition">StartingLocalPosition</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the local position recorded at the time <a class="xref" href="KSP.Sim.impl.RigidbodyComponent.html#KSP_Sim_impl_RigidbodyComponent_RecordStartingLocalPositionAndRotation">RecordStartingLocalPositionAndRotation()</a> was called.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -550,7 +534,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_StartingLocalRotation_" data-uid="KSP.Sim.impl.RigidbodyComponent.StartingLocalRotation*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_StartingLocalRotation" data-uid="KSP.Sim.impl.RigidbodyComponent.StartingLocalRotation">StartingLocalRotation</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the local rotation recorded at the time <a class="xref" href="KSP.Sim.impl.RigidbodyComponent.html#KSP_Sim_impl_RigidbodyComponent_RecordStartingLocalPositionAndRotation">RecordStartingLocalPositionAndRotation()</a> was called.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -575,7 +560,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_StateType_" data-uid="KSP.Sim.impl.RigidbodyComponent.StateType*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_StateType" data-uid="KSP.Sim.impl.RigidbodyComponent.StateType">StateType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the type of the state data object used by this component.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -603,7 +589,8 @@ public override Type StateType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_Torques_" data-uid="KSP.Sim.impl.RigidbodyComponent.Torques*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_Torques" data-uid="KSP.Sim.impl.RigidbodyComponent.Torques">Torques</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the list of torques applied to this rigidbody each physics step.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -628,7 +615,8 @@ public override Type StateType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_TrackPhysXPositionDriver_" data-uid="KSP.Sim.impl.RigidbodyComponent.TrackPhysXPositionDriver*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_TrackPhysXPositionDriver" data-uid="KSP.Sim.impl.RigidbodyComponent.TrackPhysXPositionDriver">TrackPhysXPositionDriver</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets a value indicating whether this component mirrors position and velocity state from the <a class="xref" href="KSP.Sim.impl.RigidbodyComponent.html#KSP_Sim_impl_RigidbodyComponent_PhysXBodyDriver">PhysXBodyDriver</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -653,7 +641,8 @@ public override Type StateType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_Type_" data-uid="KSP.Sim.impl.RigidbodyComponent.Type*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_Type" data-uid="KSP.Sim.impl.RigidbodyComponent.Type">Type</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the concrete runtime type of this component.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -681,7 +670,8 @@ public override Type Type { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_Velocity_" data-uid="KSP.Sim.impl.RigidbodyComponent.Velocity*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_Velocity" data-uid="KSP.Sim.impl.RigidbodyComponent.Velocity">Velocity</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets the current velocity of this rigidbody, raising <a class="xref" href="KSP.Sim.impl.RigidbodyComponent.html#KSP_Sim_impl_RigidbodyComponent_VelocityUpdated">VelocityUpdated</a> on set.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -706,7 +696,8 @@ public override Type Type { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_ViewObjectComponentType_" data-uid="KSP.Sim.impl.RigidbodyComponent.ViewObjectComponentType*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_ViewObjectComponentType" data-uid="KSP.Sim.impl.RigidbodyComponent.ViewObjectComponentType">ViewObjectComponentType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the type of the view-side object component that corresponds to this simulation component, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> if no view component is associated.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -734,7 +725,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_angularDrag_" data-uid="KSP.Sim.impl.RigidbodyComponent.angularDrag*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_angularDrag" data-uid="KSP.Sim.impl.RigidbodyComponent.angularDrag">angularDrag</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets the angular drag coefficient applied to this rigidbody.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -759,7 +751,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_angularDragPressureOverride_" data-uid="KSP.Sim.impl.RigidbodyComponent.angularDragPressureOverride*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_angularDragPressureOverride" data-uid="KSP.Sim.impl.RigidbodyComponent.angularDragPressureOverride">angularDragPressureOverride</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets a value indicating whether the angular drag is overridden by an atmospheric pressure-based value.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -784,7 +777,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_centerOfMass_" data-uid="KSP.Sim.impl.RigidbodyComponent.centerOfMass*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_centerOfMass" data-uid="KSP.Sim.impl.RigidbodyComponent.centerOfMass">centerOfMass</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets the center of mass position of this rigidbody in world space.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -809,7 +803,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_coordinateSystem_" data-uid="KSP.Sim.impl.RigidbodyComponent.coordinateSystem*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_coordinateSystem" data-uid="KSP.Sim.impl.RigidbodyComponent.coordinateSystem">coordinateSystem</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the coordinate system of the underlying transform.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -834,7 +829,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_drag_" data-uid="KSP.Sim.impl.RigidbodyComponent.drag*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_drag" data-uid="KSP.Sim.impl.RigidbodyComponent.drag">drag</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets the linear drag coefficient applied to this rigidbody.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -859,7 +855,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_inertiaTensor_" data-uid="KSP.Sim.impl.RigidbodyComponent.inertiaTensor*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_inertiaTensor" data-uid="KSP.Sim.impl.RigidbodyComponent.inertiaTensor">inertiaTensor</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets the principal axes inertia tensor of this rigidbody.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -884,7 +881,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_inertiaTensorRotation_" data-uid="KSP.Sim.impl.RigidbodyComponent.inertiaTensorRotation*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_inertiaTensorRotation" data-uid="KSP.Sim.impl.RigidbodyComponent.inertiaTensorRotation">inertiaTensorRotation</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets the rotation that aligns the rigidbody's local axes with the principal inertia tensor axes.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -909,7 +907,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_localPosition_" data-uid="KSP.Sim.impl.RigidbodyComponent.localPosition*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_localPosition" data-uid="KSP.Sim.impl.RigidbodyComponent.localPosition">localPosition</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the position of this rigidbody relative to its parent transform.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -934,7 +933,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_localRotation_" data-uid="KSP.Sim.impl.RigidbodyComponent.localRotation*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_localRotation" data-uid="KSP.Sim.impl.RigidbodyComponent.localRotation">localRotation</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the rotation of this rigidbody relative to its parent transform.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -959,7 +959,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_mass_" data-uid="KSP.Sim.impl.RigidbodyComponent.mass*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_mass" data-uid="KSP.Sim.impl.RigidbodyComponent.mass">mass</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets the total mass of this rigidbody in kilograms.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -984,7 +985,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_physicsOwner_" data-uid="KSP.Sim.impl.RigidbodyComponent.physicsOwner*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_physicsOwner" data-uid="KSP.Sim.impl.RigidbodyComponent.physicsOwner">physicsOwner</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets the physics owner responsible for this rigidbody component.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1009,7 +1011,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_relativeAngularVelocity_" data-uid="KSP.Sim.impl.RigidbodyComponent.relativeAngularVelocity*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_relativeAngularVelocity" data-uid="KSP.Sim.impl.RigidbodyComponent.relativeAngularVelocity">relativeAngularVelocity</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets the angular velocity of this rigidbody relative to its parent motion frame.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1034,7 +1037,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_relativeToMotion_" data-uid="KSP.Sim.impl.RigidbodyComponent.relativeToMotion*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_relativeToMotion" data-uid="KSP.Sim.impl.RigidbodyComponent.relativeToMotion">relativeToMotion</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the motion frame that this rigidbody's velocities are expressed relative to.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1059,7 +1063,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_relativeVelocity_" data-uid="KSP.Sim.impl.RigidbodyComponent.relativeVelocity*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_relativeVelocity" data-uid="KSP.Sim.impl.RigidbodyComponent.relativeVelocity">relativeVelocity</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the velocity of this rigidbody relative to its parent motion frame.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1086,7 +1091,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_AddForce_" data-uid="KSP.Sim.impl.RigidbodyComponent.AddForce*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_AddForce_KSP_Sim_IForce_" data-uid="KSP.Sim.impl.RigidbodyComponent.AddForce(KSP.Sim.IForce)">AddForce(IForce)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Adds a persistent force to this rigidbody, applied every physics step.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1105,7 +1111,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
       <tr>
         <td><a class="xref" href="KSP.Sim.IForce.html">IForce</a></td>
         <td><span class="parametername">force</span></td>
-        <td></td>
+        <td><p>The force to add.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1113,7 +1120,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_AddSingleFrameForce_" data-uid="KSP.Sim.impl.RigidbodyComponent.AddSingleFrameForce*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_AddSingleFrameForce_KSP_Sim_IForce_" data-uid="KSP.Sim.impl.RigidbodyComponent.AddSingleFrameForce(KSP.Sim.IForce)">AddSingleFrameForce(IForce)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Adds a one-shot force to this rigidbody, applied for a single physics step then discarded.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1132,7 +1140,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
       <tr>
         <td><a class="xref" href="KSP.Sim.IForce.html">IForce</a></td>
         <td><span class="parametername">singleFrameForce</span></td>
-        <td></td>
+        <td><p>The single-frame force to add.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1140,7 +1149,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_AddTorque_" data-uid="KSP.Sim.impl.RigidbodyComponent.AddTorque*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_AddTorque_KSP_Sim_ITorque_" data-uid="KSP.Sim.impl.RigidbodyComponent.AddTorque(KSP.Sim.ITorque)">AddTorque(ITorque)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Adds a torque to this rigidbody, applied every physics step.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1159,7 +1169,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
       <tr>
         <td><a class="xref" href="KSP.Sim.ITorque.html">ITorque</a></td>
         <td><span class="parametername">torque</span></td>
-        <td></td>
+        <td><p>The torque to add.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1167,7 +1178,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_ApplyImpulse_" data-uid="KSP.Sim.impl.RigidbodyComponent.ApplyImpulse*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_ApplyImpulse_KSP_Sim_ForceType_Vector3d_Vector3d_" data-uid="KSP.Sim.impl.RigidbodyComponent.ApplyImpulse(KSP.Sim.ForceType,Vector3d,Vector3d)">ApplyImpulse(ForceType, Vector3d, Vector3d)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Queues an impulse to be applied to this rigidbody at a given relative position.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1186,17 +1198,20 @@ public override Type ViewObjectComponentType { get; }</code></pre>
       <tr>
         <td><a class="xref" href="KSP.Sim.ForceType.html">ForceType</a></td>
         <td><span class="parametername">forceType</span></td>
-        <td></td>
+        <td><p>The force mode that controls how the impulse magnitude is interpreted.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
         <td><span class="parametername">relativeImpulse</span></td>
-        <td></td>
+        <td><p>The impulse vector expressed in the rigidbody's local coordinate frame.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
         <td><span class="parametername">relativePosition</span></td>
-        <td></td>
+        <td><p>The application point expressed in the rigidbody's local coordinate frame.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1204,7 +1219,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_ClearPendingImpulses_" data-uid="KSP.Sim.impl.RigidbodyComponent.ClearPendingImpulses*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_ClearPendingImpulses" data-uid="KSP.Sim.impl.RigidbodyComponent.ClearPendingImpulses">ClearPendingImpulses()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Removes all queued impulses from this rigidbody.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1214,7 +1230,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_ClearSingleFrameForces_" data-uid="KSP.Sim.impl.RigidbodyComponent.ClearSingleFrameForces*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_ClearSingleFrameForces" data-uid="KSP.Sim.impl.RigidbodyComponent.ClearSingleFrameForces">ClearSingleFrameForces()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Removes all single-frame forces queued for this rigidbody.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1224,7 +1241,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_GetDefinition_" data-uid="KSP.Sim.impl.RigidbodyComponent.GetDefinition*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_GetDefinition" data-uid="KSP.Sim.impl.RigidbodyComponent.GetDefinition">GetDefinition()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the definition data object for this component.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1241,7 +1259,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">object</span></td>
-        <td></td>
+        <td><p>The component's current definition data.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1251,7 +1270,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_GetState_" data-uid="KSP.Sim.impl.RigidbodyComponent.GetState*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_GetState" data-uid="KSP.Sim.impl.RigidbodyComponent.GetState">GetState()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the current state data object for this component.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1268,7 +1288,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">object</span></td>
-        <td></td>
+        <td><p>The component's current state data.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1278,7 +1299,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_IsUnderAcceleration_" data-uid="KSP.Sim.impl.RigidbodyComponent.IsUnderAcceleration*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_IsUnderAcceleration" data-uid="KSP.Sim.impl.RigidbodyComponent.IsUnderAcceleration">IsUnderAcceleration()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Determines whether any non-zero force, single-frame force, or impulse is currently applied to this rigidbody.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1295,7 +1317,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if at least one non-zero force or impulse is present; otherwise false.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1303,7 +1326,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_KillAngularVelocity_" data-uid="KSP.Sim.impl.RigidbodyComponent.KillAngularVelocity*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_KillAngularVelocity" data-uid="KSP.Sim.impl.RigidbodyComponent.KillAngularVelocity">KillAngularVelocity()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Sets the angular velocity of this rigidbody to zero relative to its parent motion frame.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1313,7 +1337,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_KillVelocity_" data-uid="KSP.Sim.impl.RigidbodyComponent.KillVelocity*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_KillVelocity" data-uid="KSP.Sim.impl.RigidbodyComponent.KillVelocity">KillVelocity()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Sets the velocity of this rigidbody to zero relative to its parent motion frame.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1321,9 +1346,47 @@ public override Type ViewObjectComponentType { get; }</code></pre>
   </div>
 
 
+  <a id="KSP_Sim_impl_RigidbodyComponent_OnAdded_" data-uid="KSP.Sim.impl.RigidbodyComponent.OnAdded*"></a>
+  <h4 id="KSP_Sim_impl_RigidbodyComponent_OnAdded_KSP_Sim_impl_SimulationObjectModel_System_Double_" data-uid="KSP.Sim.impl.RigidbodyComponent.OnAdded(KSP.Sim.impl.SimulationObjectModel,System.Double)">OnAdded(SimulationObjectModel, double)</h4>
+  <div class="markdown level1 summary"><p>Called when this component is attached to a simulation object, storing the reference and applying any pending definition data.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void OnAdded(SimulationObjectModel simulationObject, double universalTime)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.SimulationObjectModel.html">SimulationObjectModel</a></td>
+        <td><span class="parametername">simulationObject</span></td>
+        <td><p>The simulation object this component is being added to.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">universalTime</span></td>
+        <td><p>The universal time at which the component is added, in seconds.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnAdded_KSP_Sim_impl_SimulationObjectModel_System_Double_">ObjectComponent.OnAdded(SimulationObjectModel, double)</a></div>
+
+
   <a id="KSP_Sim_impl_RigidbodyComponent_OnFixedUpdate_" data-uid="KSP.Sim.impl.RigidbodyComponent.OnFixedUpdate*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_OnFixedUpdate_System_Double_System_Double_" data-uid="KSP.Sim.impl.RigidbodyComponent.OnFixedUpdate(System.Double,System.Double)">OnFixedUpdate(double, double)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called each fixed-timestep update tick, allowing the component to advance physics-dependent state.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1342,12 +1405,14 @@ public override Type ViewObjectComponentType { get; }</code></pre>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">universalTime</span></td>
-        <td></td>
+        <td><p>The current universal time, in seconds.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">deltaUniversalTime</span></td>
-        <td></td>
+        <td><p>The elapsed time since the last fixed update, in seconds.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1355,9 +1420,47 @@ public override Type ViewObjectComponentType { get; }</code></pre>
   <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnFixedUpdate_System_Double_System_Double_">ObjectComponent.OnFixedUpdate(double, double)</a></div>
 
 
+  <a id="KSP_Sim_impl_RigidbodyComponent_OnRemoved_" data-uid="KSP.Sim.impl.RigidbodyComponent.OnRemoved*"></a>
+  <h4 id="KSP_Sim_impl_RigidbodyComponent_OnRemoved_KSP_Sim_impl_SimulationObjectModel_System_Double_" data-uid="KSP.Sim.impl.RigidbodyComponent.OnRemoved(KSP.Sim.impl.SimulationObjectModel,System.Double)">OnRemoved(SimulationObjectModel, double)</h4>
+  <div class="markdown level1 summary"><p>Called when this component is detached from its simulation object, clearing the stored reference.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void OnRemoved(SimulationObjectModel simulationObject, double universalTime)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.SimulationObjectModel.html">SimulationObjectModel</a></td>
+        <td><span class="parametername">simulationObject</span></td>
+        <td><p>The simulation object this component is being removed from.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">universalTime</span></td>
+        <td><p>The universal time at which the component is removed, in seconds.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnRemoved_KSP_Sim_impl_SimulationObjectModel_System_Double_">ObjectComponent.OnRemoved(SimulationObjectModel, double)</a></div>
+
+
   <a id="KSP_Sim_impl_RigidbodyComponent_OnStart_" data-uid="KSP.Sim.impl.RigidbodyComponent.OnStart*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_OnStart_System_Double_" data-uid="KSP.Sim.impl.RigidbodyComponent.OnStart(System.Double)">OnStart(double)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called when the simulation starts, allowing the component to perform initialization logic.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1376,7 +1479,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">universalTime</span></td>
-        <td></td>
+        <td><p>The universal time at simulation start, in seconds.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1386,7 +1490,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_RecordStartingLocalPositionAndRotation_" data-uid="KSP.Sim.impl.RigidbodyComponent.RecordStartingLocalPositionAndRotation*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_RecordStartingLocalPositionAndRotation" data-uid="KSP.Sim.impl.RigidbodyComponent.RecordStartingLocalPositionAndRotation">RecordStartingLocalPositionAndRotation()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Captures the current local position and rotation of the transform as the starting reference values.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1396,7 +1501,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_RemoveForce_" data-uid="KSP.Sim.impl.RigidbodyComponent.RemoveForce*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_RemoveForce_KSP_Sim_IForce_" data-uid="KSP.Sim.impl.RigidbodyComponent.RemoveForce(KSP.Sim.IForce)">RemoveForce(IForce)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Removes a persistent force from this rigidbody.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1415,7 +1521,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
       <tr>
         <td><a class="xref" href="KSP.Sim.IForce.html">IForce</a></td>
         <td><span class="parametername">force</span></td>
-        <td></td>
+        <td><p>The force to remove.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1430,7 +1537,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the force was found and removed; otherwise false.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1438,7 +1546,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_RemoveSingleFrameForce_" data-uid="KSP.Sim.impl.RigidbodyComponent.RemoveSingleFrameForce*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_RemoveSingleFrameForce_KSP_Sim_IForce_" data-uid="KSP.Sim.impl.RigidbodyComponent.RemoveSingleFrameForce(KSP.Sim.IForce)">RemoveSingleFrameForce(IForce)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Removes a one-shot force from this rigidbody.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1457,7 +1566,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
       <tr>
         <td><a class="xref" href="KSP.Sim.IForce.html">IForce</a></td>
         <td><span class="parametername">singleFrameForce</span></td>
-        <td></td>
+        <td><p>The single-frame force to remove.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1472,7 +1582,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the force was found and removed; otherwise false.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1480,7 +1591,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_RemoveTorque_" data-uid="KSP.Sim.impl.RigidbodyComponent.RemoveTorque*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_RemoveTorque_KSP_Sim_ITorque_" data-uid="KSP.Sim.impl.RigidbodyComponent.RemoveTorque(KSP.Sim.ITorque)">RemoveTorque(ITorque)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Removes a torque from this rigidbody.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1499,7 +1611,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
       <tr>
         <td><a class="xref" href="KSP.Sim.ITorque.html">ITorque</a></td>
         <td><span class="parametername">torque</span></td>
-        <td></td>
+        <td><p>The torque to remove.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1507,7 +1620,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_SetState_" data-uid="KSP.Sim.impl.RigidbodyComponent.SetState*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_SetState_System_Object_KSP_Sim_ISimulationModelMap_" data-uid="KSP.Sim.impl.RigidbodyComponent.SetState(System.Object,KSP.Sim.ISimulationModelMap)">SetState(object, ISimulationModelMap)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Applies the supplied state data to this component and returns the applied state.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1526,12 +1640,14 @@ public override Type ViewObjectComponentType { get; }</code></pre>
       <tr>
         <td><span class="xref">object</span></td>
         <td><span class="parametername">stateData</span></td>
-        <td></td>
+        <td><p>The state data object to apply.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.ISimulationModelMap.html">ISimulationModelMap</a></td>
         <td><span class="parametername">simulationModelMap</span></td>
-        <td></td>
+        <td><p>The simulation model map providing context for applying state.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1546,7 +1662,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">object</span></td>
-        <td></td>
+        <td><p>The applied state data object.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1556,7 +1673,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_UpdateAngularVelocity_" data-uid="KSP.Sim.impl.RigidbodyComponent.UpdateAngularVelocity*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_UpdateAngularVelocity_KSP_Sim_AngularVelocity_" data-uid="KSP.Sim.impl.RigidbodyComponent.UpdateAngularVelocity(KSP.Sim.AngularVelocity)">UpdateAngularVelocity(AngularVelocity)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Sets the angular velocity of this rigidbody and propagates the new value to the <a class="xref" href="KSP.Sim.impl.RigidbodyComponent.html#KSP_Sim_impl_RigidbodyComponent_PhysXBodyDriver">PhysXBodyDriver</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1575,7 +1693,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
       <tr>
         <td><a class="xref" href="KSP.Sim.AngularVelocity.html">AngularVelocity</a></td>
         <td><span class="parametername">newAngularVelocity</span></td>
-        <td></td>
+        <td><p>The new angular velocity to apply.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1583,7 +1702,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_UpdatePosition_" data-uid="KSP.Sim.impl.RigidbodyComponent.UpdatePosition*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_UpdatePosition_KSP_Sim_Position_" data-uid="KSP.Sim.impl.RigidbodyComponent.UpdatePosition(KSP.Sim.Position)">UpdatePosition(Position)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Sets the position of this rigidbody and propagates the new value to the <a class="xref" href="KSP.Sim.impl.RigidbodyComponent.html#KSP_Sim_impl_RigidbodyComponent_PhysXBodyDriver">PhysXBodyDriver</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1602,7 +1722,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
       <tr>
         <td><a class="xref" href="KSP.Sim.Position.html">Position</a></td>
         <td><span class="parametername">newPosition</span></td>
-        <td></td>
+        <td><p>The new world position to apply.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1610,7 +1731,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_UpdateRotation_" data-uid="KSP.Sim.impl.RigidbodyComponent.UpdateRotation*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_UpdateRotation_KSP_Sim_Rotation_" data-uid="KSP.Sim.impl.RigidbodyComponent.UpdateRotation(KSP.Sim.Rotation)">UpdateRotation(Rotation)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Sets the rotation of this rigidbody and propagates the new value to the <a class="xref" href="KSP.Sim.impl.RigidbodyComponent.html#KSP_Sim_impl_RigidbodyComponent_PhysXBodyDriver">PhysXBodyDriver</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1629,7 +1751,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
       <tr>
         <td><a class="xref" href="KSP.Sim.Rotation.html">Rotation</a></td>
         <td><span class="parametername">newRotation</span></td>
-        <td></td>
+        <td><p>The new world rotation to apply.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1637,7 +1760,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_UpdateVelocity_" data-uid="KSP.Sim.impl.RigidbodyComponent.UpdateVelocity*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_UpdateVelocity_KSP_Sim_Velocity_" data-uid="KSP.Sim.impl.RigidbodyComponent.UpdateVelocity(KSP.Sim.Velocity)">UpdateVelocity(Velocity)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Sets the velocity of this rigidbody and propagates the new value to the <a class="xref" href="KSP.Sim.impl.RigidbodyComponent.html#KSP_Sim_impl_RigidbodyComponent_PhysXBodyDriver">PhysXBodyDriver</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1656,7 +1780,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
       <tr>
         <td><a class="xref" href="KSP.Sim.Velocity.html">Velocity</a></td>
         <td><span class="parametername">newVelocity</span></td>
-        <td></td>
+        <td><p>The new velocity to apply.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1664,7 +1789,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_RigidbodyComponent_ValidateState_" data-uid="KSP.Sim.impl.RigidbodyComponent.ValidateState*"></a>
   <h4 id="KSP_Sim_impl_RigidbodyComponent_ValidateState_System_Object_KSP_Sim_ISimulationModelMap_" data-uid="KSP.Sim.impl.RigidbodyComponent.ValidateState(System.Object,KSP.Sim.ISimulationModelMap)">ValidateState(object, ISimulationModelMap)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns a value indicating whether the supplied state data is valid for this component in the given simulation context.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1683,12 +1809,14 @@ public override Type ViewObjectComponentType { get; }</code></pre>
       <tr>
         <td><span class="xref">object</span></td>
         <td><span class="parametername">stateData</span></td>
-        <td></td>
+        <td><p>The state data object to validate.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.ISimulationModelMap.html">ISimulationModelMap</a></td>
         <td><span class="parametername">simulationModelMap</span></td>
-        <td></td>
+        <td><p>The simulation model map providing context for validation.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1703,7 +1831,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the state data is valid; otherwise <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1714,7 +1843,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
 
   <h4 id="KSP_Sim_impl_RigidbodyComponent_AngularVelocityUpdated" data-uid="KSP.Sim.impl.RigidbodyComponent.AngularVelocityUpdated">AngularVelocityUpdated</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Occurs when the angular velocity of this rigidbody changes.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1738,7 +1868,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
 
   <h4 id="KSP_Sim_impl_RigidbodyComponent_PositionUpdated" data-uid="KSP.Sim.impl.RigidbodyComponent.PositionUpdated">PositionUpdated</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Occurs when the position of this rigidbody changes.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1762,7 +1893,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
 
   <h4 id="KSP_Sim_impl_RigidbodyComponent_RotationUpdated" data-uid="KSP.Sim.impl.RigidbodyComponent.RotationUpdated">RotationUpdated</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Occurs when the rotation of this rigidbody changes.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1786,7 +1918,8 @@ public override Type ViewObjectComponentType { get; }</code></pre>
 
 
   <h4 id="KSP_Sim_impl_RigidbodyComponent_VelocityUpdated" data-uid="KSP.Sim.impl.RigidbodyComponent.VelocityUpdated">VelocityUpdated</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Occurs when the velocity of this rigidbody changes.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">

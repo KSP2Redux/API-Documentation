@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class Extensions | KSP2Redux API (Beta) ">
     
-    <meta name="description" content="Extension methods for UIDocument and VisualElements.">
+    <meta name="description" content="Extension methods for PanelRenderer windows and VisualElements.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,7 @@
 
 
   <h1 id="UitkForKsp2_API_Extensions" data-uid="UitkForKsp2.API.Extensions" class="text-break">Class Extensions</h1>
-  <div class="markdown level0 summary"><p>Extension methods for UIDocument and VisualElements.</p>
+  <div class="markdown level0 summary"><p>Extension methods for PanelRenderer windows and VisualElements.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -376,14 +376,14 @@
 
 
   <a id="UitkForKsp2_API_Extensions_EnableLocalization_" data-uid="UitkForKsp2.API.Extensions.EnableLocalization*"></a>
-  <h4 id="UitkForKsp2_API_Extensions_EnableLocalization_UnityEngine_UIElements_UIDocument_" data-uid="UitkForKsp2.API.Extensions.EnableLocalization(UnityEngine.UIElements.UIDocument)">EnableLocalization(UIDocument)</h4>
-  <div class="markdown level1 summary"><p>Automatically localize elements in a document. Only elements with a string property &quot;text&quot; whose value is a
+  <h4 id="UitkForKsp2_API_Extensions_EnableLocalization_UnityEngine_UIElements_PanelRenderer_" data-uid="UitkForKsp2.API.Extensions.EnableLocalization(UnityEngine.UIElements.PanelRenderer)">EnableLocalization(PanelRenderer)</h4>
+  <div class="markdown level1 summary"><p>Automatically localize elements in a window. Only elements with a string property &quot;text&quot; whose value is a
 localization key starting with '#' will be localized.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static DocumentLocalization EnableLocalization(this UIDocument document)</code></pre>
+    <pre><code class="lang-csharp hljs">public static DocumentLocalization EnableLocalization(this PanelRenderer renderer)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -396,9 +396,9 @@ localization key starting with '#' will be localized.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/UIElements.UIDocument.html">UIDocument</a></td>
-        <td><span class="parametername">document</span></td>
-        <td><p>The document in which to localize all localizable elements.</p>
+        <td><span class="xref">PanelRenderer</span></td>
+        <td><span class="parametername">renderer</span></td>
+        <td><p>The window in which to localize all localizable elements.</p>
 </td>
       </tr>
     </tbody>
@@ -414,21 +414,22 @@ localization key starting with '#' will be localized.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="GlobalUitkForKsp2.DocumentLocalization.html">DocumentLocalization</a></td>
-        <td><p>The DocumentLocalization component which was added to the document.</p>
+        <td><p>The DocumentLocalization component which was added to the window.</p>
 </td>
       </tr>
     </tbody>
   </table>
 
 
-  <a id="UitkForKsp2_API_Extensions_EnableUiSounds_" data-uid="UitkForKsp2.API.Extensions.EnableUiSounds*"></a>
-  <h4 id="UitkForKsp2_API_Extensions_EnableUiSounds_UnityEngine_UIElements_UIDocument_" data-uid="UitkForKsp2.API.Extensions.EnableUiSounds(UnityEngine.UIElements.UIDocument)">EnableUiSounds(UIDocument)</h4>
-  <div class="markdown level1 summary"><p>Enable delegated UI sounds for elements marked with sound USS classes.</p>
+  <a id="UitkForKsp2_API_Extensions_EnablePinnedBottomAutoScroll_" data-uid="UitkForKsp2.API.Extensions.EnablePinnedBottomAutoScroll*"></a>
+  <h4 id="UitkForKsp2_API_Extensions_EnablePinnedBottomAutoScroll__1___0_System_Single_" data-uid="UitkForKsp2.API.Extensions.EnablePinnedBottomAutoScroll``1(``0,System.Single)">EnablePinnedBottomAutoScroll&lt;T&gt;(T, float)</h4>
+  <div class="markdown level1 summary"><p>Keep a ScrollView pinned to the bottom while the user is already at the bottom. Scrolling upward disables
+automatic scrolling until the user scrolls back down.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static UIDocument EnableUiSounds(this UIDocument document)</code></pre>
+    <pre><code class="lang-csharp hljs">public static T EnablePinnedBottomAutoScroll&lt;T&gt;(this T scrollView, float bottomTolerance = 1) where T : ScrollView</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -441,9 +442,15 @@ localization key starting with '#' will be localized.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/UIElements.UIDocument.html">UIDocument</a></td>
-        <td><span class="parametername">document</span></td>
-        <td><p>The document whose root element should listen for UI sound events.</p>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">scrollView</span></td>
+        <td><p>The ScrollView to track.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">bottomTolerance</span></td>
+        <td><p>Distance in pixels from the bottom that still counts as pinned.</p>
 </td>
       </tr>
     </tbody>
@@ -458,8 +465,69 @@ localization key starting with '#' will be localized.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/UIElements.UIDocument.html">UIDocument</a></td>
-        <td><p>The document with delegated UI sounds enabled.</p>
+        <td><span class="xref">T</span></td>
+        <td><p>The ScrollView with pinned-bottom autoscroll enabled.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The ScrollView type.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="UitkForKsp2_API_Extensions_EnableUiSounds_" data-uid="UitkForKsp2.API.Extensions.EnableUiSounds*"></a>
+  <h4 id="UitkForKsp2_API_Extensions_EnableUiSounds_UnityEngine_UIElements_PanelRenderer_" data-uid="UitkForKsp2.API.Extensions.EnableUiSounds(UnityEngine.UIElements.PanelRenderer)">EnableUiSounds(PanelRenderer)</h4>
+  <div class="markdown level1 summary"><p>Enable delegated UI sounds for elements marked with sound USS classes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static PanelRenderer EnableUiSounds(this PanelRenderer renderer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">PanelRenderer</span></td>
+        <td><span class="parametername">renderer</span></td>
+        <td><p>The window whose root element should listen for UI sound events.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">PanelRenderer</span></td>
+        <td><p>The window with delegated UI sounds enabled.</p>
 </td>
       </tr>
     </tbody>
@@ -527,14 +595,15 @@ localization key starting with '#' will be localized.</p>
   </table>
 
 
-  <a id="UitkForKsp2_API_Extensions_Hide_" data-uid="UitkForKsp2.API.Extensions.Hide*"></a>
-  <h4 id="UitkForKsp2_API_Extensions_Hide_UnityEngine_UIElements_UIDocument_" data-uid="UitkForKsp2.API.Extensions.Hide(UnityEngine.UIElements.UIDocument)">Hide(UIDocument)</h4>
-  <div class="markdown level1 summary"><p>Hide a UIDocument by setting its root VisualElement's display style to DisplayStyle.None.</p>
+  <a id="UitkForKsp2_API_Extensions_GetPanelRoot_" data-uid="UitkForKsp2.API.Extensions.GetPanelRoot*"></a>
+  <h4 id="UitkForKsp2_API_Extensions_GetPanelRoot_UnityEngine_UIElements_PanelRenderer_" data-uid="UitkForKsp2.API.Extensions.GetPanelRoot(UnityEngine.UIElements.PanelRenderer)">GetPanelRoot(PanelRenderer)</h4>
+  <div class="markdown level1 summary"><p>The PanelRenderer's per-window container. Replaces the old <code>UIDocument.rootVisualElement</code>. Works for
+both <a class="xref" href="UitkForKsp2.API.Window.html">Window</a>-created windows and raw prefab/scene PanelRenderers.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void Hide(this UIDocument document)</code></pre>
+    <pre><code class="lang-csharp hljs">public static VisualElement? GetPanelRoot(this PanelRenderer renderer)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -547,9 +616,101 @@ localization key starting with '#' will be localized.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/UIElements.UIDocument.html">UIDocument</a></td>
-        <td><span class="parametername">document</span></td>
-        <td><p>The document to hide.</p>
+        <td><span class="xref">PanelRenderer</span></td>
+        <td><span class="parametername">renderer</span></td>
+        <td><p>The window's PanelRenderer.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/UIElements.VisualElement.html">VisualElement</a></td>
+        <td><p>The panel container, or null if the UI has not been resolved yet.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="UitkForKsp2_API_Extensions_GetWindowRoot_" data-uid="UitkForKsp2.API.Extensions.GetWindowRoot*"></a>
+  <h4 id="UitkForKsp2_API_Extensions_GetWindowRoot_UnityEngine_UIElements_PanelRenderer_" data-uid="UitkForKsp2.API.Extensions.GetWindowRoot(UnityEngine.UIElements.PanelRenderer)">GetWindowRoot(PanelRenderer)</h4>
+  <div class="markdown level1 summary"><p>The resolved, TemplateContainer-unwrapped window root. Replaces the old <code>UIDocument.rootVisualElement[0]</code>.
+Works for both <a class="xref" href="UitkForKsp2.API.Window.html">Window</a>-created windows and raw prefab/scene PanelRenderers.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static VisualElement? GetWindowRoot(this PanelRenderer renderer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">PanelRenderer</span></td>
+        <td><span class="parametername">renderer</span></td>
+        <td><p>The window's PanelRenderer.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/UIElements.VisualElement.html">VisualElement</a></td>
+        <td><p>The window root, or null if the UI has not been resolved yet.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="UitkForKsp2_API_Extensions_Hide_" data-uid="UitkForKsp2.API.Extensions.Hide*"></a>
+  <h4 id="UitkForKsp2_API_Extensions_Hide_UnityEngine_UIElements_PanelRenderer_" data-uid="UitkForKsp2.API.Extensions.Hide(UnityEngine.UIElements.PanelRenderer)">Hide(PanelRenderer)</h4>
+  <div class="markdown level1 summary"><p>Hide a window by disabling its PanelRenderer component. The renderer detaches from its panel and stops
+rendering while preserving the UI content in memory; the GameObject (and any controller on it) stays active.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Hide(this PanelRenderer renderer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">PanelRenderer</span></td>
+        <td><span class="parametername">renderer</span></td>
+        <td><p>The window to hide.</p>
 </td>
       </tr>
     </tbody>
@@ -886,6 +1047,136 @@ public static T MakeDraggable&lt;T&gt;(this T element) where T : VisualElement</
   </table>
 
 
+  <a id="UitkForKsp2_API_Extensions_OnPanelRoot_" data-uid="UitkForKsp2.API.Extensions.OnPanelRoot*"></a>
+  <h4 id="UitkForKsp2_API_Extensions_OnPanelRoot_UnityEngine_UIElements_PanelRenderer_System_Action_UnityEngine_UIElements_VisualElement__" data-uid="UitkForKsp2.API.Extensions.OnPanelRoot(UnityEngine.UIElements.PanelRenderer,System.Action{UnityEngine.UIElements.VisualElement})">OnPanelRoot(PanelRenderer, Action&lt;VisualElement&gt;)</h4>
+  <div class="markdown level1 summary"><p>Run an action against the panel container as soon as it is resolved (immediately if available, otherwise on
+the next UI reload). Robust to deferred/inactive windows and to raw prefab/scene PanelRenderers.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void OnPanelRoot(this PanelRenderer renderer, Action&lt;VisualElement&gt; action)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">PanelRenderer</span></td>
+        <td><span class="parametername">renderer</span></td>
+        <td><p>The window's PanelRenderer.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/UIElements.VisualElement.html">VisualElement</a>&gt;</td>
+        <td><span class="parametername">action</span></td>
+        <td><p>The action to run with the resolved panel container.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="UitkForKsp2_API_Extensions_OnWindowRoot_" data-uid="UitkForKsp2.API.Extensions.OnWindowRoot*"></a>
+  <h4 id="UitkForKsp2_API_Extensions_OnWindowRoot_UnityEngine_UIElements_PanelRenderer_System_Action_UnityEngine_UIElements_VisualElement__" data-uid="UitkForKsp2.API.Extensions.OnWindowRoot(UnityEngine.UIElements.PanelRenderer,System.Action{UnityEngine.UIElements.VisualElement})">OnWindowRoot(PanelRenderer, Action&lt;VisualElement&gt;)</h4>
+  <div class="markdown level1 summary"><p>Run an action against the unwrapped window root as soon as it is resolved (immediately if available,
+otherwise on the next UI reload). Robust to deferred/inactive windows and to raw prefab/scene PanelRenderers.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void OnWindowRoot(this PanelRenderer renderer, Action&lt;VisualElement&gt; action)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">PanelRenderer</span></td>
+        <td><span class="parametername">renderer</span></td>
+        <td><p>The window's PanelRenderer.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/UIElements.VisualElement.html">VisualElement</a>&gt;</td>
+        <td><span class="parametername">action</span></td>
+        <td><p>The action to run with the resolved window root.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="UitkForKsp2_API_Extensions_PinToBottom_" data-uid="UitkForKsp2.API.Extensions.PinToBottom*"></a>
+  <h4 id="UitkForKsp2_API_Extensions_PinToBottom_UnityEngine_UIElements_ScrollView_" data-uid="UitkForKsp2.API.Extensions.PinToBottom(UnityEngine.UIElements.ScrollView)">PinToBottom(ScrollView?)</h4>
+  <div class="markdown level1 summary"><p>Force a ScrollView back into pinned-bottom mode and scroll it to the current bottom.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void PinToBottom(this ScrollView? scrollView)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScrollView</span></td>
+        <td><span class="parametername">scrollView</span></td>
+        <td><p>The ScrollView to pin.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="UitkForKsp2_API_Extensions_ScrollToBottomIfPinned_" data-uid="UitkForKsp2.API.Extensions.ScrollToBottomIfPinned*"></a>
+  <h4 id="UitkForKsp2_API_Extensions_ScrollToBottomIfPinned_UnityEngine_UIElements_ScrollView_" data-uid="UitkForKsp2.API.Extensions.ScrollToBottomIfPinned(UnityEngine.UIElements.ScrollView)">ScrollToBottomIfPinned(ScrollView?)</h4>
+  <div class="markdown level1 summary"><p>Scroll to the bottom if pinned-bottom autoscroll is enabled and the ScrollView is currently pinned.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void ScrollToBottomIfPinned(this ScrollView? scrollView)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScrollView</span></td>
+        <td><span class="parametername">scrollView</span></td>
+        <td><p>The ScrollView to scroll.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="UitkForKsp2_API_Extensions_SetDefaultPosition_" data-uid="UitkForKsp2.API.Extensions.SetDefaultPosition*"></a>
   <h4 id="UitkForKsp2_API_Extensions_SetDefaultPosition_UnityEngine_UIElements_VisualElement_System_Func_UnityEngine_Vector2_UnityEngine_Vector2__" data-uid="UitkForKsp2.API.Extensions.SetDefaultPosition(UnityEngine.UIElements.VisualElement,System.Func{UnityEngine.Vector2,UnityEngine.Vector2})">SetDefaultPosition(VisualElement?, Func&lt;Vector2, Vector2&gt;)</h4>
   <div class="markdown level1 summary"><p>Set the default position of an element using a callback to calculate the position.</p>
@@ -996,13 +1287,14 @@ element and should return the position to set the element to in the reference re
 
 
   <a id="UitkForKsp2_API_Extensions_Show_" data-uid="UitkForKsp2.API.Extensions.Show*"></a>
-  <h4 id="UitkForKsp2_API_Extensions_Show_UnityEngine_UIElements_UIDocument_" data-uid="UitkForKsp2.API.Extensions.Show(UnityEngine.UIElements.UIDocument)">Show(UIDocument)</h4>
-  <div class="markdown level1 summary"><p>Show a UIDocument by setting its root VisualElement's display style to DisplayStyle.Flex.</p>
+  <h4 id="UitkForKsp2_API_Extensions_Show_UnityEngine_UIElements_PanelRenderer_" data-uid="UitkForKsp2.API.Extensions.Show(UnityEngine.UIElements.PanelRenderer)">Show(PanelRenderer)</h4>
+  <div class="markdown level1 summary"><p>Show a window by enabling its PanelRenderer component. The GameObject stays active (so any controller on it
+keeps running) and the renderer re-attaches its preserved content to the panel.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void Show(this UIDocument document)</code></pre>
+    <pre><code class="lang-csharp hljs">public static void Show(this PanelRenderer renderer)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -1015,9 +1307,9 @@ element and should return the position to set the element to in the reference re
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/UIElements.UIDocument.html">UIDocument</a></td>
-        <td><span class="parametername">document</span></td>
-        <td><p>The document to show.</p>
+        <td><span class="xref">PanelRenderer</span></td>
+        <td><span class="parametername">renderer</span></td>
+        <td><p>The window to show.</p>
 </td>
       </tr>
     </tbody>
@@ -1153,13 +1445,13 @@ element and should return the position to set the element to in the reference re
 
 
   <a id="UitkForKsp2_API_Extensions_ToggleDisplay_" data-uid="UitkForKsp2.API.Extensions.ToggleDisplay*"></a>
-  <h4 id="UitkForKsp2_API_Extensions_ToggleDisplay_UnityEngine_UIElements_UIDocument_" data-uid="UitkForKsp2.API.Extensions.ToggleDisplay(UnityEngine.UIElements.UIDocument)">ToggleDisplay(UIDocument)</h4>
-  <div class="markdown level1 summary"><p>Toggle the display of a UIDocument between DisplayStyle.Flex and DisplayStyle.None.</p>
+  <h4 id="UitkForKsp2_API_Extensions_ToggleDisplay_UnityEngine_UIElements_PanelRenderer_" data-uid="UitkForKsp2.API.Extensions.ToggleDisplay(UnityEngine.UIElements.PanelRenderer)">ToggleDisplay(PanelRenderer)</h4>
+  <div class="markdown level1 summary"><p>Toggle a window between shown and hidden by enabling/disabling its PanelRenderer component.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void ToggleDisplay(this UIDocument document)</code></pre>
+    <pre><code class="lang-csharp hljs">public static void ToggleDisplay(this PanelRenderer renderer)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -1172,9 +1464,9 @@ element and should return the position to set the element to in the reference re
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/UIElements.UIDocument.html">UIDocument</a></td>
-        <td><span class="parametername">document</span></td>
-        <td><p>The document to toggle the display of.</p>
+        <td><span class="xref">PanelRenderer</span></td>
+        <td><span class="parametername">renderer</span></td>
+        <td><p>The window to toggle.</p>
 </td>
       </tr>
     </tbody>

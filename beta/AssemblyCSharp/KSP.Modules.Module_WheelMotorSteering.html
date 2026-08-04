@@ -96,9 +96,6 @@
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a></div>
     <div><a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a></div>
   </div>
   <div class="inheritedMembers">
@@ -170,6 +167,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsStageable">PartBehaviourModule.IsStageable()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnViewUnload">PartBehaviourModule.OnViewUnload()</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnActive">PartBehaviourModule.OnActive()</a>
     </div>
     <div>
@@ -191,13 +191,16 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForDataModules">PartBehaviourModule.InitForDataModules()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_StashPendingStateJson_System_Type_Newtonsoft_Json_Linq_JObject_">PartBehaviourModule.StashPendingStateJson(Type, JObject)</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_SetDataModuleValues_KSP_Sim_Definitions_SerializedPartModule_">PartBehaviourModule.SetDataModuleValues(SerializedPartModule)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForNewOABPart">PartBehaviourModule.InitForNewOABPart()</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_">PartBehaviourModule.RemoveResourceRequest(ResourceFlowRequestHandle)</a>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_Unity_Entities_Entity_">PartBehaviourModule.RemoveResourceRequest(Entity)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnAnimStateEnter_UnityEngine_Animator_System_Int32_">PartBehaviourModule.OnAnimStateEnter(Animator, int)</a>
@@ -287,6 +290,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsLocallyAuthorized">PartBehaviourModule.IsLocallyAuthorized</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_PendingStateJson">PartBehaviourModule.PendingStateJson</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Game">KerbalMonoBehaviour.Game</a>
     </div>
     <div>
@@ -306,7 +312,9 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Module_WheelMotorSteering_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Module_WheelMotorSteering : Module_WheelMotor, IPartModule, IFixedUpdate, IPriorityOverride, IUpdate, IObjectAssemblyPartModule</code></pre>
+    <pre><code class="lang-csharp hljs">[ModuleCategory(&quot;Wheels&quot;)]
+[ModuleDescription(&quot;Motor torque with skid-steer turning from yaw input&quot;)]
+public class Module_WheelMotorSteering : Module_WheelMotor, IPartModule, IObjectAssemblyPartModule</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -325,7 +333,8 @@
 
 
   <h4 id="KSP_Modules_Module_WheelMotorSteering_dataWheelMotorSteering" data-uid="KSP.Modules.Module_WheelMotorSteering.dataWheelMotorSteering">dataWheelMotorSteering</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The steering-specific module data instance holding steering torque, enabled state, and inversion settings.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -352,7 +361,8 @@
 
   <a id="KSP_Modules_Module_WheelMotorSteering_PartComponentModuleType_" data-uid="KSP.Modules.Module_WheelMotorSteering.PartComponentModuleType*"></a>
   <h4 id="KSP_Modules_Module_WheelMotorSteering_PartComponentModuleType" data-uid="KSP.Modules.Module_WheelMotorSteering.PartComponentModuleType">PartComponentModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <span class="xref">System.Type</span> of the corresponding simulation-side <a class="xref" href="KSP.Sim.impl.PartComponentModule.html">PartComponentModule</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -381,7 +391,8 @@
 
   <a id="KSP_Modules_Module_WheelMotorSteering_AddDataModules_" data-uid="KSP.Modules.Module_WheelMotorSteering.AddDataModules*"></a>
   <h4 id="KSP_Modules_Module_WheelMotorSteering_AddDataModules" data-uid="KSP.Modules.Module_WheelMotorSteering.AddDataModules">AddDataModules()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers data modules with <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_DataModules">DataModules</a> for this part behaviour module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -393,7 +404,8 @@
 
   <a id="KSP_Modules_Module_WheelMotorSteering_GetMotorEnabled_" data-uid="KSP.Modules.Module_WheelMotorSteering.GetMotorEnabled*"></a>
   <h4 id="KSP_Modules_Module_WheelMotorSteering_GetMotorEnabled_System_Boolean_KSP_Sim_Definitions_ModuleProperty_System_String__" data-uid="KSP.Modules.Module_WheelMotorSteering.GetMotorEnabled(System.Boolean,KSP.Sim.Definitions.ModuleProperty{System.String})">GetMotorEnabled(bool, ModuleProperty&lt;string&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Determines whether the wheel motor is currently enabled, accounting for both the steering subsystem inoperability and the combined motor and steering enabled states.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -412,12 +424,14 @@
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">baseMotorEnabled</span></td>
-        <td></td>
+        <td><p>Whether the motor is enabled by the base motor user setting.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">string</span>&gt;</td>
         <td><span class="parametername">stateString</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty&lt;T&gt;</a> holding the localized status string displayed in the UI.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -432,7 +446,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the motor is operational and either the base motor or steering is active; otherwise false.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -442,7 +457,8 @@
 
   <a id="KSP_Modules_Module_WheelMotorSteering_OnDriveUpdate_" data-uid="KSP.Modules.Module_WheelMotorSteering.OnDriveUpdate*"></a>
   <h4 id="KSP_Modules_Module_WheelMotorSteering_OnDriveUpdate_System_Single_" data-uid="KSP.Modules.Module_WheelMotorSteering.OnDriveUpdate(System.Single)">OnDriveUpdate(float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Applies skid-steer yaw input to the motor drive value, blending steering torque with the base motor input based on the wheel's angular relationship to the vessel center of mass.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -461,7 +477,8 @@
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">motorInput</span></td>
-        <td></td>
+        <td><p>The raw motor drive input from the base motor pass, in the range [-1, 1].</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -476,7 +493,8 @@
     <tbody>
       <tr>
         <td><span class="xref">float</span></td>
-        <td></td>
+        <td><p>The motor drive input adjusted by the computed yaw steering contribution, or the unmodified <code class="paramref">motorInput</code> if steering is disabled.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -485,15 +503,6 @@
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a>
   </div>
   <div>
       <a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a>

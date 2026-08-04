@@ -90,6 +90,7 @@
     <div class="level1"><a class="xref" href="KSP.Game.KerbalMonoBehaviour.html">KerbalMonoBehaviour</a></div>
     <div class="level2"><span class="xref">Basic2DTooltipTarget</span></div>
       <div class="level3"><a class="xref" href="KSP.UI.AlertNotificationTooltipTarget.html">AlertNotificationTooltipTarget</a></div>
+      <div class="level3"><a class="xref" href="KSP.UI.QuickloadDisabledTooltip.html">QuickloadDisabledTooltip</a></div>
   </div>
   <div class="implements">
     <h5>Implements</h5>
@@ -136,7 +137,8 @@
 
 
   <h4 id="KSP_UI_Basic2DTooltipTarget__tooltipData" data-uid="KSP.UI.Basic2DTooltipTarget._tooltipData">_tooltipData</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Tooltip data asset supplying the text and configuration rendered by the active tooltip instance.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -163,7 +165,8 @@
 
   <a id="KSP_UI_Basic2DTooltipTarget_Priority_" data-uid="KSP.UI.Basic2DTooltipTarget.Priority*"></a>
   <h4 id="KSP_UI_Basic2DTooltipTarget_Priority" data-uid="KSP.UI.Basic2DTooltipTarget.Priority">Priority</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the priority of this tooltip target, used to resolve ordering when multiple targets overlap.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -188,7 +191,8 @@
 
   <a id="KSP_UI_Basic2DTooltipTarget_TooltipOffset_" data-uid="KSP.UI.Basic2DTooltipTarget.TooltipOffset*"></a>
   <h4 id="KSP_UI_Basic2DTooltipTarget_TooltipOffset" data-uid="KSP.UI.Basic2DTooltipTarget.TooltipOffset">TooltipOffset</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the calculated offset applied to the tooltip position relative to its anchor or the pointer.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -215,7 +219,8 @@
 
   <a id="KSP_UI_Basic2DTooltipTarget_Awake_" data-uid="KSP.UI.Basic2DTooltipTarget.Awake*"></a>
   <h4 id="KSP_UI_Basic2DTooltipTarget_Awake" data-uid="KSP.UI.Basic2DTooltipTarget.Awake">Awake()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Caches the target <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/RectTransform.html">RectTransform</a>, initializes tooltip data, and records the prefab identifier.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -225,11 +230,12 @@
 
   <a id="KSP_UI_Basic2DTooltipTarget_GetTooltipPivot_" data-uid="KSP.UI.Basic2DTooltipTarget.GetTooltipPivot*"></a>
   <h4 id="KSP_UI_Basic2DTooltipTarget_GetTooltipPivot" data-uid="KSP.UI.Basic2DTooltipTarget.GetTooltipPivot">GetTooltipPivot()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the pivot point used to position the tooltip relative to its anchor.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Vector2 GetTooltipPivot()</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Vector2 GetTooltipPivot()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-condensed">
@@ -242,7 +248,37 @@
     <tbody>
       <tr>
         <td><span class="xref">Vector2</span></td>
-        <td></td>
+        <td><p>A <span class="xref">UnityEngine.Vector2</span> pivot value based on the configured tooltip position mode.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_UI_Basic2DTooltipTarget_InitializeTooltipPrefab_" data-uid="KSP.UI.Basic2DTooltipTarget.InitializeTooltipPrefab*"></a>
+  <h4 id="KSP_UI_Basic2DTooltipTarget_InitializeTooltipPrefab_KSP_UI_Basic2DTooltip_" data-uid="KSP.UI.Basic2DTooltipTarget.InitializeTooltipPrefab(KSP.UI.Basic2DTooltip)">InitializeTooltipPrefab(Basic2DTooltip)</h4>
+  <div class="markdown level1 summary"><p>Sets the tooltip prefab at runtime for dynamically-created tooltip targets that cannot use the serialized Inspector field. (Issue #266)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void InitializeTooltipPrefab(Basic2DTooltip prefab)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.UI.Basic2DTooltip.html">Basic2DTooltip</a></td>
+        <td><span class="parametername">prefab</span></td>
+        <td><p>The Basic2DTooltip prefab to use for tooltip display.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -250,7 +286,8 @@
 
   <a id="KSP_UI_Basic2DTooltipTarget_OnDisable_" data-uid="KSP.UI.Basic2DTooltipTarget.OnDisable*"></a>
   <h4 id="KSP_UI_Basic2DTooltipTarget_OnDisable" data-uid="KSP.UI.Basic2DTooltipTarget.OnDisable">OnDisable()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Hides and releases the active tooltip when this component is disabled.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -260,7 +297,8 @@
 
   <a id="KSP_UI_Basic2DTooltipTarget_OnEnter_" data-uid="KSP.UI.Basic2DTooltipTarget.OnEnter*"></a>
   <h4 id="KSP_UI_Basic2DTooltipTarget_OnEnter" data-uid="KSP.UI.Basic2DTooltipTarget.OnEnter">OnEnter()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Requests and shows the tooltip when the pointer enters this target, applying any anchored or width-adjusted offset.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -270,12 +308,42 @@
 
   <a id="KSP_UI_Basic2DTooltipTarget_OnExit_" data-uid="KSP.UI.Basic2DTooltipTarget.OnExit*"></a>
   <h4 id="KSP_UI_Basic2DTooltipTarget_OnExit" data-uid="KSP.UI.Basic2DTooltipTarget.OnExit">OnExit()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Hides and releases the active tooltip when the pointer exits this target.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void OnExit()</code></pre>
   </div>
+
+
+  <a id="KSP_UI_Basic2DTooltipTarget_SetAnchoredMode_" data-uid="KSP.UI.Basic2DTooltipTarget.SetAnchoredMode*"></a>
+  <h4 id="KSP_UI_Basic2DTooltipTarget_SetAnchoredMode_UnityEngine_Vector2_" data-uid="KSP.UI.Basic2DTooltipTarget.SetAnchoredMode(UnityEngine.Vector2)">SetAnchoredMode(Vector2)</h4>
+  <div class="markdown level1 summary"><p>Switches to anchored mode at runtime, pinning the tooltip to the target RectTransform with the given offset. (Issue #266)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetAnchoredMode(Vector2 offset)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector2</span></td>
+        <td><span class="parametername">offset</span></td>
+        <td><p>Offset in tooltip canvas local space from the target's pivot to the tooltip's content pivot.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.UI.ITooltipTarget.html">ITooltipTarget</a>

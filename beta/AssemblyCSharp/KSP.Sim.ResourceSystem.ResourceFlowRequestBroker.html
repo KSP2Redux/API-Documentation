@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class ResourceFlowRequestBroker | KSP2Redux API (Beta) ">
     
-    <meta name="description" content="Mediates resource flow request allocation and lifecycle for a single  through a .">
+    <meta name="description" content="Mediates resource flow request allocation and lifecycle for a single  through a . A request is identified by its ECS , which the caller stores and passes back; there is no handle and no string identifier.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,9 @@
 
 
   <h1 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker" class="text-break">Class ResourceFlowRequestBroker</h1>
-  <div class="markdown level0 summary"><p>Mediates resource flow request allocation and lifecycle for a single <a class="xref" href="KSP.Sim.ResourceSystem.IFlowNode.html">IFlowNode</a> through a <a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.html">ResourceFlowRequestManager</a>.</p>
+  <div class="markdown level0 summary"><p>Mediates resource flow request allocation and lifecycle for a single <a class="xref" href="KSP.Sim.ResourceSystem.IFlowNode.html">IFlowNode</a> through a
+<a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.html">ResourceFlowRequestManager</a>. A request is identified by its ECS <span class="xref">Unity.Entities.Entity</span>,
+which the caller stores and passes back; there is no handle and no string identifier.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -101,7 +103,8 @@
 
   <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker__ctor_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.#ctor*"></a>
   <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker__ctor_KSP_Sim_ResourceSystem_ResourceFlowRequestManager_KSP_Sim_ResourceSystem_IFlowNode_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.#ctor(KSP.Sim.ResourceSystem.ResourceFlowRequestManager,KSP.Sim.ResourceSystem.IFlowNode)">ResourceFlowRequestBroker(ResourceFlowRequestManager, IFlowNode)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.html">ResourceFlowRequestBroker</a> class.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -120,12 +123,14 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.html">ResourceFlowRequestManager</a></td>
         <td><span class="parametername">requestManager</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.html">ResourceFlowRequestManager</a> that manages resource flow requests.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.ResourceSystem.IFlowNode.html">IFlowNode</a></td>
         <td><span class="parametername">node</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="KSP.Sim.ResourceSystem.IFlowNode.html">IFlowNode</a> on whose behalf this broker operates.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -134,12 +139,15 @@
 
 
   <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_AllocateOrGetRequest_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.AllocateOrGetRequest*"></a>
-  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_AllocateOrGetRequest_System_String_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.AllocateOrGetRequest(System.String,KSP.Sim.ResourceSystem.ResourceFlowRequestHandle)">AllocateOrGetRequest(string, ResourceFlowRequestHandle)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_AllocateOrGetRequest_Unity_Entities_Entity_System_UInt16_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.AllocateOrGetRequest(Unity.Entities.Entity,System.UInt16)">AllocateOrGetRequest(Entity, ushort)</h4>
+  <div class="markdown level1 summary"><p>Returns <code class="paramref">existing</code> if it is still a live request, otherwise creates a new request
+entity for this broker's node. The caller owns the returned <span class="xref">Unity.Entities.Entity</span> and is responsible
+for destroying it (via <a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.html#KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_ForceRemoveRequest_Unity_Entities_Entity_">ForceRemoveRequest(Entity)</a>) when done.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ResourceFlowRequestHandle AllocateOrGetRequest(string optionalUniqueIdentifier = null, ResourceFlowRequestHandle optionalrequestHandle = default)</code></pre>
+    <pre><code class="lang-csharp hljs">public Entity AllocateOrGetRequest(Entity existing = default, ushort index = 0)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -152,13 +160,13 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">string</span></td>
-        <td><span class="parametername">optionalUniqueIdentifier</span></td>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">existing</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestHandle.html">ResourceFlowRequestHandle</a></td>
-        <td><span class="parametername">optionalrequestHandle</span></td>
+        <td><span class="xref">ushort</span></td>
+        <td><span class="parametername">index</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -173,7 +181,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestHandle.html">ResourceFlowRequestHandle</a></td>
+        <td><span class="xref">Entity</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -181,12 +189,13 @@
 
 
   <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_ForceRemoveRequest_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.ForceRemoveRequest*"></a>
-  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_ForceRemoveRequest_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.ForceRemoveRequest(KSP.Sim.ResourceSystem.ResourceFlowRequestHandle)">ForceRemoveRequest(ResourceFlowRequestHandle)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_ForceRemoveRequest_Unity_Entities_Entity_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.ForceRemoveRequest(Unity.Entities.Entity)">ForceRemoveRequest(Entity)</h4>
+  <div class="markdown level1 summary"><p>Forcibly removes the specified request entity from the resource flow request manager.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void ForceRemoveRequest(ResourceFlowRequestHandle request)</code></pre>
+    <pre><code class="lang-csharp hljs">public void ForceRemoveRequest(Entity request)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -199,21 +208,23 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestHandle.html">ResourceFlowRequestHandle</a></td>
+        <td><span class="xref">Entity</span></td>
         <td><span class="parametername">request</span></td>
-        <td></td>
+        <td><p>The request entity to remove.</p>
+</td>
       </tr>
     </tbody>
   </table>
 
 
   <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_GetCurrentResourceSnapshot_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.GetCurrentResourceSnapshot*"></a>
-  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_GetCurrentResourceSnapshot_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.GetCurrentResourceSnapshot(KSP.Sim.ResourceSystem.ResourceFlowRequestHandle)">GetCurrentResourceSnapshot(ResourceFlowRequestHandle)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_GetCurrentResourceSnapshot_Unity_Entities_Entity_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.GetCurrentResourceSnapshot(Unity.Entities.Entity)">GetCurrentResourceSnapshot(Entity)</h4>
+  <div class="markdown level1 summary"><p>Returns a string snapshot of the current resource state for the specified request.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string GetCurrentResourceSnapshot(ResourceFlowRequestHandle handle)</code></pre>
+    <pre><code class="lang-csharp hljs">public string GetCurrentResourceSnapshot(Entity request)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -226,9 +237,10 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestHandle.html">ResourceFlowRequestHandle</a></td>
-        <td><span class="parametername">handle</span></td>
-        <td></td>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request entity to snapshot.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -243,19 +255,56 @@
     <tbody>
       <tr>
         <td><span class="xref">string</span></td>
-        <td></td>
+        <td><p>A string describing the current resource state, or an empty string if no manager or game instance is available.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_GetRequestInstructions_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.GetRequestInstructions*"></a>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_GetRequestInstructions_Unity_Entities_Entity_System_Collections_Generic_List_Redux_Ecs_Components_ResourceFlowInstructionData__" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.GetRequestInstructions(Unity.Entities.Entity,System.Collections.Generic.List{Redux.Ecs.Components.ResourceFlowInstructionData})">GetRequestInstructions(Entity, List&lt;ResourceFlowInstructionData&gt;)</h4>
+  <div class="markdown level1 summary"><p>Populates a list with the compiled flow instructions for the specified request entity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetRequestInstructions(Entity request, List&lt;ResourceFlowInstructionData&gt; results)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request entity whose instructions are to be retrieved.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="Redux.Ecs.Components.ResourceFlowInstructionData.html">ResourceFlowInstructionData</a>&gt;</td>
+        <td><span class="parametername">results</span></td>
+        <td><p>The list to populate with <a class="xref" href="Redux.Ecs.Components.ResourceFlowInstructionData.html">ResourceFlowInstructionData</a> entries; cleared if no manager is available.</p>
+</td>
       </tr>
     </tbody>
   </table>
 
 
   <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_GetRequestRequiredResourcesAvailable_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.GetRequestRequiredResourcesAvailable*"></a>
-  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_GetRequestRequiredResourcesAvailable_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_System_Collections_Generic_List_KSP_Sim_ResourceSystem_ContainedResourceData___KSP_Sim_ResourceSystem_FlowDirection_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.GetRequestRequiredResourcesAvailable(KSP.Sim.ResourceSystem.ResourceFlowRequestHandle,System.Collections.Generic.List{KSP.Sim.ResourceSystem.ContainedResourceData}@,KSP.Sim.ResourceSystem.FlowDirection)">GetRequestRequiredResourcesAvailable(ResourceFlowRequestHandle, ref List&lt;ContainedResourceData&gt;, FlowDirection)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_GetRequestRequiredResourcesAvailable_Unity_Entities_Entity_System_Collections_Generic_List_KSP_Sim_ResourceSystem_ContainedResourceData___KSP_Sim_ResourceSystem_FlowDirection_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.GetRequestRequiredResourcesAvailable(Unity.Entities.Entity,System.Collections.Generic.List{KSP.Sim.ResourceSystem.ContainedResourceData}@,KSP.Sim.ResourceSystem.FlowDirection)">GetRequestRequiredResourcesAvailable(Entity, ref List&lt;ContainedResourceData&gt;, FlowDirection)</h4>
+  <div class="markdown level1 summary"><p>Populates a list with the resources required by the specified request that are currently available for the given flow direction.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void GetRequestRequiredResourcesAvailable(ResourceFlowRequestHandle handle, ref List&lt;ContainedResourceData&gt; resourceList, FlowDirection flowDirection = FlowDirection.FLOW_OUTBOUND)</code></pre>
+    <pre><code class="lang-csharp hljs">public void GetRequestRequiredResourcesAvailable(Entity request, ref List&lt;ContainedResourceData&gt; resourceList, FlowDirection flowDirection = FlowDirection.FLOW_OUTBOUND)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -268,31 +317,34 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestHandle.html">ResourceFlowRequestHandle</a></td>
-        <td><span class="parametername">handle</span></td>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">request</span></td>
         <td></td>
       </tr>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="KSP.Sim.ResourceSystem.ContainedResourceData.html">ContainedResourceData</a>&gt;</td>
         <td><span class="parametername">resourceList</span></td>
-        <td></td>
+        <td><p>The list to populate with <a class="xref" href="KSP.Sim.ResourceSystem.ContainedResourceData.html">ContainedResourceData</a> entries for each available required resource.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.ResourceSystem.FlowDirection.html">FlowDirection</a></td>
         <td><span class="parametername">flowDirection</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="KSP.Sim.ResourceSystem.FlowDirection.html">FlowDirection</a> used to filter which resources are considered.</p>
+</td>
       </tr>
     </tbody>
   </table>
 
 
   <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_GetRequestState_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.GetRequestState*"></a>
-  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_GetRequestState_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.GetRequestState(KSP.Sim.ResourceSystem.ResourceFlowRequestHandle)">GetRequestState(ResourceFlowRequestHandle)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_GetRequestState_Unity_Entities_Entity_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.GetRequestState(Unity.Entities.Entity)">GetRequestState(Entity)</h4>
+  <div class="markdown level1 summary"><p>Returns the resolution state of the specified request from the last simulation tick.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public FlowRequestResolutionState GetRequestState(ResourceFlowRequestHandle handle)</code></pre>
+    <pre><code class="lang-csharp hljs">public FlowRequestResolutionState GetRequestState(Entity request)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -305,9 +357,10 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestHandle.html">ResourceFlowRequestHandle</a></td>
-        <td><span class="parametername">handle</span></td>
-        <td></td>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request entity to query.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -322,19 +375,21 @@
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Sim.ResourceSystem.FlowRequestResolutionState.html">FlowRequestResolutionState</a></td>
-        <td></td>
+        <td><p>A <a class="xref" href="KSP.Sim.ResourceSystem.FlowRequestResolutionState.html">FlowRequestResolutionState</a> describing the request's last tick delivery outcome, or a default value if no manager is available.</p>
+</td>
       </tr>
     </tbody>
   </table>
 
 
   <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_HasRequest_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.HasRequest*"></a>
-  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_HasRequest_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.HasRequest(KSP.Sim.ResourceSystem.ResourceFlowRequestHandle)">HasRequest(ResourceFlowRequestHandle)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_HasRequest_Unity_Entities_Entity_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.HasRequest(Unity.Entities.Entity)">HasRequest(Entity)</h4>
+  <div class="markdown level1 summary"><p>Returns a value indicating whether the specified request entity is tracked by the resource flow request manager.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool HasRequest(ResourceFlowRequestHandle handle)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool HasRequest(Entity request)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -347,9 +402,10 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestHandle.html">ResourceFlowRequestHandle</a></td>
-        <td><span class="parametername">handle</span></td>
-        <td></td>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request entity to check.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -364,19 +420,21 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the request is tracked by the manager, false otherwise.</p>
+</td>
       </tr>
     </tbody>
   </table>
 
 
   <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_IsRequestActive_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.IsRequestActive*"></a>
-  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_IsRequestActive_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.IsRequestActive(KSP.Sim.ResourceSystem.ResourceFlowRequestHandle)">IsRequestActive(ResourceFlowRequestHandle)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_IsRequestActive_Unity_Entities_Entity_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.IsRequestActive(Unity.Entities.Entity)">IsRequestActive(Entity)</h4>
+  <div class="markdown level1 summary"><p>Returns a value indicating whether the specified request entity is currently active.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool IsRequestActive(ResourceFlowRequestHandle handle)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool IsRequestActive(Entity request)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -389,9 +447,10 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestHandle.html">ResourceFlowRequestHandle</a></td>
-        <td><span class="parametername">handle</span></td>
-        <td></td>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request entity to check.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -406,19 +465,21 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the request is active, false otherwise.</p>
+</td>
       </tr>
     </tbody>
   </table>
 
 
   <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_IsRequestInactive_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.IsRequestInactive*"></a>
-  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_IsRequestInactive_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.IsRequestInactive(KSP.Sim.ResourceSystem.ResourceFlowRequestHandle)">IsRequestInactive(ResourceFlowRequestHandle)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_IsRequestInactive_Unity_Entities_Entity_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.IsRequestInactive(Unity.Entities.Entity)">IsRequestInactive(Entity)</h4>
+  <div class="markdown level1 summary"><p>Returns a value indicating whether the specified request entity is currently inactive.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool IsRequestInactive(ResourceFlowRequestHandle handle)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool IsRequestInactive(Entity request)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -431,9 +492,10 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestHandle.html">ResourceFlowRequestHandle</a></td>
-        <td><span class="parametername">handle</span></td>
-        <td></td>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request entity to check.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -448,19 +510,21 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the request is inactive, false otherwise.</p>
+</td>
       </tr>
     </tbody>
   </table>
 
 
   <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_RequestHasCommands_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.RequestHasCommands*"></a>
-  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_RequestHasCommands_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.RequestHasCommands(KSP.Sim.ResourceSystem.ResourceFlowRequestHandle)">RequestHasCommands(ResourceFlowRequestHandle)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_RequestHasCommands_Unity_Entities_Entity_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.RequestHasCommands(Unity.Entities.Entity)">RequestHasCommands(Entity)</h4>
+  <div class="markdown level1 summary"><p>Returns a value indicating whether the specified request entity has resource flow commands assigned.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool RequestHasCommands(ResourceFlowRequestHandle handle)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool RequestHasCommands(Entity request)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -473,9 +537,10 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestHandle.html">ResourceFlowRequestHandle</a></td>
-        <td><span class="parametername">handle</span></td>
-        <td></td>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request entity to check.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -490,19 +555,21 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the request has one or more commands, false otherwise.</p>
+</td>
       </tr>
     </tbody>
   </table>
 
 
   <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_RequestHasInstructions_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.RequestHasInstructions*"></a>
-  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_RequestHasInstructions_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.RequestHasInstructions(KSP.Sim.ResourceSystem.ResourceFlowRequestHandle)">RequestHasInstructions(ResourceFlowRequestHandle)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_RequestHasInstructions_Unity_Entities_Entity_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.RequestHasInstructions(Unity.Entities.Entity)">RequestHasInstructions(Entity)</h4>
+  <div class="markdown level1 summary"><p>Returns a value indicating whether the specified request entity has compiled flow instructions.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool RequestHasInstructions(ResourceFlowRequestHandle handle)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool RequestHasInstructions(Entity request)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -515,9 +582,10 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestHandle.html">ResourceFlowRequestHandle</a></td>
-        <td><span class="parametername">handle</span></td>
-        <td></td>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request entity to check.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -532,61 +600,21 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_SanitizeNameString_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.SanitizeNameString*"></a>
-  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_SanitizeNameString_System_String_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.SanitizeNameString(System.String)">SanitizeNameString(string)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static string SanitizeNameString(string resourceName)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">string</span></td>
-        <td><span class="parametername">resourceName</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">string</span></td>
-        <td></td>
+        <td><p>True if the request has one or more flow instructions, false otherwise.</p>
+</td>
       </tr>
     </tbody>
   </table>
 
 
   <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_SetCommands_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.SetCommands*"></a>
-  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_SetCommands_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_System_Collections_Generic_IEnumerable_KSP_Sim_ResourceSystem_ResourceFlowRequestCommandConfig__System_Double_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.SetCommands(KSP.Sim.ResourceSystem.ResourceFlowRequestHandle,System.Collections.Generic.IEnumerable{KSP.Sim.ResourceSystem.ResourceFlowRequestCommandConfig},System.Double)">SetCommands(ResourceFlowRequestHandle, IEnumerable&lt;ResourceFlowRequestCommandConfig&gt;, double)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_SetCommands_Unity_Entities_Entity_System_Collections_Generic_IEnumerable_KSP_Sim_ResourceSystem_ResourceFlowRequestCommandConfig__System_Double_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.SetCommands(Unity.Entities.Entity,System.Collections.Generic.IEnumerable{KSP.Sim.ResourceSystem.ResourceFlowRequestCommandConfig},System.Double)">SetCommands(Entity, IEnumerable&lt;ResourceFlowRequestCommandConfig&gt;, double)</h4>
+  <div class="markdown level1 summary"><p>Assigns a collection of resource flow commands to the specified request.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool SetCommands(ResourceFlowRequestHandle handle, IEnumerable&lt;ResourceFlowRequestCommandConfig&gt; commands, double normalizedFlowMinimum)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool SetCommands(Entity request, IEnumerable&lt;ResourceFlowRequestCommandConfig&gt; commands, double normalizedFlowMinimum)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -599,19 +627,22 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestHandle.html">ResourceFlowRequestHandle</a></td>
-        <td><span class="parametername">handle</span></td>
-        <td></td>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request entity to configure.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestCommandConfig.html">ResourceFlowRequestCommandConfig</a>&gt;</td>
         <td><span class="parametername">commands</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestCommandConfig.html">ResourceFlowRequestCommandConfig</a> entries describing the desired resource flows.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">normalizedFlowMinimum</span></td>
-        <td></td>
+        <td><p>The normalized minimum flow threshold below which flow is considered exhausted.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -626,19 +657,21 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the commands were applied successfully, false otherwise.</p>
+</td>
       </tr>
     </tbody>
   </table>
 
 
   <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_SetCommands_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.SetCommands*"></a>
-  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_SetCommands_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_System_Collections_Generic_IEnumerable_KSP_Sim_ResourceSystem_ResourceFlowRequestCommandConfig__System_Double_System_Double_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.SetCommands(KSP.Sim.ResourceSystem.ResourceFlowRequestHandle,System.Collections.Generic.IEnumerable{KSP.Sim.ResourceSystem.ResourceFlowRequestCommandConfig},System.Double,System.Double)">SetCommands(ResourceFlowRequestHandle, IEnumerable&lt;ResourceFlowRequestCommandConfig&gt;, double, double)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_SetCommands_Unity_Entities_Entity_System_Collections_Generic_IEnumerable_KSP_Sim_ResourceSystem_ResourceFlowRequestCommandConfig__System_Double_System_Double_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.SetCommands(Unity.Entities.Entity,System.Collections.Generic.IEnumerable{KSP.Sim.ResourceSystem.ResourceFlowRequestCommandConfig},System.Double,System.Double)">SetCommands(Entity, IEnumerable&lt;ResourceFlowRequestCommandConfig&gt;, double, double)</h4>
+  <div class="markdown level1 summary"><p>Assigns a collection of resource flow commands to the specified request, applying a priority offset to each command.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool SetCommands(ResourceFlowRequestHandle handle, IEnumerable&lt;ResourceFlowRequestCommandConfig&gt; commands, double normalizedFlowMinimum, double flowPriorityOffset)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool SetCommands(Entity request, IEnumerable&lt;ResourceFlowRequestCommandConfig&gt; commands, double normalizedFlowMinimum, double flowPriorityOffset)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -651,24 +684,28 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestHandle.html">ResourceFlowRequestHandle</a></td>
-        <td><span class="parametername">handle</span></td>
-        <td></td>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request entity to configure.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestCommandConfig.html">ResourceFlowRequestCommandConfig</a>&gt;</td>
         <td><span class="parametername">commands</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestCommandConfig.html">ResourceFlowRequestCommandConfig</a> entries describing the desired resource flows.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">normalizedFlowMinimum</span></td>
-        <td></td>
+        <td><p>The normalized minimum flow threshold below which flow is considered exhausted.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">flowPriorityOffset</span></td>
-        <td></td>
+        <td><p>An additive offset applied to the flow priority of each command.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -683,19 +720,21 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the commands were applied successfully, false otherwise.</p>
+</td>
       </tr>
     </tbody>
   </table>
 
 
   <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_SetCommands_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.SetCommands*"></a>
-  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_SetCommands_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_System_Double_KSP_Sim_ResourceSystem_ResourceFlowRequestCommandConfig_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.SetCommands(KSP.Sim.ResourceSystem.ResourceFlowRequestHandle,System.Double,KSP.Sim.ResourceSystem.ResourceFlowRequestCommandConfig)">SetCommands(ResourceFlowRequestHandle, double, ResourceFlowRequestCommandConfig)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_SetCommands_Unity_Entities_Entity_System_Double_KSP_Sim_ResourceSystem_ResourceFlowRequestCommandConfig_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.SetCommands(Unity.Entities.Entity,System.Double,KSP.Sim.ResourceSystem.ResourceFlowRequestCommandConfig)">SetCommands(Entity, double, ResourceFlowRequestCommandConfig)</h4>
+  <div class="markdown level1 summary"><p>Assigns a single resource flow command to the specified request.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool SetCommands(ResourceFlowRequestHandle handle, double normalizedFlowMinimum, ResourceFlowRequestCommandConfig command)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool SetCommands(Entity request, double normalizedFlowMinimum, ResourceFlowRequestCommandConfig command)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -708,19 +747,22 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestHandle.html">ResourceFlowRequestHandle</a></td>
-        <td><span class="parametername">handle</span></td>
-        <td></td>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request entity to configure.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">normalizedFlowMinimum</span></td>
-        <td></td>
+        <td><p>The normalized minimum flow threshold below which flow is considered exhausted.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestCommandConfig.html">ResourceFlowRequestCommandConfig</a></td>
         <td><span class="parametername">command</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestCommandConfig.html">ResourceFlowRequestCommandConfig</a> describing the desired resource flow.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -735,19 +777,21 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the command was applied successfully, false otherwise.</p>
+</td>
       </tr>
     </tbody>
   </table>
 
 
   <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_SetCommands_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.SetCommands*"></a>
-  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_SetCommands_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_System_Double_KSP_Sim_ResourceSystem_ResourceFlowRequestCommandConfig___" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.SetCommands(KSP.Sim.ResourceSystem.ResourceFlowRequestHandle,System.Double,KSP.Sim.ResourceSystem.ResourceFlowRequestCommandConfig[])">SetCommands(ResourceFlowRequestHandle, double, params ResourceFlowRequestCommandConfig[])</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_SetCommands_Unity_Entities_Entity_System_Double_KSP_Sim_ResourceSystem_ResourceFlowRequestCommandConfig___" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.SetCommands(Unity.Entities.Entity,System.Double,KSP.Sim.ResourceSystem.ResourceFlowRequestCommandConfig[])">SetCommands(Entity, double, params ResourceFlowRequestCommandConfig[])</h4>
+  <div class="markdown level1 summary"><p>Assigns a set of resource flow commands to the specified request using a params array.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool SetCommands(ResourceFlowRequestHandle handle, double normalizedFlowMinimum, params ResourceFlowRequestCommandConfig[] commands)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool SetCommands(Entity request, double normalizedFlowMinimum, params ResourceFlowRequestCommandConfig[] commands)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -760,19 +804,21 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestHandle.html">ResourceFlowRequestHandle</a></td>
-        <td><span class="parametername">handle</span></td>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">request</span></td>
         <td></td>
       </tr>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">normalizedFlowMinimum</span></td>
-        <td></td>
+        <td><p>The normalized minimum flow threshold below which flow is considered exhausted.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestCommandConfig.html">ResourceFlowRequestCommandConfig</a>[]</td>
         <td><span class="parametername">commands</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestCommandConfig.html">ResourceFlowRequestCommandConfig</a> entries describing the desired resource flows.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -787,7 +833,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the commands were applied successfully; otherwise, false.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -795,7 +842,8 @@
 
   <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_SetNewResourceFlowRequestManager_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.SetNewResourceFlowRequestManager*"></a>
   <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_SetNewResourceFlowRequestManager_KSP_Sim_ResourceSystem_ResourceFlowRequestManager_KSP_Sim_ResourceSystem_IFlowNode_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.SetNewResourceFlowRequestManager(KSP.Sim.ResourceSystem.ResourceFlowRequestManager,KSP.Sim.ResourceSystem.IFlowNode)">SetNewResourceFlowRequestManager(ResourceFlowRequestManager, IFlowNode)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Replaces the current <a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.html">ResourceFlowRequestManager</a> with a new one, optionally updating the associated flow node.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -814,12 +862,14 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.html">ResourceFlowRequestManager</a></td>
         <td><span class="parametername">resourceFlowRequestManager</span></td>
-        <td></td>
+        <td><p>The new <a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.html">ResourceFlowRequestManager</a> to use.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.ResourceSystem.IFlowNode.html">IFlowNode</a></td>
         <td><span class="parametername">node</span></td>
-        <td></td>
+        <td><p>An optional <a class="xref" href="KSP.Sim.ResourceSystem.IFlowNode.html">IFlowNode</a> to validate against the existing node; pass <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> to skip validation.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -834,19 +884,21 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the update succeeded, false otherwise.</p>
+</td>
       </tr>
     </tbody>
   </table>
 
 
   <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_SetRequestActive_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.SetRequestActive*"></a>
-  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_SetRequestActive_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.SetRequestActive(KSP.Sim.ResourceSystem.ResourceFlowRequestHandle)">SetRequestActive(ResourceFlowRequestHandle)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_SetRequestActive_Unity_Entities_Entity_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.SetRequestActive(Unity.Entities.Entity)">SetRequestActive(Entity)</h4>
+  <div class="markdown level1 summary"><p>Activates the specified request entity so it participates in resource flow resolution.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool SetRequestActive(ResourceFlowRequestHandle handle)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool SetRequestActive(Entity request)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -859,9 +911,10 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestHandle.html">ResourceFlowRequestHandle</a></td>
-        <td><span class="parametername">handle</span></td>
-        <td></td>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request entity to activate.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -876,19 +929,21 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the request was activated successfully, false otherwise.</p>
+</td>
       </tr>
     </tbody>
   </table>
 
 
   <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_SetRequestInactive_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.SetRequestInactive*"></a>
-  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_SetRequestInactive_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.SetRequestInactive(KSP.Sim.ResourceSystem.ResourceFlowRequestHandle)">SetRequestInactive(ResourceFlowRequestHandle)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_SetRequestInactive_Unity_Entities_Entity_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.SetRequestInactive(Unity.Entities.Entity)">SetRequestInactive(Entity)</h4>
+  <div class="markdown level1 summary"><p>Deactivates the specified request entity so it is excluded from resource flow resolution.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool SetRequestInactive(ResourceFlowRequestHandle handle)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool SetRequestInactive(Entity request)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -901,9 +956,10 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestHandle.html">ResourceFlowRequestHandle</a></td>
-        <td><span class="parametername">handle</span></td>
-        <td></td>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request entity to deactivate.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -918,66 +974,21 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_TryGetCurrentRequest_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.TryGetCurrentRequest*"></a>
-  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_TryGetCurrentRequest_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_KSP_Sim_ResourceSystem_ResourceFlowRequestManager_ManagedRequestWrapper__" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.TryGetCurrentRequest(KSP.Sim.ResourceSystem.ResourceFlowRequestHandle,KSP.Sim.ResourceSystem.ResourceFlowRequestManager.ManagedRequestWrapper@)">TryGetCurrentRequest(ResourceFlowRequestHandle, out ManagedRequestWrapper)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool TryGetCurrentRequest(ResourceFlowRequestHandle handle, out ResourceFlowRequestManager.ManagedRequestWrapper wrapper)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestHandle.html">ResourceFlowRequestHandle</a></td>
-        <td><span class="parametername">handle</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.html">ResourceFlowRequestManager</a>.<a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.ManagedRequestWrapper.html">ManagedRequestWrapper</a></td>
-        <td><span class="parametername">wrapper</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the request was deactivated successfully, false otherwise.</p>
+</td>
       </tr>
     </tbody>
   </table>
 
 
   <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_TryGetRequestResourceContainerParts_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.TryGetRequestResourceContainerParts*"></a>
-  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_TryGetRequestResourceContainerParts_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.TryGetRequestResourceContainerParts(KSP.Sim.ResourceSystem.ResourceFlowRequestHandle)">TryGetRequestResourceContainerParts(ResourceFlowRequestHandle)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_TryGetRequestResourceContainerParts_Unity_Entities_Entity_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.TryGetRequestResourceContainerParts(Unity.Entities.Entity)">TryGetRequestResourceContainerParts(Entity)</h4>
+  <div class="markdown level1 summary"><p>Retrieves the resource container part groups associated with the specified request, keyed by priority container group.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DictionaryValueList&lt;ResourceFlowRequestManager.RequestPriorityContainerGroupKey, ResourceContainerGroup&gt; TryGetRequestResourceContainerParts(ResourceFlowRequestHandle handle)</code></pre>
+    <pre><code class="lang-csharp hljs">public DictionaryValueList&lt;ResourceFlowRequestManager.RequestPriorityContainerGroupKey, ResourceContainerGroup&gt; TryGetRequestResourceContainerParts(Entity request)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -990,8 +1001,8 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestHandle.html">ResourceFlowRequestHandle</a></td>
-        <td><span class="parametername">handle</span></td>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">request</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -1007,19 +1018,21 @@
     <tbody>
       <tr>
         <td><a class="xref" href="DictionaryValueList-2.html">DictionaryValueList</a>&lt;<a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.html">ResourceFlowRequestManager</a>.<a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.RequestPriorityContainerGroupKey.html">RequestPriorityContainerGroupKey</a>, <a class="xref" href="KSP.Sim.ResourceSystem.ResourceContainerGroup.html">ResourceContainerGroup</a>&gt;</td>
-        <td></td>
+        <td><p>The dictionary mapping each priority container group key to its <a class="xref" href="KSP.Sim.ResourceSystem.ResourceContainerGroup.html">ResourceContainerGroup</a>, or null if no manager or game instance is available.</p>
+</td>
       </tr>
     </tbody>
   </table>
 
 
   <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_UpdateCommands_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.UpdateCommands*"></a>
-  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_UpdateCommands_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_System_Double_System_Double_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.UpdateCommands(KSP.Sim.ResourceSystem.ResourceFlowRequestHandle,System.Double,System.Double)">UpdateCommands(ResourceFlowRequestHandle, double, double)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_UpdateCommands_Unity_Entities_Entity_System_Double_System_Double_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestBroker.UpdateCommands(Unity.Entities.Entity,System.Double,System.Double)">UpdateCommands(Entity, double, double)</h4>
+  <div class="markdown level1 summary"><p>Updates the resource flow commands on the specified request for the current simulation tick.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool UpdateCommands(ResourceFlowRequestHandle handle, double universalTime, double deltaTime)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool UpdateCommands(Entity request, double universalTime, double deltaTime)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -1032,19 +1045,22 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestHandle.html">ResourceFlowRequestHandle</a></td>
-        <td><span class="parametername">handle</span></td>
-        <td></td>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request entity whose commands are to be updated.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">universalTime</span></td>
-        <td></td>
+        <td><p>The current universal time in seconds.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">deltaTime</span></td>
-        <td></td>
+        <td><p>The elapsed time in seconds since the last update.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1059,7 +1075,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the commands were updated successfully, false otherwise.</p>
+</td>
       </tr>
     </tbody>
   </table>

@@ -107,16 +107,16 @@
       <a class="xref" href="KSP.Sim.impl.PartComponentModule.html#KSP_Sim_impl_PartComponentModule_ClearPart">PartComponentModule.ClearPart()</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.impl.PartComponentModule.html#KSP_Sim_impl_PartComponentModule_ThermalUpdate_System_Double_">PartComponentModule.ThermalUpdate(double)</a>
-    </div>
-    <div>
       <a class="xref" href="KSP.Sim.impl.PartComponentModule.html#KSP_Sim_impl_PartComponentModule_OnFinalizeCreation_System_Double_">PartComponentModule.OnFinalizeCreation(double)</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.impl.PartComponentModule.html#KSP_Sim_impl_PartComponentModule_RemoveResourceRequest_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_">PartComponentModule.RemoveResourceRequest(ResourceFlowRequestHandle)</a>
+      <a class="xref" href="KSP.Sim.impl.PartComponentModule.html#KSP_Sim_impl_PartComponentModule_RemoveResourceRequest_Unity_Entities_Entity_">PartComponentModule.RemoveResourceRequest(Entity)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.impl.PartComponentModule.html#KSP_Sim_impl_PartComponentModule_Part">PartComponentModule.Part</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.impl.PartComponentModule.html#KSP_Sim_impl_PartComponentModule_ModuleEntity">PartComponentModule.ModuleEntity</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.impl.PartComponentModule.html#KSP_Sim_impl_PartComponentModule_Game">PartComponentModule.Game</a>
@@ -151,7 +151,8 @@
 
 
   <h4 id="KSP_Sim_impl_PartComponentModule_WheelMotor__requestOutstanding" data-uid="KSP.Sim.impl.PartComponentModule_WheelMotor._requestOutstanding">_requestOutstanding</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Indicates whether a resource flow request has been submitted and is awaiting resolution on the next simulation tick.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -175,7 +176,8 @@
 
 
   <h4 id="KSP_Sim_impl_PartComponentModule_WheelMotor__returnedRequestResolutionState" data-uid="KSP.Sim.impl.PartComponentModule_WheelMotor._returnedRequestResolutionState">_returnedRequestResolutionState</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The resolution state returned by the resource flow system for the most recently completed request tick.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -199,7 +201,8 @@
 
 
   <h4 id="KSP_Sim_impl_PartComponentModule_WheelMotor_dataWheelMotor" data-uid="KSP.Sim.impl.PartComponentModule_WheelMotor.dataWheelMotor">dataWheelMotor</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="KSP.Modules.Data_WheelMotor.html">Data_WheelMotor</a> data module holding motor drive configuration, traction control settings, and runtime motor state for this part.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -226,7 +229,8 @@
 
   <a id="KSP_Sim_impl_PartComponentModule_WheelMotor_PartBehaviourModuleType_" data-uid="KSP.Sim.impl.PartComponentModule_WheelMotor.PartBehaviourModuleType*"></a>
   <h4 id="KSP_Sim_impl_PartComponentModule_WheelMotor_PartBehaviourModuleType" data-uid="KSP.Sim.impl.PartComponentModule_WheelMotor.PartBehaviourModuleType">PartBehaviourModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the runtime <span class="xref">System.Type</span> of the part behaviour module that corresponds to this simulation module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -255,7 +259,8 @@
 
   <a id="KSP_Sim_impl_PartComponentModule_WheelMotor_CheckMotorState_" data-uid="KSP.Sim.impl.PartComponentModule_WheelMotor.CheckMotorState*"></a>
   <h4 id="KSP_Sim_impl_PartComponentModule_WheelMotor_CheckMotorState_System_Double_System_Single_System_Double__System_Single_" data-uid="KSP.Sim.impl.PartComponentModule_WheelMotor.CheckMotorState(System.Double,System.Single,System.Double@,System.Single)">CheckMotorState(double, float, out double, float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Evaluates the current motor state, updates resource flow requests, and writes the normalized resource delivery fraction to <code class="paramref">rOutput</code>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -274,22 +279,26 @@
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">fixedDeltaTime</span></td>
-        <td></td>
+        <td><p>The elapsed simulation time in seconds for the current fixed update step.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">driveInput</span></td>
-        <td></td>
+        <td><p>The absolute drive input magnitude applied to the motor this tick.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">rOutput</span></td>
-        <td></td>
+        <td><p>Receives the normalized fraction of requested resources that were delivered, in the range 0 to 1.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">torqueScalar</span></td>
-        <td></td>
+        <td><p>The ratio of current drive torque to maximum torque, used to scale resource consumption.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -297,7 +306,8 @@
 
   <a id="KSP_Sim_impl_PartComponentModule_WheelMotor_OnShutdown_" data-uid="KSP.Sim.impl.PartComponentModule_WheelMotor.OnShutdown*"></a>
   <h4 id="KSP_Sim_impl_PartComponentModule_WheelMotor_OnShutdown" data-uid="KSP.Sim.impl.PartComponentModule_WheelMotor.OnShutdown">OnShutdown()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called when the module is shutting down, allowing derived modules to release resources and detach from systems.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -309,7 +319,8 @@
 
   <a id="KSP_Sim_impl_PartComponentModule_WheelMotor_OnStart_" data-uid="KSP.Sim.impl.PartComponentModule_WheelMotor.OnStart*"></a>
   <h4 id="KSP_Sim_impl_PartComponentModule_WheelMotor_OnStart_System_Double_" data-uid="KSP.Sim.impl.PartComponentModule_WheelMotor.OnStart(System.Double)">OnStart(double)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called once when the module begins simulating, allowing derived modules to perform startup work.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -328,7 +339,8 @@
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">universalTime</span></td>
-        <td></td>
+        <td><p>The current universal time, in seconds, at which the module starts.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -338,7 +350,8 @@
 
   <a id="KSP_Sim_impl_PartComponentModule_WheelMotor_OnUpdate_" data-uid="KSP.Sim.impl.PartComponentModule_WheelMotor.OnUpdate*"></a>
   <h4 id="KSP_Sim_impl_PartComponentModule_WheelMotor_OnUpdate_System_Double_System_Double_" data-uid="KSP.Sim.impl.PartComponentModule_WheelMotor.OnUpdate(System.Double,System.Double)">OnUpdate(double, double)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called each simulation tick on modules that register for updates. Derived classes must override this method when registering for updates; the base implementation throws <span class="xref">System.NotImplementedException</span>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -357,12 +370,14 @@
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">universalTime</span></td>
-        <td></td>
+        <td><p>The current universal time, in seconds.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">deltaUniversalTime</span></td>
-        <td></td>
+        <td><p>The elapsed universal time, in seconds, since the previous update.</p>
+</td>
       </tr>
     </tbody>
   </table>

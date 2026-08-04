@@ -95,9 +95,6 @@
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a></div>
     <div><a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a></div>
   </div>
   <div class="inheritedMembers">
@@ -142,6 +139,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsStageable">PartBehaviourModule.IsStageable()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnViewUnload">PartBehaviourModule.OnViewUnload()</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnActive">PartBehaviourModule.OnActive()</a>
     </div>
     <div>
@@ -163,13 +163,16 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForDataModules">PartBehaviourModule.InitForDataModules()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_StashPendingStateJson_System_Type_Newtonsoft_Json_Linq_JObject_">PartBehaviourModule.StashPendingStateJson(Type, JObject)</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_SetDataModuleValues_KSP_Sim_Definitions_SerializedPartModule_">PartBehaviourModule.SetDataModuleValues(SerializedPartModule)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForNewOABPart">PartBehaviourModule.InitForNewOABPart()</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_">PartBehaviourModule.RemoveResourceRequest(ResourceFlowRequestHandle)</a>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_Unity_Entities_Entity_">PartBehaviourModule.RemoveResourceRequest(Entity)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnAnimStateEnter_UnityEngine_Animator_System_Int32_">PartBehaviourModule.OnAnimStateEnter(Animator, int)</a>
@@ -262,6 +265,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsLocallyAuthorized">PartBehaviourModule.IsLocallyAuthorized</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_PendingStateJson">PartBehaviourModule.PendingStateJson</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Game">KerbalMonoBehaviour.Game</a>
     </div>
     <div>
@@ -281,7 +287,9 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Module_WheelDamage_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Module_WheelDamage : Module_WheelSubmodule, IPartModule, IFixedUpdate, IPriorityOverride, IUpdate, IObjectAssemblyPartModule</code></pre>
+    <pre><code class="lang-csharp hljs">[ModuleCategory(&quot;Wheels&quot;)]
+[ModuleDescription(&quot;Tracks deflection and slip stress and triggers failure&quot;)]
+public class Module_WheelDamage : Module_WheelSubmodule, IPartModule, IObjectAssemblyPartModule</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -300,7 +308,8 @@
 
 
   <h4 id="KSP_Modules_Module_WheelDamage__startupTime" data-uid="KSP.Modules.Module_WheelDamage._startupTime">_startupTime</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The remaining startup grace period in seconds during which stress accumulation is suppressed after initialization.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -324,7 +333,8 @@
 
 
   <h4 id="KSP_Modules_Module_WheelDamage_currentDeflection" data-uid="KSP.Modules.Module_WheelDamage.currentDeflection">currentDeflection</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The current suspension deflection stress value for the wheel, smoothed over time.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -348,7 +358,8 @@
 
 
   <h4 id="KSP_Modules_Module_WheelDamage_currentDownForce" data-uid="KSP.Modules.Module_WheelDamage.currentDownForce">currentDownForce</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The current vertical force applied to the wheel from the ground contact.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -372,7 +383,8 @@
 
 
   <h4 id="KSP_Modules_Module_WheelDamage_currentSlip" data-uid="KSP.Modules.Module_WheelDamage.currentSlip">currentSlip</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The current lateral slip stress value for the wheel, smoothed over time.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -396,7 +408,8 @@
 
 
   <h4 id="KSP_Modules_Module_WheelDamage_dataWheelDamage" data-uid="KSP.Modules.Module_WheelDamage.dataWheelDamage">dataWheelDamage</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="KSP.Modules.Data_WheelDamage.html">Data_WheelDamage</a> data module associated with this wheel damage module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -420,7 +433,8 @@
 
 
   <h4 id="KSP_Modules_Module_WheelDamage_initialized" data-uid="KSP.Modules.Module_WheelDamage.initialized">initialized</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Indicates whether the damage module has completed its initial measurement pass and is ready to accumulate stress.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -444,7 +458,8 @@
 
 
   <h4 id="KSP_Modules_Module_WheelDamage_lastDeflection" data-uid="KSP.Modules.Module_WheelDamage.lastDeflection">lastDeflection</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The suspension deflection stress value recorded during the previous fixed update.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -468,7 +483,8 @@
 
 
   <h4 id="KSP_Modules_Module_WheelDamage_lastDownForce" data-uid="KSP.Modules.Module_WheelDamage.lastDownForce">lastDownForce</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The vertical force applied to the wheel recorded during the previous fixed update.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -492,7 +508,8 @@
 
 
   <h4 id="KSP_Modules_Module_WheelDamage_lastSlip" data-uid="KSP.Modules.Module_WheelDamage.lastSlip">lastSlip</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The lateral slip stress value recorded during the previous fixed update.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -516,7 +533,8 @@
 
 
   <h4 id="KSP_Modules_Module_WheelDamage_stressVariability" data-uid="KSP.Modules.Module_WheelDamage.stressVariability">stressVariability</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>A randomized negative offset applied to the stress tolerance threshold to vary the damage trigger point.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -540,7 +558,8 @@
 
 
   <h4 id="KSP_Modules_Module_WheelDamage_totalStress" data-uid="KSP.Modules.Module_WheelDamage.totalStress">totalStress</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The combined stress value computed from deflection and slip contributions during the current fixed update.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -567,7 +586,8 @@
 
   <a id="KSP_Modules_Module_WheelDamage_IsImpactDamageEnable_" data-uid="KSP.Modules.Module_WheelDamage.IsImpactDamageEnable*"></a>
   <h4 id="KSP_Modules_Module_WheelDamage_IsImpactDamageEnable" data-uid="KSP.Modules.Module_WheelDamage.IsImpactDamageEnable">IsImpactDamageEnable</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether impact damage detection is enabled for this wheel.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -592,7 +612,8 @@
 
   <a id="KSP_Modules_Module_WheelDamage_PartComponentModuleType_" data-uid="KSP.Modules.Module_WheelDamage.PartComponentModuleType*"></a>
   <h4 id="KSP_Modules_Module_WheelDamage_PartComponentModuleType" data-uid="KSP.Modules.Module_WheelDamage.PartComponentModuleType">PartComponentModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <span class="xref">System.Type</span> of the corresponding simulation-side <a class="xref" href="KSP.Sim.impl.PartComponentModule.html">PartComponentModule</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -621,7 +642,8 @@
 
   <a id="KSP_Modules_Module_WheelDamage_AddDataModules_" data-uid="KSP.Modules.Module_WheelDamage.AddDataModules*"></a>
   <h4 id="KSP_Modules_Module_WheelDamage_AddDataModules" data-uid="KSP.Modules.Module_WheelDamage.AddDataModules">AddDataModules()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers data modules with <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_DataModules">DataModules</a> for this part behaviour module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -633,7 +655,8 @@
 
   <a id="KSP_Modules_Module_WheelDamage_DamageWheel_" data-uid="KSP.Modules.Module_WheelDamage.DamageWheel*"></a>
   <h4 id="KSP_Modules_Module_WheelDamage_DamageWheel" data-uid="KSP.Modules.Module_WheelDamage.DamageWheel">DamageWheel()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Marks the wheel as damaged via a Unity context menu command.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -643,7 +666,8 @@
 
   <a id="KSP_Modules_Module_WheelDamage_HandleCollision_" data-uid="KSP.Modules.Module_WheelDamage.HandleCollision*"></a>
   <h4 id="KSP_Modules_Module_WheelDamage_HandleCollision_UnityEngine_Collision_" data-uid="KSP.Modules.Module_WheelDamage.HandleCollision(UnityEngine.Collision)">HandleCollision(Collision)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Evaluates a Unity physics collision against the designated impact damage collider and delegates to <a class="xref" href="KSP.Modules.Module_WheelDamage.html#KSP_Modules_Module_WheelDamage_HandleCollisionVelocity_UnityEngine_Collision_UnityEngine_GameObject_UnityEngine_Vector3_UnityEngine_Vector3_">HandleCollisionVelocity(Collision, GameObject, Vector3, Vector3)</a> when a matching contact is found.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -662,7 +686,8 @@
       <tr>
         <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Collision.html">Collision</a></td>
         <td><span class="parametername">c</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Collision.html">Collision</a> data provided by the physics engine.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -670,7 +695,8 @@
 
   <a id="KSP_Modules_Module_WheelDamage_HandleCollisionVelocity_" data-uid="KSP.Modules.Module_WheelDamage.HandleCollisionVelocity*"></a>
   <h4 id="KSP_Modules_Module_WheelDamage_HandleCollisionVelocity_UnityEngine_Collision_UnityEngine_GameObject_UnityEngine_Vector3_UnityEngine_Vector3_" data-uid="KSP.Modules.Module_WheelDamage.HandleCollisionVelocity(UnityEngine.Collision,UnityEngine.GameObject,UnityEngine.Vector3,UnityEngine.Vector3)">HandleCollisionVelocity(Collision, GameObject, Vector3, Vector3)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Determines whether the normal component of the collision velocity exceeds the impact damage threshold and marks the wheel as damaged if so.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -689,22 +715,26 @@
       <tr>
         <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Collision.html">Collision</a></td>
         <td><span class="parametername">c</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Collision.html">Collision</a> data provided by the physics engine.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">GameObject</span></td>
         <td><span class="parametername">otherObject</span></td>
-        <td></td>
+        <td><p>The <span class="xref">UnityEngine.GameObject</span> that participated in the collision.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Vector3</span></td>
         <td><span class="parametername">velocity</span></td>
-        <td></td>
+        <td><p>The relative velocity between the two colliding objects at the moment of impact.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Vector3</span></td>
         <td><span class="parametername">normal</span></td>
-        <td></td>
+        <td><p>The contact normal direction used to project the velocity for threshold comparison.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -712,7 +742,8 @@
 
   <a id="KSP_Modules_Module_WheelDamage_OnInitialize_" data-uid="KSP.Modules.Module_WheelDamage.OnInitialize*"></a>
   <h4 id="KSP_Modules_Module_WheelDamage_OnInitialize" data-uid="KSP.Modules.Module_WheelDamage.OnInitialize">OnInitialize()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes this submodule by resetting setup state, locating the owning <a class="xref" href="KSP.Modules.Module_WheelBase.html">Module_WheelBase</a>, and registering with it.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -724,7 +755,8 @@
 
   <a id="KSP_Modules_Module_WheelDamage_OnModuleFixedUpdate_" data-uid="KSP.Modules.Module_WheelDamage.OnModuleFixedUpdate*"></a>
   <h4 id="KSP_Modules_Module_WheelDamage_OnModuleFixedUpdate_System_Single_" data-uid="KSP.Modules.Module_WheelDamage.OnModuleFixedUpdate(System.Single)">OnModuleFixedUpdate(float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called each fixed-update tick while the module is operating in the flight context.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -743,7 +775,8 @@
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">fixedDeltaTime</span></td>
-        <td></td>
+        <td><p>The fixed physics time step in seconds.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -753,7 +786,8 @@
 
   <a id="KSP_Modules_Module_WheelDamage_OnShutdown_" data-uid="KSP.Modules.Module_WheelDamage.OnShutdown*"></a>
   <h4 id="KSP_Modules_Module_WheelDamage_OnShutdown" data-uid="KSP.Modules.Module_WheelDamage.OnShutdown">OnShutdown()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Shuts down this submodule by unregistering from the owning <a class="xref" href="KSP.Modules.Module_WheelBase.html">Module_WheelBase</a> and detaching the subsystem-modified callback.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -765,7 +799,8 @@
 
   <a id="KSP_Modules_Module_WheelDamage_OnWheelSetup_" data-uid="KSP.Modules.Module_WheelDamage.OnWheelSetup*"></a>
   <h4 id="KSP_Modules_Module_WheelDamage_OnWheelSetup" data-uid="KSP.Modules.Module_WheelDamage.OnWheelSetup">OnWheelSetup()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Applies the current damaged state to the wheel visuals and inoperative subsystem list after the wheel controller is ready.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -777,7 +812,8 @@
 
   <a id="KSP_Modules_Module_WheelDamage_ResetImmunity_" data-uid="KSP.Modules.Module_WheelDamage.ResetImmunity*"></a>
   <h4 id="KSP_Modules_Module_WheelDamage_ResetImmunity" data-uid="KSP.Modules.Module_WheelDamage.ResetImmunity">ResetImmunity()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Resets the startup grace period and repair immunity timer to their default durations.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -787,7 +823,8 @@
 
   <a id="KSP_Modules_Module_WheelDamage_SetDamaged_" data-uid="KSP.Modules.Module_WheelDamage.SetDamaged*"></a>
   <h4 id="KSP_Modules_Module_WheelDamage_SetDamaged_System_Boolean_" data-uid="KSP.Modules.Module_WheelDamage.SetDamaged(System.Boolean)">SetDamaged(bool)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Transitions the wheel into or out of the damaged state, updating visuals, the inoperative subsystem list, and the repair immunity timer.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -806,22 +843,14 @@
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">damaged</span></td>
-        <td></td>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> to mark the wheel as damaged; <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a> to mark it as repaired.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a>
   </div>
   <div>
       <a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a>

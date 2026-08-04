@@ -162,7 +162,8 @@
 
   <a id="KSP_Sim_Definitions_ModuleActionGroupAction__ctor_" data-uid="KSP.Sim.Definitions.ModuleActionGroupAction.#ctor*"></a>
   <h4 id="KSP_Sim_Definitions_ModuleActionGroupAction__ctor_System_Action_KSP_Sim_KSPActionGroup_" data-uid="KSP.Sim.Definitions.ModuleActionGroupAction.#ctor(System.Action,KSP.Sim.KSPActionGroup)">ModuleActionGroupAction(Action, KSPActionGroup)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="KSP.Sim.Definitions.ModuleActionGroupAction.html">ModuleActionGroupAction</a> class with a parameterless action delegate and a default action group.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -181,12 +182,56 @@
       <tr>
         <td><span class="xref">Action</span></td>
         <td><span class="parametername">action</span></td>
-        <td></td>
+        <td><p>The parameterless delegate to invoke when this action fires.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.KSPActionGroup.html">KSPActionGroup</a></td>
         <td><span class="parametername">defaultActionGroup</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="KSP.Sim.KSPActionGroup.html">KSPActionGroup</a> to assign as the default mapping for this action.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_Definitions_ModuleActionGroupAction__ctor_" data-uid="KSP.Sim.Definitions.ModuleActionGroupAction.#ctor*"></a>
+  <h4 id="KSP_Sim_Definitions_ModuleActionGroupAction__ctor_System_Action_KSP_Sim_KSPActionGroup_System_String_" data-uid="KSP.Sim.Definitions.ModuleActionGroupAction.#ctor(System.Action,KSP.Sim.KSPActionGroup,System.String)">ModuleActionGroupAction(Action, KSPActionGroup, string)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance with an explicit context key, so actions sharing a delegate method name
+(e.g. one lambda reused per loop iteration) register as distinct actions instead of colliding. Issue #917.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ModuleActionGroupAction(Action action, KSPActionGroup defaultActionGroup, string contextKey)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action</span></td>
+        <td><span class="parametername">action</span></td>
+        <td><p>The parameterless delegate to invoke when this action fires.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.KSPActionGroup.html">KSPActionGroup</a></td>
+        <td><span class="parametername">defaultActionGroup</span></td>
+        <td><p>The <a class="xref" href="KSP.Sim.KSPActionGroup.html">KSPActionGroup</a> to assign as the default mapping for this action.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">contextKey</span></td>
+        <td><p>The context key uniquely identifying this action within its module.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -194,7 +239,8 @@
 
   <a id="KSP_Sim_Definitions_ModuleActionGroupAction__ctor_" data-uid="KSP.Sim.Definitions.ModuleActionGroupAction.#ctor*"></a>
   <h4 id="KSP_Sim_Definitions_ModuleActionGroupAction__ctor_System_Action_System_Boolean__KSP_Sim_KSPActionGroup_KSP_Sim_Definitions_ModuleProperty_System_Boolean__" data-uid="KSP.Sim.Definitions.ModuleActionGroupAction.#ctor(System.Action{System.Boolean},KSP.Sim.KSPActionGroup,KSP.Sim.Definitions.ModuleProperty{System.Boolean})">ModuleActionGroupAction(Action&lt;bool&gt;, KSPActionGroup, ModuleProperty&lt;bool&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="KSP.Sim.Definitions.ModuleActionGroupAction.html">ModuleActionGroupAction</a> class with a boolean-toggle delegate, a default action group, and an optional state property.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -213,17 +259,20 @@
       <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">bool</span>&gt;</td>
         <td><span class="parametername">action</span></td>
-        <td></td>
+        <td><p>The delegate accepting a boolean value to invoke when this action fires as a toggle.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.KSPActionGroup.html">KSPActionGroup</a></td>
         <td><span class="parametername">defaultActionGroup</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="KSP.Sim.KSPActionGroup.html">KSPActionGroup</a> to assign as the default mapping for this action.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">bool</span>&gt;</td>
         <td><span class="parametername">stateProperty</span></td>
-        <td></td>
+        <td><p>An optional <a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty&lt;T&gt;</a> whose value is synchronized with the action state. Pass <code>null</code> to omit state synchronization.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -233,7 +282,8 @@
 
   <a id="KSP_Sim_Definitions_ModuleActionGroupAction_ActionGroup_" data-uid="KSP.Sim.Definitions.ModuleActionGroupAction.ActionGroup*"></a>
   <h4 id="KSP_Sim_Definitions_ModuleActionGroupAction_ActionGroup" data-uid="KSP.Sim.Definitions.ModuleActionGroupAction.ActionGroup">ActionGroup</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <a class="xref" href="KSP.Sim.KSPActionGroup.html">KSPActionGroup</a> this action is currently mapped to.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -258,7 +308,8 @@
 
   <a id="KSP_Sim_Definitions_ModuleActionGroupAction_ActionState_" data-uid="KSP.Sim.Definitions.ModuleActionGroupAction.ActionState*"></a>
   <h4 id="KSP_Sim_Definitions_ModuleActionGroupAction_ActionState" data-uid="KSP.Sim.Definitions.ModuleActionGroupAction.ActionState">ActionState</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets a value indicating whether this action is currently active.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -283,7 +334,8 @@
 
   <a id="KSP_Sim_Definitions_ModuleActionGroupAction_ActionType_" data-uid="KSP.Sim.Definitions.ModuleActionGroupAction.ActionType*"></a>
   <h4 id="KSP_Sim_Definitions_ModuleActionGroupAction_ActionType" data-uid="KSP.Sim.Definitions.ModuleActionGroupAction.ActionType">ActionType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets the type of this action, indicating whether it fires as an event or a toggle.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -308,7 +360,8 @@
 
   <a id="KSP_Sim_Definitions_ModuleActionGroupAction_ContextKey_" data-uid="KSP.Sim.Definitions.ModuleActionGroupAction.ContextKey*"></a>
   <h4 id="KSP_Sim_Definitions_ModuleActionGroupAction_ContextKey" data-uid="KSP.Sim.Definitions.ModuleActionGroupAction.ContextKey">ContextKey</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the key identifying the module data context for this action.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -333,7 +386,8 @@
 
   <a id="KSP_Sim_Definitions_ModuleActionGroupAction_DefaultActionGroup_" data-uid="KSP.Sim.Definitions.ModuleActionGroupAction.DefaultActionGroup*"></a>
   <h4 id="KSP_Sim_Definitions_ModuleActionGroupAction_DefaultActionGroup" data-uid="KSP.Sim.Definitions.ModuleActionGroupAction.DefaultActionGroup">DefaultActionGroup</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="KSP.Sim.KSPActionGroup.html">KSPActionGroup</a> this action is assigned to by default.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -358,7 +412,8 @@
 
   <a id="KSP_Sim_Definitions_ModuleActionGroupAction_DisplayName_" data-uid="KSP.Sim.Definitions.ModuleActionGroupAction.DisplayName*"></a>
   <h4 id="KSP_Sim_Definitions_ModuleActionGroupAction_DisplayName" data-uid="KSP.Sim.Definitions.ModuleActionGroupAction.DisplayName">DisplayName</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets the human-readable display name for this action. Returns <a class="xref" href="KSP.Sim.Definitions.ModuleActionGroupAction.html#KSP_Sim_Definitions_ModuleActionGroupAction_ContextKey">ContextKey</a> when no explicit display string has been set.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -383,7 +438,8 @@
 
   <a id="KSP_Sim_Definitions_ModuleActionGroupAction_IsDefault_" data-uid="KSP.Sim.Definitions.ModuleActionGroupAction.IsDefault*"></a>
   <h4 id="KSP_Sim_Definitions_ModuleActionGroupAction_IsDefault" data-uid="KSP.Sim.Definitions.ModuleActionGroupAction.IsDefault">IsDefault</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the current <a class="xref" href="KSP.Sim.Definitions.ModuleActionGroupAction.html#KSP_Sim_Definitions_ModuleActionGroupAction_ActionGroup">ActionGroup</a> matches the <a class="xref" href="KSP.Sim.Definitions.ModuleActionGroupAction.html#KSP_Sim_Definitions_ModuleActionGroupAction_DefaultActionGroup">DefaultActionGroup</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -408,7 +464,8 @@
 
   <a id="KSP_Sim_Definitions_ModuleActionGroupAction_StateProperty_" data-uid="KSP.Sim.Definitions.ModuleActionGroupAction.StateProperty*"></a>
   <h4 id="KSP_Sim_Definitions_ModuleActionGroupAction_StateProperty" data-uid="KSP.Sim.Definitions.ModuleActionGroupAction.StateProperty">StateProperty</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty&lt;T&gt;</a> that tracks the boolean toggle state for this action.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -435,7 +492,8 @@
 
   <a id="KSP_Sim_Definitions_ModuleActionGroupAction_GetContextKey_" data-uid="KSP.Sim.Definitions.ModuleActionGroupAction.GetContextKey*"></a>
   <h4 id="KSP_Sim_Definitions_ModuleActionGroupAction_GetContextKey" data-uid="KSP.Sim.Definitions.ModuleActionGroupAction.GetContextKey">GetContextKey()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the context key used to identify this module data context.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -452,7 +510,8 @@
     <tbody>
       <tr>
         <td><span class="xref">string</span></td>
-        <td></td>
+        <td><p>A string key that identifies this module data context.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -460,7 +519,8 @@
 
   <a id="KSP_Sim_Definitions_ModuleActionGroupAction_SetActionGroupMapping_" data-uid="KSP.Sim.Definitions.ModuleActionGroupAction.SetActionGroupMapping*"></a>
   <h4 id="KSP_Sim_Definitions_ModuleActionGroupAction_SetActionGroupMapping_KSP_Sim_KSPActionGroup_System_Boolean_" data-uid="KSP.Sim.Definitions.ModuleActionGroupAction.SetActionGroupMapping(KSP.Sim.KSPActionGroup,System.Boolean)">SetActionGroupMapping(KSPActionGroup, bool)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Updates the <a class="xref" href="KSP.Sim.Definitions.ModuleActionGroupAction.html#KSP_Sim_Definitions_ModuleActionGroupAction_ActionGroup">ActionGroup</a> mapping for this action and optionally publishes an <a class="xref" href="KSP.Messages.ActionGroupMappingChanged.html">ActionGroupMappingChanged</a> message.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -479,12 +539,14 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.KSPActionGroup.html">KSPActionGroup</a></td>
         <td><span class="parametername">newValue</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="KSP.Sim.KSPActionGroup.html">KSPActionGroup</a> to assign to this action.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">fireEvent</span></td>
-        <td></td>
+        <td><p>When <code>true</code>, publishes an <a class="xref" href="KSP.Messages.ActionGroupMappingChanged.html">ActionGroupMappingChanged</a> message after updating the mapping.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -493,7 +555,8 @@
 
 
   <h4 id="KSP_Sim_Definitions_ModuleActionGroupAction_OnActionStateChanged" data-uid="KSP.Sim.Definitions.ModuleActionGroupAction.OnActionStateChanged">OnActionStateChanged</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Occurs when the action state changes, providing the action and its new boolean state.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">

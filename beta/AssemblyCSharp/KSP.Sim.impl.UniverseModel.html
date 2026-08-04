@@ -87,73 +87,44 @@
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">object</span></div>
-    <div class="level1"><span class="xref">UniverseModel</span></div>
+    <div class="level1"><span class="xref">ComponentSystemBase</span></div>
+    <div class="level2"><span class="xref">SystemBase</span></div>
+    <div class="level3"><span class="xref">UniverseModel</span></div>
   </div>
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="KSP.Sim.IUniverseModel.html">IUniverseModel</a></div>
     <div><a class="xref" href="KSP.Sim.ISimulationModelMap.html">ISimulationModelMap</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a></div>
     <div><a class="xref" href="KSP.Sim.IUniverseTime.html">IUniverseTime</a></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Sim.html">Sim</a>.<a class="xref" href="KSP.Sim.impl.html">impl</a></h6>
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Sim_impl_UniverseModel_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class UniverseModel : IUniverseModel, ISimulationModelMap, IFixedUpdate, IPriorityOverride, IUniverseTime</code></pre>
+    <pre><code class="lang-csharp hljs">[UpdateInGroup(typeof(SimulationSystemGroup))]
+[UpdateAfter(typeof(AuxPhysicsUpdate))]
+public class UniverseModel : SystemBase, IUniverseModel, ISimulationModelMap, IUniverseTime</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
 
 
   <a id="KSP_Sim_impl_UniverseModel__ctor_" data-uid="KSP.Sim.impl.UniverseModel.#ctor*"></a>
-  <h4 id="KSP_Sim_impl_UniverseModel__ctor_System_Double_KSP_Sim_impl_InertialFrame_ILateUpdateDriver_KSP_Messages_MessageCenter_" data-uid="KSP.Sim.impl.UniverseModel.#ctor(System.Double,KSP.Sim.impl.InertialFrame,ILateUpdateDriver,KSP.Messages.MessageCenter)">UniverseModel(double, InertialFrame, ILateUpdateDriver, MessageCenter)</h4>
+  <h4 id="KSP_Sim_impl_UniverseModel__ctor" data-uid="KSP.Sim.impl.UniverseModel.#ctor">UniverseModel()</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public UniverseModel(double universalTime, InertialFrame inertialReferenceFrame, ILateUpdateDriver lateUpdateDriver, MessageCenter messageCenter)</code></pre>
+    <pre><code class="lang-csharp hljs">public UniverseModel()</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">double</span></td>
-        <td><span class="parametername">universalTime</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="KSP.Sim.impl.InertialFrame.html">InertialFrame</a></td>
-        <td><span class="parametername">inertialReferenceFrame</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="GlobalAssemblyCSharp.ILateUpdateDriver.html">ILateUpdateDriver</a></td>
-        <td><span class="parametername">lateUpdateDriver</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="KSP.Messages.MessageCenter.html">MessageCenter</a></td>
-        <td><span class="parametername">messageCenter</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <h3 id="properties">Properties
 </h3>
 
 
   <a id="KSP_Sim_impl_UniverseModel_AllFlagsCount_" data-uid="KSP.Sim.impl.UniverseModel.AllFlagsCount*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_AllFlagsCount" data-uid="KSP.Sim.impl.UniverseModel.AllFlagsCount">AllFlagsCount</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the total number of flag components currently registered in the simulation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -178,7 +149,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_AllKerbalsCount_" data-uid="KSP.Sim.impl.UniverseModel.AllKerbalsCount*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_AllKerbalsCount" data-uid="KSP.Sim.impl.UniverseModel.AllKerbalsCount">AllKerbalsCount</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the total number of kerbal components currently registered in the simulation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -203,7 +175,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_AllPartsCount_" data-uid="KSP.Sim.impl.UniverseModel.AllPartsCount*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_AllPartsCount" data-uid="KSP.Sim.impl.UniverseModel.AllPartsCount">AllPartsCount</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the total number of part components currently registered in the simulation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -228,7 +201,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_AllVesselsCount_" data-uid="KSP.Sim.impl.UniverseModel.AllVesselsCount*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_AllVesselsCount" data-uid="KSP.Sim.impl.UniverseModel.AllVesselsCount">AllVesselsCount</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the total number of vessel components currently registered in the simulation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -253,7 +227,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_CelestialBodiesCount_" data-uid="KSP.Sim.impl.UniverseModel.CelestialBodiesCount*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_CelestialBodiesCount" data-uid="KSP.Sim.impl.UniverseModel.CelestialBodiesCount">CelestialBodiesCount</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the number of celestial bodies currently registered in the universe.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -278,7 +253,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GalacticOrigin_" data-uid="KSP.Sim.impl.UniverseModel.GalacticOrigin*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GalacticOrigin" data-uid="KSP.Sim.impl.UniverseModel.GalacticOrigin">GalacticOrigin</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets the transform model representing the galactic origin of the universe.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -303,7 +279,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_HomeWorld_" data-uid="KSP.Sim.impl.UniverseModel.HomeWorld*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_HomeWorld" data-uid="KSP.Sim.impl.UniverseModel.HomeWorld">HomeWorld</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the celestial body component representing the home world of the solar system.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -328,7 +305,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_InverseRotAngle_" data-uid="KSP.Sim.impl.UniverseModel.InverseRotAngle*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_InverseRotAngle" data-uid="KSP.Sim.impl.UniverseModel.InverseRotAngle">InverseRotAngle</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets the inverse rotation angle in degrees used to compute the universe frame orientation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -353,7 +331,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_IsSimObjectCountDirty_" data-uid="KSP.Sim.impl.UniverseModel.IsSimObjectCountDirty*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_IsSimObjectCountDirty" data-uid="KSP.Sim.impl.UniverseModel.IsSimObjectCountDirty">IsSimObjectCountDirty</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the simulation object count has changed since the last fixed update.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -378,7 +357,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_IsTimePaused_" data-uid="KSP.Sim.impl.UniverseModel.IsTimePaused*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_IsTimePaused" data-uid="KSP.Sim.impl.UniverseModel.IsTimePaused">IsTimePaused</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the universe time is currently paused.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -403,7 +383,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_ModelLookup_" data-uid="KSP.Sim.impl.UniverseModel.ModelLookup*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_ModelLookup" data-uid="KSP.Sim.impl.UniverseModel.ModelLookup">ModelLookup</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the lookup used to index and retrieve simulation object models.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -428,7 +409,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_NumModels_" data-uid="KSP.Sim.impl.UniverseModel.NumModels*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_NumModels" data-uid="KSP.Sim.impl.UniverseModel.NumModels">NumModels</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the total number of simulation object models currently registered in the lookup.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -453,7 +435,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_Rotation_" data-uid="KSP.Sim.impl.UniverseModel.Rotation*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_Rotation" data-uid="KSP.Sim.impl.UniverseModel.Rotation">Rotation</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets the rotation of the universe coordinate frame as a double-precision quaternion.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -478,7 +461,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_SimulationObjects_" data-uid="KSP.Sim.impl.UniverseModel.SimulationObjects*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_SimulationObjects" data-uid="KSP.Sim.impl.UniverseModel.SimulationObjects">SimulationObjects</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets all simulation object models currently registered in the universe.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -503,7 +487,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_Time_" data-uid="KSP.Sim.impl.UniverseModel.Time*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_Time" data-uid="KSP.Sim.impl.UniverseModel.Time">Time</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the current simulation universe time state, including time value, delta, pause state, and warp scalars.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -528,7 +513,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_TimeScale_" data-uid="KSP.Sim.impl.UniverseModel.TimeScale*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_TimeScale" data-uid="KSP.Sim.impl.UniverseModel.TimeScale">TimeScale</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the current time scale multiplier applied to the universe simulation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -553,7 +539,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_UniverseTime_" data-uid="KSP.Sim.impl.UniverseModel.UniverseTime*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_UniverseTime" data-uid="KSP.Sim.impl.UniverseModel.UniverseTime">UniverseTime</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the current universal time in seconds.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -578,7 +565,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_UniverseTimeDelta_" data-uid="KSP.Sim.impl.UniverseModel.UniverseTimeDelta*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_UniverseTimeDelta" data-uid="KSP.Sim.impl.UniverseModel.UniverseTimeDelta">UniverseTimeDelta</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the elapsed time in seconds since the last universe time step.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -603,7 +591,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_ViewPrefabAssetKey_" data-uid="KSP.Sim.impl.UniverseModel.ViewPrefabAssetKey*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_ViewPrefabAssetKey" data-uid="KSP.Sim.impl.UniverseModel.ViewPrefabAssetKey">ViewPrefabAssetKey</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the asset key used to load the view prefab for this universe model.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -628,7 +617,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_Zup_" data-uid="KSP.Sim.impl.UniverseModel.Zup*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_Zup" data-uid="KSP.Sim.impl.UniverseModel.Zup">Zup</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets the current celestial reference frame defining the Z-up orientation of the universe.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -653,7 +643,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_inertialReferenceFrame_" data-uid="KSP.Sim.impl.UniverseModel.inertialReferenceFrame*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_inertialReferenceFrame" data-uid="KSP.Sim.impl.UniverseModel.inertialReferenceFrame">inertialReferenceFrame</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the inertial reference frame for the universe, tracking position, rotation, and velocity relative to a body motion frame.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -678,7 +669,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_lateUpdateDriver_" data-uid="KSP.Sim.impl.UniverseModel.lateUpdateDriver*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_lateUpdateDriver" data-uid="KSP.Sim.impl.UniverseModel.lateUpdateDriver">lateUpdateDriver</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the late-update driver used to register and unregister late-update handlers.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -705,7 +697,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_AddCelestialBody_" data-uid="KSP.Sim.impl.UniverseModel.AddCelestialBody*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_AddCelestialBody_KSP_Sim_impl_CelestialBodyComponent_" data-uid="KSP.Sim.impl.UniverseModel.AddCelestialBody(KSP.Sim.impl.CelestialBodyComponent)">AddCelestialBody(CelestialBodyComponent)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Adds a celestial body to the universe.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -724,7 +717,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
         <td><span class="parametername">celestialBody</span></td>
-        <td></td>
+        <td><p>The celestial body component to add.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -739,7 +733,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the body was added, false if it was already present.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -747,7 +742,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_AddColony_" data-uid="KSP.Sim.impl.UniverseModel.AddColony*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_AddColony_KSP_Sim_impl_ColonyComponent_" data-uid="KSP.Sim.impl.UniverseModel.AddColony(KSP.Sim.impl.ColonyComponent)">AddColony(ColonyComponent)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers a colony component in the simulation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -766,7 +762,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.ColonyComponent.html">ColonyComponent</a></td>
         <td><span class="parametername">colony</span></td>
-        <td></td>
+        <td><p>The colony component to add.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -781,7 +778,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the colony was added; false if a colony with the same global identifier already exists.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -789,7 +787,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_AddFlag_" data-uid="KSP.Sim.impl.UniverseModel.AddFlag*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_AddFlag_KSP_Sim_impl_FlagComponent_" data-uid="KSP.Sim.impl.UniverseModel.AddFlag(KSP.Sim.impl.FlagComponent)">AddFlag(FlagComponent)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers a flag component in the simulation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -808,7 +807,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.FlagComponent.html">FlagComponent</a></td>
         <td><span class="parametername">flag</span></td>
-        <td></td>
+        <td><p>The flag component to add.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -823,7 +823,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the flag was added; false if a flag with the same global identifier already exists.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -831,7 +832,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_AddKerbal_" data-uid="KSP.Sim.impl.UniverseModel.AddKerbal*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_AddKerbal_KSP_Sim_impl_KerbalComponent_" data-uid="KSP.Sim.impl.UniverseModel.AddKerbal(KSP.Sim.impl.KerbalComponent)">AddKerbal(KerbalComponent)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Adds a Kerbal to the universe.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -850,7 +852,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.KerbalComponent.html">KerbalComponent</a></td>
         <td><span class="parametername">kerbal</span></td>
-        <td></td>
+        <td><p>The Kerbal component to add.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -865,7 +868,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the Kerbal was added, false if it was already present.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -873,7 +877,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_AddPart_" data-uid="KSP.Sim.impl.UniverseModel.AddPart*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_AddPart_KSP_Sim_impl_PartComponent_" data-uid="KSP.Sim.impl.UniverseModel.AddPart(KSP.Sim.impl.PartComponent)">AddPart(PartComponent)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers a part component in the simulation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -892,7 +897,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.PartComponent.html">PartComponent</a></td>
         <td><span class="parametername">part</span></td>
-        <td></td>
+        <td><p>The part component to add.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -907,7 +913,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the part was added; false if a part with the same global identifier already exists.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -915,7 +922,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_AddSimulationObject_" data-uid="KSP.Sim.impl.UniverseModel.AddSimulationObject*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_AddSimulationObject_KSP_Sim_impl_SimulationObjectModel_" data-uid="KSP.Sim.impl.UniverseModel.AddSimulationObject(KSP.Sim.impl.SimulationObjectModel)">AddSimulationObject(SimulationObjectModel)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Adds a simulation object to the universe.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -934,7 +942,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.SimulationObjectModel.html">SimulationObjectModel</a></td>
         <td><span class="parametername">model</span></td>
-        <td></td>
+        <td><p>The simulation object model to add.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -949,7 +958,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the object was added, false if it was already present.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -957,7 +967,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_AddVessel_" data-uid="KSP.Sim.impl.UniverseModel.AddVessel*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_AddVessel_KSP_Sim_impl_VesselComponent_" data-uid="KSP.Sim.impl.UniverseModel.AddVessel(KSP.Sim.impl.VesselComponent)">AddVessel(VesselComponent)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Adds a vessel to the universe.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -976,7 +987,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.VesselComponent.html">VesselComponent</a></td>
         <td><span class="parametername">vessel</span></td>
-        <td></td>
+        <td><p>The vessel component to add.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -991,7 +1003,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the vessel was added, false if it was already present.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -999,7 +1012,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_AddWaypoint_" data-uid="KSP.Sim.impl.UniverseModel.AddWaypoint*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_AddWaypoint_KSP_Sim_impl_WaypointComponent_" data-uid="KSP.Sim.impl.UniverseModel.AddWaypoint(KSP.Sim.impl.WaypointComponent)">AddWaypoint(WaypointComponent)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers a waypoint component in the simulation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1018,7 +1032,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.WaypointComponent.html">WaypointComponent</a></td>
         <td><span class="parametername">waypoint</span></td>
-        <td></td>
+        <td><p>The waypoint component to add.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1033,7 +1048,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the waypoint was added; false if a waypoint with the same global identifier already exists.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1041,7 +1057,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_CheckDebrisBudget_" data-uid="KSP.Sim.impl.UniverseModel.CheckDebrisBudget*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_CheckDebrisBudget_KSP_Sim_impl_VesselComponent_" data-uid="KSP.Sim.impl.UniverseModel.CheckDebrisBudget(KSP.Sim.impl.VesselComponent)">CheckDebrisBudget(VesselComponent)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Enforces the debris budget for the player that owns <code class="paramref">vessel</code>, destroying the oldest excess debris if the limit is exceeded.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1060,7 +1077,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.VesselComponent.html">VesselComponent</a></td>
         <td><span class="parametername">vessel</span></td>
-        <td></td>
+        <td><p>The vessel that was just added and may have pushed the debris count over the limit.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1068,7 +1086,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_CheckModelGuidPrerequisuites_" data-uid="KSP.Sim.impl.UniverseModel.CheckModelGuidPrerequisuites*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_CheckModelGuidPrerequisuites_KSP_Sim_impl_SimulationObjectModel_System_String__" data-uid="KSP.Sim.impl.UniverseModel.CheckModelGuidPrerequisuites(KSP.Sim.impl.SimulationObjectModel,System.String@)">CheckModelGuidPrerequisuites(SimulationObjectModel, out string)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Validates that the given simulation object model meets all identifier prerequisites for registration.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1087,12 +1106,14 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.SimulationObjectModel.html">SimulationObjectModel</a></td>
         <td><span class="parametername">model</span></td>
-        <td></td>
+        <td><p>The simulation object model to validate.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">errorStringOut</span></td>
-        <td></td>
+        <td><p>When this method returns false, contains a message describing the validation failure.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1107,7 +1128,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if all prerequisites are satisfied; false otherwise.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1115,7 +1137,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_DoesGlobalIdExist_" data-uid="KSP.Sim.impl.UniverseModel.DoesGlobalIdExist*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_DoesGlobalIdExist_KSP_Sim_impl_IGGuid_" data-uid="KSP.Sim.impl.UniverseModel.DoesGlobalIdExist(KSP.Sim.impl.IGGuid)">DoesGlobalIdExist(IGGuid)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns a value indicating whether a simulation object with the given global identifier is registered.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1134,7 +1157,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.IGGuid.html">IGGuid</a></td>
         <td><span class="parametername">globalId</span></td>
-        <td></td>
+        <td><p>The global identifier to check.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1149,7 +1173,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the identifier exists; false otherwise.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1157,7 +1182,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_DoesGlobalNameKeyExist_" data-uid="KSP.Sim.impl.UniverseModel.DoesGlobalNameKeyExist*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_DoesGlobalNameKeyExist_System_String_" data-uid="KSP.Sim.impl.UniverseModel.DoesGlobalNameKeyExist(System.String)">DoesGlobalNameKeyExist(string)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns a value indicating whether a simulation object with the given global name key is registered.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1176,7 +1202,8 @@
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">globalNameKey</span></td>
-        <td></td>
+        <td><p>The global name key to check.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1191,7 +1218,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the name key exists; false otherwise.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1199,7 +1227,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_DoesObjectIdExist_" data-uid="KSP.Sim.impl.UniverseModel.DoesObjectIdExist*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_DoesObjectIdExist_System_UInt64_" data-uid="KSP.Sim.impl.UniverseModel.DoesObjectIdExist(System.UInt64)">DoesObjectIdExist(ulong)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns a value indicating whether a simulation object with the given numeric object identifier is registered.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1218,7 +1247,8 @@
       <tr>
         <td><span class="xref">ulong</span></td>
         <td><span class="parametername">objectId</span></td>
-        <td></td>
+        <td><p>The object identifier to check.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1233,7 +1263,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the identifier exists; false otherwise.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1241,7 +1272,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_Finalize_" data-uid="KSP.Sim.impl.UniverseModel.Finalize*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_Finalize" data-uid="KSP.Sim.impl.UniverseModel.Finalize">~UniverseModel()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Finalizes the <a class="xref" href="KSP.Sim.impl.UniverseModel.html">UniverseModel</a> and releases the model lookup.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1251,7 +1283,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_FindCelestialBodyByName_" data-uid="KSP.Sim.impl.UniverseModel.FindCelestialBodyByName*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_FindCelestialBodyByName_System_String_" data-uid="KSP.Sim.impl.UniverseModel.FindCelestialBodyByName(System.String)">FindCelestialBodyByName(string)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the celestial body with the specified name, or null if not found.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1270,7 +1303,8 @@
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">name</span></td>
-        <td></td>
+        <td><p>The body name to search for.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1285,7 +1319,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
-        <td></td>
+        <td><p>The matching celestial body component, or null.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1293,7 +1328,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_FindColonyComponent_" data-uid="KSP.Sim.impl.UniverseModel.FindColonyComponent*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_FindColonyComponent_KSP_Sim_impl_IGGuid_" data-uid="KSP.Sim.impl.UniverseModel.FindColonyComponent(KSP.Sim.impl.IGGuid)">FindColonyComponent(IGGuid)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the colony component with the specified global identifier, or null if not found.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1312,7 +1348,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.IGGuid.html">IGGuid</a></td>
         <td><span class="parametername">globalId</span></td>
-        <td></td>
+        <td><p>The global identifier of the colony to find.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1327,7 +1364,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.ColonyComponent.html">ColonyComponent</a></td>
-        <td></td>
+        <td><p>The matching colony component, or null.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1335,7 +1373,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_FindColonyComponent_" data-uid="KSP.Sim.impl.UniverseModel.FindColonyComponent*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_FindColonyComponent_System_Byte_System_UInt16_" data-uid="KSP.Sim.impl.UniverseModel.FindColonyComponent(System.Byte,System.UInt16)">FindColonyComponent(byte, ushort)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the colony component owned by the specified player with the given object identifier, or null if not found.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1354,12 +1393,14 @@
       <tr>
         <td><span class="xref">byte</span></td>
         <td><span class="parametername">playerId</span></td>
-        <td></td>
+        <td><p>The identifier of the owning player.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">ushort</span></td>
         <td><span class="parametername">objectId</span></td>
-        <td></td>
+        <td><p>The numeric object identifier of the colony.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1374,7 +1415,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.ColonyComponent.html">ColonyComponent</a></td>
-        <td></td>
+        <td><p>The matching colony component, or null.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1382,7 +1424,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_FindFlagComponent_" data-uid="KSP.Sim.impl.UniverseModel.FindFlagComponent*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_FindFlagComponent_KSP_Sim_impl_IGGuid_" data-uid="KSP.Sim.impl.UniverseModel.FindFlagComponent(KSP.Sim.impl.IGGuid)">FindFlagComponent(IGGuid)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the flag component with the specified global identifier, or null if not found.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1401,7 +1444,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.IGGuid.html">IGGuid</a></td>
         <td><span class="parametername">globalId</span></td>
-        <td></td>
+        <td><p>The global identifier of the flag to find.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1416,7 +1460,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.FlagComponent.html">FlagComponent</a></td>
-        <td></td>
+        <td><p>The matching flag component, or null.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1424,7 +1469,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_FindKerbalComponent_" data-uid="KSP.Sim.impl.UniverseModel.FindKerbalComponent*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_FindKerbalComponent_KSP_Sim_impl_IGGuid_" data-uid="KSP.Sim.impl.UniverseModel.FindKerbalComponent(KSP.Sim.impl.IGGuid)">FindKerbalComponent(IGGuid)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the kerbal component with the specified global identifier, or null if not found.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1443,7 +1489,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.IGGuid.html">IGGuid</a></td>
         <td><span class="parametername">globalId</span></td>
-        <td></td>
+        <td><p>The global identifier of the kerbal to find.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1458,7 +1505,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.KerbalComponent.html">KerbalComponent</a></td>
-        <td></td>
+        <td><p>The matching kerbal component, or null.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1466,7 +1514,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_FindKerbalComponent_" data-uid="KSP.Sim.impl.UniverseModel.FindKerbalComponent*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_FindKerbalComponent_System_Byte_System_UInt16_" data-uid="KSP.Sim.impl.UniverseModel.FindKerbalComponent(System.Byte,System.UInt16)">FindKerbalComponent(byte, ushort)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the kerbal component owned by the specified player with the given object identifier, or null if not found.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1485,12 +1534,14 @@
       <tr>
         <td><span class="xref">byte</span></td>
         <td><span class="parametername">playerId</span></td>
-        <td></td>
+        <td><p>The identifier of the owning player.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">ushort</span></td>
         <td><span class="parametername">objectId</span></td>
-        <td></td>
+        <td><p>The numeric object identifier of the kerbal.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1505,7 +1556,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.KerbalComponent.html">KerbalComponent</a></td>
-        <td></td>
+        <td><p>The matching kerbal component, or null.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1513,7 +1565,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_FindPartComponent_" data-uid="KSP.Sim.impl.UniverseModel.FindPartComponent*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_FindPartComponent_KSP_Sim_impl_IGGuid_" data-uid="KSP.Sim.impl.UniverseModel.FindPartComponent(KSP.Sim.impl.IGGuid)">FindPartComponent(IGGuid)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the part component with the specified global identifier, or null if not found.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1532,7 +1585,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.IGGuid.html">IGGuid</a></td>
         <td><span class="parametername">globalId</span></td>
-        <td></td>
+        <td><p>The global identifier of the part to find.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1547,7 +1601,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.PartComponent.html">PartComponent</a></td>
-        <td></td>
+        <td><p>The matching part component, or null.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1555,7 +1610,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_FindPartComponent_" data-uid="KSP.Sim.impl.UniverseModel.FindPartComponent*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_FindPartComponent_System_Byte_System_UInt16_" data-uid="KSP.Sim.impl.UniverseModel.FindPartComponent(System.Byte,System.UInt16)">FindPartComponent(byte, ushort)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the part component owned by the specified player with the given object identifier, or null if not found.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1574,12 +1630,14 @@
       <tr>
         <td><span class="xref">byte</span></td>
         <td><span class="parametername">playerId</span></td>
-        <td></td>
+        <td><p>The identifier of the owning player.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">ushort</span></td>
         <td><span class="parametername">objectId</span></td>
-        <td></td>
+        <td><p>The numeric object identifier of the part.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1594,7 +1652,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.PartComponent.html">PartComponent</a></td>
-        <td></td>
+        <td><p>The matching part component, or null.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1602,7 +1661,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_FindSimObject_" data-uid="KSP.Sim.impl.UniverseModel.FindSimObject*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_FindSimObject_KSP_Sim_impl_IGGuid_" data-uid="KSP.Sim.impl.UniverseModel.FindSimObject(KSP.Sim.impl.IGGuid)">FindSimObject(IGGuid)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the simulation object with the specified global identifier, or null if not found.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1621,7 +1681,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.IGGuid.html">IGGuid</a></td>
         <td><span class="parametername">globalId</span></td>
-        <td></td>
+        <td><p>The global identifier of the simulation object to find.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1636,7 +1697,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.SimulationObjectModel.html">SimulationObjectModel</a></td>
-        <td></td>
+        <td><p>The matching simulation object model, or null.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1644,7 +1706,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_FindSimObject_" data-uid="KSP.Sim.impl.UniverseModel.FindSimObject*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_FindSimObject_System_UInt64_" data-uid="KSP.Sim.impl.UniverseModel.FindSimObject(System.UInt64)">FindSimObject(ulong)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the simulation object with the specified numeric object identifier, or null if not found.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1663,7 +1726,8 @@
       <tr>
         <td><span class="xref">ulong</span></td>
         <td><span class="parametername">objectId</span></td>
-        <td></td>
+        <td><p>The numeric object identifier to find.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1678,7 +1742,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.SimulationObjectModel.html">SimulationObjectModel</a></td>
-        <td></td>
+        <td><p>The matching simulation object model, or null.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1686,7 +1751,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_FindSimObjectByNameKey_" data-uid="KSP.Sim.impl.UniverseModel.FindSimObjectByNameKey*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_FindSimObjectByNameKey_System_String_" data-uid="KSP.Sim.impl.UniverseModel.FindSimObjectByNameKey(System.String)">FindSimObjectByNameKey(string)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the simulation object with the specified global name key, or null if not found.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1705,7 +1771,8 @@
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">globalNameKey</span></td>
-        <td></td>
+        <td><p>The global name key of the simulation object to find.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1720,7 +1787,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.SimulationObjectModel.html">SimulationObjectModel</a></td>
-        <td></td>
+        <td><p>The matching simulation object model, or null.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1728,7 +1796,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_FindSimObjectByString_" data-uid="KSP.Sim.impl.UniverseModel.FindSimObjectByString*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_FindSimObjectByString_System_String_" data-uid="KSP.Sim.impl.UniverseModel.FindSimObjectByString(System.String)">FindSimObjectByString(string)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the simulation object whose global identifier matches the given string representation, or null if not found.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1747,7 +1816,8 @@
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">globalId</span></td>
-        <td></td>
+        <td><p>The string form of the global identifier to find.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1762,7 +1832,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.SimulationObjectModel.html">SimulationObjectModel</a></td>
-        <td></td>
+        <td><p>The matching simulation object model, or null.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1770,7 +1841,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_FindVesselComponent_" data-uid="KSP.Sim.impl.UniverseModel.FindVesselComponent*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_FindVesselComponent_KSP_Sim_impl_IGGuid_" data-uid="KSP.Sim.impl.UniverseModel.FindVesselComponent(KSP.Sim.impl.IGGuid)">FindVesselComponent(IGGuid)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the vessel with the specified globally unique identifier.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1804,7 +1876,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.VesselComponent.html">VesselComponent</a></td>
-        <td></td>
+        <td><p>The matching vessel component, or null if no vessel with that identifier exists.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1812,7 +1885,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_FindVesselComponent_" data-uid="KSP.Sim.impl.UniverseModel.FindVesselComponent*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_FindVesselComponent_System_Byte_System_UInt16_" data-uid="KSP.Sim.impl.UniverseModel.FindVesselComponent(System.Byte,System.UInt16)">FindVesselComponent(byte, ushort)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the vessel component owned by the specified player with the given object identifier, or null if not found.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1831,12 +1905,14 @@
       <tr>
         <td><span class="xref">byte</span></td>
         <td><span class="parametername">playerId</span></td>
-        <td></td>
+        <td><p>The identifier of the owning player.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">ushort</span></td>
         <td><span class="parametername">objectId</span></td>
-        <td></td>
+        <td><p>The numeric object identifier of the vessel.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1851,7 +1927,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.VesselComponent.html">VesselComponent</a></td>
-        <td></td>
+        <td><p>The matching vessel component, or null.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1859,7 +1936,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_FindWaypointComponent_" data-uid="KSP.Sim.impl.UniverseModel.FindWaypointComponent*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_FindWaypointComponent_KSP_Sim_impl_IGGuid_" data-uid="KSP.Sim.impl.UniverseModel.FindWaypointComponent(KSP.Sim.impl.IGGuid)">FindWaypointComponent(IGGuid)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the waypoint component with the specified global identifier, or null if not found.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1878,7 +1956,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.IGGuid.html">IGGuid</a></td>
         <td><span class="parametername">globalId</span></td>
-        <td></td>
+        <td><p>The global identifier of the waypoint to find.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1893,7 +1972,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.WaypointComponent.html">WaypointComponent</a></td>
-        <td></td>
+        <td><p>The matching waypoint component, or null.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1901,7 +1981,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_FixedUpdateSimObjects_" data-uid="KSP.Sim.impl.UniverseModel.FixedUpdateSimObjects*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_FixedUpdateSimObjects" data-uid="KSP.Sim.impl.UniverseModel.FixedUpdateSimObjects">FixedUpdateSimObjects()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Runs the fixed update step for all registered simulation objects, advancing celestial body positions and dispatching fixed update ticks.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1911,7 +1992,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetAllCelestialBodies_" data-uid="KSP.Sim.impl.UniverseModel.GetAllCelestialBodies*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetAllCelestialBodies" data-uid="KSP.Sim.impl.UniverseModel.GetAllCelestialBodies">GetAllCelestialBodies()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the list of all celestial body components currently registered in the simulation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1928,7 +2010,8 @@
     <tbody>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a>&gt;</td>
-        <td></td>
+        <td><p>The internal list of all registered celestial body components.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1936,7 +2019,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetAllColonies_" data-uid="KSP.Sim.impl.UniverseModel.GetAllColonies*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetAllColonies" data-uid="KSP.Sim.impl.UniverseModel.GetAllColonies">GetAllColonies()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns a list of all colony components currently registered in the simulation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1953,7 +2037,8 @@
     <tbody>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="KSP.Sim.impl.ColonyComponent.html">ColonyComponent</a>&gt;</td>
-        <td></td>
+        <td><p>A list containing all registered colony components.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1961,7 +2046,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetAllColonies_" data-uid="KSP.Sim.impl.UniverseModel.GetAllColonies*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetAllColonies_System_Byte_" data-uid="KSP.Sim.impl.UniverseModel.GetAllColonies(System.Byte)">GetAllColonies(byte)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns all colony components owned by the specified player.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1980,7 +2066,8 @@
       <tr>
         <td><span class="xref">byte</span></td>
         <td><span class="parametername">playerId</span></td>
-        <td></td>
+        <td><p>The identifier of the player whose colonies are returned.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1995,7 +2082,8 @@
     <tbody>
       <tr>
         <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="KSP.Sim.impl.ColonyComponent.html">ColonyComponent</a>&gt;</td>
-        <td></td>
+        <td><p>An enumerable sequence of colony components owned by <code class="paramref">playerId</code>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2003,7 +2091,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetAllColonies_" data-uid="KSP.Sim.impl.UniverseModel.GetAllColonies*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetAllColonies_System_Byte_System_Collections_Generic_List_KSP_Sim_impl_ColonyComponent___" data-uid="KSP.Sim.impl.UniverseModel.GetAllColonies(System.Byte,System.Collections.Generic.List{KSP.Sim.impl.ColonyComponent}@)">GetAllColonies(byte, ref List&lt;ColonyComponent&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Appends all colony components owned by the specified player to the provided list.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2022,12 +2111,14 @@
       <tr>
         <td><span class="xref">byte</span></td>
         <td><span class="parametername">playerId</span></td>
-        <td></td>
+        <td><p>The identifier of the player whose colonies are collected.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="KSP.Sim.impl.ColonyComponent.html">ColonyComponent</a>&gt;</td>
         <td><span class="parametername">results</span></td>
-        <td></td>
+        <td><p>The list to which the owned colony components are appended.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2035,7 +2126,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetAllFlags_" data-uid="KSP.Sim.impl.UniverseModel.GetAllFlags*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetAllFlags" data-uid="KSP.Sim.impl.UniverseModel.GetAllFlags">GetAllFlags()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns all flag components currently registered in the simulation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2052,7 +2144,8 @@
     <tbody>
       <tr>
         <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="KSP.Sim.impl.FlagComponent.html">FlagComponent</a>&gt;</td>
-        <td></td>
+        <td><p>An enumerable sequence of all registered flag components.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2060,7 +2153,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetAllOwnedVessels_" data-uid="KSP.Sim.impl.UniverseModel.GetAllOwnedVessels*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetAllOwnedVessels_System_Byte_" data-uid="KSP.Sim.impl.UniverseModel.GetAllOwnedVessels(System.Byte)">GetAllOwnedVessels(byte)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns all vessel components owned by the specified player.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2079,7 +2173,8 @@
       <tr>
         <td><span class="xref">byte</span></td>
         <td><span class="parametername">playerId</span></td>
-        <td></td>
+        <td><p>The identifier of the player whose vessels are returned.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2094,7 +2189,8 @@
     <tbody>
       <tr>
         <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="KSP.Sim.impl.VesselComponent.html">VesselComponent</a>&gt;</td>
-        <td></td>
+        <td><p>An enumerable sequence of vessel components owned by <code class="paramref">playerId</code>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2102,7 +2198,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetAllOwnedVessels_" data-uid="KSP.Sim.impl.UniverseModel.GetAllOwnedVessels*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetAllOwnedVessels_System_Byte_System_Collections_Generic_List_KSP_Sim_impl_VesselComponent___" data-uid="KSP.Sim.impl.UniverseModel.GetAllOwnedVessels(System.Byte,System.Collections.Generic.List{KSP.Sim.impl.VesselComponent}@)">GetAllOwnedVessels(byte, ref List&lt;VesselComponent&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Appends all vessel components owned by the specified player to the provided list.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2121,12 +2218,14 @@
       <tr>
         <td><span class="xref">byte</span></td>
         <td><span class="parametername">playerId</span></td>
-        <td></td>
+        <td><p>The identifier of the player whose vessels are collected.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="KSP.Sim.impl.VesselComponent.html">VesselComponent</a>&gt;</td>
         <td><span class="parametername">results</span></td>
-        <td></td>
+        <td><p>The list to which the owned vessel components are appended.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2134,7 +2233,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetAllParts_" data-uid="KSP.Sim.impl.UniverseModel.GetAllParts*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetAllParts" data-uid="KSP.Sim.impl.UniverseModel.GetAllParts">GetAllParts()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns all part components currently registered in the simulation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2151,7 +2251,8 @@
     <tbody>
       <tr>
         <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="KSP.Sim.impl.PartComponent.html">PartComponent</a>&gt;</td>
-        <td></td>
+        <td><p>An enumerable sequence of all registered part components.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2159,7 +2260,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetAllParts_" data-uid="KSP.Sim.impl.UniverseModel.GetAllParts*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetAllParts_System_Byte_" data-uid="KSP.Sim.impl.UniverseModel.GetAllParts(System.Byte)">GetAllParts(byte)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns all part components owned by the specified player.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2178,7 +2280,8 @@
       <tr>
         <td><span class="xref">byte</span></td>
         <td><span class="parametername">playerId</span></td>
-        <td></td>
+        <td><p>The identifier of the player whose parts are returned.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2193,7 +2296,8 @@
     <tbody>
       <tr>
         <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="KSP.Sim.impl.PartComponent.html">PartComponent</a>&gt;</td>
-        <td></td>
+        <td><p>An enumerable sequence of part components owned by <code class="paramref">playerId</code>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2201,7 +2305,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetAllPartsInRange_" data-uid="KSP.Sim.impl.UniverseModel.GetAllPartsInRange*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetAllPartsInRange_KSP_Sim_Position_System_Double_System_Collections_Generic_List_KSP_Sim_impl_PartComponent___" data-uid="KSP.Sim.impl.UniverseModel.GetAllPartsInRange(KSP.Sim.Position,System.Double,System.Collections.Generic.List{KSP.Sim.impl.PartComponent}@)">GetAllPartsInRange(Position, double, ref List&lt;PartComponent&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Populates a list with part components within the specified radius of a position.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2220,17 +2325,20 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.Position.html">Position</a></td>
         <td><span class="parametername">position</span></td>
-        <td></td>
+        <td><p>The reference position from which distance is measured.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">radius</span></td>
-        <td></td>
+        <td><p>The search radius, in meters.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="KSP.Sim.impl.PartComponent.html">PartComponent</a>&gt;</td>
         <td><span class="parametername">results</span></td>
-        <td></td>
+        <td><p>The list to which matching part components are appended.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2245,7 +2353,8 @@
     <tbody>
       <tr>
         <td><span class="xref">int</span></td>
-        <td></td>
+        <td><p>The number of part components added to <code class="paramref">results</code>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2253,7 +2362,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetAllSimObjects_" data-uid="KSP.Sim.impl.UniverseModel.GetAllSimObjects*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetAllSimObjects" data-uid="KSP.Sim.impl.UniverseModel.GetAllSimObjects">GetAllSimObjects()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns all simulation objects currently registered in the universe.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2270,7 +2380,8 @@
     <tbody>
       <tr>
         <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="KSP.Sim.impl.SimulationObjectModel.html">SimulationObjectModel</a>&gt;</td>
-        <td></td>
+        <td><p>An enumerable sequence of all registered simulation object models.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2278,7 +2389,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetAllSimObjectsForPlayerId_" data-uid="KSP.Sim.impl.UniverseModel.GetAllSimObjectsForPlayerId*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetAllSimObjectsForPlayerId_System_Byte_" data-uid="KSP.Sim.impl.UniverseModel.GetAllSimObjectsForPlayerId(System.Byte)">GetAllSimObjectsForPlayerId(byte)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns all simulation objects owned by the specified player.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2297,7 +2409,8 @@
       <tr>
         <td><span class="xref">byte</span></td>
         <td><span class="parametername">playerId</span></td>
-        <td></td>
+        <td><p>The identifier of the player whose objects are returned.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2312,7 +2425,8 @@
     <tbody>
       <tr>
         <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="KSP.Sim.impl.SimulationObjectModel.html">SimulationObjectModel</a>&gt;</td>
-        <td></td>
+        <td><p>An enumerable sequence of simulation object models owned by <code class="paramref">playerId</code>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2320,7 +2434,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetAllVessels_" data-uid="KSP.Sim.impl.UniverseModel.GetAllVessels*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetAllVessels" data-uid="KSP.Sim.impl.UniverseModel.GetAllVessels">GetAllVessels()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns a list of all vessel components currently registered in the simulation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2337,7 +2452,8 @@
     <tbody>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="KSP.Sim.impl.VesselComponent.html">VesselComponent</a>&gt;</td>
-        <td></td>
+        <td><p>A list containing all registered vessel components.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2345,7 +2461,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetAllVesselsInRange_" data-uid="KSP.Sim.impl.UniverseModel.GetAllVesselsInRange*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetAllVesselsInRange_KSP_Sim_Position_System_Double_" data-uid="KSP.Sim.impl.UniverseModel.GetAllVesselsInRange(KSP.Sim.Position,System.Double)">GetAllVesselsInRange(Position, double)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns all vessel components within the specified radius of a position.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2364,12 +2481,14 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.Position.html">Position</a></td>
         <td><span class="parametername">position</span></td>
-        <td></td>
+        <td><p>The reference position from which distance is measured.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">radius</span></td>
-        <td></td>
+        <td><p>The search radius, in meters.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2384,7 +2503,8 @@
     <tbody>
       <tr>
         <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="KSP.Sim.impl.VesselComponent.html">VesselComponent</a>&gt;</td>
-        <td></td>
+        <td><p>An enumerable sequence of vessel components within <code class="paramref">radius</code> of <code class="paramref">position</code>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2392,7 +2512,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetAllVesselsInRange_" data-uid="KSP.Sim.impl.UniverseModel.GetAllVesselsInRange*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetAllVesselsInRange_KSP_Sim_Position_System_Double_System_Collections_Generic_List_KSP_Sim_impl_VesselComponent___System_Func_KSP_Sim_Position_KSP_Sim_impl_VesselComponent_System_Boolean__" data-uid="KSP.Sim.impl.UniverseModel.GetAllVesselsInRange(KSP.Sim.Position,System.Double,System.Collections.Generic.List{KSP.Sim.impl.VesselComponent}@,System.Func{KSP.Sim.Position,KSP.Sim.impl.VesselComponent,System.Boolean})">GetAllVesselsInRange(Position, double, ref List&lt;VesselComponent&gt;, Func&lt;Position, VesselComponent, bool&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Populates a list with vessel components within the specified radius of a position, optionally filtered by a predicate.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2411,22 +2532,26 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.Position.html">Position</a></td>
         <td><span class="parametername">position</span></td>
-        <td></td>
+        <td><p>The reference position from which distance is measured.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">radius</span></td>
-        <td></td>
+        <td><p>The search radius, in meters.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="KSP.Sim.impl.VesselComponent.html">VesselComponent</a>&gt;</td>
         <td><span class="parametername">results</span></td>
-        <td></td>
+        <td><p>The list to which matching vessel components are appended.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Func</span>&lt;<a class="xref" href="KSP.Sim.Position.html">Position</a>, <a class="xref" href="KSP.Sim.impl.VesselComponent.html">VesselComponent</a>, <span class="xref">bool</span>&gt;</td>
         <td><span class="parametername">funcFilter</span></td>
-        <td></td>
+        <td><p>An optional predicate to further filter candidates; pass null to accept all vessels within range.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2441,7 +2566,8 @@
     <tbody>
       <tr>
         <td><span class="xref">int</span></td>
-        <td></td>
+        <td><p>The number of vessel components added to <code class="paramref">results</code>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2449,7 +2575,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetAllWaypoints_" data-uid="KSP.Sim.impl.UniverseModel.GetAllWaypoints*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetAllWaypoints" data-uid="KSP.Sim.impl.UniverseModel.GetAllWaypoints">GetAllWaypoints()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns all waypoint components currently registered in the simulation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2466,7 +2593,8 @@
     <tbody>
       <tr>
         <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="KSP.Sim.impl.WaypointComponent.html">WaypointComponent</a>&gt;</td>
-        <td></td>
+        <td><p>An enumerable sequence of all registered waypoint components.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2474,7 +2602,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetAltitudeAtPos_" data-uid="KSP.Sim.impl.UniverseModel.GetAltitudeAtPos*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetAltitudeAtPos_KSP_Api_ICoordinateSystem_Vector3d_" data-uid="KSP.Sim.impl.UniverseModel.GetAltitudeAtPos(KSP.Api.ICoordinateSystem,Vector3d)">GetAltitudeAtPos(ICoordinateSystem, Vector3d)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the altitude in meters above the surface of the dominant celestial body at the specified local position expressed in a coordinate system.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2493,12 +2622,14 @@
       <tr>
         <td><a class="xref" href="KSP.Api.ICoordinateSystem.html">ICoordinateSystem</a></td>
         <td><span class="parametername">coordinateSystem</span></td>
-        <td></td>
+        <td><p>The coordinate system in which <code class="paramref">position</code> is expressed.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
         <td><span class="parametername">position</span></td>
-        <td></td>
+        <td><p>The local position within <code class="paramref">coordinateSystem</code> to evaluate.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2513,7 +2644,8 @@
     <tbody>
       <tr>
         <td><span class="xref">double</span></td>
-        <td></td>
+        <td><p>The altitude in meters above the surface of the dominant body at the position.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2521,7 +2653,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetAltitudeAtPos_" data-uid="KSP.Sim.impl.UniverseModel.GetAltitudeAtPos*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetAltitudeAtPos_KSP_Api_ICoordinateSystem_Vector3d_KSP_Sim_impl_CelestialBodyComponent_" data-uid="KSP.Sim.impl.UniverseModel.GetAltitudeAtPos(KSP.Api.ICoordinateSystem,Vector3d,KSP.Sim.impl.CelestialBodyComponent)">GetAltitudeAtPos(ICoordinateSystem, Vector3d, CelestialBodyComponent)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the altitude in meters above the surface of the given celestial body at the specified local position expressed in a coordinate system.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2545,12 +2678,14 @@
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
         <td><span class="parametername">position</span></td>
-        <td></td>
+        <td><p>The local position within <code class="paramref">coordinateSystem</code> to evaluate.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
         <td><span class="parametername">body</span></td>
-        <td></td>
+        <td><p>The celestial body whose surface serves as the altitude reference.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2565,7 +2700,8 @@
     <tbody>
       <tr>
         <td><span class="xref">double</span></td>
-        <td></td>
+        <td><p>The altitude above <code class="paramref">body</code>'s surface in meters.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2573,7 +2709,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetAltitudeAtPos_" data-uid="KSP.Sim.impl.UniverseModel.GetAltitudeAtPos*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetAltitudeAtPos_KSP_Sim_Position_" data-uid="KSP.Sim.impl.UniverseModel.GetAltitudeAtPos(KSP.Sim.Position)">GetAltitudeAtPos(Position)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the altitude in meters above the surface of the dominant celestial body at the specified universe-space position.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2592,7 +2729,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.Position.html">Position</a></td>
         <td><span class="parametername">position</span></td>
-        <td></td>
+        <td><p>The universe-space position to evaluate.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2607,7 +2745,8 @@
     <tbody>
       <tr>
         <td><span class="xref">double</span></td>
-        <td></td>
+        <td><p>The altitude in meters above the surface of the dominant body at <code class="paramref">position</code>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2615,7 +2754,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetAltitudeAtPos_" data-uid="KSP.Sim.impl.UniverseModel.GetAltitudeAtPos*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetAltitudeAtPos_KSP_Sim_Position_KSP_Sim_impl_CelestialBodyComponent_" data-uid="KSP.Sim.impl.UniverseModel.GetAltitudeAtPos(KSP.Sim.Position,KSP.Sim.impl.CelestialBodyComponent)">GetAltitudeAtPos(Position, CelestialBodyComponent)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the altitude in meters above the surface of the given celestial body at the specified universe-space position.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2634,12 +2774,14 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.Position.html">Position</a></td>
         <td><span class="parametername">position</span></td>
-        <td></td>
+        <td><p>The universe-space position to evaluate.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
         <td><span class="parametername">body</span></td>
-        <td></td>
+        <td><p>The celestial body whose surface serves as the altitude reference.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2654,7 +2796,8 @@
     <tbody>
       <tr>
         <td><span class="xref">double</span></td>
-        <td></td>
+        <td><p>The altitude above <code class="paramref">body</code>'s surface in meters.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2662,7 +2805,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetAtmDensity_" data-uid="KSP.Sim.impl.UniverseModel.GetAtmDensity*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetAtmDensity_System_Double_System_Double_KSP_Sim_impl_CelestialBodyComponent_" data-uid="KSP.Sim.impl.UniverseModel.GetAtmDensity(System.Double,System.Double,KSP.Sim.impl.CelestialBodyComponent)">GetAtmDensity(double, double, CelestialBodyComponent)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the atmospheric density in kg/m^3 for the given pressure, temperature, and celestial body.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2681,17 +2825,20 @@
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">pressure</span></td>
-        <td></td>
+        <td><p>The static pressure in kPa.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">temperature</span></td>
-        <td></td>
+        <td><p>The temperature in Kelvin.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
         <td><span class="parametername">body</span></td>
-        <td></td>
+        <td><p>The celestial body whose atmospheric model is used.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2706,7 +2853,8 @@
     <tbody>
       <tr>
         <td><span class="xref">double</span></td>
-        <td></td>
+        <td><p>The atmospheric density in kg/m^3.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2714,7 +2862,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetGeeForceAtPosition_" data-uid="KSP.Sim.impl.UniverseModel.GetGeeForceAtPosition*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetGeeForceAtPosition_KSP_Api_ICoordinateSystem_Vector3d_KSP_Sim_impl_CelestialBodyComponent_" data-uid="KSP.Sim.impl.UniverseModel.GetGeeForceAtPosition(KSP.Api.ICoordinateSystem,Vector3d,KSP.Sim.impl.CelestialBodyComponent)">GetGeeForceAtPosition(ICoordinateSystem, Vector3d, CelestialBodyComponent)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the gravitational acceleration vector at the given local position expressed in a coordinate system, due to all bodies, constrained to the given main body.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2733,17 +2882,20 @@
       <tr>
         <td><a class="xref" href="KSP.Api.ICoordinateSystem.html">ICoordinateSystem</a></td>
         <td><span class="parametername">coordinateSystem</span></td>
-        <td></td>
+        <td><p>The coordinate system in which <code class="paramref">pos</code> is expressed.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
         <td><span class="parametername">pos</span></td>
-        <td></td>
+        <td><p>The local position within <code class="paramref">coordinateSystem</code> at which to evaluate gravity.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
         <td><span class="parametername">mainBody</span></td>
-        <td></td>
+        <td><p>The dominant celestial body used to anchor the gravitational computation.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2758,7 +2910,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Sim.Vector.html">Vector</a></td>
-        <td></td>
+        <td><p>A vector representing the total gravitational acceleration at the position.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2766,7 +2919,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetGeeForceAtPosition_" data-uid="KSP.Sim.impl.UniverseModel.GetGeeForceAtPosition*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetGeeForceAtPosition_KSP_Sim_Position_KSP_Sim_impl_CelestialBodyComponent_" data-uid="KSP.Sim.impl.UniverseModel.GetGeeForceAtPosition(KSP.Sim.Position,KSP.Sim.impl.CelestialBodyComponent)">GetGeeForceAtPosition(Position, CelestialBodyComponent)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the gravitational acceleration vector at the given universe-space position due to all bodies, constrained to the given main body.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2785,12 +2939,14 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.Position.html">Position</a></td>
         <td><span class="parametername">pos</span></td>
-        <td></td>
+        <td><p>The universe-space position at which to evaluate gravity.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
         <td><span class="parametername">mainBody</span></td>
-        <td></td>
+        <td><p>The dominant celestial body used to anchor the gravitational computation.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2805,7 +2961,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Sim.Vector.html">Vector</a></td>
-        <td></td>
+        <td><p>A vector representing the total gravitational acceleration at <code class="paramref">pos</code>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2813,7 +2970,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetMainBody_" data-uid="KSP.Sim.impl.UniverseModel.GetMainBody*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetMainBody_KSP_Api_ICoordinateSystem_Vector3d_" data-uid="KSP.Sim.impl.UniverseModel.GetMainBody(KSP.Api.ICoordinateSystem,Vector3d)">GetMainBody(ICoordinateSystem, Vector3d)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the dominant celestial body at the given local position expressed in a coordinate system, based on sphere-of-influence rules.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2852,7 +3010,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
-        <td></td>
+        <td><p>The celestial body component whose sphere of influence contains the position, or null if none applies.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2860,7 +3019,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetMainBody_" data-uid="KSP.Sim.impl.UniverseModel.GetMainBody*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetMainBody_KSP_Sim_Position_" data-uid="KSP.Sim.impl.UniverseModel.GetMainBody(KSP.Sim.Position)">GetMainBody(Position)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the dominant celestial body at the given universe-space position, based on sphere-of-influence rules.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2894,7 +3054,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
-        <td></td>
+        <td><p>The celestial body component whose sphere of influence contains <code class="paramref">refPos</code>, or null if none applies.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2902,7 +3063,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetStar_" data-uid="KSP.Sim.impl.UniverseModel.GetStar*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetStar_KSP_Api_ICoordinateSystem_Vector3d_" data-uid="KSP.Sim.impl.UniverseModel.GetStar(KSP.Api.ICoordinateSystem,Vector3d)">GetStar(ICoordinateSystem, Vector3d)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the star nearest to the given local position expressed in a coordinate system.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2921,12 +3083,14 @@
       <tr>
         <td><a class="xref" href="KSP.Api.ICoordinateSystem.html">ICoordinateSystem</a></td>
         <td><span class="parametername">coordinateSystem</span></td>
-        <td></td>
+        <td><p>The coordinate system in which <code class="paramref">refPos</code> is expressed.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
         <td><span class="parametername">refPos</span></td>
-        <td></td>
+        <td><p>The local position within <code class="paramref">coordinateSystem</code> to evaluate.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2941,7 +3105,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
-        <td></td>
+        <td><p>The celestial body component representing the nearest star, or null if none is found.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2949,7 +3114,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetStar_" data-uid="KSP.Sim.impl.UniverseModel.GetStar*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetStar_KSP_Sim_Position_" data-uid="KSP.Sim.impl.UniverseModel.GetStar(KSP.Sim.Position)">GetStar(Position)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the star nearest to the given position.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2968,7 +3134,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.Position.html">Position</a></td>
         <td><span class="parametername">position</span></td>
-        <td></td>
+        <td><p>The universe-space position to evaluate.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2983,7 +3150,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
-        <td></td>
+        <td><p>The celestial body component representing the nearest star, or null if none is found.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2991,7 +3159,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetStaticPressure_" data-uid="KSP.Sim.impl.UniverseModel.GetStaticPressure*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetStaticPressure_KSP_Api_ICoordinateSystem_Vector3d_" data-uid="KSP.Sim.impl.UniverseModel.GetStaticPressure(KSP.Api.ICoordinateSystem,Vector3d)">GetStaticPressure(ICoordinateSystem, Vector3d)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the static atmospheric pressure in kPa at the given local position expressed in a coordinate system.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3010,12 +3179,14 @@
       <tr>
         <td><a class="xref" href="KSP.Api.ICoordinateSystem.html">ICoordinateSystem</a></td>
         <td><span class="parametername">coordinateSystem</span></td>
-        <td></td>
+        <td><p>The coordinate system in which <code class="paramref">position</code> is expressed.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
         <td><span class="parametername">position</span></td>
-        <td></td>
+        <td><p>The local position within <code class="paramref">coordinateSystem</code> to evaluate.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3030,7 +3201,8 @@
     <tbody>
       <tr>
         <td><span class="xref">double</span></td>
-        <td></td>
+        <td><p>The static pressure in kPa at the position.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3038,7 +3210,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetStaticPressure_" data-uid="KSP.Sim.impl.UniverseModel.GetStaticPressure*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetStaticPressure_KSP_Api_ICoordinateSystem_Vector3d_KSP_Sim_impl_CelestialBodyComponent_" data-uid="KSP.Sim.impl.UniverseModel.GetStaticPressure(KSP.Api.ICoordinateSystem,Vector3d,KSP.Sim.impl.CelestialBodyComponent)">GetStaticPressure(ICoordinateSystem, Vector3d, CelestialBodyComponent)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the static atmospheric pressure in kPa at the given local position expressed in a coordinate system, relative to the specified celestial body.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3057,17 +3230,20 @@
       <tr>
         <td><a class="xref" href="KSP.Api.ICoordinateSystem.html">ICoordinateSystem</a></td>
         <td><span class="parametername">coordinateSystem</span></td>
-        <td></td>
+        <td><p>The coordinate system in which <code class="paramref">position</code> is expressed.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
         <td><span class="parametername">position</span></td>
-        <td></td>
+        <td><p>The local position within <code class="paramref">coordinateSystem</code> to evaluate.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
         <td><span class="parametername">body</span></td>
-        <td></td>
+        <td><p>The celestial body whose atmospheric model is used.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3082,7 +3258,8 @@
     <tbody>
       <tr>
         <td><span class="xref">double</span></td>
-        <td></td>
+        <td><p>The static pressure in kPa at the position.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3090,7 +3267,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetStaticPressure_" data-uid="KSP.Sim.impl.UniverseModel.GetStaticPressure*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetStaticPressure_KSP_Sim_Position_" data-uid="KSP.Sim.impl.UniverseModel.GetStaticPressure(KSP.Sim.Position)">GetStaticPressure(Position)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the static atmospheric pressure in kPa at the given universe-space position.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3109,7 +3287,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.Position.html">Position</a></td>
         <td><span class="parametername">position</span></td>
-        <td></td>
+        <td><p>The universe-space position to evaluate.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3124,7 +3303,8 @@
     <tbody>
       <tr>
         <td><span class="xref">double</span></td>
-        <td></td>
+        <td><p>The static pressure in kPa at <code class="paramref">position</code>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3132,7 +3312,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetStaticPressure_" data-uid="KSP.Sim.impl.UniverseModel.GetStaticPressure*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetStaticPressure_KSP_Sim_Position_KSP_Sim_impl_CelestialBodyComponent_" data-uid="KSP.Sim.impl.UniverseModel.GetStaticPressure(KSP.Sim.Position,KSP.Sim.impl.CelestialBodyComponent)">GetStaticPressure(Position, CelestialBodyComponent)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the static atmospheric pressure in kPa at the given universe-space position relative to the specified celestial body.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3151,12 +3332,14 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.Position.html">Position</a></td>
         <td><span class="parametername">position</span></td>
-        <td></td>
+        <td><p>The universe-space position to evaluate.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
         <td><span class="parametername">body</span></td>
-        <td></td>
+        <td><p>The celestial body whose atmospheric model is used.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3171,7 +3354,8 @@
     <tbody>
       <tr>
         <td><span class="xref">double</span></td>
-        <td></td>
+        <td><p>The static pressure in kPa at <code class="paramref">position</code>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3179,7 +3363,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetStaticPressure_" data-uid="KSP.Sim.impl.UniverseModel.GetStaticPressure*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetStaticPressure_System_Double_KSP_Sim_impl_CelestialBodyComponent_" data-uid="KSP.Sim.impl.UniverseModel.GetStaticPressure(System.Double,KSP.Sim.impl.CelestialBodyComponent)">GetStaticPressure(double, CelestialBodyComponent)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the static atmospheric pressure in kPa at the given altitude above a celestial body.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3198,12 +3383,14 @@
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">altitude</span></td>
-        <td></td>
+        <td><p>The altitude above sea level in meters.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
         <td><span class="parametername">body</span></td>
-        <td></td>
+        <td><p>The celestial body whose atmospheric model is used.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3218,7 +3405,8 @@
     <tbody>
       <tr>
         <td><span class="xref">double</span></td>
-        <td></td>
+        <td><p>The static pressure in kPa at <code class="paramref">altitude</code>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3226,7 +3414,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetUpAxis_" data-uid="KSP.Sim.impl.UniverseModel.GetUpAxis*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetUpAxis_KSP_Sim_Position_" data-uid="KSP.Sim.impl.UniverseModel.GetUpAxis(KSP.Sim.Position)">GetUpAxis(Position)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the up axis vector at the given universe-space position, using the dominant celestial body at that position.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3245,7 +3434,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.Position.html">Position</a></td>
         <td><span class="parametername">position</span></td>
-        <td></td>
+        <td><p>The universe-space position at which to evaluate the up axis.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3260,7 +3450,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Sim.Vector.html">Vector</a></td>
-        <td></td>
+        <td><p>A vector pointing radially outward from the dominant body at <code class="paramref">position</code>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3268,7 +3459,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetUpAxis_" data-uid="KSP.Sim.impl.UniverseModel.GetUpAxis*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetUpAxis_KSP_Sim_impl_CelestialBodyComponent_KSP_Api_ICoordinateSystem_Vector3d_" data-uid="KSP.Sim.impl.UniverseModel.GetUpAxis(KSP.Sim.impl.CelestialBodyComponent,KSP.Api.ICoordinateSystem,Vector3d)">GetUpAxis(CelestialBodyComponent, ICoordinateSystem, Vector3d)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the up axis vector at the given local position expressed in a coordinate system, relative to the specified celestial body.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3287,17 +3479,20 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
         <td><span class="parametername">body</span></td>
-        <td></td>
+        <td><p>The celestial body used to compute the surface normal.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Api.ICoordinateSystem.html">ICoordinateSystem</a></td>
         <td><span class="parametername">coordinateSystem</span></td>
-        <td></td>
+        <td><p>The coordinate system in which <code class="paramref">position</code> is expressed.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
         <td><span class="parametername">position</span></td>
-        <td></td>
+        <td><p>The local position within <code class="paramref">coordinateSystem</code> at which to evaluate the up axis.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3312,7 +3507,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Sim.Vector.html">Vector</a></td>
-        <td></td>
+        <td><p>A vector pointing radially outward from <code class="paramref">body</code>'s center at the position.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3320,7 +3516,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_GetUpAxis_" data-uid="KSP.Sim.impl.UniverseModel.GetUpAxis*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_GetUpAxis_KSP_Sim_impl_CelestialBodyComponent_KSP_Sim_Position_" data-uid="KSP.Sim.impl.UniverseModel.GetUpAxis(KSP.Sim.impl.CelestialBodyComponent,KSP.Sim.Position)">GetUpAxis(CelestialBodyComponent, Position)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the up axis vector at the given universe-space position relative to the specified celestial body.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3339,12 +3536,14 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
         <td><span class="parametername">body</span></td>
-        <td></td>
+        <td><p>The celestial body used to compute the surface normal.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.Position.html">Position</a></td>
         <td><span class="parametername">position</span></td>
-        <td></td>
+        <td><p>The universe-space position at which to evaluate the up axis.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3359,7 +3558,55 @@
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Sim.Vector.html">Vector</a></td>
-        <td></td>
+        <td><p>A vector pointing radially outward from <code class="paramref">body</code>'s center at <code class="paramref">position</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_UniverseModel_Initialize_" data-uid="KSP.Sim.impl.UniverseModel.Initialize*"></a>
+  <h4 id="KSP_Sim_impl_UniverseModel_Initialize_System_Double_KSP_Sim_impl_InertialFrame_ILateUpdateDriver_KSP_Messages_MessageCenter_" data-uid="KSP.Sim.impl.UniverseModel.Initialize(System.Double,KSP.Sim.impl.InertialFrame,ILateUpdateDriver,KSP.Messages.MessageCenter)">Initialize(double, InertialFrame, ILateUpdateDriver, MessageCenter)</h4>
+  <div class="markdown level1 summary"><p>Initializes the universe model with the supplied time, reference frame, late update driver, and message center.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Initialize(double universalTime, InertialFrame inertialReferenceFrame, ILateUpdateDriver lateUpdateDriver, MessageCenter messageCenter)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">universalTime</span></td>
+        <td><p>The starting universal time, in seconds.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.InertialFrame.html">InertialFrame</a></td>
+        <td><span class="parametername">inertialReferenceFrame</span></td>
+        <td><p>The inertial reference frame used for universe-relative position calculations.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.ILateUpdateDriver.html">ILateUpdateDriver</a></td>
+        <td><span class="parametername">lateUpdateDriver</span></td>
+        <td><p>The driver that dispatches late-update ticks to simulation objects.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Messages.MessageCenter.html">MessageCenter</a></td>
+        <td><span class="parametername">messageCenter</span></td>
+        <td><p>The message center used to publish simulation events such as pause state changes.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3367,7 +3614,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_LateUpdateSimObjects_" data-uid="KSP.Sim.impl.UniverseModel.LateUpdateSimObjects*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_LateUpdateSimObjects" data-uid="KSP.Sim.impl.UniverseModel.LateUpdateSimObjects">LateUpdateSimObjects()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Runs the late update step for all registered simulation objects.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3375,9 +3623,61 @@
   </div>
 
 
+  <a id="KSP_Sim_impl_UniverseModel_OnCreate_" data-uid="KSP.Sim.impl.UniverseModel.OnCreate*"></a>
+  <h4 id="KSP_Sim_impl_UniverseModel_OnCreate" data-uid="KSP.Sim.impl.UniverseModel.OnCreate">OnCreate()</h4>
+  <div class="markdown level1 summary"><p>Creates the ECS singleton entity that holds simulation time, universe rotation state, and celestial body hierarchy root components, and writes their default values.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnCreate()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Unity.Entities.ComponentSystemBase.OnCreate()</span></div>
+
+
+  <a id="KSP_Sim_impl_UniverseModel_OnCreateForCompiler_" data-uid="KSP.Sim.impl.UniverseModel.OnCreateForCompiler*"></a>
+  <h4 id="KSP_Sim_impl_UniverseModel_OnCreateForCompiler" data-uid="KSP.Sim.impl.UniverseModel.OnCreateForCompiler">OnCreateForCompiler()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnCreateForCompiler()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Unity.Entities.ComponentSystemBase.OnCreateForCompiler()</span></div>
+
+
+  <a id="KSP_Sim_impl_UniverseModel_OnDestroy_" data-uid="KSP.Sim.impl.UniverseModel.OnDestroy*"></a>
+  <h4 id="KSP_Sim_impl_UniverseModel_OnDestroy" data-uid="KSP.Sim.impl.UniverseModel.OnDestroy">OnDestroy()</h4>
+  <div class="markdown level1 summary"><p>Destroys the ECS singleton entities created during initialization, guarding against world teardown ordering where singletons may already be absent.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnDestroy()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Unity.Entities.ComponentSystemBase.OnDestroy()</span></div>
+
+
+  <a id="KSP_Sim_impl_UniverseModel_OnUpdate_" data-uid="KSP.Sim.impl.UniverseModel.OnUpdate*"></a>
+  <h4 id="KSP_Sim_impl_UniverseModel_OnUpdate" data-uid="KSP.Sim.impl.UniverseModel.OnUpdate">OnUpdate()</h4>
+  <div class="markdown level1 summary"><p>Advances universal time by the fixed timestep and publishes the updated <a class="xref" href="KSP.Sim.impl.SimUniverseTime.html">SimUniverseTime</a> singleton each fixed update.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnUpdate()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Unity.Entities.SystemBase.OnUpdate()</span></div>
+
+
   <a id="KSP_Sim_impl_UniverseModel_RemoveCelestialBody_" data-uid="KSP.Sim.impl.UniverseModel.RemoveCelestialBody*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_RemoveCelestialBody_KSP_Sim_impl_CelestialBodyComponent_" data-uid="KSP.Sim.impl.UniverseModel.RemoveCelestialBody(KSP.Sim.impl.CelestialBodyComponent)">RemoveCelestialBody(CelestialBodyComponent)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Removes a celestial body from the universe.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3396,7 +3696,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
         <td><span class="parametername">celestialBody</span></td>
-        <td></td>
+        <td><p>The celestial body component to remove.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3404,7 +3705,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_RemoveColony_" data-uid="KSP.Sim.impl.UniverseModel.RemoveColony*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_RemoveColony_KSP_Sim_impl_ColonyComponent_" data-uid="KSP.Sim.impl.UniverseModel.RemoveColony(KSP.Sim.impl.ColonyComponent)">RemoveColony(ColonyComponent)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Removes a colony component from the simulation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3423,7 +3725,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.ColonyComponent.html">ColonyComponent</a></td>
         <td><span class="parametername">colony</span></td>
-        <td></td>
+        <td><p>The colony component to remove.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3431,7 +3734,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_RemoveFlag_" data-uid="KSP.Sim.impl.UniverseModel.RemoveFlag*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_RemoveFlag_KSP_Sim_impl_FlagComponent_" data-uid="KSP.Sim.impl.UniverseModel.RemoveFlag(KSP.Sim.impl.FlagComponent)">RemoveFlag(FlagComponent)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Removes a flag component from the simulation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3450,7 +3754,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.FlagComponent.html">FlagComponent</a></td>
         <td><span class="parametername">flag</span></td>
-        <td></td>
+        <td><p>The flag component to remove.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3458,7 +3763,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_RemoveKerbal_" data-uid="KSP.Sim.impl.UniverseModel.RemoveKerbal*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_RemoveKerbal_KSP_Sim_impl_KerbalComponent_" data-uid="KSP.Sim.impl.UniverseModel.RemoveKerbal(KSP.Sim.impl.KerbalComponent)">RemoveKerbal(KerbalComponent)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Removes a Kerbal from the universe.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3477,7 +3783,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.KerbalComponent.html">KerbalComponent</a></td>
         <td><span class="parametername">kerbal</span></td>
-        <td></td>
+        <td><p>The Kerbal component to remove.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3485,7 +3792,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_RemovePart_" data-uid="KSP.Sim.impl.UniverseModel.RemovePart*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_RemovePart_KSP_Sim_impl_PartComponent_" data-uid="KSP.Sim.impl.UniverseModel.RemovePart(KSP.Sim.impl.PartComponent)">RemovePart(PartComponent)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Removes a part component from the simulation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3504,7 +3812,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.PartComponent.html">PartComponent</a></td>
         <td><span class="parametername">part</span></td>
-        <td></td>
+        <td><p>The part component to remove.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3512,7 +3821,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_RemoveSimulationObject_" data-uid="KSP.Sim.impl.UniverseModel.RemoveSimulationObject*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_RemoveSimulationObject_KSP_Sim_impl_SimulationObjectModel_" data-uid="KSP.Sim.impl.UniverseModel.RemoveSimulationObject(KSP.Sim.impl.SimulationObjectModel)">RemoveSimulationObject(SimulationObjectModel)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Removes a simulation object from the universe.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3531,7 +3841,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.SimulationObjectModel.html">SimulationObjectModel</a></td>
         <td><span class="parametername">model</span></td>
-        <td></td>
+        <td><p>The simulation object model to remove.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3539,7 +3850,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_RemoveVessel_" data-uid="KSP.Sim.impl.UniverseModel.RemoveVessel*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_RemoveVessel_KSP_Sim_impl_VesselComponent_" data-uid="KSP.Sim.impl.UniverseModel.RemoveVessel(KSP.Sim.impl.VesselComponent)">RemoveVessel(VesselComponent)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Removes a vessel from the universe.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3558,7 +3870,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.VesselComponent.html">VesselComponent</a></td>
         <td><span class="parametername">vessel</span></td>
-        <td></td>
+        <td><p>The vessel component to remove.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3566,7 +3879,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_RemoveWaypoint_" data-uid="KSP.Sim.impl.UniverseModel.RemoveWaypoint*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_RemoveWaypoint_KSP_Sim_impl_WaypointComponent_" data-uid="KSP.Sim.impl.UniverseModel.RemoveWaypoint(KSP.Sim.impl.WaypointComponent)">RemoveWaypoint(WaypointComponent)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Removes a waypoint component from the simulation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3585,7 +3899,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.WaypointComponent.html">WaypointComponent</a></td>
         <td><span class="parametername">waypoint</span></td>
-        <td></td>
+        <td><p>The waypoint component to remove.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3593,7 +3908,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_Reset_" data-uid="KSP.Sim.impl.UniverseModel.Reset*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_Reset" data-uid="KSP.Sim.impl.UniverseModel.Reset">Reset()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Resets the universe model to its initial state, clearing all registered simulation objects, celestial bodies, and vessels.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3603,7 +3919,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_SetPendingTimescaleMultiplierOverride_" data-uid="KSP.Sim.impl.UniverseModel.SetPendingTimescaleMultiplierOverride*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_SetPendingTimescaleMultiplierOverride_System_Single_" data-uid="KSP.Sim.impl.UniverseModel.SetPendingTimescaleMultiplierOverride(System.Single)">SetPendingTimescaleMultiplierOverride(float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Queues a one-shot time scale multiplier override to be applied during the next fixed update.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3622,7 +3939,8 @@
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">timescaleMultiplier</span></td>
-        <td></td>
+        <td><p>The multiplier to apply. If an override is already pending, the minimum of the two values is used.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3630,7 +3948,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_SetTimePaused_" data-uid="KSP.Sim.impl.UniverseModel.SetTimePaused*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_SetTimePaused_System_Boolean_System_Boolean_" data-uid="KSP.Sim.impl.UniverseModel.SetTimePaused(System.Boolean,System.Boolean)">SetTimePaused(bool, bool)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Sets the paused state of universe time.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3649,12 +3968,14 @@
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">isPaused</span></td>
-        <td></td>
+        <td><p>True to pause universe time; false to resume it.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">raiseEvents</span></td>
-        <td></td>
+        <td><p>True to raise <a class="xref" href="KSP.Sim.IUniverseTime.html#KSP_Sim_IUniverseTime_PausedChanged">PausedChanged</a> and related events; false to suppress them.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3669,7 +3990,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the paused state changed as a result of this call, false otherwise.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3677,7 +3999,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_SetTimeScale_" data-uid="KSP.Sim.impl.UniverseModel.SetTimeScale*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_SetTimeScale_System_Single_System_Boolean_" data-uid="KSP.Sim.impl.UniverseModel.SetTimeScale(System.Single,System.Boolean)">SetTimeScale(float, bool)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Sets the universe simulation time scale.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3701,7 +4024,8 @@
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">scalePhysics</span></td>
-        <td></td>
+        <td><p>True to also scale physics simulation; false to update only universe time.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3709,7 +4033,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_SetUniverseTime_" data-uid="KSP.Sim.impl.UniverseModel.SetUniverseTime*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_SetUniverseTime_System_Double_System_Double_" data-uid="KSP.Sim.impl.UniverseModel.SetUniverseTime(System.Double,System.Double)">SetUniverseTime(double, double)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Sets the current universe time and the elapsed time delta for the current step.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3733,7 +4058,8 @@
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">deltaUT</span></td>
-        <td></td>
+        <td><p>The elapsed time in seconds since the previous universe time step.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3741,7 +4067,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_TryFindTransform_" data-uid="KSP.Sim.impl.UniverseModel.TryFindTransform*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_TryFindTransform_KSP_Sim_ITransformModel_System_String_KSP_Sim_ITransformModel__" data-uid="KSP.Sim.impl.UniverseModel.TryFindTransform(KSP.Sim.ITransformModel,System.String,KSP.Sim.ITransformModel@)">TryFindTransform(ITransformModel, string, out ITransformModel)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Recursively searches a transform hierarchy for a transform whose GUID matches the given name.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3760,17 +4087,20 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.ITransformModel.html">ITransformModel</a></td>
         <td><span class="parametername">root</span></td>
-        <td></td>
+        <td><p>The root of the transform hierarchy to search.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">name</span></td>
-        <td></td>
+        <td><p>The GUID string to search for.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.ITransformModel.html">ITransformModel</a></td>
         <td><span class="parametername">result</span></td>
-        <td></td>
+        <td><p>When this method returns true, the matching transform; otherwise, null.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3785,7 +4115,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if a matching transform was found; false otherwise.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3793,7 +4124,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_TryFindTransform_" data-uid="KSP.Sim.impl.UniverseModel.TryFindTransform*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_TryFindTransform_System_String_KSP_Sim_ITransformModel__" data-uid="KSP.Sim.impl.UniverseModel.TryFindTransform(System.String,KSP.Sim.ITransformModel@)">TryFindTransform(string, out ITransformModel)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Searches the transform hierarchy rooted at the galactic origin for a transform whose GUID matches the given name.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3812,12 +4144,14 @@
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">name</span></td>
-        <td></td>
+        <td><p>The GUID string to search for.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.ITransformModel.html">ITransformModel</a></td>
         <td><span class="parametername">result</span></td>
-        <td></td>
+        <td><p>When this method returns true, the matching transform, otherwise null.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3832,7 +4166,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if a matching transform was found, false otherwise.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3840,7 +4175,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_UpdateSimObjects_" data-uid="KSP.Sim.impl.UniverseModel.UpdateSimObjects*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_UpdateSimObjects" data-uid="KSP.Sim.impl.UniverseModel.UpdateSimObjects">UpdateSimObjects()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Runs the per-frame update step for all registered simulation objects.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3850,7 +4186,8 @@
 
   <a id="KSP_Sim_impl_UniverseModel_ZupAtUT_" data-uid="KSP.Sim.impl.UniverseModel.ZupAtUT*"></a>
   <h4 id="KSP_Sim_impl_UniverseModel_ZupAtUT_System_Double_KSP_Sim_impl_CelestialBodyComponent_KSP_Sim_CelestialFrame__" data-uid="KSP.Sim.impl.UniverseModel.ZupAtUT(System.Double,KSP.Sim.impl.CelestialBodyComponent,KSP.Sim.CelestialFrame@)">ZupAtUT(double, CelestialBodyComponent, ref CelestialFrame)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Computes the Z-up celestial reference frame for the given celestial body at the specified universal time.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3869,17 +4206,20 @@
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">UT</span></td>
-        <td></td>
+        <td><p>The universal time in seconds at which to evaluate the frame.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
         <td><span class="parametername">body</span></td>
-        <td></td>
+        <td><p>The celestial body whose Z-up frame is computed.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.CelestialFrame.html">CelestialFrame</a></td>
         <td><span class="parametername">tempZup</span></td>
-        <td></td>
+        <td><p>When this method returns, contains the computed celestial frame for the body at <code class="paramref">UT</code>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3888,7 +4228,8 @@
 
 
   <h4 id="KSP_Sim_impl_UniverseModel_PausedChanged" data-uid="KSP.Sim.impl.UniverseModel.PausedChanged">PausedChanged</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Occurs when the paused state of the universe time changes.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3912,7 +4253,8 @@
 
 
   <h4 id="KSP_Sim_impl_UniverseModel_TimescaleChanged" data-uid="KSP.Sim.impl.UniverseModel.TimescaleChanged">TimescaleChanged</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Occurs when the universe time scale changes.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3936,7 +4278,8 @@
 
 
   <h4 id="KSP_Sim_impl_UniverseModel_onCelestialBodyAdded" data-uid="KSP.Sim.impl.UniverseModel.onCelestialBodyAdded">onCelestialBodyAdded</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Occurs when a celestial body is added to the universe.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3960,7 +4303,8 @@
 
 
   <h4 id="KSP_Sim_impl_UniverseModel_onCelestialBodyRemoved" data-uid="KSP.Sim.impl.UniverseModel.onCelestialBodyRemoved">onCelestialBodyRemoved</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Occurs when a celestial body is removed from the universe.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -3984,7 +4328,8 @@
 
 
   <h4 id="KSP_Sim_impl_UniverseModel_onPartAdded" data-uid="KSP.Sim.impl.UniverseModel.onPartAdded">onPartAdded</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Occurs when a part component is added to the simulation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -4008,7 +4353,8 @@
 
 
   <h4 id="KSP_Sim_impl_UniverseModel_onPartRemoved" data-uid="KSP.Sim.impl.UniverseModel.onPartRemoved">onPartRemoved</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Occurs when a part component is removed from the simulation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -4032,7 +4378,8 @@
 
 
   <h4 id="KSP_Sim_impl_UniverseModel_onSimulationObjectAdded" data-uid="KSP.Sim.impl.UniverseModel.onSimulationObjectAdded">onSimulationObjectAdded</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Occurs when a simulation object model is added to the universe.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -4056,7 +4403,8 @@
 
 
   <h4 id="KSP_Sim_impl_UniverseModel_onSimulationObjectRemoved" data-uid="KSP.Sim.impl.UniverseModel.onSimulationObjectRemoved">onSimulationObjectRemoved</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Occurs when a simulation object model is removed from the universe.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -4080,7 +4428,8 @@
 
 
   <h4 id="KSP_Sim_impl_UniverseModel_onVesselAdded" data-uid="KSP.Sim.impl.UniverseModel.onVesselAdded">onVesselAdded</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Occurs when a vessel is added to the universe.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -4104,7 +4453,8 @@
 
 
   <h4 id="KSP_Sim_impl_UniverseModel_onVesselRemoved" data-uid="KSP.Sim.impl.UniverseModel.onVesselRemoved">onVesselRemoved</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Occurs when a vessel is removed from the universe.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -4131,12 +4481,6 @@
   </div>
   <div>
       <a class="xref" href="KSP.Sim.ISimulationModelMap.html">ISimulationModelMap</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a>
   </div>
   <div>
       <a class="xref" href="KSP.Sim.IUniverseTime.html">IUniverseTime</a>

@@ -94,9 +94,6 @@
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a></div>
     <div><a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a></div>
   </div>
   <div class="inheritedMembers">
@@ -115,6 +112,9 @@
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsStageable">PartBehaviourModule.IsStageable()</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnViewUnload">PartBehaviourModule.OnViewUnload()</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnActive">PartBehaviourModule.OnActive()</a>
@@ -141,13 +141,16 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForDataModules">PartBehaviourModule.InitForDataModules()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_StashPendingStateJson_System_Type_Newtonsoft_Json_Linq_JObject_">PartBehaviourModule.StashPendingStateJson(Type, JObject)</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_SetDataModuleValues_KSP_Sim_Definitions_SerializedPartModule_">PartBehaviourModule.SetDataModuleValues(SerializedPartModule)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForNewOABPart">PartBehaviourModule.InitForNewOABPart()</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_">PartBehaviourModule.RemoveResourceRequest(ResourceFlowRequestHandle)</a>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_Unity_Entities_Entity_">PartBehaviourModule.RemoveResourceRequest(Entity)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnAnimStateExit_UnityEngine_Animator_System_Int32_">PartBehaviourModule.OnAnimStateExit(Animator, int)</a>
@@ -234,6 +237,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsLocallyAuthorized">PartBehaviourModule.IsLocallyAuthorized</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_PendingStateJson">PartBehaviourModule.PendingStateJson</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Game">KerbalMonoBehaviour.Game</a>
     </div>
     <div>
@@ -253,7 +259,9 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Module_ScienceExperiment_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Module_ScienceExperiment : PartBehaviourModule, IPartModule, IFixedUpdate, IPriorityOverride, IUpdate, IObjectAssemblyPartModule</code></pre>
+    <pre><code class="lang-csharp hljs">[ModuleCategory(&quot;Science&quot;)]
+[ModuleDescription(&quot;Deployable science instrument that gathers data&quot;)]
+public class Module_ScienceExperiment : PartBehaviourModule, IPartModule, IObjectAssemblyPartModule</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -272,7 +280,8 @@
 
 
   <h4 id="KSP_Modules_Module_ScienceExperiment_Animator" data-uid="KSP.Modules.Module_ScienceExperiment.Animator">Animator</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="KSP.Modules.Module_ScienceExperiment.html#KSP_Modules_Module_ScienceExperiment_Animator">Animator</a> component used to drive deployment animations for this experiment part.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -296,7 +305,8 @@
 
 
   <h4 id="KSP_Modules_Module_ScienceExperiment_DeployedAnimationStateName" data-uid="KSP.Modules.Module_ScienceExperiment.DeployedAnimationStateName">DeployedAnimationStateName</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The name of the animation state that represents the fully deployed position of the experiment part.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -320,7 +330,8 @@
 
 
   <h4 id="KSP_Modules_Module_ScienceExperiment_IndexOfContextualExperiment" data-uid="KSP.Modules.Module_ScienceExperiment.IndexOfContextualExperiment">IndexOfContextualExperiment</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The index within the experiment standings list that identifies the contextual experiment on this part.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -344,7 +355,8 @@
 
 
   <h4 id="KSP_Modules_Module_ScienceExperiment__dataKerbal" data-uid="KSP.Modules.Module_ScienceExperiment._dataKerbal">_dataKerbal</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="KSP.Modules.Data_Kerbal.html">Data_Kerbal</a> module present when this experiment is hosted on a Kerbal part, or null otherwise.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -368,7 +380,8 @@
 
 
   <h4 id="KSP_Modules_Module_ScienceExperiment_dataScienceExperiment" data-uid="KSP.Modules.Module_ScienceExperiment.dataScienceExperiment">dataScienceExperiment</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The serialized <a class="xref" href="KSP.Modules.Data_ScienceExperiment.html">Data_ScienceExperiment</a> data module associated with this part behaviour.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -395,7 +408,8 @@
 
   <a id="KSP_Modules_Module_ScienceExperiment_PartComponentModuleType_" data-uid="KSP.Modules.Module_ScienceExperiment.PartComponentModuleType*"></a>
   <h4 id="KSP_Modules_Module_ScienceExperiment_PartComponentModuleType" data-uid="KSP.Modules.Module_ScienceExperiment.PartComponentModuleType">PartComponentModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <span class="xref">System.Type</span> of the corresponding simulation-side <a class="xref" href="KSP.Sim.impl.PartComponentModule.html">PartComponentModule</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -424,7 +438,8 @@
 
   <a id="KSP_Modules_Module_ScienceExperiment_AddDataModules_" data-uid="KSP.Modules.Module_ScienceExperiment.AddDataModules*"></a>
   <h4 id="KSP_Modules_Module_ScienceExperiment_AddDataModules" data-uid="KSP.Modules.Module_ScienceExperiment.AddDataModules">AddDataModules()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers data modules with <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_DataModules">DataModules</a> for this part behaviour module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -436,7 +451,8 @@
 
   <a id="KSP_Modules_Module_ScienceExperiment_GetModuleDisplayName_" data-uid="KSP.Modules.Module_ScienceExperiment.GetModuleDisplayName*"></a>
   <h4 id="KSP_Modules_Module_ScienceExperiment_GetModuleDisplayName" data-uid="KSP.Modules.Module_ScienceExperiment.GetModuleDisplayName">GetModuleDisplayName()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the human-readable display name for this module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -453,7 +469,8 @@
     <tbody>
       <tr>
         <td><span class="xref">string</span></td>
-        <td></td>
+        <td><p>The display name string for this module.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -463,7 +480,8 @@
 
   <a id="KSP_Modules_Module_ScienceExperiment_OnAnimStateEnter_" data-uid="KSP.Modules.Module_ScienceExperiment.OnAnimStateEnter*"></a>
   <h4 id="KSP_Modules_Module_ScienceExperiment_OnAnimStateEnter_UnityEngine_Animator_System_Int32_" data-uid="KSP.Modules.Module_ScienceExperiment.OnAnimStateEnter(UnityEngine.Animator,System.Int32)">OnAnimStateEnter(Animator, int)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called when a Unity Animator state machine enters a state, allowing derived classes to respond to animation transitions.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -482,7 +500,8 @@
       <tr>
         <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Animator.html">Animator</a></td>
         <td><span class="parametername">animator</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Animator.html">Animator</a> whose state machine transitioned.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">int</span></td>
@@ -497,7 +516,8 @@
 
   <a id="KSP_Modules_Module_ScienceExperiment_OnAttemptToRunExperiment_" data-uid="KSP.Modules.Module_ScienceExperiment.OnAttemptToRunExperiment*"></a>
   <h4 id="KSP_Modules_Module_ScienceExperiment_OnAttemptToRunExperiment_System_String_" data-uid="KSP.Modules.Module_ScienceExperiment.OnAttemptToRunExperiment(System.String)">OnAttemptToRunExperiment(string)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Attempts to start running the experiment identified by the given experiment ID, cancelling any interruptible running experiment first.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -516,7 +536,8 @@
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">experimentID</span></td>
-        <td></td>
+        <td><p>The string identifier of the experiment to attempt to run.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -524,7 +545,8 @@
 
   <a id="KSP_Modules_Module_ScienceExperiment_OnCancelExperiment_" data-uid="KSP.Modules.Module_ScienceExperiment.OnCancelExperiment*"></a>
   <h4 id="KSP_Modules_Module_ScienceExperiment_OnCancelExperiment_System_String_" data-uid="KSP.Modules.Module_ScienceExperiment.OnCancelExperiment(System.String)">OnCancelExperiment(string)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Cancels the experiment identified by the given experiment ID and posts the cancel audio event.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -543,7 +565,8 @@
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">experimentID</span></td>
-        <td></td>
+        <td><p>The string identifier of the experiment to cancel.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -551,7 +574,8 @@
 
   <a id="KSP_Modules_Module_ScienceExperiment_OnEnable_" data-uid="KSP.Modules.Module_ScienceExperiment.OnEnable*"></a>
   <h4 id="KSP_Modules_Module_ScienceExperiment_OnEnable" data-uid="KSP.Modules.Module_ScienceExperiment.OnEnable">OnEnable()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes the animator state wrapper for this module when the component is enabled.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -561,7 +585,8 @@
 
   <a id="KSP_Modules_Module_ScienceExperiment_OnInitialize_" data-uid="KSP.Modules.Module_ScienceExperiment.OnInitialize*"></a>
   <h4 id="KSP_Modules_Module_ScienceExperiment_OnInitialize" data-uid="KSP.Modules.Module_ScienceExperiment.OnInitialize">OnInitialize()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called during initialization to allow derived classes to perform custom setup after data modules are registered.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -573,7 +598,8 @@
 
   <a id="KSP_Modules_Module_ScienceExperiment_OnModuleOABUpdate_" data-uid="KSP.Modules.Module_ScienceExperiment.OnModuleOABUpdate*"></a>
   <h4 id="KSP_Modules_Module_ScienceExperiment_OnModuleOABUpdate_System_Single_" data-uid="KSP.Modules.Module_ScienceExperiment.OnModuleOABUpdate(System.Single)">OnModuleOABUpdate(float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called each frame update tick while the module is operating in the OAB context.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -592,7 +618,8 @@
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">deltaTime</span></td>
-        <td></td>
+        <td><p>The elapsed frame time in seconds since the last update.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -602,7 +629,8 @@
 
   <a id="KSP_Modules_Module_ScienceExperiment_OnModuleUpdate_" data-uid="KSP.Modules.Module_ScienceExperiment.OnModuleUpdate*"></a>
   <h4 id="KSP_Modules_Module_ScienceExperiment_OnModuleUpdate_System_Single_" data-uid="KSP.Modules.Module_ScienceExperiment.OnModuleUpdate(System.Single)">OnModuleUpdate(float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called each frame update tick while the module is operating in the flight context.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -621,7 +649,8 @@
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">deltaTime</span></td>
-        <td></td>
+        <td><p>The elapsed frame time in seconds since the last update.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -631,7 +660,8 @@
 
   <a id="KSP_Modules_Module_ScienceExperiment_OnPauseExperiment_" data-uid="KSP.Modules.Module_ScienceExperiment.OnPauseExperiment*"></a>
   <h4 id="KSP_Modules_Module_ScienceExperiment_OnPauseExperiment_System_String_" data-uid="KSP.Modules.Module_ScienceExperiment.OnPauseExperiment(System.String)">OnPauseExperiment(string)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Pauses the experiment identified by the given experiment ID and posts the pause audio event.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -650,7 +680,8 @@
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">experimentID</span></td>
-        <td></td>
+        <td><p>The string identifier of the experiment to pause.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -658,7 +689,8 @@
 
   <a id="KSP_Modules_Module_ScienceExperiment_SetExperimentContext_" data-uid="KSP.Modules.Module_ScienceExperiment.SetExperimentContext*"></a>
   <h4 id="KSP_Modules_Module_ScienceExperiment_SetExperimentContext_System_Int32_System_String_" data-uid="KSP.Modules.Module_ScienceExperiment.SetExperimentContext(System.Int32,System.String)">SetExperimentContext(int, string)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Sets the context string for the experiment at the specified index.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -677,12 +709,14 @@
       <tr>
         <td><span class="xref">int</span></td>
         <td><span class="parametername">index</span></td>
-        <td></td>
+        <td><p>The zero-based index of the experiment whose context is updated.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">context</span></td>
-        <td></td>
+        <td><p>The context string to assign, identifying the current experimental situation.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -690,7 +724,8 @@
 
   <a id="KSP_Modules_Module_ScienceExperiment_SetExperimentState_" data-uid="KSP.Modules.Module_ScienceExperiment.SetExperimentState*"></a>
   <h4 id="KSP_Modules_Module_ScienceExperiment_SetExperimentState_System_Int32_KSP_Modules_ExperimentState_" data-uid="KSP.Modules.Module_ScienceExperiment.SetExperimentState(System.Int32,KSP.Modules.ExperimentState)">SetExperimentState(int, ExperimentState)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Sets the state of the experiment at the specified index on the backing component.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -709,27 +744,20 @@
       <tr>
         <td><span class="xref">int</span></td>
         <td><span class="parametername">index</span></td>
-        <td></td>
+        <td><p>The zero-based index of the experiment whose state is updated.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Modules.ExperimentState.html">ExperimentState</a></td>
         <td><span class="parametername">newState</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="KSP.Modules.ExperimentState.html">ExperimentState</a> value to assign to the experiment.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a>
   </div>
   <div>
       <a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a>

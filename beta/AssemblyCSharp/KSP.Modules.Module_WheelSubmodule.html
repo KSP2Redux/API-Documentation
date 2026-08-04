@@ -101,9 +101,6 @@
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a></div>
     <div><a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a></div>
   </div>
   <div class="inheritedMembers">
@@ -130,6 +127,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsStageable">PartBehaviourModule.IsStageable()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnViewUnload">PartBehaviourModule.OnViewUnload()</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnActive">PartBehaviourModule.OnActive()</a>
     </div>
     <div>
@@ -151,13 +151,16 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForDataModules">PartBehaviourModule.InitForDataModules()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_StashPendingStateJson_System_Type_Newtonsoft_Json_Linq_JObject_">PartBehaviourModule.StashPendingStateJson(Type, JObject)</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_SetDataModuleValues_KSP_Sim_Definitions_SerializedPartModule_">PartBehaviourModule.SetDataModuleValues(SerializedPartModule)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForNewOABPart">PartBehaviourModule.InitForNewOABPart()</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_">PartBehaviourModule.RemoveResourceRequest(ResourceFlowRequestHandle)</a>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_Unity_Entities_Entity_">PartBehaviourModule.RemoveResourceRequest(Entity)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnAnimStateEnter_UnityEngine_Animator_System_Int32_">PartBehaviourModule.OnAnimStateEnter(Animator, int)</a>
@@ -256,6 +259,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsLocallyAuthorized">PartBehaviourModule.IsLocallyAuthorized</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_PendingStateJson">PartBehaviourModule.PendingStateJson</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Game">KerbalMonoBehaviour.Game</a>
     </div>
     <div>
@@ -275,7 +281,10 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Module_WheelSubmodule_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract class Module_WheelSubmodule : PartBehaviourModule, IPartModule, IFixedUpdate, IPriorityOverride, IUpdate, IObjectAssemblyPartModule</code></pre>
+    <pre><code class="lang-csharp hljs">[ModuleCategory(&quot;Wheels&quot;)]
+[ModuleDescription(&quot;Abstract base class for wheel submodules (not directly used)&quot;)]
+[ModuleHidden]
+public abstract class Module_WheelSubmodule : PartBehaviourModule, IPartModule, IObjectAssemblyPartModule</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -294,7 +303,8 @@
 
 
   <h4 id="KSP_Modules_Module_WheelSubmodule_BaseSetup" data-uid="KSP.Modules.Module_WheelSubmodule.BaseSetup">BaseSetup</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>A value indicating whether the owning <a class="xref" href="KSP.Modules.Module_WheelBase.html">Module_WheelBase</a> has completed its setup and assigned a <a class="xref" href="KSPWheelController.html">KSPWheelController</a> to this submodule.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -318,7 +328,8 @@
 
 
   <h4 id="KSP_Modules_Module_WheelSubmodule_DataWheelBase" data-uid="KSP.Modules.Module_WheelSubmodule.DataWheelBase">DataWheelBase</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The shared data block for the owning <a class="xref" href="KSP.Modules.Module_WheelBase.html">Module_WheelBase</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -342,7 +353,8 @@
 
 
   <h4 id="KSP_Modules_Module_WheelSubmodule_WheelBase" data-uid="KSP.Modules.Module_WheelSubmodule.WheelBase">WheelBase</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="KSP.Modules.Module_WheelBase.html">Module_WheelBase</a> that owns this submodule.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -366,7 +378,8 @@
 
 
   <h4 id="KSP_Modules_Module_WheelSubmodule_wheel" data-uid="KSP.Modules.Module_WheelSubmodule.wheel">wheel</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="KSPWheelController.html">KSPWheelController</a> assigned to this submodule during wheel initialization.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -393,7 +406,8 @@
 
   <a id="KSP_Modules_Module_WheelSubmodule_OnInitialize_" data-uid="KSP.Modules.Module_WheelSubmodule.OnInitialize*"></a>
   <h4 id="KSP_Modules_Module_WheelSubmodule_OnInitialize" data-uid="KSP.Modules.Module_WheelSubmodule.OnInitialize">OnInitialize()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes this submodule by resetting setup state, locating the owning <a class="xref" href="KSP.Modules.Module_WheelBase.html">Module_WheelBase</a>, and registering with it.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -405,7 +419,8 @@
 
   <a id="KSP_Modules_Module_WheelSubmodule_OnShutdown_" data-uid="KSP.Modules.Module_WheelSubmodule.OnShutdown*"></a>
   <h4 id="KSP_Modules_Module_WheelSubmodule_OnShutdown" data-uid="KSP.Modules.Module_WheelSubmodule.OnShutdown">OnShutdown()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Shuts down this submodule by unregistering from the owning <a class="xref" href="KSP.Modules.Module_WheelBase.html">Module_WheelBase</a> and detaching the subsystem-modified callback.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -417,7 +432,8 @@
 
   <a id="KSP_Modules_Module_WheelSubmodule_OnSubsystemsModified_" data-uid="KSP.Modules.Module_WheelSubmodule.OnSubsystemsModified*"></a>
   <h4 id="KSP_Modules_Module_WheelSubmodule_OnSubsystemsModified_KSP_Modules_WheelSubsystems_" data-uid="KSP.Modules.Module_WheelSubmodule.OnSubsystemsModified(KSP.Modules.WheelSubsystems)">OnSubsystemsModified(WheelSubsystems)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called when the wheel subsystem state changes, allowing derived classes to respond to subsystem modifications.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -436,7 +452,8 @@
       <tr>
         <td><a class="xref" href="KSP.Modules.WheelSubsystems.html">WheelSubsystems</a></td>
         <td><span class="parametername">s</span></td>
-        <td></td>
+        <td><p>The updated <a class="xref" href="KSP.Modules.WheelSubsystems.html">WheelSubsystems</a> state describing the current inoperable subsystems.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -444,7 +461,8 @@
 
   <a id="KSP_Modules_Module_WheelSubmodule_OnWheelInit_" data-uid="KSP.Modules.Module_WheelSubmodule.OnWheelInit*"></a>
   <h4 id="KSP_Modules_Module_WheelSubmodule_OnWheelInit_KSPWheelController_" data-uid="KSP.Modules.Module_WheelSubmodule.OnWheelInit(KSPWheelController)">OnWheelInit(KSPWheelController)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called by the owning <a class="xref" href="KSP.Modules.Module_WheelBase.html">Module_WheelBase</a> when the wheel controller is ready, caches the controller, marks setup complete, and subscribes to subsystem change notifications.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -463,7 +481,8 @@
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.KSPWheelController.html">KSPWheelController</a></td>
         <td><span class="parametername">w</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="KSPWheelController.html">KSPWheelController</a> assigned to this submodule.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -471,7 +490,8 @@
 
   <a id="KSP_Modules_Module_WheelSubmodule_OnWheelSetup_" data-uid="KSP.Modules.Module_WheelSubmodule.OnWheelSetup*"></a>
   <h4 id="KSP_Modules_Module_WheelSubmodule_OnWheelSetup" data-uid="KSP.Modules.Module_WheelSubmodule.OnWheelSetup">OnWheelSetup()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Performs submodule-specific setup once the <a class="xref" href="KSPWheelController.html">KSPWheelController</a> has been assigned and base initialization is complete.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -481,7 +501,8 @@
 
   <a id="KSP_Modules_Module_WheelSubmodule_SetWheelBase_" data-uid="KSP.Modules.Module_WheelSubmodule.SetWheelBase*"></a>
   <h4 id="KSP_Modules_Module_WheelSubmodule_SetWheelBase" data-uid="KSP.Modules.Module_WheelSubmodule.SetWheelBase">SetWheelBase()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Locates the <a class="xref" href="KSP.Modules.Module_WheelBase.html">Module_WheelBase</a> on the same GameObject and caches references to it and its <a class="xref" href="KSP.Modules.Data_WheelBase.html">Data_WheelBase</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -490,15 +511,6 @@
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a>
   </div>
   <div>
       <a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a>

@@ -94,9 +94,6 @@
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a></div>
     <div><a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a></div>
     <div><a class="xref" href="KSP.Sim.IGroundOffsetModifier.html">IGroundOffsetModifier</a></div>
     <div><a class="xref" href="GlobalAssemblyCSharp.ILateUpdate.html">ILateUpdate</a></div>
@@ -122,6 +119,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsStageable">PartBehaviourModule.IsStageable()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnViewUnload">PartBehaviourModule.OnViewUnload()</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnActive">PartBehaviourModule.OnActive()</a>
     </div>
     <div>
@@ -143,13 +143,16 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForDataModules">PartBehaviourModule.InitForDataModules()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_StashPendingStateJson_System_Type_Newtonsoft_Json_Linq_JObject_">PartBehaviourModule.StashPendingStateJson(Type, JObject)</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_SetDataModuleValues_KSP_Sim_Definitions_SerializedPartModule_">PartBehaviourModule.SetDataModuleValues(SerializedPartModule)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForNewOABPart">PartBehaviourModule.InitForNewOABPart()</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_">PartBehaviourModule.RemoveResourceRequest(ResourceFlowRequestHandle)</a>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_Unity_Entities_Entity_">PartBehaviourModule.RemoveResourceRequest(Entity)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnAnimStateEnter_UnityEngine_Animator_System_Int32_">PartBehaviourModule.OnAnimStateEnter(Animator, int)</a>
@@ -242,6 +245,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsLocallyAuthorized">PartBehaviourModule.IsLocallyAuthorized</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_PendingStateJson">PartBehaviourModule.PendingStateJson</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Game">KerbalMonoBehaviour.Game</a>
     </div>
     <div>
@@ -261,7 +267,9 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Module_WheelBase_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Module_WheelBase : PartBehaviourModule, IPartModule, IFixedUpdate, IPriorityOverride, IUpdate, IObjectAssemblyPartModule, IGroundOffsetModifier, ILateUpdate</code></pre>
+    <pre><code class="lang-csharp hljs">[ModuleCategory(&quot;Wheels&quot;)]
+[ModuleDescription(&quot;Core wheel physics, suspension, and collider control&quot;)]
+public class Module_WheelBase : PartBehaviourModule, IPartModule, IObjectAssemblyPartModule, IGroundOffsetModifier, ILateUpdate</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -280,7 +288,8 @@
 
 
   <h4 id="KSP_Modules_Module_WheelBase_SlipDisplacement" data-uid="KSP.Modules.Module_WheelBase.SlipDisplacement">SlipDisplacement</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The accumulated lateral and longitudinal slip displacement of the wheel contact patch.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -304,7 +313,8 @@
 
 
   <h4 id="KSP_Modules_Module_WheelBase_SuspensionEnabled" data-uid="KSP.Modules.Module_WheelBase.SuspensionEnabled">SuspensionEnabled</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>A value indicating whether wheel suspension is currently enabled.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -328,7 +338,8 @@
 
 
   <h4 id="KSP_Modules_Module_WheelBase_WheelColliderHost" data-uid="KSP.Modules.Module_WheelBase.WheelColliderHost">WheelColliderHost</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The transform that hosts the wheel collider in the part model hierarchy.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -352,7 +363,8 @@
 
 
   <h4 id="KSP_Modules_Module_WheelBase_WheelTransform" data-uid="KSP.Modules.Module_WheelBase.WheelTransform">WheelTransform</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The transform representing the visible wheel mesh in the part model hierarchy.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -376,7 +388,8 @@
 
 
   <h4 id="KSP_Modules_Module_WheelBase_dataWheelBase" data-uid="KSP.Modules.Module_WheelBase.dataWheelBase">dataWheelBase</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The serialized <a class="xref" href="KSP.Modules.Data_WheelBase.html">Data_WheelBase</a> data module associated with this wheel behaviour.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -403,7 +416,8 @@
 
   <a id="KSP_Modules_Module_WheelBase_InopSystems_" data-uid="KSP.Modules.Module_WheelBase.InopSystems*"></a>
   <h4 id="KSP_Modules_Module_WheelBase_InopSystems" data-uid="KSP.Modules.Module_WheelBase.InopSystems">InopSystems</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the set of inoperative <a class="xref" href="KSP.Modules.WheelSubsystems.html">WheelSubsystems</a> currently disabling one or more wheel subsystems.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -426,9 +440,36 @@
   </table>
 
 
+  <a id="KSP_Modules_Module_WheelBase_IsWheelPhysicsActive_" data-uid="KSP.Modules.Module_WheelBase.IsWheelPhysicsActive*"></a>
+  <h4 id="KSP_Modules_Module_WheelBase_IsWheelPhysicsActive" data-uid="KSP.Modules.Module_WheelBase.IsWheelPhysicsActive">IsWheelPhysicsActive</h4>
+  <div class="markdown level1 summary"><p>Gets whether this wheel has an active legacy part body or an analytical shared vessel body.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsWheelPhysicsActive { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Modules_Module_WheelBase_PartComponentModuleType_" data-uid="KSP.Modules.Module_WheelBase.PartComponentModuleType*"></a>
   <h4 id="KSP_Modules_Module_WheelBase_PartComponentModuleType" data-uid="KSP.Modules.Module_WheelBase.PartComponentModuleType">PartComponentModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <span class="xref">System.Type</span> of the corresponding simulation-side <a class="xref" href="KSP.Sim.impl.PartComponentModule.html">PartComponentModule</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -455,7 +496,8 @@
 
   <a id="KSP_Modules_Module_WheelBase_Wheel_" data-uid="KSP.Modules.Module_WheelBase.Wheel*"></a>
   <h4 id="KSP_Modules_Module_WheelBase_Wheel" data-uid="KSP.Modules.Module_WheelBase.Wheel">Wheel</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <a class="xref" href="KSPWheelController.html">KSPWheelController</a> that drives this wheel's physics simulation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -481,7 +523,8 @@ public KSPWheelController Wheel { get; }</code></pre>
 
   <a id="KSP_Modules_Module_WheelBase_WheelOrgPosR_" data-uid="KSP.Modules.Module_WheelBase.WheelOrgPosR*"></a>
   <h4 id="KSP_Modules_Module_WheelBase_WheelOrgPosR" data-uid="KSP.Modules.Module_WheelBase.WheelOrgPosR">WheelOrgPosR</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the original local position of the wheel transform relative to the part root, recorded at initialization.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -506,7 +549,8 @@ public KSPWheelController Wheel { get; }</code></pre>
 
   <a id="KSP_Modules_Module_WheelBase_WheelOrgRotR_" data-uid="KSP.Modules.Module_WheelBase.WheelOrgRotR*"></a>
   <h4 id="KSP_Modules_Module_WheelBase_WheelOrgRotR" data-uid="KSP.Modules.Module_WheelBase.WheelOrgRotR">WheelOrgRotR</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the original local rotation of the wheel transform relative to the part root, recorded at initialization.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -533,7 +577,8 @@ public KSPWheelController Wheel { get; }</code></pre>
 
   <a id="KSP_Modules_Module_WheelBase_ActionUIUpdate_" data-uid="KSP.Modules.Module_WheelBase.ActionUIUpdate*"></a>
   <h4 id="KSP_Modules_Module_WheelBase_ActionUIUpdate_System_Boolean_" data-uid="KSP.Modules.Module_WheelBase.ActionUIUpdate(System.Boolean)">ActionUIUpdate(bool)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Updates the friction-related action UI visibility and re-applies the gee bias when the auto-friction setting changes.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -552,7 +597,8 @@ public KSPWheelController Wheel { get; }</code></pre>
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">value</span></td>
-        <td></td>
+        <td><p>The new value of the auto-friction toggle that triggered the update.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -560,7 +606,8 @@ public KSPWheelController Wheel { get; }</code></pre>
 
   <a id="KSP_Modules_Module_WheelBase_AddDataModules_" data-uid="KSP.Modules.Module_WheelBase.AddDataModules*"></a>
   <h4 id="KSP_Modules_Module_WheelBase_AddDataModules" data-uid="KSP.Modules.Module_WheelBase.AddDataModules">AddDataModules()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers data modules with <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_DataModules">DataModules</a> for this part behaviour module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -572,7 +619,8 @@ public KSPWheelController Wheel { get; }</code></pre>
 
   <a id="KSP_Modules_Module_WheelBase_ApplyGeeBias_" data-uid="KSP.Modules.Module_WheelBase.ApplyGeeBias*"></a>
   <h4 id="KSP_Modules_Module_WheelBase_ApplyGeeBias_System_Single_" data-uid="KSP.Modules.Module_WheelBase.ApplyGeeBias(System.Single)">ApplyGeeBias(float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Adjusts the wheel friction multiplier based on the given gravitational acceleration value and returns the resulting multiplier.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -591,7 +639,8 @@ public KSPWheelController Wheel { get; }</code></pre>
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">gee</span></td>
-        <td></td>
+        <td><p>The gravitational acceleration in m/s^2 used to scale friction.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -606,7 +655,8 @@ public KSPWheelController Wheel { get; }</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">float</span></td>
-        <td></td>
+        <td><p>The friction multiplier value after the gee bias has been applied.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -614,7 +664,8 @@ public KSPWheelController Wheel { get; }</code></pre>
 
   <a id="KSP_Modules_Module_WheelBase_CreateStandInCollider_" data-uid="KSP.Modules.Module_WheelBase.CreateStandInCollider*"></a>
   <h4 id="KSP_Modules_Module_WheelBase_CreateStandInCollider_KSPWheelController_" data-uid="KSP.Modules.Module_WheelBase.CreateStandInCollider(KSPWheelController)">CreateStandInCollider(KSPWheelController)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Creates a stand-in <span class="xref">UnityEngine.SphereCollider</span> positioned at the wheel transform, used when the main wheel collider is inactive.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -633,7 +684,8 @@ public KSPWheelController Wheel { get; }</code></pre>
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.KSPWheelController.html">KSPWheelController</a></td>
         <td><span class="parametername">w</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="KSPWheelController.html">KSPWheelController</a> whose collider radius is used to size the sphere.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -648,7 +700,8 @@ public KSPWheelController Wheel { get; }</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">SphereCollider</span></td>
-        <td></td>
+        <td><p>The newly created <span class="xref">UnityEngine.SphereCollider</span>, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> if no wheel transform is defined.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -656,7 +709,8 @@ public KSPWheelController Wheel { get; }</code></pre>
 
   <a id="KSP_Modules_Module_WheelBase_GetFixFwd_" data-uid="KSP.Modules.Module_WheelBase.GetFixFwd*"></a>
   <h4 id="KSP_Modules_Module_WheelBase_GetFixFwd" data-uid="KSP.Modules.Module_WheelBase.GetFixFwd">GetFixFwd()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the forward reference direction used for drift correction, resolved to the wheel forward axis for standard wheels or the right axis for landing legs.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -673,7 +727,8 @@ public KSPWheelController Wheel { get; }</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">Vector3</span></td>
-        <td></td>
+        <td><p>The world-space forward or right vector of the wheel's cached transform.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -681,7 +736,8 @@ public KSPWheelController Wheel { get; }</code></pre>
 
   <a id="KSP_Modules_Module_WheelBase_GetFixTorque_" data-uid="KSP.Modules.Module_WheelBase.GetFixTorque*"></a>
   <h4 id="KSP_Modules_Module_WheelBase_GetFixTorque_UnityEngine_Vector3_UnityEngine_Vector3_" data-uid="KSP.Modules.Module_WheelBase.GetFixTorque(UnityEngine.Vector3,UnityEngine.Vector3)">GetFixTorque(Vector3, Vector3)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Computes the angular error between a fixed reference orientation and a current orientation, and accumulates it into the drift correction error term.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -700,12 +756,14 @@ public KSPWheelController Wheel { get; }</code></pre>
       <tr>
         <td><span class="xref">Vector3</span></td>
         <td><span class="parametername">fixOrt</span></td>
-        <td></td>
+        <td><p>The fixed forward reference direction acquired when drift correction entered the fix state.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Vector3</span></td>
         <td><span class="parametername">refOrt</span></td>
-        <td></td>
+        <td><p>The current forward direction of the wheel transform.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -713,7 +771,8 @@ public KSPWheelController Wheel { get; }</code></pre>
 
   <a id="KSP_Modules_Module_WheelBase_LandedDetectionNeedsUpdate_" data-uid="KSP.Modules.Module_WheelBase.LandedDetectionNeedsUpdate*"></a>
   <h4 id="KSP_Modules_Module_WheelBase_LandedDetectionNeedsUpdate_UnityEngine_Collider_UnityEngine_Collider_KSP_Sim_impl_VesselBehavior_System_Boolean_" data-uid="KSP.Modules.Module_WheelBase.LandedDetectionNeedsUpdate(UnityEngine.Collider,UnityEngine.Collider,KSP.Sim.impl.VesselBehavior,System.Boolean)">LandedDetectionNeedsUpdate(Collider, Collider, VesselBehavior, bool)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Determines whether the landed detection state requires an update this frame based on collider and grounding changes.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -732,22 +791,26 @@ public KSPWheelController Wheel { get; }</code></pre>
       <tr>
         <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Collider.html">Collider</a></td>
         <td><span class="parametername">hitCollider</span></td>
-        <td></td>
+        <td><p>The collider the wheel is currently contacting, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> if none.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Collider.html">Collider</a></td>
         <td><span class="parametername">hitColliderPrev</span></td>
-        <td></td>
+        <td><p>The collider the wheel contacted on the previous frame.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.VesselBehavior.html">VesselBehavior</a></td>
         <td><span class="parametername">vContact</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="KSP.Sim.impl.VesselBehavior.html">VesselBehavior</a> associated with the surface contact, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> if none.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">isGrounded</span></td>
-        <td></td>
+        <td><p>A value indicating whether the wheel is currently reporting a grounded state.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -762,7 +825,8 @@ public KSPWheelController Wheel { get; }</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the landed state needs to be re-evaluated; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -770,7 +834,8 @@ public KSPWheelController Wheel { get; }</code></pre>
 
   <a id="KSP_Modules_Module_WheelBase_OnInitialize_" data-uid="KSP.Modules.Module_WheelBase.OnInitialize*"></a>
   <h4 id="KSP_Modules_Module_WheelBase_OnInitialize" data-uid="KSP.Modules.Module_WheelBase.OnInitialize">OnInitialize()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called during initialization to allow derived classes to perform custom setup after data modules are registered.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -782,7 +847,8 @@ public KSPWheelController Wheel { get; }</code></pre>
 
   <a id="KSP_Modules_Module_WheelBase_OnLateUpdate_" data-uid="KSP.Modules.Module_WheelBase.OnLateUpdate*"></a>
   <h4 id="KSP_Modules_Module_WheelBase_OnLateUpdate" data-uid="KSP.Modules.Module_WheelBase.OnLateUpdate">OnLateUpdate()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Invoked each frame during the late update phase.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -792,7 +858,8 @@ public KSPWheelController Wheel { get; }</code></pre>
 
   <a id="KSP_Modules_Module_WheelBase_OnModuleFixedUpdate_" data-uid="KSP.Modules.Module_WheelBase.OnModuleFixedUpdate*"></a>
   <h4 id="KSP_Modules_Module_WheelBase_OnModuleFixedUpdate_System_Single_" data-uid="KSP.Modules.Module_WheelBase.OnModuleFixedUpdate(System.Single)">OnModuleFixedUpdate(float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called each fixed-update tick while the module is operating in the flight context.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -811,7 +878,8 @@ public KSPWheelController Wheel { get; }</code></pre>
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">fixedDeltaTime</span></td>
-        <td></td>
+        <td><p>The fixed physics time step in seconds.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -821,7 +889,8 @@ public KSPWheelController Wheel { get; }</code></pre>
 
   <a id="KSP_Modules_Module_WheelBase_OnPutToGround_" data-uid="KSP.Modules.Module_WheelBase.OnPutToGround*"></a>
   <h4 id="KSP_Modules_Module_WheelBase_OnPutToGround_System_Single__" data-uid="KSP.Modules.Module_WheelBase.OnPutToGround(System.Single@)">OnPutToGround(ref float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called when the object is placed on the ground, allowing the implementor to modify the lowest-point ground offset.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -840,7 +909,8 @@ public KSPWheelController Wheel { get; }</code></pre>
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">lowestPoint</span></td>
-        <td></td>
+        <td><p>The lowest point of the object relative to its origin. Implementations may adjust this value to alter the final ground offset.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -848,7 +918,8 @@ public KSPWheelController Wheel { get; }</code></pre>
 
   <a id="KSP_Modules_Module_WheelBase_OnShutdown_" data-uid="KSP.Modules.Module_WheelBase.OnShutdown*"></a>
   <h4 id="KSP_Modules_Module_WheelBase_OnShutdown" data-uid="KSP.Modules.Module_WheelBase.OnShutdown">OnShutdown()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called when the module is shutting down, allowing derived classes to release resources or subscriptions.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -860,7 +931,8 @@ public KSPWheelController Wheel { get; }</code></pre>
 
   <a id="KSP_Modules_Module_WheelBase_RegisterSubmodule_" data-uid="KSP.Modules.Module_WheelBase.RegisterSubmodule*"></a>
   <h4 id="KSP_Modules_Module_WheelBase_RegisterSubmodule_KSP_Modules_Module_WheelSubmodule_" data-uid="KSP.Modules.Module_WheelBase.RegisterSubmodule(KSP.Modules.Module_WheelSubmodule)">RegisterSubmodule(Module_WheelSubmodule)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers a <a class="xref" href="KSP.Modules.Module_WheelSubmodule.html">Module_WheelSubmodule</a> with this wheel base so that it receives wheel initialization callbacks.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -879,7 +951,8 @@ public KSPWheelController Wheel { get; }</code></pre>
       <tr>
         <td><a class="xref" href="KSP.Modules.Module_WheelSubmodule.html">Module_WheelSubmodule</a></td>
         <td><span class="parametername">m</span></td>
-        <td></td>
+        <td><p>The submodule to register.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -887,7 +960,8 @@ public KSPWheelController Wheel { get; }</code></pre>
 
   <a id="KSP_Modules_Module_WheelBase_ResetWheelGroundCheck_" data-uid="KSP.Modules.Module_WheelBase.ResetWheelGroundCheck*"></a>
   <h4 id="KSP_Modules_Module_WheelBase_ResetWheelGroundCheck" data-uid="KSP.Modules.Module_WheelBase.ResetWheelGroundCheck">ResetWheelGroundCheck()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Resets the previous-frame ground collider reference so that landed detection is re-evaluated on the next fixed update.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -897,7 +971,8 @@ public KSPWheelController Wheel { get; }</code></pre>
 
   <a id="KSP_Modules_Module_WheelBase_Teleport_ResetWheelColliderIsGrounded_" data-uid="KSP.Modules.Module_WheelBase.Teleport_ResetWheelColliderIsGrounded*"></a>
   <h4 id="KSP_Modules_Module_WheelBase_Teleport_ResetWheelColliderIsGrounded" data-uid="KSP.Modules.Module_WheelBase.Teleport_ResetWheelColliderIsGrounded">Teleport_ResetWheelColliderIsGrounded()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Resets the wheel collider's grounded flag to false after a teleport to prevent stale ground-contact state.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -907,7 +982,8 @@ public KSPWheelController Wheel { get; }</code></pre>
 
   <a id="KSP_Modules_Module_WheelBase_UnregisterSubmodule_" data-uid="KSP.Modules.Module_WheelBase.UnregisterSubmodule*"></a>
   <h4 id="KSP_Modules_Module_WheelBase_UnregisterSubmodule_KSP_Modules_Module_WheelSubmodule_" data-uid="KSP.Modules.Module_WheelBase.UnregisterSubmodule(KSP.Modules.Module_WheelSubmodule)">UnregisterSubmodule(Module_WheelSubmodule)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Removes a previously registered <a class="xref" href="KSP.Modules.Module_WheelSubmodule.html">Module_WheelSubmodule</a> from the list of active submodules.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -926,7 +1002,8 @@ public KSPWheelController Wheel { get; }</code></pre>
       <tr>
         <td><a class="xref" href="KSP.Modules.Module_WheelSubmodule.html">Module_WheelSubmodule</a></td>
         <td><span class="parametername">m</span></td>
-        <td></td>
+        <td><p>The submodule to unregister.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -934,7 +1011,8 @@ public KSPWheelController Wheel { get; }</code></pre>
 
   <a id="KSP_Modules_Module_WheelBase_UpdateDriftFix_" data-uid="KSP.Modules.Module_WheelBase.UpdateDriftFix*"></a>
   <h4 id="KSP_Modules_Module_WheelBase_UpdateDriftFix" data-uid="KSP.Modules.Module_WheelBase.UpdateDriftFix">UpdateDriftFix()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Advances the drift correction state machine and applies corrective torque to the vessel rigidbody when the wheel is stationary and grounded.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -944,7 +1022,8 @@ public KSPWheelController Wheel { get; }</code></pre>
 
   <a id="KSP_Modules_Module_WheelBase_UpdateFriction_" data-uid="KSP.Modules.Module_WheelBase.UpdateFriction*"></a>
   <h4 id="KSP_Modules_Module_WheelBase_UpdateFriction" data-uid="KSP.Modules.Module_WheelBase.UpdateFriction">UpdateFriction()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Applies the current friction multiplier from <a class="xref" href="KSP.Modules.Data_WheelBase.html">Data_WheelBase</a> to the wheel's tire friction settings.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -953,15 +1032,6 @@ public KSPWheelController Wheel { get; }</code></pre>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a>
   </div>
   <div>
       <a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a>

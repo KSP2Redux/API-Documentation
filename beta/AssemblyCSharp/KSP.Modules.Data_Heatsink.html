@@ -126,9 +126,6 @@
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData__moduleDataContext">ModuleData._moduleDataContext</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RequestHandle">ModuleData.RequestHandle</a>
-    </div>
-    <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_Copy_KSP_Sim_Definitions_ModuleData_">ModuleData.Copy(ModuleData)</a>
     </div>
     <div>
@@ -142,6 +139,9 @@
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_OnPartBehaviourModuleInit">ModuleData.OnPartBehaviourModuleInit()</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_UnbindFromEntity">ModuleData.UnbindFromEntity()</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RebuildDataContext">ModuleData.RebuildDataContext()</a>
@@ -196,6 +196,12 @@
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_SyncAllSymmetricalData_KSP_Sim_Definitions_ModuleData_">ModuleData.SyncAllSymmetricalData(ModuleData)</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_Entity">ModuleData.Entity</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RequestEntity">ModuleData.RequestEntity</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_HasSymmetricalProperties">ModuleData.HasSymmetricalProperties</a>
@@ -269,6 +275,7 @@ public HeatsinkType heatsinkType</code></pre>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
+[Unit(&quot;m&quot;)]
 public float probeLength</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -294,6 +301,7 @@ public float probeLength</code></pre>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
+[Unit(&quot;kW&quot;)]
 public double surfaceFluxMaximum</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -313,13 +321,14 @@ public double surfaceFluxMaximum</code></pre>
   </table>
 
 
-  <h4 id="KSP_Modules_Data_Heatsink_transfromName" data-uid="KSP.Modules.Data_Heatsink.transfromName">transfromName</h4>
+  <h4 id="KSP_Modules_Data_Heatsink_transformName" data-uid="KSP.Modules.Data_Heatsink.transformName">transformName</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
-public string transfromName</code></pre>
+[TransformName]
+public string transformName</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -342,7 +351,8 @@ public string transfromName</code></pre>
 
   <a id="KSP_Modules_Data_Heatsink_ModuleType_" data-uid="KSP.Modules.Data_Heatsink.ModuleType*"></a>
   <h4 id="KSP_Modules_Data_Heatsink_ModuleType" data-uid="KSP.Modules.Data_Heatsink.ModuleType">ModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <span class="xref">System.Type</span> of the part behaviour module that owns this data definition.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -369,9 +379,45 @@ public string transfromName</code></pre>
 </h3>
 
 
+  <a id="KSP_Modules_Data_Heatsink_BindToEntity_" data-uid="KSP.Modules.Data_Heatsink.BindToEntity*"></a>
+  <h4 id="KSP_Modules_Data_Heatsink_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_" data-uid="KSP.Modules.Data_Heatsink.BindToEntity(Unity.Entities.EntityManager,Unity.Entities.Entity)">BindToEntity(EntityManager, Entity)</h4>
+  <div class="markdown level1 summary"><p>Binds this module's state and config to its part entity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void BindToEntity(EntityManager em, Entity entity)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">entity</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_">ModuleData.BindToEntity(EntityManager, Entity)</a></div>
+
+
   <a id="KSP_Modules_Data_Heatsink_GetPartInfoEntries_" data-uid="KSP.Modules.Data_Heatsink.GetPartInfoEntries*"></a>
   <h4 id="KSP_Modules_Data_Heatsink_GetPartInfoEntries_System_Type_System_Collections_Generic_List_OABPartData_PartInfoModuleEntry__" data-uid="KSP.Modules.Data_Heatsink.GetPartInfoEntries(System.Type,System.Collections.Generic.List{OABPartData.PartInfoModuleEntry})">GetPartInfoEntries(Type, List&lt;PartInfoModuleEntry&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns a list of Part Action Menu info entries that describe this module's exposed data for the given part behaviour module type.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -390,7 +436,8 @@ public string transfromName</code></pre>
       <tr>
         <td><span class="xref">Type</span></td>
         <td><span class="parametername">partBehaviourModuleType</span></td>
-        <td></td>
+        <td><p>The <span class="xref">System.Type</span> of the part behaviour module requesting info entries.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="OABPartData.html">OABPartData</a>.<a class="xref" href="OABPartData.PartInfoModuleEntry.html">PartInfoModuleEntry</a>&gt;</td>
@@ -410,7 +457,8 @@ public string transfromName</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="OABPartData.html">OABPartData</a>.<a class="xref" href="OABPartData.PartInfoModuleEntry.html">PartInfoModuleEntry</a>&gt;</td>
-        <td></td>
+        <td><p>The populated list of <a class="xref" href="OABPartData.html">OABPartData.PartInfoModuleEntry</a> instances describing this module's PAM entries.</p>
+</td>
       </tr>
     </tbody>
   </table>

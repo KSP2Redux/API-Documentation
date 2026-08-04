@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Enum ShaderRefactorState | KSP2Redux API (Beta) ">
     
-    <meta name="description" content="Represents the planet rendering shader state, indicating whether the standard refactored shaders or the legacy shaders are in use.">
+    <meta name="description" content="Selects which planet rendering shader variant  drives. The per-variant behaviour (which shader, pass offset, and pipeline features) is described by .">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -82,7 +82,9 @@
 
 
   <h1 id="KSP_Rendering_Planets_ShaderRefactorState" data-uid="KSP.Rendering.Planets.ShaderRefactorState" class="text-break">Enum ShaderRefactorState</h1>
-  <div class="markdown level0 summary"><p>Represents the planet rendering shader state, indicating whether the standard refactored shaders or the legacy shaders are in use.</p>
+  <div class="markdown level0 summary"><p>Selects which planet rendering shader variant <a class="xref" href="KSP.Rendering.Planets.PQSRenderer.html">PQSRenderer</a> drives. The
+per-variant behaviour (which shader, pass offset, and pipeline features) is described by
+<a class="xref" href="KSP.Rendering.Planets.ShaderRefactorProfile.html">ShaderRefactorProfile</a>.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Rendering.html">Rendering</a>.<a class="xref" href="KSP.Rendering.Planets.html">Planets</a></h6>
@@ -102,12 +104,19 @@
     <thead>
     </thead></thead><tbody>
       <tr>
+        <td id="KSP_Rendering_Planets_ShaderRefactorState_Decompiled">Decompiled</td>
+        <td><p>The in-repo decompiled/ported Redux shader, driven through the same modern pipeline as <a class="xref" href="KSP.Rendering.Planets.ShaderRefactorState.html#KSP_Rendering_Planets_ShaderRefactorState_Standard">Standard</a>.</p>
+</td>
+      </tr>
+      <tr>
         <td id="KSP_Rendering_Planets_ShaderRefactorState_Standard">Standard</td>
-        <td></td>
+        <td><p>The production refactored shader (<code>KSP2/Environment/CelestialBody_Local</code>) used as-is.</p>
+</td>
       </tr>
       <tr>
         <td id="KSP_Rendering_Planets_ShaderRefactorState_SwapOld">SwapOld</td>
-        <td></td>
+        <td><p>The legacy shader (<code>CelestialBody_Local_Old</code>), swapped onto a copy of the surface material.</p>
+</td>
       </tr>
     </tbody>
   </table>

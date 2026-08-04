@@ -94,9 +94,6 @@
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a></div>
     <div><a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a></div>
   </div>
   <div class="inheritedMembers">
@@ -115,6 +112,9 @@
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsStageable">PartBehaviourModule.IsStageable()</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnViewUnload">PartBehaviourModule.OnViewUnload()</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnActive">PartBehaviourModule.OnActive()</a>
@@ -141,13 +141,16 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForDataModules">PartBehaviourModule.InitForDataModules()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_StashPendingStateJson_System_Type_Newtonsoft_Json_Linq_JObject_">PartBehaviourModule.StashPendingStateJson(Type, JObject)</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_SetDataModuleValues_KSP_Sim_Definitions_SerializedPartModule_">PartBehaviourModule.SetDataModuleValues(SerializedPartModule)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForNewOABPart">PartBehaviourModule.InitForNewOABPart()</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_">PartBehaviourModule.RemoveResourceRequest(ResourceFlowRequestHandle)</a>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_Unity_Entities_Entity_">PartBehaviourModule.RemoveResourceRequest(Entity)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnAnimStateEnter_UnityEngine_Animator_System_Int32_">PartBehaviourModule.OnAnimStateEnter(Animator, int)</a>
@@ -240,6 +243,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsLocallyAuthorized">PartBehaviourModule.IsLocallyAuthorized</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_PendingStateJson">PartBehaviourModule.PendingStateJson</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Game">KerbalMonoBehaviour.Game</a>
     </div>
     <div>
@@ -259,7 +265,9 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Module_Decouple_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Module_Decouple : PartBehaviourModule, IPartModule, IFixedUpdate, IPriorityOverride, IUpdate, IObjectAssemblyPartModule</code></pre>
+    <pre><code class="lang-csharp hljs">[ModuleCategory(&quot;Structural&quot;)]
+[ModuleDescription(&quot;Separates the part from its parent with an impulse&quot;)]
+public class Module_Decouple : PartBehaviourModule, IPartModule, IObjectAssemblyPartModule</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -278,7 +286,8 @@
 
 
   <h4 id="KSP_Modules_Module_Decouple_ExplosiveDir" data-uid="KSP.Modules.Module_Decouple.ExplosiveDir">ExplosiveDir</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Direction vector, in local part space, along which ejection force is applied when automatic direction calculation is not used.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -302,7 +311,8 @@
 
 
   <h4 id="KSP_Modules_Module_Decouple__explosiveNode" data-uid="KSP.Modules.Module_Decouple._explosiveNode">_explosiveNode</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The attach node data representing the explosive decoupling node on this part.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -329,7 +339,8 @@
 
   <a id="KSP_Modules_Module_Decouple_ExplosiveNode_" data-uid="KSP.Modules.Module_Decouple.ExplosiveNode*"></a>
   <h4 id="KSP_Modules_Module_Decouple_ExplosiveNode" data-uid="KSP.Modules.Module_Decouple.ExplosiveNode">ExplosiveNode</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets the attach node data for the explosive decoupling node on this part.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -354,7 +365,8 @@
 
   <a id="KSP_Modules_Module_Decouple_PartComponentModuleType_" data-uid="KSP.Modules.Module_Decouple.PartComponentModuleType*"></a>
   <h4 id="KSP_Modules_Module_Decouple_PartComponentModuleType" data-uid="KSP.Modules.Module_Decouple.PartComponentModuleType">PartComponentModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <span class="xref">System.Type</span> of the corresponding simulation-side <a class="xref" href="KSP.Sim.impl.PartComponentModule.html">PartComponentModule</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -383,7 +395,8 @@
 
   <a id="KSP_Modules_Module_Decouple_AddDataModules_" data-uid="KSP.Modules.Module_Decouple.AddDataModules*"></a>
   <h4 id="KSP_Modules_Module_Decouple_AddDataModules" data-uid="KSP.Modules.Module_Decouple.AddDataModules">AddDataModules()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers data modules with <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_DataModules">DataModules</a> for this part behaviour module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -395,7 +408,8 @@
 
   <a id="KSP_Modules_Module_Decouple_GetModuleDisplayName_" data-uid="KSP.Modules.Module_Decouple.GetModuleDisplayName*"></a>
   <h4 id="KSP_Modules_Module_Decouple_GetModuleDisplayName" data-uid="KSP.Modules.Module_Decouple.GetModuleDisplayName">GetModuleDisplayName()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the human-readable display name for this module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -412,7 +426,8 @@
     <tbody>
       <tr>
         <td><span class="xref">string</span></td>
-        <td></td>
+        <td><p>The display name string for this module.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -422,7 +437,8 @@
 
   <a id="KSP_Modules_Module_Decouple_OnDecouple_" data-uid="KSP.Modules.Module_Decouple.OnDecouple*"></a>
   <h4 id="KSP_Modules_Module_Decouple_OnDecouple" data-uid="KSP.Modules.Module_Decouple.OnDecouple">OnDecouple()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Triggers the decoupling sequence, separating the attached part at the explosive node and applying the configured ejection impulse to both parts.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -432,7 +448,8 @@
 
   <a id="KSP_Modules_Module_Decouple_OnInitialize_" data-uid="KSP.Modules.Module_Decouple.OnInitialize*"></a>
   <h4 id="KSP_Modules_Module_Decouple_OnInitialize" data-uid="KSP.Modules.Module_Decouple.OnInitialize">OnInitialize()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called during initialization to allow derived classes to perform custom setup after data modules are registered.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -444,7 +461,8 @@
 
   <a id="KSP_Modules_Module_Decouple_OnModuleUpdate_" data-uid="KSP.Modules.Module_Decouple.OnModuleUpdate*"></a>
   <h4 id="KSP_Modules_Module_Decouple_OnModuleUpdate_System_Single_" data-uid="KSP.Modules.Module_Decouple.OnModuleUpdate(System.Single)">OnModuleUpdate(float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called each frame update tick while the module is operating in the flight context.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -463,7 +481,8 @@
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">deltaTime</span></td>
-        <td></td>
+        <td><p>The elapsed frame time in seconds since the last update.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -473,7 +492,7 @@
 
   <a id="KSP_Modules_Module_Decouple_PerformPartDecouple_" data-uid="KSP.Modules.Module_Decouple.PerformPartDecouple*"></a>
   <h4 id="KSP_Modules_Module_Decouple_PerformPartDecouple_KSP_Sim_impl_PartBehavior_KSP_Sim_impl_PartComponent_KSP_Sim_Vector_System_String_System_Boolean_System_Single_" data-uid="KSP.Modules.Module_Decouple.PerformPartDecouple(KSP.Sim.impl.PartBehavior,KSP.Sim.impl.PartComponent,KSP.Sim.Vector,System.String,System.Boolean,System.Single)">PerformPartDecouple(PartBehavior, PartComponent, Vector, string, bool, float)</h4>
-  <div class="markdown level1 summary"><p>Decouple 2 parts</p>
+  <div class="markdown level1 summary"><p>Performs the physical decoupling of a part from its host part, clearing attachment node references, splitting the vessel simulation object, destroying inter-part joints, and applying ejection impulse forces.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -493,37 +512,37 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.PartBehavior.html">PartBehavior</a></td>
         <td><span class="parametername">hostViewPart</span></td>
-        <td><p>The host part</p>
+        <td><p>The <a class="xref" href="KSP.Sim.impl.PartBehavior.html">PartBehavior</a> representing the host part that owns the decoupler.</p>
 </td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.PartComponent.html">PartComponent</a></td>
         <td><span class="parametername">partToDetach</span></td>
-        <td><p>The part to detach</p>
+        <td><p>The <a class="xref" href="KSP.Sim.impl.PartComponent.html">PartComponent</a> of the part to be separated from the host.</p>
 </td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.Vector.html">Vector</a></td>
         <td><span class="parametername">jettisonDirection</span></td>
-        <td><p>What direction to jettison the detached part</p>
+        <td><p>The world-space direction vector along which ejection force is applied to the detaching part.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">nodeIdToDetach</span></td>
-        <td><p>Which node id is being detached</p>
+        <td><p>The identifier of the attach node on the host part to clear during decoupling.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">isOmniDecoupler</span></td>
-        <td><p>Is the part an omni decoupler?</p>
+        <td><p>A value indicating whether this decoupler operates as an omni-decoupler, separating all surface-attached parts simultaneously.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">ejectionForce</span></td>
-        <td><p>How much of an impulse should be applied</p>
+        <td><p>The magnitude of the impulse force applied to each part during separation.</p>
 </td>
       </tr>
     </tbody>
@@ -531,15 +550,6 @@
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a>
   </div>
   <div>
       <a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a>

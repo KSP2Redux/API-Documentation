@@ -123,9 +123,6 @@
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_StageActivationActionPath">ModuleData.StageActivationActionPath</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RequestHandle">ModuleData.RequestHandle</a>
-    </div>
-    <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_Copy_KSP_Sim_Definitions_ModuleData_">ModuleData.Copy(ModuleData)</a>
     </div>
     <div>
@@ -136,6 +133,12 @@
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_OnPartBehaviourModuleInit">ModuleData.OnPartBehaviourModuleInit()</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_">ModuleData.BindToEntity(EntityManager, Entity)</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_UnbindFromEntity">ModuleData.UnbindFromEntity()</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RebuildDataContext">ModuleData.RebuildDataContext()</a>
@@ -192,6 +195,12 @@
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_SyncAllSymmetricalData_KSP_Sim_Definitions_ModuleData_">ModuleData.SyncAllSymmetricalData(ModuleData)</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_Entity">ModuleData.Entity</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RequestEntity">ModuleData.RequestEntity</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_HasSymmetricalProperties">ModuleData.HasSymmetricalProperties</a>
     </div>
     <div>
@@ -233,7 +242,8 @@
 
 
   <h4 id="KSP_Modules_Data_Heatshield_AblationFluxExponent" data-uid="KSP.Modules.Data_Heatshield.AblationFluxExponent">AblationFluxExponent</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Exponent that tunes ablation harshness at high flux; higher values cause faster ablator consumption during intense reentry heating.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -258,11 +268,13 @@ public double AblationFluxExponent</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Heatshield_AblationFluxReference" data-uid="KSP.Modules.Data_Heatshield.AblationFluxReference">AblationFluxReference</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Reference flux in kilowatts above which the high-flux ablation compression curve engages.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
+[Unit(&quot;kW&quot;)]
 public double AblationFluxReference</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -283,11 +295,13 @@ public double AblationFluxReference</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Heatshield_AblationMaximumOverThreshold" data-uid="KSP.Modules.Data_Heatshield.AblationMaximumOverThreshold">AblationMaximumOverThreshold</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Temperature range in Kelvin above <a class="xref" href="KSP.Modules.Data_Heatshield.html#KSP_Modules_Data_Heatshield_AblationTempThreshold">AblationTempThreshold</a> over which the ablation rate ramps up to its maximum.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
+[Unit(&quot;K&quot;)]
 public double AblationMaximumOverThreshold</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -308,11 +322,13 @@ public double AblationMaximumOverThreshold</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Heatshield_AblationTempHysteresis" data-uid="KSP.Modules.Data_Heatshield.AblationTempHysteresis">AblationTempHysteresis</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Temperature drop in Kelvin below <a class="xref" href="KSP.Modules.Data_Heatshield.html#KSP_Modules_Data_Heatshield_AblationTempThreshold">AblationTempThreshold</a> required before ablation stops, preventing status chattering at the end of reentry.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
+[Unit(&quot;K&quot;)]
 public double AblationTempHysteresis</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -333,11 +349,13 @@ public double AblationTempHysteresis</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Heatshield_AblationTempThreshold" data-uid="KSP.Modules.Data_Heatshield.AblationTempThreshold">AblationTempThreshold</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Skin temperature threshold in Kelvin above which ablation begins.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
+[Unit(&quot;K&quot;)]
 public double AblationTempThreshold</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -358,11 +376,13 @@ public double AblationTempThreshold</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Heatshield_AblatorMaxValue" data-uid="KSP.Modules.Data_Heatshield.AblatorMaxValue">AblatorMaxValue</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Maximum ablator capacity value in units.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double AblatorMaxValue</code></pre>
+    <pre><code class="lang-csharp hljs">[Unit(&quot;u&quot;)]
+public double AblatorMaxValue</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -382,7 +402,8 @@ public double AblationTempThreshold</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Heatshield_AblatorRatio" data-uid="KSP.Modules.Data_Heatshield.AblatorRatio">AblatorRatio</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Normalized ratio of remaining ablator, from 0 (fully depleted) to 1 (full).</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -406,11 +427,13 @@ public double AblationTempThreshold</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Heatshield_AblatorTonnesPerSecond" data-uid="KSP.Modules.Data_Heatshield.AblatorTonnesPerSecond">AblatorTonnesPerSecond</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Current ablator mass consumption rate in tonnes per second.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double AblatorTonnesPerSecond</code></pre>
+    <pre><code class="lang-csharp hljs">[Unit(&quot;t/s&quot;)]
+public double AblatorTonnesPerSecond</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -430,7 +453,8 @@ public double AblationTempThreshold</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Heatshield_CharMaterialName" data-uid="KSP.Modules.Data_Heatshield.CharMaterialName">CharMaterialName</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Name of the material on the part mesh that receives the char emissive value.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -455,7 +479,8 @@ public string CharMaterialName</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Heatshield_CharMax" data-uid="KSP.Modules.Data_Heatshield.CharMax">CharMax</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Char material emissive value at depleted ablator, representing the fully charred appearance.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -480,7 +505,8 @@ public float CharMax</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Heatshield_CharMin" data-uid="KSP.Modules.Data_Heatshield.CharMin">CharMin</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Char material emissive value at full ablator capacity, representing the start-of-life appearance.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -505,7 +531,8 @@ public float CharMin</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Heatshield_CurrentStatus" data-uid="KSP.Modules.Data_Heatshield.CurrentStatus">CurrentStatus</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Current operational status of the heat shield.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -530,7 +557,8 @@ public HeatshieldStatus CurrentStatus</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Heatshield_DisabledWhenRetracted" data-uid="KSP.Modules.Data_Heatshield.DisabledWhenRetracted">DisabledWhenRetracted</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>A value indicating whether the shield's protection is disabled while the part is retracted.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -555,11 +583,13 @@ public bool DisabledWhenRetracted</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Heatshield_FluxRemoved" data-uid="KSP.Modules.Data_Heatshield.FluxRemoved">FluxRemoved</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Thermal flux removed by the heat shield during the current frame, in kilowatts.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double FluxRemoved</code></pre>
+    <pre><code class="lang-csharp hljs">[Unit(&quot;kW&quot;)]
+public double FluxRemoved</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -579,7 +609,8 @@ public bool DisabledWhenRetracted</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Heatshield_HasEnoughResources" data-uid="KSP.Modules.Data_Heatshield.HasEnoughResources">HasEnoughResources</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>A value indicating whether the heat shield has sufficient ablator resources to operate.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -603,7 +634,8 @@ public bool DisabledWhenRetracted</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Heatshield_IsAblating" data-uid="KSP.Modules.Data_Heatshield.IsAblating">IsAblating</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>A value indicating whether the heat shield is actively ablating material.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -628,7 +660,8 @@ public bool IsAblating</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Heatshield_IsAblatorExhausted" data-uid="KSP.Modules.Data_Heatshield.IsAblatorExhausted">IsAblatorExhausted</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>A value indicating whether the ablator supply has been fully consumed.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -653,7 +686,8 @@ public bool IsAblatorExhausted</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Heatshield_IsDeployed" data-uid="KSP.Modules.Data_Heatshield.IsDeployed">IsDeployed</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>A value indicating whether the heat shield is currently deployed.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -678,7 +712,8 @@ public bool IsDeployed</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Heatshield_PyrolysisLossFactor" data-uid="KSP.Modules.Data_Heatshield.PyrolysisLossFactor">PyrolysisLossFactor</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Ablator mass lost per unit of ablator resource consumed, where 1.0 represents a one-to-one mass correspondence.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -703,7 +738,8 @@ public double PyrolysisLossFactor</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Heatshield_ResourceDisplay" data-uid="KSP.Modules.Data_Heatshield.ResourceDisplay">ResourceDisplay</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Localized display string showing the current ablator resource level in the Part Action Menu.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -729,11 +765,13 @@ public ModuleProperty&lt;string&gt; ResourceDisplay</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Heatshield_ShieldingDirection" data-uid="KSP.Modules.Data_Heatshield.ShieldingDirection">ShieldingDirection</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Local direction the heat shield faces; shielding effectiveness increases when this direction aligns with the velocity vector.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
+[SceneViewHandle(SceneViewHandleMode.Orientation)]
 public Vector3 ShieldingDirection</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -754,7 +792,8 @@ public Vector3 ShieldingDirection</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Heatshield_ShieldingDirectionScale" data-uid="KSP.Modules.Data_Heatshield.ShieldingDirectionScale">ShieldingDirectionScale</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Runtime scale applied to the shielding direction alignment effect.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -779,7 +818,8 @@ public float ShieldingDirectionScale</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Heatshield_ShieldingScale" data-uid="KSP.Modules.Data_Heatshield.ShieldingScale">ShieldingScale</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Scalar applied to the part's drag and aero heating while the shield faces the airflow.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -804,7 +844,8 @@ public float ShieldingScale</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Heatshield_StatusDisplay" data-uid="KSP.Modules.Data_Heatshield.StatusDisplay">StatusDisplay</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Localized display string for the heatshield status shown in the Part Action Menu.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -830,7 +871,8 @@ public ModuleProperty&lt;string&gt; StatusDisplay</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Heatshield_UseChar" data-uid="KSP.Modules.Data_Heatshield.UseChar">UseChar</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>A value indicating whether the char visual effect is applied as ablator is consumed.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -855,7 +897,8 @@ public bool UseChar</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Heatshield_requiredResources" data-uid="KSP.Modules.Data_Heatshield.requiredResources">requiredResources</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>List of resources consumed while the heat shield is ablating.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -883,7 +926,8 @@ public List&lt;PartModuleResourceSetting&gt; requiredResources</code></pre>
 
   <a id="KSP_Modules_Data_Heatshield_ModuleType_" data-uid="KSP.Modules.Data_Heatshield.ModuleType*"></a>
   <h4 id="KSP_Modules_Data_Heatshield_ModuleType" data-uid="KSP.Modules.Data_Heatshield.ModuleType">ModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <span class="xref">System.Type</span> of the part behaviour module that owns this data definition.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -912,7 +956,8 @@ public List&lt;PartModuleResourceSetting&gt; requiredResources</code></pre>
 
   <a id="KSP_Modules_Data_Heatshield_GetPartInfoEntries_" data-uid="KSP.Modules.Data_Heatshield.GetPartInfoEntries*"></a>
   <h4 id="KSP_Modules_Data_Heatshield_GetPartInfoEntries_System_Type_System_Collections_Generic_List_OABPartData_PartInfoModuleEntry__" data-uid="KSP.Modules.Data_Heatshield.GetPartInfoEntries(System.Type,System.Collections.Generic.List{OABPartData.PartInfoModuleEntry})">GetPartInfoEntries(Type, List&lt;PartInfoModuleEntry&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns a list of Part Action Menu info entries that describe this module's exposed data for the given part behaviour module type.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -931,7 +976,8 @@ public List&lt;PartModuleResourceSetting&gt; requiredResources</code></pre>
       <tr>
         <td><span class="xref">Type</span></td>
         <td><span class="parametername">partBehaviourModuleType</span></td>
-        <td></td>
+        <td><p>The <span class="xref">System.Type</span> of the part behaviour module requesting info entries.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="OABPartData.html">OABPartData</a>.<a class="xref" href="OABPartData.PartInfoModuleEntry.html">PartInfoModuleEntry</a>&gt;</td>
@@ -951,7 +997,8 @@ public List&lt;PartModuleResourceSetting&gt; requiredResources</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="OABPartData.html">OABPartData</a>.<a class="xref" href="OABPartData.PartInfoModuleEntry.html">PartInfoModuleEntry</a>&gt;</td>
-        <td></td>
+        <td><p>The populated list of <a class="xref" href="OABPartData.html">OABPartData.PartInfoModuleEntry</a> instances describing this module's PAM entries.</p>
+</td>
       </tr>
     </tbody>
   </table>

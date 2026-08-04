@@ -134,9 +134,40 @@
 </h3>
 
 
+  <a id="Redux_ExtraModTypes_KerbalMod_PM_" data-uid="Redux.ExtraModTypes.KerbalMod.PM*"></a>
+  <h4 id="Redux_ExtraModTypes_KerbalMod_PM" data-uid="Redux.ExtraModTypes.KerbalMod.PM">PM</h4>
+  <div class="markdown level1 summary"><p>Gets the fluent PatchManager scope bound to this mod's ID.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected PmScope PM { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.CSharpPatching.PmScope.html">PmScope</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_ExtraModTypes_KerbalMod_PM_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Use PM.PatchPart(...) and the other domain patch methods to register C# patches that namespace under
+this mod automatically. Call these from OnPreInitialized. Registering later (OnInitialized or after)
+throws, because PatchManager has by then already flushed the fluent queue and run its patch flow.</p>
+</div>
+
+
   <a id="Redux_ExtraModTypes_KerbalMod_SWConfiguration_" data-uid="Redux.ExtraModTypes.KerbalMod.SWConfiguration*"></a>
   <h4 id="Redux_ExtraModTypes_KerbalMod_SWConfiguration" data-uid="Redux.ExtraModTypes.KerbalMod.SWConfiguration">SWConfiguration</h4>
-  <div class="markdown level1 summary"><p>Gets the configuration file for this mod</p>
+  <div class="markdown level1 summary"><p>Gets or sets the configuration file provided by SpaceWarp for this mod.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -162,7 +193,7 @@
 
   <a id="Redux_ExtraModTypes_KerbalMod_SWLogger_" data-uid="Redux.ExtraModTypes.KerbalMod.SWLogger*"></a>
   <h4 id="Redux_ExtraModTypes_KerbalMod_SWLogger" data-uid="Redux.ExtraModTypes.KerbalMod.SWLogger">SWLogger</h4>
-  <div class="markdown level1 summary"><p>Gets the logger for this mod</p>
+  <div class="markdown level1 summary"><p>Gets or sets the logger instance provided by SpaceWarp for this mod.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -188,7 +219,7 @@
 
   <a id="Redux_ExtraModTypes_KerbalMod_SWMetadata_" data-uid="Redux.ExtraModTypes.KerbalMod.SWMetadata*"></a>
   <h4 id="Redux_ExtraModTypes_KerbalMod_SWMetadata" data-uid="Redux.ExtraModTypes.KerbalMod.SWMetadata">SWMetadata</h4>
-  <div class="markdown level1 summary"><p>Gets the metadata for this mod</p>
+  <div class="markdown level1 summary"><p>Gets or sets the plugin descriptor provided by SpaceWarp for this mod.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -216,7 +247,8 @@
 
   <a id="Redux_ExtraModTypes_KerbalMod_CreateHarmonyAndPatchAll_" data-uid="Redux.ExtraModTypes.KerbalMod.CreateHarmonyAndPatchAll*"></a>
   <h4 id="Redux_ExtraModTypes_KerbalMod_CreateHarmonyAndPatchAll" data-uid="Redux.ExtraModTypes.KerbalMod.CreateHarmonyAndPatchAll">CreateHarmonyAndPatchAll()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Creates a Harmony instance keyed to this mod's GUID and patches all methods in the mod's assembly.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -233,7 +265,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="https://raw.githubusercontent.com/pardeike/Harmony/refs/heads/master/docs/api/HarmonyLib.Harmony.html">Harmony</a></td>
-        <td></td>
+        <td><p>The Harmony instance used to apply the patches.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -241,8 +274,7 @@
 
   <a id="Redux_ExtraModTypes_KerbalMod_OnInitialized_" data-uid="Redux.ExtraModTypes.KerbalMod.OnInitialized*"></a>
   <h4 id="Redux_ExtraModTypes_KerbalMod_OnInitialized" data-uid="Redux.ExtraModTypes.KerbalMod.OnInitialized">OnInitialized()</h4>
-  <div class="markdown level1 summary"><p>2nd stage initialization.</p>
-<p>This is called after the game is loaded, and after your mods assets are loaded.</p>
+  <div class="markdown level1 summary"><p>Called during the mod's initialization phase.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -253,8 +285,7 @@
 
   <a id="Redux_ExtraModTypes_KerbalMod_OnPostInitialized_" data-uid="Redux.ExtraModTypes.KerbalMod.OnPostInitialized*"></a>
   <h4 id="Redux_ExtraModTypes_KerbalMod_OnPostInitialized" data-uid="Redux.ExtraModTypes.KerbalMod.OnPostInitialized">OnPostInitialized()</h4>
-  <div class="markdown level1 summary"><p>3rd stage initialization.</p>
-<p>This is called after all mods have done 2nd stage initialization.</p>
+  <div class="markdown level1 summary"><p>Called after the mod's initialization phase completes.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -265,9 +296,7 @@
 
   <a id="Redux_ExtraModTypes_KerbalMod_OnPreInitialized_" data-uid="Redux.ExtraModTypes.KerbalMod.OnPreInitialized*"></a>
   <h4 id="Redux_ExtraModTypes_KerbalMod_OnPreInitialized" data-uid="Redux.ExtraModTypes.KerbalMod.OnPreInitialized">OnPreInitialized()</h4>
-  <div class="markdown level1 summary"><p>1st stage initialization.</p>
-<p>This is called before any of the game is actually loaded, it is called as early as possible in the game's
-bootstrap process.</p>
+  <div class="markdown level1 summary"><p>Called before the mod's initialization phase begins.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>

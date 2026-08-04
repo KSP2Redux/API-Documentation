@@ -90,6 +90,10 @@
     <div class="level1"><a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a></div>
     <div class="level2"><span class="xref">Data_Convector</span></div>
   </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Redux.Ecs.CompilerServices.IPartModuleNotifier-1.html">IPartModuleNotifier</a>&lt;<a class="xref" href="Redux.Ecs.Modules.ConvectorData.html">ConvectorData</a>.<a class="xref" href="Redux.Ecs.Modules.ConvectorData.Changeset.html">Changeset</a>&gt;</div>
+  </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
@@ -121,9 +125,6 @@
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_StageActivationActionPath">ModuleData.StageActivationActionPath</a>
-    </div>
-    <div>
-      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RequestHandle">ModuleData.RequestHandle</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_Copy_KSP_Sim_Definitions_ModuleData_">ModuleData.Copy(ModuleData)</a>
@@ -195,6 +196,12 @@
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_SyncAllSymmetricalData_KSP_Sim_Definitions_ModuleData_">ModuleData.SyncAllSymmetricalData(ModuleData)</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_Entity">ModuleData.Entity</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RequestEntity">ModuleData.RequestEntity</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_HasSymmetricalProperties">ModuleData.HasSymmetricalProperties</a>
     </div>
     <div>
@@ -217,7 +224,7 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Data_Convector_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class Data_Convector : ModuleData</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class Data_Convector : ModuleData, IPartModuleNotifier&lt;ConvectorData.Changeset&gt;</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -258,17 +265,20 @@ public FloatCurve AtmosphereCurve</code></pre>
       </tr>
     </tbody>
   </table>
+  <h3 id="properties">Properties
+</h3>
 
 
+  <a id="KSP_Modules_Data_Convector_IsInAtmosphere_" data-uid="KSP.Modules.Data_Convector.IsInAtmosphere*"></a>
   <h4 id="KSP_Modules_Data_Convector_IsInAtmosphere" data-uid="KSP.Modules.Data_Convector.IsInAtmosphere">IsInAtmosphere</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Forwards to the part's ConvectorData.IsInAtmosphere once bound; a managed value seeded onto the component at bind otherwise.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[KSPState]
-public bool IsInAtmosphere</code></pre>
+    <pre><code class="lang-csharp hljs">public bool IsInAtmosphere { get; set; }</code></pre>
   </div>
-  <h5 class="fieldValue">Field Value</h5>
+  <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-condensed">
     <thead>
       <tr>
@@ -283,13 +293,12 @@ public bool IsInAtmosphere</code></pre>
       </tr>
     </tbody>
   </table>
-  <h3 id="properties">Properties
-</h3>
 
 
   <a id="KSP_Modules_Data_Convector_ModuleType_" data-uid="KSP.Modules.Data_Convector.ModuleType*"></a>
   <h4 id="KSP_Modules_Data_Convector_ModuleType" data-uid="KSP.Modules.Data_Convector.ModuleType">ModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <span class="xref">System.Type</span> of the part behaviour module that owns this data definition.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -312,6 +321,99 @@ public bool IsInAtmosphere</code></pre>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_ModuleType">ModuleData.ModuleType</a></div>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="KSP_Modules_Data_Convector_BindToEntity_" data-uid="KSP.Modules.Data_Convector.BindToEntity*"></a>
+  <h4 id="KSP_Modules_Data_Convector_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_" data-uid="KSP.Modules.Data_Convector.BindToEntity(Unity.Entities.EntityManager,Unity.Entities.Entity)">BindToEntity(EntityManager, Entity)</h4>
+  <div class="markdown level1 summary"><p>Binds this module's state and config to its part entity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void BindToEntity(EntityManager em, Entity entity)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">entity</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_">ModuleData.BindToEntity(EntityManager, Entity)</a></div>
+
+
+  <a id="KSP_Modules_Data_Convector_NotifyChanged_" data-uid="KSP.Modules.Data_Convector.NotifyChanged*"></a>
+  <h4 id="KSP_Modules_Data_Convector_NotifyChanged_Unity_Entities_EntityManager_Unity_Entities_Entity_Redux_Ecs_Modules_ConvectorData_Changeset_" data-uid="KSP.Modules.Data_Convector.NotifyChanged(Unity.Entities.EntityManager,Unity.Entities.Entity,Redux.Ecs.Modules.ConvectorData.Changeset)">NotifyChanged(EntityManager, Entity, Changeset)</h4>
+  <div class="markdown level1 summary"><p>Raises OnChanged for each changed property on the part's ConvectorData, driven by
+the changeset the scan pass captured. Live values are read from the component.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void NotifyChanged(EntityManager em, Entity entity, ConvectorData.Changeset __changeset)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">entity</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Redux.Ecs.Modules.ConvectorData.html">ConvectorData</a>.<a class="xref" href="Redux.Ecs.Modules.ConvectorData.Changeset.html">Changeset</a></td>
+        <td><span class="parametername">__changeset</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Modules_Data_Convector_UnbindFromEntity_" data-uid="KSP.Modules.Data_Convector.UnbindFromEntity*"></a>
+  <h4 id="KSP_Modules_Data_Convector_UnbindFromEntity" data-uid="KSP.Modules.Data_Convector.UnbindFromEntity">UnbindFromEntity()</h4>
+  <div class="markdown level1 summary"><p>Detaches from the module entity, snapshotting entity-backed state into managed storage.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void UnbindFromEntity()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_UnbindFromEntity">ModuleData.UnbindFromEntity()</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Redux.Ecs.CompilerServices.IPartModuleNotifier-1.html">IPartModuleNotifier&lt;TChangeset&gt;</a>
+  </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>

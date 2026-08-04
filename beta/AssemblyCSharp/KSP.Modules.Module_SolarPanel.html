@@ -95,9 +95,6 @@
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a></div>
     <div><a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a></div>
     <div><a class="xref" href="GlobalAssemblyCSharp.IMultipleDragCube.html">IMultipleDragCube</a></div>
     <div><a class="xref" href="GlobalAssemblyCSharp.ILateUpdate.html">ILateUpdate</a></div>
@@ -234,6 +231,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsStageable">PartBehaviourModule.IsStageable()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnViewUnload">PartBehaviourModule.OnViewUnload()</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnActive">PartBehaviourModule.OnActive()</a>
     </div>
     <div>
@@ -255,13 +255,16 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForDataModules">PartBehaviourModule.InitForDataModules()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_StashPendingStateJson_System_Type_Newtonsoft_Json_Linq_JObject_">PartBehaviourModule.StashPendingStateJson(Type, JObject)</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_SetDataModuleValues_KSP_Sim_Definitions_SerializedPartModule_">PartBehaviourModule.SetDataModuleValues(SerializedPartModule)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForNewOABPart">PartBehaviourModule.InitForNewOABPart()</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_">PartBehaviourModule.RemoveResourceRequest(ResourceFlowRequestHandle)</a>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_Unity_Entities_Entity_">PartBehaviourModule.RemoveResourceRequest(Entity)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnAnimStateExit_UnityEngine_Animator_System_Int32_">PartBehaviourModule.OnAnimStateExit(Animator, int)</a>
@@ -348,6 +351,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsLocallyAuthorized">PartBehaviourModule.IsLocallyAuthorized</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_PendingStateJson">PartBehaviourModule.PendingStateJson</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Game">KerbalMonoBehaviour.Game</a>
     </div>
     <div>
@@ -367,7 +373,9 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Module_SolarPanel_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Module_SolarPanel : Module_Deployable, IPartModule, IFixedUpdate, IPriorityOverride, IUpdate, IObjectAssemblyPartModule, IMultipleDragCube, ILateUpdate</code></pre>
+    <pre><code class="lang-csharp hljs">[ModuleCategory(&quot;Electrical&quot;)]
+[ModuleDescription(&quot;Tracking solar panel that generates power from sun exposure&quot;)]
+public class Module_SolarPanel : Module_Deployable, IPartModule, IObjectAssemblyPartModule, IMultipleDragCube, ILateUpdate</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -386,7 +394,8 @@
 
 
   <h4 id="KSP_Modules_Module_SolarPanel_dataSolarPanel" data-uid="KSP.Modules.Module_SolarPanel.dataSolarPanel">dataSolarPanel</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="KSP.Modules.Data_SolarPanel.html">Data_SolarPanel</a> data module instance associated with this solar panel.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -413,7 +422,8 @@
 
   <a id="KSP_Modules_Module_SolarPanel_PartComponentModuleType_" data-uid="KSP.Modules.Module_SolarPanel.PartComponentModuleType*"></a>
   <h4 id="KSP_Modules_Module_SolarPanel_PartComponentModuleType" data-uid="KSP.Modules.Module_SolarPanel.PartComponentModuleType">PartComponentModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <span class="xref">System.Type</span> of the backing part component module for this behaviour module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -442,7 +452,8 @@
 
   <a id="KSP_Modules_Module_SolarPanel_AddDataModules_" data-uid="KSP.Modules.Module_SolarPanel.AddDataModules*"></a>
   <h4 id="KSP_Modules_Module_SolarPanel_AddDataModules" data-uid="KSP.Modules.Module_SolarPanel.AddDataModules">AddDataModules()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers <a class="xref" href="KSP.Modules.Module_SolarPanel.html#KSP_Modules_Module_SolarPanel_dataSolarPanel">dataSolarPanel</a> alongside the deployable data module into the shared data-module collection.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -516,7 +527,8 @@
 
   <a id="KSP_Modules_Module_SolarPanel_GetModuleDisplayName_" data-uid="KSP.Modules.Module_SolarPanel.GetModuleDisplayName*"></a>
   <h4 id="KSP_Modules_Module_SolarPanel_GetModuleDisplayName" data-uid="KSP.Modules.Module_SolarPanel.GetModuleDisplayName">GetModuleDisplayName()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the localized display name for the solar panel module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -533,7 +545,8 @@
     <tbody>
       <tr>
         <td><span class="xref">string</span></td>
-        <td></td>
+        <td><p>The translated string for the solar panel module name.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -543,7 +556,9 @@
 
   <a id="KSP_Modules_Module_SolarPanel_OnInitialize_" data-uid="KSP.Modules.Module_SolarPanel.OnInitialize*"></a>
   <h4 id="KSP_Modules_Module_SolarPanel_OnInitialize" data-uid="KSP.Modules.Module_SolarPanel.OnInitialize">OnInitialize()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes the solar panel module, configuring the raycast layer mask, resolving the tracking-dot transform,
+and subscribing to deployable state-change events.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -555,7 +570,9 @@
 
   <a id="KSP_Modules_Module_SolarPanel_OnModuleOABFixedUpdate_" data-uid="KSP.Modules.Module_SolarPanel.OnModuleOABFixedUpdate*"></a>
   <h4 id="KSP_Modules_Module_SolarPanel_OnModuleOABFixedUpdate_System_Single_" data-uid="KSP.Modules.Module_SolarPanel.OnModuleOABFixedUpdate(System.Single)">OnModuleOABFixedUpdate(float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Handles the OAB fixed-update tick, ensuring the solar panel resource request is registered with the flow broker
+when the module is enabled and no valid request handle exists.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -574,7 +591,8 @@
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">deltaTime</span></td>
-        <td></td>
+        <td><p>The elapsed time in seconds since the last fixed update.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -584,7 +602,8 @@
 
   <a id="KSP_Modules_Module_SolarPanel_OnShutdown_" data-uid="KSP.Modules.Module_SolarPanel.OnShutdown*"></a>
   <h4 id="KSP_Modules_Module_SolarPanel_OnShutdown" data-uid="KSP.Modules.Module_SolarPanel.OnShutdown">OnShutdown()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Shuts down the solar panel module and unsubscribes from deployable state-change events.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -596,7 +615,9 @@
 
   <a id="KSP_Modules_Module_SolarPanel_PostCalculateTracking_" data-uid="KSP.Modules.Module_SolarPanel.PostCalculateTracking*"></a>
   <h4 id="KSP_Modules_Module_SolarPanel_PostCalculateTracking_System_Boolean_UnityEngine_Vector3_" data-uid="KSP.Modules.Module_SolarPanel.PostCalculateTracking(System.Boolean,UnityEngine.Vector3)">PostCalculateTracking(bool, Vector3)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Updates the stellar-exposure display and calculates the resource flow rate after a tracking line-of-sight
+result is available for this frame.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -615,12 +636,14 @@
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">trackingLOS</span></td>
-        <td></td>
+        <td><p>True if the panel has an unobstructed line of sight to the tracked star; otherwise false.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Vector3</span></td>
         <td><span class="parametername">trackingDirection</span></td>
-        <td></td>
+        <td><p>The normalized direction vector toward the tracked light source.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -629,15 +652,6 @@
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a>
   </div>
   <div>
       <a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a>

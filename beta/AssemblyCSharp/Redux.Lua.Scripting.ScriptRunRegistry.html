@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class ScriptRunRegistry | KSP2Redux API (Beta) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class ScriptRunRegistry | KSP2Redux API (Beta) ">
+    
+    <meta name="description" content="Tracks the script runs the in-game console (and CLI eval) starts, so the running script can read its own identity through the Script global and the host can cancel it.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Redux.Lua.Scripting.ScriptRunRegistry">
+
+
+
+  <h1 id="Redux_Lua_Scripting_ScriptRunRegistry" data-uid="Redux.Lua.Scripting.ScriptRunRegistry" class="text-break">Class ScriptRunRegistry</h1>
+  <div class="markdown level0 summary"><p>Tracks the script runs the in-game console (and CLI eval) starts, so the running script can read its own
+identity through the <code>Script</code> global and the host can cancel it.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><span class="xref">ScriptRunRegistry</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.Lua.html">Lua</a>.<a class="xref" href="Redux.Lua.Scripting.html">Scripting</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="Redux_Lua_Scripting_ScriptRunRegistry_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class ScriptRunRegistry</code></pre>
+  </div>
+  <h5 id="Redux_Lua_Scripting_ScriptRunRegistry_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>A &quot;run&quot; is one console or CLI execution, opened with <a class="xref" href="Redux.Lua.Scripting.ScriptRunRegistry.html#Redux_Lua_Scripting_ScriptRunRegistry_BeginScriptRun_System_String_System_String_System_String_">BeginScriptRun(string, string, string)</a> and keyed by an id. The
+host marks which run is executing with <a class="xref" href="Redux.Lua.Scripting.ScriptRunRegistry.html#Redux_Lua_Scripting_ScriptRunRegistry_SetCurrentScriptRun_System_String_">SetCurrentScriptRun(string)</a> around each resume, so the
+<code>Script</code> global reads the right run off ambient state. Coroutines a run spawns are owned by
+<a class="xref" href="Redux.Lua.ModCoroutineRunner.html">ModCoroutineRunner</a> (keyed by the same id), not tracked here. The static surface
+(<a class="xref" href="Redux.Lua.Scripting.ScriptRunRegistry.html#Redux_Lua_Scripting_ScriptRunRegistry_BeginScriptRun_System_String_System_String_System_String_">BeginScriptRun(string, string, string)</a>, <a class="xref" href="Redux.Lua.Scripting.ScriptRunRegistry.html#Redux_Lua_Scripting_ScriptRunRegistry_SetCurrentScriptRun_System_String_">SetCurrentScriptRun(string)</a>, <a class="xref" href="Redux.Lua.Scripting.ScriptRunRegistry.html#Redux_Lua_Scripting_ScriptRunRegistry_ClearCurrentScriptRun_System_String_">ClearCurrentScriptRun(string)</a>,
+<a class="xref" href="Redux.Lua.Scripting.ScriptRunRegistry.html#Redux_Lua_Scripting_ScriptRunRegistry_CompleteScriptRun_System_String_">CompleteScriptRun(string)</a>, <a class="xref" href="Redux.Lua.Scripting.ScriptRunRegistry.html#Redux_Lua_Scripting_ScriptRunRegistry_CancelScriptRun_System_String_">CancelScriptRun(string)</a>, <a class="xref" href="Redux.Lua.Scripting.ScriptRunRegistry.html#Redux_Lua_Scripting_ScriptRunRegistry_IsScriptRunActive_System_String_">IsScriptRunActive(string)</a>) is the
+contract the SpaceWarp console reaches by reflection through <a class="xref" href="KSP.ScriptInterop.LuaScriptUtilityMgr.html">LuaScriptUtilityMgr</a>.</p>
+</div>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="Redux_Lua_Scripting_ScriptRunRegistry_BeginScriptRun_" data-uid="Redux.Lua.Scripting.ScriptRunRegistry.BeginScriptRun*"></a>
+  <h4 id="Redux_Lua_Scripting_ScriptRunRegistry_BeginScriptRun_System_String_System_String_System_String_" data-uid="Redux.Lua.Scripting.ScriptRunRegistry.BeginScriptRun(System.String,System.String,System.String)">BeginScriptRun(string, string, string)</h4>
+  <div class="markdown level1 summary"><p>Opens a run and returns its id. A blank id is replaced with a generated one.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string BeginScriptRun(string id, string name, string kind)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">id</span></td>
+        <td><p>The desired run id, or null/blank to generate one.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>A display name for the run.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">kind</span></td>
+        <td><p>A category for the run (for example &quot;UI&quot;).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><p>The run id, generated when none was supplied.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Lua_Scripting_ScriptRunRegistry_CancelScriptRun_" data-uid="Redux.Lua.Scripting.ScriptRunRegistry.CancelScriptRun*"></a>
+  <h4 id="Redux_Lua_Scripting_ScriptRunRegistry_CancelScriptRun_System_String_" data-uid="Redux.Lua.Scripting.ScriptRunRegistry.CancelScriptRun(System.String)">CancelScriptRun(string)</h4>
+  <div class="markdown level1 summary"><p>Cancels a run and stops every coroutine it started.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool CancelScriptRun(string runId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">runId</span></td>
+        <td><p>The run id to cancel.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if a run with that id existed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Lua_Scripting_ScriptRunRegistry_ClearCurrentScriptRun_" data-uid="Redux.Lua.Scripting.ScriptRunRegistry.ClearCurrentScriptRun*"></a>
+  <h4 id="Redux_Lua_Scripting_ScriptRunRegistry_ClearCurrentScriptRun_System_String_" data-uid="Redux.Lua.Scripting.ScriptRunRegistry.ClearCurrentScriptRun(System.String)">ClearCurrentScriptRun(string)</h4>
+  <div class="markdown level1 summary"><p>Clears the current run if it matches the given id.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void ClearCurrentScriptRun(string runId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">runId</span></td>
+        <td><p>The run id to clear.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Lua_Scripting_ScriptRunRegistry_CompleteScriptRun_" data-uid="Redux.Lua.Scripting.ScriptRunRegistry.CompleteScriptRun*"></a>
+  <h4 id="Redux_Lua_Scripting_ScriptRunRegistry_CompleteScriptRun_System_String_" data-uid="Redux.Lua.Scripting.ScriptRunRegistry.CompleteScriptRun(System.String)">CompleteScriptRun(string)</h4>
+  <div class="markdown level1 summary"><p>Closes a run's top-level body. The run stays &quot;active&quot; while it still owns running coroutines.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void CompleteScriptRun(string runId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">runId</span></td>
+        <td><p>The run id to complete.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Lua_Scripting_ScriptRunRegistry_CurrentScriptId_" data-uid="Redux.Lua.Scripting.ScriptRunRegistry.CurrentScriptId*"></a>
+  <h4 id="Redux_Lua_Scripting_ScriptRunRegistry_CurrentScriptId" data-uid="Redux.Lua.Scripting.ScriptRunRegistry.CurrentScriptId">CurrentScriptId()</h4>
+  <div class="markdown level1 summary"><p>The id of the current run, or the stock default when none is current.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string CurrentScriptId()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Lua_Scripting_ScriptRunRegistry_CurrentScriptKind_" data-uid="Redux.Lua.Scripting.ScriptRunRegistry.CurrentScriptKind*"></a>
+  <h4 id="Redux_Lua_Scripting_ScriptRunRegistry_CurrentScriptKind" data-uid="Redux.Lua.Scripting.ScriptRunRegistry.CurrentScriptKind">CurrentScriptKind()</h4>
+  <div class="markdown level1 summary"><p>The kind of the current run, or the stock default when none is current.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string CurrentScriptKind()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Lua_Scripting_ScriptRunRegistry_CurrentScriptName_" data-uid="Redux.Lua.Scripting.ScriptRunRegistry.CurrentScriptName*"></a>
+  <h4 id="Redux_Lua_Scripting_ScriptRunRegistry_CurrentScriptName" data-uid="Redux.Lua.Scripting.ScriptRunRegistry.CurrentScriptName">CurrentScriptName()</h4>
+  <div class="markdown level1 summary"><p>The name of the current run, or the stock default when none is current.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string CurrentScriptName()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Lua_Scripting_ScriptRunRegistry_IsCurrentScriptStopRequested_" data-uid="Redux.Lua.Scripting.ScriptRunRegistry.IsCurrentScriptStopRequested*"></a>
+  <h4 id="Redux_Lua_Scripting_ScriptRunRegistry_IsCurrentScriptStopRequested" data-uid="Redux.Lua.Scripting.ScriptRunRegistry.IsCurrentScriptStopRequested">IsCurrentScriptStopRequested()</h4>
+  <div class="markdown level1 summary"><p>Whether the current run has been asked to stop, so a long-running script can bail cooperatively.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsCurrentScriptStopRequested()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True when the current run is cancelled or gone.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Lua_Scripting_ScriptRunRegistry_IsScriptRunActive_" data-uid="Redux.Lua.Scripting.ScriptRunRegistry.IsScriptRunActive*"></a>
+  <h4 id="Redux_Lua_Scripting_ScriptRunRegistry_IsScriptRunActive_System_String_" data-uid="Redux.Lua.Scripting.ScriptRunRegistry.IsScriptRunActive(System.String)">IsScriptRunActive(string)</h4>
+  <div class="markdown level1 summary"><p>Whether a run is still going: its body is registered and not cancelled, or it still owns coroutines.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsScriptRunActive(string runId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">runId</span></td>
+        <td><p>The run id to test.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True while the run or any coroutine it started is alive.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Lua_Scripting_ScriptRunRegistry_SetCurrentScriptRun_" data-uid="Redux.Lua.Scripting.ScriptRunRegistry.SetCurrentScriptRun*"></a>
+  <h4 id="Redux_Lua_Scripting_ScriptRunRegistry_SetCurrentScriptRun_System_String_" data-uid="Redux.Lua.Scripting.ScriptRunRegistry.SetCurrentScriptRun(System.String)">SetCurrentScriptRun(string)</h4>
+  <div class="markdown level1 summary"><p>Marks the given run as the one currently executing, so the <code>Script</code> global reads from it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void SetCurrentScriptRun(string runId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">runId</span></td>
+        <td><p>The run id to make current.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from prerelease
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

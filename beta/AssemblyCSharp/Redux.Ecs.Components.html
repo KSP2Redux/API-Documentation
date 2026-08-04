@@ -85,6 +85,40 @@
     <h3 id="classes">
 Classes
 </h3>
+      <h4><a class="xref" href="Redux.Ecs.Components.CurrentPatchedConicsOrbit.html">CurrentPatchedConicsOrbit</a></h4>
+      <section><p>Managed ECS component representing the current patched-conics orbit patch for an entity.
+Unmanaged orbital data is read from and written to the entity's <a class="xref" href="Redux.Ecs.Components.PatchedConicsOrbitData.html">PatchedConicsOrbitData</a>
+component; managed-side state (velocity, patch graph) is stored directly on this class.
+The reference body is identified by <a class="xref" href="Redux.Ecs.Components.PatchedConicsOrbitData.html#Redux_Ecs_Components_PatchedConicsOrbitData_ReferenceBodyEntity">ReferenceBodyEntity</a> and
+resolved to a <a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a> on demand via <a class="xref" href="Redux.Ecs.Components.SimObjectManagedData.html">SimObjectManagedData</a>.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.ModuleManagedData.html">ModuleManagedData</a></h4>
+      <section><p>Managed back-reference from a module entity to its <a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a> entries, letting
+<a class="xref" href="Redux.Ecs.ModuleEntities.html">ModuleEntities</a> unbind the managed side before the entity is destroyed.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.OabAssemblyManagedData.html">OabAssemblyManagedData</a></h4>
+      <section><p>Managed back-reference from an editor assembly entity to its <a class="xref" href="KSP.OAB.ObjectAssembly.html">ObjectAssembly</a>.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.OabPartManagedData.html">OabPartManagedData</a></h4>
+      <section><p>Managed back-reference from an editor part entity to its <a class="xref" href="KSP.OAB.ObjectAssemblyPart.html">ObjectAssemblyPart</a>.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.PartMembership.html">PartMembership</a></h4>
+      <section><p>Stamps and strips the part-owner membership component set (<a class="xref" href="Redux.Ecs.Components.PartVessel.html">PartVessel</a>,
+<a class="xref" href="Redux.Ecs.Components.PartOwnerRef.html">PartOwnerRef</a>, and the <a class="xref" href="Redux.Ecs.Components.PartParent.html">PartParent</a>/<a class="xref" href="Redux.Ecs.Components.PartChild.html">PartChild</a>
+attachment-tree placeholders) on a part entity, shared by flight
+(<a class="xref" href="KSP.Sim.impl.PartOwnerComponent.html">PartOwnerComponent</a>) and the editor (<a class="xref" href="KSP.OAB.ObjectAssembly.html">ObjectAssembly</a>).</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.ResourceRequestEntity.html">ResourceRequestEntity</a></h4>
+      <section><p>Creates and tears down resource-flow request entities and toggles their active flag. A request entity
+is the sole identity of a request: it carries <a class="xref" href="Redux.Ecs.Components.RequestVessel.html">RequestVessel</a> (shared, the solve filter),
+<a class="xref" href="Redux.Ecs.Components.RequestPart.html">RequestPart</a>, a <a class="xref" href="Redux.Ecs.Components.ResourceFlowRequest.html">ResourceFlowRequest</a> header, its own
+<a class="xref" href="Redux.Ecs.Components.ResourceFlowInstructionData.html">ResourceFlowInstructionData</a> buffer, a <a class="xref" href="Redux.Ecs.Components.ResourceFlowResponse.html">ResourceFlowResponse</a>, and a
+<a class="xref" href="Redux.Ecs.Components.ResourceFlowFailedResource.html">ResourceFlowFailedResource</a> buffer.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.ResourceRequestIndex.html">ResourceRequestIndex</a></h4>
+      <section><p>Reserved values for <a class="xref" href="Redux.Ecs.Components.ResourceFlowRequest.html#Redux_Ecs_Components_ResourceFlowRequest_Index">Index</a>. The index is a caller-defined
+discriminator, never an identity or dedup key.</p>
+</section>
       <h4><a class="xref" href="Redux.Ecs.Components.SimObjectManagedData.html">SimObjectManagedData</a></h4>
       <section></section>
     <h3 id="structs">
@@ -94,8 +128,214 @@ Structs
       <section><p>A list of ancestor entities (entity.parent.parent.parent... etc) starting with, and including the current entity.
 This is backward from the way this is normally handled, but allowed constructing the list from leaf to root without reversing.</p>
 </section>
+      <h4><a class="xref" href="Redux.Ecs.Components.AngularVelocityD.html">AngularVelocityD</a></h4>
+      <section><p>Unmanaged equivalent of <a class="xref" href="KSP.Sim.AngularVelocity.html">AngularVelocity</a>: a relative angular velocity (itself a
+frame-bound <a class="xref" href="Redux.Ecs.Components.VectorD.html">VectorD</a>) plus the entity whose motion frame it is relative to.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.BoundViewObject.html">BoundViewObject</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Redux.Ecs.Components.CelestialBodyChild.html">CelestialBodyChild</a></h4>
+      <section><p>One orbiting child of a celestial body. Each body holds a buffer of its children; the
+<a class="xref" href="Redux.Ecs.Components.CelestialBodyHierarchyRoot.html">CelestialBodyHierarchyRoot</a> singleton holds the stars.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.CelestialBodyHasRotationUpdate.html">CelestialBodyHasRotationUpdate</a></h4>
+      <section><p>Marks that a body's rotation changed this tick. The celestial-body ordered update owns the flag: it
+clears it at the start of each update and re-enables it only when it recomputes the rotation. The legacy
+fixed update reads it to raise <code>CelestialBodyComponent.RotationUpdated</code> and
+<code>CelestialBodyComponent.AngularVelocityUpdated</code>.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.CelestialBodyHierarchyRoot.html">CelestialBodyHierarchyRoot</a></h4>
+      <section><p>Singleton root of the celestial-body tree; its <a class="xref" href="Redux.Ecs.Components.CelestialBodyChild.html">CelestialBodyChild</a> buffer holds the stars.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.CelestialBodySimData.html">CelestialBodySimData</a></h4>
+      <section><p>Unmanaged source of truth for the celestial-body fields driven by <code>CelestialBodyOrderedUpdateSystem</code>,
+exposed as accessor properties on <a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a>.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.ContainerOwner.html">ContainerOwner</a></h4>
+      <section><p>Links a resource-container entity to the part entity that owns it.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.CoolerRequiredResource.html">CoolerRequiredResource</a></h4>
+      <section><p>One resource a cooler consumes while operating (rate and acceptance threshold), stamped onto the
+cooler module entity from the managed required-resource settings with names resolved to runtime ids.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.CoolingEnergyToApply.html">CoolingEnergyToApply</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Redux.Ecs.Components.MassModifierData.html">MassModifierData</a></h4>
+      <section><p>Per-module mass contribution, written on a module entity by its part-module system and scattered into the
+owning part's <a class="xref" href="Redux.Ecs.Components.PartMassModifier.html">PartMassModifier</a> by MassAggregateSystem.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.ModulePart.html">ModulePart</a></h4>
+      <section><p>The part entity that a part-module entity belongs to. A module instance lives on its own entity
+and resolves its owning part's data through this back-reference.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.ModuleRequestEntity.html">ModuleRequestEntity</a></h4>
+      <section><p>The resource-flow request entity owned by a part-module entity. Backs
+<a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RequestEntity">RequestEntity</a>; added when the module first allocates a
+request.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.OrbitStabilityData.html">OrbitStabilityData</a></h4>
+      <section><p>Tracks whether a vessel's patched-conics orbit is currently stable, so
+<code>OrbitStabilitySystem</code> can emit an event on the unstable-to-stable edge.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.OrbiterData.html">OrbiterData</a></h4>
+      <section><p>Authoritative unmanaged state for <a class="xref" href="KSP.Sim.impl.OrbiterComponent.html">OrbiterComponent</a>.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.OrbiterFrame.html">OrbiterFrame</a></h4>
+      <section><p>The orbiter's own celestial frame entity; its <a class="xref" href="Redux.Ecs.Components.Transformd.html">Transformd</a> holds the live (physics-driven) position
+the orbit-driver job resolves the owning body from when the orbiter is off-rails.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.OrbiterMainBody.html">OrbiterMainBody</a></h4>
+      <section><p>The body whose SOI owns this orbiter, resolved each tick by the orbit-driver job. <span class="xref">Unity.Entities.Entity.Null</span> when
+unresolved this tick: a celestial body, no reference body, or the job has not run yet.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.OverheatEvent.html">OverheatEvent</a></h4>
+      <section><p>Emitted by the thermal finalize job when a part's temperature exceeds its maximum, so a later managed
+system can destroy it without the Burst pipeline taking a sync point.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.PartChild.html">PartChild</a></h4>
+      <section><p>One attachment-tree child of a part within its part owner, as an entity reference. The buffer on a part
+entity holds all of its children. Rebuilt by
+<a class="xref" href="KSP.Sim.impl.PartOwnerComponent.html#KSP_Sim_impl_PartOwnerComponent_UpdatePartRelationships">UpdatePartRelationships()</a>.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.PartComponentData.html">PartComponentData</a></h4>
+      <section><p>Unmanaged source of truth for the blittable state of a part, exposed as accessor properties on
+<a class="xref" href="KSP.Sim.impl.PartComponent.html">PartComponent</a>.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.PartMassModifier.html">PartMassModifier</a></h4>
+      <section><p>A per-part component that is used by the mass update to sum up all
+mass modifiers on the part.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.PartModuleRef.html">PartModuleRef</a></h4>
+      <section><p>One part-module entity owned by a part, as an entity reference. The buffer on a part entity holds
+every module instance mounted on that part. Maintained by
+<a class="xref" href="Redux.Ecs.ModuleEntities.html">ModuleEntities</a> as modules are bound and removed.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.PartOwnerData.html">PartOwnerData</a></h4>
+      <section><p>Unmanaged source of truth for the plain (blittable) state of a part owner, exposed as accessor properties on
+<a class="xref" href="KSP.Sim.impl.PartOwnerComponent.html">PartOwnerComponent</a>.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.PartOwnerRef.html">PartOwnerRef</a></h4>
+      <section><p>The part owner entity a part belongs to (<span class="xref">Unity.Entities.Entity.Null</span> when unowned). Maintained alongside
+the part's <a class="xref" href="Redux.Ecs.Components.PartVessel.html">PartVessel</a> shared component as parts are added to and removed from owners.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.PartParent.html">PartParent</a></h4>
+      <section><p>The attachment-tree parent of a part within its part owner, as an entity reference
+(<span class="xref">Unity.Entities.Entity.Null</span> for the root or a part with no parent). Rebuilt by
+<a class="xref" href="KSP.Sim.impl.PartOwnerComponent.html#KSP_Sim_impl_PartOwnerComponent_UpdatePartRelationships">UpdatePartRelationships()</a>.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.PartVessel.html">PartVessel</a></h4>
+      <section><p>The part-owner (vessel) entity that a part belongs to, as a shared component so that all parts of a
+single vessel are grouped into the same chunks. This lets a query filter a vessel's parts with
+<code>SetSharedComponentFilter</code> and reduce a per-part component across the whole vessel without
+walking managed state. Stamped and stripped alongside the
+<a class="xref" href="KSP.Sim.impl.PartOwnerComponent.html">PartOwnerComponent</a> membership buffer.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.PatchedConicsOrbitData.html">PatchedConicsOrbitData</a></h4>
+      <section><p>Unmanaged Keplerian state for a patched-conics orbit: the orbital elements plus the values derived from them
+during propagation. <a class="xref" href="KSP.Sim.impl.PatchedConicsOrbit.html">PatchedConicsOrbit</a> holds one of these and forwards its public API to it; the
+Keplerian math is (being) moved onto this struct as instance methods so it can later run in a Burst job.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.PhysicsSpaceFrame.html">PhysicsSpaceFrame</a></h4>
+      <section><p>Singleton exposing the inertial reference frame entity (the PhysX/floating-origin frame) to Burst jobs, so they
+can perform the velocity/angular conversions otherwise only available on the managed PhysicsSpace provider.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.PhysicsStatsDirty.html">PhysicsStatsDirty</a></h4>
+      <section><p>Enableable tag on part-owner and part entities: enabled means the owner's physics stats need recomputing.
+Set on the owner by PartOwnerComponent (per-frame in OnLateUpdate, on structural changes, and by the forced
+recalculation path), broadcast onto the owner's parts by BroadcastDirtyFlagSystem, and cleared once the
+physics reduce has recomputed the owner. The part-level and owner-level reduce jobs filter on it, so clean
+owners are skipped entirely.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.PositionD.html">PositionD</a></h4>
+      <section><p>Unmanaged equivalent of <a class="xref" href="KSP.Sim.Position.html">Position</a>: a position value plus the transform-frame entity it
+is expressed in.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.RequestPart.html">RequestPart</a></h4>
+      <section><p>The part entity a resource-flow request flows against. Doubles as the plan-lookup flow target.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.RequestVessel.html">RequestVessel</a></h4>
+      <section><p>The part-owner (vessel) entity that a resource-flow request belongs to, as a shared component so all of
+a vessel's request entities are grouped into the same chunks. The solve filters a vessel's requests with
+<code>SetSharedComponentFilter</code>. Derived from the request's <a class="xref" href="Redux.Ecs.Components.RequestPart.html">RequestPart</a>'s
+<a class="xref" href="Redux.Ecs.Components.PartVessel.html">PartVessel</a> and reconciled when the part changes owner (docking, re-parent).</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.ResourceDefinitionRow.html">ResourceDefinitionRow</a></h4>
+      <section><p>An unmanaged mirror of <a class="xref" href="KSP.Sim.ResourceSystem.ResourceDefinitionData.html">ResourceDefinitionData</a>.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.ResourceDefinitionsCacheTag.html">ResourceDefinitionsCacheTag</a></h4>
+      <section><p>Tag identifying the singleton entity that carries the baked resource definition
+buffers (<a class="xref" href="Redux.Ecs.Components.ResourceDefinitionRow.html">ResourceDefinitionRow</a> and <a class="xref" href="Redux.Ecs.Components.ResourceIngredientRow.html">ResourceIngredientRow</a>).</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.ResourceFlowFailedResource.html">ResourceFlowFailedResource</a></h4>
+      <section><p>One resource a request failed to process this tick. Populated only on rejection; cleared before each
+solve.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.ResourceFlowInstructionData.html">ResourceFlowInstructionData</a></h4>
+      <section><p>One compiled flow instruction on a request entity. The buffer holds exactly this request's
+instructions — one buffer is one request, so there are no slice fields. The flow target is not stored
+here; it is the request's <a class="xref" href="Redux.Ecs.Components.RequestPart.html">RequestPart</a>.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.ResourceFlowRequest.html">ResourceFlowRequest</a></h4>
+      <section><p>Header for a resource-flow request entity: a control flag plus a non-identity discriminator. The
+request's instructions live in its own <a class="xref" href="Redux.Ecs.Components.ResourceFlowInstructionData.html">ResourceFlowInstructionData</a> buffer and the
+entity is the identity, so there is no handle and no buffer slice.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.ResourceFlowResponse.html">ResourceFlowResponse</a></h4>
+      <section><p>Output of the solve for a request entity. Rejected resources are recorded in the
+<a class="xref" href="Redux.Ecs.Components.ResourceFlowFailedResource.html">ResourceFlowFailedResource</a> buffer.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.ResourceIngredientRow.html">ResourceIngredientRow</a></h4>
+      <section><p>One recipe ingredient: the resource moved per unit of the recipe resource.
+Referenced by <a class="xref" href="Redux.Ecs.Components.ResourceDefinitionRow.html">ResourceDefinitionRow</a> ingredient slices.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.ResourceStoredEntry.html">ResourceStoredEntry</a></h4>
+      <section><p>One per-resource storage slot of a <a class="xref" href="KSP.Sim.ResourceSystem.ResourceContainer.html">ResourceContainer</a>.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.RigidbodyData.html">RigidbodyData</a></h4>
+      <section><p>Unmanaged source of truth for the blittable state of a rigidbody, exposed as accessor properties on
+<a class="xref" href="KSP.Sim.impl.RigidbodyComponent.html">RigidbodyComponent</a>.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.RotationD.html">RotationD</a></h4>
+      <section><p>Unmanaged equivalent of <a class="xref" href="KSP.Sim.Rotation.html">Rotation</a>: a local rotation value plus the transform-frame
+entity it is expressed in.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.SimObjectData.html">SimObjectData</a></h4>
+      <section><p>Unmanaged type flags for a <a class="xref" href="KSP.Sim.impl.SimulationObjectModel.html">SimulationObjectModel</a>, packed into a single
+bitset and exposed as boolean accessors.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.TelemetryData.html">TelemetryData</a></h4>
+      <section><p>Unmanaged source of truth for the plain flight-telemetry state of a simulation object, exposed as accessor
+properties on <a class="xref" href="KSP.Sim.impl.TelemetryComponent.html">TelemetryComponent</a>.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.ThermalBodyContext.html">ThermalBodyContext</a></h4>
+      <section><p>Per-owner body chain (main body up through its reference bodies); each entry is a body and its
+surface-flux base.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.ThermalOwnerData.html">ThermalOwnerData</a></h4>
+      <section><p>Per-vessel thermal aggregates on the part owner entity: the sum of per-part cooling demand, the vessel's
+total cooling budget from its operational coolers, and the main body's atmospheric temperature at the
+vessel's altitude.</p>
+</section>
       <h4><a class="xref" href="Redux.Ecs.Components.Transformd.html">Transformd</a></h4>
       <section><p>Struct representing ECS transform data.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.UniverseRotationState.html">UniverseRotationState</a></h4>
+      <section><p>Singleton holding the universe-wide inverse-rotation frame state.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.VectorD.html">VectorD</a></h4>
+      <section><p>Unmanaged equivalent of <a class="xref" href="KSP.Sim.Vector.html">Vector</a>: a vector value plus the transform-frame entity it is
+expressed in.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.VelocityD.html">VelocityD</a></h4>
+      <section><p>Unmanaged equivalent of <a class="xref" href="KSP.Sim.Velocity.html">Velocity</a>: a relative velocity (itself a frame-bound
+<a class="xref" href="Redux.Ecs.Components.VectorD.html">VectorD</a>) plus the entity whose motion frame it is relative to.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.VesselData.html">VesselData</a></h4>
+      <section><p>Unmanaged source of truth for a vessel's physics mode and per-tick derived dynamics, aero, and attitude
+scalars, exposed as accessor properties on <a class="xref" href="KSP.Sim.impl.VesselComponent.html">VesselComponent</a>.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.VesselRoot.html">VesselRoot</a></h4>
+      <section><p>Indicates which part is the root part of the vessel.</p>
 </section>
 
 

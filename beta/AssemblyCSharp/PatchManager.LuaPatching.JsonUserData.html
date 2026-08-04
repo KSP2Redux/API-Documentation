@@ -105,7 +105,7 @@ public class JsonUserData</code></pre>
   <div class="markdown level0 remarks"><p>Patch scripts read and mutate JSON assets through this type: object keys become string indices,
 array elements become 1-indexed integer indices (matching Lua convention), and iteration is exposed
 through the <code>__pairs</code> / <code>__ipairs</code> metamethods on <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_Pairs">Pairs()</a>.
-Reads against the wrong token type are non-fatal -- they log a debug message and return
+Reads against the wrong token type are non-fatal. They log a debug message and return
 <span class="xref">MoonSharp.Interpreter.DynValue.Nil</span> or an empty result. Writes against the wrong token type throw, since
 silently accepting a write would lose data. Subclasses (<a class="xref" href="PatchManager.LuaPatching.Utility.IndexedListUserData.html">IndexedListUserData</a>,
 <a class="xref" href="PatchManager.LuaPatching.Utility.ExtensibleJsonUserData.html">ExtensibleJsonUserData</a>) override these members to layer name-indexed lookup or
@@ -147,7 +147,7 @@ virtual properties on top of the underlying JSON.</p>
 
 
   <h4 id="PatchManager_LuaPatching_JsonUserData_Token" data-uid="PatchManager.LuaPatching.JsonUserData.Token">Token</h4>
-  <div class="markdown level1 summary"><p>The wrapped JSON token. Hidden from Lua; C# callers may read or replace it directly.</p>
+  <div class="markdown level1 summary"><p>The wrapped JSON token. Hidden from Lua. C# callers may read or replace it directly.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -201,13 +201,13 @@ public JToken Token</code></pre>
 
 
   <a id="PatchManager_LuaPatching_JsonUserData_Item_" data-uid="PatchManager.LuaPatching.JsonUserData.Item*"></a>
-  <h4 id="PatchManager_LuaPatching_JsonUserData_Item_System_Int32_" data-uid="PatchManager.LuaPatching.JsonUserData.Item(System.Int32)">this[int]</h4>
-  <div class="markdown level1 summary"><p>Gets or sets the array element at the given 1-indexed position.</p>
-</div>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_Item_PatchManager_LuaPatching_LuaIndex_" data-uid="PatchManager.LuaPatching.JsonUserData.Item(PatchManager.LuaPatching.LuaIndex)">this[LuaIndex]</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual DynValue this[int index] { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+public JsonUserData this[LuaIndex index] { get; set; }</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -220,10 +220,9 @@ public JToken Token</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">int</span></td>
+        <td><a class="xref" href="PatchManager.LuaPatching.LuaIndex.html">LuaIndex</a></td>
         <td><span class="parametername">index</span></td>
-        <td><p>The 1-indexed array position.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -237,30 +236,8 @@ public JToken Token</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DynValue</span></td>
-        <td><p>The element at the given position, or <span class="xref">MoonSharp.Interpreter.DynValue.Nil</span> if absent or out of range.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="PatchManager_LuaPatching_JsonUserData_Item_System_Int32__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Reads on a non-array token log a debug message and return <span class="xref">MoonSharp.Interpreter.DynValue.Nil</span>; out-of-range
-reads also return <span class="xref">MoonSharp.Interpreter.DynValue.Nil</span>. Writes throw when the token is not an array; assigning
-at <code>Count + 1</code> appends.</p>
-</div>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Exception</span></td>
-        <td><p>Thrown when setting on a token whose type is not <span class="xref">Newtonsoft.Json.Linq.JTokenType.Array</span>, or when the index is out of range.</p>
-</td>
+        <td><a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -268,12 +245,12 @@ at <code>Count + 1</code> appends.</p>
 
   <a id="PatchManager_LuaPatching_JsonUserData_Item_" data-uid="PatchManager.LuaPatching.JsonUserData.Item*"></a>
   <h4 id="PatchManager_LuaPatching_JsonUserData_Item_System_String_" data-uid="PatchManager.LuaPatching.JsonUserData.Item(System.String)">this[string]</h4>
-  <div class="markdown level1 summary"><p>Gets or sets the object property with the given key.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual DynValue this[string index] { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+public JsonUserData this[string key] { get; set; }</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -287,9 +264,8 @@ at <code>Count + 1</code> appends.</p>
     <tbody>
       <tr>
         <td><span class="xref">string</span></td>
-        <td><span class="parametername">index</span></td>
-        <td><p>The property name.</p>
-</td>
+        <td><span class="parametername">key</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -303,29 +279,8 @@ at <code>Count + 1</code> appends.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DynValue</span></td>
-        <td><p>The property value, or <span class="xref">MoonSharp.Interpreter.DynValue.Nil</span> if absent.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="PatchManager_LuaPatching_JsonUserData_Item_System_String__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Reads on a non-object token log a debug message and return <span class="xref">MoonSharp.Interpreter.DynValue.Nil</span>; reads of missing
-keys also return <span class="xref">MoonSharp.Interpreter.DynValue.Nil</span>. Writes throw when the token is not an object.</p>
-</div>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Exception</span></td>
-        <td><p>Thrown when setting on a token whose type is not <span class="xref">Newtonsoft.Json.Linq.JTokenType.Object</span>.</p>
-</td>
+        <td><a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -370,9 +325,38 @@ keys also return <span class="xref">MoonSharp.Interpreter.DynValue.Nil</span>. W
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Exception</span></td>
+        <td><span class="xref">ScriptRuntimeException</span></td>
         <td><p>Thrown when the token is not <span class="xref">Newtonsoft.Json.Linq.JTokenType.Array</span>.</p>
 </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_Append_" data-uid="PatchManager.LuaPatching.JsonUserData.Append*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_Append_PatchManager_LuaPatching_JsonUserData_" data-uid="PatchManager.LuaPatching.JsonUserData.Append(PatchManager.LuaPatching.JsonUserData)">Append(JsonUserData)</h4>
+  <div class="markdown level1 summary"><p>C# overload that appends a wrapped or implicitly-converted value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+public void Append(JsonUserData value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -397,7 +381,7 @@ keys also return <span class="xref">MoonSharp.Interpreter.DynValue.Nil</span>. W
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Exception</span></td>
+        <td><span class="xref">ScriptRuntimeException</span></td>
         <td><p>Thrown when the token is not <span class="xref">Newtonsoft.Json.Linq.JTokenType.Array</span>.</p>
 </td>
       </tr>
@@ -451,7 +435,7 @@ public static DynValue GetFromJToken(JToken token)</code></pre>
   </table>
   <h5 id="PatchManager_LuaPatching_JsonUserData_GetFromJToken_Newtonsoft_Json_Linq_JToken__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>A null token (missing JSON key) maps to <span class="xref">MoonSharp.Interpreter.DynValue.Nil</span>. Objects and arrays are wrapped in
-a fresh <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a>; primitives become the matching <span class="xref">MoonSharp.Interpreter.DynValue</span> kind;
+a fresh <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a>. Primitives become the matching <span class="xref">MoonSharp.Interpreter.DynValue</span> kind, and
 <span class="xref">Newtonsoft.Json.Linq.JTokenType.None</span>, <span class="xref">Newtonsoft.Json.Linq.JTokenType.Null</span>, and <span class="xref">Newtonsoft.Json.Linq.JTokenType.Undefined</span>
 all map to <span class="xref">MoonSharp.Interpreter.DynValue.Nil</span>.</p>
 </div>
@@ -465,7 +449,7 @@ all map to <span class="xref">MoonSharp.Interpreter.DynValue.Nil</span>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Exception</span></td>
+        <td><span class="xref">ScriptRuntimeException</span></td>
         <td><p>Thrown when <code class="paramref">token</code>'s type is not one of the handled token types.</p>
 </td>
       </tr>
@@ -626,13 +610,13 @@ and so that an empty Lua table replacing a JSON array does not collapse into an 
 
 
   <a id="PatchManager_LuaPatching_JsonUserData_Insert_" data-uid="PatchManager.LuaPatching.JsonUserData.Insert*"></a>
-  <h4 id="PatchManager_LuaPatching_JsonUserData_Insert_System_Int32_MoonSharp_Interpreter_DynValue_" data-uid="PatchManager.LuaPatching.JsonUserData.Insert(System.Int32,MoonSharp.Interpreter.DynValue)">Insert(int, DynValue)</h4>
-  <div class="markdown level1 summary"><p>Inserts an element at the given 1-indexed position, shifting later elements right.</p>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_Insert_PatchManager_LuaPatching_LuaIndex_MoonSharp_Interpreter_DynValue_" data-uid="PatchManager.LuaPatching.JsonUserData.Insert(PatchManager.LuaPatching.LuaIndex,MoonSharp.Interpreter.DynValue)">Insert(LuaIndex, DynValue)</h4>
+  <div class="markdown level1 summary"><p>Inserts an element at the given position (0-based from C#, 1-based from Lua), shifting later elements right.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual void Insert(int index, DynValue value)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual void Insert(LuaIndex index, DynValue value)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -645,9 +629,9 @@ and so that an empty Lua table replacing a JSON array does not collapse into an 
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">int</span></td>
+        <td><a class="xref" href="PatchManager.LuaPatching.LuaIndex.html">LuaIndex</a></td>
         <td><span class="parametername">index</span></td>
-        <td><p>The 1-indexed position to insert at.</p>
+        <td><p>The position to insert at.</p>
 </td>
       </tr>
       <tr>
@@ -668,9 +652,43 @@ and so that an empty Lua table replacing a JSON array does not collapse into an 
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Exception</span></td>
+        <td><span class="xref">ScriptRuntimeException</span></td>
         <td><p>Thrown when the token is not <span class="xref">Newtonsoft.Json.Linq.JTokenType.Array</span>.</p>
 </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_Insert_" data-uid="PatchManager.LuaPatching.JsonUserData.Insert*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_Insert_PatchManager_LuaPatching_LuaIndex_PatchManager_LuaPatching_JsonUserData_" data-uid="PatchManager.LuaPatching.JsonUserData.Insert(PatchManager.LuaPatching.LuaIndex,PatchManager.LuaPatching.JsonUserData)">Insert(LuaIndex, JsonUserData)</h4>
+  <div class="markdown level1 summary"><p>C# overload that inserts a wrapped or implicitly-converted value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+public void Insert(LuaIndex index, JsonUserData value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.LuaIndex.html">LuaIndex</a></td>
+        <td><span class="parametername">index</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -706,6 +724,89 @@ and so that an empty Lua table replacing a JSON array does not collapse into an 
 </div>
 
 
+  <a id="PatchManager_LuaPatching_JsonUserData_LuaGet_" data-uid="PatchManager.LuaPatching.JsonUserData.LuaGet*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_LuaGet_MoonSharp_Interpreter_DynValue_" data-uid="PatchManager.LuaPatching.JsonUserData.LuaGet(MoonSharp.Interpreter.DynValue)">LuaGet(DynValue)</h4>
+  <div class="markdown level1 summary"><p>Lua read path. Returns a native <span class="xref">MoonSharp.Interpreter.DynValue</span> for leaf tokens, with no wrapper allocation, and
+wraps only objects and arrays. Reached through <code>IndexerFallbackDescriptor</code>, not member dispatch.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+public DynValue LuaGet(DynValue key)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><span class="parametername">key</span></td>
+        <td><p>The Lua index, a string property name or a 1-based array position.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><p>The value for the key, or <span class="xref">MoonSharp.Interpreter.DynValue.Nil</span> when absent.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_LuaSet_" data-uid="PatchManager.LuaPatching.JsonUserData.LuaSet*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_LuaSet_MoonSharp_Interpreter_DynValue_MoonSharp_Interpreter_DynValue_" data-uid="PatchManager.LuaPatching.JsonUserData.LuaSet(MoonSharp.Interpreter.DynValue,MoonSharp.Interpreter.DynValue)">LuaSet(DynValue, DynValue)</h4>
+  <div class="markdown level1 summary"><p>Lua write path. Honors the subclass set-intercept first, then writes the raw JSON.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+public void LuaSet(DynValue key, DynValue value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><span class="parametername">key</span></td>
+        <td><p>The Lua index, a string property name or a 1-based array position.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The value to assign.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="PatchManager_LuaPatching_JsonUserData_Pairs_" data-uid="PatchManager.LuaPatching.JsonUserData.Pairs*"></a>
   <h4 id="PatchManager_LuaPatching_JsonUserData_Pairs" data-uid="PatchManager.LuaPatching.JsonUserData.Pairs">Pairs()</h4>
   <div class="markdown level1 summary"><p>Returns an iterator suitable for Lua's <code>__pairs</code> / <code>__ipairs</code> metamethods.</p>
@@ -734,7 +835,7 @@ public virtual DynValue Pairs()</code></pre>
     </tbody>
   </table>
   <h5 id="PatchManager_LuaPatching_JsonUserData_Pairs_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Arrays yield 1-indexed (index, value) tuples; objects yield (key, value) tuples; any other token type
+  <div class="markdown level1 remarks"><p>Arrays yield 1-indexed (index, value) tuples. Objects yield (key, value) tuples. Any other token type
 yields nothing and logs a debug message. Bound to both metamethods, so <code>pairs</code> and <code>ipairs</code>
 in Lua produce the same iterator.</p>
 </div>
@@ -742,8 +843,8 @@ in Lua produce the same iterator.</p>
 
   <a id="PatchManager_LuaPatching_JsonUserData_Patch_" data-uid="PatchManager.LuaPatching.JsonUserData.Patch*"></a>
   <h4 id="PatchManager_LuaPatching_JsonUserData_Patch_System_String_System_Action_MoonSharp_Interpreter_DynValue__" data-uid="PatchManager.LuaPatching.JsonUserData.Patch(System.String,System.Action{MoonSharp.Interpreter.DynValue})">Patch(string, Action&lt;DynValue&gt;)</h4>
-  <div class="markdown level1 summary"><p>Invokes <code class="paramref">callback</code> with the value at <code class="paramref">key</code> when the key is present;
-does nothing otherwise.</p>
+  <div class="markdown level1 summary"><p>Invokes <code class="paramref">callback</code> with the value at <code class="paramref">key</code> when the key is present.
+Does nothing otherwise.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -813,7 +914,7 @@ does nothing otherwise.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Exception</span></td>
+        <td><span class="xref">ScriptRuntimeException</span></td>
         <td><p>Thrown when the token is not <span class="xref">Newtonsoft.Json.Linq.JTokenType.Object</span>.</p>
 </td>
       </tr>
@@ -822,13 +923,13 @@ does nothing otherwise.</p>
 
 
   <a id="PatchManager_LuaPatching_JsonUserData_RemoveAt_" data-uid="PatchManager.LuaPatching.JsonUserData.RemoveAt*"></a>
-  <h4 id="PatchManager_LuaPatching_JsonUserData_RemoveAt_System_Int32_" data-uid="PatchManager.LuaPatching.JsonUserData.RemoveAt(System.Int32)">RemoveAt(int)</h4>
-  <div class="markdown level1 summary"><p>Removes the array element at the given 1-indexed position.</p>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_RemoveAt_PatchManager_LuaPatching_LuaIndex_" data-uid="PatchManager.LuaPatching.JsonUserData.RemoveAt(PatchManager.LuaPatching.LuaIndex)">RemoveAt(LuaIndex)</h4>
+  <div class="markdown level1 summary"><p>Removes the array element at the given position (0-based from C#, 1-based from Lua via the LuaIndex converter).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual void RemoveAt(int index)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual void RemoveAt(LuaIndex index)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -841,9 +942,9 @@ does nothing otherwise.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">int</span></td>
+        <td><a class="xref" href="PatchManager.LuaPatching.LuaIndex.html">LuaIndex</a></td>
         <td><span class="parametername">index</span></td>
-        <td><p>The 1-indexed array position to remove.</p>
+        <td><p>The array position to remove.</p>
 </td>
       </tr>
     </tbody>
@@ -858,7 +959,7 @@ does nothing otherwise.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Exception</span></td>
+        <td><span class="xref">ScriptRuntimeException</span></td>
         <td><p>Thrown when the token is not <span class="xref">Newtonsoft.Json.Linq.JTokenType.Array</span> or when the index is out of range.</p>
 </td>
       </tr>
@@ -868,7 +969,7 @@ does nothing otherwise.</p>
 
   <a id="PatchManager_LuaPatching_JsonUserData_RemoveWhere_" data-uid="PatchManager.LuaPatching.JsonUserData.RemoveWhere*"></a>
   <h4 id="PatchManager_LuaPatching_JsonUserData_RemoveWhere_System_Func_MoonSharp_Interpreter_DynValue_System_Boolean__" data-uid="PatchManager.LuaPatching.JsonUserData.RemoveWhere(System.Func{MoonSharp.Interpreter.DynValue,System.Boolean})">RemoveWhere(Func&lt;DynValue, bool&gt;)</h4>
-  <div class="markdown level1 summary"><p>Remove all items that match a passed predicate</p>
+  <div class="markdown level1 summary"><p>Removes every array element that matches the given predicate.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -888,7 +989,7 @@ does nothing otherwise.</p>
       <tr>
         <td><span class="xref">Func</span>&lt;<span class="xref">DynValue</span>, <span class="xref">bool</span>&gt;</td>
         <td><span class="parametername">callback</span></td>
-        <td><p>The predicate to check against</p>
+        <td><p>The predicate to test each element against.</p>
 </td>
       </tr>
     </tbody>
@@ -1091,6 +1192,658 @@ does nothing otherwise.</p>
         <td><span class="xref">ScriptRuntimeException</span></td>
         <td><p>Thrown when <code class="paramref">token</code> is missing or not a JSON string.</p>
 </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_TryGetVirtual_" data-uid="PatchManager.LuaPatching.JsonUserData.TryGetVirtual*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_TryGetVirtual_MoonSharp_Interpreter_DynValue_" data-uid="PatchManager.LuaPatching.JsonUserData.TryGetVirtual(MoonSharp.Interpreter.DynValue)">TryGetVirtual(DynValue)</h4>
+  <div class="markdown level1 summary"><p>Subclass read intercept: returns a value for keys the subclass synthesizes (name-indexed list elements,
+virtual or computed properties), or <code>null</code> to fall through to the raw JSON. The base layers nothing.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+protected virtual DynValue TryGetVirtual(DynValue key)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><span class="parametername">key</span></td>
+        <td><p>The index being read.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><p>The intercepted value, or <code>null</code> when not subclass-handled.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_TrySetVirtual_" data-uid="PatchManager.LuaPatching.JsonUserData.TrySetVirtual*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_TrySetVirtual_MoonSharp_Interpreter_DynValue_MoonSharp_Interpreter_DynValue_" data-uid="PatchManager.LuaPatching.JsonUserData.TrySetVirtual(MoonSharp.Interpreter.DynValue,MoonSharp.Interpreter.DynValue)">TrySetVirtual(DynValue, DynValue)</h4>
+  <div class="markdown level1 summary"><p>Subclass write intercept: returns true when the subclass consumed the assignment, false to fall through to
+the raw JSON write. The base layers nothing.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+protected virtual bool TrySetVirtual(DynValue key, DynValue value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><span class="parametername">key</span></td>
+        <td><p>The index being written.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The value being assigned.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True when the subclass handled the write.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_Wrap_" data-uid="PatchManager.LuaPatching.JsonUserData.Wrap*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_Wrap_MoonSharp_Interpreter_DynValue_" data-uid="PatchManager.LuaPatching.JsonUserData.Wrap(MoonSharp.Interpreter.DynValue)">Wrap(DynValue)</h4>
+  <div class="markdown level1 summary"><p>Wraps a Lua value as a <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a>: an existing wrapper is returned as-is, anything else
+is wrapped fresh from its JSON token.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static JsonUserData Wrap(DynValue dv)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><span class="parametername">dv</span></td>
+        <td><p>The Lua value to wrap.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a></td>
+        <td><p>The value as a <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="operators">Operators
+</h3>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_op_Implicit_" data-uid="PatchManager.LuaPatching.JsonUserData.op_Implicit*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_op_Implicit_PatchManager_LuaPatching_JsonUserData__System_Boolean" data-uid="PatchManager.LuaPatching.JsonUserData.op_Implicit(PatchManager.LuaPatching.JsonUserData)~System.Boolean">implicit operator bool(JsonUserData)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator bool(JsonUserData u)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a></td>
+        <td><span class="parametername">u</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_op_Implicit_" data-uid="PatchManager.LuaPatching.JsonUserData.op_Implicit*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_op_Implicit_PatchManager_LuaPatching_JsonUserData__System_Double" data-uid="PatchManager.LuaPatching.JsonUserData.op_Implicit(PatchManager.LuaPatching.JsonUserData)~System.Double">implicit operator double(JsonUserData)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator double(JsonUserData u)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a></td>
+        <td><span class="parametername">u</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_op_Implicit_" data-uid="PatchManager.LuaPatching.JsonUserData.op_Implicit*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_op_Implicit_PatchManager_LuaPatching_JsonUserData__System_Int32" data-uid="PatchManager.LuaPatching.JsonUserData.op_Implicit(PatchManager.LuaPatching.JsonUserData)~System.Int32">implicit operator int(JsonUserData)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator int(JsonUserData u)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a></td>
+        <td><span class="parametername">u</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_op_Implicit_" data-uid="PatchManager.LuaPatching.JsonUserData.op_Implicit*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_op_Implicit_PatchManager_LuaPatching_JsonUserData__System_Int64" data-uid="PatchManager.LuaPatching.JsonUserData.op_Implicit(PatchManager.LuaPatching.JsonUserData)~System.Int64">implicit operator long(JsonUserData)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator long(JsonUserData u)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a></td>
+        <td><span class="parametername">u</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">long</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_op_Implicit_" data-uid="PatchManager.LuaPatching.JsonUserData.op_Implicit*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_op_Implicit_PatchManager_LuaPatching_JsonUserData__System_Single" data-uid="PatchManager.LuaPatching.JsonUserData.op_Implicit(PatchManager.LuaPatching.JsonUserData)~System.Single">implicit operator float(JsonUserData)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator float(JsonUserData u)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a></td>
+        <td><span class="parametername">u</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_op_Implicit_" data-uid="PatchManager.LuaPatching.JsonUserData.op_Implicit*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_op_Implicit_PatchManager_LuaPatching_JsonUserData__System_String" data-uid="PatchManager.LuaPatching.JsonUserData.op_Implicit(PatchManager.LuaPatching.JsonUserData)~System.String">implicit operator string(JsonUserData)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator string(JsonUserData u)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a></td>
+        <td><span class="parametername">u</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_op_Implicit_" data-uid="PatchManager.LuaPatching.JsonUserData.op_Implicit*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_op_Implicit_System_Boolean__PatchManager_LuaPatching_JsonUserData" data-uid="PatchManager.LuaPatching.JsonUserData.op_Implicit(System.Boolean)~PatchManager.LuaPatching.JsonUserData">implicit operator JsonUserData(bool)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator JsonUserData(bool v)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">v</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_op_Implicit_" data-uid="PatchManager.LuaPatching.JsonUserData.op_Implicit*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_op_Implicit_System_Double__PatchManager_LuaPatching_JsonUserData" data-uid="PatchManager.LuaPatching.JsonUserData.op_Implicit(System.Double)~PatchManager.LuaPatching.JsonUserData">implicit operator JsonUserData(double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator JsonUserData(double v)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">v</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_op_Implicit_" data-uid="PatchManager.LuaPatching.JsonUserData.op_Implicit*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_op_Implicit_System_Int32__PatchManager_LuaPatching_JsonUserData" data-uid="PatchManager.LuaPatching.JsonUserData.op_Implicit(System.Int32)~PatchManager.LuaPatching.JsonUserData">implicit operator JsonUserData(int)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator JsonUserData(int v)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">v</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_op_Implicit_" data-uid="PatchManager.LuaPatching.JsonUserData.op_Implicit*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_op_Implicit_System_Int64__PatchManager_LuaPatching_JsonUserData" data-uid="PatchManager.LuaPatching.JsonUserData.op_Implicit(System.Int64)~PatchManager.LuaPatching.JsonUserData">implicit operator JsonUserData(long)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator JsonUserData(long v)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">long</span></td>
+        <td><span class="parametername">v</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_op_Implicit_" data-uid="PatchManager.LuaPatching.JsonUserData.op_Implicit*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_op_Implicit_System_Single__PatchManager_LuaPatching_JsonUserData" data-uid="PatchManager.LuaPatching.JsonUserData.op_Implicit(System.Single)~PatchManager.LuaPatching.JsonUserData">implicit operator JsonUserData(float)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator JsonUserData(float v)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">v</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_JsonUserData_op_Implicit_" data-uid="PatchManager.LuaPatching.JsonUserData.op_Implicit*"></a>
+  <h4 id="PatchManager_LuaPatching_JsonUserData_op_Implicit_System_String__PatchManager_LuaPatching_JsonUserData" data-uid="PatchManager.LuaPatching.JsonUserData.op_Implicit(System.String)~PatchManager.LuaPatching.JsonUserData">implicit operator JsonUserData(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator JsonUserData(string v)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">v</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a></td>
+        <td></td>
       </tr>
     </tbody>
   </table>

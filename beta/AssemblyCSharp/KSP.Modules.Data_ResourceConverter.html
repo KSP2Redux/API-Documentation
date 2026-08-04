@@ -123,13 +123,16 @@
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_StageActivationActionPath">ModuleData.StageActivationActionPath</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RequestHandle">ModuleData.RequestHandle</a>
-    </div>
-    <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_Copy_KSP_Sim_Definitions_ModuleData_">ModuleData.Copy(ModuleData)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_UpdateGuids_System_Collections_Generic_Dictionary_KSP_Sim_impl_IGGuid_KSP_Sim_impl_IGGuid__">ModuleData.UpdateGuids(Dictionary&lt;IGGuid, IGGuid&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_">ModuleData.BindToEntity(EntityManager, Entity)</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_UnbindFromEntity">ModuleData.UnbindFromEntity()</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RebuildDataContext">ModuleData.RebuildDataContext()</a>
@@ -186,6 +189,12 @@
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_SyncAllSymmetricalData_KSP_Sim_Definitions_ModuleData_">ModuleData.SyncAllSymmetricalData(ModuleData)</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_Entity">ModuleData.Entity</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RequestEntity">ModuleData.RequestEntity</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_HasSymmetricalProperties">ModuleData.HasSymmetricalProperties</a>
     </div>
     <div>
@@ -228,8 +237,7 @@ public sealed class Data_ResourceConverter : ModuleData</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ResourceConverter_AutoShutdownTemperatureRatio" data-uid="KSP.Modules.Data_ResourceConverter.AutoShutdownTemperatureRatio">AutoShutdownTemperatureRatio</h4>
-  <div class="markdown level1 summary"><p>Temperature at which the converter stops if <code>ThermalAutoShutdownToggle</code> is enabled.
-Defined as a ratio of the part's max temperature</p>
+  <div class="markdown level1 summary"><p>Fraction of the part's maximum temperature at which the converter shuts off when thermal auto-shutdown is enabled.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -255,7 +263,8 @@ public double AutoShutdownTemperatureRatio</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ResourceConverter_ConvertByMass" data-uid="KSP.Modules.Data_ResourceConverter.ConvertByMass">ConvertByMass</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Indicates whether resource conversion rates are calculated by mass rather than by volume.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -306,8 +315,7 @@ public bool ConverterIsActive</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ResourceConverter_EmissiveLerpRateDown" data-uid="KSP.Modules.Data_ResourceConverter.EmissiveLerpRateDown">EmissiveLerpRateDown</h4>
-  <div class="markdown level1 summary"><p>The rate of decrease of the converter's emissive value when the converter is turned off if
-<code>UseEmissiveTemperature</code> is <code>false</code></p>
+  <div class="markdown level1 summary"><p>Rate at which the emissive value lerps toward 0 when the converter turns off, used when <a class="xref" href="KSP.Modules.Data_ResourceConverter.html#KSP_Modules_Data_ResourceConverter_UseEmissiveTemperature">UseEmissiveTemperature</a> is disabled.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -333,8 +341,7 @@ public float EmissiveLerpRateDown</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ResourceConverter_EmissiveLerpRateUp" data-uid="KSP.Modules.Data_ResourceConverter.EmissiveLerpRateUp">EmissiveLerpRateUp</h4>
-  <div class="markdown level1 summary"><p>The rate of increase of the converter's emissive value when the converter is turned on if
-<code>UseEmissiveTemperature</code> is <code>false</code></p>
+  <div class="markdown level1 summary"><p>Rate at which the emissive value lerps toward 1 when the converter turns on, used when <a class="xref" href="KSP.Modules.Data_ResourceConverter.html#KSP_Modules_Data_ResourceConverter_UseEmissiveTemperature">UseEmissiveTemperature</a> is disabled.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -360,12 +367,13 @@ public float EmissiveLerpRateUp</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ResourceConverter_EmissiveMaterialNames" data-uid="KSP.Modules.Data_ResourceConverter.EmissiveMaterialNames">EmissiveMaterialNames</h4>
-  <div class="markdown level1 summary"><p>List of the names of the converter's emissive materials</p>
+  <div class="markdown level1 summary"><p>Material names on the part's mesh that receive the emissive value.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
+[InlineStringList]
 public List&lt;string&gt; EmissiveMaterialNames</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -386,8 +394,7 @@ public List&lt;string&gt; EmissiveMaterialNames</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ResourceConverter_EmissiveTemperatureCurve" data-uid="KSP.Modules.Data_ResourceConverter.EmissiveTemperatureCurve">EmissiveTemperatureCurve</h4>
-  <div class="markdown level1 summary"><p>Curve to determine the emissive value based on the converter's temperature if <code>UseEmissiveTemperature</code>
-is <code>true</code></p>
+  <div class="markdown level1 summary"><p>Curve mapping the converter's temperature to an emissive value, used when <a class="xref" href="KSP.Modules.Data_ResourceConverter.html#KSP_Modules_Data_ResourceConverter_UseEmissiveTemperature">UseEmissiveTemperature</a> is enabled.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -446,7 +453,8 @@ public ModuleProperty&lt;bool&gt; EnabledToggle</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double FluxGenerated</code></pre>
+    <pre><code class="lang-csharp hljs">[Unit(&quot;kW&quot;)]
+public double FluxGenerated</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -466,7 +474,7 @@ public ModuleProperty&lt;bool&gt; EnabledToggle</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ResourceConverter_FormulaDefinitions" data-uid="KSP.Modules.Data_ResourceConverter.FormulaDefinitions">FormulaDefinitions</h4>
-  <div class="markdown level1 summary"><p>List of resource conversion recipes</p>
+  <div class="markdown level1 summary"><p>Conversion recipes available on this converter, each declaring input resources, output resources, and heat flux.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -492,7 +500,8 @@ public List&lt;ResourceConverterFormulaDefinition&gt; FormulaDefinitions</code><
 
 
   <h4 id="KSP_Modules_Data_ResourceConverter_FormulaDefs" data-uid="KSP.Modules.Data_ResourceConverter.FormulaDefs">FormulaDefs</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Per-formula arrays of <a class="xref" href="KSP.Sim.ResourceSystem.ResourceDefinitionID.html">ResourceDefinitionID</a> for each resource involved in that formula.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -676,7 +685,8 @@ public ModuleProperty&lt;string&gt; OutputTxt</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ResourceConverter_RequestConfigs" data-uid="KSP.Modules.Data_ResourceConverter.RequestConfigs">RequestConfigs</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Per-formula arrays of <a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestCommandConfig.html">ResourceFlowRequestCommandConfig</a> describing the flow commands for each formula.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -700,7 +710,7 @@ public ModuleProperty&lt;string&gt; OutputTxt</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ResourceConverter_ResourceAutoShutdown" data-uid="KSP.Modules.Data_ResourceConverter.ResourceAutoShutdown">ResourceAutoShutdown</h4>
-  <div class="markdown level1 summary"><p>Should the converter turn off when out of an input resource</p>
+  <div class="markdown level1 summary"><p>Flag indicating whether the converter stops automatically when any input resource runs out.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -780,7 +790,7 @@ public ModuleProperty&lt;bool&gt; ShowStatsToggle</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ResourceConverter_StartActionName" data-uid="KSP.Modules.Data_ResourceConverter.StartActionName">StartActionName</h4>
-  <div class="markdown level1 summary"><p>Localization key for the &quot;Start Converter&quot; action group action</p>
+  <div class="markdown level1 summary"><p>Localization key for the 'Start Converter' action group action.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -806,7 +816,7 @@ public string StartActionName</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ResourceConverter_StopActionName" data-uid="KSP.Modules.Data_ResourceConverter.StopActionName">StopActionName</h4>
-  <div class="markdown level1 summary"><p>Localization key for the &quot;Stop Converter&quot; action group action</p>
+  <div class="markdown level1 summary"><p>Localization key for the 'Stop Converter' action group action.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -887,7 +897,7 @@ public ModuleProperty&lt;bool&gt; ThermalAutoShutdownToggle</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ResourceConverter_ToggleActionName" data-uid="KSP.Modules.Data_ResourceConverter.ToggleActionName">ToggleActionName</h4>
-  <div class="markdown level1 summary"><p>Localization key for the &quot;Toggle Converter&quot; action group action</p>
+  <div class="markdown level1 summary"><p>Localization key for the 'Toggle Converter' action group action.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -913,7 +923,7 @@ public string ToggleActionName</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ResourceConverter_ToggleName" data-uid="KSP.Modules.Data_ResourceConverter.ToggleName">ToggleName</h4>
-  <div class="markdown level1 summary"><p>Localization key for the PAM resource converter toggle label</p>
+  <div class="markdown level1 summary"><p>Localization key for the PAM 'Enabled' toggle label.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -939,7 +949,7 @@ public string ToggleName</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ResourceConverter_UseEmissive" data-uid="KSP.Modules.Data_ResourceConverter.UseEmissive">UseEmissive</h4>
-  <div class="markdown level1 summary"><p>Should the converter emit light based on its operation status</p>
+  <div class="markdown level1 summary"><p>Flag indicating whether the converter drives an emissive material to glow while running.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -965,7 +975,7 @@ public bool UseEmissive</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ResourceConverter_UseEmissiveTemperature" data-uid="KSP.Modules.Data_ResourceConverter.UseEmissiveTemperature">UseEmissiveTemperature</h4>
-  <div class="markdown level1 summary"><p>Should the temperature of the converter be used to determine its emissive value</p>
+  <div class="markdown level1 summary"><p>Flag indicating whether the emissive value is driven by the converter's live temperature rather than its on/off state.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -1075,7 +1085,8 @@ public ModuleProperty&lt;string&gt; statusTxt</code></pre>
 
   <a id="KSP_Modules_Data_ResourceConverter_DisplayFormulae_" data-uid="KSP.Modules.Data_ResourceConverter.DisplayFormulae*"></a>
   <h4 id="KSP_Modules_Data_ResourceConverter_DisplayFormulae" data-uid="KSP.Modules.Data_ResourceConverter.DisplayFormulae">DisplayFormulae</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the dictionary of available conversion formulae keyed by their internal name.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1100,7 +1111,8 @@ public ModuleProperty&lt;string&gt; statusTxt</code></pre>
 
   <a id="KSP_Modules_Data_ResourceConverter_ModuleType_" data-uid="KSP.Modules.Data_ResourceConverter.ModuleType*"></a>
   <h4 id="KSP_Modules_Data_ResourceConverter_ModuleType" data-uid="KSP.Modules.Data_ResourceConverter.ModuleType">ModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <span class="xref">System.Type</span> of the part behaviour module that owns this data definition.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1129,7 +1141,8 @@ public ModuleProperty&lt;string&gt; statusTxt</code></pre>
 
   <a id="KSP_Modules_Data_ResourceConverter_FindFormulaWithKey_" data-uid="KSP.Modules.Data_ResourceConverter.FindFormulaWithKey*"></a>
   <h4 id="KSP_Modules_Data_ResourceConverter_FindFormulaWithKey_System_String_" data-uid="KSP.Modules.Data_ResourceConverter.FindFormulaWithKey(System.String)">FindFormulaWithKey(string)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Searches <a class="xref" href="KSP.Modules.Data_ResourceConverter.html#KSP_Modules_Data_ResourceConverter_FormulaDefinitions">FormulaDefinitions</a> for the formula whose internal name matches the given key.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1148,7 +1161,8 @@ public ModuleProperty&lt;string&gt; statusTxt</code></pre>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">key</span></td>
-        <td></td>
+        <td><p>The internal name of the formula to find.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1163,7 +1177,8 @@ public ModuleProperty&lt;string&gt; statusTxt</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">int</span></td>
-        <td></td>
+        <td><p>The zero-based index of the matching formula, or <code>0</code> if no match is found.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1171,7 +1186,8 @@ public ModuleProperty&lt;string&gt; statusTxt</code></pre>
 
   <a id="KSP_Modules_Data_ResourceConverter_GetPartInfoEntries_" data-uid="KSP.Modules.Data_ResourceConverter.GetPartInfoEntries*"></a>
   <h4 id="KSP_Modules_Data_ResourceConverter_GetPartInfoEntries_System_Type_System_Collections_Generic_List_OABPartData_PartInfoModuleEntry__" data-uid="KSP.Modules.Data_ResourceConverter.GetPartInfoEntries(System.Type,System.Collections.Generic.List{OABPartData.PartInfoModuleEntry})">GetPartInfoEntries(Type, List&lt;PartInfoModuleEntry&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns a list of Part Action Menu info entries that describe this module's exposed data for the given part behaviour module type.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1190,7 +1206,8 @@ public ModuleProperty&lt;string&gt; statusTxt</code></pre>
       <tr>
         <td><span class="xref">Type</span></td>
         <td><span class="parametername">partBehaviourModuleType</span></td>
-        <td></td>
+        <td><p>The <span class="xref">System.Type</span> of the part behaviour module requesting info entries.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="OABPartData.html">OABPartData</a>.<a class="xref" href="OABPartData.PartInfoModuleEntry.html">PartInfoModuleEntry</a>&gt;</td>
@@ -1210,7 +1227,8 @@ public ModuleProperty&lt;string&gt; statusTxt</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="OABPartData.html">OABPartData</a>.<a class="xref" href="OABPartData.PartInfoModuleEntry.html">PartInfoModuleEntry</a>&gt;</td>
-        <td></td>
+        <td><p>The populated list of <a class="xref" href="OABPartData.html">OABPartData.PartInfoModuleEntry</a> instances describing this module's PAM entries.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1220,7 +1238,8 @@ public ModuleProperty&lt;string&gt; statusTxt</code></pre>
 
   <a id="KSP_Modules_Data_ResourceConverter_OnPartBehaviourModuleInit_" data-uid="KSP.Modules.Data_ResourceConverter.OnPartBehaviourModuleInit*"></a>
   <h4 id="KSP_Modules_Data_ResourceConverter_OnPartBehaviourModuleInit" data-uid="KSP.Modules.Data_ResourceConverter.OnPartBehaviourModuleInit">OnPartBehaviourModuleInit()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called when the owning part behaviour module is initialized, allowing module data to perform setup that depends on the module being live.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">

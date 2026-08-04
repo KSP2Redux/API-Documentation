@@ -238,8 +238,8 @@ Installed automatically for every type with a string-typed indexer via <a class=
 
   <a id="PatchManager_LuaPatching_Utility_IndexerFallbackDescriptor_Index_" data-uid="PatchManager.LuaPatching.Utility.IndexerFallbackDescriptor.Index*"></a>
   <h4 id="PatchManager_LuaPatching_Utility_IndexerFallbackDescriptor_Index_MoonSharp_Interpreter_Script_System_Object_MoonSharp_Interpreter_DynValue_System_Boolean_" data-uid="PatchManager.LuaPatching.Utility.IndexerFallbackDescriptor.Index(MoonSharp.Interpreter.Script,System.Object,MoonSharp.Interpreter.DynValue,System.Boolean)">Index(Script, object, DynValue, bool)</h4>
-  <div class="markdown level1 summary"><p>Resolves a string-key access; on a member-lookup miss, retries with <code>isDirectIndexing = false</code> so the
-access falls through to the wrapped type's <code>this[string]</code> indexer.</p>
+  <div class="markdown level1 summary"><p>Resolves an index access. On a member-lookup miss a JsonUserData is routed to its native LuaGet path, and
+any other string-indexer type retries with <code>isDirectIndexing = false</code> to reach its <code>this[string]</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -309,7 +309,7 @@ access falls through to the wrapped type's <code>this[string]</code> indexer.</p
     <tbody>
       <tr>
         <td><span class="xref">ScriptRuntimeException</span></td>
-        <td><p>Thrown when the wrapped descriptor surfaces a CLR exception; rewrapped so MoonSharp decorates the error with the Lua call site.</p>
+        <td><p>Thrown when the wrapped descriptor surfaces a CLR exception. Rewrapped so MoonSharp decorates the error with the Lua call site.</p>
 </td>
       </tr>
     </tbody>
@@ -510,7 +510,7 @@ __index, __newindex, __tostring</p>
     <tbody>
       <tr>
         <td><span class="xref">ScriptRuntimeException</span></td>
-        <td><p>Thrown when the wrapped descriptor surfaces a CLR exception; rewrapped so MoonSharp decorates the error with the Lua call site.</p>
+        <td><p>Thrown when the wrapped descriptor surfaces a CLR exception. Rewrapped so MoonSharp decorates the error with the Lua call site.</p>
 </td>
       </tr>
     </tbody>

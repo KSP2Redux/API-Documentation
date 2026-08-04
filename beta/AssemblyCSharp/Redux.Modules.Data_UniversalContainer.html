@@ -126,9 +126,6 @@
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData__moduleDataContext">ModuleData._moduleDataContext</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RequestHandle">ModuleData.RequestHandle</a>
-    </div>
-    <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_Copy_KSP_Sim_Definitions_ModuleData_">ModuleData.Copy(ModuleData)</a>
     </div>
     <div>
@@ -142,6 +139,12 @@
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_OnPartBehaviourModuleInit">ModuleData.OnPartBehaviourModuleInit()</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_">ModuleData.BindToEntity(EntityManager, Entity)</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_UnbindFromEntity">ModuleData.UnbindFromEntity()</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_GetPartInfoEntries_System_Type_System_Collections_Generic_List_OABPartData_PartInfoModuleEntry__">ModuleData.GetPartInfoEntries(Type, List&lt;OABPartData.PartInfoModuleEntry&gt;)</a>
@@ -201,6 +204,12 @@
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_SyncAllSymmetricalData_KSP_Sim_Definitions_ModuleData_">ModuleData.SyncAllSymmetricalData(ModuleData)</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_Entity">ModuleData.Entity</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RequestEntity">ModuleData.RequestEntity</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_HasSymmetricalProperties">ModuleData.HasSymmetricalProperties</a>
     </div>
     <div>
@@ -250,6 +259,7 @@
     <pre><code class="lang-csharp hljs">[LocalizedField(&quot;PartModules/UniversalContainer/Amount&quot;)]
 [KSPState]
 [PAMDisplayControl(SortIndex = 2)]
+[Unit(&quot;u&quot;)]
 public ModuleProperty&lt;float&gt; Amount</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -278,6 +288,7 @@ public ModuleProperty&lt;float&gt; Amount</code></pre>
     <pre><code class="lang-csharp hljs">[LocalizedField(&quot;PartModules/UniversalContainer/StoredResource&quot;)]
 [KSPState]
 [PAMDisplayControl(SortIndex = 1)]
+[ResourceName]
 public ModuleProperty&lt;string&gt; StoredResource</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -330,13 +341,13 @@ public ModuleProperty&lt;string&gt; StoredResource</code></pre>
 
 
   <a id="Redux_Modules_Data_UniversalContainer_SetResourcesDropdown_" data-uid="Redux.Modules.Data_UniversalContainer.SetResourcesDropdown*"></a>
-  <h4 id="Redux_Modules_Data_UniversalContainer_SetResourcesDropdown_KSP_Sim_ResourceSystem_IResourceContainer___KSP_Sim_ResourceSystem_ResourceDefinitionDatabase_" data-uid="Redux.Modules.Data_UniversalContainer.SetResourcesDropdown(KSP.Sim.ResourceSystem.IResourceContainer[],KSP.Sim.ResourceSystem.ResourceDefinitionDatabase)">SetResourcesDropdown(IResourceContainer[], ResourceDefinitionDatabase)</h4>
+  <h4 id="Redux_Modules_Data_UniversalContainer_SetResourcesDropdown_KSP_Sim_ResourceSystem_IResourceContainer_KSP_Sim_ResourceSystem_ResourceDefinitionDatabase_" data-uid="Redux.Modules.Data_UniversalContainer.SetResourcesDropdown(KSP.Sim.ResourceSystem.IResourceContainer,KSP.Sim.ResourceSystem.ResourceDefinitionDatabase)">SetResourcesDropdown(IResourceContainer, ResourceDefinitionDatabase)</h4>
   <div class="markdown level1 summary"><p>Initialize the dropdown for the possible &quot;stored resources&quot; for the universal container</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void SetResourcesDropdown(IResourceContainer[] containers, ResourceDefinitionDatabase database)</code></pre>
+    <pre><code class="lang-csharp hljs">public void SetResourcesDropdown(IResourceContainer container, ResourceDefinitionDatabase database)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -349,9 +360,9 @@ public ModuleProperty&lt;string&gt; StoredResource</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.ResourceSystem.IResourceContainer.html">IResourceContainer</a>[]</td>
-        <td><span class="parametername">containers</span></td>
-        <td><p>List of resource containers from the part</p>
+        <td><a class="xref" href="KSP.Sim.ResourceSystem.IResourceContainer.html">IResourceContainer</a></td>
+        <td><span class="parametername">container</span></td>
+        <td><p>Resource container from the part</p>
 </td>
       </tr>
       <tr>

@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class Module_LiftingSurface | KSP2Redux API (Beta) ">
     
-    <meta name="description" content="PartBehaviourModule for the lifting surface module, using  and backed by .">
+    <meta name="description" content="The transform used as the aerodynamic reference frame for lift and drag calculations.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,7 @@
 
 
   <h1 id="KSP_Modules_Module_LiftingSurface" data-uid="KSP.Modules.Module_LiftingSurface" class="text-break">Class Module_LiftingSurface</h1>
-  <div class="markdown level0 summary"><p>PartBehaviourModule for the lifting surface module, using <a class="xref" href="KSP.Modules.Data_LiftingSurface.html">Data_LiftingSurface</a> and backed by <a class="xref" href="KSP.Sim.impl.PartComponentModule_LiftingSurface.html">PartComponentModule_LiftingSurface</a>.</p>
+  <div class="markdown level0 summary"><p>The transform used as the aerodynamic reference frame for lift and drag calculations.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -95,9 +95,6 @@
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a></div>
     <div><a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a></div>
     <div><a class="xref" href="GlobalAssemblyCSharp.ILiftProvider.html">ILiftProvider</a></div>
   </div>
@@ -122,6 +119,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsStageable">PartBehaviourModule.IsStageable()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnViewUnload">PartBehaviourModule.OnViewUnload()</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnActive">PartBehaviourModule.OnActive()</a>
     </div>
     <div>
@@ -143,13 +143,16 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForDataModules">PartBehaviourModule.InitForDataModules()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_StashPendingStateJson_System_Type_Newtonsoft_Json_Linq_JObject_">PartBehaviourModule.StashPendingStateJson(Type, JObject)</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_SetDataModuleValues_KSP_Sim_Definitions_SerializedPartModule_">PartBehaviourModule.SetDataModuleValues(SerializedPartModule)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForNewOABPart">PartBehaviourModule.InitForNewOABPart()</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_">PartBehaviourModule.RemoveResourceRequest(ResourceFlowRequestHandle)</a>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_Unity_Entities_Entity_">PartBehaviourModule.RemoveResourceRequest(Entity)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnAnimStateEnter_UnityEngine_Animator_System_Int32_">PartBehaviourModule.OnAnimStateEnter(Animator, int)</a>
@@ -242,6 +245,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsLocallyAuthorized">PartBehaviourModule.IsLocallyAuthorized</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_PendingStateJson">PartBehaviourModule.PendingStateJson</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Game">KerbalMonoBehaviour.Game</a>
     </div>
     <div>
@@ -261,7 +267,9 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Module_LiftingSurface_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Module_LiftingSurface : PartBehaviourModule, IPartModule, IFixedUpdate, IPriorityOverride, IUpdate, IObjectAssemblyPartModule, ILiftProvider</code></pre>
+    <pre><code class="lang-csharp hljs">[ModuleCategory(&quot;Aerodynamics&quot;)]
+[ModuleDescription(&quot;Generates aerodynamic lift from airflow&quot;)]
+public class Module_LiftingSurface : PartBehaviourModule, IPartModule, IObjectAssemblyPartModule, ILiftProvider</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -280,7 +288,8 @@
 
 
   <h4 id="KSP_Modules_Module_LiftingSurface_CorePartData" data-uid="KSP.Modules.Module_LiftingSurface.CorePartData">CorePartData</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="KSP.Modules.Module_LiftingSurface.html#KSP_Modules_Module_LiftingSurface_CorePartData">CorePartData</a> component attached to the same part, used for center-of-pressure offset data.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -304,7 +313,8 @@
 
 
   <h4 id="KSP_Modules_Module_LiftingSurface__showPAMDebug" data-uid="KSP.Modules.Module_LiftingSurface._showPAMDebug">_showPAMDebug</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Backing field for the ShowPAMDebug property, shared across all instances of the class.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -328,7 +338,8 @@
 
 
   <h4 id="KSP_Modules_Module_LiftingSurface_baseTransform" data-uid="KSP.Modules.Module_LiftingSurface.baseTransform">baseTransform</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The transform used as the aerodynamic reference frame for lift and drag calculations.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -352,7 +363,8 @@
 
 
   <h4 id="KSP_Modules_Module_LiftingSurface_dataLiftingSurface" data-uid="KSP.Modules.Module_LiftingSurface.dataLiftingSurface">dataLiftingSurface</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="KSP.Modules.Data_LiftingSurface.html">Data_LiftingSurface</a> data module instance associated with this lifting surface.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -376,7 +388,8 @@
 
 
   <h4 id="KSP_Modules_Module_LiftingSurface_debugThis" data-uid="KSP.Modules.Module_LiftingSurface.debugThis">debugThis</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Controls whether verbose per-frame debug logging is emitted for this lifting surface instance.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -403,7 +416,8 @@
 
   <a id="KSP_Modules_Module_LiftingSurface_DataLiftingSurface_" data-uid="KSP.Modules.Module_LiftingSurface.DataLiftingSurface*"></a>
   <h4 id="KSP_Modules_Module_LiftingSurface_DataLiftingSurface" data-uid="KSP.Modules.Module_LiftingSurface.DataLiftingSurface">DataLiftingSurface</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <a class="xref" href="KSP.Modules.Data_LiftingSurface.html">Data_LiftingSurface</a> data module that stores aerodynamic configuration and runtime state for this lifting surface.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -428,7 +442,8 @@
 
   <a id="KSP_Modules_Module_LiftingSurface_LiftForce_" data-uid="KSP.Modules.Module_LiftingSurface.LiftForce*"></a>
   <h4 id="KSP_Modules_Module_LiftingSurface_LiftForce" data-uid="KSP.Modules.Module_LiftingSurface.LiftForce">LiftForce</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the current lift force applied by this lifting surface each physics step.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -453,7 +468,8 @@
 
   <a id="KSP_Modules_Module_LiftingSurface_PartComponentModuleType_" data-uid="KSP.Modules.Module_LiftingSurface.PartComponentModuleType*"></a>
   <h4 id="KSP_Modules_Module_LiftingSurface_PartComponentModuleType" data-uid="KSP.Modules.Module_LiftingSurface.PartComponentModuleType">PartComponentModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <span class="xref">System.Type</span> of the corresponding simulation-side <a class="xref" href="KSP.Sim.impl.PartComponentModule.html">PartComponentModule</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -480,7 +496,8 @@
 
   <a id="KSP_Modules_Module_LiftingSurface_ShowPAMDebug_" data-uid="KSP.Modules.Module_LiftingSurface.ShowPAMDebug*"></a>
   <h4 id="KSP_Modules_Module_LiftingSurface_ShowPAMDebug" data-uid="KSP.Modules.Module_LiftingSurface.ShowPAMDebug">ShowPAMDebug</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets a value indicating whether PAM debug controls are visible for all lifting surface instances.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -507,7 +524,8 @@
 
   <a id="KSP_Modules_Module_LiftingSurface_AddDataModules_" data-uid="KSP.Modules.Module_LiftingSurface.AddDataModules*"></a>
   <h4 id="KSP_Modules_Module_LiftingSurface_AddDataModules" data-uid="KSP.Modules.Module_LiftingSurface.AddDataModules">AddDataModules()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers data modules with <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_DataModules">DataModules</a> for this part behaviour module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -519,7 +537,8 @@
 
   <a id="KSP_Modules_Module_LiftingSurface_COPQuery_" data-uid="KSP.Modules.Module_LiftingSurface.COPQuery*"></a>
   <h4 id="KSP_Modules_Module_LiftingSurface_COPQuery_KSP_OAB_ObjectAssemblyCOPressureQuery__UnityEngine_Transform_KSP_Modules_Data_LiftingSurface_TransformDir_System_Single_System_Single_UnityEngine_Vector3_" data-uid="KSP.Modules.Module_LiftingSurface.COPQuery(KSP.OAB.ObjectAssemblyCOPressureQuery@,UnityEngine.Transform,KSP.Modules.Data_LiftingSurface.TransformDir,System.Single,System.Single,UnityEngine.Vector3)">COPQuery(ref ObjectAssemblyCOPressureQuery, Transform, TransformDir, float, float, Vector3)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Computes and writes the center-of-pressure position, lift direction, and lift magnitude into a center-of-pressure query.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -538,32 +557,38 @@
       <tr>
         <td><a class="xref" href="KSP.OAB.ObjectAssemblyCOPressureQuery.html">ObjectAssemblyCOPressureQuery</a></td>
         <td><span class="parametername">qry</span></td>
-        <td></td>
+        <td><p>The query that carries reference atmospheric conditions and receives the computed center-of-pressure result.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
         <td><span class="parametername">baseTransform</span></td>
-        <td></td>
+        <td><p>The transform whose position defines the aerodynamic reference frame origin.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Modules.Data_LiftingSurface.html">Data_LiftingSurface</a>.<a class="xref" href="KSP.Modules.Data_LiftingSurface.TransformDir.html">TransformDir</a></td>
         <td><span class="parametername">transformDir</span></td>
-        <td></td>
+        <td><p>The local axis of <code class="paramref">baseTransform</code> that defines the lift direction.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">transformSign</span></td>
-        <td></td>
+        <td><p>A sign multiplier (+1 or -1) applied to the lift axis vector.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">deflectionLiftCoeff</span></td>
-        <td></td>
+        <td><p>A scalar coefficient representing effective wing area or control-surface deflection.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Vector3</span></td>
         <td><span class="parametername">coPressureOffset</span></td>
-        <td></td>
+        <td><p>The world-space offset from the transform to the center of pressure.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -571,7 +596,8 @@
 
   <a id="KSP_Modules_Module_LiftingSurface_CalculateLiftDragForces_" data-uid="KSP.Modules.Module_LiftingSurface.CalculateLiftDragForces*"></a>
   <h4 id="KSP_Modules_Module_LiftingSurface_CalculateLiftDragForces_KSP_Sim_Definitions_ModuleProperty_System_Single___KSP_Sim_Definitions_ModuleProperty_System_Single___KSP_Modules_Data_LiftingSurface_TransformDir_System_Single_UnityEngine_Transform_KSP_Modules_Data_LiftingSurface_LiftForce__KSP_Modules_Data_LiftingSurface_DragForce__System_Single_UnityEngine_Vector3_KSP_Sim_Definitions_ModuleProperty_System_Single___UnityEngine_Vector3__" data-uid="KSP.Modules.Module_LiftingSurface.CalculateLiftDragForces(KSP.Sim.Definitions.ModuleProperty{System.Single}@,KSP.Sim.Definitions.ModuleProperty{System.Single}@,KSP.Modules.Data_LiftingSurface.TransformDir,System.Single,UnityEngine.Transform,KSP.Modules.Data_LiftingSurface.LiftForce@,KSP.Modules.Data_LiftingSurface.DragForce@,System.Single,UnityEngine.Vector3,KSP.Sim.Definitions.ModuleProperty{System.Single}@,UnityEngine.Vector3@)">CalculateLiftDragForces(ref ModuleProperty&lt;float&gt;, ref ModuleProperty&lt;float&gt;, TransformDir, float, Transform, ref LiftForce, ref DragForce, float, Vector3, ref ModuleProperty&lt;float&gt;, out Vector3)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Computes and writes the aerodynamic lift and drag forces for the current physics step.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -590,57 +616,68 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">float</span>&gt;</td>
         <td><span class="parametername">liftScalar</span></td>
-        <td></td>
+        <td><p>The property that receives the magnitude of the computed lift force in Newtons.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">float</span>&gt;</td>
         <td><span class="parametername">dragScalar</span></td>
-        <td></td>
+        <td><p>The property that receives the magnitude of the computed drag force in Newtons.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Modules.Data_LiftingSurface.html">Data_LiftingSurface</a>.<a class="xref" href="KSP.Modules.Data_LiftingSurface.TransformDir.html">TransformDir</a></td>
         <td><span class="parametername">transformDir</span></td>
-        <td></td>
+        <td><p>The local axis of <code class="paramref">referenceTransform</code> that defines the lift direction.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">transformSign</span></td>
-        <td></td>
+        <td><p>A sign multiplier (+1 or -1) applied to the lift axis vector.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
         <td><span class="parametername">referenceTransform</span></td>
-        <td></td>
+        <td><p>The transform whose orientation defines the aerodynamic reference frame.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Modules.Data_LiftingSurface.html">Data_LiftingSurface</a>.<a class="xref" href="KSP.Modules.Data_LiftingSurface.LiftForce.html">LiftForce</a></td>
         <td><span class="parametername">liftForce</span></td>
-        <td></td>
+        <td><p>The struct that receives the resulting lift force and application point.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Modules.Data_LiftingSurface.html">Data_LiftingSurface</a>.<a class="xref" href="KSP.Modules.Data_LiftingSurface.DragForce.html">DragForce</a></td>
         <td><span class="parametername">dragForce</span></td>
-        <td></td>
+        <td><p>The struct that receives the resulting drag force and application point.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">deflectionLiftCoeff</span></td>
-        <td></td>
+        <td><p>A scalar coefficient that scales both lift and drag, representing effective wing area or deflection.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Vector3</span></td>
         <td><span class="parametername">coPressureOffset</span></td>
-        <td></td>
+        <td><p>The local-space offset from the part origin to the center of pressure.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">float</span>&gt;</td>
         <td><span class="parametername">aoaProperty</span></td>
-        <td></td>
+        <td><p>The property that receives the computed angle of attack in degrees.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Vector3</span></td>
         <td><span class="parametername">normalizedVelocity</span></td>
-        <td></td>
+        <td><p>The normalized airstream velocity vector in world space, or <span class="xref">UnityEngine.Vector3</span>.zero when aerodynamics are disabled.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -648,7 +685,8 @@
 
   <a id="KSP_Modules_Module_LiftingSurface_GetDisableAerodynamics_" data-uid="KSP.Modules.Module_LiftingSurface.GetDisableAerodynamics*"></a>
   <h4 id="KSP_Modules_Module_LiftingSurface_GetDisableAerodynamics" data-uid="KSP.Modules.Module_LiftingSurface.GetDisableAerodynamics">GetDisableAerodynamics()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Determines whether aerodynamics are globally disabled via the cheat system.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -665,7 +703,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the cheat system has disabled aerodynamics; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -673,7 +712,8 @@
 
   <a id="KSP_Modules_Module_LiftingSurface_GetDragVector_" data-uid="KSP.Modules.Module_LiftingSurface.GetDragVector*"></a>
   <h4 id="KSP_Modules_Module_LiftingSurface_GetDragVector_KSP_Sim_Definitions_ModuleProperty_System_Single___UnityEngine_Vector3_System_Single_System_Double_System_Single_" data-uid="KSP.Modules.Module_LiftingSurface.GetDragVector(KSP.Sim.Definitions.ModuleProperty{System.Single}@,UnityEngine.Vector3,System.Single,System.Double,System.Single)">GetDragVector(ref ModuleProperty&lt;float&gt;, Vector3, float, double, float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Computes the aerodynamic drag force vector using the part's current Mach number.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -692,27 +732,32 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">float</span>&gt;</td>
         <td><span class="parametername">dragScalar</span></td>
-        <td></td>
+        <td><p>The property that receives the computed drag force magnitude in Newtons.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Vector3</span></td>
         <td><span class="parametername">nVel</span></td>
-        <td></td>
+        <td><p>The normalized airstream velocity vector in world space.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">absDot</span></td>
-        <td></td>
+        <td><p>The effective dot product used to evaluate the drag curve.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">Q</span></td>
-        <td></td>
+        <td><p>The dynamic pressure in Pascals.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">deflectionLiftCoeff</span></td>
-        <td></td>
+        <td><p>A scalar coefficient representing effective wing area or control-surface deflection.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -727,7 +772,8 @@
     <tbody>
       <tr>
         <td><span class="xref">Vector3</span></td>
-        <td></td>
+        <td><p>The drag force vector in world space, or <span class="xref">UnityEngine.Vector3</span>.zero when drag is zero or node attachment suppresses drag.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -735,7 +781,8 @@
 
   <a id="KSP_Modules_Module_LiftingSurface_GetDragVector_" data-uid="KSP.Modules.Module_LiftingSurface.GetDragVector*"></a>
   <h4 id="KSP_Modules_Module_LiftingSurface_GetDragVector_KSP_Sim_Definitions_ModuleProperty_System_Single___UnityEngine_Vector3_System_Single_System_Double_System_Single_System_Single_" data-uid="KSP.Modules.Module_LiftingSurface.GetDragVector(KSP.Sim.Definitions.ModuleProperty{System.Single}@,UnityEngine.Vector3,System.Single,System.Double,System.Single,System.Single)">GetDragVector(ref ModuleProperty&lt;float&gt;, Vector3, float, double, float, float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Computes the aerodynamic drag force vector using the given Mach number.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -754,32 +801,38 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">float</span>&gt;</td>
         <td><span class="parametername">dragScalar</span></td>
-        <td></td>
+        <td><p>The property that receives the computed drag force magnitude in Newtons.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Vector3</span></td>
         <td><span class="parametername">nVel</span></td>
-        <td></td>
+        <td><p>The normalized airstream velocity vector in world space.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">absDot</span></td>
-        <td></td>
+        <td><p>The effective dot product used to evaluate the drag curve.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">Q</span></td>
-        <td></td>
+        <td><p>The dynamic pressure in Pascals.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">mach</span></td>
-        <td></td>
+        <td><p>The Mach number used to evaluate the drag-Mach curve.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">deflectionLiftCoeff</span></td>
-        <td></td>
+        <td><p>A scalar coefficient representing effective wing area or control-surface deflection.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -794,7 +847,8 @@
     <tbody>
       <tr>
         <td><span class="xref">Vector3</span></td>
-        <td></td>
+        <td><p>The drag force vector in world space, or Vector3.zero when drag is zero or node attachment suppresses drag.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -802,7 +856,8 @@
 
   <a id="KSP_Modules_Module_LiftingSurface_GetLiftVector_" data-uid="KSP.Modules.Module_LiftingSurface.GetLiftVector*"></a>
   <h4 id="KSP_Modules_Module_LiftingSurface_GetLiftVector_UnityEngine_Vector3_System_Single_System_Single_System_Double_System_Single_System_Single_UnityEngine_Vector3_" data-uid="KSP.Modules.Module_LiftingSurface.GetLiftVector(UnityEngine.Vector3,System.Single,System.Single,System.Double,System.Single,System.Single,UnityEngine.Vector3)">GetLiftVector(Vector3, float, float, double, float, float, Vector3)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Computes the aerodynamic lift force vector for the current airstream conditions.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -821,37 +876,44 @@
       <tr>
         <td><span class="xref">Vector3</span></td>
         <td><span class="parametername">liftVector</span></td>
-        <td></td>
+        <td><p>The world-space lift axis vector.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">liftDot</span></td>
-        <td></td>
+        <td><p>The signed dot product of the normalized velocity and the lift vector.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">absDot</span></td>
-        <td></td>
+        <td><p>The effective dot product used to evaluate the lift curve.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">Q</span></td>
-        <td></td>
+        <td><p>The dynamic pressure in Pascals.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">mach</span></td>
-        <td></td>
+        <td><p>The current Mach number, used to evaluate the lift-Mach curve.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">deflectionLiftCoeff</span></td>
-        <td></td>
+        <td><p>A scalar coefficient representing effective wing area or control-surface deflection.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Vector3</span></td>
         <td><span class="parametername">normalizedVelocity</span></td>
-        <td></td>
+        <td><p>The normalized airstream velocity vector, used for perpendicular-only projection.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -866,7 +928,8 @@
     <tbody>
       <tr>
         <td><span class="xref">Vector3</span></td>
-        <td></td>
+        <td><p>The lift force vector in world space, or <span class="xref">UnityEngine.Vector3</span>.zero when lift is zero or node attachment suppresses lift.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -874,7 +937,8 @@
 
   <a id="KSP_Modules_Module_LiftingSurface_OnCenterOfLiftQuery_" data-uid="KSP.Modules.Module_LiftingSurface.OnCenterOfLiftQuery*"></a>
   <h4 id="KSP_Modules_Module_LiftingSurface_OnCenterOfLiftQuery_KSP_OAB_ObjectAssemblyCOPressureQuery_" data-uid="KSP.Modules.Module_LiftingSurface.OnCenterOfLiftQuery(KSP.OAB.ObjectAssemblyCOPressureQuery)">OnCenterOfLiftQuery(ObjectAssemblyCOPressureQuery)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Responds to a center-of-pressure query from the object assembly builder, reporting this surface's lift position, direction, and magnitude.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -893,7 +957,8 @@
       <tr>
         <td><a class="xref" href="KSP.OAB.ObjectAssemblyCOPressureQuery.html">ObjectAssemblyCOPressureQuery</a></td>
         <td><span class="parametername">qry</span></td>
-        <td></td>
+        <td><p>The query that carries the reference atmospheric conditions and receives the computed center-of-pressure result.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -901,7 +966,8 @@
 
   <a id="KSP_Modules_Module_LiftingSurface_OnInitialize_" data-uid="KSP.Modules.Module_LiftingSurface.OnInitialize*"></a>
   <h4 id="KSP_Modules_Module_LiftingSurface_OnInitialize" data-uid="KSP.Modules.Module_LiftingSurface.OnInitialize">OnInitialize()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called during initialization to allow derived classes to perform custom setup after data modules are registered.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -913,7 +979,8 @@
 
   <a id="KSP_Modules_Module_LiftingSurface_OnModuleFixedUpdate_" data-uid="KSP.Modules.Module_LiftingSurface.OnModuleFixedUpdate*"></a>
   <h4 id="KSP_Modules_Module_LiftingSurface_OnModuleFixedUpdate_System_Single_" data-uid="KSP.Modules.Module_LiftingSurface.OnModuleFixedUpdate(System.Single)">OnModuleFixedUpdate(float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called each fixed-update tick while the module is operating in the flight context.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -932,7 +999,8 @@
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">fixedDeltaTime</span></td>
-        <td></td>
+        <td><p>The fixed physics time step in seconds.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -942,7 +1010,8 @@
 
   <a id="KSP_Modules_Module_LiftingSurface_OnShutdown_" data-uid="KSP.Modules.Module_LiftingSurface.OnShutdown*"></a>
   <h4 id="KSP_Modules_Module_LiftingSurface_OnShutdown" data-uid="KSP.Modules.Module_LiftingSurface.OnShutdown">OnShutdown()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called when the module is shutting down, allowing derived classes to release resources or subscriptions.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -954,7 +1023,8 @@
 
   <a id="KSP_Modules_Module_LiftingSurface_SetupCoefficients_" data-uid="KSP.Modules.Module_LiftingSurface.SetupCoefficients*"></a>
   <h4 id="KSP_Modules_Module_LiftingSurface_SetupCoefficients_UnityEngine_Transform_KSP_Modules_Data_LiftingSurface_TransformDir_System_Single_UnityEngine_Vector3_UnityEngine_Vector3__UnityEngine_Vector3__System_Single__System_Single__" data-uid="KSP.Modules.Module_LiftingSurface.SetupCoefficients(UnityEngine.Transform,KSP.Modules.Data_LiftingSurface.TransformDir,System.Single,UnityEngine.Vector3,UnityEngine.Vector3@,UnityEngine.Vector3@,System.Single@,System.Single@)">SetupCoefficients(Transform, TransformDir, float, Vector3, out Vector3, out Vector3, out float, out float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Computes the normalized velocity, lift axis vector, lift dot product, and absolute dot product for the current airstream direction.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -973,42 +1043,50 @@
       <tr>
         <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
         <td><span class="parametername">baseTransform</span></td>
-        <td></td>
+        <td><p>The transform whose orientation defines the lift reference frame.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Modules.Data_LiftingSurface.html">Data_LiftingSurface</a>.<a class="xref" href="KSP.Modules.Data_LiftingSurface.TransformDir.html">TransformDir</a></td>
         <td><span class="parametername">transformDir</span></td>
-        <td></td>
+        <td><p>The local axis of <code class="paramref">baseTransform</code> that defines the nominal lift direction.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">transformSign</span></td>
-        <td></td>
+        <td><p>A sign multiplier (+1 or -1) applied to the lift axis vector.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Vector3</span></td>
         <td><span class="parametername">velocity</span></td>
-        <td></td>
+        <td><p>The airstream velocity vector in world space.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Vector3</span></td>
         <td><span class="parametername">normalizedVelocity</span></td>
-        <td></td>
+        <td><p>The normalized form of <code class="paramref">velocity</code>.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Vector3</span></td>
         <td><span class="parametername">liftVector</span></td>
-        <td></td>
+        <td><p>The world-space lift axis vector, incorporating <code class="paramref">transformSign</code>.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">liftDot</span></td>
-        <td></td>
+        <td><p>The signed dot product of <code class="paramref">normalizedVelocity</code> and <code class="paramref">liftVector</code>.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">absDot</span></td>
-        <td></td>
+        <td><p>The effective dot product used for curve evaluation, clamped to [0, 1] for non-omnidirectional surfaces or taken as the absolute value for omnidirectional ones.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1016,7 +1094,8 @@
 
   <a id="KSP_Modules_Module_LiftingSurface_UpdatePAMControlVisibility_" data-uid="KSP.Modules.Module_LiftingSurface.UpdatePAMControlVisibility*"></a>
   <h4 id="KSP_Modules_Module_LiftingSurface_UpdatePAMControlVisibility" data-uid="KSP.Modules.Module_LiftingSurface.UpdatePAMControlVisibility">UpdatePAMControlVisibility()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Updates the visibility of PAM debug controls for this lifting surface based on the current ShowPAMDebug flag.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1027,7 +1106,8 @@
 
 
   <h4 id="KSP_Modules_Module_LiftingSurface_OnPAMDebugChanged" data-uid="KSP.Modules.Module_LiftingSurface.OnPAMDebugChanged">OnPAMDebugChanged</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Occurs when the ShowPAMDebug flag changes, signaling all instances to refresh their PAM control visibility.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1051,15 +1131,6 @@
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a>
   </div>
   <div>
       <a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a>

@@ -94,9 +94,6 @@
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a></div>
     <div><a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a></div>
   </div>
   <div class="inheritedMembers">
@@ -120,6 +117,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsStageable">PartBehaviourModule.IsStageable()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnViewUnload">PartBehaviourModule.OnViewUnload()</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnActive">PartBehaviourModule.OnActive()</a>
     </div>
     <div>
@@ -141,13 +141,16 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForDataModules">PartBehaviourModule.InitForDataModules()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_StashPendingStateJson_System_Type_Newtonsoft_Json_Linq_JObject_">PartBehaviourModule.StashPendingStateJson(Type, JObject)</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_SetDataModuleValues_KSP_Sim_Definitions_SerializedPartModule_">PartBehaviourModule.SetDataModuleValues(SerializedPartModule)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForNewOABPart">PartBehaviourModule.InitForNewOABPart()</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_">PartBehaviourModule.RemoveResourceRequest(ResourceFlowRequestHandle)</a>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_Unity_Entities_Entity_">PartBehaviourModule.RemoveResourceRequest(Entity)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnAnimStateEnter_UnityEngine_Animator_System_Int32_">PartBehaviourModule.OnAnimStateEnter(Animator, int)</a>
@@ -243,6 +246,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsLocallyAuthorized">PartBehaviourModule.IsLocallyAuthorized</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_PendingStateJson">PartBehaviourModule.PendingStateJson</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Game">KerbalMonoBehaviour.Game</a>
     </div>
     <div>
@@ -262,7 +268,9 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Module_CargoBay_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Module_CargoBay : PartBehaviourModule, IPartModule, IFixedUpdate, IPriorityOverride, IUpdate, IObjectAssemblyPartModule</code></pre>
+    <pre><code class="lang-csharp hljs">[ModuleCategory(&quot;Structural&quot;)]
+[ModuleDescription(&quot;Shielded bay that protects enclosed parts from drag&quot;)]
+public class Module_CargoBay : PartBehaviourModule, IPartModule, IObjectAssemblyPartModule</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -281,7 +289,8 @@
 
 
   <h4 id="KSP_Modules_Module_CargoBay_dataCargoBay" data-uid="KSP.Modules.Module_CargoBay.dataCargoBay">dataCargoBay</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The serialized cargo bay data module instance for this component.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -308,7 +317,8 @@
 
   <a id="KSP_Modules_Module_CargoBay_PartComponentModuleType_" data-uid="KSP.Modules.Module_CargoBay.PartComponentModuleType*"></a>
   <h4 id="KSP_Modules_Module_CargoBay_PartComponentModuleType" data-uid="KSP.Modules.Module_CargoBay.PartComponentModuleType">PartComponentModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <span class="xref">System.Type</span> of the corresponding simulation-side <a class="xref" href="KSP.Sim.impl.PartComponentModule.html">PartComponentModule</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -337,7 +347,8 @@
 
   <a id="KSP_Modules_Module_CargoBay_AddConnectingPart_" data-uid="KSP.Modules.Module_CargoBay.AddConnectingPart*"></a>
   <h4 id="KSP_Modules_Module_CargoBay_AddConnectingPart_KSP_Sim_impl_PartBehavior_" data-uid="KSP.Modules.Module_CargoBay.AddConnectingPart(KSP.Sim.impl.PartBehavior)">AddConnectingPart(PartBehavior)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers a part as a connecting bay segment and schedules a collider reset on all connected bays.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -356,7 +367,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.PartBehavior.html">PartBehavior</a></td>
         <td><span class="parametername">p</span></td>
-        <td></td>
+        <td><p>The part to add as a connecting bay segment.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -364,7 +376,8 @@
 
   <a id="KSP_Modules_Module_CargoBay_AddDataModules_" data-uid="KSP.Modules.Module_CargoBay.AddDataModules*"></a>
   <h4 id="KSP_Modules_Module_CargoBay_AddDataModules" data-uid="KSP.Modules.Module_CargoBay.AddDataModules">AddDataModules()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers data modules with <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_DataModules">DataModules</a> for this part behaviour module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -376,7 +389,8 @@
 
   <a id="KSP_Modules_Module_CargoBay_CheckClosedStatus_" data-uid="KSP.Modules.Module_CargoBay.CheckClosedStatus*"></a>
   <h4 id="KSP_Modules_Module_CargoBay_CheckClosedStatus" data-uid="KSP.Modules.Module_CargoBay.CheckClosedStatus">CheckClosedStatus()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Updates the internal closed state from the deployable module's toggle value.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -386,7 +400,8 @@
 
   <a id="KSP_Modules_Module_CargoBay_ClearConnectingParts_" data-uid="KSP.Modules.Module_CargoBay.ClearConnectingParts*"></a>
   <h4 id="KSP_Modules_Module_CargoBay_ClearConnectingParts" data-uid="KSP.Modules.Module_CargoBay.ClearConnectingParts">ClearConnectingParts()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Removes all connecting parts and schedules a collider reset on all connected bays.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -396,7 +411,8 @@
 
   <a id="KSP_Modules_Module_CargoBay_ClosedAndLocked_" data-uid="KSP.Modules.Module_CargoBay.ClosedAndLocked*"></a>
   <h4 id="KSP_Modules_Module_CargoBay_ClosedAndLocked" data-uid="KSP.Modules.Module_CargoBay.ClosedAndLocked">ClosedAndLocked()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns a value indicating whether this bay and all connected bays are closed and have their outer nodes end-capped by attached parts.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -413,7 +429,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if every connected bay is closed and end-capped; false otherwise.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -421,7 +438,8 @@
 
   <a id="KSP_Modules_Module_CargoBay_EndCapped_" data-uid="KSP.Modules.Module_CargoBay.EndCapped*"></a>
   <h4 id="KSP_Modules_Module_CargoBay_EndCapped" data-uid="KSP.Modules.Module_CargoBay.EndCapped">EndCapped()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns a value indicating whether both outer attach nodes are occupied by parts that fit the node size.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -438,7 +456,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if all present outer attach nodes have a compatible attached part; false if any node is unoccupied or mismatched.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -446,7 +465,8 @@
 
   <a id="KSP_Modules_Module_CargoBay_FindPartColliders_" data-uid="KSP.Modules.Module_CargoBay.FindPartColliders*"></a>
   <h4 id="KSP_Modules_Module_CargoBay_FindPartColliders_KSP_Sim_impl_PartBehavior_" data-uid="KSP.Modules.Module_CargoBay.FindPartColliders(KSP.Sim.impl.PartBehavior)">FindPartColliders(PartBehavior)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns a list of <a class="xref" href="KSP.Modules.PartCollider.html">PartCollider</a> entries for all non-trigger colliders on the given part and its children that belong to that part.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -465,7 +485,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.PartBehavior.html">PartBehavior</a></td>
         <td><span class="parametername">p</span></td>
-        <td></td>
+        <td><p>The part whose colliders are collected.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -480,7 +501,8 @@
     <tbody>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="KSP.Modules.PartCollider.html">PartCollider</a>&gt;</td>
-        <td></td>
+        <td><p>A list of <a class="xref" href="KSP.Modules.PartCollider.html">PartCollider</a> instances found on the part.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -488,7 +510,8 @@
 
   <a id="KSP_Modules_Module_CargoBay_ModifyShieldInEnclosedParts_" data-uid="KSP.Modules.Module_CargoBay.ModifyShieldInEnclosedParts*"></a>
   <h4 id="KSP_Modules_Module_CargoBay_ModifyShieldInEnclosedParts_System_Boolean_" data-uid="KSP.Modules.Module_CargoBay.ModifyShieldInEnclosedParts(System.Boolean)">ModifyShieldInEnclosedParts(bool)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Updates the airstream-shield status for all parts currently enclosed by this bay.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -507,7 +530,8 @@
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">shieldStatus</span></td>
-        <td></td>
+        <td><p>True to shield enclosed parts from the airstream; false to unshield them.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -515,7 +539,8 @@
 
   <a id="KSP_Modules_Module_CargoBay_OnInitialize_" data-uid="KSP.Modules.Module_CargoBay.OnInitialize*"></a>
   <h4 id="KSP_Modules_Module_CargoBay_OnInitialize" data-uid="KSP.Modules.Module_CargoBay.OnInitialize">OnInitialize()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called during initialization to allow derived classes to perform custom setup after data modules are registered.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -527,7 +552,8 @@
 
   <a id="KSP_Modules_Module_CargoBay_OnShutdown_" data-uid="KSP.Modules.Module_CargoBay.OnShutdown*"></a>
   <h4 id="KSP_Modules_Module_CargoBay_OnShutdown" data-uid="KSP.Modules.Module_CargoBay.OnShutdown">OnShutdown()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called when the module is shutting down, allowing derived classes to release resources or subscriptions.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -539,7 +565,8 @@
 
   <a id="KSP_Modules_Module_CargoBay_OnStartFinished_" data-uid="KSP.Modules.Module_CargoBay.OnStartFinished*"></a>
   <h4 id="KSP_Modules_Module_CargoBay_OnStartFinished" data-uid="KSP.Modules.Module_CargoBay.OnStartFinished">OnStartFinished()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Runs post-initialization cleanup to remove any invalid colliders from the bay's lookup lists.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -549,7 +576,8 @@
 
   <a id="KSP_Modules_Module_CargoBay_ScheduleColliderResetForAllBays_" data-uid="KSP.Modules.Module_CargoBay.ScheduleColliderResetForAllBays*"></a>
   <h4 id="KSP_Modules_Module_CargoBay_ScheduleColliderResetForAllBays" data-uid="KSP.Modules.Module_CargoBay.ScheduleColliderResetForAllBays">ScheduleColliderResetForAllBays()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Schedules a collider reset on this bay and every connected cargo bay.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -559,7 +587,8 @@
 
   <a id="KSP_Modules_Module_CargoBay_SelfClosedAndLocked_" data-uid="KSP.Modules.Module_CargoBay.SelfClosedAndLocked*"></a>
   <h4 id="KSP_Modules_Module_CargoBay_SelfClosedAndLocked" data-uid="KSP.Modules.Module_CargoBay.SelfClosedAndLocked">SelfClosedAndLocked()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns a value indicating whether this bay is both closed and end-capped by attached parts.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -576,7 +605,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the bay is closed and <a class="xref" href="KSP.Modules.Module_CargoBay.html#KSP_Modules_Module_CargoBay_EndCapped">EndCapped()</a> returns <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a>; false otherwise.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -584,7 +614,8 @@
 
   <a id="KSP_Modules_Module_CargoBay_SetLookupCenter_" data-uid="KSP.Modules.Module_CargoBay.SetLookupCenter*"></a>
   <h4 id="KSP_Modules_Module_CargoBay_SetLookupCenter_UnityEngine_Vector3_" data-uid="KSP.Modules.Module_CargoBay.SetLookupCenter(UnityEngine.Vector3)">SetLookupCenter(Vector3)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Sets the center point of the sphere used to detect enclosed parts.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -603,7 +634,8 @@
       <tr>
         <td><span class="xref">Vector3</span></td>
         <td><span class="parametername">p</span></td>
-        <td></td>
+        <td><p>The lookup center position in local space.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -611,7 +643,8 @@
 
   <a id="KSP_Modules_Module_CargoBay_SetLookupRadius_" data-uid="KSP.Modules.Module_CargoBay.SetLookupRadius*"></a>
   <h4 id="KSP_Modules_Module_CargoBay_SetLookupRadius_System_Single_" data-uid="KSP.Modules.Module_CargoBay.SetLookupRadius(System.Single)">SetLookupRadius(float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Sets the radius of the sphere used to detect enclosed parts.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -630,7 +663,8 @@
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">radius</span></td>
-        <td></td>
+        <td><p>The lookup radius in world units.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -638,7 +672,8 @@
 
   <a id="KSP_Modules_Module_CargoBay_TestAttachmentFit_" data-uid="KSP.Modules.Module_CargoBay.TestAttachmentFit*"></a>
   <h4 id="KSP_Modules_Module_CargoBay_TestAttachmentFit_KSP_Sim_AttachNodeData_" data-uid="KSP.Modules.Module_CargoBay.TestAttachmentFit(KSP.Sim.AttachNodeData)">TestAttachmentFit(AttachNodeData)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns a value indicating whether the part attached at the given node has a matching or larger node size.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -657,7 +692,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.AttachNodeData.html">AttachNodeData</a></td>
         <td><span class="parametername">n</span></td>
-        <td></td>
+        <td><p>The attach node whose attached part is tested for fit.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -672,22 +708,14 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the attached part's reciprocal node size is greater than or equal to this node's size; false otherwise.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a>
   </div>
   <div>
       <a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a>

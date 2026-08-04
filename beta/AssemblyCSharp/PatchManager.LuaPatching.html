@@ -91,28 +91,31 @@ Classes
       <h4><a class="xref" href="PatchManager.LuaPatching.LuaAsset.html">LuaAsset</a></h4>
       <section><p>A new asset queued for creation by a Lua patch script.</p>
 </section>
-      <h4><a class="xref" href="PatchManager.LuaPatching.LuaPatch.html">LuaPatch</a></h4>
-      <section><p>A registered patch operation: which converter, which addressables target, what callback to run, and at which stage.</p>
-</section>
       <h4><a class="xref" href="PatchManager.LuaPatching.LuaPatchingModule.html">LuaPatchingModule</a></h4>
       <section><p>IModule that performs the late assembly scan for the Lua patching universe, registering Lua-exposed types,
 PatchManager submodules, and converters with MoonSharp once all mod assemblies are loaded.</p>
 </section>
-      <h4><a class="xref" href="PatchManager.LuaPatching.PatchManagerScriptLoader.html">PatchManagerScriptLoader</a></h4>
-      <section><p>MoonSharp <span class="xref">MoonSharp.Interpreter.Loaders.IScriptLoader</span> for PatchManager Lua scripts.</p>
+      <h4><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a></h4>
+      <section><p>A registered patch operation: which converter, which addressables target, what callback to run, and at which stage.</p>
 </section>
       <h4><a class="xref" href="PatchManager.LuaPatching.Universe.html">Universe</a></h4>
       <section><p>The central orchestrator for Lua-based patching: loads patch scripts, registers patches and new assets,
 sorts stages topologically, and runs the resulting pipeline against each patched asset.</p>
 </section>
       <h4><a class="xref" href="PatchManager.LuaPatching.Universe.LabelPatchBuckets.html">Universe.LabelPatchBuckets</a></h4>
-      <section><p>Buckets for each label</p>
+      <section><p>The patches for a single label in a single pass, grouped by how they match an asset name.</p>
 </section>
     <h3 id="structs">
 Structs
 </h3>
+      <h4><a class="xref" href="PatchManager.LuaPatching.LuaIndex.html">LuaIndex</a></h4>
+      <section><p>A position index that bridges the C# 0-based and Lua 1-based array conventions so one method body can serve
+both languages. C# callers pass a plain int, used as-is (0-based). Lua numbers are turned into a LuaIndex by
+the global MoonSharp converter, which subtracts 1, so part[1] in Lua and part[0] in C# address the same
+element. This is the parameter type for every position-taking member (the integer indexer, RemoveAt, Insert).</p>
+</section>
       <h4><a class="xref" href="PatchManager.LuaPatching.Universe.WildcardEntry.html">Universe.WildcardEntry</a></h4>
-      <section><p>Stores information about wildcard patches</p>
+      <section><p>A wildcard patch paired with the compiled name pattern it matches against.</p>
 </section>
     <h3 id="interfaces">
 Interfaces
@@ -123,10 +126,10 @@ Interfaces
     <h3 id="enums">
 Enums
 </h3>
-      <h4><a class="xref" href="PatchManager.LuaPatching.LuaPatch.PatchOrdering.html">LuaPatch.PatchOrdering</a></h4>
+      <h4><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.PatchOrdering.html">PatchDefinition.PatchOrdering</a></h4>
       <section><p>Ordering bucket within a single pass.</p>
 </section>
-      <h4><a class="xref" href="PatchManager.LuaPatching.LuaPatch.PatchPass.html">LuaPatch.PatchPass</a></h4>
+      <h4><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.PatchPass.html">PatchDefinition.PatchPass</a></h4>
       <section><p>The pass a patch runs in.</p>
 </section>
 

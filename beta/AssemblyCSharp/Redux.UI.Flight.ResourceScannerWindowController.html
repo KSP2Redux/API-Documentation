@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class ResourceScannerWindowController | KSP2Redux API (Beta) ">
     
-    <meta name="description" content="Controller for the MyFirstWindow UI.">
+    <meta name="description" content="Draws the purple dashed line from the active vessel to its main body&#39;s center in Map View while the Resource Gathering window is open, using Hslr instead of Shapes (Issue #985).">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,8 @@
 
 
   <h1 id="Redux_UI_Flight_ResourceScannerWindowController" data-uid="Redux.UI.Flight.ResourceScannerWindowController" class="text-break">Class ResourceScannerWindowController</h1>
-  <div class="markdown level0 summary"><p>Controller for the MyFirstWindow UI.</p>
+  <div class="markdown level0 summary"><p>Draws the purple dashed line from the active vessel to its main body's center in Map View
+while the Resource Gathering window is open, using Hslr instead of Shapes (Issue #985).</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -130,14 +131,44 @@
 </h3>
 
 
-  <a id="Redux_UI_Flight_ResourceScannerWindowController_IsWindowOpen_" data-uid="Redux.UI.Flight.ResourceScannerWindowController.IsWindowOpen*"></a>
-  <h4 id="Redux_UI_Flight_ResourceScannerWindowController_IsWindowOpen" data-uid="Redux.UI.Flight.ResourceScannerWindowController.IsWindowOpen">IsWindowOpen</h4>
-  <div class="markdown level1 summary"><p>The state of the window. Setting this value will open or close the window.</p>
+  <a id="Redux_UI_Flight_ResourceScannerWindowController_Instance_" data-uid="Redux.UI.Flight.ResourceScannerWindowController.Instance*"></a>
+  <h4 id="Redux_UI_Flight_ResourceScannerWindowController_Instance" data-uid="Redux.UI.Flight.ResourceScannerWindowController.Instance">Instance</h4>
+  <div class="markdown level1 summary"><p>The single active controller instance. Issue #986: lets the scanner's PAM button open this window
+directly. The window GameObject stays active (it is shown/hidden via PanelRenderer, not SetActive),
+so this reference remains valid for the lifetime of the window.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool IsWindowOpen { set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public static ResourceScannerWindowController Instance { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.UI.Flight.ResourceScannerWindowController.html">ResourceScannerWindowController</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_UI_Flight_ResourceScannerWindowController_IsWindowOpen_" data-uid="Redux.UI.Flight.ResourceScannerWindowController.IsWindowOpen*"></a>
+  <h4 id="Redux_UI_Flight_ResourceScannerWindowController_IsWindowOpen" data-uid="Redux.UI.Flight.ResourceScannerWindowController.IsWindowOpen">IsWindowOpen</h4>
+  <div class="markdown level1 summary"><p>The state of the window. Setting this value will open or close the window.
+The getter reports whether the window is currently displayed, which is not necessarily what the player
+last asked for: the game hides the window on its own when leaving Flight or the Flight Map View.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsWindowOpen { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-condensed">

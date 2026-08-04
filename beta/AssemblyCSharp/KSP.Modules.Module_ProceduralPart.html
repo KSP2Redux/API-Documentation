@@ -94,9 +94,6 @@
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a></div>
     <div><a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a></div>
   </div>
   <div class="inheritedMembers">
@@ -120,6 +117,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsStageable">PartBehaviourModule.IsStageable()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnViewUnload">PartBehaviourModule.OnViewUnload()</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnActive">PartBehaviourModule.OnActive()</a>
     </div>
     <div>
@@ -141,13 +141,16 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForDataModules">PartBehaviourModule.InitForDataModules()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_StashPendingStateJson_System_Type_Newtonsoft_Json_Linq_JObject_">PartBehaviourModule.StashPendingStateJson(Type, JObject)</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_SetDataModuleValues_KSP_Sim_Definitions_SerializedPartModule_">PartBehaviourModule.SetDataModuleValues(SerializedPartModule)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForNewOABPart">PartBehaviourModule.InitForNewOABPart()</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_">PartBehaviourModule.RemoveResourceRequest(ResourceFlowRequestHandle)</a>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_Unity_Entities_Entity_">PartBehaviourModule.RemoveResourceRequest(Entity)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnAnimStateEnter_UnityEngine_Animator_System_Int32_">PartBehaviourModule.OnAnimStateEnter(Animator, int)</a>
@@ -237,6 +240,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsLocallyAuthorized">PartBehaviourModule.IsLocallyAuthorized</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_PendingStateJson">PartBehaviourModule.PendingStateJson</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Game">KerbalMonoBehaviour.Game</a>
     </div>
     <div>
@@ -256,7 +262,9 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Module_ProceduralPart_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Module_ProceduralPart : PartBehaviourModule, IPartModule, IFixedUpdate, IPriorityOverride, IUpdate, IObjectAssemblyPartModule</code></pre>
+    <pre><code class="lang-csharp hljs">[ModuleCategory(&quot;Procedural&quot;)]
+[ModuleDescription(&quot;Runtime mesh baking, slider parameters, and drag cube updates&quot;)]
+public class Module_ProceduralPart : PartBehaviourModule, IPartModule, IObjectAssemblyPartModule</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -275,7 +283,8 @@
 
 
   <h4 id="KSP_Modules_Module_ProceduralPart_OnBakedMeshChanged" data-uid="KSP.Modules.Module_ProceduralPart.OnBakedMeshChanged">OnBakedMeshChanged</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Delegate invoked when the baked mesh changes during procedural editing.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -299,7 +308,8 @@
 
 
   <h4 id="KSP_Modules_Module_ProceduralPart_OnBakedMeshDataChanged" data-uid="KSP.Modules.Module_ProceduralPart.OnBakedMeshDataChanged">OnBakedMeshDataChanged</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Delegate invoked when the underlying baked mesh data changes.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -323,7 +333,8 @@
 
 
   <h4 id="KSP_Modules_Module_ProceduralPart_OnBakedMeshFinalized" data-uid="KSP.Modules.Module_ProceduralPart.OnBakedMeshFinalized">OnBakedMeshFinalized</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Delegate invoked when the baked mesh is finalized after procedural editing completes.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -347,7 +358,8 @@
 
 
   <h4 id="KSP_Modules_Module_ProceduralPart_dataProceduralPart" data-uid="KSP.Modules.Module_ProceduralPart.dataProceduralPart">dataProceduralPart</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="KSP.Modules.Data_ProceduralPart.html">Data_ProceduralPart</a> data module associated with this part behaviour module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -371,7 +383,8 @@
 
 
   <h4 id="KSP_Modules_Module_ProceduralPart_searchableControlSurfaceVorticesVFXTransformName" data-uid="KSP.Modules.Module_ProceduralPart.searchableControlSurfaceVorticesVFXTransformName">searchableControlSurfaceVorticesVFXTransformName</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The transform name fragment used to locate control surface vortices VFX transforms on the part hierarchy.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -395,7 +408,8 @@
 
 
   <h4 id="KSP_Modules_Module_ProceduralPart_searchableWingtipVorticesVFXTransformName" data-uid="KSP.Modules.Module_ProceduralPart.searchableWingtipVorticesVFXTransformName">searchableWingtipVorticesVFXTransformName</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The transform name fragment used to locate wingtip vortices VFX transforms on the part hierarchy.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -422,7 +436,8 @@
 
   <a id="KSP_Modules_Module_ProceduralPart_ControlSurfaceVorticesTransforms_" data-uid="KSP.Modules.Module_ProceduralPart.ControlSurfaceVorticesTransforms*"></a>
   <h4 id="KSP_Modules_Module_ProceduralPart_ControlSurfaceVorticesTransforms" data-uid="KSP.Modules.Module_ProceduralPart.ControlSurfaceVorticesTransforms">ControlSurfaceVorticesTransforms</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the list of transforms representing control surface vortices VFX attachment points on this part.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -447,7 +462,8 @@
 
   <a id="KSP_Modules_Module_ProceduralPart_IsEditable_" data-uid="KSP.Modules.Module_ProceduralPart.IsEditable*"></a>
   <h4 id="KSP_Modules_Module_ProceduralPart_IsEditable" data-uid="KSP.Modules.Module_ProceduralPart.IsEditable">IsEditable</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the procedural part is currently in an editable dynamic mesh state.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -472,7 +488,8 @@
 
   <a id="KSP_Modules_Module_ProceduralPart_IsSymmetryMirrored_" data-uid="KSP.Modules.Module_ProceduralPart.IsSymmetryMirrored*"></a>
   <h4 id="KSP_Modules_Module_ProceduralPart_IsSymmetryMirrored" data-uid="KSP.Modules.Module_ProceduralPart.IsSymmetryMirrored">IsSymmetryMirrored</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether this part is mirrored along a symmetry axis.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -497,7 +514,8 @@
 
   <a id="KSP_Modules_Module_ProceduralPart_PartComponentModuleType_" data-uid="KSP.Modules.Module_ProceduralPart.PartComponentModuleType*"></a>
   <h4 id="KSP_Modules_Module_ProceduralPart_PartComponentModuleType" data-uid="KSP.Modules.Module_ProceduralPart.PartComponentModuleType">PartComponentModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <span class="xref">System.Type</span> of the corresponding simulation-side <a class="xref" href="KSP.Sim.impl.PartComponentModule.html">PartComponentModule</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -524,7 +542,8 @@
 
   <a id="KSP_Modules_Module_ProceduralPart_ProceduralMeshBaker_" data-uid="KSP.Modules.Module_ProceduralPart.ProceduralMeshBaker*"></a>
   <h4 id="KSP_Modules_Module_ProceduralPart_ProceduralMeshBaker" data-uid="KSP.Modules.Module_ProceduralPart.ProceduralMeshBaker">ProceduralMeshBaker</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <a class="xref" href="KSP.OAB.ProcedurallyEditablePart.html">ProcedurallyEditablePart</a> mesh baker component associated with this module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -549,7 +568,8 @@
 
   <a id="KSP_Modules_Module_ProceduralPart_WingtipVorticesTransforms_" data-uid="KSP.Modules.Module_ProceduralPart.WingtipVorticesTransforms*"></a>
   <h4 id="KSP_Modules_Module_ProceduralPart_WingtipVorticesTransforms" data-uid="KSP.Modules.Module_ProceduralPart.WingtipVorticesTransforms">WingtipVorticesTransforms</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the list of transforms representing wingtip vortices VFX attachment points on this part.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -576,7 +596,8 @@
 
   <a id="KSP_Modules_Module_ProceduralPart_AddDataModules_" data-uid="KSP.Modules.Module_ProceduralPart.AddDataModules*"></a>
   <h4 id="KSP_Modules_Module_ProceduralPart_AddDataModules" data-uid="KSP.Modules.Module_ProceduralPart.AddDataModules">AddDataModules()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers data modules with <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_DataModules">DataModules</a> for this part behaviour module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -588,7 +609,8 @@
 
   <a id="KSP_Modules_Module_ProceduralPart_OnInitialize_" data-uid="KSP.Modules.Module_ProceduralPart.OnInitialize*"></a>
   <h4 id="KSP_Modules_Module_ProceduralPart_OnInitialize" data-uid="KSP.Modules.Module_ProceduralPart.OnInitialize">OnInitialize()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called during initialization to allow derived classes to perform custom setup after data modules are registered.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -600,7 +622,8 @@
 
   <a id="KSP_Modules_Module_ProceduralPart_OnModuleOABUpdate_" data-uid="KSP.Modules.Module_ProceduralPart.OnModuleOABUpdate*"></a>
   <h4 id="KSP_Modules_Module_ProceduralPart_OnModuleOABUpdate_System_Single_" data-uid="KSP.Modules.Module_ProceduralPart.OnModuleOABUpdate(System.Single)">OnModuleOABUpdate(float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called each frame update tick while the module is operating in the OAB context.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -619,7 +642,8 @@
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">deltaTime</span></td>
-        <td></td>
+        <td><p>The elapsed frame time in seconds since the last update.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -629,7 +653,8 @@
 
   <a id="KSP_Modules_Module_ProceduralPart_OnModuleUpdate_" data-uid="KSP.Modules.Module_ProceduralPart.OnModuleUpdate*"></a>
   <h4 id="KSP_Modules_Module_ProceduralPart_OnModuleUpdate_System_Single_" data-uid="KSP.Modules.Module_ProceduralPart.OnModuleUpdate(System.Single)">OnModuleUpdate(float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called each frame update tick while the module is operating in the flight context.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -648,7 +673,8 @@
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">deltaTime</span></td>
-        <td></td>
+        <td><p>The elapsed frame time in seconds since the last update.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -658,7 +684,8 @@
 
   <a id="KSP_Modules_Module_ProceduralPart_OnShutdown_" data-uid="KSP.Modules.Module_ProceduralPart.OnShutdown*"></a>
   <h4 id="KSP_Modules_Module_ProceduralPart_OnShutdown" data-uid="KSP.Modules.Module_ProceduralPart.OnShutdown">OnShutdown()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called when the module is shutting down, allowing derived classes to release resources or subscriptions.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -670,7 +697,8 @@
 
   <a id="KSP_Modules_Module_ProceduralPart_ReadValuesFromMeshBaker_" data-uid="KSP.Modules.Module_ProceduralPart.ReadValuesFromMeshBaker*"></a>
   <h4 id="KSP_Modules_Module_ProceduralPart_ReadValuesFromMeshBaker" data-uid="KSP.Modules.Module_ProceduralPart.ReadValuesFromMeshBaker">ReadValuesFromMeshBaker()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Reads the current mesh option, slider, toggle, and visible submesh values from the <a class="xref" href="KSP.OAB.ProcedurallyEditablePart.html">ProcedurallyEditablePart</a> mesh baker into the stored data module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -680,7 +708,8 @@
 
   <a id="KSP_Modules_Module_ProceduralPart_UpdateVorticesTransformLists_" data-uid="KSP.Modules.Module_ProceduralPart.UpdateVorticesTransformLists*"></a>
   <h4 id="KSP_Modules_Module_ProceduralPart_UpdateVorticesTransformLists" data-uid="KSP.Modules.Module_ProceduralPart.UpdateVorticesTransformLists">UpdateVorticesTransformLists()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Rebuilds the cached lists of wingtip and control surface vortices VFX transforms by searching the part hierarchy.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -689,15 +718,6 @@
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a>
   </div>
   <div>
       <a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a>

@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class Data_LitPart | KSP2Redux API (Beta) ">
     
-    <meta name="description" content="Serializable data definition for , holding light toggle state, color gradient configuration, and resource requirements for a controllable lit part.">
+    <meta name="description" content="The normalized interpolation progress of the current on/off transition, ranging from 0 to 1.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,7 @@
 
 
   <h1 id="KSP_Modules_Data_LitPart" data-uid="KSP.Modules.Data_LitPart" class="text-break">Class Data_LitPart</h1>
-  <div class="markdown level0 summary"><p>Serializable data definition for <a class="xref" href="KSP.Modules.Module_LitPart.html">Module_LitPart</a>, holding light toggle state, color gradient configuration, and resource requirements for a controllable lit part.</p>
+  <div class="markdown level0 summary"><p>The normalized interpolation progress of the current on/off transition, ranging from 0 to 1.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -89,6 +89,11 @@
     <div class="level0"><span class="xref">object</span></div>
     <div class="level1"><a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a></div>
     <div class="level2"><span class="xref">Data_LitPart</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Redux.Ecs.CompilerServices.IPartModuleNotifier-1.html">IPartModuleNotifier</a>&lt;<a class="xref" href="Redux.Ecs.Modules.LitPartData.html">LitPartData</a>.<a class="xref" href="Redux.Ecs.Modules.LitPartData.Changeset.html">Changeset</a>&gt;</div>
+    <div><a class="xref" href="Redux.Ecs.CompilerServices.IModuleStateSerializable.html">IModuleStateSerializable</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -121,9 +126,6 @@
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_StageActivationActionPath">ModuleData.StageActivationActionPath</a>
-    </div>
-    <div>
-      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RequestHandle">ModuleData.RequestHandle</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_SetupResourceRequest_KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_">ModuleData.SetupResourceRequest(ResourceFlowRequestBroker)</a>
@@ -192,6 +194,12 @@
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_SyncAllSymmetricalData_KSP_Sim_Definitions_ModuleData_">ModuleData.SyncAllSymmetricalData(ModuleData)</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_Entity">ModuleData.Entity</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RequestEntity">ModuleData.RequestEntity</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_HasSymmetricalProperties">ModuleData.HasSymmetricalProperties</a>
     </div>
     <div>
@@ -214,7 +222,7 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Data_LitPart_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class Data_LitPart : ModuleData</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class Data_LitPart : ModuleData, IPartModuleNotifier&lt;LitPartData.Changeset&gt;, IModuleStateSerializable</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -283,7 +291,8 @@ public FloatCurve BlueColorGradient</code></pre>
 
 
   <h4 id="KSP_Modules_Data_LitPart_ColorGradientColors" data-uid="KSP.Modules.Data_LitPart.ColorGradientColors">ColorGradientColors</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>RGBA color keyframe values packed as <span class="xref">UnityEngine.Vector4</span> entries for the light transition gradient.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -307,7 +316,8 @@ public FloatCurve BlueColorGradient</code></pre>
 
 
   <h4 id="KSP_Modules_Data_LitPart_ColorGradientTimes" data-uid="KSP.Modules.Data_LitPart.ColorGradientTimes">ColorGradientTimes</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Normalized time positions corresponding to each color keyframe in <a class="xref" href="KSP.Modules.Data_LitPart.html#KSP_Modules_Data_LitPart_ColorGradientColors">ColorGradientColors</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -331,7 +341,8 @@ public FloatCurve BlueColorGradient</code></pre>
 
 
   <h4 id="KSP_Modules_Data_LitPart_CurrentLightIntensity" data-uid="KSP.Modules.Data_LitPart.CurrentLightIntensity">CurrentLightIntensity</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The current interpolated light intensity at this frame.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -410,6 +421,7 @@ public bool DefaultEnabledState</code></pre>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
+[Unit(&quot;s&quot;)]
 public float Duration</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -430,7 +442,8 @@ public float Duration</code></pre>
 
 
   <h4 id="KSP_Modules_Data_LitPart_DurationMultiplier" data-uid="KSP.Modules.Data_LitPart.DurationMultiplier">DurationMultiplier</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Multiplier applied to the transition duration to scale the transition speed at runtime.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -479,7 +492,8 @@ public FloatCurve GreenColorGradient</code></pre>
 
 
   <h4 id="KSP_Modules_Data_LitPart_HasEnoughResources" data-uid="KSP.Modules.Data_LitPart.HasEnoughResources">HasEnoughResources</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>A value indicating whether sufficient resources are available to keep the light on.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -504,7 +518,8 @@ public bool HasEnoughResources</code></pre>
 
 
   <h4 id="KSP_Modules_Data_LitPart_Interpolation" data-uid="KSP.Modules.Data_LitPart.Interpolation">Interpolation</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The normalized interpolation progress of the current on/off transition, ranging from 0 to 1.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -528,7 +543,8 @@ public bool HasEnoughResources</code></pre>
 
 
   <h4 id="KSP_Modules_Data_LitPart_IsTransitioning" data-uid="KSP.Modules.Data_LitPart.IsTransitioning">IsTransitioning</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>A value indicating whether the light is currently mid-transition between on and off states.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -582,6 +598,7 @@ public float LightIntensityMultiplier</code></pre>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
+[InlineStringList]
 public List&lt;string&gt; LightMaterialNames</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -607,6 +624,7 @@ public List&lt;string&gt; LightMaterialNames</code></pre>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
+[InlineStringList]
 public List&lt;string&gt; LightObjectNames</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -627,7 +645,8 @@ public List&lt;string&gt; LightObjectNames</code></pre>
 
 
   <h4 id="KSP_Modules_Data_LitPart_LightStateOnBlackout" data-uid="KSP.Modules.Data_LitPart.LightStateOnBlackout">LightStateOnBlackout</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>A value indicating whether the light was active when the most recent power blackout began.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -659,7 +678,7 @@ public bool LightStateOnBlackout</code></pre>
     <pre><code class="lang-csharp hljs">[LocalizedField(&quot;PartModules/LitPart/LightEnabled&quot;)]
 [PAMDisplayControl(SortIndex = 1)]
 [KSPState]
-public ModuleProperty&lt;bool&gt; LightToggle</code></pre>
+public EntityModuleProperty&lt;LitPartData, bool&gt; LightToggle</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -671,7 +690,7 @@ public ModuleProperty&lt;bool&gt; LightToggle</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">bool</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.LitPartData.html">LitPartData</a>, <span class="xref">bool</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -709,6 +728,7 @@ public FloatCurve RedColorGradient</code></pre>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
+[ResourceName]
 public string RequiredResourceName</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -754,7 +774,8 @@ public float RequiredResourceThreshold</code></pre>
 
 
   <h4 id="KSP_Modules_Data_LitPart_TargetLightIntensity" data-uid="KSP.Modules.Data_LitPart.TargetLightIntensity">TargetLightIntensity</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The target light intensity the transition is moving toward.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -781,7 +802,8 @@ public float RequiredResourceThreshold</code></pre>
 
   <a id="KSP_Modules_Data_LitPart_ModuleType_" data-uid="KSP.Modules.Data_LitPart.ModuleType*"></a>
   <h4 id="KSP_Modules_Data_LitPart_ModuleType" data-uid="KSP.Modules.Data_LitPart.ModuleType">ModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <span class="xref">System.Type</span> of the part behaviour module that owns this data definition.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -808,9 +830,45 @@ public float RequiredResourceThreshold</code></pre>
 </h3>
 
 
+  <a id="KSP_Modules_Data_LitPart_BindToEntity_" data-uid="KSP.Modules.Data_LitPart.BindToEntity*"></a>
+  <h4 id="KSP_Modules_Data_LitPart_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_" data-uid="KSP.Modules.Data_LitPart.BindToEntity(Unity.Entities.EntityManager,Unity.Entities.Entity)">BindToEntity(EntityManager, Entity)</h4>
+  <div class="markdown level1 summary"><p>Binds this module's state and config to its part entity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void BindToEntity(EntityManager em, Entity entity)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">entity</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_">ModuleData.BindToEntity(EntityManager, Entity)</a></div>
+
+
   <a id="KSP_Modules_Data_LitPart_Copy_" data-uid="KSP.Modules.Data_LitPart.Copy*"></a>
   <h4 id="KSP_Modules_Data_LitPart_Copy_KSP_Sim_Definitions_ModuleData_" data-uid="KSP.Modules.Data_LitPart.Copy(KSP.Sim.Definitions.ModuleData)">Copy(ModuleData)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Copies the state from <code class="paramref">sourceModuleData</code> into this instance, including the light toggle value.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -829,12 +887,72 @@ public float RequiredResourceThreshold</code></pre>
       <tr>
         <td><a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a></td>
         <td><span class="parametername">sourceModuleData</span></td>
-        <td></td>
+        <td><p>The source <a class="xref" href="KSP.Modules.Data_LitPart.html">Data_LitPart</a> instance whose values are copied into this instance.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_Copy_KSP_Sim_Definitions_ModuleData_">ModuleData.Copy(ModuleData)</a></div>
+
+
+  <a id="KSP_Modules_Data_LitPart_NotifyChanged_" data-uid="KSP.Modules.Data_LitPart.NotifyChanged*"></a>
+  <h4 id="KSP_Modules_Data_LitPart_NotifyChanged_Unity_Entities_EntityManager_Unity_Entities_Entity_Redux_Ecs_Modules_LitPartData_Changeset_" data-uid="KSP.Modules.Data_LitPart.NotifyChanged(Unity.Entities.EntityManager,Unity.Entities.Entity,Redux.Ecs.Modules.LitPartData.Changeset)">NotifyChanged(EntityManager, Entity, Changeset)</h4>
+  <div class="markdown level1 summary"><p>Raises OnChanged for each changed property on the part's LitPartData, driven by
+the changeset the scan pass captured. Live values are read from the component.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void NotifyChanged(EntityManager em, Entity entity, LitPartData.Changeset __changeset)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">entity</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Redux.Ecs.Modules.LitPartData.html">LitPartData</a>.<a class="xref" href="Redux.Ecs.Modules.LitPartData.Changeset.html">Changeset</a></td>
+        <td><span class="parametername">__changeset</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Modules_Data_LitPart_UnbindFromEntity_" data-uid="KSP.Modules.Data_LitPart.UnbindFromEntity*"></a>
+  <h4 id="KSP_Modules_Data_LitPart_UnbindFromEntity" data-uid="KSP.Modules.Data_LitPart.UnbindFromEntity">UnbindFromEntity()</h4>
+  <div class="markdown level1 summary"><p>Detaches from the module entity, snapshotting entity-backed state into managed storage.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void UnbindFromEntity()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_UnbindFromEntity">ModuleData.UnbindFromEntity()</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Redux.Ecs.CompilerServices.IPartModuleNotifier-1.html">IPartModuleNotifier&lt;TChangeset&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.Ecs.CompilerServices.IModuleStateSerializable.html">IModuleStateSerializable</a>
+  </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>

@@ -168,7 +168,8 @@
 
   <a id="KSP_Sim_impl_SwimKerbalCharacterStateHandler__ctor_" data-uid="KSP.Sim.impl.SwimKerbalCharacterStateHandler.#ctor*"></a>
   <h4 id="KSP_Sim_impl_SwimKerbalCharacterStateHandler__ctor_KSP_Sim_impl_KerbalBehavior_" data-uid="KSP.Sim.impl.SwimKerbalCharacterStateHandler.#ctor(KSP.Sim.impl.KerbalBehavior)">SwimKerbalCharacterStateHandler(KerbalBehavior)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="KSP.Sim.impl.SwimKerbalCharacterStateHandler.html">SwimKerbalCharacterStateHandler</a> class.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -187,7 +188,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.KerbalBehavior.html">KerbalBehavior</a></td>
         <td><span class="parametername">kerbalBehavior</span></td>
-        <td></td>
+        <td><p>The view component for the kerbal character that owns this state handler.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -197,7 +199,8 @@
 
   <a id="KSP_Sim_impl_SwimKerbalCharacterStateHandler_CanBeDeactivatedByLocomotionHandler_" data-uid="KSP.Sim.impl.SwimKerbalCharacterStateHandler.CanBeDeactivatedByLocomotionHandler*"></a>
   <h4 id="KSP_Sim_impl_SwimKerbalCharacterStateHandler_CanBeDeactivatedByLocomotionHandler_KSP_Sim_impl_KerbalCharacterStateHandler_" data-uid="KSP.Sim.impl.SwimKerbalCharacterStateHandler.CanBeDeactivatedByLocomotionHandler(KSP.Sim.impl.KerbalCharacterStateHandler)">CanBeDeactivatedByLocomotionHandler(KerbalCharacterStateHandler)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns a value indicating whether this handler can be deactivated by the given locomotion handler.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -216,7 +219,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.KerbalCharacterStateHandler.html">KerbalCharacterStateHandler</a></td>
         <td><span class="parametername">deactivateByHandler</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="KSP.Sim.impl.KerbalCharacterStateHandler.html">KerbalCharacterStateHandler</a> requesting deactivation of this handler.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -231,7 +235,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p><code>true</code> if deactivation by the specified handler is permitted; otherwise, <code>false</code>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -239,9 +244,70 @@
   <div><a class="xref" href="KSP.Sim.impl.KerbalCharacterStateHandler.html#KSP_Sim_impl_KerbalCharacterStateHandler_CanBeDeactivatedByLocomotionHandler_KSP_Sim_impl_KerbalCharacterStateHandler_">KerbalCharacterStateHandler.CanBeDeactivatedByLocomotionHandler(KerbalCharacterStateHandler)</a></div>
 
 
+  <a id="KSP_Sim_impl_SwimKerbalCharacterStateHandler_ComputeSwimMoveDirection_" data-uid="KSP.Sim.impl.SwimKerbalCharacterStateHandler.ComputeSwimMoveDirection*"></a>
+  <h4 id="KSP_Sim_impl_SwimKerbalCharacterStateHandler_ComputeSwimMoveDirection_UnityEngine_Vector3_UnityEngine_Vector3_System_Single_" data-uid="KSP.Sim.impl.SwimKerbalCharacterStateHandler.ComputeSwimMoveDirection(UnityEngine.Vector3,UnityEngine.Vector3,System.Single)">ComputeSwimMoveDirection(Vector3, Vector3, float)</h4>
+  <div class="markdown level1 summary"><p>Combines the camera relative swim input with the vertical dive input into a single world space swim direction.
+The horizontal part is flattened onto the horizon plane, exactly as surface swimming has always done, and the
+vertical part is applied along the horizon up axis. The result is normalized, so diving diagonally moves the
+kerbal at the same speed as swimming straight forward.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Vector3 ComputeSwimMoveDirection(Vector3 cameraMoveWorldSpace, Vector3 horizonUp, float verticalInput)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">cameraMoveWorldSpace</span></td>
+        <td><p>The horizontal swim input, already rotated into world space by the flight camera.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">horizonUp</span></td>
+        <td><p>The world space horizon up axis at the kerbal's position.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">verticalInput</span></td>
+        <td><p>The vertical input, positive to swim up and negative to swim down.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><p>A unit length world space swim direction, or <span class="xref">UnityEngine.Vector3.zero</span> when there is no usable input.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Sim_impl_SwimKerbalCharacterStateHandler_FixedUpdate_" data-uid="KSP.Sim.impl.SwimKerbalCharacterStateHandler.FixedUpdate*"></a>
   <h4 id="KSP_Sim_impl_SwimKerbalCharacterStateHandler_FixedUpdate_System_Single_" data-uid="KSP.Sim.impl.SwimKerbalCharacterStateHandler.FixedUpdate(System.Single)">FixedUpdate(float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Performs physics-step logic for this character state.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -260,7 +326,8 @@
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">fixedDeltaTime</span></td>
-        <td></td>
+        <td><p>The duration of the fixed physics time step in seconds.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -270,7 +337,8 @@
 
   <a id="KSP_Sim_impl_SwimKerbalCharacterStateHandler_ShouldApplyUpright_" data-uid="KSP.Sim.impl.SwimKerbalCharacterStateHandler.ShouldApplyUpright*"></a>
   <h4 id="KSP_Sim_impl_SwimKerbalCharacterStateHandler_ShouldApplyUpright" data-uid="KSP.Sim.impl.SwimKerbalCharacterStateHandler.ShouldApplyUpright">ShouldApplyUpright()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns a value indicating whether this character state should apply an upright stabilization force to the kerbal.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -287,7 +355,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p><code>true</code> if upright stabilization should be applied; otherwise, <code>false</code>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -297,7 +366,8 @@
 
   <a id="KSP_Sim_impl_SwimKerbalCharacterStateHandler_ShouldBeActive_" data-uid="KSP.Sim.impl.SwimKerbalCharacterStateHandler.ShouldBeActive*"></a>
   <h4 id="KSP_Sim_impl_SwimKerbalCharacterStateHandler_ShouldBeActive" data-uid="KSP.Sim.impl.SwimKerbalCharacterStateHandler.ShouldBeActive">ShouldBeActive()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns a value indicating whether this handler should currently be considered active.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -314,7 +384,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p><code>true</code> if this handler should be active; otherwise, <code>false</code>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -324,7 +395,8 @@
 
   <a id="KSP_Sim_impl_SwimKerbalCharacterStateHandler_Start_" data-uid="KSP.Sim.impl.SwimKerbalCharacterStateHandler.Start*"></a>
   <h4 id="KSP_Sim_impl_SwimKerbalCharacterStateHandler_Start" data-uid="KSP.Sim.impl.SwimKerbalCharacterStateHandler.Start">Start()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Activates this handler, marking it as the currently active state.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -336,7 +408,8 @@
 
   <a id="KSP_Sim_impl_SwimKerbalCharacterStateHandler_Stop_" data-uid="KSP.Sim.impl.SwimKerbalCharacterStateHandler.Stop*"></a>
   <h4 id="KSP_Sim_impl_SwimKerbalCharacterStateHandler_Stop" data-uid="KSP.Sim.impl.SwimKerbalCharacterStateHandler.Stop">Stop()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Deactivates this handler, marking it as no longer the active state.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -348,7 +421,8 @@
 
   <a id="KSP_Sim_impl_SwimKerbalCharacterStateHandler_UpdateInput_" data-uid="KSP.Sim.impl.SwimKerbalCharacterStateHandler.UpdateInput*"></a>
   <h4 id="KSP_Sim_impl_SwimKerbalCharacterStateHandler_UpdateInput" data-uid="KSP.Sim.impl.SwimKerbalCharacterStateHandler.UpdateInput">UpdateInput()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Processes player input relevant to this character state.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">

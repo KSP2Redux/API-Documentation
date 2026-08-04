@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class Module_Engine | KSP2Redux API (Beta) ">
     
-    <meta name="description" content="PartBehaviourModule for the engine module, using  and backed by .">
+    <meta name="description" content="The gimbal module attached to this engine.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,7 @@
 
 
   <h1 id="KSP_Modules_Module_Engine" data-uid="KSP.Modules.Module_Engine" class="text-break">Class Module_Engine</h1>
-  <div class="markdown level0 summary"><p>PartBehaviourModule for the engine module, using <a class="xref" href="KSP.Modules.Data_Engine.html">Data_Engine</a> and backed by <a class="xref" href="KSP.Sim.impl.PartComponentModule_Engine.html">PartComponentModule_Engine</a>.</p>
+  <div class="markdown level0 summary"><p>The gimbal module attached to this engine.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -94,9 +94,6 @@
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a></div>
     <div><a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a></div>
     <div><a class="xref" href="GlobalAssemblyCSharp.IEngineStatus.html">IEngineStatus</a></div>
   </div>
@@ -113,6 +110,9 @@
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsStageable">PartBehaviourModule.IsStageable()</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnViewUnload">PartBehaviourModule.OnViewUnload()</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnActive">PartBehaviourModule.OnActive()</a>
@@ -136,13 +136,16 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForDataModules">PartBehaviourModule.InitForDataModules()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_StashPendingStateJson_System_Type_Newtonsoft_Json_Linq_JObject_">PartBehaviourModule.StashPendingStateJson(Type, JObject)</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_SetDataModuleValues_KSP_Sim_Definitions_SerializedPartModule_">PartBehaviourModule.SetDataModuleValues(SerializedPartModule)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForNewOABPart">PartBehaviourModule.InitForNewOABPart()</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_">PartBehaviourModule.RemoveResourceRequest(ResourceFlowRequestHandle)</a>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_Unity_Entities_Entity_">PartBehaviourModule.RemoveResourceRequest(Entity)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnAnimStateExit_UnityEngine_Animator_System_Int32_">PartBehaviourModule.OnAnimStateExit(Animator, int)</a>
@@ -226,6 +229,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsLocallyAuthorized">PartBehaviourModule.IsLocallyAuthorized</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_PendingStateJson">PartBehaviourModule.PendingStateJson</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Game">KerbalMonoBehaviour.Game</a>
     </div>
     <div>
@@ -245,7 +251,9 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Module_Engine_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Module_Engine : PartBehaviourModule, IPartModule, IFixedUpdate, IPriorityOverride, IUpdate, IObjectAssemblyPartModule, IEngineStatus</code></pre>
+    <pre><code class="lang-csharp hljs">[ModuleCategory(&quot;Propulsion&quot;)]
+[ModuleDescription(&quot;Generates thrust by burning propellant&quot;)]
+public class Module_Engine : PartBehaviourModule, IPartModule, IObjectAssemblyPartModule, IEngineStatus</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -264,7 +272,8 @@
 
 
   <h4 id="KSP_Modules_Module_Engine_Alternator" data-uid="KSP.Modules.Module_Engine.Alternator">Alternator</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="KSP.Modules.Module_Generator.html">Module_Generator</a> acting as an alternator on this engine, producing electric charge while the engine is running.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -288,7 +297,8 @@
 
 
   <h4 id="KSP_Modules_Module_Engine_FlameoutVFX" data-uid="KSP.Modules.Module_Engine.FlameoutVFX">FlameoutVFX</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The VFX data used to play the flameout visual effect.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -312,7 +322,8 @@
 
 
   <h4 id="KSP_Modules_Module_Engine_Gimbal" data-uid="KSP.Modules.Module_Engine.Gimbal">Gimbal</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="KSP.Modules.Module_Gimbal.html">Module_Gimbal</a> associated with this engine, used to vector thrust for attitude control.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -339,7 +350,8 @@
 
   <a id="KSP_Modules_Module_Engine_ActualThrust_" data-uid="KSP.Modules.Module_Engine.ActualThrust*"></a>
   <h4 id="KSP_Modules_Module_Engine_ActualThrust" data-uid="KSP.Modules.Module_Engine.ActualThrust">ActualThrust</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the actual thrust output as a fraction of the current mode's maximum thrust, scaled by engine spool when response time is enabled.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -364,7 +376,8 @@
 
   <a id="KSP_Modules_Module_Engine_AverageEngineForce_" data-uid="KSP.Modules.Module_Engine.AverageEngineForce*"></a>
   <h4 id="KSP_Modules_Module_Engine_AverageEngineForce" data-uid="KSP.Modules.Module_Engine.AverageEngineForce">AverageEngineForce</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets the averaged engine force across all thrust transforms for the current fixed update tick.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -389,7 +402,8 @@
 
   <a id="KSP_Modules_Module_Engine_CurrentEngineMode_" data-uid="KSP.Modules.Module_Engine.CurrentEngineMode*"></a>
   <h4 id="KSP_Modules_Module_Engine_CurrentEngineMode" data-uid="KSP.Modules.Module_Engine.CurrentEngineMode">CurrentEngineMode</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the index of the currently active engine mode.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -414,7 +428,8 @@
 
   <a id="KSP_Modules_Module_Engine_CurrentPropellantState_" data-uid="KSP.Modules.Module_Engine.CurrentPropellantState*"></a>
   <h4 id="KSP_Modules_Module_Engine_CurrentPropellantState" data-uid="KSP.Modules.Module_Engine.CurrentPropellantState">CurrentPropellantState</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <a class="xref" href="KSP.Modules.PropellantState.html">PropellantState</a> for the currently active engine mode, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> if the index is out of range.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -439,7 +454,8 @@
 
   <a id="KSP_Modules_Module_Engine_DataEngine_" data-uid="KSP.Modules.Module_Engine.DataEngine*"></a>
   <h4 id="KSP_Modules_Module_Engine_DataEngine" data-uid="KSP.Modules.Module_Engine.DataEngine">DataEngine</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="KSP.Modules.Data_Engine.html">Data_Engine</a> data module for this engine.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -464,7 +480,8 @@
 
   <a id="KSP_Modules_Module_Engine_EngineIgnited_" data-uid="KSP.Modules.Module_Engine.EngineIgnited*"></a>
   <h4 id="KSP_Modules_Module_Engine_EngineIgnited" data-uid="KSP.Modules.Module_Engine.EngineIgnited">EngineIgnited</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the engine is currently ignited.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -489,7 +506,8 @@
 
   <a id="KSP_Modules_Module_Engine_IsPropellantStarved_" data-uid="KSP.Modules.Module_Engine.IsPropellantStarved*"></a>
   <h4 id="KSP_Modules_Module_Engine_IsPropellantStarved" data-uid="KSP.Modules.Module_Engine.IsPropellantStarved">IsPropellantStarved</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the engine is currently starved of propellant.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -514,7 +532,8 @@
 
   <a id="KSP_Modules_Module_Engine_PartComponentModuleType_" data-uid="KSP.Modules.Module_Engine.PartComponentModuleType*"></a>
   <h4 id="KSP_Modules_Module_Engine_PartComponentModuleType" data-uid="KSP.Modules.Module_Engine.PartComponentModuleType">PartComponentModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <span class="xref">System.Type</span> of the <a class="xref" href="KSP.Sim.impl.PartComponentModule_Engine.html">PartComponentModule_Engine</a> that backs this behaviour module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -541,7 +560,8 @@
 
   <a id="KSP_Modules_Module_Engine_RequestedThrottle_" data-uid="KSP.Modules.Module_Engine.RequestedThrottle*"></a>
   <h4 id="KSP_Modules_Module_Engine_RequestedThrottle" data-uid="KSP.Modules.Module_Engine.RequestedThrottle">RequestedThrottle</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the throttle level most recently requested by flight control or independent throttle logic.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -566,7 +586,8 @@
 
   <a id="KSP_Modules_Module_Engine_ThrustCollisionInfo_" data-uid="KSP.Modules.Module_Engine.ThrustCollisionInfo*"></a>
   <h4 id="KSP_Modules_Module_Engine_ThrustCollisionInfo" data-uid="KSP.Modules.Module_Engine.ThrustCollisionInfo">ThrustCollisionInfo</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the list of thrust collision info records for each thrust transform of the current engine mode.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -591,7 +612,8 @@
 
   <a id="KSP_Modules_Module_Engine_ThrustPercentage_" data-uid="KSP.Modules.Module_Engine.ThrustPercentage*"></a>
   <h4 id="KSP_Modules_Module_Engine_ThrustPercentage" data-uid="KSP.Modules.Module_Engine.ThrustPercentage">ThrustPercentage</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the thrust percentage limit as a normalized 0-1 fraction.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -616,7 +638,8 @@
 
   <a id="KSP_Modules_Module_Engine_currentEngineModeData_" data-uid="KSP.Modules.Module_Engine.currentEngineModeData*"></a>
   <h4 id="KSP_Modules_Module_Engine_currentEngineModeData" data-uid="KSP.Modules.Module_Engine.currentEngineModeData">currentEngineModeData</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <a class="xref" href="KSP.Modules.Data_Engine.EngineMode.html">Data_Engine.EngineMode</a> data for the currently active engine mode, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> if no valid mode exists.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -641,7 +664,8 @@
 
   <a id="KSP_Modules_Module_Engine_engineDisplayName_" data-uid="KSP.Modules.Module_Engine.engineDisplayName*"></a>
   <h4 id="KSP_Modules_Module_Engine_engineDisplayName" data-uid="KSP.Modules.Module_Engine.engineDisplayName">engineDisplayName</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the localized display name of the current engine mode.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -666,7 +690,8 @@
 
   <a id="KSP_Modules_Module_Engine_engineName_" data-uid="KSP.Modules.Module_Engine.engineName*"></a>
   <h4 id="KSP_Modules_Module_Engine_engineName" data-uid="KSP.Modules.Module_Engine.engineName">engineName</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the engine identifier string of the current mode.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -691,7 +716,8 @@
 
   <a id="KSP_Modules_Module_Engine_isOperational_" data-uid="KSP.Modules.Module_Engine.isOperational*"></a>
   <h4 id="KSP_Modules_Module_Engine_isOperational" data-uid="KSP.Modules.Module_Engine.isOperational">isOperational</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the engine is operational, meaning it is ignited and not in a flameout state.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -716,7 +742,8 @@
 
   <a id="KSP_Modules_Module_Engine_normalizedOutput_" data-uid="KSP.Modules.Module_Engine.normalizedOutput*"></a>
   <h4 id="KSP_Modules_Module_Engine_normalizedOutput" data-uid="KSP.Modules.Module_Engine.normalizedOutput">normalizedOutput</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the engine's thrust output as a fraction of the current mode's maximum thrust, returning 0 when max thrust is zero or no mode is set.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -741,7 +768,8 @@
 
   <a id="KSP_Modules_Module_Engine_throttleSetting_" data-uid="KSP.Modules.Module_Engine.throttleSetting*"></a>
   <h4 id="KSP_Modules_Module_Engine_throttleSetting" data-uid="KSP.Modules.Module_Engine.throttleSetting">throttleSetting</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the current internal throttle value from the engine data.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -768,7 +796,8 @@
 
   <a id="KSP_Modules_Module_Engine_ActivateDeactivateEngine_" data-uid="KSP.Modules.Module_Engine.ActivateDeactivateEngine*"></a>
   <h4 id="KSP_Modules_Module_Engine_ActivateDeactivateEngine" data-uid="KSP.Modules.Module_Engine.ActivateDeactivateEngine">ActivateDeactivateEngine()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Toggles the engine on or off depending on whether it is currently ignited.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -778,7 +807,8 @@
 
   <a id="KSP_Modules_Module_Engine_ActivateEngine_" data-uid="KSP.Modules.Module_Engine.ActivateEngine*"></a>
   <h4 id="KSP_Modules_Module_Engine_ActivateEngine" data-uid="KSP.Modules.Module_Engine.ActivateEngine">ActivateEngine()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Activates the engine using the default local activation path.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -788,7 +818,8 @@
 
   <a id="KSP_Modules_Module_Engine_ActivateEngine_" data-uid="KSP.Modules.Module_Engine.ActivateEngine*"></a>
   <h4 id="KSP_Modules_Module_Engine_ActivateEngine_System_Boolean_" data-uid="KSP.Modules.Module_Engine.ActivateEngine(System.Boolean)">ActivateEngine(bool)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Activates the engine, optionally bypassing the normal ignition precondition checks for remote multiplayer activation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -807,7 +838,8 @@
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">mpRemoteActivate</span></td>
-        <td></td>
+        <td><p>True to bypass local precondition checks for a remote multiplayer activation; false for a local activation.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -815,7 +847,8 @@
 
   <a id="KSP_Modules_Module_Engine_AddDataModules_" data-uid="KSP.Modules.Module_Engine.AddDataModules*"></a>
   <h4 id="KSP_Modules_Module_Engine_AddDataModules" data-uid="KSP.Modules.Module_Engine.AddDataModules">AddDataModules()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers the <a class="xref" href="KSP.Modules.Data_Engine.html">Data_Engine</a> data module into the module's data module collection.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -827,7 +860,8 @@
 
   <a id="KSP_Modules_Module_Engine_ChangeEngineMode_" data-uid="KSP.Modules.Module_Engine.ChangeEngineMode*"></a>
   <h4 id="KSP_Modules_Module_Engine_ChangeEngineMode" data-uid="KSP.Modules.Module_Engine.ChangeEngineMode">ChangeEngineMode()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Advances to the next engine mode in sequence, wrapping from the last mode back to the first.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -837,7 +871,8 @@
 
   <a id="KSP_Modules_Module_Engine_ChangeEngineMode_" data-uid="KSP.Modules.Module_Engine.ChangeEngineMode*"></a>
   <h4 id="KSP_Modules_Module_Engine_ChangeEngineMode_System_Int32_" data-uid="KSP.Modules.Module_Engine.ChangeEngineMode(System.Int32)">ChangeEngineMode(int)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Begins a transition to the specified engine mode, pausing active propellant requests and starting the mode-switch coroutine.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -856,7 +891,8 @@
       <tr>
         <td><span class="xref">int</span></td>
         <td><span class="parametername">modeIndex</span></td>
-        <td></td>
+        <td><p>The zero-based index of the engine mode to switch to.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -864,7 +900,8 @@
 
   <a id="KSP_Modules_Module_Engine_CheckTransformsUnderwater_" data-uid="KSP.Modules.Module_Engine.CheckTransformsUnderwater*"></a>
   <h4 id="KSP_Modules_Module_Engine_CheckTransformsUnderwater" data-uid="KSP.Modules.Module_Engine.CheckTransformsUnderwater">CheckTransformsUnderwater()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Checks whether any thrust transform is positioned below the ocean surface and updates <a class="xref" href="KSP.Modules.Data_Engine.html#KSP_Modules_Data_Engine_IsUnderwater">IsUnderwater</a> accordingly.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -881,7 +918,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if any transform is underwater; otherwise <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -889,7 +927,8 @@
 
   <a id="KSP_Modules_Module_Engine_DeactivateEngine_" data-uid="KSP.Modules.Module_Engine.DeactivateEngine*"></a>
   <h4 id="KSP_Modules_Module_Engine_DeactivateEngine" data-uid="KSP.Modules.Module_Engine.DeactivateEngine">DeactivateEngine()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Deactivates the engine using the default local deactivation path.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -899,7 +938,8 @@
 
   <a id="KSP_Modules_Module_Engine_DeactivateEngine_" data-uid="KSP.Modules.Module_Engine.DeactivateEngine*"></a>
   <h4 id="KSP_Modules_Module_Engine_DeactivateEngine_System_Boolean_" data-uid="KSP.Modules.Module_Engine.DeactivateEngine(System.Boolean)">DeactivateEngine(bool)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Deactivates the engine, optionally bypassing the normal shutdown precondition check for remote multiplayer deactivation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -918,7 +958,8 @@
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">mpRemoteDeactivate</span></td>
-        <td></td>
+        <td><p>True to bypass the local precondition check for a remote multiplayer deactivation; false for a local deactivation.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -926,7 +967,8 @@
 
   <a id="KSP_Modules_Module_Engine_EngineExhaustDamage_" data-uid="KSP.Modules.Module_Engine.EngineExhaustDamage*"></a>
   <h4 id="KSP_Modules_Module_Engine_EngineExhaustDamage" data-uid="KSP.Modules.Module_Engine.EngineExhaustDamage">EngineExhaustDamage()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Performs sphere-cast exhaust damage checks against nearby parts and terrain, applying thermal flux and impulse forces to struck parts.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -936,7 +978,8 @@
 
   <a id="KSP_Modules_Module_Engine_EngineShockWave_" data-uid="KSP.Modules.Module_Engine.EngineShockWave*"></a>
   <h4 id="KSP_Modules_Module_Engine_EngineShockWave" data-uid="KSP.Modules.Module_Engine.EngineShockWave">EngineShockWave()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Performs a raycast shockwave check along each thrust transform and applies an impulse force to any struck part within range at the configured interval.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -946,7 +989,8 @@
 
   <a id="KSP_Modules_Module_Engine_GetModuleDisplayName_" data-uid="KSP.Modules.Module_Engine.GetModuleDisplayName*"></a>
   <h4 id="KSP_Modules_Module_Engine_GetModuleDisplayName" data-uid="KSP.Modules.Module_Engine.GetModuleDisplayName">GetModuleDisplayName()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the localized display name for this engine module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -963,7 +1007,8 @@
     <tbody>
       <tr>
         <td><span class="xref">string</span></td>
-        <td></td>
+        <td><p>The localized engine module name string.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -973,7 +1018,8 @@
 
   <a id="KSP_Modules_Module_Engine_IndependentThrottleChanged_" data-uid="KSP.Modules.Module_Engine.IndependentThrottleChanged*"></a>
   <h4 id="KSP_Modules_Module_Engine_IndependentThrottleChanged_System_Boolean_" data-uid="KSP.Modules.Module_Engine.IndependentThrottleChanged(System.Boolean)">IndependentThrottleChanged(bool)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Responds to a change in the independent throttle toggle by updating the visibility of the independent throttle percentage control.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -992,7 +1038,8 @@
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">value</span></td>
-        <td></td>
+        <td><p>The new value of the independent throttle toggle.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1000,7 +1047,8 @@
 
   <a id="KSP_Modules_Module_Engine_InitAnimator_" data-uid="KSP.Modules.Module_Engine.InitAnimator*"></a>
   <h4 id="KSP_Modules_Module_Engine_InitAnimator" data-uid="KSP.Modules.Module_Engine.InitAnimator">InitAnimator()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Locates and initializes the child <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Animator.html">Animator</a>, sets up animator state callbacks, and resumes any in-progress mode change.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1010,7 +1058,8 @@
 
   <a id="KSP_Modules_Module_Engine_OnAnimStateEnter_" data-uid="KSP.Modules.Module_Engine.OnAnimStateEnter*"></a>
   <h4 id="KSP_Modules_Module_Engine_OnAnimStateEnter_UnityEngine_Animator_System_Int32_" data-uid="KSP.Modules.Module_Engine.OnAnimStateEnter(UnityEngine.Animator,System.Int32)">OnAnimStateEnter(Animator, int)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Responds to animator state entry by setting the deployed boolean parameter when the entered state matches the deployed mode hash.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1029,12 +1078,14 @@
       <tr>
         <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Animator.html">Animator</a></td>
         <td><span class="parametername">animator</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Animator.html">Animator</a> that entered the new state.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">int</span></td>
         <td><span class="parametername">stateMachineHash</span></td>
-        <td></td>
+        <td><p>The hash of the animator state machine path that was entered.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1044,7 +1095,8 @@
 
   <a id="KSP_Modules_Module_Engine_OnCenterOfThrustQuery_" data-uid="KSP.Modules.Module_Engine.OnCenterOfThrustQuery*"></a>
   <h4 id="KSP_Modules_Module_Engine_OnCenterOfThrustQuery_KSP_OAB_CenterOfThrustQuery__" data-uid="KSP.Modules.Module_Engine.OnCenterOfThrustQuery(KSP.OAB.CenterOfThrustQuery@)">OnCenterOfThrustQuery(out CenterOfThrustQuery)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Computes the weighted center-of-thrust position and direction from all active thrust transforms.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1063,7 +1115,8 @@
       <tr>
         <td><a class="xref" href="KSP.OAB.CenterOfThrustQuery.html">CenterOfThrustQuery</a></td>
         <td><span class="parametername">qry</span></td>
-        <td></td>
+        <td><p>The KSP.Sim.CenterOfThrustQuery populated with position, direction, and thrust magnitude.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1071,7 +1124,8 @@
 
   <a id="KSP_Modules_Module_Engine_OnEnable_" data-uid="KSP.Modules.Module_Engine.OnEnable*"></a>
   <h4 id="KSP_Modules_Module_Engine_OnEnable" data-uid="KSP.Modules.Module_Engine.OnEnable">OnEnable()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers the animator state wrapper when the component is enabled and an animator is present.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1081,7 +1135,8 @@
 
   <a id="KSP_Modules_Module_Engine_OnInitialize_" data-uid="KSP.Modules.Module_Engine.OnInitialize*"></a>
   <h4 id="KSP_Modules_Module_Engine_OnInitialize" data-uid="KSP.Modules.Module_Engine.OnInitialize">OnInitialize()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes the engine module, setting up subscriptions, thrust transforms, resource requests, UI bindings, and module actions.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1093,7 +1148,8 @@
 
   <a id="KSP_Modules_Module_Engine_OnModuleFixedUpdate_" data-uid="KSP.Modules.Module_Engine.OnModuleFixedUpdate*"></a>
   <h4 id="KSP_Modules_Module_Engine_OnModuleFixedUpdate_System_Single_" data-uid="KSP.Modules.Module_Engine.OnModuleFixedUpdate(System.Single)">OnModuleFixedUpdate(float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Runs each fixed physics step, updating thrust direction, gimbal invert, underwater state, thrust forces, throttle, emissive materials, spool FX, and mode-change coroutines.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1112,7 +1168,8 @@
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">fixedDeltaTime</span></td>
-        <td></td>
+        <td><p>The duration of the fixed timestep in seconds.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1122,7 +1179,8 @@
 
   <a id="KSP_Modules_Module_Engine_OnModuleOABFixedUpdate_" data-uid="KSP.Modules.Module_Engine.OnModuleOABFixedUpdate*"></a>
   <h4 id="KSP_Modules_Module_Engine_OnModuleOABFixedUpdate_System_Single_" data-uid="KSP.Modules.Module_Engine.OnModuleOABFixedUpdate(System.Single)">OnModuleOABFixedUpdate(float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Runs each OAB fixed update step, ensuring propellant mixture requests are initialized and updating the thrust control point.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1141,7 +1199,8 @@
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">deltaTime</span></td>
-        <td></td>
+        <td><p>The duration of the fixed timestep in seconds.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1151,7 +1210,8 @@
 
   <a id="KSP_Modules_Module_Engine_OnRevertToLaunchEventMessage_" data-uid="KSP.Modules.Module_Engine.OnRevertToLaunchEventMessage*"></a>
   <h4 id="KSP_Modules_Module_Engine_OnRevertToLaunchEventMessage_KSP_Messages_MessageCenterMessage_" data-uid="KSP.Modules.Module_Engine.OnRevertToLaunchEventMessage(KSP.Messages.MessageCenterMessage)">OnRevertToLaunchEventMessage(MessageCenterMessage)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Handles a revert-to-launch message by posting an engine deactivation audio event on the associated part.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1170,7 +1230,8 @@
       <tr>
         <td><a class="xref" href="KSP.Messages.MessageCenterMessage.html">MessageCenterMessage</a></td>
         <td><span class="parametername">revertMessage</span></td>
-        <td></td>
+        <td><p>The revert-to-launch message received from the message center.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1178,7 +1239,8 @@
 
   <a id="KSP_Modules_Module_Engine_OnShutdown_" data-uid="KSP.Modules.Module_Engine.OnShutdown*"></a>
   <h4 id="KSP_Modules_Module_Engine_OnShutdown" data-uid="KSP.Modules.Module_Engine.OnShutdown">OnShutdown()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Unsubscribes from all message and data events, cleans up engine forces on the part, and releases staging references.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1190,7 +1252,8 @@
 
   <a id="KSP_Modules_Module_Engine_OnUpdate_" data-uid="KSP.Modules.Module_Engine.OnUpdate*"></a>
   <h4 id="KSP_Modules_Module_Engine_OnUpdate_System_Single_" data-uid="KSP.Modules.Module_Engine.OnUpdate(System.Single)">OnUpdate(float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Updates the cached thrust transform direction vectors and refreshes the engine status string each frame while the engine is ignited.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1209,7 +1272,8 @@
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">deltaTime</span></td>
-        <td></td>
+        <td><p>The duration of the frame in seconds.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1219,7 +1283,8 @@
 
   <a id="KSP_Modules_Module_Engine_PlayFlameoutFX_" data-uid="KSP.Modules.Module_Engine.PlayFlameoutFX*"></a>
   <h4 id="KSP_Modules_Module_Engine_PlayFlameoutFX_System_Boolean_" data-uid="KSP.Modules.Module_Engine.PlayFlameoutFX(System.Boolean)">PlayFlameoutFX(bool)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Triggers or clears the flameout VFX effect.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1238,7 +1303,8 @@
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">flamingOut</span></td>
-        <td></td>
+        <td><p>True to trigger the flameout effect; false to clear it.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1246,7 +1312,8 @@
 
   <a id="KSP_Modules_Module_Engine_SetRequestedThrottle_" data-uid="KSP.Modules.Module_Engine.SetRequestedThrottle*"></a>
   <h4 id="KSP_Modules_Module_Engine_SetRequestedThrottle_System_Single_" data-uid="KSP.Modules.Module_Engine.SetRequestedThrottle(System.Single)">SetRequestedThrottle(float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Sets the engine's requested throttle directly on the data module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1266,7 +1333,8 @@ public void SetRequestedThrottle(float newValue)</code></pre>
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">newValue</span></td>
-        <td></td>
+        <td><p>The throttle value to assign, in the range 0 to 1.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1286,7 +1354,8 @@ operational state, and mode-specific response times.</p>
 
   <a id="KSP_Modules_Module_Engine_StageEngine_" data-uid="KSP.Modules.Module_Engine.StageEngine*"></a>
   <h4 id="KSP_Modules_Module_Engine_StageEngine" data-uid="KSP.Modules.Module_Engine.StageEngine">StageEngine()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Activates the engine via staging if it is not already ignited.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1296,7 +1365,8 @@ operational state, and mode-specific response times.</p>
 
   <a id="KSP_Modules_Module_Engine_ThermalUpdate_" data-uid="KSP.Modules.Module_Engine.ThermalUpdate*"></a>
   <h4 id="KSP_Modules_Module_Engine_ThermalUpdate_System_Double_" data-uid="KSP.Modules.Module_Engine.ThermalUpdate(System.Double)">ThermalUpdate(double)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Updates the part's thermal other-flux from engine heat production based on the current throttle and atmospheric density curve.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1315,7 +1385,8 @@ operational state, and mode-specific response times.</p>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">deltaTime</span></td>
-        <td></td>
+        <td><p>The duration of the thermal update step in seconds.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1325,7 +1396,8 @@ operational state, and mode-specific response times.</p>
 
   <a id="KSP_Modules_Module_Engine_ThrustUpdate_" data-uid="KSP.Modules.Module_Engine.ThrustUpdate*"></a>
   <h4 id="KSP_Modules_Module_Engine_ThrustUpdate" data-uid="KSP.Modules.Module_Engine.ThrustUpdate">ThrustUpdate()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Applies per-transform thrust forces to the part rigidbody while the engine is ignited, then runs exhaust damage and shockwave checks.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1335,7 +1407,8 @@ operational state, and mode-specific response times.</p>
 
   <a id="KSP_Modules_Module_Engine_ToggleStaging_" data-uid="KSP.Modules.Module_Engine.ToggleStaging*"></a>
   <h4 id="KSP_Modules_Module_Engine_ToggleStaging_System_Boolean_" data-uid="KSP.Modules.Module_Engine.ToggleStaging(System.Boolean)">ToggleStaging(bool)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Enables or disables staging participation for this engine in flight mode.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1354,7 +1427,8 @@ operational state, and mode-specific response times.</p>
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">bValue</span></td>
-        <td></td>
+        <td><p>True to enable staging; false to disable it.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1362,7 +1436,8 @@ operational state, and mode-specific response times.</p>
 
   <a id="KSP_Modules_Module_Engine_UpdateAnimatorToModeChange_" data-uid="KSP.Modules.Module_Engine.UpdateAnimatorToModeChange*"></a>
   <h4 id="KSP_Modules_Module_Engine_UpdateAnimatorToModeChange_System_Int32_" data-uid="KSP.Modules.Module_Engine.UpdateAnimatorToModeChange(System.Int32)">UpdateAnimatorToModeChange(int)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Sets the animator's deploy boolean parameter to reflect whether the target mode index is a deployed mode.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1381,7 +1456,8 @@ operational state, and mode-specific response times.</p>
       <tr>
         <td><span class="xref">int</span></td>
         <td><span class="parametername">modeIndex</span></td>
-        <td></td>
+        <td><p>The zero-based index of the engine mode being transitioned to.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1389,7 +1465,8 @@ operational state, and mode-specific response times.</p>
 
   <a id="KSP_Modules_Module_Engine_UpdateStatus_" data-uid="KSP.Modules.Module_Engine.UpdateStatus*"></a>
   <h4 id="KSP_Modules_Module_Engine_UpdateStatus" data-uid="KSP.Modules.Module_Engine.UpdateStatus">UpdateStatus()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Refreshes the engine status string with the current thrust output and ISP values.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1399,7 +1476,8 @@ operational state, and mode-specific response times.</p>
 
   <a id="KSP_Modules_Module_Engine_UpdateThrottle_" data-uid="KSP.Modules.Module_Engine.UpdateThrottle*"></a>
   <h4 id="KSP_Modules_Module_Engine_UpdateThrottle" data-uid="KSP.Modules.Module_Engine.UpdateThrottle">UpdateThrottle()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Computes and applies the requested throttle level from flight controls, independent throttle, or locked throttle settings, then advances the current throttle toward the requested value respecting response time and throttle curves.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1409,7 +1487,8 @@ operational state, and mode-specific response times.</p>
 
   <a id="KSP_Modules_Module_Engine_UpdateThrustRelativeControlPoint_" data-uid="KSP.Modules.Module_Engine.UpdateThrustRelativeControlPoint*"></a>
   <h4 id="KSP_Modules_Module_Engine_UpdateThrustRelativeControlPoint" data-uid="KSP.Modules.Module_Engine.UpdateThrustRelativeControlPoint">UpdateThrustRelativeControlPoint()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Updates <a class="xref" href="KSP.Modules.Data_Engine.html#KSP_Modules_Data_Engine_ThrustDirRelativePartWorldSpace">ThrustDirRelativePartWorldSpace</a> by querying the current center-of-thrust direction from the active thrust transforms.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1418,15 +1497,6 @@ operational state, and mode-specific response times.</p>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a>
   </div>
   <div>
       <a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a>

@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class Data_Deployable | KSP2Redux API (Beta) ">
     
-    <meta name="description" content="Represents the serializable data definition for .">
+    <meta name="description" content="The deploy state the part returns to when reset to its authored defaults.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,7 @@
 
 
   <h1 id="KSP_Modules_Data_Deployable" data-uid="KSP.Modules.Data_Deployable" class="text-break">Class Data_Deployable</h1>
-  <div class="markdown level0 summary"><p>Represents the serializable data definition for <a class="xref" href="KSP.Modules.Module_Deployable.html">Module_Deployable</a>.</p>
+  <div class="markdown level0 summary"><p>The deploy state the part returns to when reset to its authored defaults.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -89,6 +89,11 @@
     <div class="level0"><span class="xref">object</span></div>
     <div class="level1"><a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a></div>
     <div class="level2"><span class="xref">Data_Deployable</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Redux.Ecs.CompilerServices.IPartModuleNotifier-1.html">IPartModuleNotifier</a>&lt;<a class="xref" href="Redux.Ecs.Modules.DeployableData.html">DeployableData</a>.<a class="xref" href="Redux.Ecs.Modules.DeployableData.Changeset.html">Changeset</a>&gt;</div>
+    <div><a class="xref" href="Redux.Ecs.CompilerServices.IModuleStateSerializable.html">IModuleStateSerializable</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -121,9 +126,6 @@
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_StageActivationActionPath">ModuleData.StageActivationActionPath</a>
-    </div>
-    <div>
-      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RequestHandle">ModuleData.RequestHandle</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_Copy_KSP_Sim_Definitions_ModuleData_">ModuleData.Copy(ModuleData)</a>
@@ -189,6 +191,12 @@
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_SyncAllSymmetricalData_KSP_Sim_Definitions_ModuleData_">ModuleData.SyncAllSymmetricalData(ModuleData)</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_Entity">ModuleData.Entity</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RequestEntity">ModuleData.RequestEntity</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_HasSymmetricalProperties">ModuleData.HasSymmetricalProperties</a>
     </div>
     <div>
@@ -211,7 +219,7 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Data_Deployable_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class Data_Deployable : ModuleData</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class Data_Deployable : ModuleData, IPartModuleNotifier&lt;DeployableData.Changeset&gt;, IModuleStateSerializable</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -310,6 +318,7 @@ public string ActionGroupToggleName</code></pre>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
+[Unit(&quot;kPa&quot;)]
 public double AeroStressBreakDynamicPressureKPa</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -380,7 +389,8 @@ public bool AeroStressCanBreak</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Deployable_AnimDeployLimitKey" data-uid="KSP.Modules.Data_Deployable.AnimDeployLimitKey">AnimDeployLimitKey</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Animator parameter name used to pass the current deploy-limit value to the animation blend tree.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -404,7 +414,8 @@ public bool AeroStressCanBreak</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Deployable_AnimDeployStateKey" data-uid="KSP.Modules.Data_Deployable.AnimDeployStateKey">AnimDeployStateKey</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Animator parameter name used to signal the deployed or retracted boolean state.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -428,7 +439,8 @@ public bool AeroStressCanBreak</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Deployable_AnimReverseStateTransitionTriggerKey" data-uid="KSP.Modules.Data_Deployable.AnimReverseStateTransitionTriggerKey">AnimReverseStateTransitionTriggerKey</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Animator trigger parameter name used to reverse an in-progress animation state transition.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -452,7 +464,8 @@ public bool AeroStressCanBreak</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Deployable_AnimSpeedMultiplierKey" data-uid="KSP.Modules.Data_Deployable.AnimSpeedMultiplierKey">AnimSpeedMultiplierKey</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Animator parameter name used to set the animation playback speed multiplier.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -481,7 +494,7 @@ public bool AeroStressCanBreak</code></pre>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPState]
-public ModuleProperty&lt;float&gt; AnimationNormalizedTime</code></pre>
+public EntityModuleProperty&lt;DeployableData, float&gt; AnimationNormalizedTime</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -493,7 +506,7 @@ public ModuleProperty&lt;float&gt; AnimationNormalizedTime</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">float</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.DeployableData.html">DeployableData</a>, <span class="xref">float</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -532,7 +545,7 @@ public Vector2 AxisMinMaxRotation</code></pre>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPState(CopyToSymmetrySet = true)]
 [PAMDisplayControl(ExcludeFromContext = true)]
-public ModuleProperty&lt;Data_Deployable.DeployState&gt; CurrentDeployState</code></pre>
+public EntityModuleProperty&lt;DeployableData, Data_Deployable.DeployState&gt; CurrentDeployState</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -544,7 +557,7 @@ public ModuleProperty&lt;Data_Deployable.DeployState&gt; CurrentDeployState</cod
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<a class="xref" href="KSP.Modules.Data_Deployable.html">Data_Deployable</a>.<a class="xref" href="KSP.Modules.Data_Deployable.DeployState.html">DeployState</a>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.DeployableData.html">DeployableData</a>, <a class="xref" href="KSP.Modules.Data_Deployable.html">Data_Deployable</a>.<a class="xref" href="KSP.Modules.Data_Deployable.DeployState.html">DeployState</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -577,7 +590,8 @@ public KSPActionGroup DefaultActionGroup</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Deployable_DefaultDeployState" data-uid="KSP.Modules.Data_Deployable.DefaultDeployState">DefaultDeployState</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The deploy state the part returns to when reset to its authored defaults.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -601,7 +615,8 @@ public KSPActionGroup DefaultActionGroup</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Deployable_DefaultExtendedAnimSpeedValue" data-uid="KSP.Modules.Data_Deployable.DefaultExtendedAnimSpeedValue">DefaultExtendedAnimSpeedValue</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Default animation playback speed applied when the part is in the extended state.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -625,7 +640,8 @@ public KSPActionGroup DefaultActionGroup</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Deployable_DefaultRetractedAnimSpeedValue" data-uid="KSP.Modules.Data_Deployable.DefaultRetractedAnimSpeedValue">DefaultRetractedAnimSpeedValue</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Default animation playback speed applied when the part is in the retracted state.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -657,7 +673,7 @@ public KSPActionGroup DefaultActionGroup</code></pre>
 [PAMDisplayControl(SortIndex = 4)]
 [SteppedRange(0, 1, 0.01)]
 [KSPState(CopyToSymmetrySet = true)]
-public ModuleProperty&lt;float&gt; DeployLimit</code></pre>
+public EntityModuleProperty&lt;DeployableData, float&gt; DeployLimit</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -669,7 +685,7 @@ public ModuleProperty&lt;float&gt; DeployLimit</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">float</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.DeployableData.html">DeployableData</a>, <span class="xref">float</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -1007,6 +1023,7 @@ public string OneTimeExtendActionName</code></pre>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
+[Unit(&quot;deg&quot;)]
 public float TrackingAlignmentOffset</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -1182,6 +1199,7 @@ public Quaternion currentRotation</code></pre>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
+[Unit(&quot;kN&quot;)]
 public float deployBreakingForce</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -1207,6 +1225,7 @@ public float deployBreakingForce</code></pre>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
+[Unit(&quot;kN&#183;m&quot;)]
 public float deployBreakingTorque</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -1232,6 +1251,7 @@ public float deployBreakingTorque</code></pre>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
+[Unit(&quot;m/s&quot;)]
 public double deployCrashTolerance</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -1257,6 +1277,7 @@ public double deployCrashTolerance</code></pre>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
+[Unit(&quot;K&quot;)]
 public double deployMaxTemp</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -1357,6 +1378,7 @@ public Quaternion originalRotation</code></pre>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
+[TransformName]
 public string pivotName</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -1402,7 +1424,8 @@ public bool retractable</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Deployable_rotationMode" data-uid="KSP.Modules.Data_Deployable.rotationMode">rotationMode</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The axis or axes around which the part rotates when tracking its target.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1431,6 +1454,7 @@ public bool retractable</code></pre>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
+[TransformName]
 public string secondaryTransform</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -1534,7 +1558,7 @@ public string targetGUID</code></pre>
     <pre><code class="lang-csharp hljs">[LocalizedField(&quot;Extend Part&quot;)]
 [PAMDisplayControl(SortIndex = 1)]
 [KSPState(CopyToSymmetrySet = true)]
-public ModuleProperty&lt;bool&gt; toggleExtend</code></pre>
+public EntityModuleProperty&lt;DeployableData, bool&gt; toggleExtend</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -1546,7 +1570,7 @@ public ModuleProperty&lt;bool&gt; toggleExtend</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">bool</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.DeployableData.html">DeployableData</a>, <span class="xref">bool</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -1607,7 +1631,8 @@ public float trackingSpeed</code></pre>
 
   <a id="KSP_Modules_Data_Deployable_IsExtended_" data-uid="KSP.Modules.Data_Deployable.IsExtended*"></a>
   <h4 id="KSP_Modules_Data_Deployable_IsExtended" data-uid="KSP.Modules.Data_Deployable.IsExtended">IsExtended</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the part is currently in the fully extended state.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1632,7 +1657,8 @@ public float trackingSpeed</code></pre>
 
   <a id="KSP_Modules_Data_Deployable_IsExtending_" data-uid="KSP.Modules.Data_Deployable.IsExtending*"></a>
   <h4 id="KSP_Modules_Data_Deployable_IsExtending" data-uid="KSP.Modules.Data_Deployable.IsExtending">IsExtending</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the part is currently in the process of extending.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1657,7 +1683,8 @@ public float trackingSpeed</code></pre>
 
   <a id="KSP_Modules_Data_Deployable_IsRetracted_" data-uid="KSP.Modules.Data_Deployable.IsRetracted*"></a>
   <h4 id="KSP_Modules_Data_Deployable_IsRetracted" data-uid="KSP.Modules.Data_Deployable.IsRetracted">IsRetracted</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the part is currently in the fully retracted state.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1682,7 +1709,8 @@ public float trackingSpeed</code></pre>
 
   <a id="KSP_Modules_Data_Deployable_IsRetracting_" data-uid="KSP.Modules.Data_Deployable.IsRetracting*"></a>
   <h4 id="KSP_Modules_Data_Deployable_IsRetracting" data-uid="KSP.Modules.Data_Deployable.IsRetracting">IsRetracting</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the part is currently in the process of retracting.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1707,7 +1735,8 @@ public float trackingSpeed</code></pre>
 
   <a id="KSP_Modules_Data_Deployable_ModuleType_" data-uid="KSP.Modules.Data_Deployable.ModuleType*"></a>
   <h4 id="KSP_Modules_Data_Deployable_ModuleType" data-uid="KSP.Modules.Data_Deployable.ModuleType">ModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <span class="xref">System.Type</span> of the part behaviour module that owns this data definition.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1734,7 +1763,8 @@ public float trackingSpeed</code></pre>
 
   <a id="KSP_Modules_Data_Deployable_UseAnimation_" data-uid="KSP.Modules.Data_Deployable.UseAnimation*"></a>
   <h4 id="KSP_Modules_Data_Deployable_UseAnimation" data-uid="KSP.Modules.Data_Deployable.UseAnimation">UseAnimation</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the part uses the deploy animation, based on whether extending or retracting is allowed.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1759,9 +1789,90 @@ public float trackingSpeed</code></pre>
 </h3>
 
 
+  <a id="KSP_Modules_Data_Deployable_BindToEntity_" data-uid="KSP.Modules.Data_Deployable.BindToEntity*"></a>
+  <h4 id="KSP_Modules_Data_Deployable_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_" data-uid="KSP.Modules.Data_Deployable.BindToEntity(Unity.Entities.EntityManager,Unity.Entities.Entity)">BindToEntity(EntityManager, Entity)</h4>
+  <div class="markdown level1 summary"><p>Binds this module's state and config to its part entity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void BindToEntity(EntityManager em, Entity entity)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">entity</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_">ModuleData.BindToEntity(EntityManager, Entity)</a></div>
+
+
+  <a id="KSP_Modules_Data_Deployable_GetDeployLimitString_" data-uid="KSP.Modules.Data_Deployable.GetDeployLimitString*"></a>
+  <h4 id="KSP_Modules_Data_Deployable_GetDeployLimitString_System_Object_" data-uid="KSP.Modules.Data_Deployable.GetDeployLimitString(System.Object)">GetDeployLimitString(object)</h4>
+  <div class="markdown level1 summary"><p>Returns the deploy limit value formatted as a whole-number percentage string.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string GetDeployLimitString(object value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">object</span></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The deploy limit as a fractional float value, where 1.0 represents 100 percent.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><p>A string representing the deploy limit as a whole-number percentage, for example &quot;75%&quot;.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Modules_Data_Deployable_GetPartInfoEntries_" data-uid="KSP.Modules.Data_Deployable.GetPartInfoEntries*"></a>
   <h4 id="KSP_Modules_Data_Deployable_GetPartInfoEntries_System_Type_System_Collections_Generic_List_OABPartData_PartInfoModuleEntry__" data-uid="KSP.Modules.Data_Deployable.GetPartInfoEntries(System.Type,System.Collections.Generic.List{OABPartData.PartInfoModuleEntry})">GetPartInfoEntries(Type, List&lt;PartInfoModuleEntry&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns a list of Part Action Menu info entries that describe this module's exposed data for the given part behaviour module type.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1780,7 +1891,8 @@ public float trackingSpeed</code></pre>
       <tr>
         <td><span class="xref">Type</span></td>
         <td><span class="parametername">partBehaviourModuleType</span></td>
-        <td></td>
+        <td><p>The <span class="xref">System.Type</span> of the part behaviour module requesting info entries.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="OABPartData.html">OABPartData</a>.<a class="xref" href="OABPartData.PartInfoModuleEntry.html">PartInfoModuleEntry</a>&gt;</td>
@@ -1800,7 +1912,8 @@ public float trackingSpeed</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="OABPartData.html">OABPartData</a>.<a class="xref" href="OABPartData.PartInfoModuleEntry.html">PartInfoModuleEntry</a>&gt;</td>
-        <td></td>
+        <td><p>The populated list of <a class="xref" href="OABPartData.html">OABPartData.PartInfoModuleEntry</a> instances describing this module's PAM entries.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1808,9 +1921,49 @@ public float trackingSpeed</code></pre>
   <div><a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_GetPartInfoEntries_System_Type_System_Collections_Generic_List_OABPartData_PartInfoModuleEntry__">ModuleData.GetPartInfoEntries(Type, List&lt;OABPartData.PartInfoModuleEntry&gt;)</a></div>
 
 
+  <a id="KSP_Modules_Data_Deployable_NotifyChanged_" data-uid="KSP.Modules.Data_Deployable.NotifyChanged*"></a>
+  <h4 id="KSP_Modules_Data_Deployable_NotifyChanged_Unity_Entities_EntityManager_Unity_Entities_Entity_Redux_Ecs_Modules_DeployableData_Changeset_" data-uid="KSP.Modules.Data_Deployable.NotifyChanged(Unity.Entities.EntityManager,Unity.Entities.Entity,Redux.Ecs.Modules.DeployableData.Changeset)">NotifyChanged(EntityManager, Entity, Changeset)</h4>
+  <div class="markdown level1 summary"><p>Raises OnChanged for each changed property on the part's DeployableData, driven by
+the changeset the scan pass captured. Live values are read from the component.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void NotifyChanged(EntityManager em, Entity entity, DeployableData.Changeset __changeset)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">entity</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Redux.Ecs.Modules.DeployableData.html">DeployableData</a>.<a class="xref" href="Redux.Ecs.Modules.DeployableData.Changeset.html">Changeset</a></td>
+        <td><span class="parametername">__changeset</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Modules_Data_Deployable_OnPartBehaviourModuleInit_" data-uid="KSP.Modules.Data_Deployable.OnPartBehaviourModuleInit*"></a>
   <h4 id="KSP_Modules_Data_Deployable_OnPartBehaviourModuleInit" data-uid="KSP.Modules.Data_Deployable.OnPartBehaviourModuleInit">OnPartBehaviourModuleInit()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called when the owning part behaviour module is initialized, allowing module data to perform setup that depends on the module being live.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1818,6 +1971,26 @@ public float trackingSpeed</code></pre>
   </div>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_OnPartBehaviourModuleInit">ModuleData.OnPartBehaviourModuleInit()</a></div>
+
+
+  <a id="KSP_Modules_Data_Deployable_UnbindFromEntity_" data-uid="KSP.Modules.Data_Deployable.UnbindFromEntity*"></a>
+  <h4 id="KSP_Modules_Data_Deployable_UnbindFromEntity" data-uid="KSP.Modules.Data_Deployable.UnbindFromEntity">UnbindFromEntity()</h4>
+  <div class="markdown level1 summary"><p>Detaches from the module entity, snapshotting entity-backed state into managed storage.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void UnbindFromEntity()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_UnbindFromEntity">ModuleData.UnbindFromEntity()</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Redux.Ecs.CompilerServices.IPartModuleNotifier-1.html">IPartModuleNotifier&lt;TChangeset&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.Ecs.CompilerServices.IModuleStateSerializable.html">IModuleStateSerializable</a>
+  </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>

@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class Data_Transmitter | KSP2Redux API (Beta) ">
     
-    <meta name="description" content="Represents the module data for , storing communication range, packet size, transmission interval, and resource requirements.">
+    <meta name="description" content="A value indicating whether sufficient resources are available for the transmitter to operate.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,7 @@
 
 
   <h1 id="KSP_Modules_Data_Transmitter" data-uid="KSP.Modules.Data_Transmitter" class="text-break">Class Data_Transmitter</h1>
-  <div class="markdown level0 summary"><p>Represents the module data for <a class="xref" href="KSP.Modules.Module_DataTransmitter.html">Module_DataTransmitter</a>, storing communication range, packet size, transmission interval, and resource requirements.</p>
+  <div class="markdown level0 summary"><p>A value indicating whether sufficient resources are available for the transmitter to operate.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -126,9 +126,6 @@
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData__moduleDataContext">ModuleData._moduleDataContext</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RequestHandle">ModuleData.RequestHandle</a>
-    </div>
-    <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_Copy_KSP_Sim_Definitions_ModuleData_">ModuleData.Copy(ModuleData)</a>
     </div>
     <div>
@@ -139,6 +136,12 @@
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_OnPartBehaviourModuleInit">ModuleData.OnPartBehaviourModuleInit()</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_">ModuleData.BindToEntity(EntityManager, Entity)</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_UnbindFromEntity">ModuleData.UnbindFromEntity()</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RebuildDataContext">ModuleData.RebuildDataContext()</a>
@@ -195,6 +198,12 @@
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_SyncAllSymmetricalData_KSP_Sim_Definitions_ModuleData_">ModuleData.SyncAllSymmetricalData(ModuleData)</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_Entity">ModuleData.Entity</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RequestEntity">ModuleData.RequestEntity</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_HasSymmetricalProperties">ModuleData.HasSymmetricalProperties</a>
     </div>
     <div>
@@ -236,7 +245,8 @@
 
 
   <h4 id="KSP_Modules_Data_Transmitter_ActiveTransmissionCompleted" data-uid="KSP.Modules.Data_Transmitter.ActiveTransmissionCompleted">ActiveTransmissionCompleted</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Amount of the in-progress transmission that has been sent so far, in kerbits.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -262,7 +272,8 @@ public float ActiveTransmissionCompleted</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Transmitter_ActiveTransmissionReportId" data-uid="KSP.Modules.Data_Transmitter.ActiveTransmissionReportId">ActiveTransmissionReportId</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Identifier of the science report associated with the active transmission.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -288,7 +299,8 @@ public string ActiveTransmissionReportId</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Transmitter_ActiveTransmissionSize" data-uid="KSP.Modules.Data_Transmitter.ActiveTransmissionSize">ActiveTransmissionSize</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Total size of the in-progress transmission, in kerbits.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -314,11 +326,13 @@ public float ActiveTransmissionSize</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Transmitter_CommunicationRange" data-uid="KSP.Modules.Data_Transmitter.CommunicationRange">CommunicationRange</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Maximum direct-link range of the transmitter, in metres.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
+[Unit(&quot;m&quot;)]
 public double CommunicationRange</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -339,7 +353,8 @@ public double CommunicationRange</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Transmitter_DataPacketSize" data-uid="KSP.Modules.Data_Transmitter.DataPacketSize">DataPacketSize</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Size of a single transmitted data packet, in kerbits.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -364,11 +379,13 @@ public float DataPacketSize</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Transmitter_DataTransmissionInterval" data-uid="KSP.Modules.Data_Transmitter.DataTransmissionInterval">DataTransmissionInterval</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Time between successive data packet transmissions, in seconds.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
+[Unit(&quot;s&quot;)]
 public float DataTransmissionInterval</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -389,7 +406,8 @@ public float DataTransmissionInterval</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Transmitter_HasPendingResourceActivity" data-uid="KSP.Modules.Data_Transmitter.HasPendingResourceActivity">HasPendingResourceActivity</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>A value indicating whether a resource flow request for this transmitter is pending.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -413,7 +431,8 @@ public float DataTransmissionInterval</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Transmitter_HasResourcesToOperate" data-uid="KSP.Modules.Data_Transmitter.HasResourcesToOperate">HasResourcesToOperate</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>A value indicating whether sufficient resources are available for the transmitter to operate.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -438,7 +457,8 @@ public bool HasResourcesToOperate</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Transmitter_IsTransmitting" data-uid="KSP.Modules.Data_Transmitter.IsTransmitting">IsTransmitting</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>A module property tracking whether this transmitter is currently transmitting data.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -464,7 +484,8 @@ public ModuleProperty&lt;bool&gt; IsTransmitting</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Transmitter_RequestConfig" data-uid="KSP.Modules.Data_Transmitter.RequestConfig">RequestConfig</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The resource flow request command configuration for the transmitter's outbound resource consumption.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -488,7 +509,8 @@ public ModuleProperty&lt;bool&gt; IsTransmitting</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Transmitter_RequiredResources" data-uid="KSP.Modules.Data_Transmitter.RequiredResources">RequiredResources</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Resources consumed per transmitted packet.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -513,7 +535,8 @@ public List&lt;PartModuleResourceSetting&gt; RequiredResources</code></pre>
 
 
   <h4 id="KSP_Modules_Data_Transmitter_TransmitterState" data-uid="KSP.Modules.Data_Transmitter.TransmitterState">TransmitterState</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>A module property holding the human-readable state label displayed in the Part Action Menu.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -542,7 +565,8 @@ public ModuleProperty&lt;string&gt; TransmitterState</code></pre>
 
   <a id="KSP_Modules_Data_Transmitter_ModuleType_" data-uid="KSP.Modules.Data_Transmitter.ModuleType*"></a>
   <h4 id="KSP_Modules_Data_Transmitter_ModuleType" data-uid="KSP.Modules.Data_Transmitter.ModuleType">ModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <span class="xref">System.Type</span> of the part behaviour module that owns this data definition.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -571,7 +595,8 @@ public ModuleProperty&lt;string&gt; TransmitterState</code></pre>
 
   <a id="KSP_Modules_Data_Transmitter_GetPartInfoEntries_" data-uid="KSP.Modules.Data_Transmitter.GetPartInfoEntries*"></a>
   <h4 id="KSP_Modules_Data_Transmitter_GetPartInfoEntries_System_Type_System_Collections_Generic_List_OABPartData_PartInfoModuleEntry__" data-uid="KSP.Modules.Data_Transmitter.GetPartInfoEntries(System.Type,System.Collections.Generic.List{OABPartData.PartInfoModuleEntry})">GetPartInfoEntries(Type, List&lt;PartInfoModuleEntry&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns a list of Part Action Menu info entries that describe this module's exposed data for the given part behaviour module type.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -590,7 +615,8 @@ public ModuleProperty&lt;string&gt; TransmitterState</code></pre>
       <tr>
         <td><span class="xref">Type</span></td>
         <td><span class="parametername">partBehaviourModuleType</span></td>
-        <td></td>
+        <td><p>The <span class="xref">System.Type</span> of the part behaviour module requesting info entries.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="OABPartData.html">OABPartData</a>.<a class="xref" href="OABPartData.PartInfoModuleEntry.html">PartInfoModuleEntry</a>&gt;</td>
@@ -610,7 +636,8 @@ public ModuleProperty&lt;string&gt; TransmitterState</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="OABPartData.html">OABPartData</a>.<a class="xref" href="OABPartData.PartInfoModuleEntry.html">PartInfoModuleEntry</a>&gt;</td>
-        <td></td>
+        <td><p>The populated list of <a class="xref" href="OABPartData.html">OABPartData.PartInfoModuleEntry</a> instances describing this module's PAM entries.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -620,11 +647,12 @@ public ModuleProperty&lt;string&gt; TransmitterState</code></pre>
 
   <a id="KSP_Modules_Data_Transmitter_GetResourceRequestHandle_" data-uid="KSP.Modules.Data_Transmitter.GetResourceRequestHandle*"></a>
   <h4 id="KSP_Modules_Data_Transmitter_GetResourceRequestHandle" data-uid="KSP.Modules.Data_Transmitter.GetResourceRequestHandle">GetResourceRequestHandle()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Allocates or retrieves the resource flow request entity via the broker and caches the result in RequestEntity.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ResourceFlowRequestHandle GetResourceRequestHandle()</code></pre>
+    <pre><code class="lang-csharp hljs">public Entity GetResourceRequestHandle()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-condensed">
@@ -636,8 +664,9 @@ public ModuleProperty&lt;string&gt; TransmitterState</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestHandle.html">ResourceFlowRequestHandle</a></td>
-        <td></td>
+        <td><span class="xref">Entity</span></td>
+        <td><p>The <span class="xref">Unity.Entities.Entity</span> handle for this module's resource flow request.</p>
+</td>
       </tr>
     </tbody>
   </table>

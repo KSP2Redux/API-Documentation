@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class TelemetryComponent | KSP2Redux API (Beta) ">
     
-    <meta name="description" content="ObjectComponent that tracks flight telemetry for a simulation object, including positional, orbital, atmospheric, and communication network state.">
+    <meta name="description" content="A base class for components that attach to a  and participate in the simulation lifecycle.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,7 @@
 
 
   <h1 id="KSP_Sim_impl_TelemetryComponent" data-uid="KSP.Sim.impl.TelemetryComponent" class="text-break">Class TelemetryComponent</h1>
-  <div class="markdown level0 summary"><p>ObjectComponent that tracks flight telemetry for a simulation object, including positional, orbital, atmospheric, and communication network state.</p>
+  <div class="markdown level0 summary"><p>A base class for components that attach to a <a class="xref" href="KSP.Sim.impl.SimulationObjectModel.html">SimulationObjectModel</a> and participate in the simulation lifecycle.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -169,7 +169,8 @@
 
   <a id="KSP_Sim_impl_TelemetryComponent__ctor_" data-uid="KSP.Sim.impl.TelemetryComponent.#ctor*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent__ctor" data-uid="KSP.Sim.impl.TelemetryComponent.#ctor">TelemetryComponent()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="KSP.Sim.impl.TelemetryComponent.html">TelemetryComponent</a> class.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -179,7 +180,8 @@
 
   <a id="KSP_Sim_impl_TelemetryComponent__ctor_" data-uid="KSP.Sim.impl.TelemetryComponent.#ctor*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent__ctor_KSP_Sim_Definitions_TelemetryDefinition_KSP_Sim_IUniverseModel_" data-uid="KSP.Sim.impl.TelemetryComponent.#ctor(KSP.Sim.Definitions.TelemetryDefinition,KSP.Sim.IUniverseModel)">TelemetryComponent(TelemetryDefinition, IUniverseModel)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="KSP.Sim.impl.TelemetryComponent.html">TelemetryComponent</a> class with the given definition and universe model.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -198,12 +200,14 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.Definitions.TelemetryDefinition.html">TelemetryDefinition</a></td>
         <td><span class="parametername">telemetryDefinition</span></td>
-        <td></td>
+        <td><p>The telemetry definition for this component.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.IUniverseModel.html">IUniverseModel</a></td>
         <td><span class="parametername">universeModel</span></td>
-        <td></td>
+        <td><p>The universe model used for spatial queries.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -211,7 +215,8 @@
 
   <a id="KSP_Sim_impl_TelemetryComponent__ctor_" data-uid="KSP.Sim.impl.TelemetryComponent.#ctor*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent__ctor_KSP_Sim_impl_UniverseModel_" data-uid="KSP.Sim.impl.TelemetryComponent.#ctor(KSP.Sim.impl.UniverseModel)">TelemetryComponent(UniverseModel)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="KSP.Sim.impl.TelemetryComponent.html">TelemetryComponent</a> class with the given universe model.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -230,7 +235,8 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.UniverseModel.html">UniverseModel</a></td>
         <td><span class="parametername">universeModel</span></td>
-        <td></td>
+        <td><p>The universe model used for spatial queries and body lookups.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -239,7 +245,8 @@
 
 
   <h4 id="KSP_Sim_impl_TelemetryComponent_ActiveDataTransmittersInRange" data-uid="KSP.Sim.impl.TelemetryComponent.ActiveDataTransmittersInRange">ActiveDataTransmittersInRange</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The list of active data transmitters whose communication range includes the current vessel.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -260,85 +267,14 @@
       </tr>
     </tbody>
   </table>
-
-
-  <h4 id="KSP_Sim_impl_TelemetryComponent_HighlightTarget" data-uid="KSP.Sim.impl.TelemetryComponent.HighlightTarget">HighlightTarget</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Position HighlightTarget</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="KSP.Sim.Position.html">Position</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="KSP_Sim_impl_TelemetryComponent_OrbitHighlightDirection" data-uid="KSP.Sim.impl.TelemetryComponent.OrbitHighlightDirection">OrbitHighlightDirection</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Vector OrbitHighlightDirection</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="KSP.Sim.Vector.html">Vector</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="KSP_Sim_impl_TelemetryComponent_VesselAtmosphericPressureKpa" data-uid="KSP.Sim.impl.TelemetryComponent.VesselAtmosphericPressureKpa">VesselAtmosphericPressureKpa</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double VesselAtmosphericPressureKpa</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">double</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <h3 id="properties">Properties
 </h3>
 
 
   <a id="KSP_Sim_impl_TelemetryComponent_AltitudeFromRadius_" data-uid="KSP.Sim.impl.TelemetryComponent.AltitudeFromRadius*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_AltitudeFromRadius" data-uid="KSP.Sim.impl.TelemetryComponent.AltitudeFromRadius">AltitudeFromRadius</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the altitude of the simulation object measured from the SOI body's center radius.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -363,7 +299,8 @@
 
   <a id="KSP_Sim_impl_TelemetryComponent_AltitudeFromScenery_" data-uid="KSP.Sim.impl.TelemetryComponent.AltitudeFromScenery*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_AltitudeFromScenery" data-uid="KSP.Sim.impl.TelemetryComponent.AltitudeFromScenery">AltitudeFromScenery</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the altitude of the simulation object above the scenery surface, accounting for placed objects.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -388,7 +325,8 @@
 
   <a id="KSP_Sim_impl_TelemetryComponent_AltitudeFromSeaLevel_" data-uid="KSP.Sim.impl.TelemetryComponent.AltitudeFromSeaLevel*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_AltitudeFromSeaLevel" data-uid="KSP.Sim.impl.TelemetryComponent.AltitudeFromSeaLevel">AltitudeFromSeaLevel</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the altitude of the simulation object above mean sea level of the SOI body.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -413,7 +351,8 @@
 
   <a id="KSP_Sim_impl_TelemetryComponent_AltitudeFromSurface_" data-uid="KSP.Sim.impl.TelemetryComponent.AltitudeFromSurface*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_AltitudeFromSurface" data-uid="KSP.Sim.impl.TelemetryComponent.AltitudeFromSurface">AltitudeFromSurface</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the altitude above the effective surface, taking ocean depth into account when applicable.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -438,7 +377,8 @@
 
   <a id="KSP_Sim_impl_TelemetryComponent_AltitudeFromTerrain_" data-uid="KSP.Sim.impl.TelemetryComponent.AltitudeFromTerrain*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_AltitudeFromTerrain" data-uid="KSP.Sim.impl.TelemetryComponent.AltitudeFromTerrain">AltitudeFromTerrain</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the altitude of the simulation object above the terrain surface of the SOI body.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -463,7 +403,8 @@
 
   <a id="KSP_Sim_impl_TelemetryComponent_AntiTargetDirection_" data-uid="KSP.Sim.impl.TelemetryComponent.AntiTargetDirection*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_AntiTargetDirection" data-uid="KSP.Sim.impl.TelemetryComponent.AntiTargetDirection">AntiTargetDirection</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the unit direction vector pointing away from the target.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -488,7 +429,8 @@
 
   <a id="KSP_Sim_impl_TelemetryComponent_AtmosphericDensity_" data-uid="KSP.Sim.impl.TelemetryComponent.AtmosphericDensity*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_AtmosphericDensity" data-uid="KSP.Sim.impl.TelemetryComponent.AtmosphericDensity">AtmosphericDensity</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the atmospheric density at the simulation object's current altitude.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -513,7 +455,8 @@
 
   <a id="KSP_Sim_impl_TelemetryComponent_AtmosphericDensityNormalized_" data-uid="KSP.Sim.impl.TelemetryComponent.AtmosphericDensityNormalized*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_AtmosphericDensityNormalized" data-uid="KSP.Sim.impl.TelemetryComponent.AtmosphericDensityNormalized">AtmosphericDensityNormalized</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the atmospheric density at the simulation object's current altitude, normalized relative to sea-level density.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -538,7 +481,8 @@
 
   <a id="KSP_Sim_impl_TelemetryComponent_AtmosphericHumidityPercentage_" data-uid="KSP.Sim.impl.TelemetryComponent.AtmosphericHumidityPercentage*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_AtmosphericHumidityPercentage" data-uid="KSP.Sim.impl.TelemetryComponent.AtmosphericHumidityPercentage">AtmosphericHumidityPercentage</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the relative humidity percentage at the simulation object's current altitude.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -563,7 +507,8 @@
 
   <a id="KSP_Sim_impl_TelemetryComponent_AtmosphericTemperature_" data-uid="KSP.Sim.impl.TelemetryComponent.AtmosphericTemperature*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_AtmosphericTemperature" data-uid="KSP.Sim.impl.TelemetryComponent.AtmosphericTemperature">AtmosphericTemperature</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the atmospheric temperature at the simulation object's current altitude, in Kelvin.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -588,7 +533,8 @@
 
   <a id="KSP_Sim_impl_TelemetryComponent_CommNetConnectionStatus_" data-uid="KSP.Sim.impl.TelemetryComponent.CommNetConnectionStatus*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_CommNetConnectionStatus" data-uid="KSP.Sim.impl.TelemetryComponent.CommNetConnectionStatus">CommNetConnectionStatus</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the current connection status of this simulation object within the communication network.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -613,7 +559,8 @@
 
   <a id="KSP_Sim_impl_TelemetryComponent_CommNetNode_" data-uid="KSP.Sim.impl.TelemetryComponent.CommNetNode*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_CommNetNode" data-uid="KSP.Sim.impl.TelemetryComponent.CommNetNode">CommNetNode</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the communication network graph node associated with this simulation object.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -638,7 +585,8 @@
 
   <a id="KSP_Sim_impl_TelemetryComponent_CommNetRangeMeters_" data-uid="KSP.Sim.impl.TelemetryComponent.CommNetRangeMeters*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_CommNetRangeMeters" data-uid="KSP.Sim.impl.TelemetryComponent.CommNetRangeMeters">CommNetRangeMeters</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets or sets the maximum communication range of the vessel's comm network node, in meters.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -663,7 +611,8 @@
 
   <a id="KSP_Sim_impl_TelemetryComponent_DefinitionType_" data-uid="KSP.Sim.impl.TelemetryComponent.DefinitionType*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_DefinitionType" data-uid="KSP.Sim.impl.TelemetryComponent.DefinitionType">DefinitionType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the type of the definition data object used by this component.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -691,7 +640,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_DynamicPressure_kPa_" data-uid="KSP.Sim.impl.TelemetryComponent.DynamicPressure_kPa*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_DynamicPressure_kPa" data-uid="KSP.Sim.impl.TelemetryComponent.DynamicPressure_kPa">DynamicPressure_kPa</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the dynamic pressure acting on the simulation object at its current speed and altitude, in kilopascals.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -716,7 +666,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_ExternalTemperature_" data-uid="KSP.Sim.impl.TelemetryComponent.ExternalTemperature*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_ExternalTemperature" data-uid="KSP.Sim.impl.TelemetryComponent.ExternalTemperature">ExternalTemperature</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the external temperature experienced by the simulation object, equal to atmospheric temperature when inside an atmosphere or the space temperature constant otherwise.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -741,7 +692,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_HasManeuver_" data-uid="KSP.Sim.impl.TelemetryComponent.HasManeuver*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_HasManeuver" data-uid="KSP.Sim.impl.TelemetryComponent.HasManeuver">HasManeuver</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the simulation object has an active maneuver node.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -766,7 +718,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_HasTargetObject_" data-uid="KSP.Sim.impl.TelemetryComponent.HasTargetObject*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_HasTargetObject" data-uid="KSP.Sim.impl.TelemetryComponent.HasTargetObject">HasTargetObject</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether a target object is currently set.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -789,9 +742,36 @@ public override Type DefinitionType { get; }</code></pre>
   </table>
 
 
+  <a id="KSP_Sim_impl_TelemetryComponent_HighlightTarget_" data-uid="KSP.Sim.impl.TelemetryComponent.HighlightTarget*"></a>
+  <h4 id="KSP_Sim_impl_TelemetryComponent_HighlightTarget" data-uid="KSP.Sim.impl.TelemetryComponent.HighlightTarget">HighlightTarget</h4>
+  <div class="markdown level1 summary"><p>The position used to highlight a target on the navball.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Position HighlightTarget { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.Position.html">Position</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Sim_impl_TelemetryComponent_HorizonDown_" data-uid="KSP.Sim.impl.TelemetryComponent.HorizonDown*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_HorizonDown" data-uid="KSP.Sim.impl.TelemetryComponent.HorizonDown">HorizonDown</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the down direction vector in the horizon frame, pointing toward the surface.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -816,7 +796,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_HorizonEast_" data-uid="KSP.Sim.impl.TelemetryComponent.HorizonEast*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_HorizonEast" data-uid="KSP.Sim.impl.TelemetryComponent.HorizonEast">HorizonEast</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the east direction vector in the horizon frame.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -841,7 +822,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_HorizonFrame_" data-uid="KSP.Sim.impl.TelemetryComponent.HorizonFrame*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_HorizonFrame" data-uid="KSP.Sim.impl.TelemetryComponent.HorizonFrame">HorizonFrame</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the body-relative transform frame aligned with the local horizon.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -866,7 +848,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_HorizonNorth_" data-uid="KSP.Sim.impl.TelemetryComponent.HorizonNorth*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_HorizonNorth" data-uid="KSP.Sim.impl.TelemetryComponent.HorizonNorth">HorizonNorth</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the north direction vector in the horizon frame.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -891,7 +874,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_HorizonRotation_" data-uid="KSP.Sim.impl.TelemetryComponent.HorizonRotation*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_HorizonRotation" data-uid="KSP.Sim.impl.TelemetryComponent.HorizonRotation">HorizonRotation</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the rotation of the horizon frame.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -916,7 +900,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_HorizonSouth_" data-uid="KSP.Sim.impl.TelemetryComponent.HorizonSouth*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_HorizonSouth" data-uid="KSP.Sim.impl.TelemetryComponent.HorizonSouth">HorizonSouth</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the south direction vector in the horizon frame.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -941,7 +926,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_HorizonUp_" data-uid="KSP.Sim.impl.TelemetryComponent.HorizonUp*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_HorizonUp" data-uid="KSP.Sim.impl.TelemetryComponent.HorizonUp">HorizonUp</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the up direction vector in the horizon frame, pointing away from the surface.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -966,7 +952,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_HorizonWest_" data-uid="KSP.Sim.impl.TelemetryComponent.HorizonWest*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_HorizonWest" data-uid="KSP.Sim.impl.TelemetryComponent.HorizonWest">HorizonWest</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the west direction vector in the horizon frame.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -991,7 +978,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_IsInAtmosphere_" data-uid="KSP.Sim.impl.TelemetryComponent.IsInAtmosphere*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_IsInAtmosphere" data-uid="KSP.Sim.impl.TelemetryComponent.IsInAtmosphere">IsInAtmosphere</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the simulation object is currently within an atmosphere.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1016,7 +1004,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_Latitude_" data-uid="KSP.Sim.impl.TelemetryComponent.Latitude*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_Latitude" data-uid="KSP.Sim.impl.TelemetryComponent.Latitude">Latitude</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the geodetic latitude of the simulation object above the SOI body, in degrees.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1041,7 +1030,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_Longitude_" data-uid="KSP.Sim.impl.TelemetryComponent.Longitude*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_Longitude" data-uid="KSP.Sim.impl.TelemetryComponent.Longitude">Longitude</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the geodetic longitude of the simulation object above the SOI body, in degrees.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1066,7 +1056,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_MachNumber_" data-uid="KSP.Sim.impl.TelemetryComponent.MachNumber*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_MachNumber" data-uid="KSP.Sim.impl.TelemetryComponent.MachNumber">MachNumber</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the Mach number of the simulation object relative to the surrounding atmosphere.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1091,7 +1082,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_ManeuverDirection_" data-uid="KSP.Sim.impl.TelemetryComponent.ManeuverDirection*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_ManeuverDirection" data-uid="KSP.Sim.impl.TelemetryComponent.ManeuverDirection">ManeuverDirection</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the burn direction vector for the active maneuver node.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1116,7 +1108,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_ObservationForward_" data-uid="KSP.Sim.impl.TelemetryComponent.ObservationForward*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_ObservationForward" data-uid="KSP.Sim.impl.TelemetryComponent.ObservationForward">ObservationForward</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the forward direction of the observation frame.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1141,7 +1134,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_ObservationFrame_" data-uid="KSP.Sim.impl.TelemetryComponent.ObservationFrame*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_ObservationFrame" data-uid="KSP.Sim.impl.TelemetryComponent.ObservationFrame">ObservationFrame</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the transform frame used as the reference for observation-relative telemetry.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1166,7 +1160,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_ObservationPosition_" data-uid="KSP.Sim.impl.TelemetryComponent.ObservationPosition*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_ObservationPosition" data-uid="KSP.Sim.impl.TelemetryComponent.ObservationPosition">ObservationPosition</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the position of the observation frame.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1191,7 +1186,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_ObservationRight_" data-uid="KSP.Sim.impl.TelemetryComponent.ObservationRight*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_ObservationRight" data-uid="KSP.Sim.impl.TelemetryComponent.ObservationRight">ObservationRight</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the right direction of the observation frame.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1216,7 +1212,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_ObservationRotation_" data-uid="KSP.Sim.impl.TelemetryComponent.ObservationRotation*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_ObservationRotation" data-uid="KSP.Sim.impl.TelemetryComponent.ObservationRotation">ObservationRotation</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the rotation of the observation frame.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1241,7 +1238,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_ObservationUp_" data-uid="KSP.Sim.impl.TelemetryComponent.ObservationUp*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_ObservationUp" data-uid="KSP.Sim.impl.TelemetryComponent.ObservationUp">ObservationUp</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the up direction of the observation frame.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1264,9 +1262,36 @@ public override Type DefinitionType { get; }</code></pre>
   </table>
 
 
+  <a id="KSP_Sim_impl_TelemetryComponent_OrbitHighlightDirection_" data-uid="KSP.Sim.impl.TelemetryComponent.OrbitHighlightDirection*"></a>
+  <h4 id="KSP_Sim_impl_TelemetryComponent_OrbitHighlightDirection" data-uid="KSP.Sim.impl.TelemetryComponent.OrbitHighlightDirection">OrbitHighlightDirection</h4>
+  <div class="markdown level1 summary"><p>The direction vector used to highlight an orbit point on the navball.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector OrbitHighlightDirection { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.Vector.html">Vector</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Sim_impl_TelemetryComponent_OrbitMovementAntiNormal_" data-uid="KSP.Sim.impl.TelemetryComponent.OrbitMovementAntiNormal*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_OrbitMovementAntiNormal" data-uid="KSP.Sim.impl.TelemetryComponent.OrbitMovementAntiNormal">OrbitMovementAntiNormal</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the anti-normal direction of the orbital plane.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1291,7 +1316,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_OrbitMovementFrame_" data-uid="KSP.Sim.impl.TelemetryComponent.OrbitMovementFrame*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_OrbitMovementFrame" data-uid="KSP.Sim.impl.TelemetryComponent.OrbitMovementFrame">OrbitMovementFrame</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the body-relative transform frame for orbital movement direction vectors.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1316,7 +1342,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_OrbitMovementNormal_" data-uid="KSP.Sim.impl.TelemetryComponent.OrbitMovementNormal*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_OrbitMovementNormal" data-uid="KSP.Sim.impl.TelemetryComponent.OrbitMovementNormal">OrbitMovementNormal</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the normal direction of the orbital plane (perpendicular to prograde, pointing up).</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1341,7 +1368,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_OrbitMovementPrograde_" data-uid="KSP.Sim.impl.TelemetryComponent.OrbitMovementPrograde*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_OrbitMovementPrograde" data-uid="KSP.Sim.impl.TelemetryComponent.OrbitMovementPrograde">OrbitMovementPrograde</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the prograde direction of orbital movement relative to the SOI body.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1366,7 +1394,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_OrbitMovementRadialIn_" data-uid="KSP.Sim.impl.TelemetryComponent.OrbitMovementRadialIn*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_OrbitMovementRadialIn" data-uid="KSP.Sim.impl.TelemetryComponent.OrbitMovementRadialIn">OrbitMovementRadialIn</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the radial-in direction, pointing toward the SOI body center.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1391,7 +1420,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_OrbitMovementRadialOut_" data-uid="KSP.Sim.impl.TelemetryComponent.OrbitMovementRadialOut*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_OrbitMovementRadialOut" data-uid="KSP.Sim.impl.TelemetryComponent.OrbitMovementRadialOut">OrbitMovementRadialOut</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the radial-out direction, pointing away from the SOI body center.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1416,7 +1446,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_OrbitMovementRetrograde_" data-uid="KSP.Sim.impl.TelemetryComponent.OrbitMovementRetrograde*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_OrbitMovementRetrograde" data-uid="KSP.Sim.impl.TelemetryComponent.OrbitMovementRetrograde">OrbitMovementRetrograde</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the retrograde direction of orbital movement relative to the SOI body.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1441,7 +1472,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_OrbitMovementRotation_" data-uid="KSP.Sim.impl.TelemetryComponent.OrbitMovementRotation*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_OrbitMovementRotation" data-uid="KSP.Sim.impl.TelemetryComponent.OrbitMovementRotation">OrbitMovementRotation</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the rotation of the orbital movement frame.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1466,7 +1498,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_OrbitalMovementSpeed_" data-uid="KSP.Sim.impl.TelemetryComponent.OrbitalMovementSpeed*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_OrbitalMovementSpeed" data-uid="KSP.Sim.impl.TelemetryComponent.OrbitalMovementSpeed">OrbitalMovementSpeed</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the orbital speed of the simulation object relative to the SOI body's celestial frame.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1491,7 +1524,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_OrbitalMovementVelocity_" data-uid="KSP.Sim.impl.TelemetryComponent.OrbitalMovementVelocity*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_OrbitalMovementVelocity" data-uid="KSP.Sim.impl.TelemetryComponent.OrbitalMovementVelocity">OrbitalMovementVelocity</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the orbital velocity of the simulation object relative to the SOI body's celestial frame.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1516,7 +1550,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_RootFrameBody_" data-uid="KSP.Sim.impl.TelemetryComponent.RootFrameBody*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_RootFrameBody" data-uid="KSP.Sim.impl.TelemetryComponent.RootFrameBody">RootFrameBody</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the body-relative transform frame of the root simulation object transform.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1541,7 +1576,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_RootFrameCelestial_" data-uid="KSP.Sim.impl.TelemetryComponent.RootFrameCelestial*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_RootFrameCelestial" data-uid="KSP.Sim.impl.TelemetryComponent.RootFrameCelestial">RootFrameCelestial</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the celestial-relative transform frame of the root simulation object transform.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1566,7 +1602,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_RootPosition_" data-uid="KSP.Sim.impl.TelemetryComponent.RootPosition*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_RootPosition" data-uid="KSP.Sim.impl.TelemetryComponent.RootPosition">RootPosition</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the position of the root simulation object transform.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1591,7 +1628,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_RootRotation_" data-uid="KSP.Sim.impl.TelemetryComponent.RootRotation*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_RootRotation" data-uid="KSP.Sim.impl.TelemetryComponent.RootRotation">RootRotation</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the rotation of the root simulation object transform.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1616,7 +1654,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_RootVelocity_" data-uid="KSP.Sim.impl.TelemetryComponent.RootVelocity*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_RootVelocity" data-uid="KSP.Sim.impl.TelemetryComponent.RootVelocity">RootVelocity</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the velocity of the root simulation object transform.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1641,7 +1680,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_RootVelocityAngular_" data-uid="KSP.Sim.impl.TelemetryComponent.RootVelocityAngular*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_RootVelocityAngular" data-uid="KSP.Sim.impl.TelemetryComponent.RootVelocityAngular">RootVelocityAngular</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the angular velocity of the root simulation object transform.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1666,7 +1706,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_SOIFrameBody_" data-uid="KSP.Sim.impl.TelemetryComponent.SOIFrameBody*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_SOIFrameBody" data-uid="KSP.Sim.impl.TelemetryComponent.SOIFrameBody">SOIFrameBody</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the body-relative transform frame of the current sphere-of-influence body.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1691,7 +1732,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_SOIFrameCelestial_" data-uid="KSP.Sim.impl.TelemetryComponent.SOIFrameCelestial*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_SOIFrameCelestial" data-uid="KSP.Sim.impl.TelemetryComponent.SOIFrameCelestial">SOIFrameCelestial</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the celestial-relative transform frame of the current sphere-of-influence body.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1716,7 +1758,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_SOIPosition_" data-uid="KSP.Sim.impl.TelemetryComponent.SOIPosition*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_SOIPosition" data-uid="KSP.Sim.impl.TelemetryComponent.SOIPosition">SOIPosition</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the position of the current sphere-of-influence body's transform.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1741,7 +1784,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_SOIUp_" data-uid="KSP.Sim.impl.TelemetryComponent.SOIUp*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_SOIUp" data-uid="KSP.Sim.impl.TelemetryComponent.SOIUp">SOIUp</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the up vector of the current sphere-of-influence body's transform.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1766,7 +1810,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_SoundSpeed_" data-uid="KSP.Sim.impl.TelemetryComponent.SoundSpeed*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_SoundSpeed" data-uid="KSP.Sim.impl.TelemetryComponent.SoundSpeed">SoundSpeed</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the speed of sound at the simulation object's current atmospheric conditions.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1791,7 +1836,8 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_StateType_" data-uid="KSP.Sim.impl.TelemetryComponent.StateType*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_StateType" data-uid="KSP.Sim.impl.TelemetryComponent.StateType">StateType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the type of the state data object used by this component.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1819,7 +1865,8 @@ public override Type StateType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_StaticPressure_kPa_" data-uid="KSP.Sim.impl.TelemetryComponent.StaticPressure_kPa*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_StaticPressure_kPa" data-uid="KSP.Sim.impl.TelemetryComponent.StaticPressure_kPa">StaticPressure_kPa</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the static atmospheric pressure at the simulation object's altitude, in kilopascals.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1844,7 +1891,8 @@ public override Type StateType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_SurfaceBiome_" data-uid="KSP.Sim.impl.TelemetryComponent.SurfaceBiome*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_SurfaceBiome" data-uid="KSP.Sim.impl.TelemetryComponent.SurfaceBiome">SurfaceBiome</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the biome surface data at the simulation object's current position on the SOI body.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1869,7 +1917,8 @@ public override Type StateType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_SurfaceHorizontalSpeed_" data-uid="KSP.Sim.impl.TelemetryComponent.SurfaceHorizontalSpeed*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_SurfaceHorizontalSpeed" data-uid="KSP.Sim.impl.TelemetryComponent.SurfaceHorizontalSpeed">SurfaceHorizontalSpeed</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the horizontal component of surface-relative speed.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1894,7 +1943,8 @@ public override Type StateType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_SurfaceHorizontalSpeedMagnitude_" data-uid="KSP.Sim.impl.TelemetryComponent.SurfaceHorizontalSpeedMagnitude*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_SurfaceHorizontalSpeedMagnitude" data-uid="KSP.Sim.impl.TelemetryComponent.SurfaceHorizontalSpeedMagnitude">SurfaceHorizontalSpeedMagnitude</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the absolute value of the horizontal surface-relative speed.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1919,7 +1969,8 @@ public override Type StateType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_SurfaceMovementPrograde_" data-uid="KSP.Sim.impl.TelemetryComponent.SurfaceMovementPrograde*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_SurfaceMovementPrograde" data-uid="KSP.Sim.impl.TelemetryComponent.SurfaceMovementPrograde">SurfaceMovementPrograde</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the prograde direction of surface-relative movement.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1944,7 +1995,8 @@ public override Type StateType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_SurfaceMovementRetrograde_" data-uid="KSP.Sim.impl.TelemetryComponent.SurfaceMovementRetrograde*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_SurfaceMovementRetrograde" data-uid="KSP.Sim.impl.TelemetryComponent.SurfaceMovementRetrograde">SurfaceMovementRetrograde</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the retrograde direction of surface-relative movement.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1969,7 +2021,8 @@ public override Type StateType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_SurfaceMovementSpeed_" data-uid="KSP.Sim.impl.TelemetryComponent.SurfaceMovementSpeed*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_SurfaceMovementSpeed" data-uid="KSP.Sim.impl.TelemetryComponent.SurfaceMovementSpeed">SurfaceMovementSpeed</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the speed of the simulation object relative to the SOI body surface.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1994,7 +2047,8 @@ public override Type StateType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_SurfaceMovementVelocity_" data-uid="KSP.Sim.impl.TelemetryComponent.SurfaceMovementVelocity*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_SurfaceMovementVelocity" data-uid="KSP.Sim.impl.TelemetryComponent.SurfaceMovementVelocity">SurfaceMovementVelocity</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the velocity of the simulation object relative to the SOI body surface.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2019,7 +2073,8 @@ public override Type StateType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_SurfaceVerticalSpeed_" data-uid="KSP.Sim.impl.TelemetryComponent.SurfaceVerticalSpeed*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_SurfaceVerticalSpeed" data-uid="KSP.Sim.impl.TelemetryComponent.SurfaceVerticalSpeed">SurfaceVerticalSpeed</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the vertical component of surface-relative speed, positive when ascending.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2044,7 +2099,8 @@ public override Type StateType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_SurfaceVerticalSpeedMagnitude_" data-uid="KSP.Sim.impl.TelemetryComponent.SurfaceVerticalSpeedMagnitude*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_SurfaceVerticalSpeedMagnitude" data-uid="KSP.Sim.impl.TelemetryComponent.SurfaceVerticalSpeedMagnitude">SurfaceVerticalSpeedMagnitude</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the absolute value of the vertical surface-relative speed.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2069,7 +2125,8 @@ public override Type StateType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_TargetDirection_" data-uid="KSP.Sim.impl.TelemetryComponent.TargetDirection*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_TargetDirection" data-uid="KSP.Sim.impl.TelemetryComponent.TargetDirection">TargetDirection</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the unit direction vector from the observation frame toward the target.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2094,7 +2151,8 @@ public override Type StateType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_TargetDistance_" data-uid="KSP.Sim.impl.TelemetryComponent.TargetDistance*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_TargetDistance" data-uid="KSP.Sim.impl.TelemetryComponent.TargetDistance">TargetDistance</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the distance to the current target, or -1 when no target is set.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2119,7 +2177,8 @@ public override Type StateType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_TargetFrame_" data-uid="KSP.Sim.impl.TelemetryComponent.TargetFrame*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_TargetFrame" data-uid="KSP.Sim.impl.TelemetryComponent.TargetFrame">TargetFrame</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the body-relative transform frame of the current target.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2144,7 +2203,8 @@ public override Type StateType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_TargetPrograde_" data-uid="KSP.Sim.impl.TelemetryComponent.TargetPrograde*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_TargetPrograde" data-uid="KSP.Sim.impl.TelemetryComponent.TargetPrograde">TargetPrograde</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the prograde direction relative to the target's orbital velocity.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2169,7 +2229,8 @@ public override Type StateType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_TargetRetrograde_" data-uid="KSP.Sim.impl.TelemetryComponent.TargetRetrograde*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_TargetRetrograde" data-uid="KSP.Sim.impl.TelemetryComponent.TargetRetrograde">TargetRetrograde</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the retrograde direction relative to the target's orbital velocity.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2194,7 +2255,8 @@ public override Type StateType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_TargetSpeed_" data-uid="KSP.Sim.impl.TelemetryComponent.TargetSpeed*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_TargetSpeed" data-uid="KSP.Sim.impl.TelemetryComponent.TargetSpeed">TargetSpeed</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the signed magnitude of the velocity relative to the target.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2219,7 +2281,8 @@ public override Type StateType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_TargetSpeedMagnitude_" data-uid="KSP.Sim.impl.TelemetryComponent.TargetSpeedMagnitude*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_TargetSpeedMagnitude" data-uid="KSP.Sim.impl.TelemetryComponent.TargetSpeedMagnitude">TargetSpeedMagnitude</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the absolute speed relative to the target.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2244,7 +2307,8 @@ public override Type StateType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_TargetVelocity_" data-uid="KSP.Sim.impl.TelemetryComponent.TargetVelocity*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_TargetVelocity" data-uid="KSP.Sim.impl.TelemetryComponent.TargetVelocity">TargetVelocity</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the relative velocity of the simulation object with respect to the target.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2269,7 +2333,8 @@ public override Type StateType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_Type_" data-uid="KSP.Sim.impl.TelemetryComponent.Type*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_Type" data-uid="KSP.Sim.impl.TelemetryComponent.Type">Type</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the concrete runtime type of this component.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2293,13 +2358,40 @@ public override Type Type { get; }</code></pre>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_Type">ObjectComponent.Type</a></div>
+
+
+  <a id="KSP_Sim_impl_TelemetryComponent_VesselAtmosphericPressureKpa_" data-uid="KSP.Sim.impl.TelemetryComponent.VesselAtmosphericPressureKpa*"></a>
+  <h4 id="KSP_Sim_impl_TelemetryComponent_VesselAtmosphericPressureKpa" data-uid="KSP.Sim.impl.TelemetryComponent.VesselAtmosphericPressureKpa">VesselAtmosphericPressureKpa</h4>
+  <div class="markdown level1 summary"><p>The atmospheric pressure at the vessel's current position, in kilopascals.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double VesselAtmosphericPressureKpa { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="methods">Methods
 </h3>
 
 
   <a id="KSP_Sim_impl_TelemetryComponent_ClearTarget_" data-uid="KSP.Sim.impl.TelemetryComponent.ClearTarget*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_ClearTarget" data-uid="KSP.Sim.impl.TelemetryComponent.ClearTarget">ClearTarget()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Clears the current target and resets target distance to indicate no target is set.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2309,7 +2401,8 @@ public override Type Type { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_Dispose_" data-uid="KSP.Sim.impl.TelemetryComponent.Dispose*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_Dispose" data-uid="KSP.Sim.impl.TelemetryComponent.Dispose">Dispose()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Releases the internal transform models held by this component.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2319,7 +2412,8 @@ public override Type Type { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_GetDefinition_" data-uid="KSP.Sim.impl.TelemetryComponent.GetDefinition*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_GetDefinition" data-uid="KSP.Sim.impl.TelemetryComponent.GetDefinition">GetDefinition()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the definition data object for this component.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2336,7 +2430,8 @@ public override Type Type { get; }</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">object</span></td>
-        <td></td>
+        <td><p>The component's current definition data.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2346,7 +2441,8 @@ public override Type Type { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_GetNavballRotationForForward_" data-uid="KSP.Sim.impl.TelemetryComponent.GetNavballRotationForForward*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_GetNavballRotationForForward_KSP_Sim_Vector_" data-uid="KSP.Sim.impl.TelemetryComponent.GetNavballRotationForForward(KSP.Sim.Vector)">GetNavballRotationForForward(Vector)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the navball rotation adjusted so the forward direction aligns with <code class="paramref">viewerForward</code>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2365,7 +2461,8 @@ public override Type Type { get; }</code></pre>
       <tr>
         <td><a class="xref" href="KSP.Sim.Vector.html">Vector</a></td>
         <td><span class="parametername">viewerForward</span></td>
-        <td></td>
+        <td><p>The forward vector of the viewer used to flip the horizon rotation.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2380,7 +2477,8 @@ public override Type Type { get; }</code></pre>
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Sim.Rotation.html">Rotation</a></td>
-        <td></td>
+        <td><p>The adjusted rotation for the navball display.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2388,7 +2486,8 @@ public override Type Type { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_GetState_" data-uid="KSP.Sim.impl.TelemetryComponent.GetState*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_GetState" data-uid="KSP.Sim.impl.TelemetryComponent.GetState">GetState()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the current state data object for this component.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2405,7 +2504,8 @@ public override Type Type { get; }</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">object</span></td>
-        <td></td>
+        <td><p>The component's current state data.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2415,7 +2515,8 @@ public override Type Type { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_OnAdded_" data-uid="KSP.Sim.impl.TelemetryComponent.OnAdded*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_OnAdded_KSP_Sim_impl_SimulationObjectModel_System_Double_" data-uid="KSP.Sim.impl.TelemetryComponent.OnAdded(KSP.Sim.impl.SimulationObjectModel,System.Double)">OnAdded(SimulationObjectModel, double)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called when this component is attached to a simulation object, storing the reference and applying any pending definition data.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2434,12 +2535,14 @@ public override Type Type { get; }</code></pre>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.SimulationObjectModel.html">SimulationObjectModel</a></td>
         <td><span class="parametername">simulationObject</span></td>
-        <td></td>
+        <td><p>The simulation object this component is being added to.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">universalTime</span></td>
-        <td></td>
+        <td><p>The universal time at which the component is added, in seconds.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2449,7 +2552,8 @@ public override Type Type { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_OnRemoved_" data-uid="KSP.Sim.impl.TelemetryComponent.OnRemoved*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_OnRemoved_KSP_Sim_impl_SimulationObjectModel_System_Double_" data-uid="KSP.Sim.impl.TelemetryComponent.OnRemoved(KSP.Sim.impl.SimulationObjectModel,System.Double)">OnRemoved(SimulationObjectModel, double)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called when this component is detached from its simulation object, clearing the stored reference.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2468,12 +2572,14 @@ public override Type Type { get; }</code></pre>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.SimulationObjectModel.html">SimulationObjectModel</a></td>
         <td><span class="parametername">simulationObject</span></td>
-        <td></td>
+        <td><p>The simulation object this component is being removed from.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">universalTime</span></td>
-        <td></td>
+        <td><p>The universal time at which the component is removed, in seconds.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2483,7 +2589,8 @@ public override Type Type { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_OnStart_" data-uid="KSP.Sim.impl.TelemetryComponent.OnStart*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_OnStart_System_Double_" data-uid="KSP.Sim.impl.TelemetryComponent.OnStart(System.Double)">OnStart(double)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called when the simulation starts, allowing the component to perform initialization logic.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2502,7 +2609,8 @@ public override Type Type { get; }</code></pre>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">universalTime</span></td>
-        <td></td>
+        <td><p>The universal time at simulation start, in seconds.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2512,7 +2620,8 @@ public override Type Type { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_OnTransmitterActivated_" data-uid="KSP.Sim.impl.TelemetryComponent.OnTransmitterActivated*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_OnTransmitterActivated" data-uid="KSP.Sim.impl.TelemetryComponent.OnTransmitterActivated">OnTransmitterActivated()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Refreshes the communication network node state when a data transmitter is activated.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2522,7 +2631,8 @@ public override Type Type { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_OnTransmitterDeactivated_" data-uid="KSP.Sim.impl.TelemetryComponent.OnTransmitterDeactivated*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_OnTransmitterDeactivated" data-uid="KSP.Sim.impl.TelemetryComponent.OnTransmitterDeactivated">OnTransmitterDeactivated()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Refreshes the communication network node state when a data transmitter is deactivated.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2532,7 +2642,8 @@ public override Type Type { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_OnUpdate_" data-uid="KSP.Sim.impl.TelemetryComponent.OnUpdate*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_OnUpdate_System_Double_System_Double_" data-uid="KSP.Sim.impl.TelemetryComponent.OnUpdate(System.Double,System.Double)">OnUpdate(double, double)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called each variable-timestep update tick, allowing the component to advance frame-dependent state.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2551,12 +2662,14 @@ public override Type Type { get; }</code></pre>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">universalTime</span></td>
-        <td></td>
+        <td><p>The current universal time, in seconds.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">deltaUniversalTime</span></td>
-        <td></td>
+        <td><p>The elapsed time since the last update, in seconds.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2566,7 +2679,8 @@ public override Type Type { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_RefreshAutopilotTelemetry_" data-uid="KSP.Sim.impl.TelemetryComponent.RefreshAutopilotTelemetry*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_RefreshAutopilotTelemetry" data-uid="KSP.Sim.impl.TelemetryComponent.RefreshAutopilotTelemetry">RefreshAutopilotTelemetry()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Refreshes the sphere-of-influence frame and recomputes horizon, surface movement, orbital movement, target, and maneuver telemetry for autopilot use.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2576,7 +2690,8 @@ public override Type Type { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_SetObservationFrame_" data-uid="KSP.Sim.impl.TelemetryComponent.SetObservationFrame*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_SetObservationFrame_KSP_Sim_ITransformFrame_" data-uid="KSP.Sim.impl.TelemetryComponent.SetObservationFrame(KSP.Sim.ITransformFrame)">SetObservationFrame(ITransformFrame)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Sets the observation frame to the given transform frame with a default rotation offset.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2595,7 +2710,8 @@ public override Type Type { get; }</code></pre>
       <tr>
         <td><a class="xref" href="KSP.Sim.ITransformFrame.html">ITransformFrame</a></td>
         <td><span class="parametername">newObservationFrame</span></td>
-        <td></td>
+        <td><p>The frame to observe from, or <code>null</code> to use the simulation object's body frame.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2603,7 +2719,8 @@ public override Type Type { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_SetObservationFrame_" data-uid="KSP.Sim.impl.TelemetryComponent.SetObservationFrame*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_SetObservationFrame_KSP_Sim_ITransformFrame_QuaternionD_" data-uid="KSP.Sim.impl.TelemetryComponent.SetObservationFrame(KSP.Sim.ITransformFrame,QuaternionD)">SetObservationFrame(ITransformFrame, QuaternionD)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Sets the observation frame to the given transform frame with an explicit local rotation offset.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2622,12 +2739,14 @@ public override Type Type { get; }</code></pre>
       <tr>
         <td><a class="xref" href="KSP.Sim.ITransformFrame.html">ITransformFrame</a></td>
         <td><span class="parametername">newRootFrame</span></td>
-        <td></td>
+        <td><p>The reference frame to use as the observation parent.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.QuaternionD.html">QuaternionD</a></td>
         <td><span class="parametername">localRotationOffset</span></td>
-        <td></td>
+        <td><p>The local rotation offset applied relative to <code class="paramref">newRootFrame</code>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2635,7 +2754,8 @@ public override Type Type { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_SetState_" data-uid="KSP.Sim.impl.TelemetryComponent.SetState*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_SetState_System_Object_KSP_Sim_ISimulationModelMap_" data-uid="KSP.Sim.impl.TelemetryComponent.SetState(System.Object,KSP.Sim.ISimulationModelMap)">SetState(object, ISimulationModelMap)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Applies the supplied state data to this component and returns the applied state.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2659,7 +2779,8 @@ public override Type Type { get; }</code></pre>
       <tr>
         <td><a class="xref" href="KSP.Sim.ISimulationModelMap.html">ISimulationModelMap</a></td>
         <td><span class="parametername">simulationModelMap</span></td>
-        <td></td>
+        <td><p>The simulation model map providing context for applying state.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2674,7 +2795,8 @@ public override Type Type { get; }</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">object</span></td>
-        <td></td>
+        <td><p>The applied state data object.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2684,7 +2806,8 @@ public override Type Type { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_SetTarget_" data-uid="KSP.Sim.impl.TelemetryComponent.SetTarget*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_SetTarget_KSP_Sim_ITransformModel_" data-uid="KSP.Sim.impl.TelemetryComponent.SetTarget(KSP.Sim.ITransformModel)">SetTarget(ITransformModel)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Sets the target transform used for target-relative telemetry calculations.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2703,7 +2826,8 @@ public override Type Type { get; }</code></pre>
       <tr>
         <td><a class="xref" href="KSP.Sim.ITransformModel.html">ITransformModel</a></td>
         <td><span class="parametername">newTargetTransform</span></td>
-        <td></td>
+        <td><p>The transform model of the target object.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2711,7 +2835,8 @@ public override Type Type { get; }</code></pre>
 
   <a id="KSP_Sim_impl_TelemetryComponent_ValidateState_" data-uid="KSP.Sim.impl.TelemetryComponent.ValidateState*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_ValidateState_System_Object_KSP_Sim_ISimulationModelMap_" data-uid="KSP.Sim.impl.TelemetryComponent.ValidateState(System.Object,KSP.Sim.ISimulationModelMap)">ValidateState(object, ISimulationModelMap)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns a value indicating whether the supplied state data is valid for this component in the given simulation context.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2730,12 +2855,14 @@ public override Type Type { get; }</code></pre>
       <tr>
         <td><span class="xref">object</span></td>
         <td><span class="parametername">stateData</span></td>
-        <td></td>
+        <td><p>The state data object to validate.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.ISimulationModelMap.html">ISimulationModelMap</a></td>
         <td><span class="parametername">simulationModelMap</span></td>
-        <td></td>
+        <td><p>The simulation model map providing context for validation.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2750,7 +2877,8 @@ public override Type Type { get; }</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the state data is valid; otherwise <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2761,7 +2889,8 @@ public override Type Type { get; }</code></pre>
 
 
   <h4 id="KSP_Sim_impl_TelemetryComponent_TelemetryDisplayUpdated" data-uid="KSP.Sim.impl.TelemetryComponent.TelemetryDisplayUpdated">TelemetryDisplayUpdated</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Occurs when the telemetry display values have been updated.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -2785,7 +2914,8 @@ public override Type Type { get; }</code></pre>
 
 
   <h4 id="KSP_Sim_impl_TelemetryComponent_TelemetryUpdated" data-uid="KSP.Sim.impl.TelemetryComponent.TelemetryUpdated">TelemetryUpdated</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Occurs when the full telemetry data set has been updated for the current simulation tick.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">

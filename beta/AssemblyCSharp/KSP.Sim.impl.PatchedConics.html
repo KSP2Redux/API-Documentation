@@ -112,12 +112,13 @@
 
 
   <a id="KSP_Sim_impl_PatchedConics_CheckEncounter_" data-uid="KSP.Sim.impl.PatchedConics.CheckEncounter*"></a>
-  <h4 id="KSP_Sim_impl_PatchedConics_CheckEncounter_KSP_Sim_impl_PatchedConicsOrbit_KSP_Sim_impl_PatchedConicsOrbit_System_Double_KSP_Sim_impl_OrbiterComponent_KSP_Sim_impl_CelestialBodyComponent_KSP_Sim_impl_PatchedConicSolver_SolverParameters_" data-uid="KSP.Sim.impl.PatchedConics.CheckEncounter(KSP.Sim.impl.PatchedConicsOrbit,KSP.Sim.impl.PatchedConicsOrbit,System.Double,KSP.Sim.impl.OrbiterComponent,KSP.Sim.impl.CelestialBodyComponent,KSP.Sim.impl.PatchedConicSolver.SolverParameters)">CheckEncounter(PatchedConicsOrbit, PatchedConicsOrbit, double, OrbiterComponent, CelestialBodyComponent, SolverParameters)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="KSP_Sim_impl_PatchedConics_CheckEncounter_KSP_Sim_IKeplerPatch_KSP_Sim_IKeplerPatch_System_Double_KSP_Sim_impl_OrbiterComponent_KSP_Sim_impl_CelestialBodyComponent_KSP_Sim_impl_PatchedConicSolver_SolverParameters_" data-uid="KSP.Sim.impl.PatchedConics.CheckEncounter(KSP.Sim.IKeplerPatch,KSP.Sim.IKeplerPatch,System.Double,KSP.Sim.impl.OrbiterComponent,KSP.Sim.impl.CelestialBodyComponent,KSP.Sim.impl.PatchedConicSolver.SolverParameters)">CheckEncounter(IKeplerPatch, IKeplerPatch, double, OrbiterComponent, CelestialBodyComponent, SolverParameters)</h4>
+  <div class="markdown level1 summary"><p>Returns a value indicating whether the current orbital patch results in an encounter with a secondary orbiter's sphere of influence.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static bool CheckEncounter(PatchedConicsOrbit currentPatch, PatchedConicsOrbit nextPatch, double startEpoch, OrbiterComponent sec, CelestialBodyComponent targetBody, PatchedConicSolver.SolverParameters pars)</code></pre>
+    <pre><code class="lang-csharp hljs">public static bool CheckEncounter(IKeplerPatch currentPatch, IKeplerPatch nextPatch, double startEpoch, OrbiterComponent sec, CelestialBodyComponent targetBody, PatchedConicSolver.SolverParameters pars)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -130,34 +131,40 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.impl.PatchedConicsOrbit.html">PatchedConicsOrbit</a></td>
+        <td><a class="xref" href="KSP.Sim.IKeplerPatch.html">IKeplerPatch</a></td>
         <td><span class="parametername">currentPatch</span></td>
-        <td></td>
+        <td><p>The orbital patch being evaluated for an encounter.</p>
+</td>
       </tr>
       <tr>
-        <td><a class="xref" href="KSP.Sim.impl.PatchedConicsOrbit.html">PatchedConicsOrbit</a></td>
+        <td><a class="xref" href="KSP.Sim.IKeplerPatch.html">IKeplerPatch</a></td>
         <td><span class="parametername">nextPatch</span></td>
-        <td></td>
+        <td><p>The next orbital patch to populate if an encounter is confirmed.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">startEpoch</span></td>
-        <td></td>
+        <td><p>The universal time at which the current patch begins, in seconds.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.OrbiterComponent.html">OrbiterComponent</a></td>
         <td><span class="parametername">sec</span></td>
-        <td></td>
+        <td><p>The secondary orbiter whose sphere of influence is tested for intersection.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
         <td><span class="parametername">targetBody</span></td>
-        <td></td>
+        <td><p>The target celestial body used to compute closest-approach data when no SOI transition occurs.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.PatchedConicSolver.html">PatchedConicSolver</a>.<a class="xref" href="KSP.Sim.impl.PatchedConicSolver.SolverParameters.html">SolverParameters</a></td>
         <td><span class="parametername">pars</span></td>
-        <td></td>
+        <td><p>Solver parameters controlling geometry iteration limits and tolerances.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -172,19 +179,21 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the orbit enters the secondary orbiter's sphere of influence within the current patch; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</td>
       </tr>
     </tbody>
   </table>
 
 
   <a id="KSP_Sim_impl_PatchedConics_IsUniversalTimeWithinPatchBounds_" data-uid="KSP.Sim.impl.PatchedConics.IsUniversalTimeWithinPatchBounds*"></a>
-  <h4 id="KSP_Sim_impl_PatchedConics_IsUniversalTimeWithinPatchBounds_System_Double_KSP_Sim_impl_PatchedConicsOrbit_" data-uid="KSP.Sim.impl.PatchedConics.IsUniversalTimeWithinPatchBounds(System.Double,KSP.Sim.impl.PatchedConicsOrbit)">IsUniversalTimeWithinPatchBounds(double, PatchedConicsOrbit)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="KSP_Sim_impl_PatchedConics_IsUniversalTimeWithinPatchBounds_System_Double_KSP_Sim_IKeplerPatch_" data-uid="KSP.Sim.impl.PatchedConics.IsUniversalTimeWithinPatchBounds(System.Double,KSP.Sim.IKeplerPatch)">IsUniversalTimeWithinPatchBounds(double, IKeplerPatch)</h4>
+  <div class="markdown level1 summary"><p>Returns a value indicating whether the given universal time falls within the valid time bounds of the specified orbital patch.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static bool IsUniversalTimeWithinPatchBounds(double universalTime, PatchedConicsOrbit patch)</code></pre>
+    <pre><code class="lang-csharp hljs">public static bool IsUniversalTimeWithinPatchBounds(double universalTime, IKeplerPatch patch)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -199,12 +208,14 @@
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">universalTime</span></td>
-        <td></td>
+        <td><p>The universal time to test, in seconds.</p>
+</td>
       </tr>
       <tr>
-        <td><a class="xref" href="KSP.Sim.impl.PatchedConicsOrbit.html">PatchedConicsOrbit</a></td>
+        <td><a class="xref" href="KSP.Sim.IKeplerPatch.html">IKeplerPatch</a></td>
         <td><span class="parametername">patch</span></td>
-        <td></td>
+        <td><p>The orbital patch whose start and end bounds are compared against <code class="paramref">universalTime</code>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -219,19 +230,21 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if <code class="paramref">universalTime</code> is within the patch bounds or the patch is a final non-hyperbolic orbit; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</td>
       </tr>
     </tbody>
   </table>
 
 
   <a id="KSP_Sim_impl_PatchedConics_WillCollideWithParent_" data-uid="KSP.Sim.impl.PatchedConics.WillCollideWithParent*"></a>
-  <h4 id="KSP_Sim_impl_PatchedConics_WillCollideWithParent_KSP_Sim_impl_PatchedConicsOrbit_System_Double_" data-uid="KSP.Sim.impl.PatchedConics.WillCollideWithParent(KSP.Sim.impl.PatchedConicsOrbit,System.Double)">WillCollideWithParent(PatchedConicsOrbit, double)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="KSP_Sim_impl_PatchedConics_WillCollideWithParent_KSP_Sim_IKeplerPatch_System_Double_" data-uid="KSP.Sim.impl.PatchedConics.WillCollideWithParent(KSP.Sim.IKeplerPatch,System.Double)">WillCollideWithParent(IKeplerPatch, double)</h4>
+  <div class="markdown level1 summary"><p>Returns a value indicating whether the given orbit will collide with its parent body before completing a full orbit.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static bool WillCollideWithParent(PatchedConicsOrbit currentPatch, double startEpoch)</code></pre>
+    <pre><code class="lang-csharp hljs">public static bool WillCollideWithParent(IKeplerPatch currentPatch, double startEpoch)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -244,14 +257,16 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.impl.PatchedConicsOrbit.html">PatchedConicsOrbit</a></td>
+        <td><a class="xref" href="KSP.Sim.IKeplerPatch.html">IKeplerPatch</a></td>
         <td><span class="parametername">currentPatch</span></td>
-        <td></td>
+        <td><p>The patched conics orbit to evaluate for collision.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">startEpoch</span></td>
-        <td></td>
+        <td><p>The universal time at which the patch begins, in seconds.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -266,7 +281,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the orbit intersects the parent body surface or terrain within the current patch; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</td>
       </tr>
     </tbody>
   </table>

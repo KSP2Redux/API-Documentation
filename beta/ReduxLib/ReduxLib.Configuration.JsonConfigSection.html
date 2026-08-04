@@ -175,7 +175,7 @@
 
   <a id="ReduxLib_Configuration_JsonConfigSection_LocalizationKey_" data-uid="ReduxLib.Configuration.JsonConfigSection.LocalizationKey*"></a>
   <h4 id="ReduxLib_Configuration_JsonConfigSection_LocalizationKey" data-uid="ReduxLib.Configuration.JsonConfigSection.LocalizationKey">LocalizationKey</h4>
-  <div class="markdown level1 summary"><p>The localization key for the section</p>
+  <div class="markdown level1 summary"><p>The localization key for the section.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -228,14 +228,14 @@
 
 
   <a id="ReduxLib_Configuration_JsonConfigSection_BindEntry_" data-uid="ReduxLib.Configuration.JsonConfigSection.BindEntry*"></a>
-  <h4 id="ReduxLib_Configuration_JsonConfigSection_BindEntry__1_System_String___0_System_String_ReduxLib_Configuration_IValueConstraint_System_String_System_String_" data-uid="ReduxLib.Configuration.JsonConfigSection.BindEntry``1(System.String,``0,System.String,ReduxLib.Configuration.IValueConstraint,System.String,System.String)">BindEntry&lt;T&gt;(string, T?, string, IValueConstraint?, string?, string?)</h4>
-  <div class="markdown level1 summary"><p>Binds a new <a class="xref" href="ReduxLib.Configuration.IConfigEntry.html">IConfigEntry</a> to the specified key within this section, with full
-metadata including localization keys for the settings menu.</p>
+  <h4 id="ReduxLib_Configuration_JsonConfigSection_BindEntry_System_Type_System_String_System_Object_System_String_ReduxLib_Configuration_IValueConstraint_System_String_System_String_System_Collections_Generic_IEnumerable_System_String__" data-uid="ReduxLib.Configuration.JsonConfigSection.BindEntry(System.Type,System.String,System.Object,System.String,ReduxLib.Configuration.IValueConstraint,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">BindEntry(Type, string, object?, string, IValueConstraint?, string?, string?, IEnumerable&lt;string&gt;?)</h4>
+  <div class="markdown level1 summary"><p>Binds a new <a class="xref" href="ReduxLib.Configuration.IConfigEntry.html">IConfigEntry</a> whose value type is only known at runtime. The generic
+overloads delegate here.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IConfigEntry BindEntry&lt;T&gt;(string key, T? defaultValue = default, string description = &quot;&quot;, IValueConstraint? constraint = null, string? nameLocalizationKey = null, string? descriptionLocalizationKey = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public IConfigEntry BindEntry(Type valueType, string key, object? defaultValue = null, string description = &quot;&quot;, IValueConstraint? constraint = null, string? nameLocalizationKey = null, string? descriptionLocalizationKey = null, IEnumerable&lt;string&gt;? tags = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -248,13 +248,19 @@ metadata including localization keys for the settings menu.</p>
     </thead>
     <tbody>
       <tr>
+        <td><span class="xref">Type</span></td>
+        <td><span class="parametername">valueType</span></td>
+        <td><p>The C# type the entry stores.</p>
+</td>
+      </tr>
+      <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">key</span></td>
         <td><p>Key of the entry.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">T</span></td>
+        <td><span class="xref">object</span></td>
         <td><span class="parametername">defaultValue</span></td>
         <td><p>Default value of the entry.</p>
 </td>
@@ -283,83 +289,10 @@ metadata including localization keys for the settings menu.</p>
         <td><p>Localization key for the entry's description.</p>
 </td>
       </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
       <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="ReduxLib.Configuration.IConfigEntry.html">IConfigEntry</a></td>
-        <td><p>The bound <a class="xref" href="ReduxLib.Configuration.IConfigEntry.html">IConfigEntry</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td><p>Type of the entry.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="ReduxLib_Configuration_JsonConfigSection_Bind_" data-uid="ReduxLib.Configuration.JsonConfigSection.Bind*"></a>
-  <h4 id="ReduxLib_Configuration_JsonConfigSection_Bind__1_System_String___0_System_String_ReduxLib_Configuration_IValueConstraint_" data-uid="ReduxLib.Configuration.JsonConfigSection.Bind``1(System.String,``0,System.String,ReduxLib.Configuration.IValueConstraint)">Bind&lt;T&gt;(string, T?, string, IValueConstraint?)</h4>
-  <div class="markdown level1 summary"><p>Binds a new <a class="xref" href="ReduxLib.Configuration.IConfigEntry.html">IConfigEntry</a> to the specified key within this section.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IConfigEntry Bind&lt;T&gt;(string key, T? defaultValue = default, string description = &quot;&quot;, IValueConstraint? constraint = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">string</span></td>
-        <td><span class="parametername">key</span></td>
-        <td><p>Key of the entry.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">T</span></td>
-        <td><span class="parametername">defaultValue</span></td>
-        <td><p>Default value of the entry.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">string</span></td>
-        <td><span class="parametername">description</span></td>
-        <td><p>Description of the entry.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="ReduxLib.Configuration.IValueConstraint.html">IValueConstraint</a></td>
-        <td><span class="parametername">constraint</span></td>
-        <td><p>The initial constraint of the entry.</p>
+        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">tags</span></td>
+        <td><p>Metadata tags declared on the entry.</p>
 </td>
       </tr>
     </tbody>
@@ -376,22 +309,6 @@ metadata including localization keys for the settings menu.</p>
       <tr>
         <td><a class="xref" href="ReduxLib.Configuration.IConfigEntry.html">IConfigEntry</a></td>
         <td><p>The bound <a class="xref" href="ReduxLib.Configuration.IConfigEntry.html">IConfigEntry</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td><p>Type of the entry.</p>
 </td>
       </tr>
     </tbody>

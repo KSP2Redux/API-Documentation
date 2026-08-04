@@ -94,9 +94,6 @@
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a></div>
     <div><a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a></div>
     <div><a class="xref" href="GlobalAssemblyCSharp.ILateUpdate.html">ILateUpdate</a></div>
   </div>
@@ -116,6 +113,9 @@
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsStageable">PartBehaviourModule.IsStageable()</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnViewUnload">PartBehaviourModule.OnViewUnload()</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnActive">PartBehaviourModule.OnActive()</a>
@@ -139,13 +139,16 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForDataModules">PartBehaviourModule.InitForDataModules()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_StashPendingStateJson_System_Type_Newtonsoft_Json_Linq_JObject_">PartBehaviourModule.StashPendingStateJson(Type, JObject)</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_SetDataModuleValues_KSP_Sim_Definitions_SerializedPartModule_">PartBehaviourModule.SetDataModuleValues(SerializedPartModule)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForNewOABPart">PartBehaviourModule.InitForNewOABPart()</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_">PartBehaviourModule.RemoveResourceRequest(ResourceFlowRequestHandle)</a>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_Unity_Entities_Entity_">PartBehaviourModule.RemoveResourceRequest(Entity)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnAnimStateEnter_UnityEngine_Animator_System_Int32_">PartBehaviourModule.OnAnimStateEnter(Animator, int)</a>
@@ -241,6 +244,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsLocallyAuthorized">PartBehaviourModule.IsLocallyAuthorized</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_PendingStateJson">PartBehaviourModule.PendingStateJson</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Game">KerbalMonoBehaviour.Game</a>
     </div>
     <div>
@@ -260,7 +266,9 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Module_ReinforcedConnection_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Module_ReinforcedConnection : PartBehaviourModule, IPartModule, IFixedUpdate, IPriorityOverride, IUpdate, IObjectAssemblyPartModule, ILateUpdate</code></pre>
+    <pre><code class="lang-csharp hljs">[ModuleCategory(&quot;Structural&quot;)]
+[ModuleDescription(&quot;Strengthens the part&#39;s attachment to its parent&quot;)]
+public class Module_ReinforcedConnection : PartBehaviourModule, IPartModule, IObjectAssemblyPartModule, ILateUpdate</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -279,7 +287,8 @@
 
 
   <h4 id="KSP_Modules_Module_ReinforcedConnection_ReinforcedConnectionJointName" data-uid="KSP.Modules.Module_ReinforcedConnection.ReinforcedConnectionJointName">ReinforcedConnectionJointName</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The name used to identify the reinforced connection configurable joint on a part.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -303,7 +312,8 @@
 
 
   <h4 id="KSP_Modules_Module_ReinforcedConnection__dataReinforcedConnection" data-uid="KSP.Modules.Module_ReinforcedConnection._dataReinforcedConnection">_dataReinforcedConnection</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The serialized <a class="xref" href="KSP.Modules.Data_ReinforcedConnection.html">Data_ReinforcedConnection</a> data module holding configuration and state for this reinforced connection.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -330,7 +340,8 @@
 
   <a id="KSP_Modules_Module_ReinforcedConnection_PartComponentModuleType_" data-uid="KSP.Modules.Module_ReinforcedConnection.PartComponentModuleType*"></a>
   <h4 id="KSP_Modules_Module_ReinforcedConnection_PartComponentModuleType" data-uid="KSP.Modules.Module_ReinforcedConnection.PartComponentModuleType">PartComponentModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <span class="xref">System.Type</span> of the corresponding simulation-side <a class="xref" href="KSP.Sim.impl.PartComponentModule.html">PartComponentModule</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -357,7 +368,8 @@
 
   <a id="KSP_Modules_Module_ReinforcedConnection_ReinforcedConfigurableJoints_" data-uid="KSP.Modules.Module_ReinforcedConnection.ReinforcedConfigurableJoints*"></a>
   <h4 id="KSP_Modules_Module_ReinforcedConnection_ReinforcedConfigurableJoints" data-uid="KSP.Modules.Module_ReinforcedConnection.ReinforcedConfigurableJoints">ReinforcedConfigurableJoints</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the number of configurable joints currently held by the active reinforced joint connection.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -384,7 +396,8 @@
 
   <a id="KSP_Modules_Module_ReinforcedConnection_AddDataModules_" data-uid="KSP.Modules.Module_ReinforcedConnection.AddDataModules*"></a>
   <h4 id="KSP_Modules_Module_ReinforcedConnection_AddDataModules" data-uid="KSP.Modules.Module_ReinforcedConnection.AddDataModules">AddDataModules()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers data modules with <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_DataModules">DataModules</a> for this part behaviour module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -396,7 +409,8 @@
 
   <a id="KSP_Modules_Module_ReinforcedConnection_GetModuleDisplayName_" data-uid="KSP.Modules.Module_ReinforcedConnection.GetModuleDisplayName*"></a>
   <h4 id="KSP_Modules_Module_ReinforcedConnection_GetModuleDisplayName" data-uid="KSP.Modules.Module_ReinforcedConnection.GetModuleDisplayName">GetModuleDisplayName()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the human-readable display name for this module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -413,7 +427,8 @@
     <tbody>
       <tr>
         <td><span class="xref">string</span></td>
-        <td></td>
+        <td><p>The display name string for this module.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -423,7 +438,8 @@
 
   <a id="KSP_Modules_Module_ReinforcedConnection_OnInitialize_" data-uid="KSP.Modules.Module_ReinforcedConnection.OnInitialize*"></a>
   <h4 id="KSP_Modules_Module_ReinforcedConnection_OnInitialize" data-uid="KSP.Modules.Module_ReinforcedConnection.OnInitialize">OnInitialize()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called during initialization to allow derived classes to perform custom setup after data modules are registered.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -435,7 +451,8 @@
 
   <a id="KSP_Modules_Module_ReinforcedConnection_OnLateUpdate_" data-uid="KSP.Modules.Module_ReinforcedConnection.OnLateUpdate*"></a>
   <h4 id="KSP_Modules_Module_ReinforcedConnection_OnLateUpdate" data-uid="KSP.Modules.Module_ReinforcedConnection.OnLateUpdate">OnLateUpdate()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Invoked each frame during the late update phase.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -445,7 +462,8 @@
 
   <a id="KSP_Modules_Module_ReinforcedConnection_OnShutdown_" data-uid="KSP.Modules.Module_ReinforcedConnection.OnShutdown*"></a>
   <h4 id="KSP_Modules_Module_ReinforcedConnection_OnShutdown" data-uid="KSP.Modules.Module_ReinforcedConnection.OnShutdown">OnShutdown()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called when the module is shutting down, allowing derived classes to release resources or subscriptions.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -457,7 +475,8 @@
 
   <a id="KSP_Modules_Module_ReinforcedConnection_PartJointBroke_" data-uid="KSP.Modules.Module_ReinforcedConnection.PartJointBroke*"></a>
   <h4 id="KSP_Modules_Module_ReinforcedConnection_PartJointBroke_KSP_Messages_MessageCenterMessage_" data-uid="KSP.Modules.Module_ReinforcedConnection.PartJointBroke(KSP.Messages.MessageCenterMessage)">PartJointBroke(MessageCenterMessage)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Handles a <a class="xref" href="KSP.Messages.PartJointBroken.html">PartJointBroken</a> message by destroying and optionally rebuilding the reinforced joint when the affected joint involves this part.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -476,7 +495,8 @@
       <tr>
         <td><a class="xref" href="KSP.Messages.MessageCenterMessage.html">MessageCenterMessage</a></td>
         <td><span class="parametername">msg</span></td>
-        <td></td>
+        <td><p>The message received from the message center.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -484,7 +504,8 @@
 
   <a id="KSP_Modules_Module_ReinforcedConnection_VesselChanged_" data-uid="KSP.Modules.Module_ReinforcedConnection.VesselChanged*"></a>
   <h4 id="KSP_Modules_Module_ReinforcedConnection_VesselChanged_KSP_Messages_MessageCenterMessage_" data-uid="KSP.Modules.Module_ReinforcedConnection.VesselChanged(KSP.Messages.MessageCenterMessage)">VesselChanged(MessageCenterMessage)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Handles vessel topology change messages by flagging that the reinforced joint connection requires re-evaluation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -503,22 +524,14 @@
       <tr>
         <td><a class="xref" href="KSP.Messages.MessageCenterMessage.html">MessageCenterMessage</a></td>
         <td><span class="parametername">msg</span></td>
-        <td></td>
+        <td><p>The message received from the message center.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a>
   </div>
   <div>
       <a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a>

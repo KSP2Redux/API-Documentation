@@ -90,6 +90,11 @@
     <div class="level1"><a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a></div>
     <div class="level2"><span class="xref">Data_WheelMotorSteering</span></div>
   </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Redux.Ecs.CompilerServices.IPartModuleNotifier-1.html">IPartModuleNotifier</a>&lt;<a class="xref" href="Redux.Ecs.Modules.WheelMotorSteeringData.html">WheelMotorSteeringData</a>.<a class="xref" href="Redux.Ecs.Modules.WheelMotorSteeringData.Changeset.html">Changeset</a>&gt;</div>
+    <div><a class="xref" href="Redux.Ecs.CompilerServices.IModuleStateSerializable.html">IModuleStateSerializable</a></div>
+  </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
@@ -121,9 +126,6 @@
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_StageActivationActionPath">ModuleData.StageActivationActionPath</a>
-    </div>
-    <div>
-      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RequestHandle">ModuleData.RequestHandle</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_Copy_KSP_Sim_Definitions_ModuleData_">ModuleData.Copy(ModuleData)</a>
@@ -195,6 +197,12 @@
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_SyncAllSymmetricalData_KSP_Sim_Definitions_ModuleData_">ModuleData.SyncAllSymmetricalData(ModuleData)</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_Entity">ModuleData.Entity</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RequestEntity">ModuleData.RequestEntity</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_HasSymmetricalProperties">ModuleData.HasSymmetricalProperties</a>
     </div>
     <div>
@@ -217,7 +225,7 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Data_WheelMotorSteering_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class Data_WheelMotorSteering : ModuleData</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class Data_WheelMotorSteering : ModuleData, IPartModuleNotifier&lt;WheelMotorSteeringData.Changeset&gt;, IModuleStateSerializable</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -242,7 +250,7 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPState(CopyToSymmetrySet = true)]
 [LocalizedField(&quot;PartModules/Wheels/SteeringEnabled&quot;)]
-public ModuleProperty&lt;bool&gt; SteeringEnabled</code></pre>
+public EntityModuleProperty&lt;WheelMotorSteeringData, bool&gt; SteeringEnabled</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -254,7 +262,7 @@ public ModuleProperty&lt;bool&gt; SteeringEnabled</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">bool</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.WheelMotorSteeringData.html">WheelMotorSteeringData</a>, <span class="xref">bool</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -268,7 +276,7 @@ public ModuleProperty&lt;bool&gt; SteeringEnabled</code></pre>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPState(CopyToSymmetrySet = true)]
 [LocalizedField(&quot;PartModules/Wheels/SteeringDirection&quot;)]
-public ModuleProperty&lt;bool&gt; SteeringInverted</code></pre>
+public EntityModuleProperty&lt;WheelMotorSteeringData, bool&gt; SteeringInverted</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -280,7 +288,7 @@ public ModuleProperty&lt;bool&gt; SteeringInverted</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">bool</span>&gt;</td>
+        <td><a class="xref" href="Redux.Ecs.EntityModuleProperty-2.html">EntityModuleProperty</a>&lt;<a class="xref" href="Redux.Ecs.Modules.WheelMotorSteeringData.html">WheelMotorSteeringData</a>, <span class="xref">bool</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -293,6 +301,7 @@ public ModuleProperty&lt;bool&gt; SteeringInverted</code></pre>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
+[Unit(&quot;kN&#183;m&quot;)]
 public float SteeringTorque</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -316,7 +325,8 @@ public float SteeringTorque</code></pre>
 
   <a id="KSP_Modules_Data_WheelMotorSteering_ModuleType_" data-uid="KSP.Modules.Data_WheelMotorSteering.ModuleType*"></a>
   <h4 id="KSP_Modules_Data_WheelMotorSteering_ModuleType" data-uid="KSP.Modules.Data_WheelMotorSteering.ModuleType">ModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <span class="xref">System.Type</span> of the part behaviour module that owns this data definition.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -343,9 +353,45 @@ public float SteeringTorque</code></pre>
 </h3>
 
 
+  <a id="KSP_Modules_Data_WheelMotorSteering_BindToEntity_" data-uid="KSP.Modules.Data_WheelMotorSteering.BindToEntity*"></a>
+  <h4 id="KSP_Modules_Data_WheelMotorSteering_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_" data-uid="KSP.Modules.Data_WheelMotorSteering.BindToEntity(Unity.Entities.EntityManager,Unity.Entities.Entity)">BindToEntity(EntityManager, Entity)</h4>
+  <div class="markdown level1 summary"><p>Binds this module's state and config to its part entity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void BindToEntity(EntityManager em, Entity entity)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">entity</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_">ModuleData.BindToEntity(EntityManager, Entity)</a></div>
+
+
   <a id="KSP_Modules_Data_WheelMotorSteering_GetSteeringEnabledString_" data-uid="KSP.Modules.Data_WheelMotorSteering.GetSteeringEnabledString*"></a>
   <h4 id="KSP_Modules_Data_WheelMotorSteering_GetSteeringEnabledString_System_Object_" data-uid="KSP.Modules.Data_WheelMotorSteering.GetSteeringEnabledString(System.Object)">GetSteeringEnabledString(object)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns a localized display string for the wheel steering enabled state.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -364,7 +410,8 @@ public float SteeringTorque</code></pre>
       <tr>
         <td><span class="xref">object</span></td>
         <td><span class="parametername">valueObj</span></td>
-        <td></td>
+        <td><p>A boxed <span class="xref">bool</span> value representing whether steering is enabled.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -379,7 +426,8 @@ public float SteeringTorque</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">string</span></td>
-        <td></td>
+        <td><p>A localized string describing the enabled or disabled steering state.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -387,7 +435,8 @@ public float SteeringTorque</code></pre>
 
   <a id="KSP_Modules_Data_WheelMotorSteering_GetSteeringInvertedString_" data-uid="KSP.Modules.Data_WheelMotorSteering.GetSteeringInvertedString*"></a>
   <h4 id="KSP_Modules_Data_WheelMotorSteering_GetSteeringInvertedString_System_Object_" data-uid="KSP.Modules.Data_WheelMotorSteering.GetSteeringInvertedString(System.Object)">GetSteeringInvertedString(object)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns a localized display string for the wheel steering inverted state.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -406,7 +455,8 @@ public float SteeringTorque</code></pre>
       <tr>
         <td><span class="xref">object</span></td>
         <td><span class="parametername">valueObj</span></td>
-        <td></td>
+        <td><p>A boxed <span class="xref">bool</span> value representing whether steering is inverted.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -421,10 +471,70 @@ public float SteeringTorque</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">string</span></td>
+        <td><p>A localized string describing the inverted or normal steering state.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Modules_Data_WheelMotorSteering_NotifyChanged_" data-uid="KSP.Modules.Data_WheelMotorSteering.NotifyChanged*"></a>
+  <h4 id="KSP_Modules_Data_WheelMotorSteering_NotifyChanged_Unity_Entities_EntityManager_Unity_Entities_Entity_Redux_Ecs_Modules_WheelMotorSteeringData_Changeset_" data-uid="KSP.Modules.Data_WheelMotorSteering.NotifyChanged(Unity.Entities.EntityManager,Unity.Entities.Entity,Redux.Ecs.Modules.WheelMotorSteeringData.Changeset)">NotifyChanged(EntityManager, Entity, Changeset)</h4>
+  <div class="markdown level1 summary"><p>Raises OnChanged for each changed property on the part's WheelMotorSteeringData, driven by
+the changeset the scan pass captured. Live values are read from the component.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void NotifyChanged(EntityManager em, Entity entity, WheelMotorSteeringData.Changeset __changeset)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">entity</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Redux.Ecs.Modules.WheelMotorSteeringData.html">WheelMotorSteeringData</a>.<a class="xref" href="Redux.Ecs.Modules.WheelMotorSteeringData.Changeset.html">Changeset</a></td>
+        <td><span class="parametername">__changeset</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
+
+
+  <a id="KSP_Modules_Data_WheelMotorSteering_UnbindFromEntity_" data-uid="KSP.Modules.Data_WheelMotorSteering.UnbindFromEntity*"></a>
+  <h4 id="KSP_Modules_Data_WheelMotorSteering_UnbindFromEntity" data-uid="KSP.Modules.Data_WheelMotorSteering.UnbindFromEntity">UnbindFromEntity()</h4>
+  <div class="markdown level1 summary"><p>Detaches from the module entity, snapshotting entity-backed state into managed storage.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void UnbindFromEntity()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_UnbindFromEntity">ModuleData.UnbindFromEntity()</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Redux.Ecs.CompilerServices.IPartModuleNotifier-1.html">IPartModuleNotifier&lt;TChangeset&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.Ecs.CompilerServices.IModuleStateSerializable.html">IModuleStateSerializable</a>
+  </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>

@@ -123,9 +123,6 @@
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_StageActivationActionPath">ModuleData.StageActivationActionPath</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RequestHandle">ModuleData.RequestHandle</a>
-    </div>
-    <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_Copy_KSP_Sim_Definitions_ModuleData_">ModuleData.Copy(ModuleData)</a>
     </div>
     <div>
@@ -133,6 +130,12 @@
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_OnPartBehaviourModuleInit">ModuleData.OnPartBehaviourModuleInit()</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_">ModuleData.BindToEntity(EntityManager, Entity)</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_UnbindFromEntity">ModuleData.UnbindFromEntity()</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RebuildDataContext">ModuleData.RebuildDataContext()</a>
@@ -189,6 +192,12 @@
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_SyncAllSymmetricalData_KSP_Sim_Definitions_ModuleData_">ModuleData.SyncAllSymmetricalData(ModuleData)</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_Entity">ModuleData.Entity</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RequestEntity">ModuleData.RequestEntity</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_HasSymmetricalProperties">ModuleData.HasSymmetricalProperties</a>
     </div>
     <div>
@@ -230,7 +239,8 @@
 
 
   <h4 id="KSP_Modules_Data_ModuleGenerator_AutoShutdown" data-uid="KSP.Modules.Data_ModuleGenerator.AutoShutdown">AutoShutdown</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Whether the generator automatically shuts down when part temperature exceeds <a class="xref" href="KSP.Modules.Data_ModuleGenerator.html#KSP_Modules_Data_ModuleGenerator_AutoShutdownTemperature">AutoShutdownTemperature</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -255,11 +265,13 @@ public bool AutoShutdown</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ModuleGenerator_AutoShutdownTemperature" data-uid="KSP.Modules.Data_ModuleGenerator.AutoShutdownTemperature">AutoShutdownTemperature</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The part temperature threshold in Kelvin above which the generator auto-shuts down when <a class="xref" href="KSP.Modules.Data_ModuleGenerator.html#KSP_Modules_Data_ModuleGenerator_AutoShutdown">AutoShutdown</a> is enabled.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
+[Unit(&quot;K&quot;)]
 public double AutoShutdownTemperature</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -280,7 +292,8 @@ public double AutoShutdownTemperature</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ModuleGenerator_CurrentDecayTime" data-uid="KSP.Modules.Data_ModuleGenerator.CurrentDecayTime">CurrentDecayTime</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The elapsed decay time in seconds since decay began.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -305,7 +318,8 @@ public double CurrentDecayTime</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ModuleGenerator_DecayCurve" data-uid="KSP.Modules.Data_ModuleGenerator.DecayCurve">DecayCurve</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The output curve sampled over the generator lifetime, where X is fractional lifetime (0 to 1) and Y is the multiplier on the base resource rate.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -330,11 +344,13 @@ public FloatCurve DecayCurve</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ModuleGenerator_DecayTime" data-uid="KSP.Modules.Data_ModuleGenerator.DecayTime">DecayTime</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The total time in seconds over which the generator decays from full output to its final curve value.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
+[Unit(&quot;s&quot;)]
 public double DecayTime</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -355,7 +371,8 @@ public double DecayTime</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ModuleGenerator_DisplayLifetime" data-uid="KSP.Modules.Data_ModuleGenerator.DisplayLifetime">DisplayLifetime</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The remaining lifetime of the generator, formatted as a date-time string for display.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -381,7 +398,8 @@ public ModuleProperty&lt;string&gt; DisplayLifetime</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ModuleGenerator_DisplayStatus" data-uid="KSP.Modules.Data_ModuleGenerator.DisplayStatus">DisplayStatus</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The localized status string shown in the part action menu.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -407,7 +425,8 @@ public ModuleProperty&lt;string&gt; DisplayStatus</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ModuleGenerator_EmissiveLerpRateDown" data-uid="KSP.Modules.Data_ModuleGenerator.EmissiveLerpRateDown">EmissiveLerpRateDown</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The per-second lerp rate at which emissive intensity ramps down after the generator stops.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -432,7 +451,8 @@ public float EmissiveLerpRateDown</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ModuleGenerator_EmissiveLerpRateUp" data-uid="KSP.Modules.Data_ModuleGenerator.EmissiveLerpRateUp">EmissiveLerpRateUp</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The per-second lerp rate at which emissive intensity ramps up while the generator runs.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -457,11 +477,13 @@ public float EmissiveLerpRateUp</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ModuleGenerator_EmissiveMaterialNames" data-uid="KSP.Modules.Data_ModuleGenerator.EmissiveMaterialNames">EmissiveMaterialNames</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The names of materials on the part whose emissive color is driven by the generator state.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
+[InlineStringList]
 public List&lt;string&gt; EmissiveMaterialNames</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -482,7 +504,8 @@ public List&lt;string&gt; EmissiveMaterialNames</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ModuleGenerator_EmissiveTemperatureCurve" data-uid="KSP.Modules.Data_ModuleGenerator.EmissiveTemperatureCurve">EmissiveTemperatureCurve</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The curve mapping part temperature in Kelvin to emissive intensity multiplier, used when <a class="xref" href="KSP.Modules.Data_ModuleGenerator.html#KSP_Modules_Data_ModuleGenerator_UseEmissiveTemperature">UseEmissiveTemperature</a> is enabled.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -507,11 +530,13 @@ public FloatCurve EmissiveTemperatureCurve</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ModuleGenerator_FluxGenerated" data-uid="KSP.Modules.Data_ModuleGenerator.FluxGenerated">FluxGenerated</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The heat flux in kilowatts added to the part while the generator runs.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
+[Unit(&quot;kW&quot;)]
 public double FluxGenerated</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -532,7 +557,8 @@ public double FluxGenerated</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ModuleGenerator_GeneratorEnabled" data-uid="KSP.Modules.Data_ModuleGenerator.GeneratorEnabled">GeneratorEnabled</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Whether the generator is enabled by the player.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -559,7 +585,8 @@ public ModuleProperty&lt;bool&gt; GeneratorEnabled</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ModuleGenerator_GeneratorIsActive" data-uid="KSP.Modules.Data_ModuleGenerator.GeneratorIsActive">GeneratorIsActive</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Whether the generator is currently active and producing output.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -584,7 +611,8 @@ public bool GeneratorIsActive</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ModuleGenerator_GeneratorOutput" data-uid="KSP.Modules.Data_ModuleGenerator.GeneratorOutput">GeneratorOutput</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The current electrical output rate of the generator, formatted for display.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -610,7 +638,8 @@ public ModuleProperty&lt;double&gt; GeneratorOutput</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ModuleGenerator_HeatGenerated" data-uid="KSP.Modules.Data_ModuleGenerator.HeatGenerated">HeatGenerated</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The current heat output rate of the generator, formatted for display.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -636,7 +665,8 @@ public ModuleProperty&lt;double&gt; HeatGenerated</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ModuleGenerator_IsAlwaysActive" data-uid="KSP.Modules.Data_ModuleGenerator.IsAlwaysActive">IsAlwaysActive</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Whether the generator runs continuously and cannot be toggled off by the player.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -661,7 +691,8 @@ public bool IsAlwaysActive</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ModuleGenerator_IsDecaying" data-uid="KSP.Modules.Data_ModuleGenerator.IsDecaying">IsDecaying</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Whether the generator is currently in its decay phase.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -686,7 +717,8 @@ public bool IsDecaying</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ModuleGenerator_RequestConfig" data-uid="KSP.Modules.Data_ModuleGenerator.RequestConfig">RequestConfig</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The resource flow request command configuration used when issuing resource requests.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -710,7 +742,8 @@ public bool IsDecaying</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ModuleGenerator_ResourceSetting" data-uid="KSP.Modules.Data_ModuleGenerator.ResourceSetting">ResourceSetting</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The resource the generator produces and its base flow rate.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -735,11 +768,13 @@ public PartModuleResourceSetting ResourceSetting</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ModuleGenerator_SafeOperationTemperature" data-uid="KSP.Modules.Data_ModuleGenerator.SafeOperationTemperature">SafeOperationTemperature</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The upper safe operating temperature in Kelvin used by the UI to warn the player before the auto-shutdown threshold is reached.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
+[Unit(&quot;K&quot;)]
 public double SafeOperationTemperature</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
@@ -760,7 +795,8 @@ public double SafeOperationTemperature</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ModuleGenerator_StartDecayImmediately" data-uid="KSP.Modules.Data_ModuleGenerator.StartDecayImmediately">StartDecayImmediately</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Whether the decay timer starts immediately when the part spawns rather than waiting for mission elapsed time to begin.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -785,7 +821,8 @@ public bool StartDecayImmediately</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ModuleGenerator_Status" data-uid="KSP.Modules.Data_ModuleGenerator.Status">Status</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The initial operational state of the generator when the part spawns.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -810,7 +847,8 @@ public GeneratorStatus Status</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ModuleGenerator_UseDecay" data-uid="KSP.Modules.Data_ModuleGenerator.UseDecay">UseDecay</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Whether the generator output decays over time according to <a class="xref" href="KSP.Modules.Data_ModuleGenerator.html#KSP_Modules_Data_ModuleGenerator_DecayCurve">DecayCurve</a> and <a class="xref" href="KSP.Modules.Data_ModuleGenerator.html#KSP_Modules_Data_ModuleGenerator_DecayTime">DecayTime</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -835,7 +873,8 @@ public bool UseDecay</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ModuleGenerator_UseEmissive" data-uid="KSP.Modules.Data_ModuleGenerator.UseEmissive">UseEmissive</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Whether the generator drives an emissive intensity on the materials listed in <a class="xref" href="KSP.Modules.Data_ModuleGenerator.html#KSP_Modules_Data_ModuleGenerator_EmissiveMaterialNames">EmissiveMaterialNames</a> while running.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -860,7 +899,8 @@ public bool UseEmissive</code></pre>
 
 
   <h4 id="KSP_Modules_Data_ModuleGenerator_UseEmissiveTemperature" data-uid="KSP.Modules.Data_ModuleGenerator.UseEmissiveTemperature">UseEmissiveTemperature</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Whether the emissive intensity is driven by part temperature via <a class="xref" href="KSP.Modules.Data_ModuleGenerator.html#KSP_Modules_Data_ModuleGenerator_EmissiveTemperatureCurve">EmissiveTemperatureCurve</a> rather than purely by generator on/off state.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -888,7 +928,8 @@ public bool UseEmissiveTemperature</code></pre>
 
   <a id="KSP_Modules_Data_ModuleGenerator_ModuleType_" data-uid="KSP.Modules.Data_ModuleGenerator.ModuleType*"></a>
   <h4 id="KSP_Modules_Data_ModuleGenerator_ModuleType" data-uid="KSP.Modules.Data_ModuleGenerator.ModuleType">ModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <span class="xref">System.Type</span> of the part behaviour module that owns this data definition.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -917,7 +958,8 @@ public bool UseEmissiveTemperature</code></pre>
 
   <a id="KSP_Modules_Data_ModuleGenerator_GetPartInfoEntries_" data-uid="KSP.Modules.Data_ModuleGenerator.GetPartInfoEntries*"></a>
   <h4 id="KSP_Modules_Data_ModuleGenerator_GetPartInfoEntries_System_Type_System_Collections_Generic_List_OABPartData_PartInfoModuleEntry__" data-uid="KSP.Modules.Data_ModuleGenerator.GetPartInfoEntries(System.Type,System.Collections.Generic.List{OABPartData.PartInfoModuleEntry})">GetPartInfoEntries(Type, List&lt;PartInfoModuleEntry&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns a list of Part Action Menu info entries that describe this module's exposed data for the given part behaviour module type.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -936,7 +978,8 @@ public bool UseEmissiveTemperature</code></pre>
       <tr>
         <td><span class="xref">Type</span></td>
         <td><span class="parametername">partBehaviourModuleType</span></td>
-        <td></td>
+        <td><p>The <span class="xref">System.Type</span> of the part behaviour module requesting info entries.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="OABPartData.html">OABPartData</a>.<a class="xref" href="OABPartData.PartInfoModuleEntry.html">PartInfoModuleEntry</a>&gt;</td>
@@ -956,7 +999,8 @@ public bool UseEmissiveTemperature</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="OABPartData.html">OABPartData</a>.<a class="xref" href="OABPartData.PartInfoModuleEntry.html">PartInfoModuleEntry</a>&gt;</td>
-        <td></td>
+        <td><p>The populated list of <a class="xref" href="OABPartData.html">OABPartData.PartInfoModuleEntry</a> instances describing this module's PAM entries.</p>
+</td>
       </tr>
     </tbody>
   </table>

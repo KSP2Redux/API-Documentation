@@ -212,13 +212,13 @@ for further configuration.</p>
 
 
   <a id="PatchManager_Planets_PlanetsLuaModule_Patch_" data-uid="PatchManager.Planets.PlanetsLuaModule.Patch*"></a>
-  <h4 id="PatchManager_Planets_PlanetsLuaModule_Patch_MoonSharp_Interpreter_Script_System_String_" data-uid="PatchManager.Planets.PlanetsLuaModule.Patch(MoonSharp.Interpreter.Script,System.String)">Patch(Script, string)</h4>
+  <h4 id="PatchManager_Planets_PlanetsLuaModule_Patch_MoonSharp_Interpreter_ScriptExecutionContext_System_String_" data-uid="PatchManager.Planets.PlanetsLuaModule.Patch(MoonSharp.Interpreter.ScriptExecutionContext,System.String)">Patch(ScriptExecutionContext, string)</h4>
   <div class="markdown level1 summary"><p>Registers a celestial-body patch with the given namespaced patch name.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public LuaPatch Patch(Script script, string name)</code></pre>
+    <pre><code class="lang-csharp hljs">public PatchDefinition Patch(ScriptExecutionContext context, string name)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -231,15 +231,15 @@ for further configuration.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Script</span></td>
-        <td><span class="parametername">script</span></td>
-        <td><p>The host Lua script; its <code>ModId</code> global is used to namespace <code class="paramref">name</code>.</p>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global namespaces <code class="paramref">name</code>.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">name</span></td>
-        <td><p>The patch's local name; namespaced with the host mod's ID.</p>
+        <td><p>The patch's local name, namespaced with the host mod's ID.</p>
 </td>
       </tr>
     </tbody>
@@ -254,25 +254,25 @@ for further configuration.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="PatchManager.LuaPatching.LuaPatch.html">LuaPatch</a></td>
+        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a></td>
         <td><p>The registered patch.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="PatchManager_Planets_PlanetsLuaModule_Patch_MoonSharp_Interpreter_Script_System_String__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>The patch matches every body by default; restrict it via <a class="xref" href="PatchManager.LuaPatching.LuaPatch.html#PatchManager_LuaPatching_LuaPatch_Named_System_String___">Named(params string[])</a>, which supports <code>*</code> and <code>?</code> wildcards.</p>
+  <h5 id="PatchManager_Planets_PlanetsLuaModule_Patch_MoonSharp_Interpreter_ScriptExecutionContext_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The patch matches every body by default. Restrict it via <a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html#PatchManager_LuaPatching_PatchDefinition_Named_System_String___">Named(params string[])</a>, which supports <code>*</code> and <code>?</code> wildcards.</p>
 </div>
 
 
   <a id="PatchManager_Planets_PlanetsLuaModule_PatchAtmosphereOverride_" data-uid="PatchManager.Planets.PlanetsLuaModule.PatchAtmosphereOverride*"></a>
-  <h4 id="PatchManager_Planets_PlanetsLuaModule_PatchAtmosphereOverride_MoonSharp_Interpreter_Script_System_String_" data-uid="PatchManager.Planets.PlanetsLuaModule.PatchAtmosphereOverride(MoonSharp.Interpreter.Script,System.String)">PatchAtmosphereOverride(Script, string)</h4>
+  <h4 id="PatchManager_Planets_PlanetsLuaModule_PatchAtmosphereOverride_MoonSharp_Interpreter_ScriptExecutionContext_System_String_" data-uid="PatchManager.Planets.PlanetsLuaModule.PatchAtmosphereOverride(MoonSharp.Interpreter.ScriptExecutionContext,System.String)">PatchAtmosphereOverride(ScriptExecutionContext, string)</h4>
   <div class="markdown level1 summary"><p>Registers a patch against the <code>atmosphere_overrides</code> label with the given namespaced patch name.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public LuaPatch PatchAtmosphereOverride(Script script, string name)</code></pre>
+    <pre><code class="lang-csharp hljs">public PatchDefinition PatchAtmosphereOverride(ScriptExecutionContext context, string name)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -285,15 +285,15 @@ for further configuration.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Script</span></td>
-        <td><span class="parametername">script</span></td>
-        <td><p>The host Lua script; its <code>ModId</code> global is used to namespace <code class="paramref">name</code>.</p>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global namespaces <code class="paramref">name</code>.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">name</span></td>
-        <td><p>The patch's local name; namespaced with the host mod's ID.</p>
+        <td><p>The patch's local name, namespaced with the host mod's ID.</p>
 </td>
       </tr>
     </tbody>
@@ -308,25 +308,25 @@ for further configuration.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="PatchManager.LuaPatching.LuaPatch.html">LuaPatch</a></td>
+        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a></td>
         <td><p>The registered patch.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="PatchManager_Planets_PlanetsLuaModule_PatchAtmosphereOverride_MoonSharp_Interpreter_Script_System_String__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Use <a class="xref" href="PatchManager.LuaPatching.LuaPatch.html#PatchManager_LuaPatching_LuaPatch_Named_System_String___">Named(params string[])</a> to restrict which override files the patch runs against.</p>
+  <h5 id="PatchManager_Planets_PlanetsLuaModule_PatchAtmosphereOverride_MoonSharp_Interpreter_ScriptExecutionContext_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Use <a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html#PatchManager_LuaPatching_PatchDefinition_Named_System_String___">Named(params string[])</a> to restrict which override files the patch runs against.</p>
 </div>
 
 
   <a id="PatchManager_Planets_PlanetsLuaModule_PatchCloudOverride_" data-uid="PatchManager.Planets.PlanetsLuaModule.PatchCloudOverride*"></a>
-  <h4 id="PatchManager_Planets_PlanetsLuaModule_PatchCloudOverride_MoonSharp_Interpreter_Script_System_String_" data-uid="PatchManager.Planets.PlanetsLuaModule.PatchCloudOverride(MoonSharp.Interpreter.Script,System.String)">PatchCloudOverride(Script, string)</h4>
+  <h4 id="PatchManager_Planets_PlanetsLuaModule_PatchCloudOverride_MoonSharp_Interpreter_ScriptExecutionContext_System_String_" data-uid="PatchManager.Planets.PlanetsLuaModule.PatchCloudOverride(MoonSharp.Interpreter.ScriptExecutionContext,System.String)">PatchCloudOverride(ScriptExecutionContext, string)</h4>
   <div class="markdown level1 summary"><p>Registers a patch against the <code>volume_cloud_overrides</code> label with the given namespaced patch name.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public LuaPatch PatchCloudOverride(Script script, string name)</code></pre>
+    <pre><code class="lang-csharp hljs">public PatchDefinition PatchCloudOverride(ScriptExecutionContext context, string name)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -339,15 +339,15 @@ for further configuration.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Script</span></td>
-        <td><span class="parametername">script</span></td>
-        <td><p>The host Lua script; its <code>ModId</code> global is used to namespace <code class="paramref">name</code>.</p>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global namespaces <code class="paramref">name</code>.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">name</span></td>
-        <td><p>The patch's local name; namespaced with the host mod's ID.</p>
+        <td><p>The patch's local name, namespaced with the host mod's ID.</p>
 </td>
       </tr>
     </tbody>
@@ -362,25 +362,25 @@ for further configuration.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="PatchManager.LuaPatching.LuaPatch.html">LuaPatch</a></td>
+        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a></td>
         <td><p>The registered patch.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="PatchManager_Planets_PlanetsLuaModule_PatchCloudOverride_MoonSharp_Interpreter_Script_System_String__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Use <a class="xref" href="PatchManager.LuaPatching.LuaPatch.html#PatchManager_LuaPatching_LuaPatch_Named_System_String___">Named(params string[])</a> to restrict which override files the patch runs against.</p>
+  <h5 id="PatchManager_Planets_PlanetsLuaModule_PatchCloudOverride_MoonSharp_Interpreter_ScriptExecutionContext_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Use <a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html#PatchManager_LuaPatching_PatchDefinition_Named_System_String___">Named(params string[])</a> to restrict which override files the patch runs against.</p>
 </div>
 
 
   <a id="PatchManager_Planets_PlanetsLuaModule_PatchDefaultGalaxy_" data-uid="PatchManager.Planets.PlanetsLuaModule.PatchDefaultGalaxy*"></a>
-  <h4 id="PatchManager_Planets_PlanetsLuaModule_PatchDefaultGalaxy_MoonSharp_Interpreter_Script_System_String_" data-uid="PatchManager.Planets.PlanetsLuaModule.PatchDefaultGalaxy(MoonSharp.Interpreter.Script,System.String)">PatchDefaultGalaxy(Script, string)</h4>
+  <h4 id="PatchManager_Planets_PlanetsLuaModule_PatchDefaultGalaxy_MoonSharp_Interpreter_ScriptExecutionContext_System_String_" data-uid="PatchManager.Planets.PlanetsLuaModule.PatchDefaultGalaxy(MoonSharp.Interpreter.ScriptExecutionContext,System.String)">PatchDefaultGalaxy(ScriptExecutionContext, string)</h4>
   <div class="markdown level1 summary"><p>Registers a patch against the default galaxy definition.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public LuaPatch PatchDefaultGalaxy(Script script, string name)</code></pre>
+    <pre><code class="lang-csharp hljs">public PatchDefinition PatchDefaultGalaxy(ScriptExecutionContext context, string name)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -393,15 +393,15 @@ for further configuration.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Script</span></td>
-        <td><span class="parametername">script</span></td>
-        <td><p>The host Lua script; its <code>ModId</code> global is used to namespace <code class="paramref">name</code>.</p>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global namespaces <code class="paramref">name</code>.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">name</span></td>
-        <td><p>The patch's local name; namespaced with the host mod's ID.</p>
+        <td><p>The patch's local name, namespaced with the host mod's ID.</p>
 </td>
       </tr>
     </tbody>
@@ -416,7 +416,7 @@ for further configuration.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="PatchManager.LuaPatching.LuaPatch.html">LuaPatch</a></td>
+        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a></td>
         <td><p>The registered patch.</p>
 </td>
       </tr>

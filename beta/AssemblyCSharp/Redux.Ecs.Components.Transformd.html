@@ -100,7 +100,8 @@ though if velocity and location data are used within the same methods and not se
 
 
   <h4 id="Redux_Ecs_Components_Transformd_Position" data-uid="Redux.Ecs.Components.Transformd.Position">Position</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The local position of the entity relative to its parent frame.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -124,7 +125,8 @@ though if velocity and location data are used within the same methods and not se
 
 
   <h4 id="Redux_Ecs_Components_Transformd_Rotation" data-uid="Redux.Ecs.Components.Transformd.Rotation">Rotation</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The local rotation of the entity relative to its parent frame.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -148,7 +150,8 @@ though if velocity and location data are used within the same methods and not se
 
 
   <h4 id="Redux_Ecs_Components_Transformd_VelocityAngular" data-uid="Redux.Ecs.Components.Transformd.VelocityAngular">VelocityAngular</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The angular velocity of the entity expressed in its local frame.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -172,7 +175,8 @@ though if velocity and location data are used within the same methods and not se
 
 
   <h4 id="Redux_Ecs_Components_Transformd_VelocityLinear" data-uid="Redux.Ecs.Components.Transformd.VelocityLinear">VelocityLinear</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The linear velocity of the entity expressed in its local frame.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -198,8 +202,63 @@ though if velocity and location data are used within the same methods and not se
 
 
   <a id="Redux_Ecs_Components_Transformd_ComputeMatrixFromOther_" data-uid="Redux.Ecs.Components.Transformd.ComputeMatrixFromOther*"></a>
+  <h4 id="Redux_Ecs_Components_Transformd_ComputeMatrixFromOther_Unity_Entities_ComponentLookup_Redux_Ecs_Components_Transformd___Unity_Entities_BufferLookup_Redux_Ecs_Components_AncestorList___Unity_Entities_Entity__Unity_Entities_Entity__Matrix4x4D__" data-uid="Redux.Ecs.Components.Transformd.ComputeMatrixFromOther(Unity.Entities.ComponentLookup{Redux.Ecs.Components.Transformd}@,Unity.Entities.BufferLookup{Redux.Ecs.Components.AncestorList}@,Unity.Entities.Entity@,Unity.Entities.Entity@,Matrix4x4D@)">ComputeMatrixFromOther(in ComponentLookup&lt;Transformd&gt;, in BufferLookup&lt;AncestorList&gt;, in Entity, in Entity, out Matrix4x4D)</h4>
+  <div class="markdown level1 summary"><p>Computes the transform matrix from another entity's local frame into this entity's local frame using component and buffer lookups.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[BurstCompile]
+public static void ComputeMatrixFromOther(in ComponentLookup&lt;Transformd&gt; transforms, in BufferLookup&lt;AncestorList&gt; ancestors, in Entity thisEnt, in Entity otherEnt, out Matrix4x4D trs)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ComponentLookup</span>&lt;<a class="xref" href="Redux.Ecs.Components.Transformd.html">Transformd</a>&gt;</td>
+        <td><span class="parametername">transforms</span></td>
+        <td><p>A component lookup used to read <a class="xref" href="Redux.Ecs.Components.Transformd.html">Transformd</a> components.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">BufferLookup</span>&lt;<a class="xref" href="Redux.Ecs.Components.AncestorList.html">AncestorList</a>&gt;</td>
+        <td><span class="parametername">ancestors</span></td>
+        <td><p>A buffer lookup used to read ancestor lists.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">thisEnt</span></td>
+        <td><p>The entity whose local frame defines the output space.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">otherEnt</span></td>
+        <td><p>The entity whose frame is the input space.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Matrix4x4D.html">Matrix4x4D</a></td>
+        <td><span class="parametername">trs</span></td>
+        <td><p>Receives the matrix that transforms from <code class="paramref">otherEnt</code>'s frame into <code class="paramref">thisEnt</code>'s local frame.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Ecs_Components_Transformd_ComputeMatrixFromOther_" data-uid="Redux.Ecs.Components.Transformd.ComputeMatrixFromOther*"></a>
   <h4 id="Redux_Ecs_Components_Transformd_ComputeMatrixFromOther_Unity_Entities_EntityManager__Unity_Entities_Entity__Unity_Entities_Entity__Matrix4x4D__" data-uid="Redux.Ecs.Components.Transformd.ComputeMatrixFromOther(Unity.Entities.EntityManager@,Unity.Entities.Entity@,Unity.Entities.Entity@,Matrix4x4D@)">ComputeMatrixFromOther(in EntityManager, in Entity, in Entity, out Matrix4x4D)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Computes the transform matrix from another entity's local frame into this entity's local frame.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -219,22 +278,90 @@ public static void ComputeMatrixFromOther(in EntityManager em, in Entity thisEnt
       <tr>
         <td><span class="xref">EntityManager</span></td>
         <td><span class="parametername">em</span></td>
-        <td></td>
+        <td><p>The entity manager used to read component and buffer data.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Entity</span></td>
         <td><span class="parametername">thisEnt</span></td>
-        <td></td>
+        <td><p>The entity whose local frame defines the output space.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Entity</span></td>
         <td><span class="parametername">otherEnt</span></td>
-        <td></td>
+        <td><p>The entity whose frame is the input space.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.Matrix4x4D.html">Matrix4x4D</a></td>
         <td><span class="parametername">trs</span></td>
-        <td></td>
+        <td><p>Receives the matrix that transforms from <code class="paramref">otherEnt</code>'s frame into <code class="paramref">thisEnt</code>'s local frame.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Ecs_Components_Transformd_FindCommonParent_" data-uid="Redux.Ecs.Components.Transformd.FindCommonParent*"></a>
+  <h4 id="Redux_Ecs_Components_Transformd_FindCommonParent_Unity_Entities_BufferLookup_Redux_Ecs_Components_AncestorList___Unity_Entities_Entity__Unity_Entities_Entity__Unity_Entities_Entity__" data-uid="Redux.Ecs.Components.Transformd.FindCommonParent(Unity.Entities.BufferLookup{Redux.Ecs.Components.AncestorList}@,Unity.Entities.Entity@,Unity.Entities.Entity@,Unity.Entities.Entity@)">FindCommonParent(in BufferLookup&lt;AncestorList&gt;, in Entity, in Entity, out Entity)</h4>
+  <div class="markdown level1 summary"><p>Finds the lowest common ancestor entity for two entities using ancestor buffer lookups.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[BurstCompile]
+public static int FindCommonParent(in BufferLookup&lt;AncestorList&gt; ancestors, in Entity lhs, in Entity rhs, out Entity commonParent)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">BufferLookup</span>&lt;<a class="xref" href="Redux.Ecs.Components.AncestorList.html">AncestorList</a>&gt;</td>
+        <td><span class="parametername">ancestors</span></td>
+        <td><p>A buffer lookup used to read ancestor lists.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">lhs</span></td>
+        <td><p>The first entity.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">rhs</span></td>
+        <td><p>The second entity.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">commonParent</span></td>
+        <td><p>Receives the lowest common ancestor entity, or <span class="xref">Unity.Entities.Entity.Null</span> if no common parent exists.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><p>The tree depth of the common ancestor, or a negative value if no common parent exists.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -242,7 +369,8 @@ public static void ComputeMatrixFromOther(in EntityManager em, in Entity thisEnt
 
   <a id="Redux_Ecs_Components_Transformd_FindCommonParent_" data-uid="Redux.Ecs.Components.Transformd.FindCommonParent*"></a>
   <h4 id="Redux_Ecs_Components_Transformd_FindCommonParent_Unity_Entities_DynamicBuffer_Redux_Ecs_Components_AncestorList__Unity_Entities_DynamicBuffer_Redux_Ecs_Components_AncestorList__Unity_Entities_Entity__" data-uid="Redux.Ecs.Components.Transformd.FindCommonParent(Unity.Entities.DynamicBuffer{Redux.Ecs.Components.AncestorList},Unity.Entities.DynamicBuffer{Redux.Ecs.Components.AncestorList},Unity.Entities.Entity@)">FindCommonParent(DynamicBuffer&lt;AncestorList&gt;, DynamicBuffer&lt;AncestorList&gt;, out Entity)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Finds the lowest common ancestor entity from two pre-resolved ancestor buffers.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -261,17 +389,20 @@ public static void ComputeMatrixFromOther(in EntityManager em, in Entity thisEnt
       <tr>
         <td><span class="xref">DynamicBuffer</span>&lt;<a class="xref" href="Redux.Ecs.Components.AncestorList.html">AncestorList</a>&gt;</td>
         <td><span class="parametername">lhsAncestors</span></td>
-        <td></td>
+        <td><p>The ancestor buffer of the left-hand entity.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">DynamicBuffer</span>&lt;<a class="xref" href="Redux.Ecs.Components.AncestorList.html">AncestorList</a>&gt;</td>
         <td><span class="parametername">rhsAncestors</span></td>
-        <td></td>
+        <td><p>The ancestor buffer of the right-hand entity.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Entity</span></td>
         <td><span class="parametername">commonParent</span></td>
-        <td></td>
+        <td><p>Receives the lowest common ancestor entity, or <span class="xref">Unity.Entities.Entity.Null</span> if no common parent exists.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -286,7 +417,8 @@ public static void ComputeMatrixFromOther(in EntityManager em, in Entity thisEnt
     <tbody>
       <tr>
         <td><span class="xref">int</span></td>
-        <td></td>
+        <td><p>The tree depth of the common ancestor, or a negative value if no common parent exists.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -354,7 +486,8 @@ public static int FindCommonParent(in EntityManager em, in Entity lhs, in Entity
 
   <a id="Redux_Ecs_Components_Transformd_GetLocalMatrix_" data-uid="Redux.Ecs.Components.Transformd.GetLocalMatrix*"></a>
   <h4 id="Redux_Ecs_Components_Transformd_GetLocalMatrix" data-uid="Redux.Ecs.Components.Transformd.GetLocalMatrix">GetLocalMatrix()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the local TRS matrix built from the current position and rotation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -371,7 +504,8 @@ public static int FindCommonParent(in EntityManager em, in Entity lhs, in Entity
     <tbody>
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.Matrix4x4D.html">Matrix4x4D</a></td>
-        <td></td>
+        <td><p>The local transform-rotate-scale matrix as a <a class="xref" href="Matrix4x4D.html">Matrix4x4D</a>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -379,7 +513,8 @@ public static int FindCommonParent(in EntityManager em, in Entity lhs, in Entity
 
   <a id="Redux_Ecs_Components_Transformd_GetLocalMatrixInverse_" data-uid="Redux.Ecs.Components.Transformd.GetLocalMatrixInverse*"></a>
   <h4 id="Redux_Ecs_Components_Transformd_GetLocalMatrixInverse" data-uid="Redux.Ecs.Components.Transformd.GetLocalMatrixInverse">GetLocalMatrixInverse()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the inverse of the local TRS matrix.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -396,7 +531,8 @@ public static int FindCommonParent(in EntityManager em, in Entity lhs, in Entity
     <tbody>
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.Matrix4x4D.html">Matrix4x4D</a></td>
-        <td></td>
+        <td><p>The inverse of the local transform-rotate-scale matrix as a <a class="xref" href="Matrix4x4D.html">Matrix4x4D</a>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -404,7 +540,8 @@ public static int FindCommonParent(in EntityManager em, in Entity lhs, in Entity
 
   <a id="Redux_Ecs_Components_Transformd_SetAngularVelocity_" data-uid="Redux.Ecs.Components.Transformd.SetAngularVelocity*"></a>
   <h4 id="Redux_Ecs_Components_Transformd_SetAngularVelocity_Unity_Entities_EntityManager__Unity_Entities_Entity__Vector3d__" data-uid="Redux.Ecs.Components.Transformd.SetAngularVelocity(Unity.Entities.EntityManager@,Unity.Entities.Entity@,Vector3d@)">SetAngularVelocity(in EntityManager, in Entity, in Vector3d)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Sets the angular velocity on the <a class="xref" href="Redux.Ecs.Components.Transformd.html">Transformd</a> component of the given entity.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -424,17 +561,20 @@ public static void SetAngularVelocity(in EntityManager em, in Entity transform, 
       <tr>
         <td><span class="xref">EntityManager</span></td>
         <td><span class="parametername">em</span></td>
-        <td></td>
+        <td><p>The entity manager used to read and write component data.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Entity</span></td>
         <td><span class="parametername">transform</span></td>
-        <td></td>
+        <td><p>The entity whose <a class="xref" href="Redux.Ecs.Components.Transformd.html">Transformd</a> component is updated.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
         <td><span class="parametername">angularVelocity</span></td>
-        <td></td>
+        <td><p>The new angular velocity to assign.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -442,7 +582,8 @@ public static void SetAngularVelocity(in EntityManager em, in Entity transform, 
 
   <a id="Redux_Ecs_Components_Transformd_SetIdentity_" data-uid="Redux.Ecs.Components.Transformd.SetIdentity*"></a>
   <h4 id="Redux_Ecs_Components_Transformd_SetIdentity" data-uid="Redux.Ecs.Components.Transformd.SetIdentity">SetIdentity()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Resets all fields of this transform to identity values.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -452,7 +593,8 @@ public static void SetAngularVelocity(in EntityManager em, in Entity transform, 
 
   <a id="Redux_Ecs_Components_Transformd_SetPositionAndRotation_" data-uid="Redux.Ecs.Components.Transformd.SetPositionAndRotation*"></a>
   <h4 id="Redux_Ecs_Components_Transformd_SetPositionAndRotation_Unity_Entities_EntityManager__Unity_Entities_Entity__Vector3d__QuaternionD__" data-uid="Redux.Ecs.Components.Transformd.SetPositionAndRotation(Unity.Entities.EntityManager@,Unity.Entities.Entity@,Vector3d@,QuaternionD@)">SetPositionAndRotation(in EntityManager, in Entity, in Vector3d, in QuaternionD)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Sets the local position and rotation on the <a class="xref" href="Redux.Ecs.Components.Transformd.html">Transformd</a> component of the given entity.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -472,22 +614,26 @@ public static void SetPositionAndRotation(in EntityManager em, in Entity entity,
       <tr>
         <td><span class="xref">EntityManager</span></td>
         <td><span class="parametername">em</span></td>
-        <td></td>
+        <td><p>The entity manager used to read and write component data.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Entity</span></td>
         <td><span class="parametername">entity</span></td>
-        <td></td>
+        <td><p>The entity whose <a class="xref" href="Redux.Ecs.Components.Transformd.html">Transformd</a> component is updated.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
         <td><span class="parametername">localPosition</span></td>
-        <td></td>
+        <td><p>The new local position to assign.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.QuaternionD.html">QuaternionD</a></td>
         <td><span class="parametername">localRotation</span></td>
-        <td></td>
+        <td><p>The new local rotation to assign.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -495,7 +641,8 @@ public static void SetPositionAndRotation(in EntityManager em, in Entity entity,
 
   <a id="Redux_Ecs_Components_Transformd_SetPositionAndRotation_" data-uid="Redux.Ecs.Components.Transformd.SetPositionAndRotation*"></a>
   <h4 id="Redux_Ecs_Components_Transformd_SetPositionAndRotation_Vector3d_QuaternionD_" data-uid="Redux.Ecs.Components.Transformd.SetPositionAndRotation(Vector3d,QuaternionD)">SetPositionAndRotation(Vector3d, QuaternionD)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Sets the local position and rotation of this transform.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -514,12 +661,14 @@ public static void SetPositionAndRotation(in EntityManager em, in Entity entity,
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
         <td><span class="parametername">localPosition</span></td>
-        <td></td>
+        <td><p>The new local position to assign.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.QuaternionD.html">QuaternionD</a></td>
         <td><span class="parametername">localRotation</span></td>
-        <td></td>
+        <td><p>The new local rotation to assign.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -527,7 +676,8 @@ public static void SetPositionAndRotation(in EntityManager em, in Entity entity,
 
   <a id="Redux_Ecs_Components_Transformd_SetVelocity_" data-uid="Redux.Ecs.Components.Transformd.SetVelocity*"></a>
   <h4 id="Redux_Ecs_Components_Transformd_SetVelocity_Unity_Entities_EntityManager__Unity_Entities_Entity__Vector3d__" data-uid="Redux.Ecs.Components.Transformd.SetVelocity(Unity.Entities.EntityManager@,Unity.Entities.Entity@,Vector3d@)">SetVelocity(in EntityManager, in Entity, in Vector3d)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Sets the linear velocity on the <a class="xref" href="Redux.Ecs.Components.Transformd.html">Transformd</a> component of the given entity.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -547,17 +697,80 @@ public static void SetVelocity(in EntityManager em, in Entity transform, in Vect
       <tr>
         <td><span class="xref">EntityManager</span></td>
         <td><span class="parametername">em</span></td>
-        <td></td>
+        <td><p>The entity manager used to read and write component data.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Entity</span></td>
         <td><span class="parametername">transform</span></td>
-        <td></td>
+        <td><p>The entity whose <a class="xref" href="Redux.Ecs.Components.Transformd.html">Transformd</a> component is updated.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
         <td><span class="parametername">velocity</span></td>
-        <td></td>
+        <td><p>The new linear velocity to assign.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Ecs_Components_Transformd_ToLocalAngularVelocity_" data-uid="Redux.Ecs.Components.Transformd.ToLocalAngularVelocity*"></a>
+  <h4 id="Redux_Ecs_Components_Transformd_ToLocalAngularVelocity_Unity_Entities_ComponentLookup_Redux_Ecs_Components_Transformd___Unity_Entities_BufferLookup_Redux_Ecs_Components_AncestorList___Unity_Entities_Entity__Unity_Entities_Entity__Vector3d__Vector3d__" data-uid="Redux.Ecs.Components.Transformd.ToLocalAngularVelocity(Unity.Entities.ComponentLookup{Redux.Ecs.Components.Transformd}@,Unity.Entities.BufferLookup{Redux.Ecs.Components.AncestorList}@,Unity.Entities.Entity@,Unity.Entities.Entity@,Vector3d@,Vector3d@)">ToLocalAngularVelocity(in ComponentLookup&lt;Transformd&gt;, in BufferLookup&lt;AncestorList&gt;, in Entity, in Entity, in Vector3d, out Vector3d)</h4>
+  <div class="markdown level1 summary"><p>Transforms an angular velocity expressed in another entity's frame into this entity's local frame using component and buffer lookups.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[BurstCompile]
+public static void ToLocalAngularVelocity(in ComponentLookup&lt;Transformd&gt; transforms, in BufferLookup&lt;AncestorList&gt; ancestors, in Entity thisEnt, in Entity otherEnt, in Vector3d angularVelocityInOther, out Vector3d relativeAngularVelocity)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ComponentLookup</span>&lt;<a class="xref" href="Redux.Ecs.Components.Transformd.html">Transformd</a>&gt;</td>
+        <td><span class="parametername">transforms</span></td>
+        <td><p>A component lookup used to read <a class="xref" href="Redux.Ecs.Components.Transformd.html">Transformd</a> components.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">BufferLookup</span>&lt;<a class="xref" href="Redux.Ecs.Components.AncestorList.html">AncestorList</a>&gt;</td>
+        <td><span class="parametername">ancestors</span></td>
+        <td><p>A buffer lookup used to read ancestor lists.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">thisEnt</span></td>
+        <td><p>The entity whose local frame defines the output space.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">otherEnt</span></td>
+        <td><p>The entity whose frame the input angular velocity is expressed in.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">angularVelocityInOther</span></td>
+        <td><p>The angular velocity expressed in <code class="paramref">otherEnt</code>'s frame.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">relativeAngularVelocity</span></td>
+        <td><p>Receives the angular velocity expressed in <code class="paramref">thisEnt</code>'s local frame.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -613,8 +826,69 @@ public static void ToLocalAngularVelocity(in EntityManager em, in Entity thisEnt
 
 
   <a id="Redux_Ecs_Components_Transformd_ToLocalPosition_" data-uid="Redux.Ecs.Components.Transformd.ToLocalPosition*"></a>
+  <h4 id="Redux_Ecs_Components_Transformd_ToLocalPosition_Unity_Entities_ComponentLookup_Redux_Ecs_Components_Transformd___Unity_Entities_BufferLookup_Redux_Ecs_Components_AncestorList___Unity_Entities_Entity__Unity_Entities_Entity__Vector3d__Vector3d__" data-uid="Redux.Ecs.Components.Transformd.ToLocalPosition(Unity.Entities.ComponentLookup{Redux.Ecs.Components.Transformd}@,Unity.Entities.BufferLookup{Redux.Ecs.Components.AncestorList}@,Unity.Entities.Entity@,Unity.Entities.Entity@,Vector3d@,Vector3d@)">ToLocalPosition(in ComponentLookup&lt;Transformd&gt;, in BufferLookup&lt;AncestorList&gt;, in Entity, in Entity, in Vector3d, out Vector3d)</h4>
+  <div class="markdown level1 summary"><p>Transforms a position expressed in another entity's frame into this entity's local frame using component and buffer lookups.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[BurstCompile]
+public static void ToLocalPosition(in ComponentLookup&lt;Transformd&gt; transforms, in BufferLookup&lt;AncestorList&gt; ancestors, in Entity thisEnt, in Entity otherEnt, in Vector3d positionInOther, out Vector3d position)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ComponentLookup</span>&lt;<a class="xref" href="Redux.Ecs.Components.Transformd.html">Transformd</a>&gt;</td>
+        <td><span class="parametername">transforms</span></td>
+        <td><p>A component lookup used to read <a class="xref" href="Redux.Ecs.Components.Transformd.html">Transformd</a> components.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">BufferLookup</span>&lt;<a class="xref" href="Redux.Ecs.Components.AncestorList.html">AncestorList</a>&gt;</td>
+        <td><span class="parametername">ancestors</span></td>
+        <td><p>A buffer lookup used to read ancestor lists.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">thisEnt</span></td>
+        <td><p>The entity whose local frame defines the output space.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">otherEnt</span></td>
+        <td><p>The entity whose frame the input position is expressed in.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">positionInOther</span></td>
+        <td><p>The position expressed in <code class="paramref">otherEnt</code>'s frame.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">position</span></td>
+        <td><p>Receives the position expressed in <code class="paramref">thisEnt</code>'s local frame.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Ecs_Components_Transformd_ToLocalPosition_" data-uid="Redux.Ecs.Components.Transformd.ToLocalPosition*"></a>
   <h4 id="Redux_Ecs_Components_Transformd_ToLocalPosition_Unity_Entities_EntityManager__Unity_Entities_Entity__Unity_Entities_Entity__Vector3d__Vector3d__" data-uid="Redux.Ecs.Components.Transformd.ToLocalPosition(Unity.Entities.EntityManager@,Unity.Entities.Entity@,Unity.Entities.Entity@,Vector3d@,Vector3d@)">ToLocalPosition(in EntityManager, in Entity, in Entity, in Vector3d, out Vector3d)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Transforms a position expressed in another entity's frame into this entity's local frame.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -634,27 +908,92 @@ public static void ToLocalPosition(in EntityManager em, in Entity thisEnt, in En
       <tr>
         <td><span class="xref">EntityManager</span></td>
         <td><span class="parametername">em</span></td>
-        <td></td>
+        <td><p>The entity manager used to read component and buffer data.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Entity</span></td>
         <td><span class="parametername">thisEnt</span></td>
-        <td></td>
+        <td><p>The entity whose local frame defines the output space.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Entity</span></td>
         <td><span class="parametername">otherEnt</span></td>
-        <td></td>
+        <td><p>The entity whose frame the input position is expressed in.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
         <td><span class="parametername">positionInOther</span></td>
-        <td></td>
+        <td><p>The position expressed in <code class="paramref">otherEnt</code>'s frame.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
         <td><span class="parametername">position</span></td>
-        <td></td>
+        <td><p>Receives the position expressed in <code class="paramref">thisEnt</code>'s local frame.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Ecs_Components_Transformd_ToLocalRotation_" data-uid="Redux.Ecs.Components.Transformd.ToLocalRotation*"></a>
+  <h4 id="Redux_Ecs_Components_Transformd_ToLocalRotation_Unity_Entities_ComponentLookup_Redux_Ecs_Components_Transformd___Unity_Entities_BufferLookup_Redux_Ecs_Components_AncestorList___Unity_Entities_Entity__Unity_Entities_Entity__QuaternionD__QuaternionD__" data-uid="Redux.Ecs.Components.Transformd.ToLocalRotation(Unity.Entities.ComponentLookup{Redux.Ecs.Components.Transformd}@,Unity.Entities.BufferLookup{Redux.Ecs.Components.AncestorList}@,Unity.Entities.Entity@,Unity.Entities.Entity@,QuaternionD@,QuaternionD@)">ToLocalRotation(in ComponentLookup&lt;Transformd&gt;, in BufferLookup&lt;AncestorList&gt;, in Entity, in Entity, in QuaternionD, out QuaternionD)</h4>
+  <div class="markdown level1 summary"><p>Transforms a rotation expressed in another entity's frame into this entity's local frame using component and buffer lookups.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[BurstCompile]
+public static void ToLocalRotation(in ComponentLookup&lt;Transformd&gt; transforms, in BufferLookup&lt;AncestorList&gt; ancestors, in Entity thisEnt, in Entity other, in QuaternionD otherRotation, out QuaternionD localRotation)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ComponentLookup</span>&lt;<a class="xref" href="Redux.Ecs.Components.Transformd.html">Transformd</a>&gt;</td>
+        <td><span class="parametername">transforms</span></td>
+        <td><p>A component lookup used to read <a class="xref" href="Redux.Ecs.Components.Transformd.html">Transformd</a> components.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">BufferLookup</span>&lt;<a class="xref" href="Redux.Ecs.Components.AncestorList.html">AncestorList</a>&gt;</td>
+        <td><span class="parametername">ancestors</span></td>
+        <td><p>A buffer lookup used to read ancestor lists.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">thisEnt</span></td>
+        <td><p>The entity whose local frame defines the output space.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">other</span></td>
+        <td><p>The entity whose frame the input rotation is expressed in.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.QuaternionD.html">QuaternionD</a></td>
+        <td><span class="parametername">otherRotation</span></td>
+        <td><p>The rotation expressed in <code class="paramref">other</code>'s frame.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.QuaternionD.html">QuaternionD</a></td>
+        <td><span class="parametername">localRotation</span></td>
+        <td><p>Receives the rotation expressed in <code class="paramref">thisEnt</code>'s local frame.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -662,7 +1001,8 @@ public static void ToLocalPosition(in EntityManager em, in Entity thisEnt, in En
 
   <a id="Redux_Ecs_Components_Transformd_ToLocalRotation_" data-uid="Redux.Ecs.Components.Transformd.ToLocalRotation*"></a>
   <h4 id="Redux_Ecs_Components_Transformd_ToLocalRotation_Unity_Entities_EntityManager__Unity_Entities_Entity__Unity_Entities_Entity__QuaternionD__QuaternionD__" data-uid="Redux.Ecs.Components.Transformd.ToLocalRotation(Unity.Entities.EntityManager@,Unity.Entities.Entity@,Unity.Entities.Entity@,QuaternionD@,QuaternionD@)">ToLocalRotation(in EntityManager, in Entity, in Entity, in QuaternionD, out QuaternionD)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Transforms a rotation expressed in another entity's frame into this entity's local frame.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -682,27 +1022,92 @@ public static void ToLocalRotation(in EntityManager em, in Entity thisEnt, in En
       <tr>
         <td><span class="xref">EntityManager</span></td>
         <td><span class="parametername">em</span></td>
-        <td></td>
+        <td><p>The entity manager used to read component and buffer data.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Entity</span></td>
         <td><span class="parametername">thisEnt</span></td>
-        <td></td>
+        <td><p>The entity whose local frame defines the output space.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Entity</span></td>
         <td><span class="parametername">other</span></td>
-        <td></td>
+        <td><p>The entity whose frame the input rotation is expressed in.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.QuaternionD.html">QuaternionD</a></td>
         <td><span class="parametername">otherRotation</span></td>
-        <td></td>
+        <td><p>The rotation expressed in <code class="paramref">other</code>'s frame.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.QuaternionD.html">QuaternionD</a></td>
         <td><span class="parametername">localRotation</span></td>
-        <td></td>
+        <td><p>Receives the rotation expressed in <code class="paramref">thisEnt</code>'s local frame.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Ecs_Components_Transformd_ToLocalVector_" data-uid="Redux.Ecs.Components.Transformd.ToLocalVector*"></a>
+  <h4 id="Redux_Ecs_Components_Transformd_ToLocalVector_Unity_Entities_ComponentLookup_Redux_Ecs_Components_Transformd___Unity_Entities_BufferLookup_Redux_Ecs_Components_AncestorList___Unity_Entities_Entity__Unity_Entities_Entity__Vector3d__Vector3d__" data-uid="Redux.Ecs.Components.Transformd.ToLocalVector(Unity.Entities.ComponentLookup{Redux.Ecs.Components.Transformd}@,Unity.Entities.BufferLookup{Redux.Ecs.Components.AncestorList}@,Unity.Entities.Entity@,Unity.Entities.Entity@,Vector3d@,Vector3d@)">ToLocalVector(in ComponentLookup&lt;Transformd&gt;, in BufferLookup&lt;AncestorList&gt;, in Entity, in Entity, in Vector3d, out Vector3d)</h4>
+  <div class="markdown level1 summary"><p>Transforms a direction vector expressed in another entity's frame into this entity's local frame using component and buffer lookups.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[BurstCompile]
+public static void ToLocalVector(in ComponentLookup&lt;Transformd&gt; transforms, in BufferLookup&lt;AncestorList&gt; ancestors, in Entity thisEnt, in Entity other, in Vector3d otherVector, out Vector3d localVector)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ComponentLookup</span>&lt;<a class="xref" href="Redux.Ecs.Components.Transformd.html">Transformd</a>&gt;</td>
+        <td><span class="parametername">transforms</span></td>
+        <td><p>A component lookup used to read <a class="xref" href="Redux.Ecs.Components.Transformd.html">Transformd</a> components.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">BufferLookup</span>&lt;<a class="xref" href="Redux.Ecs.Components.AncestorList.html">AncestorList</a>&gt;</td>
+        <td><span class="parametername">ancestors</span></td>
+        <td><p>A buffer lookup used to read ancestor lists.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">thisEnt</span></td>
+        <td><p>The entity whose local frame defines the output space.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">other</span></td>
+        <td><p>The entity whose frame the input vector is expressed in.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">otherVector</span></td>
+        <td><p>The direction vector expressed in <code class="paramref">other</code>'s frame.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">localVector</span></td>
+        <td><p>Receives the direction vector expressed in <code class="paramref">thisEnt</code>'s local frame.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -710,7 +1115,8 @@ public static void ToLocalRotation(in EntityManager em, in Entity thisEnt, in En
 
   <a id="Redux_Ecs_Components_Transformd_ToLocalVector_" data-uid="Redux.Ecs.Components.Transformd.ToLocalVector*"></a>
   <h4 id="Redux_Ecs_Components_Transformd_ToLocalVector_Unity_Entities_EntityManager__Unity_Entities_Entity__Unity_Entities_Entity__Vector3d__Vector3d__" data-uid="Redux.Ecs.Components.Transformd.ToLocalVector(Unity.Entities.EntityManager@,Unity.Entities.Entity@,Unity.Entities.Entity@,Vector3d@,Vector3d@)">ToLocalVector(in EntityManager, in Entity, in Entity, in Vector3d, out Vector3d)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Transforms a direction vector expressed in another entity's frame into this entity's local frame.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -730,27 +1136,98 @@ public static void ToLocalVector(in EntityManager em, in Entity thisEnt, in Enti
       <tr>
         <td><span class="xref">EntityManager</span></td>
         <td><span class="parametername">em</span></td>
-        <td></td>
+        <td><p>The entity manager used to read component and buffer data.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Entity</span></td>
         <td><span class="parametername">thisEnt</span></td>
-        <td></td>
+        <td><p>The entity whose local frame defines the output space.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Entity</span></td>
         <td><span class="parametername">other</span></td>
-        <td></td>
+        <td><p>The entity whose frame the input vector is expressed in.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
         <td><span class="parametername">otherVector</span></td>
-        <td></td>
+        <td><p>The direction vector expressed in <code class="paramref">other</code>'s frame.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
         <td><span class="parametername">localVector</span></td>
-        <td></td>
+        <td><p>Receives the direction vector expressed in <code class="paramref">thisEnt</code>'s local frame.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Ecs_Components_Transformd_ToLocalVelocity_" data-uid="Redux.Ecs.Components.Transformd.ToLocalVelocity*"></a>
+  <h4 id="Redux_Ecs_Components_Transformd_ToLocalVelocity_Unity_Entities_ComponentLookup_Redux_Ecs_Components_Transformd___Unity_Entities_BufferLookup_Redux_Ecs_Components_AncestorList___Unity_Entities_Entity__Unity_Entities_Entity__Vector3d__Vector3d__Vector3d__" data-uid="Redux.Ecs.Components.Transformd.ToLocalVelocity(Unity.Entities.ComponentLookup{Redux.Ecs.Components.Transformd}@,Unity.Entities.BufferLookup{Redux.Ecs.Components.AncestorList}@,Unity.Entities.Entity@,Unity.Entities.Entity@,Vector3d@,Vector3d@,Vector3d@)">ToLocalVelocity(in ComponentLookup&lt;Transformd&gt;, in BufferLookup&lt;AncestorList&gt;, in Entity, in Entity, in Vector3d, in Vector3d, out Vector3d)</h4>
+  <div class="markdown level1 summary"><p>Transforms a velocity at a given position from another entity's frame into this entity's local frame using component and buffer lookups.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[BurstCompile]
+public static void ToLocalVelocity(in ComponentLookup&lt;Transformd&gt; transforms, in BufferLookup&lt;AncestorList&gt; ancestors, in Entity thisEnt, in Entity otherEnt, in Vector3d velocityInOther, in Vector3d positionInOther, out Vector3d velocity)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ComponentLookup</span>&lt;<a class="xref" href="Redux.Ecs.Components.Transformd.html">Transformd</a>&gt;</td>
+        <td><span class="parametername">transforms</span></td>
+        <td><p>A component lookup used to read <a class="xref" href="Redux.Ecs.Components.Transformd.html">Transformd</a> components.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">BufferLookup</span>&lt;<a class="xref" href="Redux.Ecs.Components.AncestorList.html">AncestorList</a>&gt;</td>
+        <td><span class="parametername">ancestors</span></td>
+        <td><p>A buffer lookup used to read ancestor lists.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">thisEnt</span></td>
+        <td><p>The entity whose local frame defines the output space.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">otherEnt</span></td>
+        <td><p>The entity whose frame the inputs are expressed in.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">velocityInOther</span></td>
+        <td><p>The velocity expressed in <code class="paramref">otherEnt</code>'s frame.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">positionInOther</span></td>
+        <td><p>The position of the measured point expressed in <code class="paramref">otherEnt</code>'s frame.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">velocity</span></td>
+        <td><p>Receives the velocity expressed in <code class="paramref">thisEnt</code>'s local frame.</p>
+</td>
       </tr>
     </tbody>
   </table>

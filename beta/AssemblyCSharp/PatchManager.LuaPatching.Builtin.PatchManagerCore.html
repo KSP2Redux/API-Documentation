@@ -94,7 +94,7 @@
   <h5 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[MoonSharpUserData]
-public class PatchManagerCore</code></pre>
+public sealed class PatchManagerCore</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -127,8 +127,66 @@ public class PatchManagerCore</code></pre>
       </tr>
     </tbody>
   </table>
+  <h3 id="fields">Fields
+</h3>
+
+
+  <h4 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_InvalidatesOnChangeTag" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.InvalidatesOnChangeTag">InvalidatesOnChangeTag</h4>
+  <div class="markdown level1 summary"><p>The metadata tag a config value carries to invalidate the patch cache when its value changes between
+launches.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string InvalidatesOnChangeTag = &quot;InvalidatesPatchManagerOnChange&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_InvalidatesOnChangeTag_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The canonical constant. PM's own consumer and any C# config reference this.</p>
+</div>
   <h3 id="properties">Properties
 </h3>
+
+
+  <a id="PatchManager_LuaPatching_Builtin_PatchManagerCore_InvalidatesOnChange_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.InvalidatesOnChange*"></a>
+  <h4 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_InvalidatesOnChange" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.InvalidatesOnChange">InvalidatesOnChange</h4>
+  <div class="markdown level1 summary"><p>The cache-invalidation tag, exposed to scripts as <code>PM.InvalidatesOnChange</code> so a config entry can
+be tagged with <code>:Tag(PM.InvalidatesOnChange)</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string InvalidatesOnChange { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <a id="PatchManager_LuaPatching_Builtin_PatchManagerCore_Item_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.Item*"></a>
@@ -303,13 +361,13 @@ public class PatchManagerCore</code></pre>
 
 
   <a id="PatchManager_LuaPatching_Builtin_PatchManagerCore_Patch_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.Patch*"></a>
-  <h4 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_Patch_MoonSharp_Interpreter_Script_System_String_System_String_System_String_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.Patch(MoonSharp.Interpreter.Script,System.String,System.String,System.String)">Patch(Script, string, string, string)</h4>
+  <h4 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_Patch_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_String_System_String_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.Patch(MoonSharp.Interpreter.ScriptExecutionContext,System.String,System.String,System.String)">Patch(ScriptExecutionContext, string, string, string)</h4>
   <div class="markdown level1 summary"><p>Registers a patch keyed by the given addressables label and namespaced patch name.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public LuaPatch Patch(Script script, string converter, string label, string name)</code></pre>
+    <pre><code class="lang-csharp hljs">public PatchDefinition Patch(ScriptExecutionContext context, string converter, string label, string name)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -322,9 +380,9 @@ public class PatchManagerCore</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Script</span></td>
-        <td><span class="parametername">script</span></td>
-        <td><p>The host Lua script; its <code>ModId</code> global is used to namespace <code class="paramref">name</code>.</p>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global is used to namespace <code class="paramref">name</code>.</p>
 </td>
       </tr>
       <tr>
@@ -342,7 +400,7 @@ public class PatchManagerCore</code></pre>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">name</span></td>
-        <td><p>The patch's local name; the host mod's ID is prepended to form the full namespaced name.</p>
+        <td><p>The patch's local name. The host mod's ID is prepended to form the full namespaced name.</p>
 </td>
       </tr>
     </tbody>
@@ -357,8 +415,8 @@ public class PatchManagerCore</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="PatchManager.LuaPatching.LuaPatch.html">LuaPatch</a></td>
-        <td><p>The registered patch, suitable for chaining (for example <a class="xref" href="PatchManager.LuaPatching.LuaPatch.html#PatchManager_LuaPatching_LuaPatch_Do_System_Func_MoonSharp_Interpreter_DynValue_System_String__">Do(Func&lt;DynValue, string&gt;)</a>).</p>
+        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a></td>
+        <td><p>The registered patch, suitable for chaining (for example <a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html#PatchManager_LuaPatching_PatchDefinition_Do_System_Func_MoonSharp_Interpreter_DynValue_System_String__">Do(Func&lt;DynValue, string&gt;)</a>).</p>
 </td>
       </tr>
     </tbody>

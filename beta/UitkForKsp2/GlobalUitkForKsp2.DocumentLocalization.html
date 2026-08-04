@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class DocumentLocalization | KSP2Redux API (Beta) ">
     
-    <meta name="description" content="A component which automatically localizes all elements in a document. Only elements with a string property &quot;text&quot; whose value is a localization key starting with &#39;#&#39; will be localized. The LocalizationManager.OnLocalizeEvent is handled to automatically update the localization of all registered elements when the game language is changed.">
+    <meta name="description" content="A component which automatically localizes all elements in a window. Only elements with a string property &quot;text&quot; whose value is a localization key starting with &#39;#&#39; will be localized. The LocalizationManager.OnLocalizeEvent is handled to automatically update the localization of all registered elements when the game language is changed.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,7 @@
 
 
   <h1 id="GlobalUitkForKsp2_DocumentLocalization" data-uid="GlobalUitkForKsp2.DocumentLocalization" class="text-break">Class DocumentLocalization</h1>
-  <div class="markdown level0 summary"><p>A component which automatically localizes all elements in a document. Only elements with a string property
+  <div class="markdown level0 summary"><p>A component which automatically localizes all elements in a window. Only elements with a string property
 "text" whose value is a localization key starting with '#' will be localized.</p>
 <p>The <code>LocalizationManager.OnLocalizeEvent</code> is handled to automatically update the localization of all
 registered elements when the game language is changed.</p>
@@ -151,36 +151,6 @@ registered elements when the game language is changed.</p>
   </div>
 
 
-  <a id="GlobalUitkForKsp2_DocumentLocalization_RegisterDocument_" data-uid="GlobalUitkForKsp2.DocumentLocalization.RegisterDocument*"></a>
-  <h4 id="GlobalUitkForKsp2_DocumentLocalization_RegisterDocument_UnityEngine_UIElements_UIDocument_" data-uid="GlobalUitkForKsp2.DocumentLocalization.RegisterDocument(UnityEngine.UIElements.UIDocument)">RegisterDocument(UIDocument)</h4>
-  <div class="markdown level1 summary"><p>Register all elements in the document to be localized. Only elements with a string property &quot;text&quot; whose value
-is a localization key starting with '#' will be registered.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void RegisterDocument(UIDocument document)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/UIElements.UIDocument.html">UIDocument</a></td>
-        <td><span class="parametername">document</span></td>
-        <td><p>The document in which to register all localizable elements.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-
-
   <a id="GlobalUitkForKsp2_DocumentLocalization_RegisterElement_" data-uid="GlobalUitkForKsp2.DocumentLocalization.RegisterElement*"></a>
   <h4 id="GlobalUitkForKsp2_DocumentLocalization_RegisterElement_UnityEngine_UIElements_VisualElement_" data-uid="GlobalUitkForKsp2.DocumentLocalization.RegisterElement(UnityEngine.UIElements.VisualElement)">RegisterElement(VisualElement)</h4>
   <div class="markdown level1 summary"><p>Register or update an element to be localized. The element must have a property named &quot;text&quot; of type string,
@@ -205,6 +175,37 @@ and the value of the property must be a localization key starting with '#'.</p>
         <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/UIElements.VisualElement.html">VisualElement</a></td>
         <td><span class="parametername">element</span></td>
         <td><p>The element to register.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="GlobalUitkForKsp2_DocumentLocalization_RegisterRenderer_" data-uid="GlobalUitkForKsp2.DocumentLocalization.RegisterRenderer*"></a>
+  <h4 id="GlobalUitkForKsp2_DocumentLocalization_RegisterRenderer_UnityEngine_UIElements_PanelRenderer_" data-uid="GlobalUitkForKsp2.DocumentLocalization.RegisterRenderer(UnityEngine.UIElements.PanelRenderer)">RegisterRenderer(PanelRenderer)</h4>
+  <div class="markdown level1 summary"><p>Register the window whose elements should be localized, and re-localize automatically whenever its UI is
+rebuilt (live reload). Only elements with a string property &quot;text&quot; whose value is a localization key starting
+with '#' are registered.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RegisterRenderer(PanelRenderer renderer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">PanelRenderer</span></td>
+        <td><span class="parametername">renderer</span></td>
+        <td><p>The window renderer whose elements to localize.</p>
 </td>
       </tr>
     </tbody>

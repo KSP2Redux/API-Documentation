@@ -99,7 +99,8 @@
 
 
   <h4 id="Redux_Managers_ISRUResourceManager_CbResources" data-uid="Redux.Managers.ISRUResourceManager.CbResources">CbResources</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Maps each celestial body name to a dictionary of resource name to <a class="xref" href="Redux.Managers.CBResourceChart.html">CBResourceChart</a> data.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -123,7 +124,8 @@
 
 
   <h4 id="Redux_Managers_ISRUResourceManager_ColorMap" data-uid="Redux.Managers.ISRUResourceManager.ColorMap">ColorMap</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Maps resource names to their associated display colors.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -310,6 +312,69 @@
   </table>
 
 
+  <a id="Redux_Managers_ISRUResourceManager_GetDensityAtPosition_" data-uid="Redux.Managers.ISRUResourceManager.GetDensityAtPosition*"></a>
+  <h4 id="Redux_Managers_ISRUResourceManager_GetDensityAtPosition_System_String_System_String_System_Single_System_Single_" data-uid="Redux.Managers.ISRUResourceManager.GetDensityAtPosition(System.String,System.String,System.Single,System.Single)">GetDensityAtPosition(string, string, float, float)</h4>
+  <div class="markdown level1 summary"><p>Returns the resource density at the given normalized longitude/latitude position (0..1 each).
+Returns -1 if the resource has not been scanned, 0 if the map is not loaded.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float GetDensityAtPosition(string cbName, string resourceName, float longNorm, float latNorm)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">cbName</span></td>
+        <td><p>Internal name of the celestial body</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">resourceName</span></td>
+        <td><p>Internal name of the resource</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">longNorm</span></td>
+        <td><p>Normalized longitude in [0, 1], where 0 = -180° and 1 = +180°</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">latNorm</span></td>
+        <td><p>Normalized latitude in [0, 1], where 0 = -90° and 1 = +90°</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="Redux_Managers_ISRUResourceManager_GetLocalDensity_" data-uid="Redux.Managers.ISRUResourceManager.GetLocalDensity*"></a>
   <h4 id="Redux_Managers_ISRUResourceManager_GetLocalDensity_KSP_Sim_impl_VesselComponent_System_String_System_Boolean_" data-uid="Redux.Managers.ISRUResourceManager.GetLocalDensity(KSP.Sim.impl.VesselComponent,System.String,System.Boolean)">GetLocalDensity(VesselComponent, string, bool)</h4>
   <div class="markdown level1 summary"></div>
@@ -364,7 +429,8 @@
 
   <a id="Redux_Managers_ISRUResourceManager_IsCBResourceScanned_" data-uid="Redux.Managers.ISRUResourceManager.IsCBResourceScanned*"></a>
   <h4 id="Redux_Managers_ISRUResourceManager_IsCBResourceScanned_System_String_System_String_" data-uid="Redux.Managers.ISRUResourceManager.IsCBResourceScanned(System.String,System.String)">IsCBResourceScanned(string, string)</h4>
-  <div class="markdown level1 summary"><p>Checks whether a specific CB Resource has been scanned.</p>
+  <div class="markdown level1 summary"><p>Checks whether a specific CB Resource has been scanned.
+In sandbox mode, all resources are always considered scanned to remove progression gates.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -415,7 +481,8 @@
 
   <a id="Redux_Managers_ISRUResourceManager_LoadDensityMapAsync_" data-uid="Redux.Managers.ISRUResourceManager.LoadDensityMapAsync*"></a>
   <h4 id="Redux_Managers_ISRUResourceManager_LoadDensityMapAsync_System_String_System_String_System_Action_UnityEngine_ResourceManagement_AsyncOperations_AsyncOperationHandle_UnityEngine_Texture2D__System_String__" data-uid="Redux.Managers.ISRUResourceManager.LoadDensityMapAsync(System.String,System.String,System.Action{UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationHandle{UnityEngine.Texture2D},System.String})">LoadDensityMapAsync(string, string, Action&lt;AsyncOperationHandle&lt;Texture2D&gt;, string&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Loads the density map texture for a single resource on a celestial body and invokes a callback when the operation completes.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -434,17 +501,20 @@
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">celestialBodyName</span></td>
-        <td></td>
+        <td><p>Internal name of the celestial body.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">resourceName</span></td>
-        <td></td>
+        <td><p>Internal name of the resource whose density map is loaded.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">AsyncOperationHandle</span>&lt;<a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Texture2D.html">Texture2D</a>&gt;, <span class="xref">string</span>&gt;</td>
         <td><span class="parametername">callbackAction</span></td>
-        <td></td>
+        <td><p>Callback invoked with the completed async operation handle and the resource name when loading finishes.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -452,7 +522,8 @@
 
   <a id="Redux_Managers_ISRUResourceManager_LoadDensityMapsAsync_" data-uid="Redux.Managers.ISRUResourceManager.LoadDensityMapsAsync*"></a>
   <h4 id="Redux_Managers_ISRUResourceManager_LoadDensityMapsAsync_System_String_" data-uid="Redux.Managers.ISRUResourceManager.LoadDensityMapsAsync(System.String)">LoadDensityMapsAsync(string)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initiates asynchronous loading of density map textures for all resources on the specified celestial body.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -471,7 +542,8 @@
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">celestialBodyName</span></td>
-        <td></td>
+        <td><p>Internal name of the celestial body whose density maps are loaded.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -479,7 +551,8 @@
 
   <a id="Redux_Managers_ISRUResourceManager_LoadScannedResourcesFromAgencySave_" data-uid="Redux.Managers.ISRUResourceManager.LoadScannedResourcesFromAgencySave*"></a>
   <h4 id="Redux_Managers_ISRUResourceManager_LoadScannedResourcesFromAgencySave_KSP_Game_AgencyEntry_" data-uid="Redux.Managers.ISRUResourceManager.LoadScannedResourcesFromAgencySave(KSP.Game.AgencyEntry)">LoadScannedResourcesFromAgencySave(AgencyEntry)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Restores the scanned state of all resources from an agency save entry, clearing any existing scanned state first.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -498,7 +571,8 @@
       <tr>
         <td><a class="xref" href="KSP.Game.AgencyEntry.html">AgencyEntry</a></td>
         <td><span class="parametername">agencyEntry</span></td>
-        <td></td>
+        <td><p>The agency save entry containing the resource scan data to restore.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -506,7 +580,8 @@
 
   <a id="Redux_Managers_ISRUResourceManager_NoResourceWasScanned_" data-uid="Redux.Managers.ISRUResourceManager.NoResourceWasScanned*"></a>
   <h4 id="Redux_Managers_ISRUResourceManager_NoResourceWasScanned_System_String_" data-uid="Redux.Managers.ISRUResourceManager.NoResourceWasScanned(System.String)">NoResourceWasScanned(string)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Determines whether no resources have been scanned for the specified celestial body.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -525,7 +600,8 @@
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">celestialBodyName</span></td>
-        <td></td>
+        <td><p>Internal name of the celestial body to check.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -540,7 +616,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if no resources on the celestial body have been scanned, false otherwise.</p>
+</td>
       </tr>
     </tbody>
   </table>

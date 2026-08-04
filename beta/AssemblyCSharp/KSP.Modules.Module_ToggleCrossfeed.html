@@ -94,9 +94,6 @@
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a></div>
     <div><a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a></div>
   </div>
   <div class="inheritedMembers">
@@ -120,6 +117,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsStageable">PartBehaviourModule.IsStageable()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnViewUnload">PartBehaviourModule.OnViewUnload()</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnActive">PartBehaviourModule.OnActive()</a>
     </div>
     <div>
@@ -141,13 +141,16 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForDataModules">PartBehaviourModule.InitForDataModules()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_StashPendingStateJson_System_Type_Newtonsoft_Json_Linq_JObject_">PartBehaviourModule.StashPendingStateJson(Type, JObject)</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_SetDataModuleValues_KSP_Sim_Definitions_SerializedPartModule_">PartBehaviourModule.SetDataModuleValues(SerializedPartModule)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForNewOABPart">PartBehaviourModule.InitForNewOABPart()</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_">PartBehaviourModule.RemoveResourceRequest(ResourceFlowRequestHandle)</a>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_Unity_Entities_Entity_">PartBehaviourModule.RemoveResourceRequest(Entity)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnAnimStateEnter_UnityEngine_Animator_System_Int32_">PartBehaviourModule.OnAnimStateEnter(Animator, int)</a>
@@ -243,6 +246,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsLocallyAuthorized">PartBehaviourModule.IsLocallyAuthorized</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_PendingStateJson">PartBehaviourModule.PendingStateJson</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Game">KerbalMonoBehaviour.Game</a>
     </div>
     <div>
@@ -262,7 +268,9 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Module_ToggleCrossfeed_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Module_ToggleCrossfeed : PartBehaviourModule, IPartModule, IFixedUpdate, IPriorityOverride, IUpdate, IObjectAssemblyPartModule</code></pre>
+    <pre><code class="lang-csharp hljs">[ModuleCategory(&quot;Resources&quot;)]
+[ModuleDescription(&quot;Toggles fuel crossfeed between this part and its symmetry partners&quot;)]
+public class Module_ToggleCrossfeed : PartBehaviourModule, IPartModule, IObjectAssemblyPartModule</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -281,7 +289,8 @@
 
 
   <h4 id="KSP_Modules_Module_ToggleCrossfeed_dataToggleCrossfeed" data-uid="KSP.Modules.Module_ToggleCrossfeed.dataToggleCrossfeed">dataToggleCrossfeed</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The data module holding crossfeed toggle configuration and runtime state for this part.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -308,7 +317,8 @@
 
   <a id="KSP_Modules_Module_ToggleCrossfeed_PartComponentModuleType_" data-uid="KSP.Modules.Module_ToggleCrossfeed.PartComponentModuleType*"></a>
   <h4 id="KSP_Modules_Module_ToggleCrossfeed_PartComponentModuleType" data-uid="KSP.Modules.Module_ToggleCrossfeed.PartComponentModuleType">PartComponentModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <span class="xref">System.Type</span> of the corresponding simulation-side <a class="xref" href="KSP.Sim.impl.PartComponentModule.html">PartComponentModule</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -337,7 +347,8 @@
 
   <a id="KSP_Modules_Module_ToggleCrossfeed_AddDataModules_" data-uid="KSP.Modules.Module_ToggleCrossfeed.AddDataModules*"></a>
   <h4 id="KSP_Modules_Module_ToggleCrossfeed_AddDataModules" data-uid="KSP.Modules.Module_ToggleCrossfeed.AddDataModules">AddDataModules()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers data modules with <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_DataModules">DataModules</a> for this part behaviour module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -349,7 +360,9 @@
 
   <a id="KSP_Modules_Module_ToggleCrossfeed_DisableCrossFeed_" data-uid="KSP.Modules.Module_ToggleCrossfeed.DisableCrossFeed*"></a>
   <h4 id="KSP_Modules_Module_ToggleCrossfeed_DisableCrossFeed" data-uid="KSP.Modules.Module_ToggleCrossfeed.DisableCrossFeed">DisableCrossFeed()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Disables fuel crossfeed on this part while in flight and rebuilds all resource solvers
+on the owning part owner.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -359,7 +372,9 @@
 
   <a id="KSP_Modules_Module_ToggleCrossfeed_EnableCrossFeed_" data-uid="KSP.Modules.Module_ToggleCrossfeed.EnableCrossFeed*"></a>
   <h4 id="KSP_Modules_Module_ToggleCrossfeed_EnableCrossFeed" data-uid="KSP.Modules.Module_ToggleCrossfeed.EnableCrossFeed">EnableCrossFeed()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Enables fuel crossfeed on this part while in flight and rebuilds all resource solvers
+on the owning part owner.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -369,7 +384,10 @@
 
   <a id="KSP_Modules_Module_ToggleCrossfeed_OnInitialize_" data-uid="KSP.Modules.Module_ToggleCrossfeed.OnInitialize*"></a>
   <h4 id="KSP_Modules_Module_ToggleCrossfeed_OnInitialize" data-uid="KSP.Modules.Module_ToggleCrossfeed.OnInitialize">OnInitialize()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes the module by registering a crossfeed-enabled property in OAB or flight mode
+when the corresponding toggle flags are set, and registers action group actions for
+toggling, enabling, and disabling crossfeed.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -381,7 +399,9 @@
 
   <a id="KSP_Modules_Module_ToggleCrossfeed_OnShutdown_" data-uid="KSP.Modules.Module_ToggleCrossfeed.OnShutdown*"></a>
   <h4 id="KSP_Modules_Module_ToggleCrossfeed_OnShutdown" data-uid="KSP.Modules.Module_ToggleCrossfeed.OnShutdown">OnShutdown()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Shuts down the module by unsubscribing all registered value-change handlers from their
+corresponding module properties.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -393,7 +413,9 @@
 
   <a id="KSP_Modules_Module_ToggleCrossfeed_ToggleCrossFeed_" data-uid="KSP.Modules.Module_ToggleCrossfeed.ToggleCrossFeed*"></a>
   <h4 id="KSP_Modules_Module_ToggleCrossfeed_ToggleCrossFeed" data-uid="KSP.Modules.Module_ToggleCrossfeed.ToggleCrossFeed">ToggleCrossFeed()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Toggles the fuel crossfeed state on this part while in flight, flipping the current
+value and rebuilding all resource solvers on the owning part owner.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -402,15 +424,6 @@
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a>
   </div>
   <div>
       <a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a>

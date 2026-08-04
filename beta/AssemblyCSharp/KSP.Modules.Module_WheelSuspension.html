@@ -95,9 +95,6 @@
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a></div>
     <div><a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a></div>
     <div><a class="xref" href="GlobalAssemblyCSharp.ILateUpdate.html">ILateUpdate</a></div>
   </div>
@@ -140,6 +137,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsStageable">PartBehaviourModule.IsStageable()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnViewUnload">PartBehaviourModule.OnViewUnload()</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnActive">PartBehaviourModule.OnActive()</a>
     </div>
     <div>
@@ -161,13 +161,16 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForDataModules">PartBehaviourModule.InitForDataModules()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_StashPendingStateJson_System_Type_Newtonsoft_Json_Linq_JObject_">PartBehaviourModule.StashPendingStateJson(Type, JObject)</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_SetDataModuleValues_KSP_Sim_Definitions_SerializedPartModule_">PartBehaviourModule.SetDataModuleValues(SerializedPartModule)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForNewOABPart">PartBehaviourModule.InitForNewOABPart()</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_">PartBehaviourModule.RemoveResourceRequest(ResourceFlowRequestHandle)</a>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_Unity_Entities_Entity_">PartBehaviourModule.RemoveResourceRequest(Entity)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnAnimStateEnter_UnityEngine_Animator_System_Int32_">PartBehaviourModule.OnAnimStateEnter(Animator, int)</a>
@@ -260,6 +263,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsLocallyAuthorized">PartBehaviourModule.IsLocallyAuthorized</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_PendingStateJson">PartBehaviourModule.PendingStateJson</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Game">KerbalMonoBehaviour.Game</a>
     </div>
     <div>
@@ -279,7 +285,9 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Module_WheelSuspension_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Module_WheelSuspension : Module_WheelSubmodule, IPartModule, IFixedUpdate, IPriorityOverride, IUpdate, IObjectAssemblyPartModule, ILateUpdate</code></pre>
+    <pre><code class="lang-csharp hljs">[ModuleCategory(&quot;Wheels&quot;)]
+[ModuleDescription(&quot;Spring and damper rates scaled to vessel mass&quot;)]
+public class Module_WheelSuspension : Module_WheelSubmodule, IPartModule, IObjectAssemblyPartModule, ILateUpdate</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -298,7 +306,8 @@
 
 
   <h4 id="KSP_Modules_Module_WheelSuspension_dataWheelsuspension" data-uid="KSP.Modules.Module_WheelSuspension.dataWheelsuspension">dataWheelsuspension</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The wheel suspension data module associated with this part behaviour.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -322,7 +331,8 @@
 
 
   <h4 id="KSP_Modules_Module_WheelSuspension_sprungMassEasing" data-uid="KSP.Modules.Module_WheelSuspension.sprungMassEasing">sprungMassEasing</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>A value indicating whether the sprung mass is currently being eased toward its target spring rate.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -346,7 +356,8 @@
 
 
   <h4 id="KSP_Modules_Module_WheelSuspension_sprungMassGravity" data-uid="KSP.Modules.Module_WheelSuspension.sprungMassGravity">sprungMassGravity</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The gravitational load on the sprung mass, in kilonewtons, used for spring rate calculations.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -370,7 +381,8 @@
 
 
   <h4 id="KSP_Modules_Module_WheelSuspension_suspCompression" data-uid="KSP.Modules.Module_WheelSuspension.suspCompression">suspCompression</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The current suspension compression ratio, ranging from 0 (fully extended) to 1 (fully compressed).</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -397,7 +409,8 @@
 
   <a id="KSP_Modules_Module_WheelSuspension_HighGeeOverride_" data-uid="KSP.Modules.Module_WheelSuspension.HighGeeOverride*"></a>
   <h4 id="KSP_Modules_Module_WheelSuspension_HighGeeOverride" data-uid="KSP.Modules.Module_WheelSuspension.HighGeeOverride">HighGeeOverride</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the high-g spring and damper override is currently active.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -422,7 +435,8 @@
 
   <a id="KSP_Modules_Module_WheelSuspension_PartComponentModuleType_" data-uid="KSP.Modules.Module_WheelSuspension.PartComponentModuleType*"></a>
   <h4 id="KSP_Modules_Module_WheelSuspension_PartComponentModuleType" data-uid="KSP.Modules.Module_WheelSuspension.PartComponentModuleType">PartComponentModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <span class="xref">System.Type</span> of the corresponding simulation-side <a class="xref" href="KSP.Sim.impl.PartComponentModule.html">PartComponentModule</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -451,7 +465,8 @@
 
   <a id="KSP_Modules_Module_WheelSuspension_AddDataModules_" data-uid="KSP.Modules.Module_WheelSuspension.AddDataModules*"></a>
   <h4 id="KSP_Modules_Module_WheelSuspension_AddDataModules" data-uid="KSP.Modules.Module_WheelSuspension.AddDataModules">AddDataModules()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers data modules with <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_DataModules">DataModules</a> for this part behaviour module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -463,7 +478,8 @@
 
   <a id="KSP_Modules_Module_WheelSuspension_OnAutoSpringDamperChanged_" data-uid="KSP.Modules.Module_WheelSuspension.OnAutoSpringDamperChanged*"></a>
   <h4 id="KSP_Modules_Module_WheelSuspension_OnAutoSpringDamperChanged_System_Boolean_" data-uid="KSP.Modules.Module_WheelSuspension.OnAutoSpringDamperChanged(System.Boolean)">OnAutoSpringDamperChanged(bool)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Responds to a change in the auto spring-damper setting by toggling the visibility of the manual spring and damper tweakable controls.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -482,7 +498,8 @@
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">value</span></td>
-        <td></td>
+        <td><p>The new value of the auto spring-damper toggle; <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if automatic control is enabled.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -490,7 +507,8 @@
 
   <a id="KSP_Modules_Module_WheelSuspension_OnInitialize_" data-uid="KSP.Modules.Module_WheelSuspension.OnInitialize*"></a>
   <h4 id="KSP_Modules_Module_WheelSuspension_OnInitialize" data-uid="KSP.Modules.Module_WheelSuspension.OnInitialize">OnInitialize()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes this submodule by resetting setup state, locating the owning <a class="xref" href="KSP.Modules.Module_WheelBase.html">Module_WheelBase</a>, and registering with it.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -502,7 +520,8 @@
 
   <a id="KSP_Modules_Module_WheelSuspension_OnLateUpdate_" data-uid="KSP.Modules.Module_WheelSuspension.OnLateUpdate*"></a>
   <h4 id="KSP_Modules_Module_WheelSuspension_OnLateUpdate" data-uid="KSP.Modules.Module_WheelSuspension.OnLateUpdate">OnLateUpdate()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Invoked each frame during the late update phase.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -512,7 +531,8 @@
 
   <a id="KSP_Modules_Module_WheelSuspension_OnModuleFixedUpdate_" data-uid="KSP.Modules.Module_WheelSuspension.OnModuleFixedUpdate*"></a>
   <h4 id="KSP_Modules_Module_WheelSuspension_OnModuleFixedUpdate_System_Single_" data-uid="KSP.Modules.Module_WheelSuspension.OnModuleFixedUpdate(System.Single)">OnModuleFixedUpdate(float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called each fixed-update tick while the module is operating in the flight context.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -531,7 +551,8 @@
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">fixedDeltaTime</span></td>
-        <td></td>
+        <td><p>The fixed physics time step in seconds.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -541,7 +562,8 @@
 
   <a id="KSP_Modules_Module_WheelSuspension_OnShutdown_" data-uid="KSP.Modules.Module_WheelSuspension.OnShutdown*"></a>
   <h4 id="KSP_Modules_Module_WheelSuspension_OnShutdown" data-uid="KSP.Modules.Module_WheelSuspension.OnShutdown">OnShutdown()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Shuts down this submodule by unregistering from the owning <a class="xref" href="KSP.Modules.Module_WheelBase.html">Module_WheelBase</a> and detaching the subsystem-modified callback.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -553,7 +575,8 @@
 
   <a id="KSP_Modules_Module_WheelSuspension_OnSubsystemsModified_" data-uid="KSP.Modules.Module_WheelSuspension.OnSubsystemsModified*"></a>
   <h4 id="KSP_Modules_Module_WheelSuspension_OnSubsystemsModified_KSP_Modules_WheelSubsystems_" data-uid="KSP.Modules.Module_WheelSuspension.OnSubsystemsModified(KSP.Modules.WheelSubsystems)">OnSubsystemsModified(WheelSubsystems)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called when the wheel subsystem state changes, allowing derived classes to respond to subsystem modifications.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -572,7 +595,8 @@
       <tr>
         <td><a class="xref" href="KSP.Modules.WheelSubsystems.html">WheelSubsystems</a></td>
         <td><span class="parametername">s</span></td>
-        <td></td>
+        <td><p>The updated <a class="xref" href="KSP.Modules.WheelSubsystems.html">WheelSubsystems</a> state describing the current inoperable subsystems.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -582,7 +606,8 @@
 
   <a id="KSP_Modules_Module_WheelSuspension_OnWheelSetup_" data-uid="KSP.Modules.Module_WheelSuspension.OnWheelSetup*"></a>
   <h4 id="KSP_Modules_Module_WheelSuspension_OnWheelSetup" data-uid="KSP.Modules.Module_WheelSuspension.OnWheelSetup">OnWheelSetup()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Performs submodule-specific setup once the <a class="xref" href="KSPWheelController.html">KSPWheelController</a> has been assigned and base initialization is complete.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -594,7 +619,8 @@
 
   <a id="KSP_Modules_Module_WheelSuspension_ResetSuspensionCollider_" data-uid="KSP.Modules.Module_WheelSuspension.ResetSuspensionCollider*"></a>
   <h4 id="KSP_Modules_Module_WheelSuspension_ResetSuspensionCollider_System_Single_" data-uid="KSP.Modules.Module_WheelSuspension.ResetSuspensionCollider(System.Single)">ResetSuspensionCollider(float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Schedules a coroutine to disable the suspension collider after a specified delay and refresh collision ignore rules.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -613,7 +639,8 @@
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">delay</span></td>
-        <td></td>
+        <td><p>The number of fixed-update frames to wait before disabling the collider.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -621,7 +648,8 @@
 
   <a id="KSP_Modules_Module_WheelSuspension_UpdateAutoBoost_" data-uid="KSP.Modules.Module_WheelSuspension.UpdateAutoBoost*"></a>
   <h4 id="KSP_Modules_Module_WheelSuspension_UpdateAutoBoost_System_Single_" data-uid="KSP.Modules.Module_WheelSuspension.UpdateAutoBoost(System.Single)">UpdateAutoBoost(float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Updates the automatic boost value based on the current suspension compression ratio.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -640,22 +668,14 @@
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">st</span></td>
-        <td></td>
+        <td><p>The current suspension compression ratio; values above 0.8 increase the boost and values below 0.4 decrease it.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a>
   </div>
   <div>
       <a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a>

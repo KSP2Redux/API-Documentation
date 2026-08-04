@@ -94,9 +94,6 @@
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a></div>
     <div><a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a></div>
     <div><a class="xref" href="GlobalAssemblyCSharp.IDynamicCargoOccluder.html">IDynamicCargoOccluder</a></div>
   </div>
@@ -116,6 +113,9 @@
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsStageable">PartBehaviourModule.IsStageable()</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnViewUnload">PartBehaviourModule.OnViewUnload()</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnActive">PartBehaviourModule.OnActive()</a>
@@ -139,13 +139,16 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForDataModules">PartBehaviourModule.InitForDataModules()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_StashPendingStateJson_System_Type_Newtonsoft_Json_Linq_JObject_">PartBehaviourModule.StashPendingStateJson(Type, JObject)</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_SetDataModuleValues_KSP_Sim_Definitions_SerializedPartModule_">PartBehaviourModule.SetDataModuleValues(SerializedPartModule)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForNewOABPart">PartBehaviourModule.InitForNewOABPart()</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_">PartBehaviourModule.RemoveResourceRequest(ResourceFlowRequestHandle)</a>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_Unity_Entities_Entity_">PartBehaviourModule.RemoveResourceRequest(Entity)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnAnimStateEnter_UnityEngine_Animator_System_Int32_">PartBehaviourModule.OnAnimStateEnter(Animator, int)</a>
@@ -238,6 +241,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsLocallyAuthorized">PartBehaviourModule.IsLocallyAuthorized</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_PendingStateJson">PartBehaviourModule.PendingStateJson</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Game">KerbalMonoBehaviour.Game</a>
     </div>
     <div>
@@ -257,7 +263,9 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Module_Fairing_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Module_Fairing : PartBehaviourModule, IPartModule, IFixedUpdate, IPriorityOverride, IUpdate, IObjectAssemblyPartModule, IDynamicCargoOccluder</code></pre>
+    <pre><code class="lang-csharp hljs">[ModuleCategory(&quot;Aerodynamics&quot;)]
+[ModuleDescription(&quot;Jettisonable payload shroud&quot;)]
+public class Module_Fairing : PartBehaviourModule, IPartModule, IObjectAssemblyPartModule, IDynamicCargoOccluder</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -276,7 +284,8 @@
 
 
   <h4 id="KSP_Modules_Module_Fairing_ClosedColliders" data-uid="KSP.Modules.Module_Fairing.ClosedColliders">ClosedColliders</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The list of closed <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/MeshCollider.html">MeshCollider</a> instances that form the fairing shell when it is not deployed.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -300,7 +309,8 @@
 
 
   <h4 id="KSP_Modules_Module_Fairing_FAIRING_PROCEDURAL_DRAG_CUBE_NAME" data-uid="KSP.Modules.Module_Fairing.FAIRING_PROCEDURAL_DRAG_CUBE_NAME">FAIRING_PROCEDURAL_DRAG_CUBE_NAME</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The drag cube name used to identify the procedural fairing drag cube.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -324,7 +334,8 @@
 
 
   <h4 id="KSP_Modules_Module_Fairing_FAIRING_PROCEDURAL_FLIGHT_MAT" data-uid="KSP.Modules.Module_Fairing.FAIRING_PROCEDURAL_FLIGHT_MAT">FAIRING_PROCEDURAL_FLIGHT_MAT</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The asset key for the procedural fairing material used in the flight view.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -348,7 +359,8 @@
 
 
   <h4 id="KSP_Modules_Module_Fairing_FAIRING_PROCEDURAL_MAT" data-uid="KSP.Modules.Module_Fairing.FAIRING_PROCEDURAL_MAT">FAIRING_PROCEDURAL_MAT</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The asset key for the procedural fairing material used in the assembly building view.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -372,7 +384,8 @@
 
 
   <h4 id="KSP_Modules_Module_Fairing_NodeRings" data-uid="KSP.Modules.Module_Fairing.NodeRings">NodeRings</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The list of <a class="xref" href="KSP.OAB.AttachNodeRing.html">AttachNodeRing</a> instances that define the radial attach-node rings on this fairing.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -396,7 +409,8 @@
 
 
   <h4 id="KSP_Modules_Module_Fairing_Panels" data-uid="KSP.Modules.Module_Fairing.Panels">Panels</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The list of <a class="xref" href="KSP.OAB.FairingPanel.html">FairingPanel</a> instances that make up the procedural fairing mesh.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -420,7 +434,8 @@
 
 
   <h4 id="KSP_Modules_Module_Fairing_VisualizationModes" data-uid="KSP.Modules.Module_Fairing.VisualizationModes">VisualizationModes</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The list of <a class="xref" href="KSP.OAB.FairingVisualizationMode.html">FairingVisualizationMode</a> instances controlling how the fairing is displayed in the assembly building.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -447,7 +462,8 @@
 
   <a id="KSP_Modules_Module_Fairing_FairingConstructing_" data-uid="KSP.Modules.Module_Fairing.FairingConstructing*"></a>
   <h4 id="KSP_Modules_Module_Fairing_FairingConstructing" data-uid="KSP.Modules.Module_Fairing.FairingConstructing">FairingConstructing</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the fairing is currently being constructed by the player.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -472,7 +488,8 @@
 
   <a id="KSP_Modules_Module_Fairing_IsAutomated_" data-uid="KSP.Modules.Module_Fairing.IsAutomated*"></a>
   <h4 id="KSP_Modules_Module_Fairing_IsAutomated" data-uid="KSP.Modules.Module_Fairing.IsAutomated">IsAutomated</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the fairing uses automated construction mode.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -497,7 +514,8 @@
 
   <a id="KSP_Modules_Module_Fairing_PartComponentModuleType_" data-uid="KSP.Modules.Module_Fairing.PartComponentModuleType*"></a>
   <h4 id="KSP_Modules_Module_Fairing_PartComponentModuleType" data-uid="KSP.Modules.Module_Fairing.PartComponentModuleType">PartComponentModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <span class="xref">System.Type</span> of the corresponding simulation-side <a class="xref" href="KSP.Sim.impl.PartComponentModule.html">PartComponentModule</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -524,7 +542,8 @@
 
   <a id="KSP_Modules_Module_Fairing_SnapIncrement_" data-uid="KSP.Modules.Module_Fairing.SnapIncrement*"></a>
   <h4 id="KSP_Modules_Module_Fairing_SnapIncrement" data-uid="KSP.Modules.Module_Fairing.SnapIncrement">SnapIncrement</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the smallest snap increment between the fairing radius and length snap increments.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -551,7 +570,8 @@
 
   <a id="KSP_Modules_Module_Fairing_AddDataModules_" data-uid="KSP.Modules.Module_Fairing.AddDataModules*"></a>
   <h4 id="KSP_Modules_Module_Fairing_AddDataModules" data-uid="KSP.Modules.Module_Fairing.AddDataModules">AddDataModules()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers data modules with <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_DataModules">DataModules</a> for this part behaviour module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -563,7 +583,8 @@
 
   <a id="KSP_Modules_Module_Fairing_GetCurrentCrossSection_" data-uid="KSP.Modules.Module_Fairing.GetCurrentCrossSection*"></a>
   <h4 id="KSP_Modules_Module_Fairing_GetCurrentCrossSection" data-uid="KSP.Modules.Module_Fairing.GetCurrentCrossSection">GetCurrentCrossSection()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the active <a class="xref" href="KSP.OAB.FairingCrossSection.html">FairingCrossSection</a> being placed during fairing construction.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -580,7 +601,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.OAB.FairingCrossSection.html">FairingCrossSection</a></td>
-        <td></td>
+        <td><p>The current <a class="xref" href="KSP.OAB.FairingCrossSection.html">FairingCrossSection</a>, or <code>null</code> if no cross-section is active.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -588,7 +610,8 @@
 
   <a id="KSP_Modules_Module_Fairing_GetFairingArea_" data-uid="KSP.Modules.Module_Fairing.GetFairingArea*"></a>
   <h4 id="KSP_Modules_Module_Fairing_GetFairingArea" data-uid="KSP.Modules.Module_Fairing.GetFairingArea">GetFairingArea()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the total surface area of all fairing panels.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -605,7 +628,8 @@
     <tbody>
       <tr>
         <td><span class="xref">float</span></td>
-        <td></td>
+        <td><p>The sum of each panel's area in square meters.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -613,7 +637,8 @@
 
   <a id="KSP_Modules_Module_Fairing_GetFairingBounds_" data-uid="KSP.Modules.Module_Fairing.GetFairingBounds*"></a>
   <h4 id="KSP_Modules_Module_Fairing_GetFairingBounds" data-uid="KSP.Modules.Module_Fairing.GetFairingBounds">GetFairingBounds()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns an axis-aligned bounding box enclosing the fairing based on the accumulated cross-section heights and radii.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -630,7 +655,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Bounds.html">Bounds</a></td>
-        <td></td>
+        <td><p>A <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Bounds.html">Bounds</a> centered on the part's world position with extents derived from the cross-section stack.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -638,7 +664,8 @@
 
   <a id="KSP_Modules_Module_Fairing_GetModuleDisplayName_" data-uid="KSP.Modules.Module_Fairing.GetModuleDisplayName*"></a>
   <h4 id="KSP_Modules_Module_Fairing_GetModuleDisplayName" data-uid="KSP.Modules.Module_Fairing.GetModuleDisplayName">GetModuleDisplayName()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the human-readable display name for this module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -655,7 +682,8 @@
     <tbody>
       <tr>
         <td><span class="xref">string</span></td>
-        <td></td>
+        <td><p>The display name string for this module.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -665,7 +693,8 @@
 
   <a id="KSP_Modules_Module_Fairing_OnDeployTypeChanged_" data-uid="KSP.Modules.Module_Fairing.OnDeployTypeChanged*"></a>
   <h4 id="KSP_Modules_Module_Fairing_OnDeployTypeChanged_KSP_Modules_FairingDeployType_" data-uid="KSP.Modules.Module_Fairing.OnDeployTypeChanged(KSP.Modules.FairingDeployType)">OnDeployTypeChanged(FairingDeployType)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called when the fairing deploy type changes, regrouping panels into the appropriate number of jettison pieces and reinitializing the reentry mesh.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -684,7 +713,8 @@
       <tr>
         <td><a class="xref" href="KSP.Modules.FairingDeployType.html">FairingDeployType</a></td>
         <td><span class="parametername">newType</span></td>
-        <td></td>
+        <td><p>The new <a class="xref" href="KSP.Modules.FairingDeployType.html">FairingDeployType</a> value selected by the player.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -692,7 +722,8 @@
 
   <a id="KSP_Modules_Module_Fairing_OnEnterEdit_" data-uid="KSP.Modules.Module_Fairing.OnEnterEdit*"></a>
   <h4 id="KSP_Modules_Module_Fairing_OnEnterEdit" data-uid="KSP.Modules.Module_Fairing.OnEnterEdit">OnEnterEdit()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Begins interactive fairing construction, initializing cross-sections and panel state for editing.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -702,7 +733,8 @@
 
   <a id="KSP_Modules_Module_Fairing_OnExitEdit_" data-uid="KSP.Modules.Module_Fairing.OnExitEdit*"></a>
   <h4 id="KSP_Modules_Module_Fairing_OnExitEdit_System_Boolean_System_Boolean_" data-uid="KSP.Modules.Module_Fairing.OnExitEdit(System.Boolean,System.Boolean)">OnExitEdit(bool, bool)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Ends interactive fairing construction, optionally committing or discarding the current cross-section state.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -721,12 +753,14 @@
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">saveChanges</span></td>
-        <td></td>
+        <td><p>When <code>true</code>, the current cross-section shape is committed and meshes are rebuilt. When <code>false</code>, changes are discarded.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">isSymmetrySibling</span></td>
-        <td></td>
+        <td><p>When <code>true</code>, indicates this call originates from a symmetry counterpart and suppresses re-propagation to symmetry siblings.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -734,7 +768,8 @@
 
   <a id="KSP_Modules_Module_Fairing_OnInitialize_" data-uid="KSP.Modules.Module_Fairing.OnInitialize*"></a>
   <h4 id="KSP_Modules_Module_Fairing_OnInitialize" data-uid="KSP.Modules.Module_Fairing.OnInitialize">OnInitialize()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called during initialization to allow derived classes to perform custom setup after data modules are registered.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -746,7 +781,8 @@
 
   <a id="KSP_Modules_Module_Fairing_OnModuleOABFixedUpdate_" data-uid="KSP.Modules.Module_Fairing.OnModuleOABFixedUpdate*"></a>
   <h4 id="KSP_Modules_Module_Fairing_OnModuleOABFixedUpdate_System_Single_" data-uid="KSP.Modules.Module_Fairing.OnModuleOABFixedUpdate(System.Single)">OnModuleOABFixedUpdate(float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called each fixed-update tick while the module is operating in the OAB context.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -765,7 +801,8 @@
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">fixedDeltaTime</span></td>
-        <td></td>
+        <td><p>The fixed physics time step in seconds.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -775,7 +812,8 @@
 
   <a id="KSP_Modules_Module_Fairing_OnNodeRingCountChanged_" data-uid="KSP.Modules.Module_Fairing.OnNodeRingCountChanged*"></a>
   <h4 id="KSP_Modules_Module_Fairing_OnNodeRingCountChanged_System_Int32_System_Object_" data-uid="KSP.Modules.Module_Fairing.OnNodeRingCountChanged(System.Int32,System.Object)">OnNodeRingCountChanged(int, object)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called when a node ring's attach-node count changes, updating the generated dynamic nodes for the affected ring.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -794,12 +832,14 @@
       <tr>
         <td><span class="xref">int</span></td>
         <td><span class="parametername">newValue</span></td>
-        <td></td>
+        <td><p>The new node count for the ring.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">object</span></td>
         <td><span class="parametername">sender</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty&lt;T&gt;</a> that raised the change event.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -807,7 +847,8 @@
 
   <a id="KSP_Modules_Module_Fairing_OnNodeRingDistanceChanged_" data-uid="KSP.Modules.Module_Fairing.OnNodeRingDistanceChanged*"></a>
   <h4 id="KSP_Modules_Module_Fairing_OnNodeRingDistanceChanged_System_Single_System_Object_" data-uid="KSP.Modules.Module_Fairing.OnNodeRingDistanceChanged(System.Single,System.Object)">OnNodeRingDistanceChanged(float, object)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called when a node ring's radial distance changes, updating the generated dynamic nodes for the affected ring.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -826,12 +867,14 @@
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">newValue</span></td>
-        <td></td>
+        <td><p>The new radial distance for the ring's attach nodes.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">object</span></td>
         <td><span class="parametername">sender</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty&lt;T&gt;</a> that raised the change event.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -839,7 +882,8 @@
 
   <a id="KSP_Modules_Module_Fairing_OnNodeRingSizeChanged_" data-uid="KSP.Modules.Module_Fairing.OnNodeRingSizeChanged*"></a>
   <h4 id="KSP_Modules_Module_Fairing_OnNodeRingSizeChanged_System_Int32_System_Object_" data-uid="KSP.Modules.Module_Fairing.OnNodeRingSizeChanged(System.Int32,System.Object)">OnNodeRingSizeChanged(int, object)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called when a node ring's attach-node size changes, updating the generated dynamic nodes for the affected ring.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -858,12 +902,14 @@
       <tr>
         <td><span class="xref">int</span></td>
         <td><span class="parametername">newValue</span></td>
-        <td></td>
+        <td><p>The new node size value for the ring.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">object</span></td>
         <td><span class="parametername">sender</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty&lt;T&gt;</a> that raised the change event.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -871,7 +917,8 @@
 
   <a id="KSP_Modules_Module_Fairing_OnRingChangedState_" data-uid="KSP.Modules.Module_Fairing.OnRingChangedState*"></a>
   <h4 id="KSP_Modules_Module_Fairing_OnRingChangedState_System_Boolean_System_Object_" data-uid="KSP.Modules.Module_Fairing.OnRingChangedState(System.Boolean,System.Object)">OnRingChangedState(bool, object)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called when a node ring's enabled state changes, generating or removing dynamic attach nodes for the affected ring.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -890,12 +937,14 @@
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">newState</span></td>
-        <td></td>
+        <td><p>The new enabled state of the ring.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">object</span></td>
         <td><span class="parametername">sender</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty&lt;T&gt;</a> that raised the change event.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -903,7 +952,8 @@
 
   <a id="KSP_Modules_Module_Fairing_OnRingUnplace_" data-uid="KSP.Modules.Module_Fairing.OnRingUnplace*"></a>
   <h4 id="KSP_Modules_Module_Fairing_OnRingUnplace" data-uid="KSP.Modules.Module_Fairing.OnRingUnplace">OnRingUnplace()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Removes the most recently placed cross-section ring and reverts the fairing geometry to the previous state.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -913,7 +963,8 @@
 
   <a id="KSP_Modules_Module_Fairing_OnShutdown_" data-uid="KSP.Modules.Module_Fairing.OnShutdown*"></a>
   <h4 id="KSP_Modules_Module_Fairing_OnShutdown" data-uid="KSP.Modules.Module_Fairing.OnShutdown">OnShutdown()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called when the module is shutting down, allowing derived classes to release resources or subscriptions.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -925,7 +976,8 @@
 
   <a id="KSP_Modules_Module_Fairing_OnVisibilityChanged_" data-uid="KSP.Modules.Module_Fairing.OnVisibilityChanged*"></a>
   <h4 id="KSP_Modules_Module_Fairing_OnVisibilityChanged" data-uid="KSP.Modules.Module_Fairing.OnVisibilityChanged">OnVisibilityChanged()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Advances to the next fairing visualization mode and refreshes the panel display.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -935,7 +987,8 @@
 
   <a id="KSP_Modules_Module_Fairing_PerformJettison_" data-uid="KSP.Modules.Module_Fairing.PerformJettison*"></a>
   <h4 id="KSP_Modules_Module_Fairing_PerformJettison" data-uid="KSP.Modules.Module_Fairing.PerformJettison">PerformJettison()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Performs fairing jettison using the configured ejection force, separating panels from the vessel.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -945,7 +998,8 @@
 
   <a id="KSP_Modules_Module_Fairing_PerformJettison_" data-uid="KSP.Modules.Module_Fairing.PerformJettison*"></a>
   <h4 id="KSP_Modules_Module_Fairing_PerformJettison_System_Boolean_System_Boolean_" data-uid="KSP.Modules.Module_Fairing.PerformJettison(System.Boolean,System.Boolean)">PerformJettison(bool, bool)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Performs fairing jettison using the configured ejection force with explicit control over physics object creation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -964,12 +1018,14 @@
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">fairingNodeOccupied</span></td>
-        <td></td>
+        <td><p>When <code>true</code>, indicates a part is attached to the floating node, affecting shroud jettison behavior.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">createPhysicsObjects</span></td>
-        <td></td>
+        <td><p>When <code>true</code>, converts panel piece groups into temporary physics objects upon separation.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -977,7 +1033,8 @@
 
   <a id="KSP_Modules_Module_Fairing_SetPieceGroupsParent_" data-uid="KSP.Modules.Module_Fairing.SetPieceGroupsParent*"></a>
   <h4 id="KSP_Modules_Module_Fairing_SetPieceGroupsParent_UnityEngine_Transform_" data-uid="KSP.Modules.Module_Fairing.SetPieceGroupsParent(UnityEngine.Transform)">SetPieceGroupsParent(Transform)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Reparents all fairing piece group transforms to the specified parent transform.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -996,7 +1053,8 @@
       <tr>
         <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
         <td><span class="parametername">newParent</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a> that will become the parent of each piece group.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1004,7 +1062,8 @@
 
   <a id="KSP_Modules_Module_Fairing_SetupOcclusionTest_" data-uid="KSP.Modules.Module_Fairing.SetupOcclusionTest*"></a>
   <h4 id="KSP_Modules_Module_Fairing_SetupOcclusionTest_System_Boolean_" data-uid="KSP.Modules.Module_Fairing.SetupOcclusionTest(System.Boolean)">SetupOcclusionTest(bool)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Configures the collider state for occlusion testing, enabling panel colliders and disabling closed shell colliders when active.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1023,7 +1082,8 @@
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">testActive</span></td>
-        <td></td>
+        <td><p>When <code>true</code>, activates panel colliders for occlusion testing. When <code>false</code>, restores closed shell colliders.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1031,7 +1091,8 @@
 
   <a id="KSP_Modules_Module_Fairing_UpdateScale_" data-uid="KSP.Modules.Module_Fairing.UpdateScale*"></a>
   <h4 id="KSP_Modules_Module_Fairing_UpdateScale_System_Single_System_Single_System_Boolean_" data-uid="KSP.Modules.Module_Fairing.UpdateScale(System.Single,System.Single,System.Boolean)">UpdateScale(float, float, bool)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Adjusts the active cross-section's radius and height by the given deltas and updates the mesh preview.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -1050,32 +1111,26 @@
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">addedRadius</span></td>
-        <td></td>
+        <td><p>The amount to add to the current radius.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">addedHeight</span></td>
-        <td></td>
+        <td><p>The amount to add to the current height.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">isSnapEnabled</span></td>
-        <td></td>
+        <td><p>When <code>true</code>, applies snap-to-previous-radius behavior when near the cap radius.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a>
   </div>
   <div>
       <a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a>

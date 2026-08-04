@@ -96,9 +96,6 @@
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a></div>
-    <div><a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a></div>
     <div><a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a></div>
   </div>
   <div class="inheritedMembers">
@@ -143,6 +140,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsStageable">PartBehaviourModule.IsStageable()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnViewUnload">PartBehaviourModule.OnViewUnload()</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnActive">PartBehaviourModule.OnActive()</a>
     </div>
     <div>
@@ -164,13 +164,16 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForDataModules">PartBehaviourModule.InitForDataModules()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_StashPendingStateJson_System_Type_Newtonsoft_Json_Linq_JObject_">PartBehaviourModule.StashPendingStateJson(Type, JObject)</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_SetDataModuleValues_KSP_Sim_Definitions_SerializedPartModule_">PartBehaviourModule.SetDataModuleValues(SerializedPartModule)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_InitForNewOABPart">PartBehaviourModule.InitForNewOABPart()</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_KSP_Sim_ResourceSystem_ResourceFlowRequestHandle_">PartBehaviourModule.RemoveResourceRequest(ResourceFlowRequestHandle)</a>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_RemoveResourceRequest_Unity_Entities_Entity_">PartBehaviourModule.RemoveResourceRequest(Entity)</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnAnimStateEnter_UnityEngine_Animator_System_Int32_">PartBehaviourModule.OnAnimStateEnter(Animator, int)</a>
@@ -260,6 +263,9 @@
       <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_IsLocallyAuthorized">PartBehaviourModule.IsLocallyAuthorized</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_PendingStateJson">PartBehaviourModule.PendingStateJson</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Game">KerbalMonoBehaviour.Game</a>
     </div>
     <div>
@@ -279,7 +285,9 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Module_WheelMotor_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Module_WheelMotor : Module_WheelSubmodule, IPartModule, IFixedUpdate, IPriorityOverride, IUpdate, IObjectAssemblyPartModule</code></pre>
+    <pre><code class="lang-csharp hljs">[ModuleCategory(&quot;Wheels&quot;)]
+[ModuleDescription(&quot;Applies motor torque to the wheel&quot;)]
+public class Module_WheelMotor : Module_WheelSubmodule, IPartModule, IObjectAssemblyPartModule</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -298,7 +306,8 @@
 
 
   <h4 id="KSP_Modules_Module_WheelMotor_avgResRate" data-uid="KSP.Modules.Module_WheelMotor.avgResRate">avgResRate</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The average resource consumption rate of the motor over the last fixed update, in units per second.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -322,7 +331,8 @@
 
 
   <h4 id="KSP_Modules_Module_WheelMotor_dataWheelMotor" data-uid="KSP.Modules.Module_WheelMotor.dataWheelMotor">dataWheelMotor</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="KSP.Modules.Data_WheelMotor.html">Data_WheelMotor</a> data module holding motor drive configuration, traction control settings, and runtime motor state.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -349,7 +359,8 @@
 
   <a id="KSP_Modules_Module_WheelMotor_PartComponentModuleType_" data-uid="KSP.Modules.Module_WheelMotor.PartComponentModuleType*"></a>
   <h4 id="KSP_Modules_Module_WheelMotor_PartComponentModuleType" data-uid="KSP.Modules.Module_WheelMotor.PartComponentModuleType">PartComponentModuleType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the <span class="xref">System.Type</span> of the corresponding simulation-side <a class="xref" href="KSP.Sim.impl.PartComponentModule.html">PartComponentModule</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -378,7 +389,8 @@
 
   <a id="KSP_Modules_Module_WheelMotor_AddDataModules_" data-uid="KSP.Modules.Module_WheelMotor.AddDataModules*"></a>
   <h4 id="KSP_Modules_Module_WheelMotor_AddDataModules" data-uid="KSP.Modules.Module_WheelMotor.AddDataModules">AddDataModules()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers data modules with <a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_DataModules">DataModules</a> for this part behaviour module.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -390,7 +402,8 @@
 
   <a id="KSP_Modules_Module_WheelMotor_GetMaxSpeed_" data-uid="KSP.Modules.Module_WheelMotor.GetMaxSpeed*"></a>
   <h4 id="KSP_Modules_Module_WheelMotor_GetMaxSpeed" data-uid="KSP.Modules.Module_WheelMotor.GetMaxSpeed">GetMaxSpeed()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the maximum wheel speed supported by the motor, derived from the upper bound of the torque curve.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -407,7 +420,8 @@
     <tbody>
       <tr>
         <td><span class="xref">float</span></td>
-        <td></td>
+        <td><p>The maximum speed in meters per second at which the motor can produce torque.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -415,7 +429,8 @@
 
   <a id="KSP_Modules_Module_WheelMotor_GetMotorEnabled_" data-uid="KSP.Modules.Module_WheelMotor.GetMotorEnabled*"></a>
   <h4 id="KSP_Modules_Module_WheelMotor_GetMotorEnabled_System_Boolean_KSP_Sim_Definitions_ModuleProperty_System_String__" data-uid="KSP.Modules.Module_WheelMotor.GetMotorEnabled(System.Boolean,KSP.Sim.Definitions.ModuleProperty{System.String})">GetMotorEnabled(bool, ModuleProperty&lt;string&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Determines whether the motor is currently enabled and updates the motor drive state and status string accordingly.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -434,12 +449,14 @@
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">baseMotorEnabled</span></td>
-        <td></td>
+        <td><p>Whether the motor is enabled by the user setting.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty</a>&lt;<span class="xref">string</span>&gt;</td>
         <td><span class="parametername">stateString</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty&lt;T&gt;</a> holding the localized status string displayed in the UI.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -454,7 +471,8 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
+        <td><p>True if the motor is operational and enabled; otherwise false.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -462,7 +480,8 @@
 
   <a id="KSP_Modules_Module_WheelMotor_GetMotorOrientationSign_" data-uid="KSP.Modules.Module_WheelMotor.GetMotorOrientationSign*"></a>
   <h4 id="KSP_Modules_Module_WheelMotor_GetMotorOrientationSign" data-uid="KSP.Modules.Module_WheelMotor.GetMotorOrientationSign">GetMotorOrientationSign()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the orientation sign of the motor relative to the vessel control transform, used to align drive direction with vehicle heading.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -479,7 +498,8 @@
     <tbody>
       <tr>
         <td><span class="xref">float</span></td>
-        <td></td>
+        <td><p>1 or -1 depending on whether the part's dominant axis aligns or opposes the vessel control orientation.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -487,7 +507,8 @@
 
   <a id="KSP_Modules_Module_WheelMotor_OnDriveUpdate_" data-uid="KSP.Modules.Module_WheelMotor.OnDriveUpdate*"></a>
   <h4 id="KSP_Modules_Module_WheelMotor_OnDriveUpdate_System_Single_" data-uid="KSP.Modules.Module_WheelMotor.OnDriveUpdate(System.Single)">OnDriveUpdate(float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Applies any subclass-specific drive adjustments to the raw motor input value and returns the modified result.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -506,7 +527,8 @@
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">motorInput</span></td>
-        <td></td>
+        <td><p>The raw motor drive input, in the range [-1, 1].</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -521,7 +543,8 @@
     <tbody>
       <tr>
         <td><span class="xref">float</span></td>
-        <td></td>
+        <td><p>The adjusted motor drive input after subclass processing.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -529,7 +552,8 @@
 
   <a id="KSP_Modules_Module_WheelMotor_OnInitialize_" data-uid="KSP.Modules.Module_WheelMotor.OnInitialize*"></a>
   <h4 id="KSP_Modules_Module_WheelMotor_OnInitialize" data-uid="KSP.Modules.Module_WheelMotor.OnInitialize">OnInitialize()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes this submodule by resetting setup state, locating the owning <a class="xref" href="KSP.Modules.Module_WheelBase.html">Module_WheelBase</a>, and registering with it.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -541,7 +565,8 @@
 
   <a id="KSP_Modules_Module_WheelMotor_OnModuleFixedUpdate_" data-uid="KSP.Modules.Module_WheelMotor.OnModuleFixedUpdate*"></a>
   <h4 id="KSP_Modules_Module_WheelMotor_OnModuleFixedUpdate_System_Single_" data-uid="KSP.Modules.Module_WheelMotor.OnModuleFixedUpdate(System.Single)">OnModuleFixedUpdate(float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called each fixed-update tick while the module is operating in the flight context.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -560,7 +585,8 @@
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">fixedDeltaTime</span></td>
-        <td></td>
+        <td><p>The fixed physics time step in seconds.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -570,7 +596,8 @@
 
   <a id="KSP_Modules_Module_WheelMotor_OnModuleOABFixedUpdate_" data-uid="KSP.Modules.Module_WheelMotor.OnModuleOABFixedUpdate*"></a>
   <h4 id="KSP_Modules_Module_WheelMotor_OnModuleOABFixedUpdate_System_Single_" data-uid="KSP.Modules.Module_WheelMotor.OnModuleOABFixedUpdate(System.Single)">OnModuleOABFixedUpdate(float)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called each fixed-update tick while the module is operating in the OAB context.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -599,7 +626,8 @@
 
   <a id="KSP_Modules_Module_WheelMotor_OnShutdown_" data-uid="KSP.Modules.Module_WheelMotor.OnShutdown*"></a>
   <h4 id="KSP_Modules_Module_WheelMotor_OnShutdown" data-uid="KSP.Modules.Module_WheelMotor.OnShutdown">OnShutdown()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Shuts down this submodule by unregistering from the owning <a class="xref" href="KSP.Modules.Module_WheelBase.html">Module_WheelBase</a> and detaching the subsystem-modified callback.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -611,7 +639,8 @@
 
   <a id="KSP_Modules_Module_WheelMotor_OnWheelSetup_" data-uid="KSP.Modules.Module_WheelMotor.OnWheelSetup*"></a>
   <h4 id="KSP_Modules_Module_WheelMotor_OnWheelSetup" data-uid="KSP.Modules.Module_WheelMotor.OnWheelSetup">OnWheelSetup()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Performs submodule-specific setup once the <a class="xref" href="KSPWheelController.html">KSPWheelController</a> has been assigned and base initialization is complete.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -622,15 +651,6 @@
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.Sim.IPartModule.html">IPartModule</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IFixedUpdate.html">IFixedUpdate</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IPriorityOverride.html">IPriorityOverride</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.IUpdate.html">IUpdate</a>
   </div>
   <div>
       <a class="xref" href="KSP.OAB.IObjectAssemblyPartModule.html">IObjectAssemblyPartModule</a>
