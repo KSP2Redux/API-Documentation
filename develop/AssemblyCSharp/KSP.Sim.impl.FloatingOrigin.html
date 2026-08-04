@@ -286,7 +286,7 @@ public class FloatingOrigin : SystemBase, IFloatingOrigin</code></pre>
 
   <a id="KSP_Sim_impl_FloatingOrigin_OnUpdate_" data-uid="KSP.Sim.impl.FloatingOrigin.OnUpdate*"></a>
   <h4 id="KSP_Sim_impl_FloatingOrigin_OnUpdate" data-uid="KSP.Sim.impl.FloatingOrigin.OnUpdate">OnUpdate()</h4>
-  <div class="markdown level1 summary"><p>Forces an inertial reference frame snap when the physics space reference frame has changed, and records that the physics step ran this frame.</p>
+  <div class="markdown level1 summary"><p>Resolves an inertial reference frame snap when the physics space reference frame has changed, and records that the physics step ran this frame.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -296,7 +296,10 @@ public class FloatingOrigin : SystemBase, IFloatingOrigin</code></pre>
   <h5 class="overrides">Overrides</h5>
   <div><span class="xref">Unity.Entities.SystemBase.OnUpdate()</span></div>
   <h5 id="KSP_Sim_impl_FloatingOrigin_OnUpdate_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>The position and velocity threshold check deliberately does not run here. It runs once per rendered frame from <a class="xref" href="KSP.Sim.impl.FloatingOrigin.html#KSP_Sim_impl_FloatingOrigin_ResolveOnUpdate">ResolveOnUpdate()</a>, after the physics step has completed. Snapping the origin from the physics step teleports every rigidbody across the frame change immediately before <code>Physics.Simulate</code>, which parts running continuous collision detection register as a high velocity contact.</p>
+  <div class="markdown level1 remarks"><p>The ordinary position and velocity threshold check deliberately does not run here. It
+runs once per rendered frame from <a class="xref" href="KSP.Sim.impl.FloatingOrigin.html#KSP_Sim_impl_FloatingOrigin_ResolveOnUpdate">ResolveOnUpdate()</a>. A physics reference
+frame change is different: every fixed step must use the matching inertial frame, so
+that forced snap is resolved immediately before physics advances again.</p>
 </div>
 
 
