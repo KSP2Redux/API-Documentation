@@ -176,15 +176,77 @@
 </h3>
 
 
+  <a id="GlobalAssemblyCSharp_ShaderHelper_Shaders_FindCached_" data-uid="GlobalAssemblyCSharp.ShaderHelper.Shaders.FindCached*"></a>
+  <h4 id="GlobalAssemblyCSharp_ShaderHelper_Shaders_FindCached_System_String_" data-uid="GlobalAssemblyCSharp.ShaderHelper.Shaders.FindCached(System.String)">FindCached(string)</h4>
+  <div class="markdown level1 summary"><p>Resolves a shader by name, retaining the first successful result for the rest of the session.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Shader FindCached(string shaderName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">shaderName</span></td>
+        <td><p>The shader name to resolve.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Shader.html">Shader</a></td>
+        <td><p>The shader, or <code>null</code> if it has never resolved.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="GlobalAssemblyCSharp_ShaderHelper_Shaders_FindCached_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+<span class="xref">UnityEngine.Shader.Find(System.String)</span> only sees shaders that are currently loaded. These shaders
+ship inside asset bundles rather than the build, so a lookup that succeeds during the first
+scene load returns null on the next one, once returning to the menu has unloaded the bundle.
+Holding the resolved shader in a static field roots it and stops the unload from collecting it,
+so every later caller keeps working.
+</p>
+<p>
+Callers must still handle null. A shader that has never resolved cannot be conjured, and passing
+null to a Material constructor throws.
+</p>
+</div>
+
+
   <a id="GlobalAssemblyCSharp_ShaderHelper_Shaders_InitShaderResources_" data-uid="GlobalAssemblyCSharp.ShaderHelper.Shaders.InitShaderResources*"></a>
   <h4 id="GlobalAssemblyCSharp_ShaderHelper_Shaders_InitShaderResources" data-uid="GlobalAssemblyCSharp.ShaderHelper.Shaders.InitShaderResources">InitShaderResources()</h4>
-  <div class="markdown level1 summary"><p>Loads and caches each shader in <a class="xref" href="ShaderHelper.html">ShaderHelper.Shaders</a> by name using <span class="xref">UnityEngine.Shader.Find(System.String)</span>.</p>
+  <div class="markdown level1 summary"><p>Loads and caches each shader in <a class="xref" href="ShaderHelper.html">ShaderHelper.Shaders</a> by name using <a class="xref" href="GlobalAssemblyCSharp.ShaderHelper.Shaders.html#ShaderHelper_Shaders_FindCached_System_String_">FindCached(string)</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static void InitShaderResources()</code></pre>
   </div>
+  <h5 id="GlobalAssemblyCSharp_ShaderHelper_Shaders_InitShaderResources_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Safe to call more than once. A later call cannot undo an earlier success, which matters because
+the shaders here live in asset bundles and stop resolving once those bundles unload.</p>
+</div>
 
 </article>
           </div>
