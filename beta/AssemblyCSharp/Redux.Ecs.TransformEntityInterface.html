@@ -238,6 +238,34 @@ public class TransformEntityInterface : ITransformFrameInternal, ITransformFrame
   </table>
 
 
+  <a id="Redux_Ecs_TransformEntityInterface_OwnedByLinkedGroup_" data-uid="Redux.Ecs.TransformEntityInterface.OwnedByLinkedGroup*"></a>
+  <h4 id="Redux_Ecs_TransformEntityInterface_OwnedByLinkedGroup" data-uid="Redux.Ecs.TransformEntityInterface.OwnedByLinkedGroup">OwnedByLinkedGroup</h4>
+  <div class="markdown level1 summary"><p>True when this frame entity is destroyed by its owner's DestroyEntity cascade (registered
+via <a class="xref" href="Redux.Ecs.OwnedEntities.html">OwnedEntities</a>.Link). Its dispose then only detaches from the parent and
+leaves component and entity removal to the cascade.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool OwnedByLinkedGroup { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="Redux_Ecs_TransformEntityInterface__transformInternal_" data-uid="Redux.Ecs.TransformEntityInterface._transformInternal*"></a>
   <h4 id="Redux_Ecs_TransformEntityInterface__transformInternal" data-uid="Redux.Ecs.TransformEntityInterface._transformInternal">_transformInternal</h4>
   <div class="markdown level1 summary"><p>Gets the <a class="xref" href="KSP.Sim.impl.ITransformModelInternal.html">ITransformModelInternal</a> providing internal simulation access to the transform model for this frame.</p>
@@ -816,6 +844,48 @@ public static void AddTransformToEntity(in EntityManager em, in Entity simEntity
   </table>
 
 
+  <a id="Redux_Ecs_TransformEntityInterface_DetachFromTransformGraph_" data-uid="Redux.Ecs.TransformEntityInterface.DetachFromTransformGraph*"></a>
+  <h4 id="Redux_Ecs_TransformEntityInterface_DetachFromTransformGraph_Unity_Entities_EntityManager_Unity_Entities_Entity_" data-uid="Redux.Ecs.TransformEntityInterface.DetachFromTransformGraph(Unity.Entities.EntityManager,Unity.Entities.Entity)">DetachFromTransformGraph(EntityManager, Entity)</h4>
+  <div class="markdown level1 summary"><p>Detaches an entity from the transform graph - unlinks it from its parent's child list and
+orphans its own children - without touching its own components.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void DetachFromTransformGraph(EntityManager em, Entity transformEnt)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td><p>The entity manager used to modify the graph.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">transformEnt</span></td>
+        <td><p>The entity to detach.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Ecs_TransformEntityInterface_DetachFromTransformGraph_Unity_Entities_EntityManager_Unity_Entities_Entity__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Called before a <span class="xref">Unity.Entities.LinkedEntityGroup</span> cascade destroys the entity. The cascade runs
+each owned entity's managed <a class="xref" href="Redux.Ecs.TransformEntityInterface.html#Redux_Ecs_TransformEntityInterface_Dispose">Dispose()</a> as part of <code>DestroyEntity</code>, by which
+point the entity is already gone and <a class="xref" href="Redux.Ecs.TransformEntityInterface.html#Redux_Ecs_TransformEntityInterface_Dispose">Dispose()</a> takes its &quot;no longer exists&quot;
+early-out, leaving the parent holding a dead child entry.</p>
+</div>
+
+
   <a id="Redux_Ecs_TransformEntityInterface_Dispose_" data-uid="Redux.Ecs.TransformEntityInterface.Dispose*"></a>
   <h4 id="Redux_Ecs_TransformEntityInterface_Dispose" data-uid="Redux.Ecs.TransformEntityInterface.Dispose">Dispose()</h4>
   <div class="markdown level1 summary"></div>
@@ -848,7 +918,7 @@ public static void AddTransformToEntity(in EntityManager em, in Entity simEntity
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">disposing</span></td>
-        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> when called from <a class="xref" href="Redux.Ecs.TransformEntityInterface.html#Redux_Ecs_TransformEntityInterface_Dispose">Dispose()</a>; <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a> when called from the finalizer.</p>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> when called from <a class="xref" href="Redux.Ecs.TransformEntityInterface.html#Redux_Ecs_TransformEntityInterface_Dispose">Dispose()</a>, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a> when called from the finalizer.</p>
 </td>
       </tr>
     </tbody>

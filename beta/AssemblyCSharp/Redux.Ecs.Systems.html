@@ -102,6 +102,15 @@ Classes
       <section></section>
       <h4><a class="xref" href="Redux.Ecs.Systems.SimLegacyUpdate.html">SimLegacyUpdate</a></h4>
       <section></section>
+      <h4><a class="xref" href="Redux.Ecs.Systems.SimObjectDestroyEcbSystem.html">SimObjectDestroyEcbSystem</a></h4>
+      <section><p>Plays back the deferred destruction of simulation-object and transform entities once per frame,
+at the end of <span class="xref">Unity.Entities.PresentationSystemGroup</span> - after both <a class="xref" href="Redux.Ecs.Systems.SimFixedUpdateGroup.html">SimFixedUpdateGroup</a>
+(FixedUpdate) and <a class="xref" href="Redux.Ecs.Systems.SimUpdateGroup.html">SimUpdateGroup</a> (Update). Managed teardown still runs synchronously
+inside <a class="xref" href="KSP.Sim.impl.SimulationObjectModel.html#KSP_Sim_impl_SimulationObjectModel_Destroy">Destroy()</a>. Only the entity destruction waits,
+so no structural change lands in the middle of a reentrant destroy. Playback cascades each entity's
+<span class="xref">Unity.Entities.LinkedEntityGroup</span> and disposes its managed components, which is where every
+<code>ObjectComponent.OnDispose</code> runs.</p>
+</section>
       <h4><a class="xref" href="Redux.Ecs.Systems.SimUpdateGroup.html">SimUpdateGroup</a></h4>
       <section></section>
       <h4><a class="xref" href="Redux.Ecs.Systems.ViewLegacyFixedUpdateSystem.html">ViewLegacyFixedUpdateSystem</a></h4>

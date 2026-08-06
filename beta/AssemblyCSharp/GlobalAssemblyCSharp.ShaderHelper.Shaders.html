@@ -178,13 +178,18 @@
 
   <a id="GlobalAssemblyCSharp_ShaderHelper_Shaders_InitShaderResources_" data-uid="GlobalAssemblyCSharp.ShaderHelper.Shaders.InitShaderResources*"></a>
   <h4 id="GlobalAssemblyCSharp_ShaderHelper_Shaders_InitShaderResources" data-uid="GlobalAssemblyCSharp.ShaderHelper.Shaders.InitShaderResources">InitShaderResources()</h4>
-  <div class="markdown level1 summary"><p>Loads and caches each shader in <a class="xref" href="ShaderHelper.html">ShaderHelper.Shaders</a> by name using <span class="xref">UnityEngine.Shader.Find(System.String)</span>.</p>
+  <div class="markdown level1 summary"><p>Loads and caches each shader in <a class="xref" href="ShaderHelper.html">ShaderHelper.Shaders</a> by name.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static void InitShaderResources()</code></pre>
   </div>
+  <h5 id="GlobalAssemblyCSharp_ShaderHelper_Shaders_InitShaderResources_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Safe to call more than once, and a later call cannot undo an earlier success. These shaders
+live in the ksp2.catalog AssetBundle, so a lookup made while that bundle is unavailable
+resolves null. Overwriting a good reference with that null would break every consumer.</p>
+</div>
 
 </article>
           </div>

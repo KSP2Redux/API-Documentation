@@ -106,6 +106,9 @@
       <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_Is_KSP_Sim_IGuidIdentity_">ObjectComponent.Is(IGuidIdentity)</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_Dispose">ObjectComponent.Dispose()</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnFixedUpdate_System_Double_System_Double_">ObjectComponent.OnFixedUpdate(double, double)</a>
     </div>
     <div>
@@ -2399,17 +2402,6 @@ public override Type Type { get; }</code></pre>
   </div>
 
 
-  <a id="KSP_Sim_impl_TelemetryComponent_Dispose_" data-uid="KSP.Sim.impl.TelemetryComponent.Dispose*"></a>
-  <h4 id="KSP_Sim_impl_TelemetryComponent_Dispose" data-uid="KSP.Sim.impl.TelemetryComponent.Dispose">Dispose()</h4>
-  <div class="markdown level1 summary"><p>Releases the internal transform models held by this component.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
-  </div>
-
-
   <a id="KSP_Sim_impl_TelemetryComponent_GetDefinition_" data-uid="KSP.Sim.impl.TelemetryComponent.GetDefinition*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_GetDefinition" data-uid="KSP.Sim.impl.TelemetryComponent.GetDefinition">GetDefinition()</h4>
   <div class="markdown level1 summary"><p>Returns the definition data object for this component.</p>
@@ -2550,41 +2542,35 @@ public override Type Type { get; }</code></pre>
   <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnAdded_KSP_Sim_impl_SimulationObjectModel_System_Double_">ObjectComponent.OnAdded(SimulationObjectModel, double)</a></div>
 
 
-  <a id="KSP_Sim_impl_TelemetryComponent_OnRemoved_" data-uid="KSP.Sim.impl.TelemetryComponent.OnRemoved*"></a>
-  <h4 id="KSP_Sim_impl_TelemetryComponent_OnRemoved_KSP_Sim_impl_SimulationObjectModel_System_Double_" data-uid="KSP.Sim.impl.TelemetryComponent.OnRemoved(KSP.Sim.impl.SimulationObjectModel,System.Double)">OnRemoved(SimulationObjectModel, double)</h4>
-  <div class="markdown level1 summary"><p>Called when this component is detached from its simulation object, clearing the stored reference.</p>
+  <a id="KSP_Sim_impl_TelemetryComponent_OnDestroyed_" data-uid="KSP.Sim.impl.TelemetryComponent.OnDestroyed*"></a>
+  <h4 id="KSP_Sim_impl_TelemetryComponent_OnDestroyed" data-uid="KSP.Sim.impl.TelemetryComponent.OnDestroyed">OnDestroyed()</h4>
+  <div class="markdown level1 summary"><p>Called immediately when this component's entity is scheduled to be destroyed.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void OnRemoved(SimulationObjectModel simulationObject, double universalTime)</code></pre>
+    <pre><code class="lang-csharp hljs">protected override void OnDestroyed()</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="KSP.Sim.impl.SimulationObjectModel.html">SimulationObjectModel</a></td>
-        <td><span class="parametername">simulationObject</span></td>
-        <td><p>The simulation object this component is being removed from.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">double</span></td>
-        <td><span class="parametername">universalTime</span></td>
-        <td><p>The universal time at which the component is removed, in seconds.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
   <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnRemoved_KSP_Sim_impl_SimulationObjectModel_System_Double_">ObjectComponent.OnRemoved(SimulationObjectModel, double)</a></div>
+  <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnDestroyed">ObjectComponent.OnDestroyed()</a></div>
+
+
+  <a id="KSP_Sim_impl_TelemetryComponent_OnDispose_" data-uid="KSP.Sim.impl.TelemetryComponent.OnDispose*"></a>
+  <h4 id="KSP_Sim_impl_TelemetryComponent_OnDispose" data-uid="KSP.Sim.impl.TelemetryComponent.OnDispose">OnDispose()</h4>
+  <div class="markdown level1 summary"><p>Called when the entity this component is attached to is destroyed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnDispose()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnDispose">ObjectComponent.OnDispose()</a></div>
+  <h5 id="KSP_Sim_impl_TelemetryComponent_OnDispose_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This runs during a structural change, so you cannot add or remove other entities or
+components. If you need to do that, use <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnDestroyed">OnDestroyed()</a> or record your changes
+into an EntityCommandBuffer that will be played back later.</p>
+</div>
 
 
   <a id="KSP_Sim_impl_TelemetryComponent_OnStart_" data-uid="KSP.Sim.impl.TelemetryComponent.OnStart*"></a>
@@ -2833,6 +2819,18 @@ public override Type Type { get; }</code></pre>
   </table>
 
 
+  <a id="KSP_Sim_impl_TelemetryComponent_UnregisterCommNetNode_" data-uid="KSP.Sim.impl.TelemetryComponent.UnregisterCommNetNode*"></a>
+  <h4 id="KSP_Sim_impl_TelemetryComponent_UnregisterCommNetNode" data-uid="KSP.Sim.impl.TelemetryComponent.UnregisterCommNetNode">UnregisterCommNetNode()</h4>
+  <div class="markdown level1 summary"><p>Removes this object's node from the CommNet graph. Called by the destroy sequence. The node
+reference itself is released in <a class="xref" href="KSP.Sim.impl.TelemetryComponent.html#KSP_Sim_impl_TelemetryComponent_OnDispose">OnDispose()</a>, when the entity is destroyed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UnregisterCommNetNode()</code></pre>
+  </div>
+
+
   <a id="KSP_Sim_impl_TelemetryComponent_ValidateState_" data-uid="KSP.Sim.impl.TelemetryComponent.ValidateState*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_ValidateState_System_Object_KSP_Sim_ISimulationModelMap_" data-uid="KSP.Sim.impl.TelemetryComponent.ValidateState(System.Object,KSP.Sim.ISimulationModelMap)">ValidateState(object, ISimulationModelMap)</h4>
   <div class="markdown level1 summary"><p>Returns a value indicating whether the supplied state data is valid for this component in the given simulation context.</p>
@@ -2877,7 +2875,7 @@ public override Type Type { get; }</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the state data is valid; otherwise <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the state data is valid, otherwise <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
 </td>
       </tr>
     </tbody>
