@@ -140,6 +140,57 @@
   </table>
 
 
+  <a id="KSP_Game_Missions_SaveLoadMissionUtils_CollectConditionLatches_" data-uid="KSP.Game.Missions.SaveLoadMissionUtils.CollectConditionLatches*"></a>
+  <h4 id="KSP_Game_Missions_SaveLoadMissionUtils_CollectConditionLatches_KSP_Game_Missions_Condition_" data-uid="KSP.Game.Missions.SaveLoadMissionUtils.CollectConditionLatches(KSP.Game.Missions.Condition)">CollectConditionLatches(Condition)</h4>
+  <div class="markdown level1 summary"><p>Collects the latched progress of every condition in a tree, in the order a pre-order walk reaches them.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool[] CollectConditionLatches(Condition root)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Game.Missions.Condition.html">Condition</a></td>
+        <td><span class="parametername">root</span></td>
+        <td><p>The root of the condition tree to walk. May be null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span>[]</td>
+        <td><p>One entry per latching condition, or an empty array when the tree is null or holds none.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Game_Missions_SaveLoadMissionUtils_CollectConditionLatches_KSP_Game_Missions_Condition__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Only conditions reporting <code>HasLatchedProgress</code> take a slot, so a grouping condition such as
+<a class="xref" href="KSP.Game.Missions.ConditionSet.html">ConditionSet</a> contributes nothing of its own and appears only through its children. This
+records the few bits of state a condition tree accumulates rather than a copy of the tree, which keeps
+the definition authoritative when a mission is updated underneath a save.</p>
+</div>
+
+
   <a id="KSP_Game_Missions_SaveLoadMissionUtils_IsMissionTracked_" data-uid="KSP.Game.Missions.SaveLoadMissionUtils.IsMissionTracked*"></a>
   <h4 id="KSP_Game_Missions_SaveLoadMissionUtils_IsMissionTracked_KSP_Game_Missions_Definitions_MissionData_System_Collections_Generic_List_KSP_Game_Missions_Definitions_TrackedMissions__KSP_Game_Missions_Definitions_MissionOwner_" data-uid="KSP.Game.Missions.SaveLoadMissionUtils.IsMissionTracked(KSP.Game.Missions.Definitions.MissionData,System.Collections.Generic.List{KSP.Game.Missions.Definitions.TrackedMissions},KSP.Game.Missions.Definitions.MissionOwner)">IsMissionTracked(MissionData, List&lt;TrackedMissions&gt;, MissionOwner)</h4>
   <div class="markdown level1 summary"><p>Determines whether the given mission appears in a list of tracked missions, optionally filtering by a specific owner.</p>
@@ -597,6 +648,63 @@
       </tr>
     </tbody>
   </table>
+
+
+  <a id="KSP_Game_Missions_SaveLoadMissionUtils_TryApplyConditionLatches_" data-uid="KSP.Game.Missions.SaveLoadMissionUtils.TryApplyConditionLatches*"></a>
+  <h4 id="KSP_Game_Missions_SaveLoadMissionUtils_TryApplyConditionLatches_KSP_Game_Missions_Condition_System_Boolean___" data-uid="KSP.Game.Missions.SaveLoadMissionUtils.TryApplyConditionLatches(KSP.Game.Missions.Condition,System.Boolean[])">TryApplyConditionLatches(Condition, bool[])</h4>
+  <div class="markdown level1 summary"><p>Restores previously collected latches onto a condition tree, matching them up by the same pre-order walk.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool TryApplyConditionLatches(Condition root, bool[] latches)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Game.Missions.Condition.html">Condition</a></td>
+        <td><span class="parametername">root</span></td>
+        <td><p>The root of the condition tree to restore onto. May be null.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span>[]</td>
+        <td><span class="parametername">latches</span></td>
+        <td><p>The array previously produced by <a class="xref" href="KSP.Game.Missions.SaveLoadMissionUtils.html#KSP_Game_Missions_SaveLoadMissionUtils_CollectConditionLatches_KSP_Game_Missions_Condition_">CollectConditionLatches(Condition)</a>. May be null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the latches were applied, false if they were refused and the tree left untouched.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Game_Missions_SaveLoadMissionUtils_TryApplyConditionLatches_KSP_Game_Missions_Condition_System_Boolean____remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Refuses the whole array when its length does not match the tree, which is what happens when a mission
+definition gains or loses a condition while a save that predates the change is still around. Discarding
+is the safe outcome there, since applying positionally would silently attach one condition's progress to
+another.</p>
+</div>
 
 
   <a id="KSP_Game_Missions_SaveLoadMissionUtils_TryCreateNewMissionSaveData_" data-uid="KSP.Game.Missions.SaveLoadMissionUtils.TryCreateNewMissionSaveData*"></a>
