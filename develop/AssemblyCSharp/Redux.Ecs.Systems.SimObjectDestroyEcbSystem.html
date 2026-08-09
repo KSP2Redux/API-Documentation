@@ -82,7 +82,7 @@
 
   <h1 id="Redux_Ecs_Systems_SimObjectDestroyEcbSystem" data-uid="Redux.Ecs.Systems.SimObjectDestroyEcbSystem" class="text-break">Class SimObjectDestroyEcbSystem</h1>
   <div class="markdown level0 summary"><p>Plays back the deferred destruction of simulation-object and transform entities once per frame,
-at the end of <span class="xref">Unity.Entities.PresentationSystemGroup</span> - after both <a class="xref" href="Redux.Ecs.Systems.SimFixedUpdateGroup.html">SimFixedUpdateGroup</a>
+at the end of <a class="xref" href="Redux.Ecs.Systems.SimLateUpdateGroup.html">SimLateUpdateGroup</a> - after both <a class="xref" href="Redux.Ecs.Systems.SimFixedUpdateGroup.html">SimFixedUpdateGroup</a>
 (FixedUpdate) and <a class="xref" href="Redux.Ecs.Systems.SimUpdateGroup.html">SimUpdateGroup</a> (Update). Managed teardown still runs synchronously
 inside <a class="xref" href="KSP.Sim.impl.SimulationObjectModel.html#KSP_Sim_impl_SimulationObjectModel_Destroy">Destroy()</a>. Only the entity destruction waits,
 so no structural change lands in the middle of a reentrant destroy. Playback cascades each entity's
@@ -101,8 +101,7 @@ so no structural change lands in the middle of a reentrant destroy. Playback cas
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="Redux_Ecs_Systems_SimObjectDestroyEcbSystem_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[WorldSystemFilter(WorldSystemFilterFlags.LocalSimulation, WorldSystemFilterFlags.Default)]
-[UpdateInGroup(typeof(PresentationSystemGroup), OrderLast = true)]
+    <pre><code class="lang-csharp hljs">[UpdateInGroup(typeof(SimLateUpdateGroup), OrderLast = true)]
 public class SimObjectDestroyEcbSystem : SystemBase</code></pre>
   </div>
   <h3 id="constructors">Constructors

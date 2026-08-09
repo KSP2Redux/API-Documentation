@@ -347,13 +347,13 @@ Returns -1 if the resource has not been scanned, 0 if the map is not loaded.</p>
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">longNorm</span></td>
-        <td><p>Normalized longitude in [0, 1], where 0 = -180° and 1 = +180°</p>
+        <td><p>Normalized longitude in [0, 1], where 0 = -180 deg and 1 = +180 deg</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">float</span></td>
         <td><span class="parametername">latNorm</span></td>
-        <td><p>Normalized latitude in [0, 1], where 0 = -90° and 1 = +90°</p>
+        <td><p>Normalized latitude in [0, 1], where 0 = -90 deg and 1 = +90 deg</p>
 </td>
       </tr>
     </tbody>
@@ -375,9 +375,72 @@ Returns -1 if the resource has not been scanned, 0 if the map is not loaded.</p>
   </table>
 
 
+  <a id="Redux_Managers_ISRUResourceManager_GetDensityMapPixel_" data-uid="Redux.Managers.ISRUResourceManager.GetDensityMapPixel*"></a>
+  <h4 id="Redux_Managers_ISRUResourceManager_GetDensityMapPixel_System_Double_System_Double_System_Int32_System_Int32_System_Int32__System_Int32__" data-uid="Redux.Managers.ISRUResourceManager.GetDensityMapPixel(System.Double,System.Double,System.Int32,System.Int32,System.Int32@,System.Int32@)">GetDensityMapPixel(double, double, int, int, out int, out int)</h4>
+  <div class="markdown level1 summary"><p>Converts a normalized longitude and latitude into pixel coordinates on a density map.
+Both axes are clamped to the last valid pixel. Rounding sends the final half pixel of each axis
+to the pixel one past the end, which a vessel reaches at the antimeridian or at a pole.
+Static and free of game state so the mapping can be tested.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void GetDensityMapPixel(double longNorm, double latNorm, int width, int height, out int x, out int y)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">longNorm</span></td>
+        <td><p>Normalized longitude in [0, 1].</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">latNorm</span></td>
+        <td><p>Normalized latitude in [0, 1].</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">width</span></td>
+        <td><p>Width of the density map in pixels.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">height</span></td>
+        <td><p>Height of the density map in pixels.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>Receives the clamped horizontal pixel index.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>Receives the clamped vertical pixel index.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="Redux_Managers_ISRUResourceManager_GetLocalDensity_" data-uid="Redux.Managers.ISRUResourceManager.GetLocalDensity*"></a>
   <h4 id="Redux_Managers_ISRUResourceManager_GetLocalDensity_KSP_Sim_impl_VesselComponent_System_String_System_Boolean_" data-uid="Redux.Managers.ISRUResourceManager.GetLocalDensity(KSP.Sim.impl.VesselComponent,System.String,System.Boolean)">GetLocalDensity(VesselComponent, string, bool)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Samples the resource density at the vessel's current geographic coordinates from the celestial body's density map.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -396,17 +459,20 @@ Returns -1 if the resource has not been scanned, 0 if the map is not loaded.</p>
       <tr>
         <td><a class="xref" href="KSP.Sim.impl.VesselComponent.html">VesselComponent</a></td>
         <td><span class="parametername">vessel</span></td>
-        <td></td>
+        <td><p>The vessel whose position and main body are used for the density lookup.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">resourceName</span></td>
-        <td></td>
+        <td><p>Internal name of the resource to sample.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">overrideScanning</span></td>
-        <td></td>
+        <td><p>When true, skips the scan requirement and returns density for unscanned resources.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -421,7 +487,9 @@ Returns -1 if the resource has not been scanned, 0 if the map is not loaded.</p>
     <tbody>
       <tr>
         <td><span class="xref">float</span></td>
-        <td></td>
+        <td><p>The red-channel value of the density map at the vessel's location, -1 if the resource has not been scanned and <code class="paramref">overrideScanning</code>
+is false, or 0 if the map is unavailable.</p>
+</td>
       </tr>
     </tbody>
   </table>
