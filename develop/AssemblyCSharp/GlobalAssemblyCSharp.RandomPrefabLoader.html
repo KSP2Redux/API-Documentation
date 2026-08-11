@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class RandomPrefabLoader | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="Serialized host for the main-menu prefab/vessel rotation. Runtime ownership lives in  so OTA menu-vessel lifecycle stays out of the prefab component.">
+    <meta name="description" content="Randomly selects and asynchronously loads a prefab from a configured list, replacing the active instance each time one reports itself finished.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,8 +81,8 @@
 
 
   <h1 id="GlobalAssemblyCSharp_RandomPrefabLoader" data-uid="GlobalAssemblyCSharp.RandomPrefabLoader" class="text-break">Class RandomPrefabLoader</h1>
-  <div class="markdown level0 summary"><p>Serialized host for the main-menu prefab/vessel rotation. Runtime ownership lives in
-<a class="xref" href="Redux.UI.MainMenu.MainMenuVesselRotationSession.html">MainMenuVesselRotationSession</a> so OTA menu-vessel lifecycle stays out of the prefab component.</p>
+  <div class="markdown level0 summary"><p>Randomly selects and asynchronously loads a prefab from a configured list, replacing the active instance each
+time one reports itself finished.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -119,6 +119,12 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class RandomPrefabLoader : KerbalMonoBehaviour, IAsyncHandleAccess</code></pre>
   </div>
+  <h5 id="GlobalAssemblyCSharp_RandomPrefabLoader_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>The main menu's loader does something else entirely: it rotates through published craft, flies them in and out,
+and turns the planet behind them. That lives in <a class="xref" href="Redux.UI.MainMenu.MainMenuVesselRotationSession.html">MainMenuVesselRotationSession</a> and is built only
+for the loader that runs in the menu. Every other loader in the game - ten of them dress Mission Control alone -
+swaps its prefab where it stands, which is what this component did before the menu rotation existed.</p>
+</div>
   <h3 id="constructors">Constructors
 </h3>
 
