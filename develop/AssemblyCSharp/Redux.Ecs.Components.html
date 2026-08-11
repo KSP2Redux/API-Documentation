@@ -88,7 +88,7 @@ Classes
       <h4><a class="xref" href="Redux.Ecs.Components.CurrentPatchedConicsOrbit.html">CurrentPatchedConicsOrbit</a></h4>
       <section><p>Managed ECS component representing the current patched-conics orbit patch for an entity.
 Unmanaged orbital data is read from and written to the entity's <a class="xref" href="Redux.Ecs.Components.PatchedConicsOrbitData.html">PatchedConicsOrbitData</a>
-component; managed-side state (velocity, patch graph) is stored directly on this class.
+component. Managed-side state (velocity, patch graph) is stored directly on this class.
 The reference body is identified by <a class="xref" href="Redux.Ecs.Components.PatchedConicsOrbitData.html#Redux_Ecs_Components_PatchedConicsOrbitData_ReferenceBodyEntity">ReferenceBodyEntity</a> and
 resolved to a <a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a> on demand via <a class="xref" href="Redux.Ecs.Components.SimObjectManagedData.html">SimObjectManagedData</a>.</p>
 </section>
@@ -135,7 +135,7 @@ frame-bound <a class="xref" href="Redux.Ecs.Components.VectorD.html">VectorD</a>
       <h4><a class="xref" href="Redux.Ecs.Components.BoundViewObject.html">BoundViewObject</a></h4>
       <section></section>
       <h4><a class="xref" href="Redux.Ecs.Components.CelestialBodyChild.html">CelestialBodyChild</a></h4>
-      <section><p>One orbiting child of a celestial body. Each body holds a buffer of its children; the
+      <section><p>One orbiting child of a celestial body. Each body holds a buffer of its children. The
 <a class="xref" href="Redux.Ecs.Components.CelestialBodyHierarchyRoot.html">CelestialBodyHierarchyRoot</a> singleton holds the stars.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.CelestialBodyHasRotationUpdate.html">CelestialBodyHasRotationUpdate</a></h4>
@@ -145,7 +145,7 @@ fixed update reads it to raise <code>CelestialBodyComponent.RotationUpdated</cod
 <code>CelestialBodyComponent.AngularVelocityUpdated</code>.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.CelestialBodyHierarchyRoot.html">CelestialBodyHierarchyRoot</a></h4>
-      <section><p>Singleton root of the celestial-body tree; its <a class="xref" href="Redux.Ecs.Components.CelestialBodyChild.html">CelestialBodyChild</a> buffer holds the stars.</p>
+      <section><p>Singleton root of the celestial-body tree. Its <a class="xref" href="Redux.Ecs.Components.CelestialBodyChild.html">CelestialBodyChild</a> buffer holds the stars.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.CelestialBodySimData.html">CelestialBodySimData</a></h4>
       <section><p>Unmanaged source of truth for the celestial-body fields driven by <code>CelestialBodyOrderedUpdateSystem</code>,
@@ -170,7 +170,7 @@ and resolves its owning part's data through this back-reference.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.ModuleRequestEntity.html">ModuleRequestEntity</a></h4>
       <section><p>The resource-flow request entity owned by a part-module entity. Backs
-<a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RequestEntity">RequestEntity</a>; added when the module first allocates a
+<a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RequestEntity">RequestEntity</a>. Added when the module first allocates a
 request.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.OrbitStabilityData.html">OrbitStabilityData</a></h4>
@@ -181,7 +181,7 @@ request.</p>
       <section><p>Authoritative unmanaged state for <a class="xref" href="KSP.Sim.impl.OrbiterComponent.html">OrbiterComponent</a>.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.OrbiterFrame.html">OrbiterFrame</a></h4>
-      <section><p>The orbiter's own celestial frame entity; its <a class="xref" href="Redux.Ecs.Components.Transformd.html">Transformd</a> holds the live (physics-driven) position
+      <section><p>The orbiter's own celestial frame entity. Its <a class="xref" href="Redux.Ecs.Components.Transformd.html">Transformd</a> holds the live (physics-driven) position
 the orbit-driver job resolves the owning body from when the orbiter is off-rails.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.OrbiterMainBody.html">OrbiterMainBody</a></h4>
@@ -232,7 +232,7 @@ walking managed state. Stamped and stripped alongside the
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.PatchedConicsOrbitData.html">PatchedConicsOrbitData</a></h4>
       <section><p>Unmanaged Keplerian state for a patched-conics orbit: the orbital elements plus the values derived from them
-during propagation. <a class="xref" href="KSP.Sim.impl.PatchedConicsOrbit.html">PatchedConicsOrbit</a> holds one of these and forwards its public API to it; the
+during propagation. <a class="xref" href="KSP.Sim.impl.PatchedConicsOrbit.html">PatchedConicsOrbit</a> holds one of these and forwards its public API to it. The
 Keplerian math is (being) moved onto this struct as instance methods so it can later run in a Burst job.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.PhysicsSpaceFrame.html">PhysicsSpaceFrame</a></h4>
@@ -267,13 +267,13 @@ a vessel's request entities are grouped into the same chunks. The solve filters 
 buffers (<a class="xref" href="Redux.Ecs.Components.ResourceDefinitionRow.html">ResourceDefinitionRow</a> and <a class="xref" href="Redux.Ecs.Components.ResourceIngredientRow.html">ResourceIngredientRow</a>).</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.ResourceFlowFailedResource.html">ResourceFlowFailedResource</a></h4>
-      <section><p>One resource a request failed to process this tick. Populated only on rejection; cleared before each
+      <section><p>One resource a request failed to process this tick. Populated only on rejection. Cleared before each
 solve.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.ResourceFlowInstructionData.html">ResourceFlowInstructionData</a></h4>
       <section><p>One compiled flow instruction on a request entity. The buffer holds exactly this request's
-instructions — one buffer is one request, so there are no slice fields. The flow target is not stored
-here; it is the request's <a class="xref" href="Redux.Ecs.Components.RequestPart.html">RequestPart</a>.</p>
+instructions - one buffer is one request, so there are no slice fields. The flow target is not stored
+here. It is the request's <a class="xref" href="Redux.Ecs.Components.RequestPart.html">RequestPart</a>.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.ResourceFlowRequest.html">ResourceFlowRequest</a></h4>
       <section><p>Header for a resource-flow request entity: a control flag plus a non-identity discriminator. The
@@ -308,7 +308,7 @@ bitset and exposed as boolean accessors.</p>
 properties on <a class="xref" href="KSP.Sim.impl.TelemetryComponent.html">TelemetryComponent</a>.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.ThermalBodyContext.html">ThermalBodyContext</a></h4>
-      <section><p>Per-owner body chain (main body up through its reference bodies); each entry is a body and its
+      <section><p>Per-owner body chain (main body up through its reference bodies). Each entry is a body and its
 surface-flux base.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.ThermalOwnerData.html">ThermalOwnerData</a></h4>
