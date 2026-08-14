@@ -297,6 +297,45 @@ game has left the states this rotation runs in.</p>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void Tick()</code></pre>
   </div>
+
+
+  <a id="Redux_UI_MainMenu_MainMenuVesselRotationSession_UnloadForMenuClose_" data-uid="Redux.UI.MainMenu.MainMenuVesselRotationSession.UnloadForMenuClose*"></a>
+  <h4 id="Redux_UI_MainMenu_MainMenuVesselRotationSession_UnloadForMenuClose" data-uid="Redux.UI.MainMenu.MainMenuVesselRotationSession.UnloadForMenuClose">UnloadForMenuClose()</h4>
+  <div class="markdown level1 summary"><p>Takes the menu's craft down in an order that leaves nothing reading from a bundle as it closes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerator UnloadForMenuClose()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IEnumerator</span></td>
+        <td><p>An enumerator that finishes once everything has been released.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_UI_MainMenu_MainMenuVesselRotationSession_UnloadForMenuClose_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Called by the loading flow while the curtain is up, on the way out of the menu, so the wait below costs
+nothing anybody sees. The order is the whole point:</p>
+<ol><li>the craft stop being drawn, which is what stops the streaming system wanting more of them</li><li>whatever it already asked for is allowed to finish, which is what this waits on</li><li>only then are the parts released, closing their bundles with nothing outstanding</li></ol>
+Doing the last of those first is the version that fills the log: a menu craft's parts come from
+hundreds of bundles, their textures are streamed, and every read still in the air when an archive
+closes fails and is logged from a loader thread.
+<p>
+Switching the craft off is not free either, since dropping a texture's mip level is itself a read, so
+it is done before the wait rather than after it.
+</p>
+</div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
