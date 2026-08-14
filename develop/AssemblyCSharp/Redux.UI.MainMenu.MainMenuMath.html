@@ -131,6 +131,36 @@ running the game.</p>
   </table>
 
 
+  <h4 id="Redux_UI_MainMenu_MainMenuMath_LIGHT_SCALE_EXPONENT" data-uid="Redux.UI.MainMenu.MainMenuMath.LIGHT_SCALE_EXPONENT">LIGHT_SCALE_EXPONENT</h4>
+  <div class="markdown level1 summary"><p>How a craft's own lights are brightened for the size the menu draws it at, as a power of that size.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const float LIGHT_SCALE_EXPONENT = 0.5</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_UI_MainMenu_MainMenuMath_LIGHT_SCALE_EXPONENT_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Gentler than the sun's curve, which is gentler again than the physics. A lamp is looked at directly
+rather than by the light it casts on a planet, so it goes to white long before the arithmetic says it
+should.</p>
+</div>
+
+
   <h4 id="Redux_UI_MainMenu_MainMenuMath_PERCEIVED_BRIGHTNESS_EXPONENT" data-uid="Redux.UI.MainMenu.MainMenuMath.PERCEIVED_BRIGHTNESS_EXPONENT">PERCEIVED_BRIGHTNESS_EXPONENT</h4>
   <div class="markdown level1 summary"><p>How much of a change in light an eye actually sees. Perceived brightness goes roughly as intensity to
 this power, which is why a room lit at half the wattage does not look half as bright.</p>
@@ -600,6 +630,63 @@ breaks that is terrain: a mountain is a rounding error against a planet's radius
 on a rock a mile across, and it is the drawn shape rather than the sphere under it that runs into the
 craft. Pulling the body back by exactly what it overhangs leaves a smooth one untouched and gives a
 lumpy one the same room in frame.</p>
+</div>
+
+
+  <a id="Redux_UI_MainMenu_MainMenuMath_SolveLightScale_" data-uid="Redux.UI.MainMenu.MainMenuMath.SolveLightScale*"></a>
+  <h4 id="Redux_UI_MainMenu_MainMenuMath_SolveLightScale_System_Single_System_Single_" data-uid="Redux.UI.MainMenu.MainMenuMath.SolveLightScale(System.Single,System.Single)">SolveLightScale(float, float)</h4>
+  <div class="markdown level1 summary"><p>Returns what to multiply a craft's own lights by for the size the menu draws it at.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float SolveLightScale(float drawnScale, float exponent)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">drawnScale</span></td>
+        <td><p>How much larger than life the craft is being drawn.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">exponent</span></td>
+        <td><p>The power to raise it to, which is settled by eye.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><p>The multiplier, which is one for a craft drawn at the size it was built.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_UI_MainMenu_MainMenuMath_SolveLightScale_System_Single_System_Single__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>A lamp reaching several times further than it was authored to arrives at nothing unless it is
+brightened to match. The square that light physically loses is far more than anybody wants to look at,
+and so is the curve the sun is scaled along, so this one was picked by eye against a craft with its
+lamps on.</p>
 </div>
 
 
