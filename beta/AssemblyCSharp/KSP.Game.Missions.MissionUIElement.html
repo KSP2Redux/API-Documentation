@@ -908,11 +908,68 @@ public Property&lt;string&gt; submitTooltipText</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the mission IDs match and the objectives list was updated; otherwise <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the mission IDs match and the objectives list was updated, and <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a> otherwise.</p>
 </td>
       </tr>
     </tbody>
   </table>
+
+
+  <a id="KSP_Game_Missions_MissionUIElement_TryUpdateObjectives_" data-uid="KSP.Game.Missions.MissionUIElement.TryUpdateObjectives*"></a>
+  <h4 id="KSP_Game_Missions_MissionUIElement_TryUpdateObjectives_KSP_Game_Missions_Definitions_MissionData_System_Collections_Generic_IReadOnlyList_System_Int32__" data-uid="KSP.Game.Missions.MissionUIElement.TryUpdateObjectives(KSP.Game.Missions.Definitions.MissionData,System.Collections.Generic.IReadOnlyList{System.Int32})">TryUpdateObjectives(MissionData, IReadOnlyList&lt;int&gt;)</h4>
+  <div class="markdown level1 summary"><p>Rebuilds the objective list, counting the supplied stage identifiers as met as well.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryUpdateObjectives(MissionData missionData, IReadOnlyList&lt;int&gt; alsoCompletedStageIds)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Game.Missions.Definitions.MissionData.html">MissionData</a></td>
+        <td><span class="parametername">missionData</span></td>
+        <td><p>The mission whose stages are listed.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">IReadOnlyList</span>&lt;<span class="xref">int</span>&gt;</td>
+        <td><span class="parametername">alsoCompletedStageIds</span></td>
+        <td><p>Stage identifiers to show as met. May be null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the objectives were rebuilt, false if the mission is not the one this element shows.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Game_Missions_MissionUIElement_TryUpdateObjectives_KSP_Game_Missions_Definitions_MissionData_System_Collections_Generic_IReadOnlyList_System_Int32___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The live mission holds the progress of whichever craft is flying, which is the right answer in
+flight and an arbitrary one in Mission Control, where several craft may be working the same run.
+Passing what the fleet managed lets Mission Control show its own answer without writing it onto the
+mission everything else evaluates from.</p>
+</div>
 
 
   <a id="KSP_Game_Missions_MissionUIElement_UpdateMissionLogButtonStatus_" data-uid="KSP.Game.Missions.MissionUIElement.UpdateMissionLogButtonStatus*"></a>

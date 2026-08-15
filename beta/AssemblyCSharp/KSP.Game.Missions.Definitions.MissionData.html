@@ -450,6 +450,38 @@ public List&lt;MissionBranch&gt; PreRequisiteBranches</code></pre>
   </table>
 
 
+  <h4 id="KSP_Game_Missions_Definitions_MissionData_RequiresNewVessel" data-uid="KSP.Game.Missions.Definitions.MissionData.RequiresNewVessel">RequiresNewVessel</h4>
+  <div class="markdown level1 summary"><p>A value indicating whether only craft built after this mission was picked up may work on it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[KSPDefinition]
+public bool RequiresNewVessel</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Game_Missions_Definitions_MissionData_RequiresNewVessel_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Off unless the author asks for it, which is how KSP1 contracts treat craft that already exist. It
+belongs to the mission rather than to a stage, because it is measured against when the mission was
+picked up, and a run late in a mission is judged against that same moment rather than against when
+the run began.</p>
+</div>
+
+
   <h4 id="KSP_Game_Missions_Definitions_MissionData_TriumphLoopVideoKey" data-uid="KSP.Game.Missions.Definitions.MissionData.TriumphLoopVideoKey">TriumphLoopVideoKey</h4>
   <div class="markdown level1 summary"><p>The asset key for the looping triumph video played on mission completion.</p>
 </div>
@@ -791,6 +823,60 @@ public UIDisplayType uiDisplayType</code></pre>
 </h3>
 
 
+  <a id="KSP_Game_Missions_Definitions_MissionData_CopyStringVariables_" data-uid="KSP.Game.Missions.Definitions.MissionData.CopyStringVariables*"></a>
+  <h4 id="KSP_Game_Missions_Definitions_MissionData_CopyStringVariables" data-uid="KSP.Game.Missions.Definitions.MissionData.CopyStringVariables">CopyStringVariables()</h4>
+  <div class="markdown level1 summary"><p>Returns a copy of the mission-scoped variables captured so far.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, string&gt; CopyStringVariables()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Dictionary</span>&lt;<span class="xref">string</span>, <span class="xref">string</span>&gt;</td>
+        <td><p>A dictionary holding every captured variable, empty when none have been captured.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Game_Missions_Definitions_MissionData_CopyVesselStringVariables_" data-uid="KSP.Game.Missions.Definitions.MissionData.CopyVesselStringVariables*"></a>
+  <h4 id="KSP_Game_Missions_Definitions_MissionData_CopyVesselStringVariables" data-uid="KSP.Game.Missions.Definitions.MissionData.CopyVesselStringVariables">CopyVesselStringVariables()</h4>
+  <div class="markdown level1 summary"><p>Returns a copy of the variables captured while a vessel scoped stage was running.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, string&gt; CopyVesselStringVariables()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Dictionary</span>&lt;<span class="xref">string</span>, <span class="xref">string</span>&gt;</td>
+        <td><p>A dictionary holding the capturing vessel's variables, empty when it captured none.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Game_Missions_Definitions_MissionData_CurrentStageUpdatesExceptionBranches_" data-uid="KSP.Game.Missions.Definitions.MissionData.CurrentStageUpdatesExceptionBranches*"></a>
   <h4 id="KSP_Game_Missions_Definitions_MissionData_CurrentStageUpdatesExceptionBranches" data-uid="KSP.Game.Missions.Definitions.MissionData.CurrentStageUpdatesExceptionBranches">CurrentStageUpdatesExceptionBranches()</h4>
   <div class="markdown level1 summary"><p>Returns a value indicating whether the current stage participates in exception branch evaluation.</p>
@@ -811,7 +897,7 @@ public UIDisplayType uiDisplayType</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td><p><code>true</code> if exception branches should be updated and evaluated for the current stage; <code>false</code> if the stage suppresses them.</p>
+        <td><p><code>true</code> if exception branches should be updated and evaluated for the current stage, and <code>false</code> if the stage suppresses them.</p>
 </td>
       </tr>
     </tbody>
@@ -894,7 +980,7 @@ public UIDisplayType uiDisplayType</code></pre>
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">dumpStatus</span></td>
-        <td><p>When <code>true</code>, appends the condition status dump for each stage; otherwise only the headline is included.</p>
+        <td><p>When <code>true</code>, appends the condition status dump for each stage, and otherwise only the headline is included.</p>
 </td>
       </tr>
     </tbody>
@@ -1042,7 +1128,7 @@ public UIDisplayType uiDisplayType</code></pre>
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">applyPriorState</span></td>
-        <td><p>When <code>true</code> and the mission is a tutorial, the tutorial save is exited; otherwise the callback is invoked directly.</p>
+        <td><p>When <code>true</code> and the mission is a tutorial, the tutorial save is exited, and otherwise the callback is invoked directly.</p>
 </td>
       </tr>
       <tr>
@@ -1121,6 +1207,17 @@ public UIDisplayType uiDisplayType</code></pre>
   </div>
 
 
+  <a id="KSP_Game_Missions_Definitions_MissionData_PromoteVesselStringVariables_" data-uid="KSP.Game.Missions.Definitions.MissionData.PromoteVesselStringVariables*"></a>
+  <h4 id="KSP_Game_Missions_Definitions_MissionData_PromoteVesselStringVariables" data-uid="KSP.Game.Missions.Definitions.MissionData.PromoteVesselStringVariables">PromoteVesselStringVariables()</h4>
+  <div class="markdown level1 summary"><p>Hands the variables captured during a run to the campaign, and clears the vessel scoped ones.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void PromoteVesselStringVariables()</code></pre>
+  </div>
+
+
   <a id="KSP_Game_Missions_Definitions_MissionData_ReactivateCurrentStage_" data-uid="KSP.Game.Missions.Definitions.MissionData.ReactivateCurrentStage*"></a>
   <h4 id="KSP_Game_Missions_Definitions_MissionData_ReactivateCurrentStage" data-uid="KSP.Game.Missions.Definitions.MissionData.ReactivateCurrentStage">ReactivateCurrentStage()</h4>
   <div class="markdown level1 summary"><p>Re-activates the current stage along with any applicable exception and pre-requisite branches, resuming mission execution from its saved position.</p>
@@ -1190,6 +1287,40 @@ public UIDisplayType uiDisplayType</code></pre>
   </table>
 
 
+  <a id="KSP_Game_Missions_Definitions_MissionData_SetPendingConditionLatches_" data-uid="KSP.Game.Missions.Definitions.MissionData.SetPendingConditionLatches*"></a>
+  <h4 id="KSP_Game_Missions_Definitions_MissionData_SetPendingConditionLatches_System_Boolean___" data-uid="KSP.Game.Missions.Definitions.MissionData.SetPendingConditionLatches(System.Boolean[])">SetPendingConditionLatches(bool[])</h4>
+  <div class="markdown level1 summary"><p>Holds restored condition latches until the stages have been initialized.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetPendingConditionLatches(bool[] latches)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span>[]</td>
+        <td><span class="parametername">latches</span></td>
+        <td><p>The latches read from the save, or null when the save carried none.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Game_Missions_Definitions_MissionData_SetPendingConditionLatches_System_Boolean____remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Initializing a stage rebuilds its condition tree from the serialized definition, which would discard
+anything written beforehand, so the latches have to wait for <a class="xref" href="KSP.Game.Missions.Definitions.MissionData.html#KSP_Game_Missions_Definitions_MissionData_OnInitialize">OnInitialize()</a> to finish
+building the tree they belong to.</p>
+</div>
+
+
   <a id="KSP_Game_Missions_Definitions_MissionData_SetStringVariable_" data-uid="KSP.Game.Missions.Definitions.MissionData.SetStringVariable*"></a>
   <h4 id="KSP_Game_Missions_Definitions_MissionData_SetStringVariable_System_String_System_String_" data-uid="KSP.Game.Missions.Definitions.MissionData.SetStringVariable(System.String,System.String)">SetStringVariable(string, string)</h4>
   <div class="markdown level1 summary"><p>Stores a string value under a mission-scoped variable name.</p>
@@ -1234,7 +1365,65 @@ public UIDisplayType uiDisplayType</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td><p>True when the value was stored; false when the variable name was empty.</p>
+        <td><p>True when the value was stored, false when the variable name was empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Game_Missions_Definitions_MissionData_SetStringVariables_" data-uid="KSP.Game.Missions.Definitions.MissionData.SetStringVariables*"></a>
+  <h4 id="KSP_Game_Missions_Definitions_MissionData_SetStringVariables_System_Collections_Generic_Dictionary_System_String_System_String__" data-uid="KSP.Game.Missions.Definitions.MissionData.SetStringVariables(System.Collections.Generic.Dictionary{System.String,System.String})">SetStringVariables(Dictionary&lt;string, string&gt;)</h4>
+  <div class="markdown level1 summary"><p>Replaces the mission-scoped variables with a copy of the supplied values.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetStringVariables(Dictionary&lt;string, string&gt; variables)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Dictionary</span>&lt;<span class="xref">string</span>, <span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">variables</span></td>
+        <td><p>The variables to restore. A null value clears the existing ones.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Game_Missions_Definitions_MissionData_SetVesselStringVariables_" data-uid="KSP.Game.Missions.Definitions.MissionData.SetVesselStringVariables*"></a>
+  <h4 id="KSP_Game_Missions_Definitions_MissionData_SetVesselStringVariables_System_Collections_Generic_Dictionary_System_String_System_String__" data-uid="KSP.Game.Missions.Definitions.MissionData.SetVesselStringVariables(System.Collections.Generic.Dictionary{System.String,System.String})">SetVesselStringVariables(Dictionary&lt;string, string&gt;)</h4>
+  <div class="markdown level1 summary"><p>Replaces the vessel scoped variables with a copy of the supplied values.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetVesselStringVariables(Dictionary&lt;string, string&gt; variables)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Dictionary</span>&lt;<span class="xref">string</span>, <span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">variables</span></td>
+        <td><p>The variables to restore. A null value clears the existing ones.</p>
 </td>
       </tr>
     </tbody>
@@ -1343,7 +1532,7 @@ public UIDisplayType uiDisplayType</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td><p><code>true</code> if a matching content branch was found; otherwise <code>false</code>.</p>
+        <td><p><code>true</code> if a matching content branch was found, and <code>false</code> otherwise.</p>
 </td>
       </tr>
     </tbody>
@@ -1378,7 +1567,7 @@ public UIDisplayType uiDisplayType</code></pre>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">value</span></td>
-        <td><p>The stored value when found; otherwise an empty string.</p>
+        <td><p>The stored value when found, or an empty string.</p>
 </td>
       </tr>
     </tbody>
@@ -1394,11 +1583,74 @@ public UIDisplayType uiDisplayType</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td><p>True when the variable exists; otherwise false.</p>
+        <td><p>True when the variable exists, false otherwise.</p>
 </td>
       </tr>
     </tbody>
   </table>
+
+
+  <a id="KSP_Game_Missions_Definitions_MissionData_TryGetVesselRun_" data-uid="KSP.Game.Missions.Definitions.MissionData.TryGetVesselRun*"></a>
+  <h4 id="KSP_Game_Missions_Definitions_MissionData_TryGetVesselRun_System_Int32_System_Int32__System_Int32__" data-uid="KSP.Game.Missions.Definitions.MissionData.TryGetVesselRun(System.Int32,System.Int32@,System.Int32@)">TryGetVesselRun(int, out int, out int)</h4>
+  <div class="markdown level1 summary"><p>Returns the bounds of the run of consecutive vessel-scoped stages that the given stage belongs to.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryGetVesselRun(int stageIndex, out int firstStageIndex, out int lastStageIndex)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">stageIndex</span></td>
+        <td><p>The index of the stage to locate.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">firstStageIndex</span></td>
+        <td><p>When this method returns <code>true</code>, the index of the run's first stage.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">lastStageIndex</span></td>
+        <td><p>When this method returns <code>true</code>, the index of the run's last stage.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the stage is vessel-scoped and therefore part of a run, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Game_Missions_Definitions_MissionData_TryGetVesselRun_System_Int32_System_Int32__System_Int32___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>A run is every unbroken span of stages set to <a class="xref" href="KSP.Game.Missions.Definitions.MissionProgressScope.html#KSP_Game_Missions_Definitions_MissionProgressScope_Vessel">Vessel</a>. One vessel has
+to carry a run from its first stage to its last, and a <a class="xref" href="KSP.Game.Missions.Definitions.MissionProgressScope.html#KSP_Game_Missions_Definitions_MissionProgressScope_Campaign">Campaign</a> stage
+ends it, so the stages beyond are open to whichever vessel is flying by then. Runs are derived from the
+stage list rather than stored, so they cannot fall out of step with the definition.</p>
+</div>
 
 
   <a id="KSP_Game_Missions_Definitions_MissionData_Update_" data-uid="KSP.Game.Missions.Definitions.MissionData.Update*"></a>

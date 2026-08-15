@@ -109,7 +109,7 @@ events published since the system's last run.</p>
   <h5 id="Redux_Ecs_Event_Subscriber_1_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>Call <a class="xref" href="Redux.Ecs.Event.Subscriber-1.html#Redux_Ecs_Event_Subscriber_1_Initialize_Unity_Entities_SystemState__">Initialize(ref SystemState)</a> in <code>OnCreate</code>,
 <a class="xref" href="Redux.Ecs.Event.Subscriber-1.html#Redux_Ecs_Event_Subscriber_1_Update_Unity_Entities_SystemState__">Update(ref SystemState)</a> at the start of <code>OnUpdate</code>, and
-<a class="xref" href="Redux.Ecs.Event.Subscriber-1.html#Redux_Ecs_Event_Subscriber_1_Dispose">Dispose()</a> in <code>OnDestroy</code>; then schedule the read job with the
+<a class="xref" href="Redux.Ecs.Event.Subscriber-1.html#Redux_Ecs_Event_Subscriber_1_Dispose">Dispose()</a> in <code>OnDestroy</code>. Then schedule the read job with the
 implicit dependency.</p>
 </div>
   <h3 id="methods">Methods
@@ -120,7 +120,7 @@ implicit dependency.</p>
   <h4 id="Redux_Ecs_Event_Subscriber_1_AsDeferredJobArray" data-uid="Redux.Ecs.Event.Subscriber`1.AsDeferredJobArray">AsDeferredJobArray()</h4>
   <div class="markdown level1 summary"><p>Returns a NativeArray that resolves to this frame's unread events when the
 consuming job starts (after the flush and cursor jobs have run). Reacquire every
-frame; unreadable on the main thread.</p>
+frame. Unreadable on the main thread.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -157,7 +157,7 @@ frame; unreadable on the main thread.</p>
 
   <a id="Redux_Ecs_Event_Subscriber_1_GetReader_" data-uid="Redux.Ecs.Event.Subscriber`1.GetReader*"></a>
   <h4 id="Redux_Ecs_Event_Subscriber_1_GetReader" data-uid="Redux.Ecs.Event.Subscriber`1.GetReader">GetReader()</h4>
-  <div class="markdown level1 summary"><p>Returns the read view for this frame's read job. Safe on the main thread — copies
+  <div class="markdown level1 summary"><p>Returns the read view for this frame's read job. Safe on the main thread - copies
 handles only, touches no container data.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -184,7 +184,7 @@ handles only, touches no container data.</p>
 
   <a id="Redux_Ecs_Event_Subscriber_1_Initialize_" data-uid="Redux.Ecs.Event.Subscriber`1.Initialize*"></a>
   <h4 id="Redux_Ecs_Event_Subscriber_1_Initialize_Unity_Entities_SystemBase_" data-uid="Redux.Ecs.Event.Subscriber`1.Initialize(Unity.Entities.SystemBase)">Initialize(SystemBase)</h4>
-  <div class="markdown level1 summary"><p>SystemBase overload; call as <code>_subscriber.Initialize(this)</code> in OnCreate.</p>
+  <div class="markdown level1 summary"><p>SystemBase overload. Call as <code>_subscriber.Initialize(this)</code> in OnCreate.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -295,7 +295,7 @@ handles only, touches no container data.</p>
   <h4 id="Redux_Ecs_Event_Subscriber_1_ScheduleParallel__1___0_System_Int32_Unity_Entities_SystemState__" data-uid="Redux.Ecs.Event.Subscriber`1.ScheduleParallel``1(``0,System.Int32,Unity.Entities.SystemState@)">ScheduleParallel&lt;TJob&gt;(TJob, int, ref SystemState)</h4>
   <div class="markdown level1 summary"><p>Schedules an <span class="xref">Unity.Jobs.IJobParallelForDefer</span> over this frame's unread events
 and chains it into state.Dependency. The iteration count is resolved when the job
-starts (after the flush); read the events via <a class="xref" href="Redux.Ecs.Event.EventReader-1.html">EventReader&lt;T&gt;</a> (whose
+starts (after the flush). Read the events via <a class="xref" href="Redux.Ecs.Event.EventReader-1.html">EventReader&lt;T&gt;</a> (whose
 indexer maps the job index to the matching unread event) or
 <a class="xref" href="Redux.Ecs.Event.Subscriber-1.html#Redux_Ecs_Event_Subscriber_1_AsDeferredJobArray">AsDeferredJobArray()</a>.</p>
 </div>
@@ -350,7 +350,7 @@ indexer maps the job index to the matching unread event) or
 
   <a id="Redux_Ecs_Event_Subscriber_1_Update_" data-uid="Redux.Ecs.Event.Subscriber`1.Update*"></a>
   <h4 id="Redux_Ecs_Event_Subscriber_1_Update_Unity_Entities_SystemBase_" data-uid="Redux.Ecs.Event.Subscriber`1.Update(Unity.Entities.SystemBase)">Update(SystemBase)</h4>
-  <div class="markdown level1 summary"><p>SystemBase overload; call as <code>_subscriber.Update(this)</code> in OnUpdate.</p>
+  <div class="markdown level1 summary"><p>SystemBase overload. Call as <code>_subscriber.Update(this)</code> in OnUpdate.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -379,7 +379,7 @@ indexer maps the job index to the matching unread event) or
   <a id="Redux_Ecs_Event_Subscriber_1_Update_" data-uid="Redux.Ecs.Event.Subscriber`1.Update*"></a>
   <h4 id="Redux_Ecs_Event_Subscriber_1_Update_Unity_Entities_SystemState__" data-uid="Redux.Ecs.Event.Subscriber`1.Update(Unity.Entities.SystemState@)">Update(ref SystemState)</h4>
   <div class="markdown level1 summary"><p>Schedules the flush (idempotent) and cursor-update jobs and assigns them to
-state.Dependency. Burst-safe; no main-thread container access.</p>
+state.Dependency. Burst-safe. No main-thread container access.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
