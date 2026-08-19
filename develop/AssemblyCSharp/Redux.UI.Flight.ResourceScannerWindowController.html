@@ -189,6 +189,77 @@ last asked for: the game hides the window on its own when leaving Flight or the 
 </h3>
 
 
+  <a id="Redux_UI_Flight_ResourceScannerWindowController_BuildIdentityCardSubtitle_" data-uid="Redux.UI.Flight.ResourceScannerWindowController.BuildIdentityCardSubtitle*"></a>
+  <h4 id="Redux_UI_Flight_ResourceScannerWindowController_BuildIdentityCardSubtitle_System_Boolean_System_String_System_String_System_Boolean_System_Func_System_String_System_String__" data-uid="Redux.UI.Flight.ResourceScannerWindowController.BuildIdentityCardSubtitle(System.Boolean,System.String,System.String,System.Boolean,System.Func{System.String,System.String})">BuildIdentityCardSubtitle(bool, string, string, bool, Func&lt;string, string&gt;)</h4>
+  <div class="markdown level1 summary"><p>Builds the identity card subtitle for a body, given what it is and what it orbits. A body that orbits
+a star is a planet, a body that orbits anything else is a moon, and a star names itself.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string BuildIdentityCardSubtitle(bool isStar, string parentBodyName, string parentDisplayNameKey, bool parentIsStar, Func&lt;string, string&gt; translate)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">isStar</span></td>
+        <td><p>Whether the body on display is itself a star.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">parentBodyName</span></td>
+        <td><p>Internal name of the body it orbits, or <code>null</code> when it orbits nothing.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">parentDisplayNameKey</span></td>
+        <td><p>The parent's own display name key, as read off bodyDisplayName. It does not resolve for every body,
+so <span class="xref">Redux.UI.Flight.ResourceScannerWindowController.ResolveBodyDisplayName(System.String,System.String,System.Func{System.String,System.String})</span> treats it as the first of several candidates.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">parentIsStar</span></td>
+        <td><p>Whether the body it orbits is a star. Ignored when <code class="paramref">isStar</code> is true.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Func</span>&lt;<span class="xref">string</span>, <span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">translate</span></td>
+        <td><p>Resolves a localization key to its localized string, or to null when the key is unknown.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><p>The subtitle text, or an empty string when the body orbits nothing and is not a star.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="Redux_UI_Flight_ResourceScannerWindowController_OnVesselChanged_" data-uid="Redux.UI.Flight.ResourceScannerWindowController.OnVesselChanged*"></a>
   <h4 id="Redux_UI_Flight_ResourceScannerWindowController_OnVesselChanged_KSP_Messages_MessageCenterMessage_" data-uid="Redux.UI.Flight.ResourceScannerWindowController.OnVesselChanged(KSP.Messages.MessageCenterMessage)">OnVesselChanged(MessageCenterMessage)</h4>
   <div class="markdown level1 summary"></div>
@@ -214,6 +285,131 @@ last asked for: the game hides the window on its own when leaving Flight or the 
       </tr>
     </tbody>
   </table>
+
+
+  <a id="Redux_UI_Flight_ResourceScannerWindowController_RequiresFullRefresh_" data-uid="Redux.UI.Flight.ResourceScannerWindowController.RequiresFullRefresh*"></a>
+  <h4 id="Redux_UI_Flight_ResourceScannerWindowController_RequiresFullRefresh_System_String_System_String_" data-uid="Redux.UI.Flight.ResourceScannerWindowController.RequiresFullRefresh(System.String,System.String)">RequiresFullRefresh(string, string)</h4>
+  <div class="markdown level1 summary"><p>Decides whether a vessel change moved the window to another celestial body, which every part of
+it is keyed to and none of it refreshes on its own.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool RequiresFullRefresh(string displayedBodyName, string activeVesselBodyName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">displayedBodyName</span></td>
+        <td><p>Internal name of the body the window currently describes.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">activeVesselBodyName</span></td>
+        <td><p>Internal name of the body the active vessel orbits.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True when the window has to be refreshed whole.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_UI_Flight_ResourceScannerWindowController_RequiresFullRefresh_System_String_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Switching to a vessel in another sphere of influence is not an SOI transition, so nothing
+publishes the message the window rebuilds itself on. The identity card, the resource rows and
+the body material all keep describing the body the previous vessel orbited. Issue #1220.
+A vessel that reports no body yet returns false rather than forcing a refresh, or the window
+rebuilds itself every frame for as long as the lookup keeps coming back empty.</p>
+</div>
+
+
+  <a id="Redux_UI_Flight_ResourceScannerWindowController_SyncResourceListToBody_" data-uid="Redux.UI.Flight.ResourceScannerWindowController.SyncResourceListToBody*"></a>
+  <h4 id="Redux_UI_Flight_ResourceScannerWindowController_SyncResourceListToBody_UnityEngine_UIElements_VisualElement_System_String_System_String_" data-uid="Redux.UI.Flight.ResourceScannerWindowController.SyncResourceListToBody(UnityEngine.UIElements.VisualElement,System.String,System.String)">SyncResourceListToBody(VisualElement, string, string)</h4>
+  <div class="markdown level1 summary"><p>Drops the available-resource rows when they were built for a different celestial body, so a
+resource the body on display does not have cannot stay on screen.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string SyncResourceListToBody(VisualElement resourceList, string listBodyName, string currentBodyName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/UIElements.VisualElement.html">VisualElement</a></td>
+        <td><span class="parametername">resourceList</span></td>
+        <td><p>The rows container, or null when the window is not built yet.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">listBodyName</span></td>
+        <td><p>Internal name of the body the rows were last built for.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">currentBodyName</span></td>
+        <td><p>Internal name of the body now on display.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><p>The body name the list is keyed to once this returns.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_UI_Flight_ResourceScannerWindowController_SyncResourceListToBody_UnityEngine_UIElements_VisualElement_System_String_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The rows are keyed by resource name and reused across repopulations, and the repopulation only
+ever adds or updates them. Nothing removes the row of a resource the new body lacks, and the
+active vessel can change body with no SOI transition to hang a clear off, by switching to a
+vessel elsewhere. That is how Duna's Carbon Regolith row reached Ike, still selectable and still
+showing the concentration it last read at Duna, on a body that has no Carbon Regolith at all.
+Issue #1220.</p>
+</div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
