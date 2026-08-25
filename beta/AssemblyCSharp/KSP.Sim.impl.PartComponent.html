@@ -1128,7 +1128,20 @@ public override Type DefinitionType { get; }</code></pre>
 
   <a id="KSP_Sim_impl_PartComponent_MaxTemp_" data-uid="KSP.Sim.impl.PartComponent.MaxTemp*"></a>
   <h4 id="KSP_Sim_impl_PartComponent_MaxTemp" data-uid="KSP.Sim.impl.PartComponent.MaxTemp">MaxTemp</h4>
-  <div class="markdown level1 summary"><p>Gets or sets the maximum temperature this part can sustain before being destroyed, in Kelvin.</p>
+  <div class="markdown level1 summary"><p>Gets or sets the maximum temperature this part can sustain before being destroyed, in Kelvin.
+This is not fixed for the life of the part: <a class="xref" href="KSP.Modules.Module_Deployable.html">Module_Deployable</a> raises it
+to the deployable's <code>deployMaxTemp</code> while the part is extended and puts it back on retraction.
+Writing here therefore has to write through to the part entity's
+<a class="xref" href="KSP.ThermalData.html#KSP_ThermalData_MaxTemp">MaxTemp</a>, which is what the thermal simulation destroys the part on,
+the same way <a class="xref" href="KSP.Sim.impl.PartComponent.html#KSP_Sim_impl_PartComponent_CrashTolerance">CrashTolerance</a>, <a class="xref" href="KSP.Sim.impl.PartComponent.html#KSP_Sim_impl_PartComponent_BreakingForce">BreakingForce</a> and
+<a class="xref" href="KSP.Sim.impl.PartComponent.html#KSP_Sim_impl_PartComponent_BreakingTorque">BreakingTorque</a> write through to their entity copies. Without it the two disagreed
+whenever a part deployed, and a deployed part was destroyed at its authored limit rather than the
+raised one.
+The write is a no-op while the part entity has no <a class="xref" href="KSP.ThermalData.html">ThermalData</a> component. That
+does not happen on the normal path, since <a class="xref" href="KSP.Sim.impl.PartComponent.html#KSP_Sim_impl_PartComponent_OnAdded_KSP_Sim_impl_SimulationObjectModel_System_Double_">OnAdded(SimulationObjectModel, double)</a> adds the component before
+<a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnAdded_KSP_Sim_impl_SimulationObjectModel_System_Double_">OnAdded(SimulationObjectModel, double)</a> runs <a class="xref" href="KSP.Sim.impl.PartComponent.html#KSP_Sim_impl_PartComponent_SetDefinition_System_Object_">SetDefinition(object)</a>, so the very first write
+already reaches the entity. <a class="xref" href="KSP.Sim.impl.PartComponent.html#KSP_Sim_impl_PartComponent_OnStart_System_Double_">OnStart(double)</a> reseeds it anyway as a guard against a caller
+that sets the limit earlier.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>

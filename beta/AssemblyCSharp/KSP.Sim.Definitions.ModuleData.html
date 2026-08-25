@@ -1413,6 +1413,55 @@ on the module entity.</p>
   </table>
 
 
+  <a id="KSP_Sim_Definitions_ModuleData_SyncSymmetricalData_" data-uid="KSP.Sim.Definitions.ModuleData.SyncSymmetricalData*"></a>
+  <h4 id="KSP_Sim_Definitions_ModuleData_SyncSymmetricalData_KSP_Sim_Definitions_ModuleData_System_Type_System_String_" data-uid="KSP.Sim.Definitions.ModuleData.SyncSymmetricalData(KSP.Sim.Definitions.ModuleData,System.Type,System.String)">SyncSymmetricalData(ModuleData, Type, string)</h4>
+  <div class="markdown level1 summary"><p>Copies a single symmetrical property value from <code class="paramref">sourceModuleData</code> into this instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SyncSymmetricalData(ModuleData sourceModuleData, Type dataType, string propertyKey)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a></td>
+        <td><span class="parametername">sourceModuleData</span></td>
+        <td><p>The module data instance whose value is the source.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Type</span></td>
+        <td><span class="parametername">dataType</span></td>
+        <td><p>The data type that owns the changed property.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">propertyKey</span></td>
+        <td><p>The context key of the single property to copy.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Sim_Definitions_ModuleData_SyncSymmetricalData_KSP_Sim_Definitions_ModuleData_System_Type_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>A property write only tells its symmetry partners about the one value that changed, so propagating the
+whole symmetrical set would copy neighbouring values that are merely stale. That matters because
+entity backed properties defer their change notification to the end of the tick, so a value written
+earlier in the same tick is still pending on the partner and a blanket copy overwrites it. Issue #641.</p>
+<p><a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_SyncAllSymmetricalData_KSP_Sim_Definitions_ModuleData_">SyncAllSymmetricalData(ModuleData)</a> is still what runs, so subclasses that override it to carry
+extra non property state keep doing so on every sync.</p>
+</div>
+
+
   <a id="KSP_Sim_Definitions_ModuleData_TryGetProperty_" data-uid="KSP.Sim.Definitions.ModuleData.TryGetProperty*"></a>
   <h4 id="KSP_Sim_Definitions_ModuleData_TryGetProperty__1_System_String_KSP_Sim_Definitions_ModuleProperty___0___" data-uid="KSP.Sim.Definitions.ModuleData.TryGetProperty``1(System.String,KSP.Sim.Definitions.ModuleProperty{``0}@)">TryGetProperty&lt;T&gt;(string, out ModuleProperty&lt;T&gt;)</h4>
   <div class="markdown level1 summary"><p>Attempts to retrieve a registered module property of type <code class="typeparamref">T</code> by its context key.</p>
@@ -1525,12 +1574,14 @@ last live values and fall back to managed storage.</p>
 
 
   <h4 id="KSP_Sim_Definitions_ModuleData_OnSymmetricalPropertyChanged" data-uid="KSP.Sim.Definitions.ModuleData.OnSymmetricalPropertyChanged">OnSymmetricalPropertyChanged</h4>
-  <div class="markdown level1 summary"><p>Occurs when a symmetrical property on this module changes and symmetry partners should be updated.</p>
+  <div class="markdown level1 summary"><p>Occurs when a symmetrical property on this module changes and symmetry partners should be updated.
+The arguments are the data type that owns the property and its context key, so the sync can copy that
+one value instead of every symmetrical value on the part.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public event Action OnSymmetricalPropertyChanged</code></pre>
+    <pre><code class="lang-csharp hljs">public event Action&lt;Type, string&gt; OnSymmetricalPropertyChanged</code></pre>
   </div>
   <h5 class="eventType">Event Type</h5>
   <table class="table table-bordered table-condensed">
@@ -1542,7 +1593,7 @@ last live values and fall back to managed storage.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Action</span></td>
+        <td><span class="xref">Action</span>&lt;<span class="xref">Type</span>, <span class="xref">string</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
