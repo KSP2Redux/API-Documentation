@@ -114,6 +114,11 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class MapUI : KerbalMonoBehaviour</code></pre>
   </div>
+  <h5 id="KSP_Map_MapUI_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>Split off from the rest of <a class="xref" href="KSP.Map.MapUI.html">MapUI</a> because none of it belongs to the object picker or
+the map item lifecycle that file is about. Six calls reach it from there: one to build it, one to
+reset it, one per selection, one per celestial body, one per frame, and one at map shutdown.</p>
+</div>
   <h3 id="constructors">Constructors
 </h3>
 
@@ -284,6 +289,32 @@
   </table>
 
 
+  <a id="KSP_Map_MapUI_InfoPanel_" data-uid="KSP.Map.MapUI.InfoPanel*"></a>
+  <h4 id="KSP_Map_MapUI_InfoPanel" data-uid="KSP.Map.MapUI.InfoPanel">InfoPanel</h4>
+  <div class="markdown level1 summary"><p>Gets the view model bound to the tracking station info panel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TrackingStationInfoPanel InfoPanel { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.UI.Map.TrackingStationInfoPanel.html">TrackingStationInfoPanel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Map_MapUI_IsEnabled_" data-uid="KSP.Map.MapUI.IsEnabled*"></a>
   <h4 id="KSP_Map_MapUI_IsEnabled" data-uid="KSP.Map.MapUI.IsEnabled">IsEnabled</h4>
   <div class="markdown level1 summary"><p>Gets or sets a value indicating whether this map UI GameObject is active.</p>
@@ -310,32 +341,6 @@
   </table>
 
 
-  <a id="KSP_Map_MapUI_IsFavorited_" data-uid="KSP.Map.MapUI.IsFavorited*"></a>
-  <h4 id="KSP_Map_MapUI_IsFavorited" data-uid="KSP.Map.MapUI.IsFavorited">IsFavorited</h4>
-  <div class="markdown level1 summary"><p>Gets or sets a value indicating whether the currently selected map item is marked as a favorite.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool IsFavorited { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">bool</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
   <a id="KSP_Map_MapUI_IsProcessingMapItems_" data-uid="KSP.Map.MapUI.IsProcessingMapItems*"></a>
   <h4 id="KSP_Map_MapUI_IsProcessingMapItems" data-uid="KSP.Map.MapUI.IsProcessingMapItems">IsProcessingMapItems</h4>
   <div class="markdown level1 summary"><p>Gets a value indicating whether the map item load queue is currently being processed.</p>
@@ -344,32 +349,6 @@
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public bool IsProcessingMapItems { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">bool</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="KSP_Map_MapUI_IsSelectionActive_" data-uid="KSP.Map.MapUI.IsSelectionActive*"></a>
-  <h4 id="KSP_Map_MapUI_IsSelectionActive" data-uid="KSP.Map.MapUI.IsSelectionActive">IsSelectionActive</h4>
-  <div class="markdown level1 summary"><p>Gets or sets a value indicating whether a map item is currently selected and the info panel is active.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool IsSelectionActive { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-condensed">
@@ -440,32 +419,6 @@
   </table>
 
 
-  <a id="KSP_Map_MapUI_SelectedItem_" data-uid="KSP.Map.MapUI.SelectedItem*"></a>
-  <h4 id="KSP_Map_MapUI_SelectedItem" data-uid="KSP.Map.MapUI.SelectedItem">SelectedItem</h4>
-  <div class="markdown level1 summary"><p>Gets the currently selected <a class="xref" href="KSP.Map.MapItem.html">MapItem</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public MapItem SelectedItem { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="KSP.Map.MapItem.html">MapItem</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
   <a id="KSP_Map_MapUI_VesselItems_" data-uid="KSP.Map.MapUI.VesselItems*"></a>
   <h4 id="KSP_Map_MapUI_VesselItems" data-uid="KSP.Map.MapUI.VesselItems">VesselItems</h4>
   <div class="markdown level1 summary"><p>Gets or sets the lookup of vessel-type <a class="xref" href="KSP.Map.MapUISelectableEntry.html">MapUISelectableEntry</a> instances, keyed by simulation GUID.</p>
@@ -529,20 +482,9 @@
   </table>
 
 
-  <a id="KSP_Map_MapUI_InitializeGameObjectPools_" data-uid="KSP.Map.MapUI.InitializeGameObjectPools*"></a>
-  <h4 id="KSP_Map_MapUI_InitializeGameObjectPools" data-uid="KSP.Map.MapUI.InitializeGameObjectPools">InitializeGameObjectPools()</h4>
-  <div class="markdown level1 summary"><p>Initializes the object pools used for crew member and notification alert UI prefabs.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void InitializeGameObjectPools()</code></pre>
-  </div>
-
-
   <a id="KSP_Map_MapUI_OnDestroy_" data-uid="KSP.Map.MapUI.OnDestroy*"></a>
   <h4 id="KSP_Map_MapUI_OnDestroy" data-uid="KSP.Map.MapUI.OnDestroy">OnDestroy()</h4>
-  <div class="markdown level1 summary"><p>Releases pooled crew member and alert UI instances and unregisters the localization event handler.</p>
+  <div class="markdown level1 summary"><p>Unregisters the localization event handler.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>

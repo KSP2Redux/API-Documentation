@@ -146,6 +146,40 @@
       </tr>
     </tbody>
   </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="Redux_Managers_ISRUResourceManager_ScanStateVersion_" data-uid="Redux.Managers.ISRUResourceManager.ScanStateVersion*"></a>
+  <h4 id="Redux_Managers_ISRUResourceManager_ScanStateVersion" data-uid="Redux.Managers.ISRUResourceManager.ScanStateVersion">ScanStateVersion</h4>
+  <div class="markdown level1 summary"><p>Counts the times a resource has actually changed scanned state.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int ScanStateVersion { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Managers_ISRUResourceManager_ScanStateVersion_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Scanned state is a plain flag on each chart, with nothing to subscribe to when it changes, and
+more than one thing writes it: a scanner finishing, an agency save being loaded, the debug window.
+UI that has to follow it compares this against what it last read rather than polling every chart
+of every body, or worse, only reading it when the player happens to reselect something.</p>
+</div>
   <h3 id="methods">Methods
 </h3>
 
@@ -490,6 +524,59 @@ Static and free of game state so the mapping can be tested.</p>
         <td><p>The red-channel value of the density map at the vessel's location, -1 if the resource has not been scanned and <code class="paramref">overrideScanning</code>
 is false, or 0 if the map is unavailable.</p>
 </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Managers_ISRUResourceManager_GetLocalizedResourceName_" data-uid="Redux.Managers.ISRUResourceManager.GetLocalizedResourceName*"></a>
+  <h4 id="Redux_Managers_ISRUResourceManager_GetLocalizedResourceName_System_String_KSP_Sim_ResourceSystem_ResourceDefinitionDatabase_" data-uid="Redux.Managers.ISRUResourceManager.GetLocalizedResourceName(System.String,KSP.Sim.ResourceSystem.ResourceDefinitionDatabase)">GetLocalizedResourceName(string, ResourceDefinitionDatabase)</h4>
+  <div class="markdown level1 summary"><p>Returns the localized display name for an internal resource name, resolved through the resource
+definition database's displayNameKey. Falls back to the internal name when the resource has no
+definition (e.g. KSP1-imported resources) or the database is not available yet.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string GetLocalizedResourceName(string resourceName, ResourceDefinitionDatabase database = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">resourceName</span></td>
+        <td><p>Internal resource name, as stored in <a class="xref" href="Redux.Managers.CBResourceChart.html#Redux_Managers_CBResourceChart_ResourceName">ResourceName</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceDefinitionDatabase.html">ResourceDefinitionDatabase</a></td>
+        <td><span class="parametername">database</span></td>
+        <td><p>The resource definition database, or null to read it from the running game. Callers that already
+hold it pass it in rather than resolving it again on every row.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>

@@ -92,7 +92,6 @@
   </div>
   <div class="implements">
     <h5>Implements</h5>
-    <div><a class="xref" href="KSP.Sim.IMassModifier.html">IMassModifier</a></div>
     <div><a class="xref" href="KSP.OAB.IResourceCostModifier.html">IResourceCostModifier</a></div>
     <div><a class="xref" href="KSP.Sim.IMultiJointScaleModifier.html">IMultiJointScaleModifier</a></div>
   </div>
@@ -136,12 +135,6 @@
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_OnPartBehaviourModuleInit">ModuleData.OnPartBehaviourModuleInit()</a>
-    </div>
-    <div>
-      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_">ModuleData.BindToEntity(EntityManager, Entity)</a>
-    </div>
-    <div>
-      <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_UnbindFromEntity">ModuleData.UnbindFromEntity()</a>
     </div>
     <div>
       <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_GetPartInfoEntries_System_Type_System_Collections_Generic_List_OABPartData_PartInfoModuleEntry__">ModuleData.GetPartInfoEntries(Type, List&lt;OABPartData.PartInfoModuleEntry&gt;)</a>
@@ -235,7 +228,7 @@
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
   <h5 id="KSP_Modules_Data_ProceduralPart_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class Data_ProceduralPart : ModuleData, IMassModifier, IResourceCostModifier, IMultiJointScaleModifier</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class Data_ProceduralPart : ModuleData, IResourceCostModifier, IMultiJointScaleModifier</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -261,32 +254,6 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[KSPDefinition]
 public float BasePartDensity</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">float</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="KSP_Modules_Data_ProceduralPart_MassModifierAmount" data-uid="KSP.Modules.Data_ProceduralPart.MassModifierAmount">MassModifierAmount</h4>
-  <div class="markdown level1 summary"><p>The scalar multiplier applied to the base part mass for the current procedural shape.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[KSPState]
-public float MassModifierAmount</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -593,14 +560,15 @@ public Dictionary&lt;string, bool&gt; visibleMeshData</code></pre>
   </table>
 
 
-  <a id="KSP_Modules_Data_ProceduralPart_MassModifier_" data-uid="KSP.Modules.Data_ProceduralPart.MassModifier*"></a>
-  <h4 id="KSP_Modules_Data_ProceduralPart_MassModifier" data-uid="KSP.Modules.Data_ProceduralPart.MassModifier">MassModifier</h4>
-  <div class="markdown level1 summary"><p>Gets the scalar mass modifier value derived from the current procedural shape.</p>
+  <a id="KSP_Modules_Data_ProceduralPart_MassModifierAmount_" data-uid="KSP.Modules.Data_ProceduralPart.MassModifierAmount*"></a>
+  <h4 id="KSP_Modules_Data_ProceduralPart_MassModifierAmount" data-uid="KSP.Modules.Data_ProceduralPart.MassModifierAmount">MassModifierAmount</h4>
+  <div class="markdown level1 summary"><p>The scalar multiplier applied to the base part mass for the current procedural shape.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public float MassModifier { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">[KSPState(CopyToSymmetrySet = true)]
+public float MassModifierAmount { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-condensed">
@@ -675,6 +643,41 @@ public Dictionary&lt;string, bool&gt; visibleMeshData</code></pre>
 </h3>
 
 
+  <a id="KSP_Modules_Data_ProceduralPart_BindToEntity_" data-uid="KSP.Modules.Data_ProceduralPart.BindToEntity*"></a>
+  <h4 id="KSP_Modules_Data_ProceduralPart_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_" data-uid="KSP.Modules.Data_ProceduralPart.BindToEntity(Unity.Entities.EntityManager,Unity.Entities.Entity)">BindToEntity(EntityManager, Entity)</h4>
+  <div class="markdown level1 summary"><p>Create unmanaged ECS components that this module needs to function.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void BindToEntity(EntityManager em, Entity entity)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">entity</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_">ModuleData.BindToEntity(EntityManager, Entity)</a></div>
+
+
   <a id="KSP_Modules_Data_ProceduralPart_Copy_" data-uid="KSP.Modules.Data_ProceduralPart.Copy*"></a>
   <h4 id="KSP_Modules_Data_ProceduralPart_Copy_KSP_Sim_Definitions_ModuleData_" data-uid="KSP.Modules.Data_ProceduralPart.Copy(KSP.Sim.Definitions.ModuleData)">Copy(ModuleData)</h4>
   <div class="markdown level1 summary"><p>Copies the mesh option index, slider values, toggle states, and mesh visibility states from <code class="paramref">sourceModuleData</code> into this instance.</p>
@@ -731,10 +734,22 @@ public Dictionary&lt;string, bool&gt; visibleMeshData</code></pre>
       </tr>
     </tbody>
   </table>
-  <h3 id="implements">Implements</h3>
-  <div>
-      <a class="xref" href="KSP.Sim.IMassModifier.html">IMassModifier</a>
+
+
+  <a id="KSP_Modules_Data_ProceduralPart_UnbindFromEntity_" data-uid="KSP.Modules.Data_ProceduralPart.UnbindFromEntity*"></a>
+  <h4 id="KSP_Modules_Data_ProceduralPart_UnbindFromEntity" data-uid="KSP.Modules.Data_ProceduralPart.UnbindFromEntity">UnbindFromEntity()</h4>
+  <div class="markdown level1 summary"><p>Detaches this module from its ECS entity, the reverse of <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_BindToEntity_Unity_Entities_EntityManager_Unity_Entities_Entity_">BindToEntity(EntityManager, Entity)</a>.
+Runs before the module entity is destroyed so entity-backed properties snapshot their
+last live values and fall back to managed storage.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void UnbindFromEntity()</code></pre>
   </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_UnbindFromEntity">ModuleData.UnbindFromEntity()</a></div>
+  <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.OAB.IResourceCostModifier.html">IResourceCostModifier</a>
   </div>

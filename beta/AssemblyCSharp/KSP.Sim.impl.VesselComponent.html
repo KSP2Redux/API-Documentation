@@ -1481,6 +1481,32 @@ public override Type DefinitionType { get; }</code></pre>
   </table>
 
 
+  <a id="KSP_Sim_impl_VesselComponent_IsSurfaceTeleportSettling_" data-uid="KSP.Sim.impl.VesselComponent.IsSurfaceTeleportSettling*"></a>
+  <h4 id="KSP_Sim_impl_VesselComponent_IsSurfaceTeleportSettling" data-uid="KSP.Sim.impl.VesselComponent.IsSurfaceTeleportSettling">IsSurfaceTeleportSettling</h4>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether a recent surface teleport is still settling under rigid-body physics.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsSurfaceTeleportSettling { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Sim_impl_VesselComponent_IsVesselBeingRecovered_" data-uid="KSP.Sim.impl.VesselComponent.IsVesselBeingRecovered*"></a>
   <h4 id="KSP_Sim_impl_VesselComponent_IsVesselBeingRecovered" data-uid="KSP.Sim.impl.VesselComponent.IsVesselBeingRecovered">IsVesselBeingRecovered</h4>
   <div class="markdown level1 summary"><p>Gets a value indicating whether the vessel is currently being recovered.</p>
@@ -5484,6 +5510,67 @@ into an EntityCommandBuffer that will be played back later.</p>
         <td><a class="xref" href="KSP.Sim.Definitions.VesselCategory.html">VesselCategory</a></td>
         <td><span class="parametername">category</span></td>
         <td><p>The new category to assign to the vessel.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_VesselComponent_ShouldApplyFlightControlTrim_" data-uid="KSP.Sim.impl.VesselComponent.ShouldApplyFlightControlTrim*"></a>
+  <h4 id="KSP_Sim_impl_VesselComponent_ShouldApplyFlightControlTrim" data-uid="KSP.Sim.impl.VesselComponent.ShouldApplyFlightControlTrim">ShouldApplyFlightControlTrim()</h4>
+  <div class="markdown level1 summary"><p>Returns whether stored rotational trim should contribute to flight control input.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ShouldApplyFlightControlTrim()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if trim should be applied, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Sim_impl_VesselComponent_ShouldApplyFlightControlTrim_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Trim is retained but suspended while resting on the surface with no throttle or engine thrust.
+This prevents persistent trim from lifting a settled vessel and blocking landed time warp.</p>
+</div>
+
+
+  <a id="KSP_Sim_impl_VesselComponent_StartSurfaceTeleportSettling_" data-uid="KSP.Sim.impl.VesselComponent.StartSurfaceTeleportSettling*"></a>
+  <h4 id="KSP_Sim_impl_VesselComponent_StartSurfaceTeleportSettling_System_Double_" data-uid="KSP.Sim.impl.VesselComponent.StartSurfaceTeleportSettling(System.Double)">StartSurfaceTeleportSettling(double)</h4>
+  <div class="markdown level1 summary"><p>Temporarily suppresses orbital correction and approximate terrain collision handling while a surface
+teleport settles onto the loaded terrain collider.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void StartSurfaceTeleportSettling(double expectedFallTime)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">expectedFallTime</span></td>
+        <td><p>The estimated time, in seconds, for the vessel to reach the surface.</p>
 </td>
       </tr>
     </tbody>

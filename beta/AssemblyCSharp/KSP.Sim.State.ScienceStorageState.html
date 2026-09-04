@@ -95,7 +95,8 @@
 
 
   <h4 id="KSP_Sim_State_ScienceStorageState_ActiveTransmittingReports" data-uid="KSP.Sim.State.ScienceStorageState.ActiveTransmittingReports">ActiveTransmittingReports</h4>
-  <div class="markdown level1 summary"><p>The map of research reports currently being transmitted, keyed by report identifier with the associated transmission target identifier as the value.</p>
+  <div class="markdown level1 summary"><p>The legacy map of queued research reports, keyed by transmitter part identifier.
+Retained so saves created before ordered transmission queues were introduced can still be loaded.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -138,6 +139,32 @@
     <tbody>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="KSP.Game.Science.ResearchReport.html">ResearchReport</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Sim_State_ScienceStorageState_TransmissionQueue" data-uid="KSP.Sim.State.ScienceStorageState.TransmissionQueue">TransmissionQueue</h4>
+  <div class="markdown level1 summary"><p>The ordered queue of research reports waiting to be transmitted.
+A list is required because multiple reports can use the same transmitter part.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;ScienceTransmissionQueueEntryState&gt; TransmissionQueue</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="KSP.Sim.State.ScienceTransmissionQueueEntryState.html">ScienceTransmissionQueueEntryState</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>

@@ -131,6 +131,25 @@ Classes
       <h4><a class="xref" href="Redux.Modules.PartComponentModule_UniversalContainer.html">PartComponentModule_UniversalContainer</a></h4>
       <section><p><code>PartComponentModule</code> for the <code>UniversalContainer</code> module</p>
 </section>
+    <h3 id="structs">
+Structs
+</h3>
+      <h4><a class="xref" href="Redux.Modules.Module_Mine.GroundContactDebounce.html">Module_Mine.GroundContactDebounce</a></h4>
+      <section><p>Counts how many consecutive updates the drill has failed to find ground under it, so a loss of
+contact has to persist before the mine reacts to it.</p>
+<p>
+The mine samples ground contact every fixed update, and part of that check reads vessel state
+that is written from the simulation on its own cadence. When timewarp ends and physics
+re-engages, a vessel resting on the surface reports a non-landed situation for a single update
+before settling back to landed. Acting on that one update switched a working drill off and left
+it off, since nothing turns the mine back on by itself (#1117).
+</p>
+<p>
+A genuine loss of contact holds across every following update, so waiting for
+<a class="xref" href="Redux.Modules.Module_Mine.GroundContactDebounce.html#Redux_Modules_Module_Mine_GroundContactDebounce_TOLERATED_FAILURES">TOLERATED_FAILURES</a> of them costs a few tens of milliseconds of extra mining and
+rejects the transient. Free of game state so the sequence can be replayed in a test.
+</p>
+</section>
     <h3 id="enums">
 Enums
 </h3>

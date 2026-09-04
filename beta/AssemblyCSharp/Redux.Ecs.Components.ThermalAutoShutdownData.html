@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Struct ThermalAutoShutdownData | KSP2Redux API (Beta) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Struct ThermalAutoShutdownData | KSP2Redux API (Beta) ">
+    
+    <meta name="description" content="Per-part thermal auto-shutdown state for a module that generates its own heat, such as a mine, a resource converter or a generator.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Redux.Ecs.Components.ThermalAutoShutdownData">
+
+
+
+  <h1 id="Redux_Ecs_Components_ThermalAutoShutdownData" data-uid="Redux.Ecs.Components.ThermalAutoShutdownData" class="text-break">Struct ThermalAutoShutdownData</h1>
+  <div class="markdown level0 summary"><p>Per-part thermal auto-shutdown state for a module that generates its own heat, such as a mine, a
+resource converter or a generator.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.Ecs.html">Ecs</a>.<a class="xref" href="Redux.Ecs.Components.html">Components</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="Redux_Ecs_Components_ThermalAutoShutdownData_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public struct ThermalAutoShutdownData</code></pre>
+  </div>
+  <h5 id="Redux_Ecs_Components_ThermalAutoShutdownData_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>The shutdown decision used to live in the view-side <code>ThermalUpdate</code> of each module, which runs
+once per rendered frame and reads a temperature the flux integration has already committed. That
+works only while a single integration step is small compared to the gap between the shutdown
+temperature and the part's maximum. At high timewarp the step is not: one tick advances universe
+time by the physics timestep multiplied by the warp rate, so at a million times a drill rose by
+nearly five thousand kelvin in a single step and was destroyed before the shutdown had any
+intermediate temperature to react to.</p>
+<p>Holding the state here lets the decision run in <code>ThermalAutoShutdownSystem</code>, at the same
+cadence as the integration and with the step length in hand.</p>
+<p>The request half is written by the sim-side <code>PartComponentModule_*</code>, through
+<a class="xref" href="Redux.Ecs.Components.ThermalAutoShutdownData.html#Redux_Ecs_Components_ThermalAutoShutdownData_RunRequested">RunRequested</a>, <a class="xref" href="Redux.Ecs.Components.ThermalAutoShutdownData.html#Redux_Ecs_Components_ThermalAutoShutdownData_FluxGenerated">FluxGenerated</a>, <a class="xref" href="Redux.Ecs.Components.ThermalAutoShutdownData.html#Redux_Ecs_Components_ThermalAutoShutdownData_AutoShutdownEnabled">AutoShutdownEnabled</a> and
+<a class="xref" href="Redux.Ecs.Components.ThermalAutoShutdownData.html#Redux_Ecs_Components_ThermalAutoShutdownData_ShutdownTemperature">ShutdownTemperature</a>. That side has to be sim side: <code>ThermalSimGroup</code> is ordered
+after <code>SimLegacyUpdate</code>, which drives those modules, so a value written there reaches the
+shutdown on the same tick. The view modules run later in the frame from <code>GameInstance.Update</code>,
+so publishing from their <code>ThermalUpdate</code> handed the shutdown the previous frame's request and a
+module that had already stopped still got a full step of heat.</p>
+<p>The result half, <a class="xref" href="Redux.Ecs.Components.ThermalAutoShutdownData.html#Redux_Ecs_Components_ThermalAutoShutdownData_HasOverheated">HasOverheated</a> and <a class="xref" href="Redux.Ecs.Components.ThermalAutoShutdownData.html#Redux_Ecs_Components_ThermalAutoShutdownData_AppliedFlux">AppliedFlux</a>, is read back by the
+view modules for their status and readouts. That direction is same-frame and can stay in the view.</p>
+<p>This is one component per part, and each publishing module overwrites the whole struct, so it
+assumes at most one heat-generating module per part. Two of them would silently stomp each other,
+which is what the ThermalData.OtherFlux field they replaced already did. No stock part carries two.
+The one case that comes close is an engine alternator, a Module_Generator sharing a part with a
+Module_Engine, and every one of those is authored with a FluxGenerated of zero, which
+<a class="xref" href="Redux.Ecs.Components.ThermalAutoShutdownData.html#Redux_Ecs_Components_ThermalAutoShutdownData_Resolve_Redux_Ecs_Components_ThermalAutoShutdownData__KSP_ThermalData__System_Double_System_Double_">Resolve(ref ThermalAutoShutdownData, ref ThermalData, double, double)</a> skips before it touches the flux field so the engine keeps its own heat.</p>
+<p>A mod is the likely way the assumption gets broken. A single part that both mines and converts what
+it mines is a reasonable thing for someone to author, and nothing stops a mod from putting a
+Module_Mine and a Module_ResourceConverter on the same part. That is the point at which this code
+has to be updated, and the symptom would be one of the two modules generating no heat at all rather
+than anything failing loudly.</p>
+<p>If a part ever needs two, the established pattern to follow is
+<a class="xref" href="Redux.Ecs.Components.MassModifierData.html">MassModifierData</a>: a component on each module entity, reduced into the part by a
+system, the way MassAggregateSystem reduces into <a class="xref" href="Redux.Ecs.Components.PartMassModifier.html">PartMassModifier</a>. Note that mass
+reduces by summation and this does not. Summing <a class="xref" href="Redux.Ecs.Components.ThermalAutoShutdownData.html#Redux_Ecs_Components_ThermalAutoShutdownData_FluxGenerated">FluxGenerated</a> is the easy half, and
+how two modules with different shutdown temperatures and separate latches should divide one part's
+headroom is an open question that wants answering against a real part rather than in advance.</p>
+</div>
+  <h3 id="fields">Fields
+</h3>
+
+
+  <h4 id="Redux_Ecs_Components_ThermalAutoShutdownData_AppliedFlux" data-uid="Redux.Ecs.Components.ThermalAutoShutdownData.AppliedFlux">AppliedFlux</h4>
+  <div class="markdown level1 summary"><p>Flux the system actually applied this step, which is the module's full output, zero, or the
+reduced value that lands the part exactly on its shutdown temperature.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double AppliedFlux</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Ecs_Components_ThermalAutoShutdownData_AutoShutdownEnabled" data-uid="Redux.Ecs.Components.ThermalAutoShutdownData.AutoShutdownEnabled">AutoShutdownEnabled</h4>
+  <div class="markdown level1 summary"><p>Whether the player has the thermal auto-shutdown turned on. A module without a shutdown toggle
+at all leaves this false and keeps its full flux.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool AutoShutdownEnabled</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Ecs_Components_ThermalAutoShutdownData_FluxGenerated" data-uid="Redux.Ecs.Components.ThermalAutoShutdownData.FluxGenerated">FluxGenerated</h4>
+  <div class="markdown level1 summary"><p>Heat flux the module produces while running, in the same units as
+<a class="xref" href="KSP.ThermalData.html#KSP_ThermalData_OtherFlux">OtherFlux</a>. Zero means the module generates no heat and the
+system leaves it alone.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double FluxGenerated</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Ecs_Components_ThermalAutoShutdownData_HasOverheated" data-uid="Redux.Ecs.Components.ThermalAutoShutdownData.HasOverheated">HasOverheated</h4>
+  <div class="markdown level1 summary"><p>Set by the system when the shutdown has tripped, and cleared once the part is back below
+<a class="xref" href="Redux.Ecs.Components.ThermalAutoShutdownData.html#Redux_Ecs_Components_ThermalAutoShutdownData_ShutdownTemperature">ShutdownTemperature</a>. The latch is maintained whether or not the module is asking
+to run, so a part that has cooled down reports itself recovered.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HasOverheated</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Ecs_Components_ThermalAutoShutdownData_ResumeTemperature" data-uid="Redux.Ecs.Components.ThermalAutoShutdownData.ResumeTemperature">ResumeTemperature</h4>
+  <div class="markdown level1 summary"><p>Absolute temperature in kelvin the part has to fall back to before the shutdown releases the
+module. Below <a class="xref" href="Redux.Ecs.Components.ThermalAutoShutdownData.html#Redux_Ecs_Components_ThermalAutoShutdownData_ShutdownTemperature">ShutdownTemperature</a> this forms a hysteresis band, and inside the
+band the latch holds whatever it already was.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double ResumeTemperature</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Ecs_Components_ThermalAutoShutdownData_ResumeTemperature_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Only a module that resumes on its own needs a band. The mine and the converter drop their enable
+toggle when they trip, so the player restarts them and there is nothing to cycle. The generator
+deliberately keeps its toggle, since SetGeneratorState is written to let it come back once cool,
+so without a band it would clear the instant it touched its threshold, resume at full output,
+reach the threshold again in the same step and trip once more, flicking its status, its audio
+cue and its resource output on and off tick by tick.</p>
+<p>Left at zero this falls back to <a class="xref" href="Redux.Ecs.Components.ThermalAutoShutdownData.html#Redux_Ecs_Components_ThermalAutoShutdownData_ShutdownTemperature">ShutdownTemperature</a>, which is the no-band
+behaviour and stops an unset field from holding a part overheated forever.</p>
+</div>
+
+
+  <h4 id="Redux_Ecs_Components_ThermalAutoShutdownData_RunRequested" data-uid="Redux.Ecs.Components.ThermalAutoShutdownData.RunRequested">RunRequested</h4>
+  <div class="markdown level1 summary"><p>Whether the module wants to generate heat this step, meaning it is switched on and nothing else
+is blocking it. The system applies no flux at all while this is false, which also stops a stale
+flux from a module that has since stopped updating.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool RunRequested</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Ecs_Components_ThermalAutoShutdownData_ShutdownTemperature" data-uid="Redux.Ecs.Components.ThermalAutoShutdownData.ShutdownTemperature">ShutdownTemperature</h4>
+  <div class="markdown level1 summary"><p>Absolute temperature in kelvin at which the module shuts itself down. Modules that express the
+threshold as a fraction of the part's maximum resolve it against the current maximum before
+writing it here, since a deployable part raises its own limit while extended.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double ShutdownTemperature</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="Redux_Ecs_Components_ThermalAutoShutdownData_Resolve_" data-uid="Redux.Ecs.Components.ThermalAutoShutdownData.Resolve*"></a>
+  <h4 id="Redux_Ecs_Components_ThermalAutoShutdownData_Resolve_Redux_Ecs_Components_ThermalAutoShutdownData__KSP_ThermalData__System_Double_System_Double_" data-uid="Redux.Ecs.Components.ThermalAutoShutdownData.Resolve(Redux.Ecs.Components.ThermalAutoShutdownData@,KSP.ThermalData@,System.Double,System.Double)">Resolve(ref ThermalAutoShutdownData, ref ThermalData, double, double)</h4>
+  <div class="markdown level1 summary"><p>Resolves one part's shutdown state for a single integration step and publishes the module's heat
+into <a class="xref" href="KSP.ThermalData.html#KSP_ThermalData_OtherFlux">OtherFlux</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Resolve(ref ThermalAutoShutdownData shutdown, ref ThermalData thermal, double deltaUniversalTime, double temperatureRiseScale)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Ecs.Components.ThermalAutoShutdownData.html">ThermalAutoShutdownData</a></td>
+        <td><span class="parametername">shutdown</span></td>
+        <td><p>The part's shutdown state, updated in place.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.ThermalData.html">ThermalData</a></td>
+        <td><span class="parametername">thermal</span></td>
+        <td><p>The part's thermal data, whose OtherFlux this may write.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">deltaUniversalTime</span></td>
+        <td><p>Length of the integration step in universe seconds.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">temperatureRiseScale</span></td>
+        <td><p>Product of the difficulty heat scale and the global positive temperature change rate scale.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Ecs_Components_ThermalAutoShutdownData_Resolve_Redux_Ecs_Components_ThermalAutoShutdownData__KSP_ThermalData__System_Double_System_Double__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The step bound applies to the module's own heat only, so the promise is that a module cannot
+cook its own part, not that the part survives. Heat arriving from anywhere else is caught
+reactively instead: the temperature latch below shuts the module down on the first step that
+finds the part over its threshold, whatever drove it there.</p>
+<p>Folding the other sources into the headroom is deliberately not done yet. The environment and
+reentry fluxes on <a class="xref" href="KSP.ThermalData.html">ThermalData</a> are computed by <code>IntegrateFluxJob</code>, which runs
+after this system, so the values visible here are a step old. More to the point they are not
+currently trustworthy at the warp rates this bound exists for. The negative branch of that job
+applies an unbounded step of its own, which drives a landed part below absolute zero and clamps
+it, and a drill on Laythe was measured alternating between 0 K and 482.758 K on consecutive
+ticks at 100000x with the environment flux flipping between 0 and -5905.305. Feeding that into
+the projection would make the applied flux flap for no physical reason. Widen this once the
+integration's own steps are bounded.</p>
+<p>Static and free of ECS state so the whole decision, ownership of the flux field included, can be
+tested without a world, a <code>GameManager</code> or loaded physics settings.</p>
+</div>
+
+
+  <a id="Redux_Ecs_Components_ThermalAutoShutdownData_ResolveAppliedFlux_" data-uid="Redux.Ecs.Components.ThermalAutoShutdownData.ResolveAppliedFlux*"></a>
+  <h4 id="Redux_Ecs_Components_ThermalAutoShutdownData_ResolveAppliedFlux_System_Double_System_Double_System_Double_System_Double_System_Double_System_Double_System_Boolean__" data-uid="Redux.Ecs.Components.ThermalAutoShutdownData.ResolveAppliedFlux(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Boolean@)">ResolveAppliedFlux(double, double, double, double, double, double, out bool)</h4>
+  <div class="markdown level1 summary"><p>Decides how much of a module's heat flux may be applied over a single integration step.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static double ResolveAppliedFlux(double fluxGenerated, double temperature, double shutdownTemperature, double thermalMass, double deltaUniversalTime, double temperatureRiseScale, out bool hasTripped)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">fluxGenerated</span></td>
+        <td><p>Heat flux the module produces while running.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">temperature</span></td>
+        <td><p>The part's temperature at the start of the step.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">shutdownTemperature</span></td>
+        <td><p>Temperature the module shuts itself down at.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">thermalMass</span></td>
+        <td><p>The part's thermal mass.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">deltaUniversalTime</span></td>
+        <td><p>Length of the integration step in universe seconds.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">temperatureRiseScale</span></td>
+        <td><p>Product of the difficulty heat scale and the global positive temperature change rate scale, so
+the projection matches what the flux integration will do with the returned flux.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">hasTripped</span></td>
+        <td><p>True when the step reaches the shutdown temperature.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><p>The flux to apply over this step.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Ecs_Components_ThermalAutoShutdownData_ResolveAppliedFlux_System_Double_System_Double_System_Double_System_Double_System_Double_System_Double_System_Boolean___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>A step long enough to carry the part past <code class="paramref">shutdownTemperature</code> is treated as
+the module running for only the part of the interval that gets it there and being shut down for
+the rest, so the averaged flux over the whole step lands the part on the threshold rather than
+far beyond it. That is what the once-per-frame check could not express: it could only choose
+between the full flux and none, and at high timewarp the full flux for one step was already
+past the part's maximum temperature.</p>
+<p>The bound covers the module's own contribution only. The integration sums reentry, environment
+and exhaust flux into the same step, and none of those are subtracted from the headroom here, so
+a module running while the part is being heated from elsewhere can still be carried past its
+threshold and on past its maximum. See <a class="xref" href="Redux.Ecs.Components.ThermalAutoShutdownData.html#Redux_Ecs_Components_ThermalAutoShutdownData_Resolve_Redux_Ecs_Components_ThermalAutoShutdownData__KSP_ThermalData__System_Double_System_Double_">Resolve(ref ThermalAutoShutdownData, ref ThermalData, double, double)</a> for why the other sources are not
+folded in and what catches that case instead.</p>
+<p>Static and free of ECS state so the decision can be tested directly.</p>
+</div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetField__2___0_System_String_">Util.GetField&lt;T, R&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetField__2___0_System_String___1_">Util.SetField&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromProperties_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromProperties(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetFieldValue__1_System_Object_System_String_">Util.GetFieldValue&lt;T&gt;(object, string)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from prerelease
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
