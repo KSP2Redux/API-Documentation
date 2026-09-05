@@ -5,11 +5,11 @@
   <head>
     <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-      <title>Class VersionID | KSP2Redux API (Beta) </title>
+      <title>Class FuelTankControls | KSP2Redux API (Beta) </title>
       <meta name="viewport" content="width=device-width">
-      <meta name="title" content="Class VersionID | KSP2Redux API (Beta) ">
+      <meta name="title" content="Class FuelTankControls | KSP2Redux API (Beta) ">
     
-    <meta name="description" content="Stores version identity constants for the current build, including the version text, debug hash, and release channel name.">
+    <meta name="description" content="Resolves tank flow settings from the same module state in the OAB and flight.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -76,38 +76,57 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="GlobalAssemblyCSharp.VersionID">
+            <article class="content wrap" id="_content" data-uid="KSP.Sim.ResourceSystem.FuelTankControls">
 
 
 
-  <h1 id="GlobalAssemblyCSharp_VersionID" data-uid="GlobalAssemblyCSharp.VersionID" class="text-break">Class VersionID</h1>
-  <div class="markdown level0 summary"><p>Stores version identity constants for the current build, including the version text, debug hash, and release channel name.</p>
+  <h1 id="KSP_Sim_ResourceSystem_FuelTankControls" data-uid="KSP.Sim.ResourceSystem.FuelTankControls" class="text-break">Class FuelTankControls</h1>
+  <div class="markdown level0 summary"><p>Resolves tank flow settings from the same module state in the OAB and flight.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">object</span></div>
-    <div class="level1"><span class="xref">VersionID</span></div>
+    <div class="level1"><span class="xref">FuelTankControls</span></div>
   </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="GlobalAssemblyCSharp.html">GlobalAssemblyCSharp</a></h6>
+  <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Sim.html">Sim</a>.<a class="xref" href="KSP.Sim.ResourceSystem.html">ResourceSystem</a></h6>
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
-  <h5 id="GlobalAssemblyCSharp_VersionID_syntax">Syntax</h5>
+  <h5 id="KSP_Sim_ResourceSystem_FuelTankControls_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class VersionID</code></pre>
+    <pre><code class="lang-csharp hljs">public static class FuelTankControls</code></pre>
   </div>
-  <h3 id="fields">Fields
+  <h3 id="methods">Methods
 </h3>
 
 
-  <h4 id="GlobalAssemblyCSharp_VersionID_CHANNEL_NAME" data-uid="GlobalAssemblyCSharp.VersionID.CHANNEL_NAME">CHANNEL_NAME</h4>
-  <div class="markdown level1 summary"><p>Name of the release channel this build targets.</p>
+  <a id="KSP_Sim_ResourceSystem_FuelTankControls_GetData_" data-uid="KSP.Sim.ResourceSystem.FuelTankControls.GetData*"></a>
+  <h4 id="KSP_Sim_ResourceSystem_FuelTankControls_GetData_KSP_Sim_ResourceSystem_IFlowNode_" data-uid="KSP.Sim.ResourceSystem.FuelTankControls.GetData(KSP.Sim.ResourceSystem.IFlowNode)">GetData(IFlowNode)</h4>
+  <div class="markdown level1 summary"><p>Gets the resource storage module data for a flow node.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public const string CHANNEL_NAME = &quot;beta&quot;</code></pre>
+    <pre><code class="lang-csharp hljs">public static Data_ResourceCapacities GetData(IFlowNode node)</code></pre>
   </div>
-  <h5 class="fieldValue">Field Value</h5>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.ResourceSystem.IFlowNode.html">IFlowNode</a></td>
+        <td><span class="parametername">node</span></td>
+        <td><p>The node to inspect.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-condensed">
     <thead>
       <tr>
@@ -117,22 +136,42 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">string</span></td>
-        <td></td>
+        <td><a class="xref" href="KSP.Modules.Data_ResourceCapacities.html">Data_ResourceCapacities</a></td>
+        <td><p>The storage settings, or null for a node without a storage module.</p>
+</td>
       </tr>
     </tbody>
   </table>
 
 
-  <h4 id="GlobalAssemblyCSharp_VersionID_DEBUG_INFO" data-uid="GlobalAssemblyCSharp.VersionID.DEBUG_INFO">DEBUG_INFO</h4>
-  <div class="markdown level1 summary"><p>Short debug identifier or commit hash for the current build.</p>
+  <a id="KSP_Sim_ResourceSystem_FuelTankControls_GetPriority_" data-uid="KSP.Sim.ResourceSystem.FuelTankControls.GetPriority*"></a>
+  <h4 id="KSP_Sim_ResourceSystem_FuelTankControls_GetPriority_KSP_Sim_ResourceSystem_IFlowNode_" data-uid="KSP.Sim.ResourceSystem.FuelTankControls.GetPriority(KSP.Sim.ResourceSystem.IFlowNode)">GetPriority(IFlowNode)</h4>
+  <div class="markdown level1 summary"><p>Computes the stage priority plus the user offset. Higher values drain first.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public const string DEBUG_INFO = &quot;26w36c-d299b906&quot;</code></pre>
+    <pre><code class="lang-csharp hljs">public static double GetPriority(IFlowNode node)</code></pre>
   </div>
-  <h5 class="fieldValue">Field Value</h5>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.ResourceSystem.IFlowNode.html">IFlowNode</a></td>
+        <td><span class="parametername">node</span></td>
+        <td><p>The part whose staging assignment is used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-condensed">
     <thead>
       <tr>
@@ -142,22 +181,42 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">string</span></td>
-        <td></td>
+        <td><span class="xref">double</span></td>
+        <td><p>The effective fuel priority.</p>
+</td>
       </tr>
     </tbody>
   </table>
 
 
-  <h4 id="GlobalAssemblyCSharp_VersionID_VERSION_TEXT" data-uid="GlobalAssemblyCSharp.VersionID.VERSION_TEXT">VERSION_TEXT</h4>
-  <div class="markdown level1 summary"><p>Full version string combining the version number and build number.</p>
+  <a id="KSP_Sim_ResourceSystem_FuelTankControls_IsEnabled_" data-uid="KSP.Sim.ResourceSystem.FuelTankControls.IsEnabled*"></a>
+  <h4 id="KSP_Sim_ResourceSystem_FuelTankControls_IsEnabled_KSP_Sim_ResourceSystem_IFlowNode_" data-uid="KSP.Sim.ResourceSystem.FuelTankControls.IsEnabled(KSP.Sim.ResourceSystem.IFlowNode)">IsEnabled(IFlowNode)</h4>
+  <div class="markdown level1 summary"><p>Checks whether a tank participates in resource flow without changing graph reachability.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public const string VERSION_TEXT = &quot;0.2.9.0.104521&quot;</code></pre>
+    <pre><code class="lang-csharp hljs">public static bool IsEnabled(IFlowNode node)</code></pre>
   </div>
-  <h5 class="fieldValue">Field Value</h5>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.ResourceSystem.IFlowNode.html">IFlowNode</a></td>
+        <td><span class="parametername">node</span></td>
+        <td><p>The potential resource source or destination.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-condensed">
     <thead>
       <tr>
@@ -167,8 +226,9 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">string</span></td>
-        <td></td>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the tank is enabled or has no storage settings, false otherwise.</p>
+</td>
       </tr>
     </tbody>
   </table>
