@@ -131,6 +131,36 @@ running the game.</p>
   </table>
 
 
+  <h4 id="Redux_UI_MainMenu_MainMenuMath_FAILED_BOUNDS_SOLVE_GROWTH" data-uid="Redux.UI.MainMenu.MainMenuMath.FAILED_BOUNDS_SOLVE_GROWTH">FAILED_BOUNDS_SOLVE_GROWTH</h4>
+  <div class="markdown level1 summary"><p>How much bigger than its authored box a forced bounds solve may come back before
+<a class="xref" href="Redux.UI.MainMenu.MainMenuMath.html#Redux_UI_MainMenu_MainMenuMath_IsFailedBoundsSolve_UnityEngine_Bounds_UnityEngine_Bounds_">IsFailedBoundsSolve(Bounds, Bounds)</a> treats it as having failed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const float FAILED_BOUNDS_SOLVE_GROWTH = 1000</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_UI_MainMenu_MainMenuMath_FAILED_BOUNDS_SOLVE_GROWTH_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Measured off the craft the menu shows. The largest honest growth is a solar panel opening out of its
+folded box, at 64 times, and the parachute canopy comes back at 7600 to 9400 times.</p>
+</div>
+
+
   <h4 id="Redux_UI_MainMenu_MainMenuMath_LIGHT_SCALE_EXPONENT" data-uid="Redux.UI.MainMenu.MainMenuMath.LIGHT_SCALE_EXPONENT">LIGHT_SCALE_EXPONENT</h4>
   <div class="markdown level1 summary"><p>How a craft's own lights are brightened for the size the menu draws it at, as a power of that size.</p>
 </div>
@@ -376,6 +406,65 @@ there is to show.</p>
 works through everything before repeating. The one place it can repeat is across that refill, where
 what just went back in the pool is what is still on screen, and with two things published that is
 every other change.</p>
+</div>
+
+
+  <a id="Redux_UI_MainMenu_MainMenuMath_IsFailedBoundsSolve_" data-uid="Redux.UI.MainMenu.MainMenuMath.IsFailedBoundsSolve*"></a>
+  <h4 id="Redux_UI_MainMenu_MainMenuMath_IsFailedBoundsSolve_UnityEngine_Bounds_UnityEngine_Bounds_" data-uid="Redux.UI.MainMenu.MainMenuMath.IsFailedBoundsSolve(UnityEngine.Bounds,UnityEngine.Bounds)">IsFailedBoundsSolve(Bounds, Bounds)</h4>
+  <div class="markdown level1 summary"><p>Answers whether a forced skinned bounds solve came back so much larger than the box the mesh was
+authored with that it has to be treated as having failed rather than corrected.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsFailedBoundsSolve(Bounds authoredBounds, Bounds solvedBounds)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Bounds.html">Bounds</a></td>
+        <td><span class="parametername">authoredBounds</span></td>
+        <td><p>The bounds the mesh carried before the solve was forced.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Bounds.html">Bounds</a></td>
+        <td><span class="parametername">solvedBounds</span></td>
+        <td><p>The bounds the forced solve returned.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the solved bounds should be discarded in favour of the authored ones, false otherwise,
+including when the authored bounds are empty and there is nothing to judge the solve against.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_UI_MainMenu_MainMenuMath_IsFailedBoundsSolve_UnityEngine_Bounds_UnityEngine_Bounds__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Solving corrects a mesh posed differently from how it was authored, so growth is expected and a
+deployable opening out of its folded box is the honest upper end of it. A mesh Unity cannot skin where
+it stands, such as a packed parachute canopy, instead reports a box tens of thousands of units across,
+and one of those in a craft's measurement scales the whole craft down until it cannot be seen.</p>
 </div>
 
 
@@ -809,6 +898,89 @@ planets at a few percent of the light the menu was lit and framed against, and t
 the top of the range. An eye does not work that way. Brightness is perceived closer to the fifth root
 of the square of intensity, so the physical figure is passed through that same response and what comes
 out is a picture that reads as further from the sun rather than one that reads as unlit.</p>
+</div>
+
+
+  <a id="Redux_UI_MainMenu_MainMenuMath_TightenFrameFit_" data-uid="Redux.UI.MainMenu.MainMenuMath.TightenFrameFit*"></a>
+  <h4 id="Redux_UI_MainMenu_MainMenuMath_TightenFrameFit_System_Single_System_Single_System_Single_System_Single_System_Single_System_Single_" data-uid="Redux.UI.MainMenu.MainMenuMath.TightenFrameFit(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">TightenFrameFit(float, float, float, float, float, float)</h4>
+  <div class="markdown level1 summary"><p>Narrows how large a craft may be drawn, as a multiple of the size it was framed at, so that one point of
+it stays between the two limits of the picture along one direction, across or up.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float TightenFrameFit(float fit, float anchorAlong, float anchorW, float offsetAlong, float offsetW, float edge)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">fit</span></td>
+        <td><p>The largest multiple every point so far allows, starting from one.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">anchorAlong</span></td>
+        <td><p>The anchor's clip space position along the direction being checked.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">anchorW</span></td>
+        <td><p>The anchor's clip space depth term.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">offsetAlong</span></td>
+        <td><p>The point's clip space position along the direction being checked, relative to the anchor, at the
+framed size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">offsetW</span></td>
+        <td><p>The point's clip space depth term relative to the anchor, at the framed size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">edge</span></td>
+        <td><p>The furthest normalised position allowed either side of the middle, where one is the frame edge.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><p>The smaller of <code class="paramref">fit</code> and what this point allows. A point already inside leaves it
+unchanged, and so does an anchor already outside a limit, since shrinking toward it cannot help.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_UI_MainMenu_MainMenuMath_TightenFrameFit_System_Single_System_Single_System_Single_System_Single_System_Single_System_Single__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The craft is shrunk toward its anchor, so each point slides along the straight line between where the
+framing put it and the anchor, and its clip space position and depth slide along that line in step.
+Where it meets a limit is therefore one division rather than a search.</p>
 </div>
 
 
