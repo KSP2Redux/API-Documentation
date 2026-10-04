@@ -180,6 +180,34 @@ earliest. Tiles already in <a class="xref" href="Redux.Planets.TerrainFootprintJ
   </table>
 
 
+  <h4 id="Redux_Planets_TerrainFootprintJob_IsAccelerationMarginIncluded" data-uid="Redux.Planets.TerrainFootprintJob.IsAccelerationMarginIncluded">IsAccelerationMarginIncluded</h4>
+  <div class="markdown level1 summary"><p>Whether to grow the must-have discs for acceleration the vessel's motion does not show yet.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsAccelerationMarginIncluded</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Planets_TerrainFootprintJob_IsAccelerationMarginIncluded_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>False under on-rails warp, where the vessel follows its orbit and nothing can change its acceleration.</p>
+</div>
+
+
   <h4 id="Redux_Planets_TerrainFootprintJob_IsPrewarmIncluded" data-uid="Redux.Planets.TerrainFootprintJob.IsPrewarmIncluded">IsPrewarmIncluded</h4>
   <div class="markdown level1 summary"><p>Whether to add prewarm requests after the must-have ones.</p>
 </div>
@@ -203,6 +231,37 @@ earliest. Tiles already in <a class="xref" href="Redux.Planets.TerrainFootprintJ
       </tr>
     </tbody>
   </table>
+
+
+  <h4 id="Redux_Planets_TerrainFootprintJob_IsTruncated" data-uid="Redux.Planets.TerrainFootprintJob.IsTruncated">IsTruncated</h4>
+  <div class="markdown level1 summary"><p>Set to true when <a class="xref" href="Redux.Planets.TerrainFootprintJob.html#Redux_Planets_TerrainFootprintJob_Requests">Requests</a> filled up before every disc's tiles were added, and left alone
+otherwise.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NativeReference&lt;bool&gt; IsTruncated</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">NativeReference</span>&lt;<span class="xref">bool</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Planets_TerrainFootprintJob_IsTruncated_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>A native container, because a job works on a copy of its fields and nothing written to one comes back.
+Must-have tiles are added first, nearest in time first, so a truncated list still holds the ground the
+vessel needs soonest.</p>
+</div>
 
 
   <h4 id="Redux_Planets_TerrainFootprintJob_LeafDecisions" data-uid="Redux.Planets.TerrainFootprintJob.LeafDecisions">LeafDecisions</h4>
@@ -286,7 +345,7 @@ earliest. Tiles already in <a class="xref" href="Redux.Planets.TerrainFootprintJ
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public NativeList&lt;TerrainTileAddress&gt; Pending</code></pre>
+    <pre><code class="lang-csharp hljs">public NativeList&lt;TerrainTileLattice.PendingNode&gt; Pending</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -298,7 +357,7 @@ earliest. Tiles already in <a class="xref" href="Redux.Planets.TerrainFootprintJ
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">NativeList</span>&lt;<a class="xref" href="Redux.Planets.TerrainTileAddress.html">TerrainTileAddress</a>&gt;</td>
+        <td><span class="xref">NativeList</span>&lt;<a class="xref" href="Redux.Planets.TerrainTileLattice.html">TerrainTileLattice</a>.<a class="xref" href="Redux.Planets.TerrainTileLattice.PendingNode.html">PendingNode</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
