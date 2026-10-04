@@ -96,9 +96,9 @@
     <pre><code class="lang-csharp hljs">public static class TerrainLod</code></pre>
   </div>
   <h5 id="Redux_Planets_TerrainLod_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>A quad splits when its error, seen from the nearest point of its bounds, covers more than the tolerance, or when
-its cells cover more than <a class="xref" href="Redux.Planets.TerrainLod.html#Redux_Planets_TerrainLod_CELL_CAP">CELL_CAP</a> pixels at that distance, which keeps flat ground from staying
-coarse. It never splits into cells that would cover fewer pixels than the floor at that distance.</p>
+  <div class="markdown level0 remarks"><p>A quad splits when its error, seen from the nearest point of its bounds, covers more than the tolerance. It
+never splits into cells that would cover fewer pixels than the floor at that distance. Flat ground stays coarse,
+which measured no different to the eye on Kerbin's grassland and Beyl's rock, for 14% fewer quads on Kerbin.</p>
 <p>Every limit is measured as if the quad were seen side-on. Foreshortening against the body's radial direction
 read steep slopes turned toward the camera as edge-on, and a small camera move then flipped whole slopes between
 levels.</p>
@@ -130,31 +130,6 @@ a quad neither splits nor merges by itself. It keeps its detail until the budget
     <tbody>
       <tr>
         <td><span class="xref">int</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="Redux_Planets_TerrainLod_CELL_CAP" data-uid="Redux.Planets.TerrainLod.CELL_CAP">CELL_CAP</h4>
-  <div class="markdown level1 summary"><p>The pixels a quad's cells may cover, seen side-on, before the quad splits whatever its error.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public const float CELL_CAP = 16</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">float</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -573,8 +548,7 @@ a quad neither splits nor merges by itself. It keeps its detail until the budget
     </tbody>
   </table>
   <h5 id="Redux_Planets_TerrainLod_SplitPriority_Redux_Planets_TerrainLodView__Unity_Mathematics_double3_System_Double_System_Single__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>The larger of its error over the tolerance and its cells over <a class="xref" href="Redux.Planets.TerrainLod.html#Redux_Planets_TerrainLod_CELL_CAP">CELL_CAP</a>, so splits wanted for
-error and for size rank on one scale. Above 1 the quad wants to split.</p>
+  <div class="markdown level1 remarks"><p>Its error over the tolerance. Above 1 the quad wants to split.</p>
 </div>
 
 </article>

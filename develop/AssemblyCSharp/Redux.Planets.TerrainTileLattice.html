@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class TerrainTileLattice | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="Lays terrain collider tiles out on the PQS cube-face lattice, choosing each tile&#39;s depth from its size on the ground.">
+    <meta name="description" content="Lays terrain collider tiles out on the PQS cube-face lattice, every tile at the one depth whose cells are a PQS quad&#39;s at a chosen level.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,8 +81,8 @@
 
 
   <h1 id="Redux_Planets_TerrainTileLattice" data-uid="Redux.Planets.TerrainTileLattice" class="text-break">Class TerrainTileLattice</h1>
-  <div class="markdown level0 summary"><p>Lays terrain collider tiles out on the PQS cube-face lattice, choosing each tile's depth from its size on the
-ground.</p>
+  <div class="markdown level0 summary"><p>Lays terrain collider tiles out on the PQS cube-face lattice, every tile at the one depth whose cells are a PQS
+quad's at a chosen level.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -98,11 +98,11 @@ ground.</p>
   </div>
   <h5 id="Redux_Planets_TerrainTileLattice_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>
-A face splits like a PQS quad until a node's cells, measured at its surface radius, are no larger than the
-square root of two times <a class="xref" href="Redux.Planets.TerrainTileLattice.html#Redux_Planets_TerrainTileLattice_TargetCellSize">TargetCellSize</a>. Tiles therefore stay within about 2x of the target on
-every body, whatever its relief. The decision depends only on the node and the terrain, so a location's tile
-never changes, and each node's decision is cached once made, in native memory that Burst jobs walking the
-lattice share. Not thread-safe.
+A drawn PQS quad has 8 cells a side and a tile <a class="xref" href="Redux.Planets.TerrainTileLattice.html#Redux_Planets_TerrainTileLattice_CELLS_PER_SIDE">CELLS_PER_SIDE</a>, so a tile at
+<a class="xref" href="Redux.Planets.TerrainTileLattice.html#Redux_Planets_TerrainTileLattice_TileDepth">TileDepth</a>, as many levels above the chosen level as that ratio's power of two, holds exactly the
+cells of the quads at that level under it. Collider vertices are then vertices of the drawn mesh wherever it is
+drawn at that level, on every body and at any height, since both scale with the distance from the body center
+alike. Not thread-safe.
 </p>
 <p>
 Vertices are numbered along X first, then row by row along Y. Face frames are exact signed axis permutations
@@ -115,13 +115,13 @@ integer lattice coordinates, so tiles sharing an edge get bit-identical directio
 
 
   <a id="Redux_Planets_TerrainTileLattice__ctor_" data-uid="Redux.Planets.TerrainTileLattice.#ctor*"></a>
-  <h4 id="Redux_Planets_TerrainTileLattice__ctor_System_Double_System_Int32_" data-uid="Redux.Planets.TerrainTileLattice.#ctor(System.Double,System.Int32)">TerrainTileLattice(double, int)</h4>
+  <h4 id="Redux_Planets_TerrainTileLattice__ctor_System_Int32_" data-uid="Redux.Planets.TerrainTileLattice.#ctor(System.Int32)">TerrainTileLattice(int)</h4>
   <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Redux.Planets.TerrainTileLattice.html">TerrainTileLattice</a> class for a body.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public TerrainTileLattice(double radius, int effectiveMaxLevel)</code></pre>
+    <pre><code class="lang-csharp hljs">public TerrainTileLattice(int level)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -134,23 +134,13 @@ integer lattice coordinates, so tiles sharing an edge get bit-identical directio
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">double</span></td>
-        <td><span class="parametername">radius</span></td>
-        <td><p>The body's radius in meters.</p>
-</td>
-      </tr>
-      <tr>
         <td><span class="xref">int</span></td>
-        <td><span class="parametername">effectiveMaxLevel</span></td>
-        <td><p>The body's effective maximum PQS subdivision level.</p>
+        <td><span class="parametername">level</span></td>
+        <td><p>The PQS subdivision level whose quads' cells the tiles take.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Redux_Planets_TerrainTileLattice__ctor_System_Double_System_Int32__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>The target is the body's finest visual cell, so physics matches what is drawn, but never finer than half a
-meter on small bodies.</p>
-</div>
   <h3 id="fields">Fields
 </h3>
 
@@ -161,7 +151,7 @@ meter on small bodies.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public const int CELLS_PER_SIDE = 32</code></pre>
+    <pre><code class="lang-csharp hljs">public const int CELLS_PER_SIDE = 64</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -211,7 +201,7 @@ meter on small bodies.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public const int TRIANGLE_INDEX_COUNT = 6144</code></pre>
+    <pre><code class="lang-csharp hljs">public const int TRIANGLE_INDEX_COUNT = 24576</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -236,7 +226,7 @@ meter on small bodies.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public const int VERTEX_COUNT = 1089</code></pre>
+    <pre><code class="lang-csharp hljs">public const int VERTEX_COUNT = 4225</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -261,7 +251,7 @@ meter on small bodies.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public const int VERTICES_PER_SIDE = 33</code></pre>
+    <pre><code class="lang-csharp hljs">public const int VERTICES_PER_SIDE = 65</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -282,14 +272,14 @@ meter on small bodies.</p>
 </h3>
 
 
-  <a id="Redux_Planets_TerrainTileLattice_TargetCellSize_" data-uid="Redux.Planets.TerrainTileLattice.TargetCellSize*"></a>
-  <h4 id="Redux_Planets_TerrainTileLattice_TargetCellSize" data-uid="Redux.Planets.TerrainTileLattice.TargetCellSize">TargetCellSize</h4>
-  <div class="markdown level1 summary"><p>Gets the cell size tiles aim for, in meters.</p>
+  <a id="Redux_Planets_TerrainTileLattice_TileDepth_" data-uid="Redux.Planets.TerrainTileLattice.TileDepth*"></a>
+  <h4 id="Redux_Planets_TerrainTileLattice_TileDepth" data-uid="Redux.Planets.TerrainTileLattice.TileDepth">TileDepth</h4>
+  <div class="markdown level1 summary"><p>Gets the depth every tile sits at.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double TargetCellSize { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public int TileDepth { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-condensed">
@@ -301,7 +291,7 @@ meter on small bodies.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">double</span></td>
+        <td><span class="xref">int</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -312,7 +302,7 @@ meter on small bodies.</p>
 
   <a id="Redux_Planets_TerrainTileLattice_AddressAt_" data-uid="Redux.Planets.TerrainTileLattice.AddressAt*"></a>
   <h4 id="Redux_Planets_TerrainTileLattice_AddressAt_Unity_Mathematics_double3_System_Int32_" data-uid="Redux.Planets.TerrainTileLattice.AddressAt(Unity.Mathematics.double3,System.Int32)">AddressAt(double3, int)</h4>
-  <div class="markdown level1 summary"><p>Returns the tile at a given depth that contains a direction, whatever depth the lattice would choose there.</p>
+  <div class="markdown level1 summary"><p>Returns the tile at a given depth that contains a direction.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -406,57 +396,6 @@ meter on small bodies.</p>
   </table>
 
 
-  <a id="Redux_Planets_TerrainTileLattice_CoarserNeighbors_" data-uid="Redux.Planets.TerrainTileLattice.CoarserNeighbors*"></a>
-  <h4 id="Redux_Planets_TerrainTileLattice_CoarserNeighbors_Redux_Planets_TerrainHeightSampler__Redux_Planets_TerrainTileAddress_" data-uid="Redux.Planets.TerrainTileLattice.CoarserNeighbors(Redux.Planets.TerrainHeightSampler@,Redux.Planets.TerrainTileAddress)">CoarserNeighbors(in TerrainHeightSampler, TerrainTileAddress)</h4>
-  <div class="markdown level1 summary"><p>Returns how many levels coarser the tile across each edge is.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int4 CoarserNeighbors(in TerrainHeightSampler sampler, TerrainTileAddress tile)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Redux.Planets.TerrainHeightSampler.html">TerrainHeightSampler</a></td>
-        <td><span class="parametername">sampler</span></td>
-        <td><p>The sampler that supplies surface radii for depth decisions.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Redux.Planets.TerrainTileAddress.html">TerrainTileAddress</a></td>
-        <td><span class="parametername">tile</span></td>
-        <td><p>The tile whose neighbors to check.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">int4</span></td>
-        <td><p>One count per edge, indexed by <a class="xref" href="Redux.Planets.TerrainTileEdge.html">TerrainTileEdge</a>, zero where the neighbor is as deep or deeper.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-
-
   <a id="Redux_Planets_TerrainTileLattice_Covering_" data-uid="Redux.Planets.TerrainTileLattice.Covering*"></a>
   <h4 id="Redux_Planets_TerrainTileLattice_Covering_Redux_Planets_TerrainHeightSampler__Unity_Mathematics_double3_System_Double_Unity_Collections_NativeList_Redux_Planets_TerrainTileAddress__" data-uid="Redux.Planets.TerrainTileLattice.Covering(Redux.Planets.TerrainHeightSampler@,Unity.Mathematics.double3,System.Double,Unity.Collections.NativeList{Redux.Planets.TerrainTileAddress})">Covering(in TerrainHeightSampler, double3, double, NativeList&lt;TerrainTileAddress&gt;)</h4>
   <div class="markdown level1 summary"><p>Adds every tile that a disc on the surface touches.</p>
@@ -479,7 +418,7 @@ meter on small bodies.</p>
       <tr>
         <td><a class="xref" href="Redux.Planets.TerrainHeightSampler.html">TerrainHeightSampler</a></td>
         <td><span class="parametername">sampler</span></td>
-        <td><p>The sampler that supplies surface radii for depth decisions.</p>
+        <td><p>The sampler that supplies the surface radius at the disc's center.</p>
 </td>
       </tr>
       <tr>
@@ -506,7 +445,7 @@ meter on small bodies.</p>
 
   <a id="Redux_Planets_TerrainTileLattice_Dispose_" data-uid="Redux.Planets.TerrainTileLattice.Dispose*"></a>
   <h4 id="Redux_Planets_TerrainTileLattice_Dispose" data-uid="Redux.Planets.TerrainTileLattice.Dispose">Dispose()</h4>
-  <div class="markdown level1 summary"><p>Frees the cached depth decisions and the scratch space.</p>
+  <div class="markdown level1 summary"><p>Frees the scratch space.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -516,13 +455,13 @@ meter on small bodies.</p>
 
 
   <a id="Redux_Planets_TerrainTileLattice_Locate_" data-uid="Redux.Planets.TerrainTileLattice.Locate*"></a>
-  <h4 id="Redux_Planets_TerrainTileLattice_Locate_Redux_Planets_TerrainHeightSampler__Unity_Mathematics_double3_" data-uid="Redux.Planets.TerrainTileLattice.Locate(Redux.Planets.TerrainHeightSampler@,Unity.Mathematics.double3)">Locate(in TerrainHeightSampler, double3)</h4>
+  <h4 id="Redux_Planets_TerrainTileLattice_Locate_Unity_Mathematics_double3_" data-uid="Redux.Planets.TerrainTileLattice.Locate(Unity.Mathematics.double3)">Locate(double3)</h4>
   <div class="markdown level1 summary"><p>Returns the tile containing a direction.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public TerrainTileAddress Locate(in TerrainHeightSampler sampler, double3 direction)</code></pre>
+    <pre><code class="lang-csharp hljs">public TerrainTileAddress Locate(double3 direction)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -534,12 +473,6 @@ meter on small bodies.</p>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td><a class="xref" href="Redux.Planets.TerrainHeightSampler.html">TerrainHeightSampler</a></td>
-        <td><span class="parametername">sampler</span></td>
-        <td><p>The sampler that supplies surface radii for depth decisions.</p>
-</td>
-      </tr>
       <tr>
         <td><span class="xref">double3</span></td>
         <td><span class="parametername">direction</span></td>
