@@ -172,38 +172,18 @@
       </tr>
     </tbody>
   </table>
-  <h3 id="methods">Methods
-</h3>
 
 
-  <a id="KSP_Rendering_Planets_PQSColliderPool_DebugFindColliderQuadIndex_" data-uid="KSP.Rendering.Planets.PQSColliderPool.DebugFindColliderQuadIndex*"></a>
-  <h4 id="KSP_Rendering_Planets_PQSColliderPool_DebugFindColliderQuadIndex_UnityEngine_MeshCollider_" data-uid="KSP.Rendering.Planets.PQSColliderPool.DebugFindColliderQuadIndex(UnityEngine.MeshCollider)">DebugFindColliderQuadIndex(MeshCollider)</h4>
-  <div class="markdown level1 summary"><p>Returns the quad index assigned to the active pooled collider that matches the given <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/MeshCollider.html">MeshCollider</a>, or -1 if no match is found.</p>
+  <a id="KSP_Rendering_Planets_PQSColliderPool_FreeCount_" data-uid="KSP.Rendering.Planets.PQSColliderPool.FreeCount*"></a>
+  <h4 id="KSP_Rendering_Planets_PQSColliderPool_FreeCount" data-uid="KSP.Rendering.Planets.PQSColliderPool.FreeCount">FreeCount</h4>
+  <div class="markdown level1 summary"><p>Gets the number of colliders ready to hand out without creating one.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int DebugFindColliderQuadIndex(MeshCollider collider)</code></pre>
+    <pre><code class="lang-csharp hljs">public int FreeCount { get; }</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/MeshCollider.html">MeshCollider</a></td>
-        <td><span class="parametername">collider</span></td>
-        <td><p>The <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/MeshCollider.html">MeshCollider</a> to search for among active pool entries.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
+  <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-condensed">
     <thead>
       <tr>
@@ -214,11 +194,12 @@
     <tbody>
       <tr>
         <td><span class="xref">int</span></td>
-        <td><p>The quad index of the matching <a class="xref" href="KSP.Rendering.Planets.PQSCollider.html">PQSCollider</a>, or -1 if no active entry owns <code class="paramref">collider</code>.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
+  <h3 id="methods">Methods
+</h3>
 
 
   <a id="KSP_Rendering_Planets_PQSColliderPool_Dispose_" data-uid="KSP.Rendering.Planets.PQSColliderPool.Dispose*"></a>
@@ -328,14 +309,15 @@
   </table>
 
 
-  <a id="KSP_Rendering_Planets_PQSColliderPool_ReturnPqsCollider_" data-uid="KSP.Rendering.Planets.PQSColliderPool.ReturnPqsCollider*"></a>
-  <h4 id="KSP_Rendering_Planets_PQSColliderPool_ReturnPqsCollider_KSP_Rendering_Planets_PQSCollider_" data-uid="KSP.Rendering.Planets.PQSColliderPool.ReturnPqsCollider(KSP.Rendering.Planets.PQSCollider)">ReturnPqsCollider(PQSCollider)</h4>
-  <div class="markdown level1 summary"><p>Returns a <a class="xref" href="KSP.Rendering.Planets.PQSCollider.html">PQSCollider</a> to the pool, resetting its state and decrementing the active count.</p>
+  <a id="KSP_Rendering_Planets_PQSColliderPool_Reserve_" data-uid="KSP.Rendering.Planets.PQSColliderPool.Reserve*"></a>
+  <h4 id="KSP_Rendering_Planets_PQSColliderPool_Reserve_System_Int32_System_Int32_" data-uid="KSP.Rendering.Planets.PQSColliderPool.Reserve(System.Int32,System.Int32)">Reserve(int, int)</h4>
+  <div class="markdown level1 summary"><p>Creates colliders ahead of demand until <code class="paramref">freeSlots</code> are free, at most
+<code class="paramref">maxCreated</code> per call.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void ReturnPqsCollider(PQSCollider pqsCollider)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Reserve(int freeSlots, int maxCreated)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -348,13 +330,22 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Rendering.Planets.PQSCollider.html">PQSCollider</a></td>
-        <td><span class="parametername">pqsCollider</span></td>
-        <td><p>The collider instance to return.</p>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">freeSlots</span></td>
+        <td><p>The free colliders to keep ready.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">maxCreated</span></td>
+        <td><p>The most colliders this call creates.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 id="KSP_Rendering_Planets_PQSColliderPool_Reserve_System_Int32_System_Int32__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Called once a frame, so the pool grows a few colliders at a time instead of inside the frame that needs one.</p>
+</div>
 
 
   <a id="KSP_Rendering_Planets_PQSColliderPool_ReturnPqsCollider_" data-uid="KSP.Rendering.Planets.PQSColliderPool.ReturnPqsCollider*"></a>
@@ -380,41 +371,6 @@
         <td><span class="xref">int</span></td>
         <td><span class="parametername">index</span></td>
         <td><p>The zero-based pool index of the collider to return.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="KSP_Rendering_Planets_PQSColliderPool_UpdateColliderData_" data-uid="KSP.Rendering.Planets.PQSColliderPool.UpdateColliderData*"></a>
-  <h4 id="KSP_Rendering_Planets_PQSColliderPool_UpdateColliderData_KSP_Rendering_Planets_PQS_KSP_Rendering_Planets_BiomePhysicsMapping_" data-uid="KSP.Rendering.Planets.PQSColliderPool.UpdateColliderData(KSP.Rendering.Planets.PQS,KSP.Rendering.Planets.BiomePhysicsMapping)">UpdateColliderData(PQS, BiomePhysicsMapping)</h4>
-  <div class="markdown level1 summary"><p>Updates the physics material and biome metadata on each active collider based on its current world position.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void UpdateColliderData(PQS Pqs, BiomePhysicsMapping mappingTable)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="KSP.Rendering.Planets.PQS.html">PQS</a></td>
-        <td><span class="parametername">Pqs</span></td>
-        <td><p>The <a class="xref" href="KSP.Rendering.Planets.PQS.html">PQS</a> instance used to sample biome surface data at each collider's position.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="KSP.Rendering.Planets.BiomePhysicsMapping.html">BiomePhysicsMapping</a></td>
-        <td><span class="parametername">mappingTable</span></td>
-        <td><p>The <a class="xref" href="KSP.Rendering.Planets.BiomePhysicsMapping.html">BiomePhysicsMapping</a> that maps biome types to physics materials, or <code>null</code> to skip material assignment.</p>
 </td>
       </tr>
     </tbody>

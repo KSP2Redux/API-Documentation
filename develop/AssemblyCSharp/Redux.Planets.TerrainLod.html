@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class TerrainLod | KSP2Redux API (Develop) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class TerrainLod | KSP2Redux API (Develop) ">
+    
+    <meta name="description" content="Decides PQS quad splits and merges by screen-space error, the screen size of a quad&#39;s geometric error.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Redux.Planets.TerrainLod">
+
+
+
+  <h1 id="Redux_Planets_TerrainLod" data-uid="Redux.Planets.TerrainLod" class="text-break">Class TerrainLod</h1>
+  <div class="markdown level0 summary"><p>Decides PQS quad splits and merges by screen-space error, the screen size of a quad's geometric error.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><span class="xref">TerrainLod</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.Planets.html">Planets</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="Redux_Planets_TerrainLod_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class TerrainLod</code></pre>
+  </div>
+  <h5 id="Redux_Planets_TerrainLod_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>A quad splits when its error, seen from the nearest point of its bounds, covers more than the tolerance, or when
+its cells cover more than <a class="xref" href="Redux.Planets.TerrainLod.html#Redux_Planets_TerrainLod_CELL_CAP">CELL_CAP</a> pixels at that distance, which keeps flat ground from staying
+coarse. It never splits into cells that would cover fewer pixels than the floor at that distance.</p>
+<p>Every limit is measured as if the quad were seen side-on. Foreshortening against the body's radial direction
+read steep slopes turned toward the camera as edge-on, and a small camera move then flipped whole slopes between
+levels.</p>
+<p>Every limit merges at half of where it splits, so quads at a boundary do not flicker between levels.</p>
+<p>Detail also depends on the quad's <a class="xref" href="Redux.Planets.TerrainLodRegion.html">TerrainLodRegion</a>: full on screen, half in a
+<a class="xref" href="Redux.Planets.TerrainLod.html#Redux_Planets_TerrainLod_GUARD_BAND_DEGREES">GUARD_BAND_DEGREES</a> band around the view and where a quad off screen casts a shadow into it. Elsewhere
+a quad neither splits nor merges by itself. It keeps its detail until the budget trades it away, first of all.</p>
+</div>
+  <h3 id="fields">Fields
+</h3>
+
+
+  <h4 id="Redux_Planets_TerrainLod_CELLS_PER_SIDE" data-uid="Redux.Planets.TerrainLod.CELLS_PER_SIDE">CELLS_PER_SIDE</h4>
+  <div class="markdown level1 summary"><p>The cells along each side of a PQS quad.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int CELLS_PER_SIDE = 8</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainLod_CELL_CAP" data-uid="Redux.Planets.TerrainLod.CELL_CAP">CELL_CAP</h4>
+  <div class="markdown level1 summary"><p>The pixels a quad's cells may cover, seen side-on, before the quad splits whatever its error.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const float CELL_CAP = 16</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainLod_GUARD_BAND_DEGREES" data-uid="Redux.Planets.TerrainLod.GUARD_BAND_DEGREES">GUARD_BAND_DEGREES</h4>
+  <div class="markdown level1 summary"><p>How far past each side of the view quads still get half detail, in degrees, so a turn finds detail waiting.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const double GUARD_BAND_DEGREES = 10</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="Redux_Planets_TerrainLod_Classify_" data-uid="Redux.Planets.TerrainLod.Classify*"></a>
+  <h4 id="Redux_Planets_TerrainLod_Classify_Redux_Planets_TerrainLodView__Unity_Mathematics_double3_System_Double_" data-uid="Redux.Planets.TerrainLod.Classify(Redux.Planets.TerrainLodView@,Unity.Mathematics.double3,System.Double)">Classify(in TerrainLodView, double3, double)</h4>
+  <div class="markdown level1 summary"><p>Returns how much detail a quad gets for where it sits relative to the view.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static TerrainLodRegion Classify(in TerrainLodView view, double3 center, double boundsRadius)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainLodView.html">TerrainLodView</a></td>
+        <td><span class="parametername">view</span></td>
+        <td><p>The camera inputs.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double3</span></td>
+        <td><span class="parametername">center</span></td>
+        <td><p>The quad's center, in body space, in meters.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">boundsRadius</span></td>
+        <td><p>The radius of a sphere around the center holding the whole quad, in meters.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainLodRegion.html">TerrainLodRegion</a></td>
+        <td><p>The quad's region.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Planets_TerrainLod_ForDetail_" data-uid="Redux.Planets.TerrainLod.ForDetail*"></a>
+  <h4 id="Redux_Planets_TerrainLod_ForDetail_System_Int32_System_Single__System_Single__" data-uid="Redux.Planets.TerrainLod.ForDetail(System.Int32,System.Single@,System.Single@)">ForDetail(int, out float, out float)</h4>
+  <div class="markdown level1 summary"><p>Returns the tolerance and cell floor of a terrain detail setting.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void ForDetail(int detail, out float tolerance, out float cellFloor)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">detail</span></td>
+        <td><p>The setting: 0 for low, 1 for medium, 2 or more for high.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">tolerance</span></td>
+        <td><p>Receives the tolerance in pixels at 1080 lines.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">cellFloor</span></td>
+        <td><p>Receives the cell floor in pixels at 1080 lines.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Planets_TerrainLod_PixelsPerRadian_" data-uid="Redux.Planets.TerrainLod.PixelsPerRadian*"></a>
+  <h4 id="Redux_Planets_TerrainLod_PixelsPerRadian_System_Single_" data-uid="Redux.Planets.TerrainLod.PixelsPerRadian(System.Single)">PixelsPerRadian(float)</h4>
+  <div class="markdown level1 summary"><p>Returns the pixels one radian covers at 1080 lines for a vertical field of view.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static double PixelsPerRadian(float verticalFieldOfView)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">verticalFieldOfView</span></td>
+        <td><p>The camera's vertical field of view, in degrees.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><p>The pixels per radian.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Planets_TerrainLod_QuadWidth_" data-uid="Redux.Planets.TerrainLod.QuadWidth*"></a>
+  <h4 id="Redux_Planets_TerrainLod_QuadWidth_System_Double_System_Int32_" data-uid="Redux.Planets.TerrainLod.QuadWidth(System.Double,System.Int32)">QuadWidth(double, int)</h4>
+  <div class="markdown level1 summary"><p>Returns the width of a PQS quad.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static double QuadWidth(double radius, int level)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">radius</span></td>
+        <td><p>The distance from the body center to the quad, in meters.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">level</span></td>
+        <td><p>The quad's subdivision level, with a whole face at zero.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><p>The quad's width in meters.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Planets_TerrainLod_QuadWidth_System_Double_System_Int32__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>A cube face spans a quarter turn, so this is exact in the middle of a face and up to about 30 percent wide near its corners.</p>
+</div>
+
+
+  <a id="Redux_Planets_TerrainLod_ShouldMerge_" data-uid="Redux.Planets.TerrainLod.ShouldMerge*"></a>
+  <h4 id="Redux_Planets_TerrainLod_ShouldMerge_Redux_Planets_TerrainLodView__Unity_Mathematics_double3_System_Double_System_Single_" data-uid="Redux.Planets.TerrainLod.ShouldMerge(Redux.Planets.TerrainLodView@,Unity.Mathematics.double3,System.Double,System.Single)">ShouldMerge(in TerrainLodView, double3, double, float)</h4>
+  <div class="markdown level1 summary"><p>Returns whether a split quad's children should merge back into it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool ShouldMerge(in TerrainLodView view, double3 center, double width, float error)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainLodView.html">TerrainLodView</a></td>
+        <td><span class="parametername">view</span></td>
+        <td><p>The camera inputs.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double3</span></td>
+        <td><span class="parametername">center</span></td>
+        <td><p>The split quad's center, in body space, in meters.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">width</span></td>
+        <td><p>The split quad's width in meters.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">error</span></td>
+        <td><p>The split quad's geometric error in meters.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the children should merge, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Planets_TerrainLod_ShouldSplit_" data-uid="Redux.Planets.TerrainLod.ShouldSplit*"></a>
+  <h4 id="Redux_Planets_TerrainLod_ShouldSplit_Redux_Planets_TerrainLodView__Unity_Mathematics_double3_System_Double_System_Single_" data-uid="Redux.Planets.TerrainLod.ShouldSplit(Redux.Planets.TerrainLodView@,Unity.Mathematics.double3,System.Double,System.Single)">ShouldSplit(in TerrainLodView, double3, double, float)</h4>
+  <div class="markdown level1 summary"><p>Returns whether a quad should split.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool ShouldSplit(in TerrainLodView view, double3 center, double width, float error)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainLodView.html">TerrainLodView</a></td>
+        <td><span class="parametername">view</span></td>
+        <td><p>The camera inputs.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double3</span></td>
+        <td><span class="parametername">center</span></td>
+        <td><p>The quad's center, in body space, in meters.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">width</span></td>
+        <td><p>The quad's width in meters.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">error</span></td>
+        <td><p>The quad's geometric error in meters.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the quad should split, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Planets_TerrainLod_SplitPriority_" data-uid="Redux.Planets.TerrainLod.SplitPriority*"></a>
+  <h4 id="Redux_Planets_TerrainLod_SplitPriority_Redux_Planets_TerrainLodView__Unity_Mathematics_double3_System_Double_System_Single_" data-uid="Redux.Planets.TerrainLod.SplitPriority(Redux.Planets.TerrainLodView@,Unity.Mathematics.double3,System.Double,System.Single)">SplitPriority(in TerrainLodView, double3, double, float)</h4>
+  <div class="markdown level1 summary"><p>Returns how far past its limits a quad is, for ranking splits against each other.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float SplitPriority(in TerrainLodView view, double3 center, double width, float error)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainLodView.html">TerrainLodView</a></td>
+        <td><span class="parametername">view</span></td>
+        <td><p>The camera inputs.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double3</span></td>
+        <td><span class="parametername">center</span></td>
+        <td><p>The quad's center, in body space, in meters.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">width</span></td>
+        <td><p>The quad's width in meters.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">error</span></td>
+        <td><p>The quad's geometric error in meters.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><p>The priority, higher for quads more visibly short of detail.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Planets_TerrainLod_SplitPriority_Redux_Planets_TerrainLodView__Unity_Mathematics_double3_System_Double_System_Single__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The larger of its error over the tolerance and its cells over <a class="xref" href="Redux.Planets.TerrainLod.html#Redux_Planets_TerrainLod_CELL_CAP">CELL_CAP</a>, so splits wanted for
+error and for size rank on one scale. Above 1 the quad wants to split.</p>
+</div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from develop
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

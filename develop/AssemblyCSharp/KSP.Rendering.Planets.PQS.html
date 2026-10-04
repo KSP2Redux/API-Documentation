@@ -113,12 +113,12 @@ public class PQS : MonoBehaviour</code></pre>
 
 
   <h4 id="KSP_Rendering_Planets_PQS_BUFFER_SIZE" data-uid="KSP.Rendering.Planets.PQS.BUFFER_SIZE">BUFFER_SIZE</h4>
-  <div class="markdown level1 summary"><p>Maximum number of quads that can be held in the PQS native buffers.</p>
+  <div class="markdown level1 summary"><p>Maximum number of quads the tree can hold, interior quads included.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public const int BUFFER_SIZE = 12000</code></pre>
+    <pre><code class="lang-csharp hljs">public const int BUFFER_SIZE = 25000</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -135,106 +135,10 @@ public class PQS : MonoBehaviour</code></pre>
       </tr>
     </tbody>
   </table>
-
-
-  <h4 id="KSP_Rendering_Planets_PQS_DebugIncludeInterestPositions" data-uid="KSP.Rendering.Planets.PQS.DebugIncludeInterestPositions">DebugIncludeInterestPositions</h4>
-  <div class="markdown level1 summary"><p>Gets or sets a value indicating whether interest positions from nearby vessels are included when building interest groups.</p>
+  <h5 id="KSP_Rendering_Planets_PQS_BUFFER_SIZE_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Only drawn leaves take GPU mesh memory, from <a class="xref" href="KSP.Rendering.Planets.PQSRenderer.html#KSP_Rendering_Planets_PQSRenderer_MeshSlotCount">MeshSlotCount</a> slots, so the tree can
+hold more quads than there are slots. It holds the interior quads above the largest slot count.</p>
 </div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static bool DebugIncludeInterestPositions</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">bool</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="KSP_Rendering_Planets_PQS_DebugInterestGroupRadiusMultiplier" data-uid="KSP.Rendering.Planets.PQS.DebugInterestGroupRadiusMultiplier">DebugInterestGroupRadiusMultiplier</h4>
-  <div class="markdown level1 summary"><p>Debug multiplier applied to interest group radii when grouping nearby physics objects.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static double DebugInterestGroupRadiusMultiplier</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">double</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="KSP_Rendering_Planets_PQS_DebugInterestVesselCount" data-uid="KSP.Rendering.Planets.PQS.DebugInterestVesselCount">DebugInterestVesselCount</h4>
-  <div class="markdown level1 summary"><p>Number of vessel interest groups present during the most recent update, used for debugging.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static int DebugInterestVesselCount</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">int</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="KSP_Rendering_Planets_PQS_DebugSurfaceInterestCount" data-uid="KSP.Rendering.Planets.PQS.DebugSurfaceInterestCount">DebugSurfaceInterestCount</h4>
-  <div class="markdown level1 summary"><p>Number of terrain-surface interest points added during the most recent update.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static int DebugSurfaceInterestCount</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">int</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
 
 
   <h4 id="KSP_Rendering_Planets_PQS_EmptyDecalInstanceList" data-uid="KSP.Rendering.Planets.PQS.EmptyDecalInstanceList">EmptyDecalInstanceList</h4>
@@ -1736,15 +1640,51 @@ public class PQS : MonoBehaviour</code></pre>
   </table>
 
 
-  <a id="KSP_Rendering_Planets_PQS_AllocInterestGroups_" data-uid="KSP.Rendering.Planets.PQS.AllocInterestGroups*"></a>
-  <h4 id="KSP_Rendering_Planets_PQS_AllocInterestGroups" data-uid="KSP.Rendering.Planets.PQS.AllocInterestGroups">AllocInterestGroups()</h4>
-  <div class="markdown level1 summary"><p>Allocates a temporary native list of interest groups derived from the current set of nearby vessel positions.</p>
+  <a id="KSP_Rendering_Planets_PQS_BeginRaycastTerrainWorld_" data-uid="KSP.Rendering.Planets.PQS.BeginRaycastTerrainWorld*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_BeginRaycastTerrainWorld_Vector3d_UnityEngine_Vector3_System_Double_System_Int32_" data-uid="KSP.Rendering.Planets.PQS.BeginRaycastTerrainWorld(Vector3d,UnityEngine.Vector3,System.Double,System.Int32)">BeginRaycastTerrainWorld(Vector3d, Vector3, double, int)</h4>
+  <div class="markdown level1 summary"><p>Starts casting a ray against the terrain in world space on a worker thread.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public NativeList&lt;InterestGroup&gt; AllocInterestGroups()</code></pre>
+    <pre><code class="lang-csharp hljs">public ITerrainRayRequest BeginRaycastTerrainWorld(Vector3d origin, Vector3 direction, double maxDistance, int maxSteps)</code></pre>
   </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">origin</span></td>
+        <td><p>The ray origin in world space.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">direction</span></td>
+        <td><p>The ray direction in world space.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">maxDistance</span></td>
+        <td><p>The farthest distance along the ray to look, in meters.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">maxSteps</span></td>
+        <td><p>The most marching steps the cast may take before it gives up and reports a miss.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-condensed">
     <thead>
@@ -1755,12 +1695,16 @@ public class PQS : MonoBehaviour</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">NativeList</span>&lt;<a class="xref" href="KSP.Rendering.Planets.InterestGroup.html">InterestGroup</a>&gt;</td>
-        <td><p>A <span class="xref">Unity.Collections.NativeList&lt;T&gt;</span> of <a class="xref" href="KSP.Rendering.Planets.InterestGroup.html">InterestGroup</a> values allocated with <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Collections.Allocator.TempJob.html">TempJob</a>.</p>
+        <td><a class="xref" href="Redux.Planets.ITerrainRayRequest.html">ITerrainRayRequest</a></td>
+        <td><p>The scheduled cast, or <code>null</code> when the body builds no collider tiles.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 id="KSP_Rendering_Planets_PQS_BeginRaycastTerrainWorld_Vector3d_UnityEngine_Vector3_System_Double_System_Int32__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Reports nothing while the body builds no collider tiles, so callers keep using physics raycasts alone. The
+caller disposes the request once it has read the result.</p>
+</div>
 
 
   <a id="KSP_Rendering_Planets_PQS_BootForEditor_" data-uid="KSP.Rendering.Planets.PQS.BootForEditor*"></a>
@@ -1790,6 +1734,55 @@ partially-booted state and clears it before re-running the boot path.</p>
       </tr>
     </tbody>
   </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_BuildHeightSampler_" data-uid="KSP.Rendering.Planets.PQS.BuildHeightSampler*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_BuildHeightSampler_System_Boolean_" data-uid="KSP.Rendering.Planets.PQS.BuildHeightSampler(System.Boolean)">BuildHeightSampler(bool)</h4>
+  <div class="markdown level1 summary"><p>Builds a sampler that reproduces this sphere's rendered terrain height on the CPU.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerrainHeightSampler BuildHeightSampler(bool includeDecals)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">includeDecals</span></td>
+        <td><p>True to apply decals, false to sample the terrain without them.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainHeightSampler.html">TerrainHeightSampler</a></td>
+        <td><p>A sampler valid until this sphere is destroyed or its height textures change.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Rendering_Planets_PQS_BuildHeightSampler_System_Boolean__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Cheap enough to call per query. The sampler reads the decal controller's own decal array, which the
+controller can replace, so copy <a class="xref" href="Redux.Planets.TerrainHeightSampler.html#Redux_Planets_TerrainHeightSampler_Decals">Decals</a> before handing the sampler to a job.</p>
+</div>
 
 
   <a id="KSP_Rendering_Planets_PQS_DeactivateSphere_" data-uid="KSP.Rendering.Planets.PQS.DeactivateSphere*"></a>
@@ -1842,6 +1835,51 @@ partially-booted state and clears it before re-running the boot path.</p>
       <tr>
         <td><span class="xref">double</span></td>
         <td><p>The altitude in meters above the surface reference radius.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQS_GetBiomeDataAtDirection_" data-uid="KSP.Rendering.Planets.PQS.GetBiomeDataAtDirection*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_GetBiomeDataAtDirection_UnityEngine_Vector3_" data-uid="KSP.Rendering.Planets.PQS.GetBiomeDataAtDirection(UnityEngine.Vector3)">GetBiomeDataAtDirection(Vector3)</h4>
+  <div class="markdown level1 summary"><p>Returns biome surface data for the biome in a body-space direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PQSData.BiomeSurfaceData GetBiomeDataAtDirection(Vector3 direction)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">direction</span></td>
+        <td><p>The normalized direction from the body center, in body space.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Planets.PQSData.html">PQSData</a>.<a class="xref" href="KSP.Rendering.Planets.PQSData.BiomeSurfaceData.html">BiomeSurfaceData</a></td>
+        <td><p>A <a class="xref" href="KSP.Rendering.Planets.PQSData.BiomeSurfaceData.html">PQSData.BiomeSurfaceData</a> describing the dominant biome and surface properties in that direction.</p>
 </td>
       </tr>
     </tbody>
@@ -2331,6 +2369,62 @@ partially-booted state and clears it before re-running the boot path.</p>
   </table>
 
 
+  <a id="KSP_Rendering_Planets_PQS_GetStockSurfaceHeight_" data-uid="KSP.Rendering.Planets.PQS.GetStockSurfaceHeight*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_GetStockSurfaceHeight_Vector3d_System_Boolean_" data-uid="KSP.Rendering.Planets.PQS.GetStockSurfaceHeight(Vector3d,System.Boolean)">GetStockSurfaceHeight(Vector3d, bool)</h4>
+  <div class="markdown level1 summary"><p>Samples the surface height the way the stock game did, for placing authored surface objects.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double GetStockSurfaceHeight(Vector3d radialVector, bool includeDecals)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">radialVector</span></td>
+        <td><p>The direction from the sphere origin toward the surface sample point.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">includeDecals</span></td>
+        <td><p>When <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a>, decal height contributions are included in the sample.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><p>The absolute surface radius in meters from the sphere origin.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Rendering_Planets_PQS_GetStockSurfaceHeight_Vector3d_System_Boolean__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The stock CPU sampler is tens of metres off the rendered terrain, but surface objects such as the KSC
+had their offsets and flattening decals authored against it. Use <a class="xref" href="KSP.Rendering.Planets.PQS.html#KSP_Rendering_Planets_PQS_GetSurfaceHeight_Vector3d_System_Boolean_">GetSurfaceHeight(Vector3d, bool)</a> for
+anything that has to meet the drawn ground.</p>
+</div>
+
+
   <a id="KSP_Rendering_Planets_PQS_GetSurfaceHeight_" data-uid="KSP.Rendering.Planets.PQS.GetSurfaceHeight*"></a>
   <h4 id="KSP_Rendering_Planets_PQS_GetSurfaceHeight_Vector3d_System_Boolean_" data-uid="KSP.Rendering.Planets.PQS.GetSurfaceHeight(Vector3d,System.Boolean)">GetSurfaceHeight(Vector3d, bool)</h4>
   <div class="markdown level1 summary"><p>Samples the terrain surface height at a given radial direction.</p>
@@ -2376,6 +2470,60 @@ partially-booted state and clears it before re-running the boot path.</p>
       <tr>
         <td><span class="xref">double</span></td>
         <td><p>The absolute surface radius in meters from the sphere origin.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Rendering_Planets_PQS_GetSurfaceHeight_Vector3d_System_Boolean__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Matches the rendered terrain, quirks included. See <a class="xref" href="Redux.Planets.TerrainHeightSampler.html">TerrainHeightSampler</a>.</p>
+</div>
+
+
+  <a id="KSP_Rendering_Planets_PQS_GetSurfaceNormal_" data-uid="KSP.Rendering.Planets.PQS.GetSurfaceNormal*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_GetSurfaceNormal_Vector3d_System_Single_" data-uid="KSP.Rendering.Planets.PQS.GetSurfaceNormal(Vector3d,System.Single)">GetSurfaceNormal(Vector3d, float)</h4>
+  <div class="markdown level1 summary"><p>Returns the terrain normal along a radial direction, as the terrain is rendered.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3 GetSurfaceNormal(Vector3d radialVector, float spacing = 2)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">radialVector</span></td>
+        <td><p>The direction from the sphere origin, in body space.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">spacing</span></td>
+        <td><p>The distance in meters between samples, which sets the scale the slope is read at.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><p>The outward unit normal in body space.</p>
 </td>
       </tr>
     </tbody>
@@ -2750,6 +2898,138 @@ partially-booted state and clears it before re-running the boot path.</p>
   </table>
 
 
+  <a id="KSP_Rendering_Planets_PQS_RaycastTerrain_" data-uid="KSP.Rendering.Planets.PQS.RaycastTerrain*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_RaycastTerrain_Vector3d_UnityEngine_Vector3_System_Double_Redux_Planets_TerrainHit__" data-uid="KSP.Rendering.Planets.PQS.RaycastTerrain(Vector3d,UnityEngine.Vector3,System.Double,Redux.Planets.TerrainHit@)">RaycastTerrain(Vector3d, Vector3, double, out TerrainHit)</h4>
+  <div class="markdown level1 summary"><p>Casts a ray against the terrain as it is rendered, in body space.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool RaycastTerrain(Vector3d origin, Vector3 direction, double maxDistance, out TerrainHit hit)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">origin</span></td>
+        <td><p>The ray origin in meters from the sphere origin.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">direction</span></td>
+        <td><p>The ray direction.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">maxDistance</span></td>
+        <td><p>The farthest distance along the ray to look, in meters.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainHit.html">TerrainHit</a></td>
+        <td><span class="parametername">hit</span></td>
+        <td><p>The first point where the ray meets the terrain, when it does.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the ray meets the terrain within the distance, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Rendering_Planets_PQS_RaycastTerrain_Vector3d_UnityEngine_Vector3_System_Double_Redux_Planets_TerrainHit___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Runs Burst-compiled on the calling thread. See <a class="xref" href="Redux.Planets.TerrainHeightSampler.html#Redux_Planets_TerrainHeightSampler_Raycast_Unity_Mathematics_double3_Unity_Mathematics_float3_System_Double_Redux_Planets_TerrainHit__">Raycast(double3, float3, double, out TerrainHit)</a> for when it gives up.</p>
+</div>
+
+
+  <a id="KSP_Rendering_Planets_PQS_RaycastTerrainWorld_" data-uid="KSP.Rendering.Planets.PQS.RaycastTerrainWorld*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_RaycastTerrainWorld_Vector3d_UnityEngine_Vector3_System_Double_Redux_Planets_TerrainHit__" data-uid="KSP.Rendering.Planets.PQS.RaycastTerrainWorld(Vector3d,UnityEngine.Vector3,System.Double,Redux.Planets.TerrainHit@)">RaycastTerrainWorld(Vector3d, Vector3, double, out TerrainHit)</h4>
+  <div class="markdown level1 summary"><p>Casts a ray against the terrain in world space, for callers that cannot rely on terrain colliders far from vessels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool RaycastTerrainWorld(Vector3d origin, Vector3 direction, double maxDistance, out TerrainHit hit)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">origin</span></td>
+        <td><p>The ray origin in world space.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">direction</span></td>
+        <td><p>The ray direction in world space.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">maxDistance</span></td>
+        <td><p>The farthest distance along the ray to look, in meters.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainHit.html">TerrainHit</a></td>
+        <td><span class="parametername">hit</span></td>
+        <td><p>The first point where the ray meets the terrain, in world space, when it does.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the ray meets the terrain within the distance, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Rendering_Planets_PQS_RaycastTerrainWorld_Vector3d_UnityEngine_Vector3_System_Double_Redux_Planets_TerrainHit___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Answers only while the body builds collider tiles. Otherwise it reports a miss, so callers keep using physics raycasts alone.</p>
+</div>
+
+
   <a id="KSP_Rendering_Planets_PQS_RebuildSphere_" data-uid="KSP.Rendering.Planets.PQS.RebuildSphere*"></a>
   <h4 id="KSP_Rendering_Planets_PQS_RebuildSphere" data-uid="KSP.Rendering.Planets.PQS.RebuildSphere">RebuildSphere()</h4>
   <div class="markdown level1 summary"><p>Tears down the sphere and restarts it, rebuilding all native buffers and quad trees from scratch.</p>
@@ -3083,6 +3363,66 @@ partially-booted state and clears it before re-running the boot path.</p>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">protected void SyncVSPMat()</code></pre>
   </div>
+
+
+  <a id="KSP_Rendering_Planets_PQS_TryLiftAboveTerrainWorld_" data-uid="KSP.Rendering.Planets.PQS.TryLiftAboveTerrainWorld*"></a>
+  <h4 id="KSP_Rendering_Planets_PQS_TryLiftAboveTerrainWorld_Vector3d_System_Double_Vector3d__" data-uid="KSP.Rendering.Planets.PQS.TryLiftAboveTerrainWorld(Vector3d,System.Double,Vector3d@)">TryLiftAboveTerrainWorld(Vector3d, double, out Vector3d)</h4>
+  <div class="markdown level1 summary"><p>Lifts a world-space position straight up to a clearance above the terrain when it is lower than that.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryLiftAboveTerrainWorld(Vector3d position, double clearance, out Vector3d lifted)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">position</span></td>
+        <td><p>The position in world space.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">clearance</span></td>
+        <td><p>The least height above the terrain to leave the position at, in meters.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">lifted</span></td>
+        <td><p>The position above <code class="paramref">position</code> at the clearance, in world space, when it was lower.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the position was lower than the clearance and was lifted, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Rendering_Planets_PQS_TryLiftAboveTerrainWorld_Vector3d_System_Double_Vector3d___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Answers only while the body builds collider tiles, like <a class="xref" href="KSP.Rendering.Planets.PQS.html#KSP_Rendering_Planets_PQS_RaycastTerrainWorld_Vector3d_UnityEngine_Vector3_System_Double_Redux_Planets_TerrainHit__">RaycastTerrainWorld(Vector3d, Vector3, double, out TerrainHit)</a>.</p>
+</div>
 
 
   <a id="KSP_Rendering_Planets_PQS_UpdateSphere_" data-uid="KSP.Rendering.Planets.PQS.UpdateSphere*"></a>

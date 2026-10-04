@@ -5,11 +5,11 @@
   <head>
     <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-      <title>Struct PQSColliderInfo | KSP2Redux API (Develop) </title>
+      <title>Struct TerrainLodCandidate | KSP2Redux API (Develop) </title>
       <meta name="viewport" content="width=device-width">
-      <meta name="title" content="Struct PQSColliderInfo | KSP2Redux API (Develop) ">
+      <meta name="title" content="Struct TerrainLodCandidate | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="Represents collider information for a PQS terrain quad, including the quad index, relative position, and pooled collider index.">
+    <meta name="description" content="A PQS quad the subdivision budget may spend nodes on or take them back from.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -76,33 +76,78 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="KSP.Rendering.Planets.PQSColliderInfo">
+            <article class="content wrap" id="_content" data-uid="Redux.Planets.TerrainLodCandidate">
 
 
 
-  <h1 id="KSP_Rendering_Planets_PQSColliderInfo" data-uid="KSP.Rendering.Planets.PQSColliderInfo" class="text-break">Struct PQSColliderInfo</h1>
-  <div class="markdown level0 summary"><p>Represents collider information for a PQS terrain quad, including the quad index, relative position, and pooled collider index.</p>
+  <h1 id="Redux_Planets_TerrainLodCandidate" data-uid="Redux.Planets.TerrainLodCandidate" class="text-break">Struct TerrainLodCandidate</h1>
+  <div class="markdown level0 summary"><p>A PQS quad the subdivision budget may spend nodes on or take them back from.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Rendering.html">Rendering</a>.<a class="xref" href="KSP.Rendering.Planets.html">Planets</a></h6>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.Planets.html">Planets</a></h6>
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
-  <h5 id="KSP_Rendering_Planets_PQSColliderInfo_syntax">Syntax</h5>
+  <h5 id="Redux_Planets_TerrainLodCandidate_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public struct PQSColliderInfo</code></pre>
+    <pre><code class="lang-csharp hljs">public readonly struct TerrainLodCandidate</code></pre>
   </div>
-  <h3 id="fields">Fields
+  <h3 id="constructors">Constructors
 </h3>
 
 
-  <h4 id="KSP_Rendering_Planets_PQSColliderInfo_ColliderPoolIndex" data-uid="KSP.Rendering.Planets.PQSColliderInfo.ColliderPoolIndex">ColliderPoolIndex</h4>
-  <div class="markdown level1 summary"><p>The index of this collider within the shared collider pool.</p>
+  <a id="Redux_Planets_TerrainLodCandidate__ctor_" data-uid="Redux.Planets.TerrainLodCandidate.#ctor*"></a>
+  <h4 id="Redux_Planets_TerrainLodCandidate__ctor_System_Int32_System_Single_System_Int32_" data-uid="Redux.Planets.TerrainLodCandidate.#ctor(System.Int32,System.Single,System.Int32)">TerrainLodCandidate(int, float, int)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Redux.Planets.TerrainLodCandidate.html">TerrainLodCandidate</a> struct.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int ColliderPoolIndex</code></pre>
+    <pre><code class="lang-csharp hljs">public TerrainLodCandidate(int quad, float priority, int nodes)</code></pre>
   </div>
-  <h5 class="fieldValue">Field Value</h5>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">quad</span></td>
+        <td><p>The quad's id.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">priority</span></td>
+        <td><p>How far past its limits the quad is, from <a class="xref" href="Redux.Planets.TerrainLod.html#Redux_Planets_TerrainLod_SplitPriority_Redux_Planets_TerrainLodView__Unity_Mathematics_double3_System_Double_System_Single_">SplitPriority(in TerrainLodView, double3, double, float)</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">nodes</span></td>
+        <td><p>The nodes a split needs, its own children and any neighbours split to keep the balance,
+or the nodes a merge frees.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="Redux_Planets_TerrainLodCandidate_Nodes_" data-uid="Redux.Planets.TerrainLodCandidate.Nodes*"></a>
+  <h4 id="Redux_Planets_TerrainLodCandidate_Nodes" data-uid="Redux.Planets.TerrainLodCandidate.Nodes">Nodes</h4>
+  <div class="markdown level1 summary"><p>Gets the nodes a split needs or a merge frees.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Nodes { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-condensed">
     <thead>
       <tr>
@@ -119,15 +164,42 @@
   </table>
 
 
-  <h4 id="KSP_Rendering_Planets_PQSColliderInfo_QuadIndex" data-uid="KSP.Rendering.Planets.PQSColliderInfo.QuadIndex">QuadIndex</h4>
-  <div class="markdown level1 summary"><p>The index of the PQS terrain quad associated with this collider.</p>
+  <a id="Redux_Planets_TerrainLodCandidate_Priority_" data-uid="Redux.Planets.TerrainLodCandidate.Priority*"></a>
+  <h4 id="Redux_Planets_TerrainLodCandidate_Priority" data-uid="Redux.Planets.TerrainLodCandidate.Priority">Priority</h4>
+  <div class="markdown level1 summary"><p>Gets how far past its limits the quad is. Higher is more visible.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int QuadIndex</code></pre>
+    <pre><code class="lang-csharp hljs">public float Priority { get; }</code></pre>
   </div>
-  <h5 class="fieldValue">Field Value</h5>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Planets_TerrainLodCandidate_Quad_" data-uid="Redux.Planets.TerrainLodCandidate.Quad*"></a>
+  <h4 id="Redux_Planets_TerrainLodCandidate_Quad" data-uid="Redux.Planets.TerrainLodCandidate.Quad">Quad</h4>
+  <div class="markdown level1 summary"><p>Gets the quad's id.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Quad { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-condensed">
     <thead>
       <tr>
@@ -138,31 +210,6 @@
     <tbody>
       <tr>
         <td><span class="xref">int</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="KSP_Rendering_Planets_PQSColliderInfo_RelativePosition" data-uid="KSP.Rendering.Planets.PQSColliderInfo.RelativePosition">RelativePosition</h4>
-  <div class="markdown level1 summary"><p>The position of the collider relative to its associated PQS terrain quad.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Vector3 RelativePosition</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Vector3</span></td>
         <td></td>
       </tr>
     </tbody>

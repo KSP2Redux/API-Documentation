@@ -235,31 +235,6 @@ public class PQSRenderer : KerbalMonoBehaviour, IPQSRenderer</code></pre>
   </table>
 
 
-  <h4 id="KSP_Rendering_Planets_PQSRenderer_COLLIDER_POOL_SIZE" data-uid="KSP.Rendering.Planets.PQSRenderer.COLLIDER_POOL_SIZE">COLLIDER_POOL_SIZE</h4>
-  <div class="markdown level1 summary"><p>The maximum number of PQS mesh colliders maintained in the collider pool.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static int COLLIDER_POOL_SIZE</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">int</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
   <h4 id="KSP_Rendering_Planets_PQSRenderer_CalculateNormals" data-uid="KSP.Rendering.Planets.PQSRenderer.CalculateNormals">CalculateNormals</h4>
   <div class="markdown level1 summary"><p>Flag indicating whether vertex normals are recalculated for the PQS surface.</p>
 </div>
@@ -267,31 +242,6 @@ public class PQSRenderer : KerbalMonoBehaviour, IPQSRenderer</code></pre>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public bool CalculateNormals</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">bool</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="KSP_Rendering_Planets_PQSRenderer_CreateColliders" data-uid="KSP.Rendering.Planets.PQSRenderer.CreateColliders">CreateColliders</h4>
-  <div class="markdown level1 summary"><p>Flag indicating whether collision meshes are created for the planet surface.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool CreateColliders</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -1537,14 +1487,14 @@ public class PQSRenderer : KerbalMonoBehaviour, IPQSRenderer</code></pre>
 </h3>
 
 
-  <a id="KSP_Rendering_Planets_PQSRenderer_ColliderReadbackRequestPendingCount_" data-uid="KSP.Rendering.Planets.PQSRenderer.ColliderReadbackRequestPendingCount*"></a>
-  <h4 id="KSP_Rendering_Planets_PQSRenderer_ColliderReadbackRequestPendingCount" data-uid="KSP.Rendering.Planets.PQSRenderer.ColliderReadbackRequestPendingCount">ColliderReadbackRequestPendingCount</h4>
-  <div class="markdown level1 summary"><p>Gets the number of collider GPU readback requests currently pending.</p>
+  <a id="KSP_Rendering_Planets_PQSRenderer_MeshSlotCount_" data-uid="KSP.Rendering.Planets.PQSRenderer.MeshSlotCount*"></a>
+  <h4 id="KSP_Rendering_Planets_PQSRenderer_MeshSlotCount" data-uid="KSP.Rendering.Planets.PQSRenderer.MeshSlotCount">MeshSlotCount</h4>
+  <div class="markdown level1 summary"><p>Gets the number of quads whose meshes the GPU buffers hold, which bounds the leaves the tree can draw.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int ColliderReadbackRequestPendingCount { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public int MeshSlotCount { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-condensed">
@@ -1557,6 +1507,61 @@ public class PQSRenderer : KerbalMonoBehaviour, IPQSRenderer</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Rendering_Planets_PQSRenderer_MeshSlotCount_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Set by the terrain memory setting. A change resizes the buffers the next time the tree updates.</p>
+</div>
+
+
+  <a id="KSP_Rendering_Planets_PQSRenderer_QuadErrors_" data-uid="KSP.Rendering.Planets.PQSRenderer.QuadErrors*"></a>
+  <h4 id="KSP_Rendering_Planets_PQSRenderer_QuadErrors" data-uid="KSP.Rendering.Planets.PQSRenderer.QuadErrors">QuadErrors</h4>
+  <div class="markdown level1 summary"><p>Gets the measured geometric error of this body's quads, or <code>null</code> when the renderer draws water or has no compute resources.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerrainQuadErrors QuadErrors { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainQuadErrors.html">TerrainQuadErrors</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQSRenderer_TerrainTiles_" data-uid="KSP.Rendering.Planets.PQSRenderer.TerrainTiles*"></a>
+  <h4 id="KSP_Rendering_Planets_PQSRenderer_TerrainTiles" data-uid="KSP.Rendering.Planets.PQSRenderer.TerrainTiles">TerrainTiles</h4>
+  <div class="markdown level1 summary"><p>Gets the body's terrain collider tiles, or <code>null</code> when the renderer runs outside a game, as in edit mode.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerrainColliderTiles TerrainTiles { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainColliderTiles.html">TerrainColliderTiles</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -1605,6 +1610,33 @@ public class PQSRenderer : KerbalMonoBehaviour, IPQSRenderer</code></pre>
   </table>
 
 
+  <a id="KSP_Rendering_Planets_PQSRenderer_BodyToPhysicsMatrix_" data-uid="KSP.Rendering.Planets.PQSRenderer.BodyToPhysicsMatrix*"></a>
+  <h4 id="KSP_Rendering_Planets_PQSRenderer_BodyToPhysicsMatrix" data-uid="KSP.Rendering.Planets.PQSRenderer.BodyToPhysicsMatrix">BodyToPhysicsMatrix()</h4>
+  <div class="markdown level1 summary"><p>Returns the transformation from this body's space to PhysX world space, through the floating origin.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double4x4 BodyToPhysicsMatrix()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double4x4</span></td>
+        <td><p>The body-to-world matrix that places terrain colliders.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Rendering_Planets_PQSRenderer_BootForEditor_" data-uid="KSP.Rendering.Planets.PQSRenderer.BootForEditor*"></a>
   <h4 id="KSP_Rendering_Planets_PQSRenderer_BootForEditor" data-uid="KSP.Rendering.Planets.PQSRenderer.BootForEditor">BootForEditor()</h4>
   <div class="markdown level1 summary"><p>Mirrors Awake so the editor-mode preview can prepare the renderer without
@@ -1641,7 +1673,7 @@ instantiating the prefab into a live scene. Idempotent on the allocations it own
 
   <a id="KSP_Rendering_Planets_PQSRenderer_DebugColliderWithRaycast_" data-uid="KSP.Rendering.Planets.PQSRenderer.DebugColliderWithRaycast*"></a>
   <h4 id="KSP_Rendering_Planets_PQSRenderer_DebugColliderWithRaycast" data-uid="KSP.Rendering.Planets.PQSRenderer.DebugColliderWithRaycast">DebugColliderWithRaycast()</h4>
-  <div class="markdown level1 summary"><p>Casts a ray from the current mouse position and updates <a class="xref" href="KSP.Rendering.Planets.PQSRenderer.html#KSP_Rendering_Planets_PQSRenderer_DebugQuadIndex">DebugQuadIndex</a> with the index of any PQS mesh collider that is hit.</p>
+  <div class="markdown level1 summary"><p>Casts a ray from the current mouse position and updates <a class="xref" href="KSP.Rendering.Planets.PQSRenderer.html#KSP_Rendering_Planets_PQSRenderer_DebugQuadIndex">DebugQuadIndex</a> with the visible quad nearest the terrain it hits.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -2124,7 +2156,7 @@ of <code class="paramref">matrix</code>, derived via <a class="xref" href="https
 
   <a id="KSP_Rendering_Planets_PQSRenderer_LateUpdateForEditor_" data-uid="KSP.Rendering.Planets.PQSRenderer.LateUpdateForEditor*"></a>
   <h4 id="KSP_Rendering_Planets_PQSRenderer_LateUpdateForEditor" data-uid="KSP.Rendering.Planets.PQSRenderer.LateUpdateForEditor">LateUpdateForEditor()</h4>
-  <div class="markdown level1 summary"><p>Performs the late-update logic for both play mode and editor mode, processing collider requests, rendering the prepass, and updating debug counters.</p>
+  <div class="markdown level1 summary"><p>Performs the late-update logic for both play mode and editor mode, updating the terrain collider tiles, rendering the prepass, and updating debug counters.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -2280,6 +2312,52 @@ of <code class="paramref">matrix</code>, derived via <a class="xref" href="https
       </tr>
     </tbody>
   </table>
+
+
+  <a id="KSP_Rendering_Planets_PQSRenderer_RequestHeightsGPU_" data-uid="KSP.Rendering.Planets.PQSRenderer.RequestHeightsGPU*"></a>
+  <h4 id="KSP_Rendering_Planets_PQSRenderer_RequestHeightsGPU_Unity_Collections_NativeArray_Unity_Mathematics_float3__Unity_Collections_NativeArray_System_Single__System_Action_" data-uid="KSP.Rendering.Planets.PQSRenderer.RequestHeightsGPU(Unity.Collections.NativeArray{Unity.Mathematics.float3},Unity.Collections.NativeArray{System.Single},System.Action)">RequestHeightsGPU(NativeArray&lt;float3&gt;, NativeArray&lt;float&gt;, Action)</h4>
+  <div class="markdown level1 summary"><p>Queues terrain heights to be read from the terrain shader itself, exactly as the mesh is built from it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RequestHeightsGPU(NativeArray&lt;float3&gt; directions, NativeArray&lt;float&gt; heights, Action onComplete)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Collections.NativeArray.html">NativeArray</a>&lt;<span class="xref">float3</span>&gt;</td>
+        <td><span class="parametername">directions</span></td>
+        <td><p>The normalized body-space directions to sample. Copied, so the caller can dispose them on return.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Collections.NativeArray.html">NativeArray</a>&lt;<span class="xref">float</span>&gt;</td>
+        <td><span class="parametername">heights</span></td>
+        <td><p>Receives the heights above the base sphere, one per direction. Must stay alive and untouched until <code class="paramref">onComplete</code> runs.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Action</span></td>
+        <td><span class="parametername">onComplete</span></td>
+        <td><p>Called on the main thread once the heights are written.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Rendering_Planets_PQSRenderer_RequestHeightsGPU_Unity_Collections_NativeArray_Unity_Mathematics_float3__Unity_Collections_NativeArray_System_Single__System_Action__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Every request made in a frame goes out in one SampleHeights dispatch at the end of that frame, and the heights
+land one to three frames later. Requests still pending or in flight when the renderer shuts down are dropped and
+never call back, as is a batch whose readback fails.</p>
+</div>
 
 
   <a id="KSP_Rendering_Planets_PQSRenderer_ShutdownForEditor_" data-uid="KSP.Rendering.Planets.PQSRenderer.ShutdownForEditor*"></a>

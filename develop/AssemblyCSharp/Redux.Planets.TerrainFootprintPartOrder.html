@@ -5,11 +5,11 @@
   <head>
     <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-      <title>Class PQSColliderRequest | KSP2Redux API (Develop) </title>
+      <title>Struct TerrainFootprintPartOrder | KSP2Redux API (Develop) </title>
       <meta name="viewport" content="width=device-width">
-      <meta name="title" content="Class PQSColliderRequest | KSP2Redux API (Develop) ">
+      <meta name="title" content="Struct TerrainFootprintPartOrder | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="Represents a pending async GPU readback request for PQS collider vertex data, holding the associated compute buffer and native arrays for a terrain quad batch.">
+    <meta name="description" content="A vessel&#39;s part spheres, ordered so each footprint disc tests only the parts low enough to reach the ground.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -76,37 +76,44 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="KSP.Rendering.Planets.PQSColliderRequest">
+            <article class="content wrap" id="_content" data-uid="Redux.Planets.TerrainFootprintPartOrder">
 
 
 
-  <h1 id="KSP_Rendering_Planets_PQSColliderRequest" data-uid="KSP.Rendering.Planets.PQSColliderRequest" class="text-break">Class PQSColliderRequest</h1>
-  <div class="markdown level0 summary"><p>Represents a pending async GPU readback request for PQS collider vertex data, holding the associated compute buffer and native arrays for a terrain quad batch.</p>
+  <h1 id="Redux_Planets_TerrainFootprintPartOrder" data-uid="Redux.Planets.TerrainFootprintPartOrder" class="text-break">Struct TerrainFootprintPartOrder</h1>
+  <div class="markdown level0 summary"><p>A vessel's part spheres, ordered so each footprint disc tests only the parts low enough to reach the ground.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
-  <div class="inheritance">
-    <h5>Inheritance</h5>
-    <div class="level0"><span class="xref">object</span></div>
-    <div class="level1"><span class="xref">PQSColliderRequest</span></div>
-  </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Rendering.html">Rendering</a>.<a class="xref" href="KSP.Rendering.Planets.html">Planets</a></h6>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.Planets.html">Planets</a></h6>
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
-  <h5 id="KSP_Rendering_Planets_PQSColliderRequest_syntax">Syntax</h5>
+  <h5 id="Redux_Planets_TerrainFootprintPartOrder_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class PQSColliderRequest</code></pre>
+    <pre><code class="lang-csharp hljs">public struct TerrainFootprintPartOrder</code></pre>
   </div>
+  <h5 id="Redux_Planets_TerrainFootprintPartOrder_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>
+Every disc of one footprint moves the same parts by a displacement, so each part's height above the parts'
+centroid, less its radius and its sideways offset, is fixed for the whole footprint. The parts are sorted by that
+key once, and a disc stops at the first part whose key is past its threshold.
+</p>
+<p>
+The threshold is the disc's reach plus the ground radius less the centroid's distance, widened by three times the
+vessel's extent times how far up has turned with the displacement. A part past it is below no ground it could
+reach, and every part under it still takes the exact test, so the disc is the one testing every part gives.
+</p>
+</div>
   <h3 id="constructors">Constructors
 </h3>
 
 
-  <a id="KSP_Rendering_Planets_PQSColliderRequest__ctor_" data-uid="KSP.Rendering.Planets.PQSColliderRequest.#ctor*"></a>
-  <h4 id="KSP_Rendering_Planets_PQSColliderRequest__ctor_System_Int32_System_Int32_System_Int32_" data-uid="KSP.Rendering.Planets.PQSColliderRequest.#ctor(System.Int32,System.Int32,System.Int32)">PQSColliderRequest(int, int, int)</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="KSP.Rendering.Planets.PQSColliderRequest.html">PQSColliderRequest</a> class.</p>
+  <a id="Redux_Planets_TerrainFootprintPartOrder__ctor_" data-uid="Redux.Planets.TerrainFootprintPartOrder.#ctor*"></a>
+  <h4 id="Redux_Planets_TerrainFootprintPartOrder__ctor_Unity_Collections_NativeArray_Unity_Mathematics_double4__Unity_Collections_Allocator_" data-uid="Redux.Planets.TerrainFootprintPartOrder.#ctor(Unity.Collections.NativeArray{Unity.Mathematics.double4},Unity.Collections.Allocator)">TerrainFootprintPartOrder(NativeArray&lt;double4&gt;, Allocator)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Redux.Planets.TerrainFootprintPartOrder.html">TerrainFootprintPartOrder</a> struct.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public PQSColliderRequest(int quadCount, int bufferSize, int dataSize)</code></pre>
+    <pre><code class="lang-csharp hljs">public TerrainFootprintPartOrder(NativeArray&lt;double4&gt; parts, Allocator allocator)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -119,149 +126,17 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">int</span></td>
-        <td><span class="parametername">quadCount</span></td>
-        <td><p>The number of terrain quads included in this request.</p>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Collections.NativeArray.html">NativeArray</a>&lt;<span class="xref">double4</span>&gt;</td>
+        <td><span class="parametername">parts</span></td>
+        <td><p>One bounding sphere per part, as body-space center and radius in meters. It is read, not
+copied, so it must outlive this instance.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">int</span></td>
-        <td><span class="parametername">bufferSize</span></td>
-        <td><p>The number of vertex entries to allocate in the compute buffer and native vertex array.</p>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Collections.Allocator.html">Allocator</a></td>
+        <td><span class="parametername">allocator</span></td>
+        <td><p>The allocator for the sorted order.</p>
 </td>
-      </tr>
-      <tr>
-        <td><span class="xref">int</span></td>
-        <td><span class="parametername">dataSize</span></td>
-        <td><p>The stride in bytes of each element in the compute buffer.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="fields">Fields
-</h3>
-
-
-  <h4 id="KSP_Rendering_Planets_PQSColliderRequest_ColliderVertices" data-uid="KSP.Rendering.Planets.PQSColliderRequest.ColliderVertices">ColliderVertices</h4>
-  <div class="markdown level1 summary"><p>The native array of collider vertex positions read back from the GPU.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public NativeArray&lt;Vector3&gt; ColliderVertices</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Collections.NativeArray.html">NativeArray</a>&lt;<span class="xref">Vector3</span>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="KSP_Rendering_Planets_PQSColliderRequest_ColliderVerticesBuffer" data-uid="KSP.Rendering.Planets.PQSColliderRequest.ColliderVerticesBuffer">ColliderVerticesBuffer</h4>
-  <div class="markdown level1 summary"><p>The GPU compute buffer holding collider vertex data for the terrain quad batch.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public readonly ComputeBuffer ColliderVerticesBuffer</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeBuffer.html">ComputeBuffer</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="KSP_Rendering_Planets_PQSColliderRequest_QuadCount" data-uid="KSP.Rendering.Planets.PQSColliderRequest.QuadCount">QuadCount</h4>
-  <div class="markdown level1 summary"><p>The number of terrain quads included in this collider request.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int QuadCount</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">int</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="KSP_Rendering_Planets_PQSColliderRequest_QuadDataList" data-uid="KSP.Rendering.Planets.PQSColliderRequest.QuadDataList">QuadDataList</h4>
-  <div class="markdown level1 summary"><p>The native list of per-quad GPU data descriptors for this collider request.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public NativeList&lt;QuadDataGPU&gt; QuadDataList</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">NativeList</span>&lt;<a class="xref" href="KSP.Rendering.Planets.QuadDataGPU.html">QuadDataGPU</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="KSP_Rendering_Planets_PQSColliderRequest_ReadbackRequest" data-uid="KSP.Rendering.Planets.PQSColliderRequest.ReadbackRequest">ReadbackRequest</h4>
-  <div class="markdown level1 summary"><p>The asynchronous GPU readback request used to retrieve collider vertex data.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public AsyncGPUReadbackRequest ReadbackRequest</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Rendering.AsyncGPUReadbackRequest.html">AsyncGPUReadbackRequest</a></td>
-        <td></td>
       </tr>
     </tbody>
   </table>
@@ -269,15 +144,92 @@
 </h3>
 
 
-  <a id="KSP_Rendering_Planets_PQSColliderRequest_Dispose_" data-uid="KSP.Rendering.Planets.PQSColliderRequest.Dispose*"></a>
-  <h4 id="KSP_Rendering_Planets_PQSColliderRequest_Dispose" data-uid="KSP.Rendering.Planets.PQSColliderRequest.Dispose">Dispose()</h4>
-  <div class="markdown level1 summary"><p>Releases all native and GPU resources held by this request.</p>
-</div>
+  <a id="Redux_Planets_TerrainFootprintPartOrder_Dispose_" data-uid="Redux.Planets.TerrainFootprintPartOrder.Dispose*"></a>
+  <h4 id="Redux_Planets_TerrainFootprintPartOrder_Dispose" data-uid="Redux.Planets.TerrainFootprintPartOrder.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
   </div>
+
+
+  <a id="Redux_Planets_TerrainFootprintPartOrder_TryGetDisc_" data-uid="Redux.Planets.TerrainFootprintPartOrder.TryGetDisc*"></a>
+  <h4 id="Redux_Planets_TerrainFootprintPartOrder_TryGetDisc_Redux_Planets_TerrainHeightSampler__Unity_Mathematics_double3_System_Double_Unity_Collections_NativeList_System_Int32__Unity_Mathematics_double3__System_Double__" data-uid="Redux.Planets.TerrainFootprintPartOrder.TryGetDisc(Redux.Planets.TerrainHeightSampler@,Unity.Mathematics.double3,System.Double,Unity.Collections.NativeList{System.Int32},Unity.Mathematics.double3@,System.Double@)">TryGetDisc(in TerrainHeightSampler, double3, double, NativeList&lt;int&gt;, out double3, out double)</h4>
+  <div class="markdown level1 summary"><p>Finds the disc on the ground under the parts that can reach it, with the vessel moved by a displacement.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryGetDisc(in TerrainHeightSampler sampler, double3 displacement, double reach, NativeList&lt;int&gt; reaching, out double3 direction, out double radius)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainHeightSampler.html">TerrainHeightSampler</a></td>
+        <td><span class="parametername">sampler</span></td>
+        <td><p>The body's height sampler.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double3</span></td>
+        <td><span class="parametername">displacement</span></td>
+        <td><p>How far the vessel has moved, in body space, in meters.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">reach</span></td>
+        <td><p>How far beyond its sphere a part can get before new tiles go live, in meters.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">NativeList</span>&lt;<span class="xref">int</span>&gt;</td>
+        <td><span class="parametername">reaching</span></td>
+        <td><p>Scratch space, which receives the indices of the parts that can reach.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double3</span></td>
+        <td><span class="parametername">direction</span></td>
+        <td><p>Receives the direction of the disc center, in body space.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">radius</span></td>
+        <td><p>Receives the disc radius along the surface, reach included, in meters.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if any part can reach the ground, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Planets_TerrainFootprintPartOrder_TryGetDisc_Redux_Planets_TerrainHeightSampler__Unity_Mathematics_double3_System_Double_Unity_Collections_NativeList_System_Int32__Unity_Mathematics_double3__System_Double___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Gives the same disc as <span class="xref">Redux.Planets.TerrainFootprintJob.TryGetDisc(Redux.Planets.TerrainHeightSampler@,Unity.Collections.NativeArray{Unity.Mathematics.double4},Unity.Mathematics.double3,System.Double,Unity.Mathematics.double3@,System.Double@)</span> over every part.</p>
+</div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
