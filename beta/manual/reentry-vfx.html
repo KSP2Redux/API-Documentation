@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Reentry VFX | KSP2Redux API (Beta) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Reentry VFX | KSP2Redux API (Beta) ">
+    
+    
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="reentry-vfx">Reentry VFX</h1>
+
+<p>This guide describes the implementation at commit <code>bf2e756d75bf169c9cef83dd520a7aa578a7d488</code>, dated 2026-10-02. Source links refer to that revision. The main renderer is <code>VesselReentryFlowPreview</code>, using <code>FlowPacketsProbe.shader</code>. Despite their historical names, these are the normal continuous reentry rendering path.</p>
+<p>The effect is a bounded visual approximation driven by the existing flight and thermal systems. It does not solve fluid dynamics, gas chemistry, or radiative heat transfer. Terms such as shock, separation, mixing, and cooling describe the shapes and responses represented by the visual model.</p>
+<h2 id="the-pieces-of-the-effect">The pieces of the effect</h2>
+<p>Reentry combines five contributions with different responsibilities:</p>
+<table>
+<thead>
+<tr>
+<th>Contribution</th>
+<th>Implementation</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Plasma around the vessel</td>
+<td><code>VesselReentryFlowPreview</code> and <code>FlowPacketsProbe.shader</code></td>
+<td>A geometry-derived windward layer and expanding separated wake</td>
+</tr>
+<tr>
+<td>Long trail</td>
+<td><code>VesselAblationTrail</code> and <code>AblationTrail.shader</code></td>
+<td>A fading record of the vessel's path, including its past transverse size and orientation</td>
+</tr>
+<tr>
+<td>Ablation sparks</td>
+<td>The same trail renderer, with separate emission and motion rules</td>
+<td>Short incandescent fragments from an actively ablating heatshield</td>
+</tr>
+<tr>
+<td>Surface incandescence</td>
+<td><code>ReentryMesh.UpdatePartGlowData</code> and the bundled part materials</td>
+<td>Temperature-dependent emission from the part itself</td>
+</tr>
+<tr>
+<td>Hull illumination</td>
+<td>Lights owned by <code>FXReentryContextualEvent</code></td>
+<td>Direct lighting from the plasma-facing and downstream sides</td>
+</tr>
+</tbody>
+</table>
+<p>Bright plasma pixels do not automatically light a part. Plasma radiance, material emission, and direct lights are separate mechanisms. Increasing contact radiance makes gas near the hull brighter; the two point lights make the hull's material respond to that illumination. Temperature controls whether the hull itself incandesces.</p>
+<p>The long trail does not require a heatshield or ablator. Only sparks require actual ablation. This distinction matters for unshielded craft, aircraft, and large stations.</p>
+<pre><code class="lang-text">Flight conditions and authored response curves
+                    |
+          normalized VFX intensity
+                    |
+         FXReentryContextualManager
+          /          |           \
+         /           |            \
+  near-vessel     path history    contextual event
+  renderer        and sparks     and lights
+      |               |               |
+  source meshes   body-frame      windward + aft
+      |           samples         point lights
+  windward capture    |
+      |           elliptical Gaussian volumes
+  seeds -&gt; field      |
+      |           analytic ray integration
+  triangular columns  |
+      |               |
+  ray integration -&gt; premultiplied camera composition
+
+Part thermal data -&gt; material incandescence (independent of gas brightness)
+</code></pre>
+<h2 id="activation-and-intensity">Activation and intensity</h2>
+<h3 id="flight-conditions">Flight conditions</h3>
+<p><a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/Code/KSP/VFX/FXReentryContextualManager.cs"><code>FXReentryContextualManager</code></a> owns the vessel's contextual reentry state. It respects the contextual FX enable flag and evaluates a raw visual intensity. The default calculation uses Mach number, atmospheric density, surface speed, the thermal system's global flux constants, and authored curves:</p>
+<pre><code class="lang-text">flux = fluxScale * Mach^machExponent * density^densityExponent
+fluxResponse = lerp(lowDensityFluxCurve(flux), highDensityFluxCurve(flux),
+                    densityCurve(density))
+rawIntensity = velocityCurve(surfaceSpeed) * fluxResponse
+</code></pre>
+<p>There is no extra altitude fade in this default path. Atmospheric density already changes the response with height; an additional altitude fade would suppress fast flight in dense, low atmosphere. An optional alternate calculation instead multiplies an altitude curve by a velocity curve and clamps the result to 0-1.</p>
+<p>For an activation threshold <code>m = ReentryMinimumIntensity</code>, reentry becomes active when <code>rawIntensity &gt; m</code>. The active normalized intensity is:</p>
+<pre><code class="lang-text">I = clamp01((rawIntensity - m) / (1 - m))
+</code></pre>
+<p>This removes the activation threshold from the visible range. An override of <code>0.15</code> is therefore not necessarily an emission intensity of <code>0.15</code>: with <code>m = 0.05</code>, the visible intensity is approximately <code>0.105263</code>. The threshold and response curves come from the loaded settings asset; C# field initializers alone do not establish the effective authored values.</p>
+<p>The flow component releases its render resources when its normalized emission falls to <code>0.001</code> or below. The historical trail has its own fade and lifetime, so it can continue draining after the near-vessel plasma stops.</p>
+<h3 id="visual-intensity-and-actual-heating">Visual intensity and actual heating</h3>
+<p>The visual calculation shares input quantities and global constants with heating, but it is not the thermal simulation. <a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/Code/Redux/Ecs/Systems/ThermalUpdate/ThermalUpdateSystem.cs"><code>ThermalUpdateSystem</code></a> calculates part reentry flux using exposed area, drag coefficient, density, Mach number, skin-friction terms, and shielding. That flux drives temperature and ablator behavior.</p>
+<p>Changing a plasma shader's brightness, gradient, density, or light multiplier changes presentation. It does not add heat to the part or consume more ablator. A debug visual intensity override likewise does not demonstrate that a shield is physically ablating.</p>
+<h2 id="orchestration-frames-and-source-geometry">Orchestration, frames, and source geometry</h2>
+<h3 id="why-rendering-preparation-runs-at-camera-time">Why rendering preparation runs at camera time</h3>
+<p><a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/Code/Redux/VFX/VesselReentryFlowPreview.cs"><code>VesselReentryFlowPreview</code></a> prepares the field in <code>Camera.onPreCull</code>, using <code>Camera.main</code> and the final rendered vessel transforms. This avoids preparing geometry from a simulation pose that is then moved before the camera draws it. The material values and instance matrices update each render; a recorded command buffer can remain reusable while the vessel moves or turns.</p>
+<p>The command buffer executes at <code>CameraEvent.AfterForwardAlpha</code>. The flight ocean is transparent and would otherwise draw over plasma submitted too early. The plasma performs its own depth clipping, so drawing after forward alpha can keep it above the distant ocean background while still stopping at opaque geometry.</p>
+<p>Map view clears the flight draw and restores legacy visibility. A paused game still renders cameras, so map suppression cannot depend only on simulation updates. Invalid heading, absent sources, disabled components, and unsuitable camera dimensions also clear the draw rather than retaining a stale field.</p>
+<h3 id="airflow-coordinates">Airflow coordinates</h3>
+<p>Surface velocity is converted from the game's simulation frame into physics space and then into vessel-local coordinates. Its negative defines the downstream axis, <code>+Z</code>, of the flow frame. <code>X</code> and <code>Y</code> are transverse axes.</p>
+<p>The transverse right axis is transported in vessel-local coordinates with the change in downstream direction, then projected back onto its perpendicular plane. Choosing a fresh reference-axis basis every frame would rotate the capture grid abruptly during a turn. Transport keeps the sampling axes continuous without smoothing or delaying the actual airflow direction. It does not promise a world-fixed transverse axis during vessel roll. A nearly reversed direction selects a new stable basis because the previous frame is no longer a useful reference.</p>
+<p>The world-to-flow matrix combines this rotation with the vessel's current world-to-local matrix. Successful captures retain the inverse rotation in vessel space. The shared bounds interface reconstructs the current transform as:</p>
+<pre><code class="lang-text">flowToWorld = vessel.localToWorldMatrix * capturedFlowToVessel
+</code></pre>
+<p>The trail and windward light therefore reuse one geometry result while following later vessel movement and floating-origin changes. They do not each rescan every part to calculate a different envelope.</p>
+<h3 id="what-is-captured">What is captured</h3>
+<p>The continuous renderer captures supported original vessel surface renderers. Authored or generated <code>ReentryMesh</code> shell renderers are not the source of the continuous field. A <code>MeshRenderer</code> or <code>SkinnedMeshRenderer</code> is accepted when its first shared material's shader name starts with <code>KSP2/Scenery/Standard</code> or exactly matches <code>KSP2/Scenery/OAB_Procedural_Fairings</code>. Every submesh of an accepted mesh is then captured with the replacement material. This is selective geometry capture, not a reproduction of each material's transparency, alpha clipping, or shading.</p>
+<p>Source transforms, local bounds, active state, mesh references, and submesh counts are refreshed for rendering. A hierarchy/material inspection once per unscaled second discovers membership and material changes; <code>RequestRebuild</code> requests earlier inspection. This avoids scanning the full hierarchy every rendered frame. A changed active state, mesh, submesh count, capture mode, camera layout, or render-target layout invalidates the cached command recording.</p>
+<p><a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/Code/Redux/VFX/ReentryBoundsKernel.cs"><code>ReentryBoundsKernel</code></a> transforms each source's bounding box into flow space and reduces the aggregate minimum and maximum. It uses synchronous Burst jobs when Burst is available and a managed implementation otherwise. Unity object properties are read on the main thread before the numeric reduction. Skinned renderer world bounds account for the current pose without CPU mesh baking for bounds.</p>
+<p>Eligible mesh renderers sharing a mesh use procedural instancing. Sources are grouped by shared mesh and drawn once per submesh per group, with matrices and source indices supplied by structured buffers. One matrix upload supports both the windward capture and the camera-depth capture. Skinned renderers, Unity static-batched renderers, and renderers with additional vertex streams fall back to <code>DrawRenderer</code>. Renderer count and capture draw count are consequently different metrics.</p>
+<h3 id="field-extent">Field extent</h3>
+<p>For flow-space bounds <code>B</code>, the renderer defines:</p>
+<pre><code class="lang-text">r = max(0.3, min(B.extents.x, B.extents.y))
+wakeLength = max(8*r, 1.5*B.size.z)
+plasmaLength = B.size.z + wakeLength
+margin = plasmaLength/2.8 + 0.3*r
+
+field XY = vessel XY bounds expanded by margin on each side
+volume minimum Z = B.min.z - 0.5*r
+volume maximum Z = B.max.z + wakeLength
+</code></pre>
+<p>The minor transverse half-span sets the characteristic radius. A wide but thin station retains its actual rectangular transverse bounds without being treated as a large circular capsule. Long vessels also receive enough downstream extent. The expanded XY rectangle places the capture border beyond the wake's visible fade, avoiding a rectangular cutoff at oblique attitudes.</p>
+<h3 id="legacy-meshes-and-fallback-ownership">Legacy meshes and fallback ownership</h3>
+<p><a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/Code/KSP/VFX/Reentry/ReentryMesh.cs"><code>ReentryMesh</code></a> still supplies legacy shell rendering, part-glow updates, and data used by the stock occlusion path. The continuous renderer remembers each legacy renderer's visibility and force-hides the shells only after it has a valid field draw. Restoring the saved visibility preserves a usable fallback when the new shader is unavailable, capture is invalid, or rendering is suspended.</p>
+<p>Do not equate hiding legacy shells with disabling part thermal glow. The original part material continues to receive its glow properties.</p>
+<p><a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/Code/Redux/VFX/ReentryMeshGeneration/RuntimeReentryMeshFallback.cs"><code>RuntimeReentryMeshFallback</code></a> can generate shells, and <a href="https://github.com/KSP2Community/PatchManager/blob/f895a4571ae2ee9d0bdb2d34b695d17ba5d5acf1/Runtime/Parts/Patchers/PartModuleLoadPatcher.cs"><code>PartModuleLoadPatcher</code></a> invokes it for registered imported KSP1 parts. That is a restricted import fallback, not unconditional runtime shell generation for every stock part. Existing reentry shells and applicable procedural-part roots are excluded from unnecessary generation.</p>
+<h2 id="gpu-resources-and-data-contracts">GPU resources and data contracts</h2>
+<p>The fixed field resolution is <code>256 x 256</code>. Heights and distances need more precision than final displayed radiance, so the capture, seeds, and continuous field use full floating-point RGBA textures. The filtered screen-space plasma uses half precision.</p>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Format and filtering</th>
+<th>Contents / use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windward capture</td>
+<td><code>ARGBFloat</code>, point, 24-bit depth; requested 4x MSAA, limited by device support</td>
+<td>Per-sample nearest upstream surface and incidence</td>
+</tr>
+<tr>
+<td>Exposed-surface resolve</td>
+<td><code>ARGBFloat</code>, point; only when capture has MSAA</td>
+<td>Nearest exposed depth with retained silhouette coverage</td>
+</tr>
+<tr>
+<td>Front seeds, two textures</td>
+<td><code>ARGBFloat</code>, point</td>
+<td>Ping-pong propagation of candidate front generators</td>
+</tr>
+<tr>
+<td>Edge seeds, two textures</td>
+<td><code>ARGBFloat</code>, point</td>
+<td>Ping-pong propagation of projected silhouette boundaries</td>
+</tr>
+<tr>
+<td>Continuous field</td>
+<td><code>ARGBFloat</code>, trilinear, manually generated mipmaps</td>
+<td>Lower height, upper height, heat proxy, strength</td>
+</tr>
+<tr>
+<td>Vessel camera depth</td>
+<td>Temporary half-screen <code>RFloat</code>, point, 24-bit depth</td>
+<td>Explicit linear eye depth of captured vessel geometry</td>
+</tr>
+<tr>
+<td>Plasma and filter scratch</td>
+<td>Two temporary half-screen <code>ARGBHalf</code>, bilinear</td>
+<td>Premultiplied plasma RGB and opacity</td>
+</tr>
+</tbody>
+</table>
+<p>Textures are linear, not color-space encoded data. Capture and field resources are per flow component. Screen-space temporary targets are requested and released by the camera command buffer. The shader itself is loaded through Addressables, rather than <code>Resources.Load</code>.</p>
+<h3 id="windward-depth-and-msaa">Windward depth and MSAA</h3>
+<p>The capture looks along downstream <code>+Z</code>. A depth buffer chooses the upstream surface independently for each covered sample. The interpolated depth slope provides:</p>
+<pre><code class="lang-text">incidence = 1 / (1 + |gradient(depth)|^2)
+</code></pre>
+<p>For a height field this is the squared cosine of the reconstructed surface angle to the flow. A blunt face therefore supports a broader disturbance than a grazing face.</p>
+<p><code>CaptureFragment</code> uses <code>SV_SampleIndex</code> and <code>EvaluateAttributeAtSample</code> to evaluate depth at the actual covered MSAA sample. A thin triangle can cover a sample while missing the pixel center. Center interpolation, or a depth shared from a different sample position, can extrapolate upstream of the real triangle. A nearest-depth resolve would amplify that false depth into a long plasma spike. Sample-specific interpolation and rejection of invalid or out-of-bounds depths prevent that failure at its source.</p>
+<p>The MSAA resolve chooses the nearest covered sample's depth and incidence, while separately counting coverage. It does not average a foreground fin's depth with a deeper engine's depth. The resolved contract is:</p>
+<pre><code class="lang-text">R = nearest exposed flow-space depth
+G = nearest incidence * coverage
+B = coverage
+A = nearest depth * coverage
+</code></pre>
+<p>The single-sample capture produces the same full-coverage contract. Filtering uses the coverage-weighted channels and divides by coverage when reconstructing depth or incidence. This prevents empty texels and their clear depth from pulling the reconstructed surface through the hull.</p>
+<h2 id="flowpacketsprobeshader-every-pass">FlowPacketsProbe.shader: every pass</h2>
+<p>The shader name is <code>Redux/Atmospheric/Continuous Reentry</code>. All passes target shader model 4.5. Unless overridden below, the subshader uses <code>Cull Off</code>, <code>ZWrite Off</code>, and <code>ZTest Always</code>. The pass index is part of the C# contract: update <code>FlowPass</code> and the recording code if passes are reordered.</p>
+<table>
+<thead>
+<tr>
+<th>Index</th>
+<th>Pass</th>
+<th>Input -&gt; output</th>
+<th>Render state / role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><code>WindwardDepth</code></td>
+<td>Original meshes -&gt; depth, incidence, coverage</td>
+<td><code>ZWrite On</code>, <code>ZTest LEqual</code>, <code>Blend Off</code>; upstream geometry capture</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>SeedField</code></td>
+<td>Resolved capture -&gt; front and edge seed MRTs</td>
+<td>Fullscreen triangle; starts both propagation fields</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>JumpField</code></td>
+<td>Previous front/edge seeds -&gt; next seed MRTs</td>
+<td>Fullscreen triangle; repeated at jumps 128, 64, 32, 16, 8, 4, 2, 1 texels</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>ResolveField</code></td>
+<td>Seeds and capture -&gt; continuous field</td>
+<td>Fullscreen triangle; front shape, thickness, heat, strength</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>ContinuousVolume</code></td>
+<td>Synthetic capsule reference -&gt; camera</td>
+<td>Premultiplied blending; retained duplicate diagnostic entry, not submitted by the production recorder</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>ConnectedFlowVolume</code></td>
+<td>Field -&gt; triangular volumes -&gt; plasma target/camera</td>
+<td><code>Cull Front</code>, <code>Blend One OneMinusSrcAlpha</code>; normal vessel renderer</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>CapsuleIntervalReference</code></td>
+<td>Synthetic capsule -&gt; camera</td>
+<td><code>Blend One OneMinusSrcAlpha</code>; paused integration comparison</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>PlasmaHorizontalFilter</code></td>
+<td>Plasma target -&gt; scratch</td>
+<td><code>Blend Off</code>; depth-aware horizontal filtering</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>PlasmaVerticalFilter</code></td>
+<td>Scratch -&gt; plasma target</td>
+<td><code>Blend Off</code>; depth-aware vertical filtering</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>VesselViewDepth</code></td>
+<td>Original meshes -&gt; linear camera depth</td>
+<td><code>ZWrite On</code>, <code>ZTest LEqual</code>, <code>Blend Off</code>; explicit vessel clipping depth</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>PlasmaComposite</code></td>
+<td>Filtered plasma -&gt; camera</td>
+<td><code>Blend One OneMinusSrcAlpha</code>; depth-aware reconstruction to camera resolution</td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>ResolveExposedSurface</code></td>
+<td>Multisampled capture -&gt; resolved capture</td>
+<td><code>Blend Off</code>; sample selection with separate coverage</td>
+</tr>
+</tbody>
+</table>
+<p>The usual execution order is <code>0 -&gt; 11 (if MSAA) -&gt; 1 -&gt; 2 x 8 -&gt; 3 -&gt; mip generation -&gt; 9 (if enabled) -&gt; 5 -&gt; 7 -&gt; 8 -&gt; 10</code>. Pass numbers are not execution order. With plasma smoothing disabled, pass 5 draws directly to the camera and passes 7, 8, and 10 are skipped. Diagnostic capsule rendering selects pass 6 instead of pass 5 and bypasses the plasma filter.</p>
+<h3 id="seedfield-and-jumpfield-an-upstream-envelope">SeedField and JumpField: an upstream envelope</h3>
+<p>Each valid surface texel seeds a front generator with its UV, upstream depth, and an incidence-dependent spread slope:</p>
+<pre><code class="lang-text">spreadSlope = lerp(10, 2.8, incidence)
+rounding = 0.18*r
+frontScore(seed, xy) = seed.depth
+    + spreadSlope * (sqrt(distanceXY^2 + rounding^2) - rounding)
+</code></pre>
+<p>Before setting the spread slope, incidence uses a depth-aware 3x3 binomial neighborhood weighted by coverage. Its support denominator is at least 8, reducing isolated tiny patches while retaining broad supported faces. <code>_IncidenceSmoothing</code> blends this response with the unsmoothed incidence.</p>
+<p>Smaller spread slopes allow a blunt face's disturbance to reach farther transversely. The rounding removes a sharp cone apex. Front propagation chooses the lowest score, so an upstream part can dominate before a downstream wing does. Selecting only the nearest silhouette point would lose the depth relationship and pull the front toward thin aft appendages.</p>
+<p>Edge seeds identify valid texels adjacent to uncovered neighbors. Their propagation selects the nearest projected edge in flow-space distance. Front and edge fields are deliberately distinct: one answers which surface produces the upstream envelope, while the other measures distance from the vessel silhouette.</p>
+<p>Jump flooding spreads candidates over the 256-square texture with eight decreasing jump lengths. This gives a bounded GPU construction cost without rebuilding or reading a detailed CPU flow mesh. It is an approximate discrete propagation method, not an exact continuous distance solver.</p>
+<h3 id="resolvefield-front-separated-layer-and-cooling">ResolveField: front, separated layer, and cooling</h3>
+<p>The front score is offset upstream by <code>0.12*r</code> and filtered with a 3x3 binomial stencil. <code>_PreserveExposedFront</code> retains the more upstream central value where filtering would move a thin feature's shock behind its surface. Slope is reconstructed from the same neighborhood.</p>
+<p>Projected edge distance is signed using capture coverage. Outside the silhouette, positive distance <code>d</code> curves the separated layer toward the downstream direction:</p>
+<pre><code class="lang-text">curvature = 0.65 * WakeCurvature / max(0.3, r)
+front += curvature * d^2
+initialThickness = 0.14*r + 0.18*d
+normalZ = 1 / sqrt(1 + |frontSlope|^2)
+
+travelAge = max(2.8*d, front - vesselAftPlane)  [at full DownstreamCooling]
+strength = (0.025 + normalZ^2) * exp(-travelAge / (0.20*wakeLength))
+heat = lerp(0.3, 0.64, normalZ) * exp(-travelAge / (1.5*wakeLength))
+</code></pre>
+<p><code>travelAge</code> has flow-distance units; it is a cooling coordinate, not elapsed seconds. The common aft plane keeps cooling continuous when different source seeds exchange ownership. It also cools narrow disturbances that travel downstream with little transverse displacement.</p>
+<p>Wake disturbance displaces and widens the separated layer with smooth noise. It fades in outside the shoulder, leaving the leading windward front intact. The shader receives <code>Ablation = clamp01(AblationIntensity/max(I,0.0001))</code>; this normalized ratio raises the disturbance amplitude from 0.28 to 0.65 before separation gating. It is not a direct ablator mass-flow input. Ordinary atmospheric gas still produces a disturbed wake without ablation. The noise scale is bounded by the volume-grid spacing so fine patterns remain resolved on long, thin silhouettes.</p>
+<p>Mixing adds an inward spread to the layer. Both disturbance width changes and mixing compensate strength for the extra thickness. These are visual dilution rules: expanding a layer should not automatically make it brighter merely by increasing the integrated path.</p>
+<p>The upper field height stops just upstream of the captured hull (<code>surfaceDepth - 0.01*r</code>) where coverage indicates a vessel surface. Broad interior windward regions also receive a bowed front, displaced upstream by up to <code>0.18*r</code>; its strength is reduced in proportion to its enlarged width. The hull-side boundary stays in place. This is the bow shape of the geometry-derived layer, not a separate camera-distance head sphere.</p>
+<p>The resulting field stores:</p>
+<pre><code class="lang-text">RGBA = (lower/front Z, upper/hull-side Z, heat proxy, strength)
+</code></pre>
+<p>Mipmaps are generated after this pass. Volume vertices read heights at LOD 0, retaining the shock and clipping boundaries, but read heat and strength at <code>_EmissionFilterLod</code> (default 2.5). Filtering only emission quantities reduces brightness seams where seeds exchange ownership without blurring the geometry through the hull.</p>
+<h3 id="connectedflowvolume-occupied-interval-integration">ConnectedFlowVolume: occupied-interval integration</h3>
+<p>The renderer creates a <code>63 x 63</code> cell grid, splitting each cell into two triangular columns: 7,938 columns, each drawn with 24 procedural vertices. Half the transverse grid parameter range covers the vessel interior and half covers the exterior wake. Exterior cells grow gradually, and <code>_GridTransition</code> matches their spacing at the shoulder to avoid a square ridge.</p>
+<p>Each triangular column has three lower and three upper heights. Barycentric interpolation produces continuous planes shared with neighboring columns. This partitions the represented gas instead of stacking overlapping shell surfaces.</p>
+<p>The vertex shader orders cells from the outer edges toward the camera cell and orders each cell's two triangles according to the camera position. This supports back-to-front premultiplied composition along rays through the XY grid. Front faces are culled; rear faces launch the ray integral.</p>
+<p>The fragment shader clips the camera ray against the triangle's three side half-spaces, its lower and upper planes, the global downstream limit, and opaque depth. Integration starts only inside the resulting occupied interval. A thin layer therefore cannot disappear just because a coarse full-scene march missed it between samples.</p>
+<p>Within that interval, the local phase and density profile are:</p>
+<pre><code class="lang-text">q = clamp01((sampleZ - lowerZ) / (upperZ - lowerZ))
+density = [4*q*(1-q)]^2
+</code></pre>
+<p>The profile reaches zero at both boundaries. Three-point Gauss-Legendre quadrature evaluates the density and emission at the interval midpoint and at offsets <code>+/-0.77459667</code> times its half-length, with weights <code>0.88888889</code>, <code>0.55555556</code>, and <code>0.55555556</code>. The integral scales by <code>halfLength/r * I</code>. Geometry bounds the interval exactly for the represented prism; the varying emission inside it remains a numerical approximation.</p>
+<p>The sampled heat maps to the palette as <code>clamp01(heat/0.64)^4</code>. This expands the hottest field value to the gradient's hot endpoint and reaches cold colors before density disappears. Gradient RGB is capped to a maximum component of 3 before the radiance multipliers. <code>_PlasmaBrightness</code> defaults to 1.8; <code>_SurfaceBrightness</code> defaults to 2.5.</p>
+<p>The far wake also has a spatially varied endpoint, separate from the field's travel cooling. Flow-space XY noise gives <code>coolingEnd = volumeMaxZ - 0.5*wakeLength*WakeEdgeVariation*variation</code>. Sampled strength fades over the last <code>0.35*wakeLength</code> before that local endpoint. Fading the sampled gas before its clip plane avoids a luminous end cap, while the varied endpoint breaks up a uniform termination line.</p>
+<p>For integrated emission <code>E</code> and integrated density/strength <code>D</code>:</p>
+<pre><code class="lang-text">tau = max(0, D * OpticalDepth)
+opacity = 1 - exp(-tau)
+sourceColor = E / max(D, epsilon)
+output = (sourceColor * opacity, opacity)
+</code></pre>
+<p><code>Blend One OneMinusSrcAlpha</code> consumes this premultiplied output. Shared emission and extinction avoid unlimited additive brightness when the camera looks along a long gas column. The shader uses a small-optical-depth expansion to avoid subtracting almost equal numbers. Setting <code>_OpticalDepth</code> to zero selects a special additive diagnostic response (<code>RGB * 16</code>, zero opacity), not the normal extinction model.</p>
+<h3 id="hull-clipping-contact-brightness-and-moving-currents">Hull clipping, contact brightness, and moving currents</h3>
+<p>Coarse triangular interpolation can cross a thin wing even when all source field samples stop upstream of it. <code>WindwardSurfaceTransmission</code> therefore reapplies the captured surface limit at each quadrature position. <code>_SurfaceClipSmoothing</code> reconstructs the coverage-weighted depth using a cubic B-spline expressed as four bilinear texture reads. It reconstructs a continuous boundary rather than introducing a visible capture-texel staircase.</p>
+<p>The sample-density transmission is <code>1 - coverage*WindwardSurfaceLimit*smoothstep(surfaceDepth-0.03*r, surfaceDepth-0.01*r, sampleZ)</code>. Setting <code>_WindwardSurfaceLimit</code> to zero disables this additional attenuation, but field-height clipping and scene-depth clipping still apply. <code>_SurfaceClipSmoothing</code> is a mode switch: a positive value selects the B-spline reconstruction; zero selects one bilinear read.</p>
+<p>The contact factor combines reconstructed coverage with distance from the captured surface:</p>
+<pre><code class="lang-text">contact = coverage * (1 - smoothstep(0, 0.20*r, abs(sampleZ - surfaceDepth)))
+radianceMultiplier = PlasmaBrightness * lerp(1, SurfaceBrightness, contact)
+</code></pre>
+<p>This raises gas radiance where it approaches the hull without increasing density, thickness, or trail size. It does not create a vessel light by itself.</p>
+<p>Flow currents grow outside the covered hull and follow the expanding wake. Transverse noise bands are stretched along downstream travel rather than producing isotropic flashing patches. They vary both density and emissivity, so movement remains visible even when opacity saturates. Gas between bright currents is retained. The density and emissivity multipliers are different, intentionally allowing brightness variation beyond simple opacity changes.</p>
+<p>The current clock accumulates <code>Time.deltaTime * 25.6 * ReentryPlasmaScrollSpeed</code>. Changing the slider changes subsequent motion without jumping the existing phase. Pausing freezes it. Other wake-shape disturbances use scaled shader time and are not all controlled by this slider.</p>
+<h3 id="vesselviewdepth-filters-and-composition">VesselViewDepth, filters, and composition</h3>
+<p>The flight camera stack does not guarantee that the shared camera depth texture contains the vessel. Pass 9 explicitly captures the same supported source geometry into a half-screen linear-depth texture. The shader uses the nearer of that texture and ordinary scene depth for clipping and filtering.</p>
+<p>With smoothing enabled, the volume renders to a half-screen plasma target. Passes 7 and 8 filter premultiplied RGB and opacity along horizontal and vertical axes, weighting samples by scene-depth similarity. Filter radius follows the projected size of a capture texel, clamped to 1-32 camera pixels. This prevents close zooms from exposing the coarser volume grid while preserving opaque silhouettes.</p>
+<p>The depth rejection weight is <code>exp2(-abs(sampleDepth-centerDepth)/depthScale)</code>, where <code>depthScale = max(0.05,0.015*centerDepth)</code>. The full-resolution composite uses the same rule. Each filter normalizes its weighted sample support rather than adding light with every tap.</p>
+<p><code>_AdaptivePlasmaFilter</code> defaults to 1. Above 0.5 it spaces filter taps at plasma-pixel centers according to the footprint, includes a small reconstruction-variance correction, and introduces boundary taps smoothly as the radius grows. At 0.5 or below it uses a fixed 33-tap pattern per axis. The adaptive path also has a 33-tap maximum, reducing redundant samples at small radii without a sudden tap-count transition.</p>
+<p>Pass 10 reconstructs the filtered plasma to the full camera target with four neighboring samples weighted by depth similarity. The filters operate on plasma data, not the already-rendered ship or background. They are spatial filters; there is no temporal accumulation, motion-vector reprojection, or history buffer for the near-vessel plasma.</p>
+<h3 id="capsule-reference-passes">Capsule reference passes</h3>
+<p>Pass 6 replaces vessel-derived density with a fixed synthetic shape: a detached oblate front and an expanding annular wake. Mode 1 solves intersections with inner and outer quadrics, partitions the occupied intervals, and applies five-point Gaussian quadrature. Mode 2 uses 768 midpoint samples per clipped section as a dense comparison. Both evaluate the same synthetic density and scene-depth clipping.</p>
+<p>This comparison isolates integration error from capture and changing vessel geometry. It is allowed only while simulation is paused; resuming resets <code>CapsuleIntegrator</code> to zero before rendering the next frame. Pass 4 invokes the same capsule fragment program but has no production command-buffer submission.</p>
+<p><code>IntegrationReview.y</code> and <code>.z</code> control shock and wake contribution weights. In production these weights blend according to <code>smoothstep(0.38, 0.58, heat)</code>, rather than selecting independently drawn shock and wake volumes. <code>IntegrationReview.x</code> still accepts a clamped diagnostic step value and is reported by the CLI, but the shader does not read it. It does not change the three-point production quadrature, five-point capsule quadrature, or 768-step reference. <code>_FlowShape.y</code> is another retained binding currently unused by the shader.</p>
+<p>The capsule fixture has its own simplified color and absorption response, using gradient coordinates 0.58 for the front and 0.32 for the wake. It does not exercise production capture, contact brightness, current bands, or the field's cooling model. Agreement between its two integrators validates that fixture's integration, not the whole vessel effect.</p>
+<p>Its palette channels are capped at 2.5, with <code>light = (capColor*capIntegral + wakeColor*wakeIntegral)*I</code> and <code>absorption = 1-exp(-0.12*(capIntegral+wakeIntegral)*I)</code>. It bypasses the production brightness and optical-depth controls.</p>
+<h2 id="ablationtrailshader-historical-wake-and-sparks">AblationTrail.shader: historical wake and sparks</h2>
+<p><a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/Code/Redux/VFX/VesselAblationTrail.cs"><code>VesselAblationTrail</code></a> builds one dynamic mesh containing proxy boxes for plasma and sparks. <a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/ReduxAssets/Shaders/Atmospheric/AblationTrail.shader"><code>AblationTrail.shader</code></a> has one unnamed pass, targeting shader model 4.5:</p>
+<pre><code class="lang-text">Blend One OneMinusSrcAlpha
+ZWrite Off
+ZTest Always
+Cull Front
+</code></pre>
+<p>Rear proxy faces start a camera ray through each volume. Hardware depth testing is bypassed because the shader clips the integrated ray to scene depth itself. Unlike the near-vessel renderer, this path does not use the flow component's explicit vessel-depth target or its screen-space filter.</p>
+<h3 id="recording-a-trail-that-survives-frame-changes">Recording a trail that survives frame changes</h3>
+<p>Only the main camera advances history in its pre-cull callback. Elapsed time comes from <code>Time.time</code>; extra camera renders and paused captures do not generate additional movement, fading, or ember births.</p>
+<p>Each sample stores position, birth time, normalized emission strength, minor radius, both transverse half-spans, and a transverse right vector. Position and right are represented in the vessel's celestial-body frame using <code>KSP.Sim.Position</code> and <code>KSP.Sim.Vector</code>. At render time they are converted into the current physics frame. Floating-origin movement or frame rotation therefore transforms the old path and its old ellipse together.</p>
+<p>New samples are recorded after 80 m of movement or 0.09 s since the previous sample. History expires after 8 s and is bounded to 1,024 samples. A source displacement above 4,000 m resets history and sparks rather than drawing a connection across a teleport. A temporary live endpoint closes the gap to the latest rendered source when it is more than 0.01 m from the last recorded point.</p>
+<p>The trail's intensity approaches its target exponentially, using a 0.2 s rise constant and a 0.65 s fall constant. A zero target snaps the remaining strength to zero below <code>0.0001</code>. Historical intensity is limited by current smoothed intensity, so old weak gas does not brighten again when current emission increases.</p>
+<h3 id="matching-a-wide-or-tilted-vessel">Matching a wide or tilted vessel</h3>
+<p>The source is the windward center of the shared flow bounds: <code>(B.center.x, B.center.y, B.min.z)</code>. Its two source half-spans come from <code>B.extents.x/y</code> scaled by the corresponding current world-axis lengths, each with a 0.3 m minimum. The scalar radius is the smaller half-span. Before valid flow bounds are available, a circular bounding-sphere fallback supplies an origin and radius.</p>
+<p>Keeping both spans is essential for large stations. Replacing them with the smaller span would make the trail much narrower than the plasma; replacing them with the larger span would inflate a thin vessel into a circle. The ellipse follows the captured right axis, and each recorded sample retains that past orientation instead of rotating the whole history with the vessel's current attitude.</p>
+<p>When interpolating neighboring bases, right axes are first aligned to the same hemisphere. An ellipse is unchanged by negating both transverse axes, so this prevents an artificial half-turn. The right axis is projected perpendicular to the local path tangent, with endpoint and stable-axis fallbacks for degenerate cases.</p>
+<p>The minor radius continues to control the entrance and core mixing distances. A broad station therefore receives a broad trail without a long blank entrance caused by its largest dimension.</p>
+<h3 id="kernel-placement-expansion-and-strength">Kernel placement, expansion, and strength</h3>
+<p>The visible path is limited to 3,000 m. Kernels are placed by cumulative distance along the complete path, not by restarting a spacing pattern at every history segment:</p>
+<pre><code class="lang-text">spacing = min(remainingLength, clamp(2 + 0.08*intervalStart, 2, 160))
+distance = intervalStart + spacing/2
+halfLength = max(0.001, 1.6*spacing)
+
+expansion = plasmaLength * (1 - exp(-distance/plasmaLength))
+widthX = max((sourceHalfSpanX + expansion/2.8)/1.25, angularWidth)
+widthY = max((sourceHalfSpanY + expansion/2.8)/1.25, angularWidth)
+</code></pre>
+<p>Near the vessel, kernels are dense and follow wake expansion. Farther away, spacing increases and width approaches a bounded value. <code>angularWidth</code> is 0.85 times the estimated world size of a vertical screen pixel at the kernel's distance. Applying this floor to each axis keeps thin kernels visible at long range. It widens existing volumes rather than adding a separate camera-distance head glow.</p>
+<p>The CPU applies a transverse dilution factor <code>sqrt(sourceHalfSpanX*sourceHalfSpanY) / sqrt(widthX*widthY)</code>. The shader also divides optical depth by <code>sqrt(widthX*widthY)</code>, giving combined dilution proportional to source equivalent radius divided by rendered transverse area. This preserves the circular formulas when both dimensions match. It is an artistic normalization, not a thermodynamic energy-conservation claim.</p>
+<p>Age combines recorded elapsed age with traveled distance:</p>
+<pre><code class="lang-text">age = max(interpolatedNormalizedAge, distance/3000)
+strength *= exp(-2*age) * (1 - smoothstep(0.75, 1, age))
+heatAge = max(age, 0.8*smoothstep(0, 1, distance/plasmaLength))
+</code></pre>
+<p>The entrance fades between 2 and 8 minor radii. An axial overlap correction of <code>1.418</code> compensates overlapping Gaussian kernels: <code>1.6*sqrt(pi)/2</code> is approximately <code>1.417963</code>, the axial integral factor for the kernel half-length-to-spacing ratio and <code>exp(-4*z^2)</code> profile.</p>
+<h3 id="mesh-attributes">Mesh attributes</h3>
+<p>Each kernel has eight proxy-box vertices and twelve triangles. Its basis is the path axis, transverse right, and their perpendicular up axis. The proxy encloses the supported ellipsoid at 1.25 widths. The shader receives the same basis and dimensions through four UV channels:</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>XYZ</th>
+<th>W</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UV0 / <code>TEXCOORD0</code></td>
+<td>World-space center</td>
+<td>Positive minor source radius for plasma; negative physical width for sparks</td>
+</tr>
+<tr>
+<td>UV1 / <code>TEXCOORD1</code></td>
+<td>Normalized axial direction</td>
+<td>Gaussian axial half-length</td>
+</tr>
+<tr>
+<td>UV2 / <code>TEXCOORD2</code></td>
+<td>First width, heat age, normalized strength</td>
+<td>Distance along the trail; zero for sparks</td>
+</tr>
+<tr>
+<td>UV3 / <code>TEXCOORD3</code></td>
+<td>Transverse right axis</td>
+<td>Second width</td>
+</tr>
+</tbody>
+</table>
+<p>The shader constructs an inverse elliptical basis, then uses the geometric mean width for optical-depth and pixel-core normalization. These attributes are rendering data, not conventional texture coordinates. Kernels and spark segments are sorted farthest-first by center depth before the mesh is uploaded. This is an approximation for overlapping volumes, not exact per-pixel volume sorting.</p>
+<h3 id="analytic-gaussian-integration">Analytic Gaussian integration</h3>
+<p>The inverse basis transforms the camera origin and ray direction into normalized kernel coordinates <code>o</code> and <code>d</code>. The Gaussian is <code>exp(-4*|x|^2)</code>. Define:</p>
+<pre><code class="lang-text">q = dot(d, d)
+tClosest = -dot(o, d)/q
+radialSquared = |o + d*tClosest|^2
+</code></pre>
+<p>The shader intersects the finite support at normalized radius 1.25, then clips the surviving interval to the forward camera ray and scene depth. At that support edge the Gaussian is about 0.193% of its peak, allowing a small finite proxy with little discarded density.</p>
+<p>Using an error-function approximation, the column integral between <code>tNear</code> and <code>tFar</code> is:</p>
+<pre><code class="lang-text">sqrt(pi)/(4*sqrt(q)) * exp(-4*radialSquared)
+  * [erf(2*sqrt(q)*(tFar-tClosest))
+     - erf(2*sqrt(q)*(tNear-tClosest))]
+</code></pre>
+<p>The closest-point calculation avoids cancellation from subtracting large squared distances when the camera is far away. This replaces repeated raymarch samples for a smooth Gaussian kernel. It is analytic integration of the smooth kernel, not analytic integration of every subsequent noise variation.</p>
+<p>Plasma has an additional entrance plane at 2 minor radii along the trail. Clipping the interval as well as fading strength prevents the forward tails of long overlapping Gaussians from protruding through the craft.</p>
+<h3 id="annulus-incandescent-core-and-cooling">Annulus, incandescent core, and cooling</h3>
+<p>The trail begins as a separated outer layer. Core mixing increases between 12 and 40 minor radii downstream:</p>
+<pre><code class="lang-text">mixing = smoothstep(12*r, 40*r, distanceAlong)
+innerRadius = lerp(0.7, 0.32, mixing)
+diffuse = max(0, outerIntegral-coreIntegral) / max(0.01, 1-innerRadius^2)
+coreIntegral *= mixing
+</code></pre>
+<p>The diffuse lobe is a difference of Gaussians. Its normalization compensates for the changing annular area. The inner incandescent component appears gradually, creating a narrow bright center inside a broader diffuse wake. If a core becomes smaller than a resolvable pixel footprint, its radius is widened and its integral receives an area compensation <code>(innerRadius/coreRadius)^2</code>.</p>
+<p>With <code>cooling = 1-heatAge</code>, diffuse plasma samples the gradient at <code>cooling^2</code>, the hotter core at <code>cooling^1.5</code>, and sparks at linear <code>cooling</code>. Colors are constant per kernel. Smoothly changing kernel strengths and overlapping kernels approximate a continuous cooling path.</p>
+<p>Warped sine-wave noise modulates plasma density and is reduced when screen derivatives indicate an unresolved footprint. It uses transverse coordinates, distance, age, and scaled simulation time. Noise is evaluated at a representative ray position after the Gaussian integral; the complete noisy density field is not analytically integrated.</p>
+<p>The weighted diffuse and core columns produce opacity through <code>1-exp(-tau)</code>, with the exponent limited to 20. RGB is their emission-weighted palette color multiplied by opacity. <code>_TrailEmission</code> reduces source light independently of extinction. Non-finite results return zero. This bounded extinction model prevents a long axial view of overlapping kernels from becoming an unlimited additive beam.</p>
+<h3 id="actual-ablation-and-rim-sparks">Actual ablation and rim sparks</h3>
+<p>The manager selects an active heatshield only when all of these hold: <code>IsAblating</code>, ablator ratio above <code>0.001</code>, positive ablator consumption, positive removed flux, shielding-direction scale above <code>0.15</code>, and a valid active part view. Candidate intensity is:</p>
+<pre><code class="lang-text">consumption = 1-exp(-AblatorTonnesPerSecond*100000)
+sparkIntensity = clamp01(I * ShieldingDirectionScale * consumption)
+</code></pre>
+<p>Only the strongest candidate emits sparks. This bounds cost and associates fragments with genuine exposed ablation, although multiple simultaneously ablating shields are not individually represented.</p>
+<p>The selected shield's supported mesh vertices are cached in shield-local space. Unreadable meshes use a temporary readable copy that is destroyed afterward. The frontmost plane and projected radius define the source. A 64-bin angular rim cache selects frontmost vertices in the outer 20% of the radius, so fragments leave the perimeter rather than the center. The cache rebuilds when the selected shield changes or is cleared on suspension.</p>
+<p>Births use random exponential intervals at <code>clamp(420*intensity*shieldRadius, 1, 900)</code> births per second. Catch-up is limited to the latest 0.1 s, avoiding a burst of stale particles after a delay. Origins, bulk velocity, outward velocity, and swirl are stored in the celestial-body frame.</p>
+<p>An ember's bulk coast uses <code>dragTime*(1-exp(-age/dragTime))</code>, with outward drift and oscillating swirl added separately. When the shield remains available, observed shield displacement replaces extrapolated bulk motion so a fragment does not run ahead of the vessel's actual stepped rendered pose.</p>
+<p>Each ember becomes six short circular Gaussian volumes spanning a small shutter interval. The shutter follows the observing vessel to cancel shared bulk velocity. Pixel widening receives a physical-to-rendered-width squared compensation. Negative UV0.W marks sparks in the shader: they use one Gaussian, gain 3, no mixed core, no plasma density noise, and no plasma-only density or brightness reduction.</p>
+<h2 id="retained-shell-and-occlusion-shaders">Retained shell and occlusion shaders</h2>
+<p>The new field does not replace every part of the old contextual system. Legacy shell controllers still evaluate authored deformation curves, update bounds and part glow, and provide an available fallback. Their shared vessel buffer contains heading, extension, friction, noise, Fresnel, tail, and occlusion parameters. The buffer has shared system ownership rather than one independent lifetime per vessel.</p>
+<p>Shell visibility distinguishes persistent structural shielding from temporary loss of thermal exposure. A part marked shielded from the airstream turns off immediately. A previously visible shell can retain a 1.5 s simulation-time hold when exposed area temporarily reaches zero, avoiding flicker from transient exposure changes. Conservative deformed bounds include both the original mesh and its displaced endpoint, with bulge expansion; procedural mesh bounds are read again when they change.</p>
+<h3 id="current-c-contract">Current C# contract</h3>
+<p><a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/Code/KSP/VFX/ContextualFxSystem.cs"><code>ContextualFxSystem</code></a> loads <code>VFXGlobalSettings.asset</code> through the asset provider and clones its referenced reentry material. The same settings supply <code>DepthReplacementShader</code> and <code>CopyOcclusionData</code>. These runtime settings are the binding authority. A local shader name or an authoring material alone does not establish which bundled shader the running game loaded.</p>
+<p><a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/Code/KSP/VFX/FXReentryOcclusionRenderer.cs"><code>FXReentryOcclusionRenderer</code></a> creates a separate orthographic replacement camera for the legacy path, limited to the first four vessel parameter slots. Its target is a <code>2048 x 2048</code> point-filtered <code>RHalf</code> texture with a 16-bit hardware depth attachment, no MSAA, and no HDR. Bounds determine camera size and far distance with a 10% margin, a 10 m minimum orthographic size, and a 100 m minimum far plane. The capture is aligned with the vessel's downstream velocity holder.</p>
+<p>At that camera's <code>AfterEverything</code> event, the command buffer dispatches compute kernel 0 as one group <code>(1,1,1)</code> into a one-element <a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/Code/KSP2/VFX/Reentry/Shaders/ReentryOcclusionData.cs"><code>ReentryOcclusionData</code></a> buffer. The contract contains <code>DepthVP</code>, <code>CameraPosWS</code>, <code>ProjectionParams</code>, <code>ZBufferParams</code>, and the initialized <code>OcclusionMapSize</code>. Each renderer clones the compute shader so its output-buffer binding cannot overwrite another vessel's binding. Disposal releases that clone, camera target, command buffer, metadata buffer, and bounds storage.</p>
+<p>This legacy camera and its metadata are separate from the new field's 256-square upstream capture and half-screen linear vessel depth. Near-flow pass 9 does not read the legacy occlusion map.</p>
+<h3 id="exported-shader-reference">Exported shader reference</h3>
+<p>The SDK's stock export under <code>Exports/KSP2-Export/ExportedProject/Assets/</code> contains recovered shaders and serialized compute data. They explain the legacy design, but the exact current runtime settings-to-shader binding has not been confirmed as part of this documentation work. The local <code>KSP2/Parts/Reentry.shader</code> authoring file is an exported placeholder and cannot establish working runtime passes.</p>
+<table>
+<thead>
+<tr>
+<th>Exported reference</th>
+<th>Pass / kernel</th>
+<th>Behavior and rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Reentry/Shockwave</code> (<code>Shader/Reentry_Shockwave.shader</code>)</td>
+<td>One <code>ReentryRender</code> pass</td>
+<td>Transparent shell with <code>Blend One One</code>, <code>BlendOp Max</code>, <code>ZWrite Off</code>, and <code>Cull Off</code>; strongest radiance wins when shells overlap, rather than adding every shell's brightness</td>
+</tr>
+<tr>
+<td><code>Hidden/VFX/ReentryPartDepth</code></td>
+<td>One opaque replacement pass</td>
+<td>Writes normalized radial distance from the capture camera; hardware depth selects the visible triangle</td>
+</tr>
+<tr>
+<td><code>CopyOcclusionData.asset</code></td>
+<td>One <code>CopyOcclusionData</code> kernel, thread group <code>1 x 1 x 1</code></td>
+<td>Transfers camera/projection metadata into the structured buffer; this is not a texture filtering or image reduction kernel</td>
+</tr>
+</tbody>
+</table>
+<p>The exported shell shader deforms vertices using the shared vessel state, applies heading/normal-dependent friction and animated noise, samples a heat gradient, and uses depth/Fresnel/clip variants. Its filtered occlusion takes depth taps at two sample positions and combines their visibility conservatively. This limits glow on sheltered shell regions. It is a shell-surface approximation; it does not integrate the connected gas interval used by <code>ConnectedFlowVolume</code>.</p>
+<p>The exported replacement depth value is:</p>
+<pre><code class="lang-text">saturate((length(worldPosition-cameraPosition)-near)/(far-near))
+</code></pre>
+<p>That radial-distance encoding is not the new field's linear eye-depth encoding. Copying either texture into the other path without changing its reconstruction would violate the shader contract. The compute export retains compiled data without recovered HLSL source, so this guide documents its exposed bindings, dispatch, and data layout rather than inventing a source implementation.</p>
+<h2 id="shared-gradient-and-color">Shared gradient and color</h2>
+<p><a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/ReduxAssets/Shaders/Atmospheric/ReentryGradient.hlsl"><code>ReentryGradient.hlsl</code></a> is included by both new shaders. The manager uses the normal reentry gradient, with an optional celestial body's <code>atmosphericReentryVFXGradient</code> loaded through the existing asset system. The trail reads the shared reentry material's main texture, falling back to the manager's default gradient.</p>
+<p><a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/ReduxAssets/Patches/ColoredReentry.lua"><code>ColoredReentry.lua</code></a> assigns body-specific gradients to Eve, Duna, Laythe, and Jool, using the corresponding textures under <code>Assets/ReduxAssets/Definitions/CelestialBodies/KerbolSystem/</code>. This changes the authored palette, rather than adding a separate shader for each atmosphere. The direct point lights currently derive their color from <code>PartGlowColor</code>, not by sampling this body-specific gradient.</p>
+<p>The helper samples the horizontal heat ramp between the centers of its first and last texels, at the vertical center and LOD 0. This avoids wrapping the hottest endpoint onto the cold endpoint when an authored texture has repeat addressing.</p>
+<p><code>_GradientSaturation</code> defaults to 1.2. It moves RGB away from Rec.709-weighted luminance, clamps negative components, then rescales to retain the input's largest RGB component. Neutral white stays white. This preserves peak channel magnitude, not total luminance or physical radiant energy. Near-plasma and trail gains are applied separately afterward.</p>
+<p>The two materials share the helper but do not share every parameter. The trail creates its own material and assigns its gradient; it does not copy near-flow density, brightness, variation, or scroll settings. The shared stock gradient is also not a separate independent palette per simultaneous vessel on different bodies.</p>
+<h2 id="surface-incandescence-and-direct-illumination">Surface incandescence and direct illumination</h2>
+<h3 id="material-glow-follows-temperature">Material glow follows temperature</h3>
+<p><code>ReentryMesh.UpdatePartGlowData</code> writes <code>_ReentryColor</code>, <code>_ReentryHeadingWs</code>, <code>_ReentryIntensity</code>, <code>_ReentryEmissivePow</code>, noise controls, and material-response properties into the source renderers' property blocks. The default <code>UsePartTemperatureForGlow</code> path reads current thermal data through the current ECS view system, falling back to the part's thermal data when appropriate. It does not retain an ECS system reference across universe loads.</p>
+<p>The current response is:</p>
+<pre><code class="lang-text">g = clamp01((temperature - 700)/1300)^4
+materialGlowIntensity = g / max(1, PartGlowFadeModifier)
+</code></pre>
+<p>The bundled part shader multiplies the intensity by its glow gain. Dividing here bounds the combined gain so an authored modifier such as 25 does not bleach textures. Cold parts remain non-incandescent even while the surrounding gas emits bright plasma. Non-finite temperatures return zero. Disabling temperature mode selects the legacy vessel-intensity response for comparison.</p>
+<h3 id="why-there-are-lights-on-both-sides">Why there are lights on both sides</h3>
+<p><a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/Code/KSP/VFX/FXReentryContextualEvent.cs"><code>FXReentryContextualEvent</code></a> reuses the <code>fx_reentry</code> prefab lights as shadowless point lights forced into per-pixel rendering. The normal prefab provides one downstream light; the event creates one owned windward child light from the first cached light's authored intensity and color. Prefabs with additional authored lights retain those lights as well.</p>
+<p>A downstream light cannot strongly illuminate an opposing windward normal. Raising only its intensity therefore leaves the plasma-facing front dark. The windward light is placed upstream of the captured front:</p>
+<pre><code class="lang-text">R = max(0.5, vesselBoundingSphere.radius)
+clearance = max(0.5, 0.5*max(flowBounds.extents.x, flowBounds.extents.y))
+windwardPosition = flowToWorld * (bounds.centerXY, bounds.min.z-clearance)
+downstreamPosition = sphereCenter + downstreamDirection*(1.25*R)
+</code></pre>
+<p>Before valid flow geometry exists, windward placement falls back to <code>sphereCenter - downstreamDirection*(1.25*R)</code>. Range is <code>6*R</code>. Using the captured front instead of only the sphere center keeps the windward light outside long or broad vessels.</p>
+<p>Each light's intensity follows:</p>
+<pre><code class="lang-text">lightIntensity = authoredIntensity * sqrt(clamp01(I))
+               * ReentryPlasmaLightStrength * 2
+</code></pre>
+<p>The square-root response makes low and medium plasma levels visibly illuminate the hull while keeping the peak at twice the authored intensity. For an authored intensity of 3 and <code>I = 0.105263</code>, the default profile produces about 1.9467 rather than the previous linear response's 0.6316.</p>
+<p>Color blends 65% toward <code>PartGlowColor</code> normalized by its largest channel. The culling mask is intersected with Default, LocalParts, and LocalPartsActive layers, excluding portrait-only models from flight plasma lighting. Both sides are point-light approximations, without shadows or geometry-dependent light occlusion; the volume renderer does not perform general scene illumination.</p>
+<p>Cleanup disables cached lights and lets prefab ownership destroy the windward child together with its parent. Repeated activation should recreate one windward child, not accumulate children.</p>
+<h2 id="controls-and-practical-tuning">Controls and practical tuning</h2>
+<h3 id="player-profile-controls">Player profile controls</h3>
+<table>
+<thead>
+<tr>
+<th>Preference</th>
+<th>Default</th>
+<th>Clamped range</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ReentryPlasmaVariation</code></td>
+<td>0.33</td>
+<td>0-1</td>
+<td>Near-plasma current variation through <code>_FlowUnsteadiness</code></td>
+</tr>
+<tr>
+<td><code>ReentryPlasmaScrollSpeed</code></td>
+<td>0.67</td>
+<td>0-2</td>
+<td>Accumulated near-plasma current clock speed</td>
+</tr>
+<tr>
+<td><code>ReentryPlasmaLightStrength</code></td>
+<td>1</td>
+<td>0-2</td>
+<td>Direct light intensity; zero disables the light contribution</td>
+</tr>
+</tbody>
+</table>
+<p>These are defined in <a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/Code/KSP/game/PersistentSettings.cs"><code>PersistentSettings</code></a> and exposed through graphics settings. Variation and scroll speed do not control every wake disturbance or the historical trail's own noise.</p>
+<h3 id="near-plasma-material-controls">Near-plasma material controls</h3>
+<p>These are shader property defaults on the newly created material. The table groups controls by their role, rather than suggesting that they change thermal physics.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Default</th>
+<th>Why / what it adjusts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>_GradientSaturation</code></td>
+<td>1.2</td>
+<td>Color separation while retaining the palette's peak channel</td>
+</tr>
+<tr>
+<td><code>_IncidenceSmoothing</code></td>
+<td>1</td>
+<td>Supports broad faces while limiting isolated tiny front patches</td>
+</tr>
+<tr>
+<td><code>_FrontSmoothing</code></td>
+<td>2</td>
+<td>Capture-texel radius for front reconstruction</td>
+</tr>
+<tr>
+<td><code>_PreserveExposedFront</code></td>
+<td>1</td>
+<td>Prevents averaging a shock behind an exposed protrusion</td>
+</tr>
+<tr>
+<td><code>_EmissionFilterLod</code></td>
+<td>2.5</td>
+<td>Prefilters heat and strength, leaving heights at full resolution</td>
+</tr>
+<tr>
+<td><code>_OpticalDepth</code></td>
+<td>8</td>
+<td>Extinction response; zero is a special additive diagnostic</td>
+</tr>
+<tr>
+<td><code>_WakeEdgeVariation</code></td>
+<td>1</td>
+<td>Spatial variation of the downstream cooling endpoint</td>
+</tr>
+<tr>
+<td><code>_WakeDisturbance</code></td>
+<td>1</td>
+<td>Noise-driven deformation and spreading of separated gas</td>
+</tr>
+<tr>
+<td><code>_DownstreamCooling</code></td>
+<td>1</td>
+<td>Includes travel beyond the common aft plane in cooling</td>
+</tr>
+<tr>
+<td><code>_WakeMixing</code></td>
+<td>1</td>
+<td>Inward spreading with strength compensation</td>
+</tr>
+<tr>
+<td><code>_WakeCurvature</code></td>
+<td>1</td>
+<td>Downstream turning outside the projected shoulder</td>
+</tr>
+<tr>
+<td><code>_BowShockCurvature</code></td>
+<td>1</td>
+<td>Broad-face windward bow displacement</td>
+</tr>
+<tr>
+<td><code>_WindwardSurfaceLimit</code></td>
+<td>1</td>
+<td>Per-integral-sample gas clipping upstream of the captured hull</td>
+</tr>
+<tr>
+<td><code>_AdaptivePlasmaFilter</code></td>
+<td>1</td>
+<td>Footprint-dependent filter taps, reducing redundant small-radius samples</td>
+</tr>
+<tr>
+<td><code>_GridTransition</code></td>
+<td>1</td>
+<td>Gradual cell-size transition at the shoulder</td>
+</tr>
+<tr>
+<td><code>_SurfaceClipSmoothing</code></td>
+<td>1</td>
+<td>Continuous coverage-weighted reconstruction for hull clipping</td>
+</tr>
+<tr>
+<td><code>_FlowUnsteadiness</code></td>
+<td>0.33</td>
+<td>Current density and emissivity modulation; profile overrides this</td>
+</tr>
+<tr>
+<td><code>_PlasmaBrightness</code></td>
+<td>1.8</td>
+<td>Gas radiance without changing represented density</td>
+</tr>
+<tr>
+<td><code>_SurfaceBrightness</code></td>
+<td>2.5</td>
+<td>Additional radiance close to the captured hull</td>
+</tr>
+</tbody>
+</table>
+<p><code>PlasmaSmoothing</code> on the flow component independently controls screen-space filter strength and enabling; its default is 1. <code>UseVesselDepth</code> defaults to true.</p>
+<p>For a dim hull, inspect light placement and <code>ReentryPlasmaLightStrength</code> before changing gas opacity. For dim gas at the contact surface, inspect capture coverage, the per-sample surface limit, and <code>_SurfaceBrightness</code>. Increasing density to solve either problem can instead hide textures, saturate axial views, or change the apparent width.</p>
+<h3 id="trail-constants-and-material-controls">Trail constants and material controls</h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Current value</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>History capacity / lifetime</td>
+<td>1,024 samples / 8 s</td>
+<td>Bounds retained data and persistence</td>
+</tr>
+<tr>
+<td>Visible path / teleport reset</td>
+<td>3,000 m / 4,000 m</td>
+<td>Bounds visible extent and rejects false long connections</td>
+</tr>
+<tr>
+<td>Sampling thresholds</td>
+<td>80 m or 0.09 s</td>
+<td>Captures travel without appending every camera render</td>
+</tr>
+<tr>
+<td>Fade rise / fall</td>
+<td>0.2 s / 0.65 s</td>
+<td>Smooths changes in emission</td>
+</tr>
+<tr>
+<td>Minimum half-span</td>
+<td>0.3 m</td>
+<td>Avoids degenerate source profiles</td>
+</tr>
+<tr>
+<td>Kernel spacing</td>
+<td>2-160 m</td>
+<td>Fine near coverage and cheaper distant coverage</td>
+</tr>
+<tr>
+<td>Gaussian support</td>
+<td>1.25 widths</td>
+<td>Finite proxy and integration interval</td>
+</tr>
+<tr>
+<td>Ember capacity</td>
+<td>192</td>
+<td>Bounds short-lived fragment work</td>
+</tr>
+<tr>
+<td>Ember lifetime</td>
+<td>0.028-0.11 s</td>
+<td>Brief incandescent streaks</td>
+</tr>
+<tr>
+<td>Ember drag time</td>
+<td>0.035-0.11 s</td>
+<td>Rapid loss of bulk motion</td>
+</tr>
+<tr>
+<td>Ember physical width</td>
+<td>0.005-0.016 m</td>
+<td>Thin fragments with compensated pixel widening</td>
+</tr>
+<tr>
+<td>Ember exposure</td>
+<td>0.0003-0.0015 s</td>
+<td>Short shutter segments</td>
+</tr>
+<tr>
+<td><code>_Gain</code> / <code>_CoreGain</code></td>
+<td>2 / 12</td>
+<td>Diffuse and incandescent palette gains</td>
+</tr>
+<tr>
+<td><code>_TrailDensity</code></td>
+<td>0.18</td>
+<td>Plasma optical-density multiplier</td>
+</tr>
+<tr>
+<td><code>_TrailEmission</code></td>
+<td>0.35</td>
+<td>Plasma source-light multiplier</td>
+</tr>
+</tbody>
+</table>
+<p>The shader shares <code>_GradientSaturation</code>'s 1.2 default with the near-plasma material. Its noise and cooling rules are otherwise independent.</p>
+<h2 id="lifecycle-and-performance">Lifecycle and performance</h2>
+<p>The flow component loads its shader once through Addressables, creates render resources when emission is active, and releases textures, material, command buffer, structured buffers, and native bounds arrays when it becomes idle or disabled. Destruction also releases the shader handle and disables profiler recording. Unsupported shaders leave legacy visibility restored and provide a diagnostic error.</p>
+<p>The trail lazily loads its shader and reuses fixed sample/ember arrays, lists, and a dynamic mesh. It keeps camera updates long enough to fade, prune history, and expire sparks. Once targets, strength, history, and sparks are empty, it unsubscribes from camera and floating-origin callbacks and clears part references. It retains reusable rendering resources while idle; permanent disposal destroys them and releases its Addressables handle. Map view suppresses drawing while history and expiration continue.</p>
+<p>The normal costs are:</p>
+<ul>
+<li>CPU: source inspection, renderer snapshots, bounds reduction, instance matrix uploads, body-frame history conversion, trail kernel placement, sorting, and mesh upload.</li>
+<li>GPU: geometry capture, eight jump-flood passes, field resolution and mip generation, explicit vessel depth, occupied-column integration, plasma filtering, and overlapping trail/spark integration.</li>
+<li>Lights: a small bounded set of shadowless per-pixel point lights, rather than a light per part or trail kernel.</li>
+</ul>
+<p>A fixed 256-square field and fixed column grid bound one part of the cost. Vessel capture still scales with distinct meshes and submeshes, and trail fragment cost depends on projected area and overlap. An analytically integrated kernel is not free when many kernels cover the same pixels.</p>
+<p><code>BuildCount</code> counts field preparations; <code>CommandBuildCount</code> counts command-buffer recordings. A moving vessel should not require a new recording merely because transforms changed. <code>CaptureDrawCount</code> describes one capture pass, not the total frame draw count.</p>
+<p><code>BuildMilliseconds</code> and the CLI's phase labels are CPU preparation timings. They do not include GPU execution; historical labels such as potential or transport do not imply a CPU fluid solver. Optional GPU recorders separately measure field and volume work, with delayed frame attribution and unavailable-sample counts. They retain at most 256 samples. Do not interpret missing GPU timings as zero cost or convert a CPU preparation time into an overall FPS claim.</p>
+<p>The <code>perf.reentry</code> stock/new/off comparison leaves legacy shell CPU work, part glow, and legacy occlusion active in every mode. It compares rendering contributions, not removal of the entire old system. Its alpha-camera sampler also includes other scene transparents, so subtract an off baseline when attributing that timing to reentry. Pause is recommended for a controlled rendering comparison; the separate geometry-stress method requires it. Additional capture renderers do not add physics parts, heat modules, or stock shell controllers, so that stress result is not a full large-vessel performance measurement.</p>
+<h2 id="runtime-diagnostics-and-verification">Runtime diagnostics and verification</h2>
+<p>The CLI methods below are implemented in <a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/Code/Redux/CliIntegration/CliIntegrationServer.Atmospheric.cs"><code>CliIntegrationServer.Atmospheric.cs</code></a> and the reentry benchmark helpers. They run in a live game and are intended for inspection and controlled comparisons.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Useful inputs</th>
+<th>What to inspect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>debug.reentry_flow_preview</code></td>
+<td><code>intensityOverride</code>, <code>clearIntensityOverride</code>, <code>rebuild</code>, <code>instancedCapture</code>, <code>captureTimings</code>, <code>timingSamples</code>, <code>capsuleIntegrator</code>, <code>integrationReview</code></td>
+<td>Readiness, source count, draw count, intensity, field extent, trail and ember counts, errors, CPU/GPU samples</td>
+</tr>
+<tr>
+<td><code>debug.reentry_surface_glow</code></td>
+<td>Optional <code>usePartTemperature</code></td>
+<td>Per-part thermal state and actual glow response</td>
+</tr>
+<tr>
+<td><code>perf.reentry</code></td>
+<td><code>mode</code>, <code>capture</code>, <code>dispose</code></td>
+<td>Paused stock/new/off rendering comparison and GPU measurements</td>
+</tr>
+<tr>
+<td><code>perf.reentry_geometry</code></td>
+<td><code>extraRenderers</code> 0-4,096 or <code>dispose</code></td>
+<td>Paused capture stress with extra render geometry, without extra simulated parts</td>
+</tr>
+<tr>
+<td><code>perf.reentry_bounds</code></td>
+<td>See method schema</td>
+<td>Deterministic managed/Burst bounds comparison; math and scheduling cost only</td>
+</tr>
+</tbody>
+</table>
+<p>For example, the parameter objects for <code>debug.reentry_flow_preview</code> can be:</p>
+<pre><code class="lang-json">{&quot;intensityOverride&quot;: 0.15, &quot;rebuild&quot;: true}
+</code></pre>
+<pre><code class="lang-json">{&quot;captureTimings&quot;: true}
+</code></pre>
+<pre><code class="lang-json">{&quot;integrationReview&quot;: {&quot;shockWeight&quot;: 1, &quot;wakeWeight&quot;: 0}}
+</code></pre>
+<pre><code class="lang-json">{&quot;clearIntensityOverride&quot;: true, &quot;capsuleIntegrator&quot;: 0, &quot;captureTimings&quot;: false}
+</code></pre>
+<p>These are JSON-RPC parameters, not complete shell commands. A visual override changes global reentry settings; restore it after testing. Clearing it does not reset separately changed profile sliders or all diagnostic layer weights. Restore shock and wake weights to 1 as well. The reported <code>integrationSteps</code> value is retained metadata, not an active quadrature sample count. <code>ablationSourceRadius</code> is the minor source radius, not the full ellipse width.</p>
+<p>Use the project's CLI integration for play-mode start, stop, loading saves, and runtime actions. Stop play mode before expecting script changes to compile, then use the established Unity MCP compile checks. Rebuilding shader Addressables and making the resulting catalog available to the running project are separate from C# compilation; a supported shader import does not by itself prove the runtime loaded the new asset.</p>
+<p>A useful visual verification sequence is:</p>
+<ol>
+<li>Load a representative save and let flight, vessel geometry, and the reentry component become ready. Use both a simple capsule and a broad irregular vessel.</li>
+<li>Inspect natural intensity, then use a controlled override when a stable comparison is needed. Record the activation threshold and normalized emission.</li>
+<li>Compare windward, side, and axial views, including thin appendages and partly sheltered surfaces. Check that contact radiance stops at the hull and the plasma-facing normal receives direct light.</li>
+<li>Move through close and distant camera ranges. Check capture ridges, flickering thin features, squared-off wake boundaries, and any detached bright head.</li>
+<li>Rotate a broad vessel. Check that the near plasma follows the new flow direction and the long trail retains its old ellipse along the old path without a sudden history rotation.</li>
+<li>Test gas without ablation, then genuine ablation. The first should retain a continuous trail; only the second should create rim sparks.</li>
+<li>Enter map view while active and while paused. Return to flight, allow emission to stop, wait for history and sparks to drain, and repeat activation. Check restored fallback visibility and one windward light child.</li>
+<li>Test a floating-origin shift, a teleport, and a save unload/reload. History should follow valid frame changes, reset across a teleport, and release ownership on teardown.</li>
+<li>Restore overrides, layer weights, profile values, and any time/camera controls changed during testing. Dispose benchmark geometry and stop timing capture.</li>
+</ol>
+<p>Take screenshots and examine the returned state as well as logs. A compile success alone cannot establish trail width, light direction, or clipping quality.</p>
+<h2 id="troubleshooting-and-limits">Troubleshooting and limits</h2>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>First things to check</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No near plasma</td>
+<td>FX enable flag, normalized intensity, valid velocity heading, supported sources, Addressables shader readiness, map state, <code>LastError</code></td>
+</tr>
+<tr>
+<td>Bright gas but dark windward hull</td>
+<td>Windward light position, supported part layers, profile light multiplier, material normals, cached flow bounds</td>
+</tr>
+<tr>
+<td>Uniformly incandescent cold parts</td>
+<td>Temperature mode and actual part thermal data; do not use material emission to imitate external lighting</td>
+</tr>
+<tr>
+<td>Trail narrower than a broad station</td>
+<td>Both source spans and UV3 width/basis; minor-radius telemetry alone cannot establish the shape</td>
+</tr>
+<tr>
+<td>Plasma upstream spike from a small appendage</td>
+<td>Per-sample depth interpolation, capture bounds rejection, nearest-depth resolve and matching incidence</td>
+</tr>
+<tr>
+<td>Grid ridges when zoomed in</td>
+<td>Front preservation, emission mip filtering, grid transition, plasma smoothing and depth reconstruction</td>
+</tr>
+<tr>
+<td>Trail appears as an overbright beam from behind</td>
+<td>Extinction/source-color calculation, overlap normalization, core gain and depth sorting</td>
+</tr>
+<tr>
+<td>Sparks without plausible heating</td>
+<td>Actual <code>IsAblating</code>, consumption, removed flux and direction gating; a plasma override is insufficient evidence</td>
+</tr>
+<tr>
+<td>Portrait models receive plasma illumination</td>
+<td>Point-light culling mask and portrait layers</td>
+</tr>
+<tr>
+<td>Persistent effects after map/load/idle</td>
+<td>Cached command clearing, visibility restoration, callback suspension and ownership cleanup</td>
+</tr>
+</tbody>
+</table>
+<p>The important approximation limits are explicit:</p>
+<ul>
+<li>The near field retains one upstream surface per transverse texel. It does not model multiple interior layers, detailed gas circulation through gaps, or a resolved three-dimensional flow around every part.</li>
+<li>Geometry support is selective. Bounds summarize supported sources, and replacement capture does not reproduce every original material's shading, transparency, or custom deformation.</li>
+<li>Jump flooding, the fixed capture resolution, triangular interpolation, emission mipmaps, and three-point quadrature trade detail for bounded work. They are not physically exact shock solutions.</li>
+<li>The historical source is an ellipse from captured bounds. It retains span and orientation, not the complete station silhouette or gaps. Expansion uses the current near-plasma length while recorded source dimensions remain historical.</li>
+<li>Trail curves are approximated by straight tangent-aligned kernels. Center-depth sorting approximates overlapping volume order, and per-kernel palette color approximates continuous cooling.</li>
+<li>Depth clipping depends on depth textures. Transparent objects need not contribute the same depth as opaque objects; the near renderer's dedicated vessel capture does not solve all transparent-scene ordering.</li>
+<li>Spark emission represents only the strongest ablating shield, and its rim cache does not continuously track every deformation of the selected mesh.</li>
+<li>Point lights approximate illumination without shadows. Plasma brightness does not perform global illumination, and bloom depends on the camera's separate post-processing configuration.</li>
+<li>Scaled simulation time drives lifetime and animation. Pause freezes them; extreme time steps can reduce the temporal detail represented by recorded history.</li>
+</ul>
+<p>When extending this system, preserve the contracts that prevent visible regressions: depth and incidence must belong to the same covered sample, hull clipping must remain upstream of thin surfaces, the flow heading must follow current rendered flight geometry, both historical ellipse dimensions and basis must survive frame conversion, and idle ownership must release or suspend its work. Do not reintroduce a separate camera-distance head volume to mask distant trail resolution.</p>
+<h2 id="source-map">Source map</h2>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/Code/KSP/VFX/FXReentryContextualManager.cs"><code>FXReentryContextualManager.cs</code></a></td>
+<td>Activation, curves, normalized intensity, gradients, shield selection, trail ownership</td>
+</tr>
+<tr>
+<td><a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/Code/KSP/VFX/FXReentryContextualEvent.cs"><code>FXReentryContextualEvent.cs</code></a></td>
+<td>Contextual prefab, shared reentry parameters, point lights and cleanup</td>
+</tr>
+<tr>
+<td><a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/Code/Redux/VFX/VesselReentryFlowPreview.cs"><code>VesselReentryFlowPreview.cs</code></a></td>
+<td>Source inspection, frames, GPU resource ownership, pass recording, shared flow bounds, diagnostics</td>
+</tr>
+<tr>
+<td><a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/Code/Redux/VFX/ReentryBoundsKernel.cs"><code>ReentryBoundsKernel.cs</code></a></td>
+<td>Numeric bounds reductions and legacy displaced bounds</td>
+</tr>
+<tr>
+<td><a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/ReduxAssets/Shaders/Atmospheric/FlowPacketsProbe.shader"><code>FlowPacketsProbe.shader</code></a></td>
+<td>Windward capture, seed propagation, field construction, volume integration, filtering and references</td>
+</tr>
+<tr>
+<td><a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/Code/Redux/VFX/VesselAblationTrail.cs"><code>VesselAblationTrail.cs</code></a></td>
+<td>History, ellipse kernels, rim cache, sparks, dynamic mesh and lifecycle</td>
+</tr>
+<tr>
+<td><a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/ReduxAssets/Shaders/Atmospheric/AblationTrail.shader"><code>AblationTrail.shader</code></a></td>
+<td>Analytic Gaussian integration, core mixing, extinction and spark rendering</td>
+</tr>
+<tr>
+<td><a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/ReduxAssets/Shaders/Atmospheric/ReentryGradient.hlsl"><code>ReentryGradient.hlsl</code></a></td>
+<td>Endpoint-safe gradient sampling and peak-preserving saturation</td>
+</tr>
+<tr>
+<td><a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/Code/KSP/VFX/Reentry/ReentryMesh.cs"><code>ReentryMesh.cs</code></a></td>
+<td>Legacy shell integration, source material glow and thermal response</td>
+</tr>
+<tr>
+<td><a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/Code/KSP/VFX/FXReentryOcclusionRenderer.cs"><code>FXReentryOcclusionRenderer.cs</code></a> and <a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/Code/KSP2/VFX/Reentry/Shaders/ReentryOcclusionData.cs"><code>ReentryOcclusionData.cs</code></a></td>
+<td>Legacy replacement-camera depth capture and GPU metadata</td>
+</tr>
+<tr>
+<td><a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/Code/KSP/VFX/ContextualFxSystem.cs"><code>ContextualFxSystem.cs</code></a></td>
+<td>Shared materials and vessel parameter slots</td>
+</tr>
+<tr>
+<td><a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/Code/Redux/Ecs/Systems/ThermalUpdate/ThermalUpdateSystem.cs"><code>ThermalUpdateSystem.cs</code></a></td>
+<td>Actual per-part reentry heating</td>
+</tr>
+<tr>
+<td><a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/Code/KSP/game/PersistentSettings.cs"><code>PersistentSettings.cs</code></a></td>
+<td>Player preference defaults</td>
+</tr>
+<tr>
+<td><a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/ReduxAssets/Patches/ColoredReentry.lua"><code>ColoredReentry.lua</code></a></td>
+<td>Body-specific gradient assignments</td>
+</tr>
+<tr>
+<td><a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/Code/Redux/CliIntegration/CliIntegrationServer.Atmospheric.cs"><code>CliIntegrationServer.Atmospheric.cs</code></a></td>
+<td>Runtime inspection and diagnostic entry points</td>
+</tr>
+<tr>
+<td><a href="https://git.rendezvous.dev/rendezvous-entertainment/ksp2redux/-/blob/bf2e756d75bf169c9cef83dd520a7aa578a7d488/Assets/Code/Redux/VFX/ReentryMeshGeneration/RuntimeReentryMeshFallback.cs"><code>RuntimeReentryMeshFallback.cs</code></a> and <a href="https://github.com/KSP2Community/PatchManager/blob/f895a4571ae2ee9d0bdb2d34b695d17ba5d5acf1/Runtime/Parts/Patchers/PartModuleLoadPatcher.cs"><code>PartModuleLoadPatcher.cs</code></a></td>
+<td>Restricted generated-shell fallback for imported parts</td>
+</tr>
+</tbody>
+</table>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from prerelease
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

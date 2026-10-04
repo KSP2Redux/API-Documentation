@@ -102,12 +102,6 @@
       <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent__isEnabled">ObjectComponent._isEnabled</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_initialDefinitionData">ObjectComponent.initialDefinitionData</a>
-    </div>
-    <div>
-      <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_Is_KSP_Sim_IGuidIdentity_">ObjectComponent.Is(IGuidIdentity)</a>
-    </div>
-    <div>
       <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_Dispose">ObjectComponent.Dispose()</a>
     </div>
     <div>
@@ -211,31 +205,6 @@
 </h3>
 
 
-  <h4 id="KSP_Sim_impl_PartComponent_AssemblySizeTypeDiameters" data-uid="KSP.Sim.impl.PartComponent.AssemblySizeTypeDiameters">AssemblySizeTypeDiameters</h4>
-  <div class="markdown level1 summary"><p>The list of standard assembly size-type diameters in meters, indexed by size category.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public List&lt;float&gt; AssemblySizeTypeDiameters</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">List</span>&lt;<span class="xref">float</span>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
   <h4 id="KSP_Sim_impl_PartComponent_Modules" data-uid="KSP.Sim.impl.PartComponent.Modules">Modules</h4>
   <div class="markdown level1 summary"><p>The collection of <a class="xref" href="KSP.Sim.impl.PartComponentModule.html">PartComponentModule</a> instances attached to this part, keyed by module type.</p>
 </div>
@@ -296,7 +265,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double AirstreamArea { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public double AirstreamArea { set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-condensed">
@@ -705,35 +674,6 @@
   </table>
 
 
-  <a id="KSP_Sim_impl_PartComponent_DefinitionType_" data-uid="KSP.Sim.impl.PartComponent.DefinitionType*"></a>
-  <h4 id="KSP_Sim_impl_PartComponent_DefinitionType" data-uid="KSP.Sim.impl.PartComponent.DefinitionType">DefinitionType</h4>
-  <div class="markdown level1 summary"><p>Gets the type of the definition data object used by this component.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[TypeConverterIgnore]
-public override Type DefinitionType { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Type</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_DefinitionType">ObjectComponent.DefinitionType</a></div>
-
-
   <a id="KSP_Sim_impl_PartComponent_DeltaVChildren_" data-uid="KSP.Sim.impl.PartComponent.DeltaVChildren*"></a>
   <h4 id="KSP_Sim_impl_PartComponent_DeltaVChildren" data-uid="KSP.Sim.impl.PartComponent.DeltaVChildren">DeltaVChildren</h4>
   <div class="markdown level1 summary"><p>Gets the child parts of this part in the delta-V part tree.</p>
@@ -1137,11 +1077,7 @@ the same way <a class="xref" href="KSP.Sim.impl.PartComponent.html#KSP_Sim_impl_
 <a class="xref" href="KSP.Sim.impl.PartComponent.html#KSP_Sim_impl_PartComponent_BreakingTorque">BreakingTorque</a> write through to their entity copies. Without it the two disagreed
 whenever a part deployed, and a deployed part was destroyed at its authored limit rather than the
 raised one.
-The write is a no-op while the part entity has no <a class="xref" href="KSP.ThermalData.html">ThermalData</a> component. That
-does not happen on the normal path, since <a class="xref" href="KSP.Sim.impl.PartComponent.html#KSP_Sim_impl_PartComponent_OnAdded_KSP_Sim_impl_SimulationObjectModel_System_Double_">OnAdded(SimulationObjectModel, double)</a> adds the component before
-<a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnAdded_KSP_Sim_impl_SimulationObjectModel_System_Double_">OnAdded(SimulationObjectModel, double)</a> runs <a class="xref" href="KSP.Sim.impl.PartComponent.html#KSP_Sim_impl_PartComponent_SetDefinition_System_Object_">SetDefinition(object)</a>, so the very first write
-already reaches the entity. <a class="xref" href="KSP.Sim.impl.PartComponent.html#KSP_Sim_impl_PartComponent_OnStart_System_Double_">OnStart(double)</a> reseeds it anyway as a guard against a caller
-that sets the limit earlier.</p>
+The write is a no-op while the part entity has no <a class="xref" href="KSP.ThermalData.html">ThermalData</a> component.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -1159,32 +1095,6 @@ that sets the limit earlier.</p>
     <tbody>
       <tr>
         <td><span class="xref">double</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="KSP_Sim_impl_PartComponent_OnDecoupled_" data-uid="KSP.Sim.impl.PartComponent.OnDecoupled*"></a>
-  <h4 id="KSP_Sim_impl_PartComponent_OnDecoupled" data-uid="KSP.Sim.impl.PartComponent.OnDecoupled">OnDecoupled</h4>
-  <div class="markdown level1 summary"><p>Gets or sets the delegate invoked when this part is decoupled from its vessel.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DecouplePartEvent OnDecoupled { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="KSP.Sim.DecouplePartEvent.html">DecouplePartEvent</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -1503,32 +1413,6 @@ that sets the limit earlier.</p>
   </table>
 
 
-  <a id="KSP_Sim_impl_PartComponent_ResourceThermalMass_" data-uid="KSP.Sim.impl.PartComponent.ResourceThermalMass*"></a>
-  <h4 id="KSP_Sim_impl_PartComponent_ResourceThermalMass" data-uid="KSP.Sim.impl.PartComponent.ResourceThermalMass">ResourceThermalMass</h4>
-  <div class="markdown level1 summary"><p>Gets the thermal mass contributed by the resources currently stored in this part.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double ResourceThermalMass { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">double</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
   <a id="KSP_Sim_impl_PartComponent_Splashed_" data-uid="KSP.Sim.impl.PartComponent.Splashed*"></a>
   <h4 id="KSP_Sim_impl_PartComponent_Splashed" data-uid="KSP.Sim.impl.PartComponent.Splashed">Splashed</h4>
   <div class="markdown level1 summary"><p>Gets or sets a value indicating whether this part is currently splashed down in a liquid body.</p>
@@ -1553,35 +1437,6 @@ that sets the limit earlier.</p>
       </tr>
     </tbody>
   </table>
-
-
-  <a id="KSP_Sim_impl_PartComponent_StateType_" data-uid="KSP.Sim.impl.PartComponent.StateType*"></a>
-  <h4 id="KSP_Sim_impl_PartComponent_StateType" data-uid="KSP.Sim.impl.PartComponent.StateType">StateType</h4>
-  <div class="markdown level1 summary"><p>Gets the type of the state data object used by this component.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[TypeConverterIgnore]
-public override Type StateType { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Type</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_StateType">ObjectComponent.StateType</a></div>
 
 
   <a id="KSP_Sim_impl_PartComponent_StaticPressureAtm_" data-uid="KSP.Sim.impl.PartComponent.StaticPressureAtm*"></a>
@@ -2009,32 +1864,6 @@ public override Type ViewObjectComponentType { get; }</code></pre>
   </table>
 
 
-  <a id="KSP_Sim_impl_PartComponent_dynamicPressureAtm_" data-uid="KSP.Sim.impl.PartComponent.dynamicPressureAtm*"></a>
-  <h4 id="KSP_Sim_impl_PartComponent_dynamicPressureAtm" data-uid="KSP.Sim.impl.PartComponent.dynamicPressureAtm">dynamicPressureAtm</h4>
-  <div class="markdown level1 summary"><p>Gets the dynamic pressure at the part's current location, in atmospheres.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double dynamicPressureAtm { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">double</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
   <a id="KSP_Sim_impl_PartComponent_dynamicPressurekPa_" data-uid="KSP.Sim.impl.PartComponent.dynamicPressurekPa*"></a>
   <h4 id="KSP_Sim_impl_PartComponent_dynamicPressurekPa" data-uid="KSP.Sim.impl.PartComponent.dynamicPressurekPa">dynamicPressurekPa</h4>
   <div class="markdown level1 summary"><p>Gets the dynamic pressure at the part's current location, in kilopascals.</p>
@@ -2087,58 +1916,6 @@ public override Type ViewObjectComponentType { get; }</code></pre>
   </table>
 
 
-  <a id="KSP_Sim_impl_PartComponent_maximum_drag_" data-uid="KSP.Sim.impl.PartComponent.maximum_drag*"></a>
-  <h4 id="KSP_Sim_impl_PartComponent_maximum_drag" data-uid="KSP.Sim.impl.PartComponent.maximum_drag">maximum_drag</h4>
-  <div class="markdown level1 summary"><p>Gets or sets the maximum aerodynamic drag coefficient for this part.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public float maximum_drag { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">float</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="KSP_Sim_impl_PartComponent_minimum_drag_" data-uid="KSP.Sim.impl.PartComponent.minimum_drag*"></a>
-  <h4 id="KSP_Sim_impl_PartComponent_minimum_drag" data-uid="KSP.Sim.impl.PartComponent.minimum_drag">minimum_drag</h4>
-  <div class="markdown level1 summary"><p>Gets or sets the minimum aerodynamic drag coefficient for this part.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public float minimum_drag { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">float</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
   <a id="KSP_Sim_impl_PartComponent_partProperties_" data-uid="KSP.Sim.impl.PartComponent.partProperties*"></a>
   <h4 id="KSP_Sim_impl_PartComponent_partProperties" data-uid="KSP.Sim.impl.PartComponent.partProperties">partProperties</h4>
   <div class="markdown level1 summary"><p>Gets the part properties from the current definition.</p>
@@ -2160,32 +1937,6 @@ public PartProperties partProperties { get; }</code></pre>
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Sim.Definitions.PartProperties.html">PartProperties</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="KSP_Sim_impl_PartComponent_soundSpeed_" data-uid="KSP.Sim.impl.PartComponent.soundSpeed*"></a>
-  <h4 id="KSP_Sim_impl_PartComponent_soundSpeed" data-uid="KSP.Sim.impl.PartComponent.soundSpeed">soundSpeed</h4>
-  <div class="markdown level1 summary"><p>Gets the speed of sound at the part's current atmospheric conditions, in meters per second.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double soundSpeed { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">double</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -2630,51 +2381,6 @@ sequence after destroyed notifications have been delivered.</p>
   </table>
 
 
-  <a id="KSP_Sim_impl_PartComponent_FindInternalSeat_" data-uid="KSP.Sim.impl.PartComponent.FindInternalSeat*"></a>
-  <h4 id="KSP_Sim_impl_PartComponent_FindInternalSeat_System_Int32_" data-uid="KSP.Sim.impl.PartComponent.FindInternalSeat(System.Int32)">FindInternalSeat(int)</h4>
-  <div class="markdown level1 summary"><p>Returns the internal seat at the specified index within this part.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IInternalSeat FindInternalSeat(int index)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">int</span></td>
-        <td><span class="parametername">index</span></td>
-        <td><p>The zero-based index of the seat to retrieve.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="KSP.Sim.IInternalSeat.html">IInternalSeat</a></td>
-        <td><p>The <a class="xref" href="KSP.Sim.IInternalSeat.html">IInternalSeat</a> at the given index, or <code>null</code> if none exists.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-
-
   <a id="KSP_Sim_impl_PartComponent_FindNodeAttachmentsOfType_" data-uid="KSP.Sim.impl.PartComponent.FindNodeAttachmentsOfType*"></a>
   <h4 id="KSP_Sim_impl_PartComponent_FindNodeAttachmentsOfType_KSP_Sim_AttachNodeType_" data-uid="KSP.Sim.impl.PartComponent.FindNodeAttachmentsOfType(KSP.Sim.AttachNodeType)">FindNodeAttachmentsOfType(AttachNodeType)</h4>
   <div class="markdown level1 summary"><p>Returns all attachment nodes on this part whose type matches the specified <a class="xref" href="KSP.Sim.AttachNodeType.html">AttachNodeType</a>.</p>
@@ -2776,12 +2482,11 @@ sequence after destroyed notifications have been delivered.</p>
 
   <a id="KSP_Sim_impl_PartComponent_GetDefinition_" data-uid="KSP.Sim.impl.PartComponent.GetDefinition*"></a>
   <h4 id="KSP_Sim_impl_PartComponent_GetDefinition" data-uid="KSP.Sim.impl.PartComponent.GetDefinition">GetDefinition()</h4>
-  <div class="markdown level1 summary"><p>Returns the definition data object for this component.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override object GetDefinition()</code></pre>
+    <pre><code class="lang-csharp hljs">public object GetDefinition()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-condensed">
@@ -2794,13 +2499,10 @@ sequence after destroyed notifications have been delivered.</p>
     <tbody>
       <tr>
         <td><span class="xref">object</span></td>
-        <td><p>The component's current definition data.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_GetDefinition">ObjectComponent.GetDefinition()</a></div>
 
 
   <a id="KSP_Sim_impl_PartComponent_GetMainBody_" data-uid="KSP.Sim.impl.PartComponent.GetMainBody*"></a>
@@ -2926,41 +2628,13 @@ sequence after destroyed notifications have been delivered.</p>
   </table>
 
 
-  <a id="KSP_Sim_impl_PartComponent_GetStackAttachNodeSize_" data-uid="KSP.Sim.impl.PartComponent.GetStackAttachNodeSize*"></a>
-  <h4 id="KSP_Sim_impl_PartComponent_GetStackAttachNodeSize" data-uid="KSP.Sim.impl.PartComponent.GetStackAttachNodeSize">GetStackAttachNodeSize()</h4>
-  <div class="markdown level1 summary"><p>Returns the size of the first stack attachment node found on this part.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int GetStackAttachNodeSize()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">int</span></td>
-        <td><p>The size index of the first stack node, or <code>0</code> if no stack nodes are present.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-
-
   <a id="KSP_Sim_impl_PartComponent_GetState_" data-uid="KSP.Sim.impl.PartComponent.GetState*"></a>
   <h4 id="KSP_Sim_impl_PartComponent_GetState" data-uid="KSP.Sim.impl.PartComponent.GetState">GetState()</h4>
-  <div class="markdown level1 summary"><p>Returns the current state data object for this component.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override object GetState()</code></pre>
+    <pre><code class="lang-csharp hljs">public PartState GetState()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-condensed">
@@ -2972,14 +2646,11 @@ sequence after destroyed notifications have been delivered.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">object</span></td>
-        <td><p>The component's current state data.</p>
-</td>
+        <td><a class="xref" href="KSP.Sim.State.PartState.html">PartState</a></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_GetState">ObjectComponent.GetState()</a></div>
 
 
   <a id="KSP_Sim_impl_PartComponent_HasModule_" data-uid="KSP.Sim.impl.PartComponent.HasModule*"></a>
@@ -3038,7 +2709,7 @@ sequence after destroyed notifications have been delivered.</p>
 
   <a id="KSP_Sim_impl_PartComponent_OnAdded_" data-uid="KSP.Sim.impl.PartComponent.OnAdded*"></a>
   <h4 id="KSP_Sim_impl_PartComponent_OnAdded_KSP_Sim_impl_SimulationObjectModel_System_Double_" data-uid="KSP.Sim.impl.PartComponent.OnAdded(KSP.Sim.impl.SimulationObjectModel,System.Double)">OnAdded(SimulationObjectModel, double)</h4>
-  <div class="markdown level1 summary"><p>Called when this component is attached to a simulation object, storing the reference and applying any pending definition data.</p>
+  <div class="markdown level1 summary"><p>Called when this component is attached to a simulation object, storing the reference.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -3228,36 +2899,6 @@ into an EntityCommandBuffer that will be played back later.</p>
   </table>
 
 
-  <a id="KSP_Sim_impl_PartComponent_RemoveModule_" data-uid="KSP.Sim.impl.PartComponent.RemoveModule*"></a>
-  <h4 id="KSP_Sim_impl_PartComponent_RemoveModule_System_Type_" data-uid="KSP.Sim.impl.PartComponent.RemoveModule(System.Type)">RemoveModule(Type)</h4>
-  <div class="markdown level1 summary"><p>Removes the <a class="xref" href="KSP.Sim.impl.PartComponentModule.html">PartComponentModule</a> registered under the specified type,
-unbinds its data modules, and destroys its ECS entity.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void RemoveModule(Type type)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Type</span></td>
-        <td><span class="parametername">type</span></td>
-        <td><p>The type key of the module to remove.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-
-
   <a id="KSP_Sim_impl_PartComponent_RemoveNodeAttachment_" data-uid="KSP.Sim.impl.PartComponent.RemoveNodeAttachment*"></a>
   <h4 id="KSP_Sim_impl_PartComponent_RemoveNodeAttachment_System_String_" data-uid="KSP.Sim.impl.PartComponent.RemoveNodeAttachment(System.String)">RemoveNodeAttachment(string)</h4>
   <div class="markdown level1 summary"><p>Removes the dynamic attachment node with the specified identifier from this part.</p>
@@ -3297,33 +2938,6 @@ unbinds its data modules, and destroys its ECS entity.</p>
       <tr>
         <td><span class="xref">bool</span></td>
         <td><p><code>true</code> if the node was found and removed; otherwise, <code>false</code>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="KSP_Sim_impl_PartComponent_SetAsVesselControl_" data-uid="KSP.Sim.impl.PartComponent.SetAsVesselControl*"></a>
-  <h4 id="KSP_Sim_impl_PartComponent_SetAsVesselControl" data-uid="KSP.Sim.impl.PartComponent.SetAsVesselControl">SetAsVesselControl()</h4>
-  <div class="markdown level1 summary"><p>Registers this part as the control owner for its vessel.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool SetAsVesselControl()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">bool</span></td>
-        <td><p><code>true</code> if the vessel was found and the control owner was set; otherwise, <code>false</code>.</p>
 </td>
       </tr>
     </tbody>
@@ -3404,37 +3018,6 @@ unbinds its data modules, and destroys its ECS entity.</p>
       </tr>
     </tbody>
   </table>
-
-
-  <a id="KSP_Sim_impl_PartComponent_SetDefinition_" data-uid="KSP.Sim.impl.PartComponent.SetDefinition*"></a>
-  <h4 id="KSP_Sim_impl_PartComponent_SetDefinition_System_Object_" data-uid="KSP.Sim.impl.PartComponent.SetDefinition(System.Object)">SetDefinition(object)</h4>
-  <div class="markdown level1 summary"><p>Applies the supplied definition data to this component.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void SetDefinition(object definitionData)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">object</span></td>
-        <td><span class="parametername">definitionData</span></td>
-        <td><p>The definition data object to apply.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_SetDefinition_System_Object_">ObjectComponent.SetDefinition(object)</a></div>
 
 
   <a id="KSP_Sim_impl_PartComponent_SetNodeAttachment_" data-uid="KSP.Sim.impl.PartComponent.SetNodeAttachment*"></a>
@@ -3661,13 +3244,12 @@ reasons to do with the vessel merge path destroying the vessel to early</p>
 
 
   <a id="KSP_Sim_impl_PartComponent_SetState_" data-uid="KSP.Sim.impl.PartComponent.SetState*"></a>
-  <h4 id="KSP_Sim_impl_PartComponent_SetState_System_Object_KSP_Sim_ISimulationModelMap_" data-uid="KSP.Sim.impl.PartComponent.SetState(System.Object,KSP.Sim.ISimulationModelMap)">SetState(object, ISimulationModelMap)</h4>
-  <div class="markdown level1 summary"><p>Applies the supplied state data to this component and returns the applied state.</p>
-</div>
+  <h4 id="KSP_Sim_impl_PartComponent_SetState_KSP_Sim_State_PartState_KSP_Sim_ISimulationModelMap_" data-uid="KSP.Sim.impl.PartComponent.SetState(KSP.Sim.State.PartState,KSP.Sim.ISimulationModelMap)">SetState(PartState, ISimulationModelMap)</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override object SetState(object stateData, ISimulationModelMap simulationModelMap)</code></pre>
+    <pre><code class="lang-csharp hljs">public void SetState(PartState partState, ISimulationModelMap simulationModelMap)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -3680,37 +3262,17 @@ reasons to do with the vessel merge path destroying the vessel to early</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">object</span></td>
-        <td><span class="parametername">stateData</span></td>
-        <td><p>The state data object to apply.</p>
-</td>
+        <td><a class="xref" href="KSP.Sim.State.PartState.html">PartState</a></td>
+        <td><span class="parametername">partState</span></td>
+        <td></td>
       </tr>
       <tr>
         <td><a class="xref" href="KSP.Sim.ISimulationModelMap.html">ISimulationModelMap</a></td>
         <td><span class="parametername">simulationModelMap</span></td>
-        <td><p>The simulation model map providing context for applying state.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">object</span></td>
-        <td><p>The applied state data object.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_SetState_System_Object_KSP_Sim_ISimulationModelMap_">ObjectComponent.SetState(object, ISimulationModelMap)</a></div>
 
 
   <a id="KSP_Sim_impl_PartComponent_SubscribeOnPartActiveUpdate_" data-uid="KSP.Sim.impl.PartComponent.SubscribeOnPartActiveUpdate*"></a>
@@ -4157,70 +3719,6 @@ reasons to do with the vessel merge path destroying the vessel to early</p>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void UnsubscribeOnPartActiveUpdate()</code></pre>
   </div>
-
-
-  <a id="KSP_Sim_impl_PartComponent_UpdateMass_" data-uid="KSP.Sim.impl.PartComponent.UpdateMass*"></a>
-  <h4 id="KSP_Sim_impl_PartComponent_UpdateMass" data-uid="KSP.Sim.impl.PartComponent.UpdateMass">UpdateMass()</h4>
-  <div class="markdown level1 summary"><p>Recalculates and updates the dry mass, resource mass, crew mass, and physics mass for this part.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void UpdateMass()</code></pre>
-  </div>
-
-
-  <a id="KSP_Sim_impl_PartComponent_ValidateState_" data-uid="KSP.Sim.impl.PartComponent.ValidateState*"></a>
-  <h4 id="KSP_Sim_impl_PartComponent_ValidateState_System_Object_KSP_Sim_ISimulationModelMap_" data-uid="KSP.Sim.impl.PartComponent.ValidateState(System.Object,KSP.Sim.ISimulationModelMap)">ValidateState(object, ISimulationModelMap)</h4>
-  <div class="markdown level1 summary"><p>Returns a value indicating whether the supplied state data is valid for this component in the given simulation context.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override bool ValidateState(object stateData, ISimulationModelMap simulationModelMap)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">object</span></td>
-        <td><span class="parametername">stateData</span></td>
-        <td><p>The state data object to validate.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="KSP.Sim.ISimulationModelMap.html">ISimulationModelMap</a></td>
-        <td><span class="parametername">simulationModelMap</span></td>
-        <td><p>The simulation model map providing context for validation.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">bool</span></td>
-        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the state data is valid, otherwise <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_ValidateState_System_Object_KSP_Sim_ISimulationModelMap_">ObjectComponent.ValidateState(object, ISimulationModelMap)</a></div>
   <h3 id="events">Events
 </h3>
 

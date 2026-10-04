@@ -5,11 +5,11 @@
   <head>
     <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-      <title>Enum VesselStatus | KSP2Redux API (Beta) </title>
+      <title>Interface ITerrainRayRequest | KSP2Redux API (Beta) </title>
       <meta name="viewport" content="width=device-width">
-      <meta name="title" content="Enum VesselStatus | KSP2Redux API (Beta) ">
+      <meta name="title" content="Interface ITerrainRayRequest | KSP2Redux API (Beta) ">
     
-    <meta name="description" content="The operational status of a vessel in the simulation.">
+    <meta name="description" content="A terrain ray cast that finishes later, whose result is read once it is done.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -76,105 +76,116 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="KSP.Sim.impl.VesselStatus">
+            <article class="content wrap" id="_content" data-uid="Redux.Planets.ITerrainRayRequest">
 
 
 
-
-  <h1 id="KSP_Sim_impl_VesselStatus" data-uid="KSP.Sim.impl.VesselStatus" class="text-break">Enum VesselStatus</h1>
-  <div class="markdown level0 summary"><p>The operational status of a vessel in the simulation.</p>
+  <h1 id="Redux_Planets_ITerrainRayRequest" data-uid="Redux.Planets.ITerrainRayRequest" class="text-break">Interface ITerrainRayRequest</h1>
+  <div class="markdown level0 summary"><p>A terrain ray cast that finishes later, whose result is read once it is done.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Sim.html">Sim</a>.<a class="xref" href="KSP.Sim.impl.html">impl</a></h6>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.Planets.html">Planets</a></h6>
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
-  <h5 id="KSP_Sim_impl_VesselStatus_syntax">Syntax</h5>
+  <h5 id="Redux_Planets_ITerrainRayRequest_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public enum VesselStatus</code></pre>
+    <pre><code class="lang-csharp hljs">public interface ITerrainRayRequest</code></pre>
   </div>
-  <h3 id="fields">Fields
+  <h3 id="properties">Properties
 </h3>
+
+
+  <a id="Redux_Planets_ITerrainRayRequest_IsCompleted_" data-uid="Redux.Planets.ITerrainRayRequest.IsCompleted*"></a>
+  <h4 id="Redux_Planets_ITerrainRayRequest_IsCompleted" data-uid="Redux.Planets.ITerrainRayRequest.IsCompleted">IsCompleted</h4>
+  <div class="markdown level1 summary"><p>Gets whether the cast has finished.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool IsCompleted { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-condensed">
     <thead>
       <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="Redux_Planets_ITerrainRayRequest_TryGetHit_" data-uid="Redux.Planets.ITerrainRayRequest.TryGetHit*"></a>
+  <h4 id="Redux_Planets_ITerrainRayRequest_TryGetHit_Redux_Planets_TerrainHit__" data-uid="Redux.Planets.ITerrainRayRequest.TryGetHit(Redux.Planets.TerrainHit@)">TryGetHit(out TerrainHit)</h4>
+  <div class="markdown level1 summary"><p>Waits for the cast and reads its result.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool TryGetHit(out TerrainHit hit)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
         <th>Name</th>
         <th>Description</th>
       </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainHit.html">TerrainHit</a></td>
+        <td><span class="parametername">hit</span></td>
+        <td><p>The first point where the ray met the terrain, when it did.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
     <thead>
-    </thead></thead><tbody>
       <tr>
-        <td id="KSP_Sim_impl_VesselStatus_ACTIVE">ACTIVE</td>
-        <td><p>Vessel is actively simulated and may be under player or autopilot control.</p>
-</td>
+        <th>Type</th>
+        <th>Description</th>
       </tr>
+    </thead>
+    <tbody>
       <tr>
-        <td id="KSP_Sim_impl_VesselStatus_DEAD">DEAD</td>
-        <td><p>Vessel has been destroyed or is otherwise unrecoverable and will be removed from the simulation.</p>
-</td>
-      </tr>
-      <tr>
-        <td id="KSP_Sim_impl_VesselStatus_INACTIVE">INACTIVE</td>
-        <td><p>Vessel exists in the simulation but is not currently being simulated or controlled.</p>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the ray met the terrain, false otherwise.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.EnumExtensions.html#GlobalAssemblyCSharp_EnumExtensions_Description__1___0_">EnumExtensions.Description&lt;VesselStatus&gt;(VesselStatus)</a>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.EnumExtensions.html#GlobalAssemblyCSharp_EnumExtensions_GetTranslatedDescription__1___0_">EnumExtensions.GetTranslatedDescription&lt;VesselStatus&gt;(VesselStatus)</a>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.EnumExtensions.html#GlobalAssemblyCSharp_EnumExtensions_HasFlag__1___0___0_">EnumExtensions.HasFlag&lt;VesselStatus&gt;(VesselStatus, VesselStatus)</a>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;VesselStatus&gt;(VesselStatus, Action&lt;VesselStatus&gt;)</a>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;VesselStatus, R&gt;(VesselStatus, Func&lt;VesselStatus, R&gt;)</a>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetField__2___0_System_String_">Util.GetField&lt;T, R&gt;(T, string)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;VesselStatus&gt;(VesselStatus, Action&lt;VesselStatus&gt;)</a>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetField__2___0_System_String___1_">Util.SetField&lt;T, V&gt;(T, string, V)</a>
   </div>
   <div>
-      <a class="xref" href="KSP.Navigation.NavigatorExtensiion.html#KSP_Navigation_NavigatorExtensiion_Next__1___0_">NavigatorExtensiion.Next&lt;VesselStatus&gt;(VesselStatus)</a>
-  </div>
-  <div>
-      <a class="xref" href="KSP.Navigation.NavigatorExtensiion.html#KSP_Navigation_NavigatorExtensiion_Prev__1___0_">NavigatorExtensiion.Prev&lt;VesselStatus&gt;(VesselStatus)</a>
-  </div>
-  <div>
-      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;VesselStatus&gt;(VesselStatus, string, params object[])</a>
-  </div>
-  <div>
-      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetField__2___0_System_String_">Util.GetField&lt;VesselStatus, R&gt;(VesselStatus, string)</a>
-  </div>
-  <div>
-      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetField__2___0_System_String___1_">Util.SetField&lt;VesselStatus, V&gt;(VesselStatus, string, V)</a>
-  </div>
-  <div>
-      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;VesselStatus, V&gt;(VesselStatus, string, V)</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.EnumExtensions.html#GlobalAssemblyCSharp_EnumExtensions_Description_System_Enum_">EnumExtensions.Description(Enum)</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.EnumExtensions.html#GlobalAssemblyCSharp_EnumExtensions_GetTranslatedDescription_System_Enum_">EnumExtensions.GetTranslatedDescription(Enum)</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.EnumExtensions.html#GlobalAssemblyCSharp_EnumExtensions_IsBackingTypeSigned_System_Enum_">EnumExtensions.IsBackingTypeSigned(Enum)</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.EnumExtensions.html#GlobalAssemblyCSharp_EnumExtensions_ToBinaryString_System_Enum_">EnumExtensions.ToBinaryString(Enum)</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.EnumExtensions.html#GlobalAssemblyCSharp_EnumExtensions_ToInt64_System_Enum_">EnumExtensions.ToInt64(Enum)</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.EnumExtensions.html#GlobalAssemblyCSharp_EnumExtensions_ToStringFlags_System_Enum_">EnumExtensions.ToStringFlags(Enum)</a>
-  </div>
-  <div>
-      <a class="xref" href="GlobalAssemblyCSharp.EnumExtensions.html#GlobalAssemblyCSharp_EnumExtensions_ToUInt64_System_Enum_">EnumExtensions.ToUInt64(Enum)</a>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
   </div>
   <div>
       <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>
@@ -185,6 +196,7 @@
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetFieldValue__1_System_Object_System_String_">Util.GetFieldValue&lt;T&gt;(object, string)</a>
   </div>
+
 </article>
           </div>
 

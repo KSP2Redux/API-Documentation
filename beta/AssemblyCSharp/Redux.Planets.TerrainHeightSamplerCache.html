@@ -5,11 +5,11 @@
   <head>
     <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-      <title>Delegate ObjectComponentDefRegistry.LoopThroughObjectComponentsCallback | KSP2Redux API (Beta) </title>
+      <title>Class TerrainHeightSamplerCache | KSP2Redux API (Beta) </title>
       <meta name="viewport" content="width=device-width">
-      <meta name="title" content="Delegate ObjectComponentDefRegistry.LoopThroughObjectComponentsCallback | KSP2Redux API (Beta) ">
+      <meta name="title" content="Class TerrainHeightSamplerCache | KSP2Redux API (Beta) ">
     
-    <meta name="description" content="Callback invoked for each  during enumeration of registered components.">
+    <meta name="description" content="Builds  instances for a body and owns the CPU copies they read.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -76,87 +76,61 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="KSP.Sim.ObjectComponentDefRegistry.LoopThroughObjectComponentsCallback">
+            <article class="content wrap" id="_content" data-uid="Redux.Planets.TerrainHeightSamplerCache">
 
 
 
-  <h1 id="KSP_Sim_ObjectComponentDefRegistry_LoopThroughObjectComponentsCallback" data-uid="KSP.Sim.ObjectComponentDefRegistry.LoopThroughObjectComponentsCallback" class="text-break">Delegate ObjectComponentDefRegistry.LoopThroughObjectComponentsCallback</h1>
-  <div class="markdown level0 summary"><p>Callback invoked for each <a class="xref" href="KSP.Sim.impl.ObjectComponent.html">ObjectComponent</a> during enumeration of registered components.</p>
+  <h1 id="Redux_Planets_TerrainHeightSamplerCache" data-uid="Redux.Planets.TerrainHeightSamplerCache" class="text-break">Class TerrainHeightSamplerCache</h1>
+  <div class="markdown level0 summary"><p>Builds <a class="xref" href="Redux.Planets.TerrainHeightSampler.html">TerrainHeightSampler</a> instances for a body and owns the CPU copies they read.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Sim.html">Sim</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
-  <h5 id="KSP_Sim_ObjectComponentDefRegistry_LoopThroughObjectComponentsCallback_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public delegate void ObjectComponentDefRegistry.LoopThroughObjectComponentsCallback(ObjectComponent objectComponent, int componentIndex)</code></pre>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><span class="xref">TerrainHeightSamplerCache</span></div>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="KSP.Sim.impl.ObjectComponent.html">ObjectComponent</a></td>
-        <td><span class="parametername">objectComponent</span></td>
-        <td>Callback invoked for each  during enumeration of registered components.</td>
-      </tr>
-      <tr>
-        <td><span class="xref">int</span></td>
-        <td><span class="parametername">componentIndex</span></td>
-        <td>Callback invoked for each  during enumeration of registered components.</td>
-      </tr>
-    </tbody>
-  </table>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.Planets.html">Planets</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="Redux_Planets_TerrainHeightSamplerCache_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class TerrainHeightSamplerCache : ScriptableObject</code></pre>
+  </div>
+  <h5 id="Redux_Planets_TerrainHeightSamplerCache_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>Readable 16-bit height maps and RGBA32 masks are read in place. Anything else, typically the sub-zone mask and
+a few sub-zone maps, is copied back from the GPU on first use, about 88 MB on Kerbin. Both are remembered per
+texture and fetched again only when its update count changes, so building a sampler is cheap enough to do per
+query.</p>
+<p>
+The copies are freed when the cache is disabled. In play mode the owning <code>PQS</code> destroys it. <code>PQS</code>
+does not run in edit mode, and with domain reload off nothing frees a cache on entering play mode, so every
+<a class="xref" href="Redux.Planets.TerrainHeightSamplerCache.html#Redux_Planets_TerrainHeightSamplerCache_Create_UnityEngine_Object_">Create(Object)</a> and <a class="xref" href="Redux.Planets.TerrainHeightSamplerCache.html#Redux_Planets_TerrainHeightSamplerCache_Build_KSP_Rendering_Planets_PQSData_HeightMapInfo_System_Double_System_Double_System_Double_PQSDecalController_System_Boolean_">Build(HeightMapInfo, double, double, double, PQSDecalController, bool)</a> also destroys caches whose owner is gone. A recompile still
+reloads the domain and frees the rest.
+</p>
+</div>
   <h3 id="constructors">Constructors
 </h3>
 
 
-  <a id="KSP_Sim_ObjectComponentDefRegistry_LoopThroughObjectComponentsCallback__ctor_" data-uid="KSP.Sim.ObjectComponentDefRegistry.LoopThroughObjectComponentsCallback.#ctor*"></a>
-  <h4 id="KSP_Sim_ObjectComponentDefRegistry_LoopThroughObjectComponentsCallback__ctor_System_Object_System_IntPtr_" data-uid="KSP.Sim.ObjectComponentDefRegistry.LoopThroughObjectComponentsCallback.#ctor(System.Object,System.IntPtr)">LoopThroughObjectComponentsCallback(object, IntPtr)</h4>
+  <a id="Redux_Planets_TerrainHeightSamplerCache__ctor_" data-uid="Redux.Planets.TerrainHeightSamplerCache.#ctor*"></a>
+  <h4 id="Redux_Planets_TerrainHeightSamplerCache__ctor" data-uid="Redux.Planets.TerrainHeightSamplerCache.#ctor">TerrainHeightSamplerCache()</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public LoopThroughObjectComponentsCallback(object @object, IntPtr method)</code></pre>
+    <pre><code class="lang-csharp hljs">public TerrainHeightSamplerCache()</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">object</span></td>
-        <td><span class="parametername">object</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">IntPtr</span></td>
-        <td><span class="parametername">method</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <h3 id="methods">Methods
 </h3>
 
 
-  <a id="KSP_Sim_ObjectComponentDefRegistry_LoopThroughObjectComponentsCallback_BeginInvoke_" data-uid="KSP.Sim.ObjectComponentDefRegistry.LoopThroughObjectComponentsCallback.BeginInvoke*"></a>
-  <h4 id="KSP_Sim_ObjectComponentDefRegistry_LoopThroughObjectComponentsCallback_BeginInvoke_KSP_Sim_impl_ObjectComponent_System_Int32_System_AsyncCallback_System_Object_" data-uid="KSP.Sim.ObjectComponentDefRegistry.LoopThroughObjectComponentsCallback.BeginInvoke(KSP.Sim.impl.ObjectComponent,System.Int32,System.AsyncCallback,System.Object)">BeginInvoke(ObjectComponent, int, AsyncCallback, object)</h4>
-  <div class="markdown level1 summary"></div>
+  <a id="Redux_Planets_TerrainHeightSamplerCache_Build_" data-uid="Redux.Planets.TerrainHeightSamplerCache.Build*"></a>
+  <h4 id="Redux_Planets_TerrainHeightSamplerCache_Build_KSP_Rendering_Planets_PQSData_HeightMapInfo_System_Double_System_Double_System_Double_PQSDecalController_System_Boolean_" data-uid="Redux.Planets.TerrainHeightSamplerCache.Build(KSP.Rendering.Planets.PQSData.HeightMapInfo,System.Double,System.Double,System.Double,PQSDecalController,System.Boolean)">Build(HeightMapInfo, double, double, double, PQSDecalController, bool)</h4>
+  <div class="markdown level1 summary"><p>Builds a sampler over a body's height data, laid out exactly as the terrain shader is bound.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual IAsyncResult BeginInvoke(ObjectComponent objectComponent, int componentIndex, AsyncCallback callback, object @object)</code></pre>
+    <pre><code class="lang-csharp hljs">public TerrainHeightSampler Build(PQSData.HeightMapInfo info, double radius, double oceanAltitude, double maxTerrainHeight, PQSDecalController decalController, bool includeDecals)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -169,24 +143,40 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.impl.ObjectComponent.html">ObjectComponent</a></td>
-        <td><span class="parametername">objectComponent</span></td>
-        <td></td>
+        <td><a class="xref" href="KSP.Rendering.Planets.PQSData.html">PQSData</a>.<a class="xref" href="KSP.Rendering.Planets.PQSData.HeightMapInfo.html">HeightMapInfo</a></td>
+        <td><span class="parametername">info</span></td>
+        <td><p>The body's height map settings.</p>
+</td>
       </tr>
       <tr>
-        <td><span class="xref">int</span></td>
-        <td><span class="parametername">componentIndex</span></td>
-        <td></td>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">radius</span></td>
+        <td><p>The body radius in meters.</p>
+</td>
       </tr>
       <tr>
-        <td><span class="xref">AsyncCallback</span></td>
-        <td><span class="parametername">callback</span></td>
-        <td></td>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">oceanAltitude</span></td>
+        <td><p>The body's ocean altitude in meters.</p>
+</td>
       </tr>
       <tr>
-        <td><span class="xref">object</span></td>
-        <td><span class="parametername">object</span></td>
-        <td></td>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">maxTerrainHeight</span></td>
+        <td><p>The body's recorded maximum terrain height above sea level in meters, or zero if unknown.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalAssemblyCSharp.PQSDecalController.html">PQSDecalController</a></td>
+        <td><span class="parametername">decalController</span></td>
+        <td><p>The body's decal controller, or <code>null</code> for none.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">includeDecals</span></td>
+        <td><p>True to apply decals, false to sample the terrain without them.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -200,20 +190,22 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IAsyncResult</span></td>
-        <td></td>
+        <td><a class="xref" href="Redux.Planets.TerrainHeightSampler.html">TerrainHeightSampler</a></td>
+        <td><p>A sampler whose containers stay valid until this cache is disabled or the source textures change.</p>
+</td>
       </tr>
     </tbody>
   </table>
 
 
-  <a id="KSP_Sim_ObjectComponentDefRegistry_LoopThroughObjectComponentsCallback_EndInvoke_" data-uid="KSP.Sim.ObjectComponentDefRegistry.LoopThroughObjectComponentsCallback.EndInvoke*"></a>
-  <h4 id="KSP_Sim_ObjectComponentDefRegistry_LoopThroughObjectComponentsCallback_EndInvoke_System_IAsyncResult_" data-uid="KSP.Sim.ObjectComponentDefRegistry.LoopThroughObjectComponentsCallback.EndInvoke(System.IAsyncResult)">EndInvoke(IAsyncResult)</h4>
-  <div class="markdown level1 summary"></div>
+  <a id="Redux_Planets_TerrainHeightSamplerCache_Create_" data-uid="Redux.Planets.TerrainHeightSamplerCache.Create*"></a>
+  <h4 id="Redux_Planets_TerrainHeightSamplerCache_Create_UnityEngine_Object_" data-uid="Redux.Planets.TerrainHeightSamplerCache.Create(UnityEngine.Object)">Create(Object)</h4>
+  <div class="markdown level1 summary"><p>Creates a cache owned by the given object, after destroying every cache whose owner is gone.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual void EndInvoke(IAsyncResult result)</code></pre>
+    <pre><code class="lang-csharp hljs">public static TerrainHeightSamplerCache Create(Object owner)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -226,41 +218,26 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IAsyncResult</span></td>
-        <td><span class="parametername">result</span></td>
-        <td></td>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Object.html">Object</a></td>
+        <td><span class="parametername">owner</span></td>
+        <td><p>The object whose lifetime bounds the cache, normally its <code>PQS</code>.</p>
+</td>
       </tr>
     </tbody>
   </table>
-
-
-  <a id="KSP_Sim_ObjectComponentDefRegistry_LoopThroughObjectComponentsCallback_Invoke_" data-uid="KSP.Sim.ObjectComponentDefRegistry.LoopThroughObjectComponentsCallback.Invoke*"></a>
-  <h4 id="KSP_Sim_ObjectComponentDefRegistry_LoopThroughObjectComponentsCallback_Invoke_KSP_Sim_impl_ObjectComponent_System_Int32_" data-uid="KSP.Sim.ObjectComponentDefRegistry.LoopThroughObjectComponentsCallback.Invoke(KSP.Sim.impl.ObjectComponent,System.Int32)">Invoke(ObjectComponent, int)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual void Invoke(ObjectComponent objectComponent, int componentIndex)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
+  <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-condensed">
     <thead>
       <tr>
         <th>Type</th>
-        <th>Name</th>
         <th>Description</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="KSP.Sim.impl.ObjectComponent.html">ObjectComponent</a></td>
-        <td><span class="parametername">objectComponent</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">int</span></td>
-        <td><span class="parametername">componentIndex</span></td>
-        <td></td>
+        <td><a class="xref" href="Redux.Planets.TerrainHeightSamplerCache.html">TerrainHeightSamplerCache</a></td>
+        <td><p>A new cache, never saved and left unloadable.</p>
+</td>
       </tr>
     </tbody>
   </table>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class TerrainQuadErrorPass | KSP2Redux API (Beta) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class TerrainQuadErrorPass | KSP2Redux API (Beta) ">
+    
+    <meta name="description" content="Measures the geometric error of newly meshed PQS quads on the GPU, from the working grid the stock quad kernel wrote.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Redux.Planets.TerrainQuadErrorPass">
+
+
+
+  <h1 id="Redux_Planets_TerrainQuadErrorPass" data-uid="Redux.Planets.TerrainQuadErrorPass" class="text-break">Class TerrainQuadErrorPass</h1>
+  <div class="markdown level0 summary"><p>Measures the geometric error of newly meshed PQS quads on the GPU, from the working grid the stock quad kernel wrote.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><span class="xref">TerrainQuadErrorPass</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.Planets.html">Planets</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="Redux_Planets_TerrainQuadErrorPass_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class TerrainQuadErrorPass</code></pre>
+  </div>
+  <h5 id="Redux_Planets_TerrainQuadErrorPass_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>A quad's error is the largest second difference of its vertex heights along both grid axes and both diagonals, over
+the quad's own 9 by 9 vertices, divided by 8: how far a straight edge between vertices strays from a surface curving
+as the samples do. Results are read back without waiting and land a few frames later. They are recorded only by
+<a class="xref" href="Redux.Planets.TerrainQuadErrorPass.html#Redux_Planets_TerrainQuadErrorPass_Flush_Redux_Planets_TerrainQuadErrors_">Flush(TerrainQuadErrors)</a>, so a job reading <a class="xref" href="Redux.Planets.TerrainQuadErrors.html">TerrainQuadErrors</a> never sees them change under it.</p>
+</div>
+  <h3 id="constructors">Constructors
+</h3>
+
+
+  <a id="Redux_Planets_TerrainQuadErrorPass__ctor_" data-uid="Redux.Planets.TerrainQuadErrorPass.#ctor*"></a>
+  <h4 id="Redux_Planets_TerrainQuadErrorPass__ctor_UnityEngine_ComputeShader_System_Int32_" data-uid="Redux.Planets.TerrainQuadErrorPass.#ctor(UnityEngine.ComputeShader,System.Int32)">TerrainQuadErrorPass(ComputeShader, int)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Redux.Planets.TerrainQuadErrorPass.html">TerrainQuadErrorPass</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerrainQuadErrorPass(ComputeShader shader, int capacity)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeShader.html">ComputeShader</a></td>
+        <td><span class="parametername">shader</span></td>
+        <td><p>The compute shader holding the <code>MeasureQuadError</code> kernel.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">capacity</span></td>
+        <td><p>The most quads one <a class="xref" href="Redux.Planets.TerrainQuadErrorPass.html#Redux_Planets_TerrainQuadErrorPass_Measure_UnityEngine_ComputeBuffer_Unity_Collections_NativeArray_KSP_Rendering_Planets_QuadDataGPU__Unity_Collections_NativeArray_KSP_Rendering_Planets_PQJob_PQ__Redux_Planets_TerrainQuadErrors_">Measure(ComputeBuffer, NativeArray&lt;QuadDataGPU&gt;, NativeArray&lt;PQ&gt;, TerrainQuadErrors)</a> call measures, the PQS node buffer size.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="Redux_Planets_TerrainQuadErrorPass_Dispose_" data-uid="Redux.Planets.TerrainQuadErrorPass.Dispose*"></a>
+  <h4 id="Redux_Planets_TerrainQuadErrorPass_Dispose" data-uid="Redux.Planets.TerrainQuadErrorPass.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+
+
+  <a id="Redux_Planets_TerrainQuadErrorPass_Flush_" data-uid="Redux.Planets.TerrainQuadErrorPass.Flush*"></a>
+  <h4 id="Redux_Planets_TerrainQuadErrorPass_Flush_Redux_Planets_TerrainQuadErrors_" data-uid="Redux.Planets.TerrainQuadErrorPass.Flush(Redux.Planets.TerrainQuadErrors)">Flush(TerrainQuadErrors)</h4>
+  <div class="markdown level1 summary"><p>Records every measurement that has landed since the last call.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Flush(TerrainQuadErrors errors)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainQuadErrors.html">TerrainQuadErrors</a></td>
+        <td><span class="parametername">errors</span></td>
+        <td><p>The errors to record into.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Planets_TerrainQuadErrorPass_Flush_Redux_Planets_TerrainQuadErrors__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Call at a point where nothing is reading <code class="paramref">errors</code>, such as after the subdivision job completes.</p>
+</div>
+
+
+  <a id="Redux_Planets_TerrainQuadErrorPass_Measure_" data-uid="Redux.Planets.TerrainQuadErrorPass.Measure*"></a>
+  <h4 id="Redux_Planets_TerrainQuadErrorPass_Measure_UnityEngine_ComputeBuffer_Unity_Collections_NativeArray_KSP_Rendering_Planets_QuadDataGPU__Unity_Collections_NativeArray_KSP_Rendering_Planets_PQJob_PQ__Redux_Planets_TerrainQuadErrors_" data-uid="Redux.Planets.TerrainQuadErrorPass.Measure(UnityEngine.ComputeBuffer,Unity.Collections.NativeArray{KSP.Rendering.Planets.QuadDataGPU},Unity.Collections.NativeArray{KSP.Rendering.Planets.PQJob.PQ},Redux.Planets.TerrainQuadErrors)">Measure(ComputeBuffer, NativeArray&lt;QuadDataGPU&gt;, NativeArray&lt;PQ&gt;, TerrainQuadErrors)</h4>
+  <div class="markdown level1 summary"><p>Starts measuring the quads just meshed that have no recorded error yet.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Measure(ComputeBuffer quadMeshData, NativeArray&lt;QuadDataGPU&gt; meshed, NativeArray&lt;PQJob.PQ&gt; quads, TerrainQuadErrors errors)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeBuffer.html">ComputeBuffer</a></td>
+        <td><span class="parametername">quadMeshData</span></td>
+        <td><p>The buffer the stock kernel writes quads' working grids into.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Collections.NativeArray.html">NativeArray</a>&lt;<a class="xref" href="KSP.Rendering.Planets.QuadDataGPU.html">QuadDataGPU</a>&gt;</td>
+        <td><span class="parametername">meshed</span></td>
+        <td><p>The quads the stock kernel was dispatched for this frame.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Collections.NativeArray.html">NativeArray</a>&lt;<a class="xref" href="KSP.Rendering.Planets.PQJob.PQ.html">PQ</a>&gt;</td>
+        <td><span class="parametername">quads</span></td>
+        <td><p>Every quad node of the body, indexed by id.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainQuadErrors.html">TerrainQuadErrors</a></td>
+        <td><span class="parametername">errors</span></td>
+        <td><p>The errors recorded so far, which quads already in it are skipped by.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Planets_TerrainQuadErrorPass_Measure_UnityEngine_ComputeBuffer_Unity_Collections_NativeArray_KSP_Rendering_Planets_QuadDataGPU__Unity_Collections_NativeArray_KSP_Rendering_Planets_PQJob_PQ__Redux_Planets_TerrainQuadErrors__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Call after the stock kernel's mesh dispatch for the same quads, so their working grids are written first.</p>
+</div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetField__2___0_System_String_">Util.GetField&lt;T, R&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetField__2___0_System_String___1_">Util.SetField&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromProperties_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromProperties(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetFieldValue__1_System_Object_System_String_">Util.GetFieldValue&lt;T&gt;(object, string)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from prerelease
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1661 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Struct TerrainHeightSampler | KSP2Redux API (Beta) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Struct TerrainHeightSampler | KSP2Redux API (Beta) ">
+    
+    <meta name="description" content="Samples terrain height on the CPU the way the bundled terrain compute shader does, quirks included.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Redux.Planets.TerrainHeightSampler">
+
+
+
+  <h1 id="Redux_Planets_TerrainHeightSampler" data-uid="Redux.Planets.TerrainHeightSampler" class="text-break">Struct TerrainHeightSampler</h1>
+  <div class="markdown level0 summary"><p>Samples terrain height on the CPU the way the bundled terrain compute shader does, quirks included.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.Planets.html">Planets</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="Redux_Planets_TerrainHeightSampler_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public struct TerrainHeightSampler</code></pre>
+  </div>
+  <h5 id="Redux_Planets_TerrainHeightSampler_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>
+The terrain is drawn, and its colliders built, from the <code>PQSQuadConstructor</code> compute shader. It ships
+compiled, so its rules were measured by probing its <code>SampleHeights</code> kernel on Direct3D11. Together they
+reproduced the kernel to about 2 cm mean and under 1 m worst case on Kerbin, decals included. The stock CPU
+sampler, <a class="xref" href="KSP.Rendering.Planets.PQSJobUtil.html#KSP_Rendering_Planets_PQSJobUtil_HeightSample_UnityEngine_Vector2_UnityEngine_Vector3_System_Single_KSP_Rendering_Planets_PQS_System_Boolean_">HeightSample(Vector2, Vector3, float, PQS, bool)</a>, is about 225 m off on
+average there.
+</p>
+<p>
+Each of these is reproduced deliberately, because the shader does it:
+</p>
+<ol><li>UVs come from FXC's polynomial expansions of atan2 and asin, see <a class="xref" href="KSP.Rendering.Planets.PQSJobUtil.html#KSP_Rendering_Planets_PQSJobUtil_GetShaderSphericalUVs_Unity_Mathematics_float3_">GetShaderSphericalUVs(float3)</a>.</li><li>Tiled maps blend a side projection at (2u, v) times the UV scale with a top projection at (x, z) / 2 times the UV scale, weighted by 1 - |y|^contrast toward the side.</li><li>The global map and every tier sample biquadratically, whatever the body's filtering modes say, and both masks bilinearly. Only biquadratic has been verified, and every body checked uses it.</li><li>An sRGB mask is decoded to linear before it is filtered, alpha excepted, as the hardware does. Minmus ships its layer mask that way.</li><li>Layer mask weights are divided by their sum. A missing layer mask reads as black, which zeroes every tier.</li><li>A tier channel's sub-zone weight is the dot product of the sub-zone mask with the channel's filter, neither normalized nor clamped, so overlapping zones stack. With sub-zones on it applies to all four tiers, and a black sub-zone mask leaves only the global map.</li><li>Tiers 3 and 4 exist only with sub-zones on, and a missing map in either reads as white.</li><li>Decal footprints are measured on the base sphere, the body radius less the ocean altitude, whatever the terrain height. Decals cull and clip at the body radius, so terrain height never clips one.</li><li>Decal height and alpha are read through the low half of each packed texel pair, so every odd texel column repeats its even neighbour.</li><li>No pole caps and no pole direction offset. The height kernel never reads the offset, and only applies a cap past a radius of 1,000.</li></ol>
+<p>
+Burst-compatible. Every container has to be valid before the sampler goes into a job, which
+<a class="xref" href="Redux.Planets.TerrainHeightSamplerCache.html#Redux_Planets_TerrainHeightSamplerCache_Build_KSP_Rendering_Planets_PQSData_HeightMapInfo_System_Double_System_Double_System_Double_PQSDecalController_System_Boolean_">Build(HeightMapInfo, double, double, double, PQSDecalController, bool)</a> guarantees.
+</p>
+</div>
+  <h3 id="fields">Fields
+</h3>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_BaseRadius" data-uid="Redux.Planets.TerrainHeightSampler.BaseRadius">BaseRadius</h4>
+  <div class="markdown level1 summary"><p>The body radius less its ocean altitude in meters, the sphere heights are measured from and decal footprints are measured on.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float BaseRadius</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_DEFAULT_RAYCAST_STEPS" data-uid="Redux.Planets.TerrainHeightSampler.DEFAULT_RAYCAST_STEPS">DEFAULT_RAYCAST_STEPS</h4>
+  <div class="markdown level1 summary"><p>The most marching steps a raycast takes before it gives up, unless the caller sets its own limit.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int DEFAULT_RAYCAST_STEPS = 2048</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_DecalAlpha" data-uid="Redux.Planets.TerrainHeightSampler.DecalAlpha">DecalAlpha</h4>
+  <div class="markdown level1 summary"><p>The packed decal alpha slices, one slice of <a class="xref" href="Redux.Planets.TerrainHeightSampler.html#Redux_Planets_TerrainHeightSampler_DecalAlphaWidth">DecalAlphaWidth</a> by <a class="xref" href="Redux.Planets.TerrainHeightSampler.html#Redux_Planets_TerrainHeightSampler_DecalAlphaHeight">DecalAlphaHeight</a> per baked decal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NativeArray&lt;ushort&gt; DecalAlpha</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Collections.NativeArray.html">NativeArray</a>&lt;<span class="xref">ushort</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_DecalAlphaHeight" data-uid="Redux.Planets.TerrainHeightSampler.DecalAlphaHeight">DecalAlphaHeight</h4>
+  <div class="markdown level1 summary"><p>The height of one decal alpha slice in texels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int DecalAlphaHeight</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_DecalAlphaWidth" data-uid="Redux.Planets.TerrainHeightSampler.DecalAlphaWidth">DecalAlphaWidth</h4>
+  <div class="markdown level1 summary"><p>The width of one decal alpha slice in texels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int DecalAlphaWidth</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_DecalCount" data-uid="Redux.Planets.TerrainHeightSampler.DecalCount">DecalCount</h4>
+  <div class="markdown level1 summary"><p>The number of decal instances to apply, zero to skip decals.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int DecalCount</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_DecalHeightHeight" data-uid="Redux.Planets.TerrainHeightSampler.DecalHeightHeight">DecalHeightHeight</h4>
+  <div class="markdown level1 summary"><p>The height of one decal height slice in texels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int DecalHeightHeight</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_DecalHeightWidth" data-uid="Redux.Planets.TerrainHeightSampler.DecalHeightWidth">DecalHeightWidth</h4>
+  <div class="markdown level1 summary"><p>The width of one decal height slice in texels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int DecalHeightWidth</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_DecalHeights" data-uid="Redux.Planets.TerrainHeightSampler.DecalHeights">DecalHeights</h4>
+  <div class="markdown level1 summary"><p>The packed decal height slices, one slice of <a class="xref" href="Redux.Planets.TerrainHeightSampler.html#Redux_Planets_TerrainHeightSampler_DecalHeightWidth">DecalHeightWidth</a> by <a class="xref" href="Redux.Planets.TerrainHeightSampler.html#Redux_Planets_TerrainHeightSampler_DecalHeightHeight">DecalHeightHeight</a> per baked decal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NativeArray&lt;ushort&gt; DecalHeights</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Collections.NativeArray.html">NativeArray</a>&lt;<span class="xref">ushort</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_Decals" data-uid="Redux.Planets.TerrainHeightSampler.Decals">Decals</h4>
+  <div class="markdown level1 summary"><p>The decal instances, applied in order. Only the first <a class="xref" href="Redux.Planets.TerrainHeightSampler.html#Redux_Planets_TerrainHeightSampler_DecalCount">DecalCount</a> are read.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NativeArray&lt;DecalInstance&gt; Decals</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Collections.NativeArray.html">NativeArray</a>&lt;<a class="xref" href="DecalInstance.html">DecalInstance</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_GlobalHeight" data-uid="Redux.Planets.TerrainHeightSampler.GlobalHeight">GlobalHeight</h4>
+  <div class="markdown level1 summary"><p>The height of <a class="xref" href="Redux.Planets.TerrainHeightSampler.html#Redux_Planets_TerrainHeightSampler_GlobalMap">GlobalMap</a> in texels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int GlobalHeight</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_GlobalMap" data-uid="Redux.Planets.TerrainHeightSampler.GlobalMap">GlobalMap</h4>
+  <div class="markdown level1 summary"><p>The global height map, one 16-bit texel per element in rows.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NativeArray&lt;ushort&gt; GlobalMap</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Collections.NativeArray.html">NativeArray</a>&lt;<span class="xref">ushort</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_GlobalScale" data-uid="Redux.Planets.TerrainHeightSampler.GlobalScale">GlobalScale</h4>
+  <div class="markdown level1 summary"><p>The height in meters that a full-scale global map texel represents.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float GlobalScale</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_GlobalWidth" data-uid="Redux.Planets.TerrainHeightSampler.GlobalWidth">GlobalWidth</h4>
+  <div class="markdown level1 summary"><p>The width of <a class="xref" href="Redux.Planets.TerrainHeightSampler.html#Redux_Planets_TerrainHeightSampler_GlobalMap">GlobalMap</a> in texels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int GlobalWidth</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_HasSubZones" data-uid="Redux.Planets.TerrainHeightSampler.HasSubZones">HasSubZones</h4>
+  <div class="markdown level1 summary"><p>True if the body uses sub-zones, which weights every tier by the sub-zone mask and adds tiers 3 and 4.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HasSubZones</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_IsLayerMaskSrgb" data-uid="Redux.Planets.TerrainHeightSampler.IsLayerMaskSrgb">IsLayerMaskSrgb</h4>
+  <div class="markdown level1 summary"><p>True if <a class="xref" href="Redux.Planets.TerrainHeightSampler.html#Redux_Planets_TerrainHeightSampler_LayerMask">LayerMask</a> holds sRGB colour, which is decoded to linear before filtering.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsLayerMaskSrgb</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_IsSubZoneMaskSrgb" data-uid="Redux.Planets.TerrainHeightSampler.IsSubZoneMaskSrgb">IsSubZoneMaskSrgb</h4>
+  <div class="markdown level1 summary"><p>True if <a class="xref" href="Redux.Planets.TerrainHeightSampler.html#Redux_Planets_TerrainHeightSampler_SubZoneMask">SubZoneMask</a> holds sRGB colour, which is decoded to linear before filtering.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsSubZoneMaskSrgb</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_LargeA" data-uid="Redux.Planets.TerrainHeightSampler.LargeA">LargeA</h4>
+  <div class="markdown level1 summary"><p>The large tier on the layer mask's alpha channel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerrainHeightChannel LargeA</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainHeightChannel.html">TerrainHeightChannel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_LargeB" data-uid="Redux.Planets.TerrainHeightSampler.LargeB">LargeB</h4>
+  <div class="markdown level1 summary"><p>The large tier on the layer mask's blue channel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerrainHeightChannel LargeB</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainHeightChannel.html">TerrainHeightChannel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_LargeG" data-uid="Redux.Planets.TerrainHeightSampler.LargeG">LargeG</h4>
+  <div class="markdown level1 summary"><p>The large tier on the layer mask's green channel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerrainHeightChannel LargeG</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainHeightChannel.html">TerrainHeightChannel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_LargeR" data-uid="Redux.Planets.TerrainHeightSampler.LargeR">LargeR</h4>
+  <div class="markdown level1 summary"><p>The large tier on the layer mask's red channel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerrainHeightChannel LargeR</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainHeightChannel.html">TerrainHeightChannel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_LayerMask" data-uid="Redux.Planets.TerrainHeightSampler.LayerMask">LayerMask</h4>
+  <div class="markdown level1 summary"><p>The layer mask, whose four channels weight the four tier channels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NativeArray&lt;Color32&gt; LayerMask</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Collections.NativeArray.html">NativeArray</a>&lt;<a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Color32.html">Color32</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_LayerMaskHeight" data-uid="Redux.Planets.TerrainHeightSampler.LayerMaskHeight">LayerMaskHeight</h4>
+  <div class="markdown level1 summary"><p>The height of <a class="xref" href="Redux.Planets.TerrainHeightSampler.html#Redux_Planets_TerrainHeightSampler_LayerMask">LayerMask</a> in texels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int LayerMaskHeight</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_LayerMaskWidth" data-uid="Redux.Planets.TerrainHeightSampler.LayerMaskWidth">LayerMaskWidth</h4>
+  <div class="markdown level1 summary"><p>The width of <a class="xref" href="Redux.Planets.TerrainHeightSampler.html#Redux_Planets_TerrainHeightSampler_LayerMask">LayerMask</a> in texels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int LayerMaskWidth</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_MaxTerrainRadius" data-uid="Redux.Planets.TerrainHeightSampler.MaxTerrainRadius">MaxTerrainRadius</h4>
+  <div class="markdown level1 summary"><p>The radius in meters above which no terrain is assumed, where raycasts give up.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float MaxTerrainRadius</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_MediumA" data-uid="Redux.Planets.TerrainHeightSampler.MediumA">MediumA</h4>
+  <div class="markdown level1 summary"><p>The medium tier on the layer mask's alpha channel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerrainHeightChannel MediumA</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainHeightChannel.html">TerrainHeightChannel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_MediumB" data-uid="Redux.Planets.TerrainHeightSampler.MediumB">MediumB</h4>
+  <div class="markdown level1 summary"><p>The medium tier on the layer mask's blue channel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerrainHeightChannel MediumB</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainHeightChannel.html">TerrainHeightChannel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_MediumG" data-uid="Redux.Planets.TerrainHeightSampler.MediumG">MediumG</h4>
+  <div class="markdown level1 summary"><p>The medium tier on the layer mask's green channel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerrainHeightChannel MediumG</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainHeightChannel.html">TerrainHeightChannel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_MediumR" data-uid="Redux.Planets.TerrainHeightSampler.MediumR">MediumR</h4>
+  <div class="markdown level1 summary"><p>The medium tier on the layer mask's red channel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerrainHeightChannel MediumR</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainHeightChannel.html">TerrainHeightChannel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_SeaLevelRadius" data-uid="Redux.Planets.TerrainHeightSampler.SeaLevelRadius">SeaLevelRadius</h4>
+  <div class="markdown level1 summary"><p>The body radius in meters, where decals cull and clip.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float SeaLevelRadius</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_SubZone3A" data-uid="Redux.Planets.TerrainHeightSampler.SubZone3A">SubZone3A</h4>
+  <div class="markdown level1 summary"><p>Sub-zone tier 3 on the layer mask's alpha channel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerrainHeightChannel SubZone3A</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainHeightChannel.html">TerrainHeightChannel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_SubZone3B" data-uid="Redux.Planets.TerrainHeightSampler.SubZone3B">SubZone3B</h4>
+  <div class="markdown level1 summary"><p>Sub-zone tier 3 on the layer mask's blue channel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerrainHeightChannel SubZone3B</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainHeightChannel.html">TerrainHeightChannel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_SubZone3G" data-uid="Redux.Planets.TerrainHeightSampler.SubZone3G">SubZone3G</h4>
+  <div class="markdown level1 summary"><p>Sub-zone tier 3 on the layer mask's green channel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerrainHeightChannel SubZone3G</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainHeightChannel.html">TerrainHeightChannel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_SubZone3R" data-uid="Redux.Planets.TerrainHeightSampler.SubZone3R">SubZone3R</h4>
+  <div class="markdown level1 summary"><p>Sub-zone tier 3 on the layer mask's red channel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerrainHeightChannel SubZone3R</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainHeightChannel.html">TerrainHeightChannel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_SubZone4A" data-uid="Redux.Planets.TerrainHeightSampler.SubZone4A">SubZone4A</h4>
+  <div class="markdown level1 summary"><p>Sub-zone tier 4 on the layer mask's alpha channel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerrainHeightChannel SubZone4A</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainHeightChannel.html">TerrainHeightChannel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_SubZone4B" data-uid="Redux.Planets.TerrainHeightSampler.SubZone4B">SubZone4B</h4>
+  <div class="markdown level1 summary"><p>Sub-zone tier 4 on the layer mask's blue channel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerrainHeightChannel SubZone4B</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainHeightChannel.html">TerrainHeightChannel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_SubZone4G" data-uid="Redux.Planets.TerrainHeightSampler.SubZone4G">SubZone4G</h4>
+  <div class="markdown level1 summary"><p>Sub-zone tier 4 on the layer mask's green channel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerrainHeightChannel SubZone4G</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainHeightChannel.html">TerrainHeightChannel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_SubZone4R" data-uid="Redux.Planets.TerrainHeightSampler.SubZone4R">SubZone4R</h4>
+  <div class="markdown level1 summary"><p>Sub-zone tier 4 on the layer mask's red channel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerrainHeightChannel SubZone4R</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainHeightChannel.html">TerrainHeightChannel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_SubZoneMask" data-uid="Redux.Planets.TerrainHeightSampler.SubZoneMask">SubZoneMask</h4>
+  <div class="markdown level1 summary"><p>The sub-zone mask, read only when <a class="xref" href="Redux.Planets.TerrainHeightSampler.html#Redux_Planets_TerrainHeightSampler_HasSubZones">HasSubZones</a> is set.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NativeArray&lt;Color32&gt; SubZoneMask</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Collections.NativeArray.html">NativeArray</a>&lt;<a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Color32.html">Color32</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_SubZoneMaskHeight" data-uid="Redux.Planets.TerrainHeightSampler.SubZoneMaskHeight">SubZoneMaskHeight</h4>
+  <div class="markdown level1 summary"><p>The height of <a class="xref" href="Redux.Planets.TerrainHeightSampler.html#Redux_Planets_TerrainHeightSampler_SubZoneMask">SubZoneMask</a> in texels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int SubZoneMaskHeight</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_SubZoneMaskWidth" data-uid="Redux.Planets.TerrainHeightSampler.SubZoneMaskWidth">SubZoneMaskWidth</h4>
+  <div class="markdown level1 summary"><p>The width of <a class="xref" href="Redux.Planets.TerrainHeightSampler.html#Redux_Planets_TerrainHeightSampler_SubZoneMask">SubZoneMask</a> in texels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int SubZoneMaskWidth</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_TiledContrast" data-uid="Redux.Planets.TerrainHeightSampler.TiledContrast">TiledContrast</h4>
+  <div class="markdown level1 summary"><p>The exponent that sets how fast tiled maps turn from the side projection to the top one toward the poles.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float TiledContrast</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="Redux_Planets_TerrainHeightSampler_LiftAboveTerrain_" data-uid="Redux.Planets.TerrainHeightSampler.LiftAboveTerrain*"></a>
+  <h4 id="Redux_Planets_TerrainHeightSampler_LiftAboveTerrain_Unity_Mathematics_double3_System_Double_" data-uid="Redux.Planets.TerrainHeightSampler.LiftAboveTerrain(Unity.Mathematics.double3,System.Double)">LiftAboveTerrain(double3, double)</h4>
+  <div class="markdown level1 summary"><p>Lifts a point straight up to a clearance above the terrain when it is lower than that.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double3 LiftAboveTerrain(double3 point, double clearance)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double3</span></td>
+        <td><span class="parametername">point</span></td>
+        <td><p>The point in meters from the body center.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">clearance</span></td>
+        <td><p>The least height above the terrain to leave the point at, in meters.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double3</span></td>
+        <td><p>The point itself when it is high enough, otherwise the point above it at the clearance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Planets_TerrainHeightSampler_Raycast_" data-uid="Redux.Planets.TerrainHeightSampler.Raycast*"></a>
+  <h4 id="Redux_Planets_TerrainHeightSampler_Raycast_Unity_Mathematics_double3_Unity_Mathematics_float3_System_Double_Redux_Planets_TerrainHit__" data-uid="Redux.Planets.TerrainHeightSampler.Raycast(Unity.Mathematics.double3,Unity.Mathematics.float3,System.Double,Redux.Planets.TerrainHit@)">Raycast(double3, float3, double, out TerrainHit)</h4>
+  <div class="markdown level1 summary"><p>Casts a ray against the terrain, in body space.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Raycast(double3 origin, float3 direction, double maxDistance, out TerrainHit hit)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double3</span></td>
+        <td><span class="parametername">origin</span></td>
+        <td><p>The ray origin in meters from the body center.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float3</span></td>
+        <td><span class="parametername">direction</span></td>
+        <td><p>The normalized ray direction.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">maxDistance</span></td>
+        <td><p>The farthest distance along the ray to look, in meters.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainHit.html">TerrainHit</a></td>
+        <td><span class="parametername">hit</span></td>
+        <td><p>The first point where the ray meets the terrain, when it does.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the ray meets the terrain within the distance, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Planets_TerrainHeightSampler_Raycast_Unity_Mathematics_double3_Unity_Mathematics_float3_System_Double_Redux_Planets_TerrainHit___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Marches in steps no longer than the ray could fall before meeting terrain of up to about 72 degrees, then
+bisects to 1 cm. Reports a miss once the ray leaves <a class="xref" href="Redux.Planets.TerrainHeightSampler.html#Redux_Planets_TerrainHeightSampler_MaxTerrainRadius">MaxTerrainRadius</a>, passes
+<code class="paramref">maxDistance</code>, or runs out of 2048 steps, which a ray skimming low over tens of kilometers
+of terrain can do. A ray starting under the terrain hits at its origin.</p>
+</div>
+
+
+  <a id="Redux_Planets_TerrainHeightSampler_Raycast_" data-uid="Redux.Planets.TerrainHeightSampler.Raycast*"></a>
+  <h4 id="Redux_Planets_TerrainHeightSampler_Raycast_Unity_Mathematics_double3_Unity_Mathematics_float3_System_Double_System_Int32_Redux_Planets_TerrainHit__" data-uid="Redux.Planets.TerrainHeightSampler.Raycast(Unity.Mathematics.double3,Unity.Mathematics.float3,System.Double,System.Int32,Redux.Planets.TerrainHit@)">Raycast(double3, float3, double, int, out TerrainHit)</h4>
+  <div class="markdown level1 summary"><p>Casts a ray against the terrain, in body space, giving up after a number of marching steps.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Raycast(double3 origin, float3 direction, double maxDistance, int maxSteps, out TerrainHit hit)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double3</span></td>
+        <td><span class="parametername">origin</span></td>
+        <td><p>The ray origin in meters from the body center.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float3</span></td>
+        <td><span class="parametername">direction</span></td>
+        <td><p>The normalized ray direction.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">maxDistance</span></td>
+        <td><p>The farthest distance along the ray to look, in meters.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">maxSteps</span></td>
+        <td><p>The most marching steps to take before reporting a miss.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainHit.html">TerrainHit</a></td>
+        <td><span class="parametername">hit</span></td>
+        <td><p>The first point where the ray meets the terrain, when it does.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the ray meets the terrain within the distance and the steps, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Planets_TerrainHeightSampler_Raycast_" data-uid="Redux.Planets.TerrainHeightSampler.Raycast*"></a>
+  <h4 id="Redux_Planets_TerrainHeightSampler_Raycast_Unity_Mathematics_double4x4__Unity_Mathematics_double3_Unity_Mathematics_float3_System_Double_Redux_Planets_TerrainHit__" data-uid="Redux.Planets.TerrainHeightSampler.Raycast(Unity.Mathematics.double4x4@,Unity.Mathematics.double3,Unity.Mathematics.float3,System.Double,Redux.Planets.TerrainHit@)">Raycast(in double4x4, double3, float3, double, out TerrainHit)</h4>
+  <div class="markdown level1 summary"><p>Casts a ray against the terrain, with the ray and the result in world space.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Raycast(in double4x4 bodyToWorld, double3 origin, float3 direction, double maxDistance, out TerrainHit hit)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double4x4</span></td>
+        <td><span class="parametername">bodyToWorld</span></td>
+        <td><p>The rigid transformation from body space to world space.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double3</span></td>
+        <td><span class="parametername">origin</span></td>
+        <td><p>The ray origin in world space.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float3</span></td>
+        <td><span class="parametername">direction</span></td>
+        <td><p>The ray direction in world space.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">maxDistance</span></td>
+        <td><p>The farthest distance along the ray to look, in meters.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainHit.html">TerrainHit</a></td>
+        <td><span class="parametername">hit</span></td>
+        <td><p>The first point where the ray meets the terrain, with its point and normal in world space.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the ray meets the terrain within the distance, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Planets_TerrainHeightSampler_Raycast_" data-uid="Redux.Planets.TerrainHeightSampler.Raycast*"></a>
+  <h4 id="Redux_Planets_TerrainHeightSampler_Raycast_Unity_Mathematics_double4x4__Unity_Mathematics_double3_Unity_Mathematics_float3_System_Double_System_Int32_Redux_Planets_TerrainHit__" data-uid="Redux.Planets.TerrainHeightSampler.Raycast(Unity.Mathematics.double4x4@,Unity.Mathematics.double3,Unity.Mathematics.float3,System.Double,System.Int32,Redux.Planets.TerrainHit@)">Raycast(in double4x4, double3, float3, double, int, out TerrainHit)</h4>
+  <div class="markdown level1 summary"><p>Casts a ray against the terrain, with the ray and the result in world space, giving up after a number of marching steps.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Raycast(in double4x4 bodyToWorld, double3 origin, float3 direction, double maxDistance, int maxSteps, out TerrainHit hit)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double4x4</span></td>
+        <td><span class="parametername">bodyToWorld</span></td>
+        <td><p>The rigid transformation from body space to world space.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double3</span></td>
+        <td><span class="parametername">origin</span></td>
+        <td><p>The ray origin in world space.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float3</span></td>
+        <td><span class="parametername">direction</span></td>
+        <td><p>The ray direction in world space.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">maxDistance</span></td>
+        <td><p>The farthest distance along the ray to look, in meters.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">maxSteps</span></td>
+        <td><p>The most marching steps to take before reporting a miss.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainHit.html">TerrainHit</a></td>
+        <td><span class="parametername">hit</span></td>
+        <td><p>The first point where the ray meets the terrain, with its point and normal in world space.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the ray meets the terrain within the distance and the steps, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Planets_TerrainHeightSampler_Sample_" data-uid="Redux.Planets.TerrainHeightSampler.Sample*"></a>
+  <h4 id="Redux_Planets_TerrainHeightSampler_Sample_Unity_Mathematics_float3_" data-uid="Redux.Planets.TerrainHeightSampler.Sample(Unity.Mathematics.float3)">Sample(float3)</h4>
+  <div class="markdown level1 summary"><p>Returns the terrain height above the base sphere in the given direction, as the terrain shader computes it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Sample(float3 direction)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float3</span></td>
+        <td><span class="parametername">direction</span></td>
+        <td><p>The normalized direction from the body center, in body space.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><p>The height in meters above <a class="xref" href="Redux.Planets.TerrainHeightSampler.html#Redux_Planets_TerrainHeightSampler_BaseRadius">BaseRadius</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Planets_TerrainHeightSampler_SampleNormal_" data-uid="Redux.Planets.TerrainHeightSampler.SampleNormal*"></a>
+  <h4 id="Redux_Planets_TerrainHeightSampler_SampleNormal_Unity_Mathematics_float3_System_Single_" data-uid="Redux.Planets.TerrainHeightSampler.SampleNormal(Unity.Mathematics.float3,System.Single)">SampleNormal(float3, float)</h4>
+  <div class="markdown level1 summary"><p>Returns the terrain normal in the given direction, read from samples a set distance apart.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float3 SampleNormal(float3 direction, float spacing)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float3</span></td>
+        <td><span class="parametername">direction</span></td>
+        <td><p>The normalized direction from the body center, in body space.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">spacing</span></td>
+        <td><p>The distance in meters between samples, which sets the scale the slope is read at.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float3</span></td>
+        <td><p>The outward unit normal in body space.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetField__2___0_System_String_">Util.GetField&lt;T, R&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetField__2___0_System_String___1_">Util.SetField&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromProperties_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromProperties(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetFieldValue__1_System_Object_System_String_">Util.GetFieldValue&lt;T&gt;(object, string)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from prerelease
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

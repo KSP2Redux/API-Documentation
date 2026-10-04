@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class TerrainTileLattice | KSP2Redux API (Beta) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class TerrainTileLattice | KSP2Redux API (Beta) ">
+    
+    <meta name="description" content="Lays terrain collider tiles out on the PQS cube-face lattice, every tile at the one depth whose cells are a PQS quad&#39;s at a chosen level.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Redux.Planets.TerrainTileLattice">
+
+
+
+  <h1 id="Redux_Planets_TerrainTileLattice" data-uid="Redux.Planets.TerrainTileLattice" class="text-break">Class TerrainTileLattice</h1>
+  <div class="markdown level0 summary"><p>Lays terrain collider tiles out on the PQS cube-face lattice, every tile at the one depth whose cells are a PQS
+quad's at a chosen level.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><span class="xref">TerrainTileLattice</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.Planets.html">Planets</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="Redux_Planets_TerrainTileLattice_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class TerrainTileLattice</code></pre>
+  </div>
+  <h5 id="Redux_Planets_TerrainTileLattice_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>
+A drawn PQS quad has 8 cells a side and a tile <a class="xref" href="Redux.Planets.TerrainTileLattice.html#Redux_Planets_TerrainTileLattice_CELLS_PER_SIDE">CELLS_PER_SIDE</a>, so a tile at
+<a class="xref" href="Redux.Planets.TerrainTileLattice.html#Redux_Planets_TerrainTileLattice_TileDepth">TileDepth</a>, as many levels above the chosen level as that ratio's power of two, holds exactly the
+cells of the quads at that level under it. Collider vertices are then vertices of the drawn mesh wherever it is
+drawn at that level, on every body and at any height, since both scale with the distance from the body center
+alike. Not thread-safe.
+</p>
+<p>
+Vertices are numbered along X first, then row by row along Y. Face frames are exact signed axis permutations
+matching <a class="xref" href="KSP.Rendering.Planets.PQData.html#KSP_Rendering_Planets_PQData_FaceRotation_UnityEngine_Vector3_">FaceRotation(Vector3)</a>, and directions are computed in double from
+integer lattice coordinates, so tiles sharing an edge get bit-identical directions on it, across face seams too.
+</p>
+</div>
+  <h3 id="constructors">Constructors
+</h3>
+
+
+  <a id="Redux_Planets_TerrainTileLattice__ctor_" data-uid="Redux.Planets.TerrainTileLattice.#ctor*"></a>
+  <h4 id="Redux_Planets_TerrainTileLattice__ctor_System_Int32_" data-uid="Redux.Planets.TerrainTileLattice.#ctor(System.Int32)">TerrainTileLattice(int)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Redux.Planets.TerrainTileLattice.html">TerrainTileLattice</a> class for a body.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerrainTileLattice(int level)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">level</span></td>
+        <td><p>The PQS subdivision level whose quads' cells the tiles take.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+</h3>
+
+
+  <h4 id="Redux_Planets_TerrainTileLattice_CELLS_PER_SIDE" data-uid="Redux.Planets.TerrainTileLattice.CELLS_PER_SIDE">CELLS_PER_SIDE</h4>
+  <div class="markdown level1 summary"><p>The number of cells along each side of a tile.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int CELLS_PER_SIDE = 64</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainTileLattice_MAX_DEPTH" data-uid="Redux.Planets.TerrainTileLattice.MAX_DEPTH">MAX_DEPTH</h4>
+  <div class="markdown level1 summary"><p>The deepest a tile can sit, which keeps lattice coordinates within an int.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int MAX_DEPTH = 24</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainTileLattice_TRIANGLE_INDEX_COUNT" data-uid="Redux.Planets.TerrainTileLattice.TRIANGLE_INDEX_COUNT">TRIANGLE_INDEX_COUNT</h4>
+  <div class="markdown level1 summary"><p>The number of indices in the triangle list every tile shares.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int TRIANGLE_INDEX_COUNT = 24576</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainTileLattice_VERTEX_COUNT" data-uid="Redux.Planets.TerrainTileLattice.VERTEX_COUNT">VERTEX_COUNT</h4>
+  <div class="markdown level1 summary"><p>The number of vertices in a tile.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int VERTEX_COUNT = 4225</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainTileLattice_VERTICES_PER_SIDE" data-uid="Redux.Planets.TerrainTileLattice.VERTICES_PER_SIDE">VERTICES_PER_SIDE</h4>
+  <div class="markdown level1 summary"><p>The number of vertices along each side of a tile.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int VERTICES_PER_SIDE = 65</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="Redux_Planets_TerrainTileLattice_TileDepth_" data-uid="Redux.Planets.TerrainTileLattice.TileDepth*"></a>
+  <h4 id="Redux_Planets_TerrainTileLattice_TileDepth" data-uid="Redux.Planets.TerrainTileLattice.TileDepth">TileDepth</h4>
+  <div class="markdown level1 summary"><p>Gets the depth every tile sits at.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int TileDepth { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="Redux_Planets_TerrainTileLattice_AddressAt_" data-uid="Redux.Planets.TerrainTileLattice.AddressAt*"></a>
+  <h4 id="Redux_Planets_TerrainTileLattice_AddressAt_Unity_Mathematics_double3_System_Int32_" data-uid="Redux.Planets.TerrainTileLattice.AddressAt(Unity.Mathematics.double3,System.Int32)">AddressAt(double3, int)</h4>
+  <div class="markdown level1 summary"><p>Returns the tile at a given depth that contains a direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static TerrainTileAddress AddressAt(double3 direction, int depth)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double3</span></td>
+        <td><span class="parametername">direction</span></td>
+        <td><p>The direction from the body center, in body space. It need not be normalized.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">depth</span></td>
+        <td><p>The depth of the tile to return.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainTileAddress.html">TerrainTileAddress</a></td>
+        <td><p>The tile at that depth containing the direction.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Planets_TerrainTileLattice_CenterDirection_" data-uid="Redux.Planets.TerrainTileLattice.CenterDirection*"></a>
+  <h4 id="Redux_Planets_TerrainTileLattice_CenterDirection_Redux_Planets_TerrainTileAddress_" data-uid="Redux.Planets.TerrainTileLattice.CenterDirection(Redux.Planets.TerrainTileAddress)">CenterDirection(TerrainTileAddress)</h4>
+  <div class="markdown level1 summary"><p>Returns the direction of a tile's center from the body center.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static double3 CenterDirection(TerrainTileAddress tile)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainTileAddress.html">TerrainTileAddress</a></td>
+        <td><span class="parametername">tile</span></td>
+        <td><p>The tile.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double3</span></td>
+        <td><p>The normalized direction, in body space.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Planets_TerrainTileLattice_Covering_" data-uid="Redux.Planets.TerrainTileLattice.Covering*"></a>
+  <h4 id="Redux_Planets_TerrainTileLattice_Covering_Redux_Planets_TerrainHeightSampler__Unity_Mathematics_double3_System_Double_Unity_Collections_NativeList_Redux_Planets_TerrainTileAddress__" data-uid="Redux.Planets.TerrainTileLattice.Covering(Redux.Planets.TerrainHeightSampler@,Unity.Mathematics.double3,System.Double,Unity.Collections.NativeList{Redux.Planets.TerrainTileAddress})">Covering(in TerrainHeightSampler, double3, double, NativeList&lt;TerrainTileAddress&gt;)</h4>
+  <div class="markdown level1 summary"><p>Adds every tile that a disc on the surface touches.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Covering(in TerrainHeightSampler sampler, double3 direction, double radius, NativeList&lt;TerrainTileAddress&gt; tiles)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainHeightSampler.html">TerrainHeightSampler</a></td>
+        <td><span class="parametername">sampler</span></td>
+        <td><p>The sampler that supplies the surface radius at the disc's center.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double3</span></td>
+        <td><span class="parametername">direction</span></td>
+        <td><p>The direction of the disc center from the body center, in body space.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">radius</span></td>
+        <td><p>The disc radius in meters along the surface.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">NativeList</span>&lt;<a class="xref" href="Redux.Planets.TerrainTileAddress.html">TerrainTileAddress</a>&gt;</td>
+        <td><span class="parametername">tiles</span></td>
+        <td><p>The list the tiles are added to. Tiles already in it are not added again.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Planets_TerrainTileLattice_Dispose_" data-uid="Redux.Planets.TerrainTileLattice.Dispose*"></a>
+  <h4 id="Redux_Planets_TerrainTileLattice_Dispose" data-uid="Redux.Planets.TerrainTileLattice.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"><p>Frees the scratch space.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+
+
+  <a id="Redux_Planets_TerrainTileLattice_Locate_" data-uid="Redux.Planets.TerrainTileLattice.Locate*"></a>
+  <h4 id="Redux_Planets_TerrainTileLattice_Locate_Unity_Mathematics_double3_" data-uid="Redux.Planets.TerrainTileLattice.Locate(Unity.Mathematics.double3)">Locate(double3)</h4>
+  <div class="markdown level1 summary"><p>Returns the tile containing a direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerrainTileAddress Locate(double3 direction)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double3</span></td>
+        <td><span class="parametername">direction</span></td>
+        <td><p>The direction from the body center, in body space. It need not be normalized.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainTileAddress.html">TerrainTileAddress</a></td>
+        <td><p>The tile containing the direction.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Planets_TerrainTileLattice_VertexDirections_" data-uid="Redux.Planets.TerrainTileLattice.VertexDirections*"></a>
+  <h4 id="Redux_Planets_TerrainTileLattice_VertexDirections_Redux_Planets_TerrainTileAddress_Unity_Collections_NativeArray_Unity_Mathematics_float3__" data-uid="Redux.Planets.TerrainTileLattice.VertexDirections(Redux.Planets.TerrainTileAddress,Unity.Collections.NativeArray{Unity.Mathematics.float3})">VertexDirections(TerrainTileAddress, NativeArray&lt;float3&gt;)</h4>
+  <div class="markdown level1 summary"><p>Writes a tile's vertex directions.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void VertexDirections(TerrainTileAddress tile, NativeArray&lt;float3&gt; directions)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainTileAddress.html">TerrainTileAddress</a></td>
+        <td><span class="parametername">tile</span></td>
+        <td><p>The tile.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Collections.NativeArray.html">NativeArray</a>&lt;<span class="xref">float3</span>&gt;</td>
+        <td><span class="parametername">directions</span></td>
+        <td><p>Receives <a class="xref" href="Redux.Planets.TerrainTileLattice.html#Redux_Planets_TerrainTileLattice_VERTEX_COUNT">VERTEX_COUNT</a> normalized directions in body space.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Planets_TerrainTileLattice_WriteTriangles_" data-uid="Redux.Planets.TerrainTileLattice.WriteTriangles*"></a>
+  <h4 id="Redux_Planets_TerrainTileLattice_WriteTriangles_Unity_Collections_NativeArray_System_UInt16__" data-uid="Redux.Planets.TerrainTileLattice.WriteTriangles(Unity.Collections.NativeArray{System.UInt16})">WriteTriangles(NativeArray&lt;ushort&gt;)</h4>
+  <div class="markdown level1 summary"><p>Writes the triangle list every tile shares, wound to face away from the body.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void WriteTriangles(NativeArray&lt;ushort&gt; indices)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Collections.NativeArray.html">NativeArray</a>&lt;<span class="xref">ushort</span>&gt;</td>
+        <td><span class="parametername">indices</span></td>
+        <td><p>Receives <a class="xref" href="Redux.Planets.TerrainTileLattice.html#Redux_Planets_TerrainTileLattice_TRIANGLE_INDEX_COUNT">TRIANGLE_INDEX_COUNT</a> vertex indices.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetField__2___0_System_String_">Util.GetField&lt;T, R&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetField__2___0_System_String___1_">Util.SetField&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromProperties_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromProperties(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetFieldValue__1_System_Object_System_String_">Util.GetFieldValue&lt;T&gt;(object, string)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from prerelease
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

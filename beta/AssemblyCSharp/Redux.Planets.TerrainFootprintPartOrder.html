@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Struct TerrainFootprintPartOrder | KSP2Redux API (Beta) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Struct TerrainFootprintPartOrder | KSP2Redux API (Beta) ">
+    
+    <meta name="description" content="A vessel&#39;s part spheres, ordered so each footprint disc tests only the parts low enough to reach the ground.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Redux.Planets.TerrainFootprintPartOrder">
+
+
+
+  <h1 id="Redux_Planets_TerrainFootprintPartOrder" data-uid="Redux.Planets.TerrainFootprintPartOrder" class="text-break">Struct TerrainFootprintPartOrder</h1>
+  <div class="markdown level0 summary"><p>A vessel's part spheres, ordered so each footprint disc tests only the parts low enough to reach the ground.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.Planets.html">Planets</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="Redux_Planets_TerrainFootprintPartOrder_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public struct TerrainFootprintPartOrder</code></pre>
+  </div>
+  <h5 id="Redux_Planets_TerrainFootprintPartOrder_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>
+Every disc of one footprint moves the same parts by a displacement, so each part's height above the parts'
+centroid, less its radius and its sideways offset, is fixed for the whole footprint. The parts are sorted by that
+key once, and a disc stops at the first part whose key is past its threshold.
+</p>
+<p>
+The threshold is the disc's reach plus the ground radius less the centroid's distance, widened by three times the
+vessel's extent times how far up has turned with the displacement. A part past it is below no ground it could
+reach, and every part under it still takes the exact test, so the disc is the one testing every part gives.
+</p>
+</div>
+  <h3 id="constructors">Constructors
+</h3>
+
+
+  <a id="Redux_Planets_TerrainFootprintPartOrder__ctor_" data-uid="Redux.Planets.TerrainFootprintPartOrder.#ctor*"></a>
+  <h4 id="Redux_Planets_TerrainFootprintPartOrder__ctor_Unity_Collections_NativeArray_Unity_Mathematics_double4__Unity_Collections_Allocator_" data-uid="Redux.Planets.TerrainFootprintPartOrder.#ctor(Unity.Collections.NativeArray{Unity.Mathematics.double4},Unity.Collections.Allocator)">TerrainFootprintPartOrder(NativeArray&lt;double4&gt;, Allocator)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Redux.Planets.TerrainFootprintPartOrder.html">TerrainFootprintPartOrder</a> struct.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerrainFootprintPartOrder(NativeArray&lt;double4&gt; parts, Allocator allocator)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Collections.NativeArray.html">NativeArray</a>&lt;<span class="xref">double4</span>&gt;</td>
+        <td><span class="parametername">parts</span></td>
+        <td><p>One bounding sphere per part, as body-space center and radius in meters. It is read, not
+copied, so it must outlive this instance.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Collections.Allocator.html">Allocator</a></td>
+        <td><span class="parametername">allocator</span></td>
+        <td><p>The allocator for the sorted order.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="Redux_Planets_TerrainFootprintPartOrder_Dispose_" data-uid="Redux.Planets.TerrainFootprintPartOrder.Dispose*"></a>
+  <h4 id="Redux_Planets_TerrainFootprintPartOrder_Dispose" data-uid="Redux.Planets.TerrainFootprintPartOrder.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+
+
+  <a id="Redux_Planets_TerrainFootprintPartOrder_TryGetDisc_" data-uid="Redux.Planets.TerrainFootprintPartOrder.TryGetDisc*"></a>
+  <h4 id="Redux_Planets_TerrainFootprintPartOrder_TryGetDisc_Redux_Planets_TerrainHeightSampler__Unity_Mathematics_double3_System_Double_Unity_Collections_NativeList_System_Int32__Unity_Mathematics_double3__System_Double__" data-uid="Redux.Planets.TerrainFootprintPartOrder.TryGetDisc(Redux.Planets.TerrainHeightSampler@,Unity.Mathematics.double3,System.Double,Unity.Collections.NativeList{System.Int32},Unity.Mathematics.double3@,System.Double@)">TryGetDisc(in TerrainHeightSampler, double3, double, NativeList&lt;int&gt;, out double3, out double)</h4>
+  <div class="markdown level1 summary"><p>Finds the disc on the ground under the parts that can reach it, with the vessel moved by a displacement.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryGetDisc(in TerrainHeightSampler sampler, double3 displacement, double reach, NativeList&lt;int&gt; reaching, out double3 direction, out double radius)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainHeightSampler.html">TerrainHeightSampler</a></td>
+        <td><span class="parametername">sampler</span></td>
+        <td><p>The body's height sampler.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double3</span></td>
+        <td><span class="parametername">displacement</span></td>
+        <td><p>How far the vessel has moved, in body space, in meters.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">reach</span></td>
+        <td><p>How far beyond its sphere a part can get before new tiles go live, in meters.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">NativeList</span>&lt;<span class="xref">int</span>&gt;</td>
+        <td><span class="parametername">reaching</span></td>
+        <td><p>Scratch space, which receives the indices of the parts that can reach.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double3</span></td>
+        <td><span class="parametername">direction</span></td>
+        <td><p>Receives the direction of the disc center, in body space.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">radius</span></td>
+        <td><p>Receives the disc radius along the surface, reach included, in meters.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if any part can reach the ground, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Planets_TerrainFootprintPartOrder_TryGetDisc_Redux_Planets_TerrainHeightSampler__Unity_Mathematics_double3_System_Double_Unity_Collections_NativeList_System_Int32__Unity_Mathematics_double3__System_Double___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Gives the same disc as <span class="xref">Redux.Planets.TerrainFootprintJob.TryGetDisc(Redux.Planets.TerrainHeightSampler@,Unity.Collections.NativeArray{Unity.Mathematics.double4},Unity.Mathematics.double3,System.Double,Unity.Mathematics.double3@,System.Double@)</span> over every part.</p>
+</div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetField__2___0_System_String_">Util.GetField&lt;T, R&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetField__2___0_System_String___1_">Util.SetField&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromProperties_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromProperties(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetFieldValue__1_System_Object_System_String_">Util.GetFieldValue&lt;T&gt;(object, string)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from prerelease
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

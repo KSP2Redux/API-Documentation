@@ -128,6 +128,34 @@
 </h3>
 
 
+  <h4 id="KSP_Map_OrbitRenderSegment_BodyFixedFrame" data-uid="KSP.Map.OrbitRenderSegment.BodyFixedFrame">BodyFixedFrame</h4>
+  <div class="markdown level1 summary"><p>The conversion a body-fixed stretch of conic is taken into the rotating frame with.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BodyFixedFrame BodyFixedFrame</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Simulation.ImpactPrediction.BodyFixedFrame.html">BodyFixedFrame</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Map_OrbitRenderSegment_BodyFixedFrame_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Only read for a segment that is body-fixed and carries an orbit patch. A run carries its own.</p>
+</div>
+
+
   <h4 id="KSP_Map_OrbitRenderSegment_ConnectorDashSize" data-uid="KSP.Map.OrbitRenderSegment.ConnectorDashSize">ConnectorDashSize</h4>
   <div class="markdown level1 summary"><p>Size of the dashes of the connector line between adjacent orbit segments.</p>
 </div>
@@ -348,6 +376,36 @@
   </table>
 
 
+  <h4 id="KSP_Map_OrbitRenderSegment_IsBodyFixed" data-uid="KSP.Map.OrbitRenderSegment.IsBodyFixed">IsBodyFixed</h4>
+  <div class="markdown level1 summary"><p>True when the segment is drawn in its body's rotating frame rather than its celestial frame.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsBodyFixed</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Map_OrbitRenderSegment_IsBodyFixed_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Set on the parts of a forecast that follow the ground below them: its runs through the air, and
+the stretch of conic leading up to them. <a class="xref" href="KSP.Map.OrbitRenderSegment.html#KSP_Map_OrbitRenderSegment_ReferenceFrame">ReferenceFrame</a> is then the body frame, and
+the vertex source reads the rotating frame positions.</p>
+</div>
+
+
   <h4 id="KSP_Map_OrbitRenderSegment_IsHighlighted" data-uid="KSP.Map.OrbitRenderSegment.IsHighlighted">IsHighlighted</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
@@ -370,6 +428,35 @@
       </tr>
     </tbody>
   </table>
+
+
+  <h4 id="KSP_Map_OrbitRenderSegment_IsReplacedByPrediction" data-uid="KSP.Map.OrbitRenderSegment.IsReplacedByPrediction">IsReplacedByPrediction</h4>
+  <div class="markdown level1 summary"><p>True when the predicted atmospheric path has replaced this patch outright, so it is not drawn.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsReplacedByPrediction</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Map_OrbitRenderSegment_IsReplacedByPrediction_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The prediction takes over at the atmosphere entry, so a patch that begins at or after it has
+nothing left to show.</p>
+</div>
 
 
   <h4 id="KSP_Map_OrbitRenderSegment_MAX_END_PARAM" data-uid="KSP.Map.OrbitRenderSegment.MAX_END_PARAM">MAX_END_PARAM</h4>
@@ -538,6 +625,36 @@
       </tr>
     </tbody>
   </table>
+
+
+  <h4 id="KSP_Map_OrbitRenderSegment_PredictedPath" data-uid="KSP.Map.OrbitRenderSegment.PredictedPath">PredictedPath</h4>
+  <div class="markdown level1 summary"><p>The integrated atmospheric run this segment draws, or null if the segment draws an orbit patch.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PredictedAtmosphericPath PredictedPath</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Simulation.ImpactPrediction.PredictedAtmosphericPath.html">PredictedAtmosphericPath</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Map_OrbitRenderSegment_PredictedPath_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>A segment carries one or the other, never both, and a segment with a path has no orbit patch at
+all. The renderer reads this to pick the vertex source, and the render data that owns the segment
+is flagged so the parts of the update that only make sense for a conic skip it.</p>
+</div>
 
 
   <h4 id="KSP_Map_OrbitRenderSegment_ReferenceFrame" data-uid="KSP.Map.OrbitRenderSegment.ReferenceFrame">ReferenceFrame</h4>

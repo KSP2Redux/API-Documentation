@@ -5,11 +5,11 @@
   <head>
     <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-      <title>Struct PQSColliderInfo | KSP2Redux API (Beta) </title>
+      <title>Struct TerrainTileLattice.PendingNode | KSP2Redux API (Beta) </title>
       <meta name="viewport" content="width=device-width">
-      <meta name="title" content="Struct PQSColliderInfo | KSP2Redux API (Beta) ">
+      <meta name="title" content="Struct TerrainTileLattice.PendingNode | KSP2Redux API (Beta) ">
     
-    <meta name="description" content="Represents collider information for a PQS terrain quad, including the quad index, relative position, and pooled collider index.">
+    <meta name="description" content="A node waiting on a walk of the lattice, with how near to the disc&#39;s center it can reach.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -76,31 +76,31 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="KSP.Rendering.Planets.PQSColliderInfo">
+            <article class="content wrap" id="_content" data-uid="Redux.Planets.TerrainTileLattice.PendingNode">
 
 
 
-  <h1 id="KSP_Rendering_Planets_PQSColliderInfo" data-uid="KSP.Rendering.Planets.PQSColliderInfo" class="text-break">Struct PQSColliderInfo</h1>
-  <div class="markdown level0 summary"><p>Represents collider information for a PQS terrain quad, including the quad index, relative position, and pooled collider index.</p>
+  <h1 id="Redux_Planets_TerrainTileLattice_PendingNode" data-uid="Redux.Planets.TerrainTileLattice.PendingNode" class="text-break">Struct TerrainTileLattice.PendingNode</h1>
+  <div class="markdown level0 summary"><p>A node waiting on a walk of the lattice, with how near to the disc's center it can reach.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Rendering.html">Rendering</a>.<a class="xref" href="KSP.Rendering.Planets.html">Planets</a></h6>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.Planets.html">Planets</a></h6>
   <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
-  <h5 id="KSP_Rendering_Planets_PQSColliderInfo_syntax">Syntax</h5>
+  <h5 id="Redux_Planets_TerrainTileLattice_PendingNode_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public struct PQSColliderInfo</code></pre>
+    <pre><code class="lang-csharp hljs">public struct TerrainTileLattice.PendingNode</code></pre>
   </div>
   <h3 id="fields">Fields
 </h3>
 
 
-  <h4 id="KSP_Rendering_Planets_PQSColliderInfo_ColliderPoolIndex" data-uid="KSP.Rendering.Planets.PQSColliderInfo.ColliderPoolIndex">ColliderPoolIndex</h4>
-  <div class="markdown level1 summary"><p>The index of this collider within the shared collider pool.</p>
+  <h4 id="Redux_Planets_TerrainTileLattice_PendingNode_Nearest" data-uid="Redux.Planets.TerrainTileLattice.PendingNode.Nearest">Nearest</h4>
+  <div class="markdown level1 summary"><p>A lower bound on the angle in radians from the disc's center to the node, never less than its parent's.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int ColliderPoolIndex</code></pre>
+    <pre><code class="lang-csharp hljs">public double Nearest</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -112,20 +112,20 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">int</span></td>
+        <td><span class="xref">double</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
 
 
-  <h4 id="KSP_Rendering_Planets_PQSColliderInfo_QuadIndex" data-uid="KSP.Rendering.Planets.PQSColliderInfo.QuadIndex">QuadIndex</h4>
-  <div class="markdown level1 summary"><p>The index of the PQS terrain quad associated with this collider.</p>
+  <h4 id="Redux_Planets_TerrainTileLattice_PendingNode_Node" data-uid="Redux.Planets.TerrainTileLattice.PendingNode.Node">Node</h4>
+  <div class="markdown level1 summary"><p>The node.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int QuadIndex</code></pre>
+    <pre><code class="lang-csharp hljs">public TerrainTileAddress Node</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -137,32 +137,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">int</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="KSP_Rendering_Planets_PQSColliderInfo_RelativePosition" data-uid="KSP.Rendering.Planets.PQSColliderInfo.RelativePosition">RelativePosition</h4>
-  <div class="markdown level1 summary"><p>The position of the collider relative to its associated PQS terrain quad.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Vector3 RelativePosition</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Vector3</span></td>
+        <td><a class="xref" href="Redux.Planets.TerrainTileAddress.html">TerrainTileAddress</a></td>
         <td></td>
       </tr>
     </tbody>

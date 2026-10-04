@@ -5,11 +5,11 @@
   <head>
     <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-      <title>Struct InterestGroup | KSP2Redux API (Beta) </title>
+      <title>Class TerrainHeightRequestBatch | KSP2Redux API (Beta) </title>
       <meta name="viewport" content="width=device-width">
-      <meta name="title" content="Struct InterestGroup | KSP2Redux API (Beta) ">
+      <meta name="title" content="Class TerrainHeightRequestBatch | KSP2Redux API (Beta) ">
     
-    <meta name="description" content="Represents a spherical region of interest defined by a world-space center position and a radius.">
+    <meta name="description" content="A set of GPU terrain height requests dispatched together.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -76,33 +76,39 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="KSP.Rendering.Planets.InterestGroup">
+            <article class="content wrap" id="_content" data-uid="Redux.Planets.TerrainHeightRequestBatch">
 
 
 
-  <h1 id="KSP_Rendering_Planets_InterestGroup" data-uid="KSP.Rendering.Planets.InterestGroup" class="text-break">Struct InterestGroup</h1>
-  <div class="markdown level0 summary"><p>Represents a spherical region of interest defined by a world-space center position and a radius.</p>
+  <h1 id="Redux_Planets_TerrainHeightRequestBatch" data-uid="Redux.Planets.TerrainHeightRequestBatch" class="text-break">Class TerrainHeightRequestBatch</h1>
+  <div class="markdown level0 summary"><p>A set of GPU terrain height requests dispatched together.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Rendering.html">Rendering</a>.<a class="xref" href="KSP.Rendering.Planets.html">Planets</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
-  <h5 id="KSP_Rendering_Planets_InterestGroup_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public struct InterestGroup</code></pre>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><span class="xref">TerrainHeightRequestBatch</span></div>
   </div>
-  <h3 id="fields">Fields
+  <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.Planets.html">Planets</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="Redux_Planets_TerrainHeightRequestBatch_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class TerrainHeightRequestBatch</code></pre>
+  </div>
+  <h3 id="properties">Properties
 </h3>
 
 
-  <h4 id="KSP_Rendering_Planets_InterestGroup_CenterWorldSpace" data-uid="KSP.Rendering.Planets.InterestGroup.CenterWorldSpace">CenterWorldSpace</h4>
-  <div class="markdown level1 summary"><p>The center position of the interest group in world space.</p>
+  <a id="Redux_Planets_TerrainHeightRequestBatch_Directions_" data-uid="Redux.Planets.TerrainHeightRequestBatch.Directions*"></a>
+  <h4 id="Redux_Planets_TerrainHeightRequestBatch_Directions" data-uid="Redux.Planets.TerrainHeightRequestBatch.Directions">Directions</h4>
+  <div class="markdown level1 summary"><p>Gets every request's directions packed in request order, as the dispatch reads them.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double3 CenterWorldSpace</code></pre>
+    <pre><code class="lang-csharp hljs">public NativeArray&lt;float3&gt; Directions { get; }</code></pre>
   </div>
-  <h5 class="fieldValue">Field Value</h5>
+  <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-condensed">
     <thead>
       <tr>
@@ -112,22 +118,23 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">double3</span></td>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Collections.NativeArray.html">NativeArray</a>&lt;<span class="xref">float3</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
 
 
-  <h4 id="KSP_Rendering_Planets_InterestGroup_Radius" data-uid="KSP.Rendering.Planets.InterestGroup.Radius">Radius</h4>
-  <div class="markdown level1 summary"><p>The radius of the interest group.</p>
+  <a id="Redux_Planets_TerrainHeightRequestBatch_IsDropped_" data-uid="Redux.Planets.TerrainHeightRequestBatch.IsDropped*"></a>
+  <h4 id="Redux_Planets_TerrainHeightRequestBatch_IsDropped" data-uid="Redux.Planets.TerrainHeightRequestBatch.IsDropped">IsDropped</h4>
+  <div class="markdown level1 summary"><p>Gets a value that turns true once the batch is dropped, after which it never calls back.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double Radius</code></pre>
+    <pre><code class="lang-csharp hljs">public bool IsDropped { get; }</code></pre>
   </div>
-  <h5 class="fieldValue">Field Value</h5>
+  <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-condensed">
     <thead>
       <tr>
@@ -137,11 +144,56 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">double</span></td>
+        <td><span class="xref">bool</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="Redux_Planets_TerrainHeightRequestBatch_Complete_" data-uid="Redux.Planets.TerrainHeightRequestBatch.Complete*"></a>
+  <h4 id="Redux_Planets_TerrainHeightRequestBatch_Complete_Unity_Collections_NativeArray_KSP_Rendering_Planets_HeightSampleRequest__" data-uid="Redux.Planets.TerrainHeightRequestBatch.Complete(Unity.Collections.NativeArray{KSP.Rendering.Planets.HeightSampleRequest})">Complete(NativeArray&lt;HeightSampleRequest&gt;)</h4>
+  <div class="markdown level1 summary"><p>Writes each request's heights into its caller's array, calls each request back in order and frees the batch.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Complete(NativeArray&lt;HeightSampleRequest&gt; results)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Collections.NativeArray.html">NativeArray</a>&lt;<a class="xref" href="KSP.Rendering.Planets.HeightSampleRequest.html">HeightSampleRequest</a>&gt;</td>
+        <td><span class="parametername">results</span></td>
+        <td><p>The dispatch's readback, one entry per direction in <a class="xref" href="Redux.Planets.TerrainHeightRequestBatch.html#Redux_Planets_TerrainHeightRequestBatch_Directions">Directions</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Planets_TerrainHeightRequestBatch_Complete_Unity_Collections_NativeArray_KSP_Rendering_Planets_HeightSampleRequest___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Does nothing on a batch already completed or dropped. A callback that throws is logged and the rest still run.</p>
+</div>
+
+
+  <a id="Redux_Planets_TerrainHeightRequestBatch_Drop_" data-uid="Redux.Planets.TerrainHeightRequestBatch.Drop*"></a>
+  <h4 id="Redux_Planets_TerrainHeightRequestBatch_Drop" data-uid="Redux.Planets.TerrainHeightRequestBatch.Drop">Drop()</h4>
+  <div class="markdown level1 summary"><p>Frees the batch without writing heights or calling back.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Drop()</code></pre>
+  </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>

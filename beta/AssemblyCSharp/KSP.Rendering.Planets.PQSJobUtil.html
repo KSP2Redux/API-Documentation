@@ -582,9 +582,59 @@
   </table>
 
 
+  <a id="KSP_Rendering_Planets_PQSJobUtil_GetShaderSphericalUVs_" data-uid="KSP.Rendering.Planets.PQSJobUtil.GetShaderSphericalUVs*"></a>
+  <h4 id="KSP_Rendering_Planets_PQSJobUtil_GetShaderSphericalUVs_Unity_Mathematics_float3_" data-uid="KSP.Rendering.Planets.PQSJobUtil.GetShaderSphericalUVs(Unity.Mathematics.float3)">GetShaderSphericalUVs(float3)</h4>
+  <div class="markdown level1 summary"><p>Returns the spherical UV the bundled terrain compute shader assigns to a surface direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float2 GetShaderSphericalUVs(float3 direction)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float3</span></td>
+        <td><span class="parametername">direction</span></td>
+        <td><p>The normalized surface direction.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float2</span></td>
+        <td><p>The spherical UV coordinate pair.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Rendering_Planets_PQSJobUtil_GetShaderSphericalUVs_Unity_Mathematics_float3__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>U comes from <a class="xref" href="KSP.Rendering.Planets.PQSJobUtil.html#KSP_Rendering_Planets_PQSJobUtil_ShaderAtan2_System_Single_System_Single_">ShaderAtan2(float, float)</a> and V from <a class="xref" href="KSP.Rendering.Planets.PQSJobUtil.html#KSP_Rendering_Planets_PQSJobUtil_ShaderAsin_System_Single_">ShaderAsin(float)</a>, each mapped to
+[0, 1] in single precision as on the GPU. Every spherical UV helper here routes through this, so
+CPU height, biome and decal lookups land on the texels the terrain was drawn from.</p>
+</div>
+
+
   <a id="KSP_Rendering_Planets_PQSJobUtil_GetSphericalUVsForLatLong_" data-uid="KSP.Rendering.Planets.PQSJobUtil.GetSphericalUVsForLatLong*"></a>
   <h4 id="KSP_Rendering_Planets_PQSJobUtil_GetSphericalUVsForLatLong_System_Double_System_Double_" data-uid="KSP.Rendering.Planets.PQSJobUtil.GetSphericalUVsForLatLong(System.Double,System.Double)">GetSphericalUVsForLatLong(double, double)</h4>
-  <div class="markdown level1 summary"><p>Returns the spherical UV coordinates for a geographic latitude and longitude in degrees.</p>
+  <div class="markdown level1 summary"><p>Returns the spherical UV coordinates for a geographic latitude and longitude in degrees, as the terrain shader computes them.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -635,7 +685,7 @@
 
   <a id="KSP_Rendering_Planets_PQSJobUtil_GetSphericalUVsForLatLongSingle_" data-uid="KSP.Rendering.Planets.PQSJobUtil.GetSphericalUVsForLatLongSingle*"></a>
   <h4 id="KSP_Rendering_Planets_PQSJobUtil_GetSphericalUVsForLatLongSingle_System_Double_System_Double_" data-uid="KSP.Rendering.Planets.PQSJobUtil.GetSphericalUVsForLatLongSingle(System.Double,System.Double)">GetSphericalUVsForLatLongSingle(double, double)</h4>
-  <div class="markdown level1 summary"><p>Returns the spherical UV coordinates for a geographic latitude and longitude in degrees as single-precision floats.</p>
+  <div class="markdown level1 summary"><p>Returns the spherical UV coordinates for a geographic latitude and longitude in degrees as single-precision floats, as the terrain shader computes them.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -686,7 +736,7 @@
 
   <a id="KSP_Rendering_Planets_PQSJobUtil_GetVertexSphericalUVs_" data-uid="KSP.Rendering.Planets.PQSJobUtil.GetVertexSphericalUVs*"></a>
   <h4 id="KSP_Rendering_Planets_PQSJobUtil_GetVertexSphericalUVs_UnityEngine_Vector3_" data-uid="KSP.Rendering.Planets.PQSJobUtil.GetVertexSphericalUVs(UnityEngine.Vector3)">GetVertexSphericalUVs(Vector3)</h4>
-  <div class="markdown level1 summary"><p>Returns the spherical UV coordinates for a surface direction vector.</p>
+  <div class="markdown level1 summary"><p>Returns the spherical UV coordinates for a surface direction vector, as the terrain shader computes them.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -731,7 +781,7 @@
 
   <a id="KSP_Rendering_Planets_PQSJobUtil_GetVertexSphericalUVsForQuad_" data-uid="KSP.Rendering.Planets.PQSJobUtil.GetVertexSphericalUVsForQuad*"></a>
   <h4 id="KSP_Rendering_Planets_PQSJobUtil_GetVertexSphericalUVsForQuad_Unity_Mathematics_double3_UnityEngine_Vector3_" data-uid="KSP.Rendering.Planets.PQSJobUtil.GetVertexSphericalUVsForQuad(Unity.Mathematics.double3,UnityEngine.Vector3)">GetVertexSphericalUVsForQuad(double3, Vector3)</h4>
-  <div class="markdown level1 summary"><p>Returns the spherical UV coordinates for a quad vertex given its direction and quad position.</p>
+  <div class="markdown level1 summary"><p>Returns the spherical UV coordinates for a quad vertex, as the terrain shader computes them.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -1357,6 +1407,115 @@
       </tr>
     </tbody>
   </table>
+
+
+  <a id="KSP_Rendering_Planets_PQSJobUtil_ShaderAsin_" data-uid="KSP.Rendering.Planets.PQSJobUtil.ShaderAsin*"></a>
+  <h4 id="KSP_Rendering_Planets_PQSJobUtil_ShaderAsin_System_Single_" data-uid="KSP.Rendering.Planets.PQSJobUtil.ShaderAsin(System.Single)">ShaderAsin(float)</h4>
+  <div class="markdown level1 summary"><p>Returns the arcsine as the bundled terrain compute shader computes it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float ShaderAsin(float value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The sine to invert.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><p>The angle in radians, from -pi/2 to pi/2.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Rendering_Planets_PQSJobUtil_ShaderAsin_System_Single__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>FXC compiled that shader and expanded <code>asin</code> into Abramowitz and Stegun 4.4.45, a four-term
+polynomial accurate to about 7e-5 radians. Tiled height maps repeat hundreds of times around a
+body, so CPU code that samples terrain has to round the same way to land on the same texels.
+Measured against the live kernel on Direct3D11. The input is clamped to [-1, 1], so a direction
+one rounding step past unit length gives the pole rather than NaN.</p>
+</div>
+
+
+  <a id="KSP_Rendering_Planets_PQSJobUtil_ShaderAtan2_" data-uid="KSP.Rendering.Planets.PQSJobUtil.ShaderAtan2*"></a>
+  <h4 id="KSP_Rendering_Planets_PQSJobUtil_ShaderAtan2_System_Single_System_Single_" data-uid="KSP.Rendering.Planets.PQSJobUtil.ShaderAtan2(System.Single,System.Single)">ShaderAtan2(float, float)</h4>
+  <div class="markdown level1 summary"><p>Returns the four-quadrant arctangent as the bundled terrain compute shader computes it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float ShaderAtan2(float y, float x)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>The ordinate.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>The abscissa.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><p>The angle in radians, from -pi to pi.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Rendering_Planets_PQSJobUtil_ShaderAtan2_System_Single_System_Single__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>FXC expanded <code>atan2</code> into Hastings' ninth-order odd polynomial on the first octant,
+accurate to about 1e-5 radians, then folds the result out to the full circle. Measured against
+the live kernel on Direct3D11. The shader divides zero by zero when both arguments are zero, so
+that case returns zero here instead.</p>
+</div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
