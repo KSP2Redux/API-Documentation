@@ -3137,51 +3137,6 @@
   </table>
 
 
-  <a id="KSP_Rendering_Planets_WaterManager_GetDetectObjectBody_" data-uid="KSP.Rendering.Planets.WaterManager.GetDetectObjectBody*"></a>
-  <h4 id="KSP_Rendering_Planets_WaterManager_GetDetectObjectBody_System_Int32_" data-uid="KSP.Rendering.Planets.WaterManager.GetDetectObjectBody(System.Int32)">GetDetectObjectBody(int)</h4>
-  <div class="markdown level1 summary"><p>Returns the celestial body associated with the water detect object at the given list index.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public CelestialBodyComponent GetDetectObjectBody(int index)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">int</span></td>
-        <td><span class="parametername">index</span></td>
-        <td><p>Zero-based index into the internal list of registered detect objects.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
-        <td><p>The <a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a> for the object at that index, or <code>null</code> if the index is out of range.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-
-
   <a id="KSP_Rendering_Planets_WaterManager_GetGIProbeInDebugScene_" data-uid="KSP.Rendering.Planets.WaterManager.GetGIProbeInDebugScene*"></a>
   <h4 id="KSP_Rendering_Planets_WaterManager_GetGIProbeInDebugScene_System_String_" data-uid="KSP.Rendering.Planets.WaterManager.GetGIProbeInDebugScene(System.String)">GetGIProbeInDebugScene(string)</h4>
   <div class="markdown level1 summary"><p>Returns the spherical harmonics GI probe term for the named celestial body from the debug scene.</p>
@@ -3489,6 +3444,57 @@
       <tr>
         <td><span class="xref">bool</span></td>
         <td><p><code>true</code> if a previs game instance is active. Otherwise <code>false</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_WaterManager_MarkDetectObjectsOnBody_" data-uid="KSP.Rendering.Planets.WaterManager.MarkDetectObjectsOnBody*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterManager_MarkDetectObjectsOnBody_KSP_Sim_impl_CelestialBodyComponent_Unity_Collections_NativeArray_System_Boolean__" data-uid="KSP.Rendering.Planets.WaterManager.MarkDetectObjectsOnBody(KSP.Sim.impl.CelestialBodyComponent,Unity.Collections.NativeArray{System.Boolean})">MarkDetectObjectsOnBody(CelestialBodyComponent, NativeArray&lt;bool&gt;)</h4>
+  <div class="markdown level1 summary"><p>Marks which registered detect objects belong to a body, so that body's ocean tests only its own objects.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool MarkDetectObjectsOnBody(CelestialBodyComponent body, NativeArray&lt;bool&gt; isOnBody)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
+        <td><span class="parametername">body</span></td>
+        <td><p>The body whose ocean is being tested.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Collections.NativeArray.html">NativeArray</a>&lt;<span class="xref">bool</span>&gt;</td>
+        <td><span class="parametername">isOnBody</span></td>
+        <td><p>Receives, per entry index, whether that entry belongs to <code class="paramref">body</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if any entry belongs to <code class="paramref">body</code>.</p>
 </td>
       </tr>
     </tbody>

@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class TerrainHeightRequestQueue | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="Collects GPU terrain height requests between dispatches and hands them out as one batch.">
+    <meta name="description" content="Collects GPU terrain height requests between dispatches and hands them out in batches.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,7 @@
 
 
   <h1 id="Redux_Planets_TerrainHeightRequestQueue" data-uid="Redux.Planets.TerrainHeightRequestQueue" class="text-break">Class TerrainHeightRequestQueue</h1>
-  <div class="markdown level0 summary"><p>Collects GPU terrain height requests between dispatches and hands them out as one batch.</p>
+  <div class="markdown level0 summary"><p>Collects GPU terrain height requests between dispatches and hands them out in batches.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -245,14 +245,32 @@
 
 
   <a id="Redux_Planets_TerrainHeightRequestQueue_TakeBatch_" data-uid="Redux.Planets.TerrainHeightRequestQueue.TakeBatch*"></a>
-  <h4 id="Redux_Planets_TerrainHeightRequestQueue_TakeBatch" data-uid="Redux.Planets.TerrainHeightRequestQueue.TakeBatch">TakeBatch()</h4>
-  <div class="markdown level1 summary"><p>Moves every pending request into a new batch.</p>
+  <h4 id="Redux_Planets_TerrainHeightRequestQueue_TakeBatch_System_Int32_" data-uid="Redux.Planets.TerrainHeightRequestQueue.TakeBatch(System.Int32)">TakeBatch(int)</h4>
+  <div class="markdown level1 summary"><p>Moves pending requests into a new batch, whole and in order, up to a number of samples.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public TerrainHeightRequestBatch TakeBatch()</code></pre>
+    <pre><code class="lang-csharp hljs">public TerrainHeightRequestBatch TakeBatch(int maxSampleCount = 2147483647)</code></pre>
   </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">maxSampleCount</span></td>
+        <td><p>The most directions the batch may hold.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-condensed">
     <thead>
@@ -269,6 +287,10 @@
       </tr>
     </tbody>
   </table>
+  <h5 id="Redux_Planets_TerrainHeightRequestQueue_TakeBatch_System_Int32__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The requests that would pass the limit stay queued for the next batch. The first request is always taken, so a
+single request larger than the limit still goes out on its own.</p>
+</div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>

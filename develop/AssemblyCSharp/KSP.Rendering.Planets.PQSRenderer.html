@@ -2354,8 +2354,8 @@ of <code class="paramref">matrix</code>, derived via <a class="xref" href="https
     </tbody>
   </table>
   <h5 id="KSP_Rendering_Planets_PQSRenderer_RequestHeightsGPU_Unity_Collections_NativeArray_Unity_Mathematics_float3__Unity_Collections_NativeArray_System_Single__System_Action__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Every request made in a frame goes out in one SampleHeights dispatch at the end of that frame, and the heights
-land one to three frames later. Requests still pending or in flight when the renderer shuts down are dropped and
+  <div class="markdown level1 remarks"><p>Requests go out in one SampleHeights dispatch at the end of each frame, as many as one dispatch can hold, and
+the rest wait for the next frame. The heights land one to three frames after their dispatch. Requests still pending or in flight when the renderer shuts down are dropped and
 never call back, as is a batch whose readback fails.</p>
 </div>
 
