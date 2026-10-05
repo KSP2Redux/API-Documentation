@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class TerrainTriangleCullPass | KSP2Redux API (Beta) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class TerrainTriangleCullPass | KSP2Redux API (Beta) ">
+    
+    <meta name="description" content="Culls a body&#39;s visible PQS triangles and buckets the survivors for the biome passes, in place of the stock QuadMeshTriangleCulling, CalculateMeshBiomeBucketingArgs and MeshBiomeTriplanarBucketing kernels.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Redux.Planets.TerrainTriangleCullPass">
+
+
+
+  <h1 id="Redux_Planets_TerrainTriangleCullPass" data-uid="Redux.Planets.TerrainTriangleCullPass" class="text-break">Class TerrainTriangleCullPass</h1>
+  <div class="markdown level0 summary"><p>Culls a body's visible PQS triangles and buckets the survivors for the biome passes, in place of the stock
+QuadMeshTriangleCulling, CalculateMeshBiomeBucketingArgs and MeshBiomeTriplanarBucketing kernels.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><span class="xref">TerrainTriangleCullPass</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.Planets.html">Planets</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="Redux_Planets_TerrainTriangleCullPass_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class TerrainTriangleCullPass</code></pre>
+  </div>
+  <h5 id="Redux_Planets_TerrainTriangleCullPass_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>The stock kernels index triangles by thread group X alone, and a dispatch past 65535 groups is refused, which left a
+body with more than 16383 visible quads drawing no terrain at all. These kernels do the same per-triangle work with
+their groups spread over X and Y. Every input is bound on each call, so one shader serves every body.</p>
+</div>
+  <h3 id="constructors">Constructors
+</h3>
+
+
+  <a id="Redux_Planets_TerrainTriangleCullPass__ctor_" data-uid="Redux.Planets.TerrainTriangleCullPass.#ctor*"></a>
+  <h4 id="Redux_Planets_TerrainTriangleCullPass__ctor_UnityEngine_ComputeShader_" data-uid="Redux.Planets.TerrainTriangleCullPass.#ctor(UnityEngine.ComputeShader)">TerrainTriangleCullPass(ComputeShader)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Redux.Planets.TerrainTriangleCullPass.html">TerrainTriangleCullPass</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerrainTriangleCullPass(ComputeShader shader)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeShader.html">ComputeShader</a></td>
+        <td><span class="parametername">shader</span></td>
+        <td><p>The compute shader holding the culling and bucketing kernels.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+</h3>
+
+
+  <h4 id="Redux_Planets_TerrainTriangleCullPass_MAX_GROUPS_PER_DIMENSION" data-uid="Redux.Planets.TerrainTriangleCullPass.MAX_GROUPS_PER_DIMENSION">MAX_GROUPS_PER_DIMENSION</h4>
+  <div class="markdown level1 summary"><p>The most thread groups one dispatch dimension takes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int MAX_GROUPS_PER_DIMENSION = 65535</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainTriangleCullPass_THREADS_PER_GROUP" data-uid="Redux.Planets.TerrainTriangleCullPass.THREADS_PER_GROUP">THREADS_PER_GROUP</h4>
+  <div class="markdown level1 summary"><p>The triangles one thread group covers.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int THREADS_PER_GROUP = 32</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="Redux_Planets_TerrainTriangleCullPass_Bucket_" data-uid="Redux.Planets.TerrainTriangleCullPass.Bucket*"></a>
+  <h4 id="Redux_Planets_TerrainTriangleCullPass_Bucket_UnityEngine_ComputeBuffer_UnityEngine_ComputeBuffer_UnityEngine_ComputeBuffer_UnityEngine_GraphicsBuffer_UnityEngine_GraphicsBuffer_UnityEngine_GraphicsBuffer_UnityEngine_ComputeBuffer_System_Int32_System_Single_UnityEngine_Texture_UnityEngine_Matrix4x4_System_Single_UnityEngine_Vector3_UnityEngine_Vector4_" data-uid="Redux.Planets.TerrainTriangleCullPass.Bucket(UnityEngine.ComputeBuffer,UnityEngine.ComputeBuffer,UnityEngine.ComputeBuffer,UnityEngine.GraphicsBuffer,UnityEngine.GraphicsBuffer,UnityEngine.GraphicsBuffer,UnityEngine.ComputeBuffer,System.Int32,System.Single,UnityEngine.Texture,UnityEngine.Matrix4x4,System.Single,UnityEngine.Vector3,UnityEngine.Vector4)">Bucket(ComputeBuffer, ComputeBuffer, ComputeBuffer, GraphicsBuffer, GraphicsBuffer, GraphicsBuffer, ComputeBuffer, int, float, Texture, Matrix4x4, float, Vector3, Vector4)</h4>
+  <div class="markdown level1 summary"><p>Writes each kept triangle's flags word, and the decals covering it, for the biome passes to clip by.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Bucket(ComputeBuffer quadMesh, ComputeBuffer drawArgs, ComputeBuffer visibleIndices, GraphicsBuffer bucketingArgs, GraphicsBuffer triangleFlags, GraphicsBuffer triangleDecals, ComputeBuffer decals, int decalCount, float sphereRadius, Texture biomeMask, Matrix4x4 triplanarBasis, float triplanarContrast, Vector3 triplanarContrastBoost, Vector4 biomeCutoffs)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeBuffer.html">ComputeBuffer</a></td>
+        <td><span class="parametername">quadMesh</span></td>
+        <td><p>The visible quads' meshes as a triangle list.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeBuffer.html">ComputeBuffer</a></td>
+        <td><span class="parametername">drawArgs</span></td>
+        <td><p>The draw arguments <a class="xref" href="Redux.Planets.TerrainTriangleCullPass.html#Redux_Planets_TerrainTriangleCullPass_Cull_UnityEngine_ComputeBuffer_UnityEngine_ComputeBuffer_UnityEngine_ComputeBuffer_UnityEngine_ComputeBuffer_System_Int32_UnityEngine_Vector3_">Cull(ComputeBuffer, ComputeBuffer, ComputeBuffer, ComputeBuffer, int, Vector3)</a> filled.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeBuffer.html">ComputeBuffer</a></td>
+        <td><span class="parametername">visibleIndices</span></td>
+        <td><p>The corner indices <a class="xref" href="Redux.Planets.TerrainTriangleCullPass.html#Redux_Planets_TerrainTriangleCullPass_Cull_UnityEngine_ComputeBuffer_UnityEngine_ComputeBuffer_UnityEngine_ComputeBuffer_UnityEngine_ComputeBuffer_System_Int32_UnityEngine_Vector3_">Cull(ComputeBuffer, ComputeBuffer, ComputeBuffer, ComputeBuffer, int, Vector3)</a> kept.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">GraphicsBuffer</span></td>
+        <td><span class="parametername">bucketingArgs</span></td>
+        <td><p>Four uints receiving the kept triangle count and the bucketing groups.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">GraphicsBuffer</span></td>
+        <td><span class="parametername">triangleFlags</span></td>
+        <td><p>One flags word per kept triangle.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">GraphicsBuffer</span></td>
+        <td><span class="parametername">triangleDecals</span></td>
+        <td><p>The packed decal indices of each kept triangle covered by one to four decals.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeBuffer.html">ComputeBuffer</a></td>
+        <td><span class="parametername">decals</span></td>
+        <td><p>The body's decal instances.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">decalCount</span></td>
+        <td><p>The decal instances in <code class="paramref">decals</code> to test.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">sphereRadius</span></td>
+        <td><p>The body's radius, the farthest a covering decal may be from a triangle.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Texture.html">Texture</a></td>
+        <td><span class="parametername">biomeMask</span></td>
+        <td><p>The body's biome mask.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Matrix4x4.html">Matrix4x4</a></td>
+        <td><span class="parametername">triplanarBasis</span></td>
+        <td><p>The rotation taking the local up at the camera onto Y.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">triplanarContrast</span></td>
+        <td><p>The surface material's triplanar contrast.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">triplanarContrastBoost</span></td>
+        <td><p>The per-axis boost on the triplanar contrast.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector4</span></td>
+        <td><span class="parametername">biomeCutoffs</span></td>
+        <td><p>The mask value each biome channel must exceed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Planets_TerrainTriangleCullPass_Bucket_UnityEngine_ComputeBuffer_UnityEngine_ComputeBuffer_UnityEngine_ComputeBuffer_UnityEngine_GraphicsBuffer_UnityEngine_GraphicsBuffer_UnityEngine_GraphicsBuffer_UnityEngine_ComputeBuffer_System_Int32_System_Single_UnityEngine_Texture_UnityEngine_Matrix4x4_System_Single_UnityEngine_Vector3_UnityEngine_Vector4__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Call after <a class="xref" href="Redux.Planets.TerrainTriangleCullPass.html#Redux_Planets_TerrainTriangleCullPass_Cull_UnityEngine_ComputeBuffer_UnityEngine_ComputeBuffer_UnityEngine_ComputeBuffer_UnityEngine_ComputeBuffer_System_Int32_UnityEngine_Vector3_">Cull(ComputeBuffer, ComputeBuffer, ComputeBuffer, ComputeBuffer, int, Vector3)</a>. The triangle count is read from the draw arguments on the GPU.</p>
+</div>
+
+
+  <a id="Redux_Planets_TerrainTriangleCullPass_Cull_" data-uid="Redux.Planets.TerrainTriangleCullPass.Cull*"></a>
+  <h4 id="Redux_Planets_TerrainTriangleCullPass_Cull_UnityEngine_ComputeBuffer_UnityEngine_ComputeBuffer_UnityEngine_ComputeBuffer_UnityEngine_ComputeBuffer_System_Int32_UnityEngine_Vector3_" data-uid="Redux.Planets.TerrainTriangleCullPass.Cull(UnityEngine.ComputeBuffer,UnityEngine.ComputeBuffer,UnityEngine.ComputeBuffer,UnityEngine.ComputeBuffer,System.Int32,UnityEngine.Vector3)">Cull(ComputeBuffer, ComputeBuffer, ComputeBuffer, ComputeBuffer, int, Vector3)</h4>
+  <div class="markdown level1 summary"><p>Appends the visible triangles inside the frustum and facing the camera to the draw list.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Cull(ComputeBuffer quadMesh, ComputeBuffer frustumPlanes, ComputeBuffer drawArgs, ComputeBuffer visibleIndices, int triangleCount, Vector3 cameraPosition)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeBuffer.html">ComputeBuffer</a></td>
+        <td><span class="parametername">quadMesh</span></td>
+        <td><p>The visible quads' meshes as a triangle list.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeBuffer.html">ComputeBuffer</a></td>
+        <td><span class="parametername">frustumPlanes</span></td>
+        <td><p>The six camera frustum planes, inward normal and distance.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeBuffer.html">ComputeBuffer</a></td>
+        <td><span class="parametername">drawArgs</span></td>
+        <td><p>The draw arguments, whose vertex count grows by 3 for each triangle kept.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeBuffer.html">ComputeBuffer</a></td>
+        <td><span class="parametername">visibleIndices</span></td>
+        <td><p>The corner indices of the triangles kept.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">triangleCount</span></td>
+        <td><p>The triangles in <code class="paramref">quadMesh</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">cameraPosition</span></td>
+        <td><p>The camera's world position, for the back-face test.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Planets_TerrainTriangleCullPass_Cull_UnityEngine_ComputeBuffer_UnityEngine_ComputeBuffer_UnityEngine_ComputeBuffer_UnityEngine_ComputeBuffer_System_Int32_UnityEngine_Vector3__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The host resets the draw arguments' vertex count to 0 and writes the frustum planes first.</p>
+</div>
+
+
+  <a id="Redux_Planets_TerrainTriangleCullPass_GroupsFor_" data-uid="Redux.Planets.TerrainTriangleCullPass.GroupsFor*"></a>
+  <h4 id="Redux_Planets_TerrainTriangleCullPass_GroupsFor_System_Int32_" data-uid="Redux.Planets.TerrainTriangleCullPass.GroupsFor(System.Int32)">GroupsFor(int)</h4>
+  <div class="markdown level1 summary"><p>Splits the thread groups covering a number of triangles over X and Y, so neither exceeds the dispatch limit.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int2 GroupsFor(int triangleCount)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">triangleCount</span></td>
+        <td><p>The triangles to cover, one thread each.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int2</span></td>
+        <td><p>The thread groups in X and in Y.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Planets_TerrainTriangleCullPass_GroupsFor_System_Int32__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The bucketing kernel's arguments are split the same way on the GPU.</p>
+</div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetField__2___0_System_String_">Util.GetField&lt;T, R&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetField__2___0_System_String___1_">Util.SetField&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromProperties_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromProperties(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetFieldValue__1_System_Object_System_String_">Util.GetFieldValue&lt;T&gt;(object, string)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from prerelease
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
