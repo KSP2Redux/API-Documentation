@@ -117,6 +117,9 @@
       <a class="xref" href="GlobalAssemblyCSharp.EffectBase.html#GlobalAssemblyCSharp_EffectBase_EnsureRenderTarget_UnityEngine_RenderTexture__System_Int32_System_Int32_UnityEngine_RenderTextureFormat_UnityEngine_FilterMode_UnityEngine_TextureWrapMode_System_Boolean_System_Boolean_System_Int32_System_Int32_System_String_">EffectBase.EnsureRenderTarget(ref RenderTexture, int, int, RenderTextureFormat, FilterMode, TextureWrapMode, bool, bool, int, int, string)</a>
     </div>
     <div>
+      <a class="xref" href="GlobalAssemblyCSharp.EffectBase.html#GlobalAssemblyCSharp_EffectBase_DestroyOrImmediate_UnityEngine_Object_">EffectBase.DestroyOrImmediate(Object)</a>
+    </div>
+    <div>
       <a class="xref" href="GlobalAssemblyCSharp.EffectBase.html#GlobalAssemblyCSharp_EffectBase_ReleaseRenderTarget_UnityEngine_RenderTexture__">EffectBase.ReleaseRenderTarget(ref RenderTexture)</a>
     </div>
     <div>
@@ -297,6 +300,80 @@
 </h3>
 
 
+  <a id="KSP_VolumeCloud_VolumeCloudBakeCubemap_BakeForEditor_" data-uid="KSP.VolumeCloud.VolumeCloudBakeCubemap.BakeForEditor*"></a>
+  <h4 id="KSP_VolumeCloud_VolumeCloudBakeCubemap_BakeForEditor_KSP_VolumeCloud_VolumeCloudConfiguration_KSP_VolumeCloud_VolumeCloudConfiguration_CumulusData_UnityEngine_Cubemap__UnityEngine_Cubemap__UnityEngine_Cubemap__" data-uid="KSP.VolumeCloud.VolumeCloudBakeCubemap.BakeForEditor(KSP.VolumeCloud.VolumeCloudConfiguration,KSP.VolumeCloud.VolumeCloudConfiguration.CumulusData,UnityEngine.Cubemap@,UnityEngine.Cubemap@,UnityEngine.Cubemap@)">BakeForEditor(VolumeCloudConfiguration, CumulusData, out Cubemap, out Cubemap, out Cubemap)</h4>
+  <div class="markdown level1 summary"><p>Bakes one layer's scaled clouds: the color cubemap, its underside and its normals.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool BakeForEditor(VolumeCloudConfiguration config, VolumeCloudConfiguration.CumulusData layer, out Cubemap color, out Cubemap bottom, out Cubemap normals)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.VolumeCloud.VolumeCloudConfiguration.html">VolumeCloudConfiguration</a></td>
+        <td><span class="parametername">config</span></td>
+        <td><p>The configuration the layer belongs to.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.VolumeCloud.VolumeCloudConfiguration.html">VolumeCloudConfiguration</a>.<a class="xref" href="KSP.VolumeCloud.VolumeCloudConfiguration.CumulusData.html">CumulusData</a></td>
+        <td><span class="parametername">layer</span></td>
+        <td><p>The layer to bake.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Cubemap.html">Cubemap</a></td>
+        <td><span class="parametername">color</span></td>
+        <td><p>The baked color cubemap.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Cubemap.html">Cubemap</a></td>
+        <td><span class="parametername">bottom</span></td>
+        <td><p>The baked underside cubemap.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Cubemap.html">Cubemap</a></td>
+        <td><span class="parametername">normals</span></td>
+        <td><p>The baked normal cubemap.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the bake finished, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_VolumeCloud_VolumeCloudBakeCubemap_BakeForEditor_KSP_VolumeCloud_VolumeCloudConfiguration_KSP_VolumeCloud_VolumeCloudConfiguration_CumulusData_UnityEngine_Cubemap__UnityEngine_Cubemap__UnityEngine_Cubemap___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Runs the same face-by-face sequence the game's baker does, from the planet's center outward. The planet
+rotation is reset to identity first, since the bake measures directions in the planet's own frame and
+nothing else sets it outside a running renderer.</p>
+</div>
+
+
   <a id="KSP_VolumeCloud_VolumeCloudBakeCubemap_EnableClouds_" data-uid="KSP.VolumeCloud.VolumeCloudBakeCubemap.EnableClouds*"></a>
   <h4 id="KSP_VolumeCloud_VolumeCloudBakeCubemap_EnableClouds_System_Boolean_" data-uid="KSP.VolumeCloud.VolumeCloudBakeCubemap.EnableClouds(System.Boolean)">EnableClouds(bool)</h4>
   <div class="markdown level1 summary"><p>Sets whether cloud rendering is enabled.</p>
@@ -351,6 +428,21 @@
       </tr>
     </tbody>
   </table>
+
+
+  <a id="KSP_VolumeCloud_VolumeCloudBakeCubemap_InitializeForEditor_" data-uid="KSP.VolumeCloud.VolumeCloudBakeCubemap.InitializeForEditor*"></a>
+  <h4 id="KSP_VolumeCloud_VolumeCloudBakeCubemap_InitializeForEditor" data-uid="KSP.VolumeCloud.VolumeCloudBakeCubemap.InitializeForEditor">InitializeForEditor()</h4>
+  <div class="markdown level1 summary"><p>Sets the baker up for the SDK, which hosts it on a hidden camera and bakes through <a class="xref" href="KSP.VolumeCloud.VolumeCloudBakeCubemap.html#KSP_VolumeCloud_VolumeCloudBakeCubemap_BakeForEditor_KSP_VolumeCloud_VolumeCloudConfiguration_KSP_VolumeCloud_VolumeCloudConfiguration_CumulusData_UnityEngine_Cubemap__UnityEngine_Cubemap__UnityEngine_Cubemap__">BakeForEditor(VolumeCloudConfiguration, CumulusData, out Cubemap, out Cubemap, out Cubemap)</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void InitializeForEditor()</code></pre>
+  </div>
+  <h5 id="KSP_VolumeCloud_VolumeCloudBakeCubemap_InitializeForEditor_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Call on an inactive GameObject after copying the cloud shader references onto the component and before
+activating it, so its Awake does not look for a running game.</p>
+</div>
 
 
   <a id="KSP_VolumeCloud_VolumeCloudBakeCubemap_IsEnabledClouds_" data-uid="KSP.VolumeCloud.VolumeCloudBakeCubemap.IsEnabledClouds*"></a>

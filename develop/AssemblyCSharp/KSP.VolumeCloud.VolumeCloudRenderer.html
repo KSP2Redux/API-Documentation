@@ -117,6 +117,9 @@
       <a class="xref" href="GlobalAssemblyCSharp.EffectBase.html#GlobalAssemblyCSharp_EffectBase_EnsureRenderTarget_UnityEngine_RenderTexture__System_Int32_System_Int32_UnityEngine_RenderTextureFormat_UnityEngine_FilterMode_UnityEngine_TextureWrapMode_System_Boolean_System_Boolean_System_Int32_System_Int32_System_String_">EffectBase.EnsureRenderTarget(ref RenderTexture, int, int, RenderTextureFormat, FilterMode, TextureWrapMode, bool, bool, int, int, string)</a>
     </div>
     <div>
+      <a class="xref" href="GlobalAssemblyCSharp.EffectBase.html#GlobalAssemblyCSharp_EffectBase_DestroyOrImmediate_UnityEngine_Object_">EffectBase.DestroyOrImmediate(Object)</a>
+    </div>
+    <div>
       <a class="xref" href="GlobalAssemblyCSharp.EffectBase.html#GlobalAssemblyCSharp_EffectBase_ReleaseRenderTarget_UnityEngine_RenderTexture__">EffectBase.ReleaseRenderTarget(ref RenderTexture)</a>
     </div>
     <div>
@@ -414,6 +417,39 @@
   </table>
 
 
+  <a id="KSP_VolumeCloud_VolumeCloudRenderer_InitializeForEditor_" data-uid="KSP.VolumeCloud.VolumeCloudRenderer.InitializeForEditor*"></a>
+  <h4 id="KSP_VolumeCloud_VolumeCloudRenderer_InitializeForEditor_KSP_VolumeCloud_IVolumeCloudEnvironment_" data-uid="KSP.VolumeCloud.VolumeCloudRenderer.InitializeForEditor(KSP.VolumeCloud.IVolumeCloudEnvironment)">InitializeForEditor(IVolumeCloudEnvironment)</h4>
+  <div class="markdown level1 summary"><p>Sets the renderer up for the SDK planet preview, which hosts it on the SceneView camera.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void InitializeForEditor(IVolumeCloudEnvironment environment)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.VolumeCloud.IVolumeCloudEnvironment.html">IVolumeCloudEnvironment</a></td>
+        <td><span class="parametername">environment</span></td>
+        <td><p>The scene state the preview supplies.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_VolumeCloud_VolumeCloudRenderer_InitializeForEditor_KSP_VolumeCloud_IVolumeCloudEnvironment__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Call straight after adding the component and copying a stock renderer's shader references onto it, before
+its first Start. The renderer then draws only from <a class="xref" href="KSP.VolumeCloud.VolumeCloudRenderer.html#KSP_VolumeCloud_VolumeCloudRenderer_RenderForEditor">RenderForEditor()</a>.</p>
+</div>
+
+
   <a id="KSP_VolumeCloud_VolumeCloudRenderer_IsEnabledClouds_" data-uid="KSP.VolumeCloud.VolumeCloudRenderer.IsEnabledClouds*"></a>
   <h4 id="KSP_VolumeCloud_VolumeCloudRenderer_IsEnabledClouds" data-uid="KSP.VolumeCloud.VolumeCloudRenderer.IsEnabledClouds">IsEnabledClouds()</h4>
   <div class="markdown level1 summary"><p>Returns a value indicating whether cloud rendering is currently enabled.</p>
@@ -439,6 +475,20 @@
       </tr>
     </tbody>
   </table>
+
+
+  <a id="KSP_VolumeCloud_VolumeCloudRenderer_RenderForEditor_" data-uid="KSP.VolumeCloud.VolumeCloudRenderer.RenderForEditor*"></a>
+  <h4 id="KSP_VolumeCloud_VolumeCloudRenderer_RenderForEditor" data-uid="KSP.VolumeCloud.VolumeCloudRenderer.RenderForEditor">RenderForEditor()</h4>
+  <div class="markdown level1 summary"><p>Builds this frame's cloud commands for the hosting camera.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RenderForEditor()</code></pre>
+  </div>
+  <h5 id="KSP_VolumeCloud_VolumeCloudRenderer_RenderForEditor_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Call from the camera's pre-cull, so the commands are in place when the camera renders.</p>
+</div>
 
 
   <a id="KSP_VolumeCloud_VolumeCloudRenderer_SetCloudsQualityLevel_" data-uid="KSP.VolumeCloud.VolumeCloudRenderer.SetCloudsQualityLevel*"></a>
@@ -503,6 +553,21 @@
       </tr>
     </tbody>
   </table>
+
+
+  <a id="KSP_VolumeCloud_VolumeCloudRenderer_ShutdownForEditor_" data-uid="KSP.VolumeCloud.VolumeCloudRenderer.ShutdownForEditor*"></a>
+  <h4 id="KSP_VolumeCloud_VolumeCloudRenderer_ShutdownForEditor" data-uid="KSP.VolumeCloud.VolumeCloudRenderer.ShutdownForEditor">ShutdownForEditor()</h4>
+  <div class="markdown level1 summary"><p>Takes everything an editor-hosted renderer added to its camera, light and shader globals back off.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ShutdownForEditor()</code></pre>
+  </div>
+  <h5 id="KSP_VolumeCloud_VolumeCloudRenderer_ShutdownForEditor_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The SceneView camera and the scene's light outlive the preview, so nothing that is destroyed along with a
+game camera may be left on them. Destroy the component afterwards.</p>
+</div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>

@@ -161,6 +161,69 @@
 </h3>
 
 
+  <a id="KSP_Rendering_Planets_AtmosphereScatterManager_BindLocalAtmosphere_" data-uid="KSP.Rendering.Planets.AtmosphereScatterManager.BindLocalAtmosphere*"></a>
+  <h4 id="KSP_Rendering_Planets_AtmosphereScatterManager_BindLocalAtmosphere_UnityEngine_Material_KSP_Rendering_IAtmosphereRenderModel_UnityEngine_Camera_UnityEngine_Vector3_UnityEngine_Vector3_UnityEngine_RenderTexture_" data-uid="KSP.Rendering.Planets.AtmosphereScatterManager.BindLocalAtmosphere(UnityEngine.Material,KSP.Rendering.IAtmosphereRenderModel,UnityEngine.Camera,UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.RenderTexture)">BindLocalAtmosphere(Material, IAtmosphereRenderModel, Camera, Vector3, Vector3, RenderTexture)</h4>
+  <div class="markdown level1 summary"><p>Binds an atmosphere to a material that composites inside it, such as the volumetric clouds.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void BindLocalAtmosphere(Material material, IAtmosphereRenderModel model, Camera camera, Vector3 planetCenterKilometers, Vector3 sunDirection, RenderTexture oceanDepth)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Material.html">Material</a></td>
+        <td><span class="parametername">material</span></td>
+        <td><p>The material to bind to.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.IAtmosphereRenderModel.html">IAtmosphereRenderModel</a></td>
+        <td><span class="parametername">model</span></td>
+        <td><p>The atmosphere to bind.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Camera.html">Camera</a></td>
+        <td><span class="parametername">camera</span></td>
+        <td><p>The camera the material draws for, which a Hillaire model updates against.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">planetCenterKilometers</span></td>
+        <td><p>The planet center in world space, in kilometers.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">sunDirection</span></td>
+        <td><p>The world-space direction toward the sun.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">RenderTexture</span></td>
+        <td><span class="parametername">oceanDepth</span></td>
+        <td><p>The ocean depth target, or <code>null</code> when nothing draws an ocean.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Rendering_Planets_AtmosphereScatterManager_BindLocalAtmosphere_UnityEngine_Material_KSP_Rendering_IAtmosphereRenderModel_UnityEngine_Camera_UnityEngine_Vector3_UnityEngine_Vector3_UnityEngine_RenderTexture__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Static so a host without a running scatter manager, such as the SDK planet preview, binds exactly what the
+game does.</p>
+</div>
+
+
   <a id="KSP_Rendering_Planets_AtmosphereScatterManager_BindLocalAtmosphereDataToMaterial_" data-uid="KSP.Rendering.Planets.AtmosphereScatterManager.BindLocalAtmosphereDataToMaterial*"></a>
   <h4 id="KSP_Rendering_Planets_AtmosphereScatterManager_BindLocalAtmosphereDataToMaterial_UnityEngine_Material_" data-uid="KSP.Rendering.Planets.AtmosphereScatterManager.BindLocalAtmosphereDataToMaterial(UnityEngine.Material)">BindLocalAtmosphereDataToMaterial(Material)</h4>
   <div class="markdown level1 summary"></div>
@@ -188,6 +251,82 @@
   </table>
 
 
+  <a id="KSP_Rendering_Planets_AtmosphereScatterManager_BindPostAtmosphere_" data-uid="KSP.Rendering.Planets.AtmosphereScatterManager.BindPostAtmosphere*"></a>
+  <h4 id="KSP_Rendering_Planets_AtmosphereScatterManager_BindPostAtmosphere_UnityEngine_Camera_KSP_Rendering_IAtmosphereRenderModel_UnityEngine_Material_UnityEngine_Vector3_UnityEngine_Vector3_System_Single_System_Single_UnityEngine_RenderTexture_" data-uid="KSP.Rendering.Planets.AtmosphereScatterManager.BindPostAtmosphere(UnityEngine.Camera,KSP.Rendering.IAtmosphereRenderModel,UnityEngine.Material,UnityEngine.Vector3,UnityEngine.Vector3,System.Single,System.Single,UnityEngine.RenderTexture)">BindPostAtmosphere(Camera, IAtmosphereRenderModel, Material, Vector3, Vector3, float, float, RenderTexture)</h4>
+  <div class="markdown level1 summary"><p>Writes everything the local-space post atmosphere shader reads for one camera into a material.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void BindPostAtmosphere(Camera camera, IAtmosphereRenderModel model, Material material, Vector3 planetCenterKilometers, Vector3 sunDirection, float transition, float ditheringScale, RenderTexture oceanDepth)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Camera.html">Camera</a></td>
+        <td><span class="parametername">camera</span></td>
+        <td><p>The camera the atmosphere is drawn for.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.IAtmosphereRenderModel.html">IAtmosphereRenderModel</a></td>
+        <td><span class="parametername">model</span></td>
+        <td><p>The atmosphere model to bind.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Material.html">Material</a></td>
+        <td><span class="parametername">material</span></td>
+        <td><p>The post atmosphere material to write into.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">planetCenterKilometers</span></td>
+        <td><p>The planet center in world space, in kilometers.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">sunDirection</span></td>
+        <td><p>The direction toward the sun, in world space.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">transition</span></td>
+        <td><p>The local-to-scaled transition. Zero draws the post atmosphere at full strength.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">ditheringScale</span></td>
+        <td><p>The dithering scale of the transition.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">RenderTexture</span></td>
+        <td><span class="parametername">oceanDepth</span></td>
+        <td><p>The ocean depth target, or <code>null</code> for a body drawn without an ocean.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Rendering_Planets_AtmosphereScatterManager_BindPostAtmosphere_UnityEngine_Camera_KSP_Rendering_IAtmosphereRenderModel_UnityEngine_Material_UnityEngine_Vector3_UnityEngine_Vector3_System_Single_System_Single_UnityEngine_RenderTexture__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Needs no <a class="xref" href="KSP.Rendering.Planets.AtmosphereScatterManager.html#KSP_Rendering_Planets_AtmosphereScatterManager_GraphicsManager">GraphicsManager</a>, so the SDK preview can drive the same shader in edit
+mode. Also enables the camera's depth texture, which the shader reads to stop rays at the
+terrain.</p>
+</div>
+
+
   <a id="KSP_Rendering_Planets_AtmosphereScatterManager_Cleanup_" data-uid="KSP.Rendering.Planets.AtmosphereScatterManager.Cleanup*"></a>
   <h4 id="KSP_Rendering_Planets_AtmosphereScatterManager_Cleanup" data-uid="KSP.Rendering.Planets.AtmosphereScatterManager.Cleanup">Cleanup()</h4>
   <div class="markdown level1 summary"></div>
@@ -196,6 +335,83 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void Cleanup()</code></pre>
   </div>
+
+
+  <a id="KSP_Rendering_Planets_AtmosphereScatterManager_CreateFullscreenQuadMesh_" data-uid="KSP.Rendering.Planets.AtmosphereScatterManager.CreateFullscreenQuadMesh*"></a>
+  <h4 id="KSP_Rendering_Planets_AtmosphereScatterManager_CreateFullscreenQuadMesh" data-uid="KSP.Rendering.Planets.AtmosphereScatterManager.CreateFullscreenQuadMesh">CreateFullscreenQuadMesh()</h4>
+  <div class="markdown level1 summary"><p>Creates the quad the post atmosphere is drawn with.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Mesh CreateFullscreenQuadMesh()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Mesh.html">Mesh</a></td>
+        <td><p>A new fullscreen quad mesh.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Rendering_Planets_AtmosphereScatterManager_CreateFullscreenQuadMesh_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The post shader treats the vertices as clip-space positions, so the quad covers the
+screen wherever it is placed. The caller owns the mesh.</p>
+</div>
+
+
+  <a id="KSP_Rendering_Planets_AtmosphereScatterManager_DrawPostAtmosphere_" data-uid="KSP.Rendering.Planets.AtmosphereScatterManager.DrawPostAtmosphere*"></a>
+  <h4 id="KSP_Rendering_Planets_AtmosphereScatterManager_DrawPostAtmosphere_UnityEngine_Camera_UnityEngine_Material_UnityEngine_Mesh_" data-uid="KSP.Rendering.Planets.AtmosphereScatterManager.DrawPostAtmosphere(UnityEngine.Camera,UnityEngine.Material,UnityEngine.Mesh)">DrawPostAtmosphere(Camera, Material, Mesh)</h4>
+  <div class="markdown level1 summary"><p>Draws the Bruneton post atmosphere into one camera this frame.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void DrawPostAtmosphere(Camera camera, Material material, Mesh fullscreenQuad)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Camera.html">Camera</a></td>
+        <td><span class="parametername">camera</span></td>
+        <td><p>The camera to draw into.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Material.html">Material</a></td>
+        <td><span class="parametername">material</span></td>
+        <td><p>The bound post atmosphere material.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Mesh.html">Mesh</a></td>
+        <td><span class="parametername">fullscreenQuad</span></td>
+        <td><p>A quad from <a class="xref" href="KSP.Rendering.Planets.AtmosphereScatterManager.html#KSP_Rendering_Planets_AtmosphereScatterManager_CreateFullscreenQuadMesh">CreateFullscreenQuadMesh()</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Rendering_Planets_AtmosphereScatterManager_DrawPostAtmosphere_UnityEngine_Camera_UnityEngine_Material_UnityEngine_Mesh__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Bind the material with <a class="xref" href="KSP.Rendering.Planets.AtmosphereScatterManager.html#KSP_Rendering_Planets_AtmosphereScatterManager_BindPostAtmosphere_UnityEngine_Camera_KSP_Rendering_IAtmosphereRenderModel_UnityEngine_Material_UnityEngine_Vector3_UnityEngine_Vector3_System_Single_System_Single_UnityEngine_RenderTexture_">BindPostAtmosphere(Camera, IAtmosphereRenderModel, Material, Vector3, Vector3, float, float, RenderTexture)</a> first. The quad's vertices are
+clip-space positions, so its transform only decides culling. It sits just beyond the near
+plane rather than a fixed metre ahead, which an orbital near plane would cull.</p>
+</div>
 
 
   <a id="KSP_Rendering_Planets_AtmosphereScatterManager_GetMapCamera_" data-uid="KSP.Rendering.Planets.AtmosphereScatterManager.GetMapCamera*"></a>

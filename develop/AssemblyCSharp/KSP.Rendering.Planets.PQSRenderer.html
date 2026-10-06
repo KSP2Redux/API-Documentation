@@ -885,6 +885,56 @@ public class PQSRenderer : KerbalMonoBehaviour, IPQSRenderer</code></pre>
   </table>
 
 
+  <h4 id="KSP_Rendering_Planets_PQSRenderer_OCEAN_LAVA_STAND_IN_SHADER" data-uid="KSP.Rendering.Planets.PQSRenderer.OCEAN_LAVA_STAND_IN_SHADER">OCEAN_LAVA_STAND_IN_SHADER</h4>
+  <div class="markdown level1 summary"><p>The name of the SDK's stand-in for the lava shader.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string OCEAN_LAVA_STAND_IN_SHADER = &quot;KSP2/Environment/Ocean/OceanLavaShader (SDK Stand-in)&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQSRenderer_OCEAN_WATER_STAND_IN_SHADER" data-uid="KSP.Rendering.Planets.PQSRenderer.OCEAN_WATER_STAND_IN_SHADER">OCEAN_WATER_STAND_IN_SHADER</h4>
+  <div class="markdown level1 summary"><p>The name of the SDK's stand-in for the water shader.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string OCEAN_WATER_STAND_IN_SHADER = &quot;KSP2/Environment/Ocean/OceanWater (SDK Stand-in)&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <h4 id="KSP_Rendering_Planets_PQSRenderer_OceanColliderIsTrigger" data-uid="KSP.Rendering.Planets.PQSRenderer.OceanColliderIsTrigger">OceanColliderIsTrigger</h4>
   <div class="markdown level1 summary"><p>Flag indicating whether the ocean collider is configured as a trigger.</p>
 </div>
@@ -2165,6 +2215,56 @@ of <code class="paramref">matrix</code>, derived via <a class="xref" href="https
   </div>
 
 
+  <a id="KSP_Rendering_Planets_PQSRenderer_NeedsGameOceanShader_" data-uid="KSP.Rendering.Planets.PQSRenderer.NeedsGameOceanShader*"></a>
+  <h4 id="KSP_Rendering_Planets_PQSRenderer_NeedsGameOceanShader_UnityEngine_Material_" data-uid="KSP.Rendering.Planets.PQSRenderer.NeedsGameOceanShader(UnityEngine.Material)">NeedsGameOceanShader(Material)</h4>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether an ocean material has to be moved onto the game's shader before it draws.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool NeedsGameOceanShader(Material material)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Material.html">Material</a></td>
+        <td><span class="parametername">material</span></td>
+        <td><p>The material to check.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the material is on a stand-in or has no usable shader, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Rendering_Planets_PQSRenderer_NeedsGameOceanShader_UnityEngine_Material__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>A material saved in a project, the SDK's or a mod's, cannot reference a shader that only exists in the game's
+data. It is authored on the SDK's stand-in, which carries the same properties, or comes back on Unity's error
+shader when the reference was lost. Either way it keeps the values and keywords it was saved with.</p>
+</div>
+
+
   <a id="KSP_Rendering_Planets_PQSRenderer_OceanColliderName_" data-uid="KSP.Rendering.Planets.PQSRenderer.OceanColliderName*"></a>
   <h4 id="KSP_Rendering_Planets_PQSRenderer_OceanColliderName" data-uid="KSP.Rendering.Planets.PQSRenderer.OceanColliderName">OceanColliderName()</h4>
   <div class="markdown level1 summary"><p>Returns the fixed name used to identify the ocean collider object.</p>
@@ -2360,6 +2460,37 @@ never call back, as is a batch whose readback fails.</p>
 </div>
 
 
+  <a id="KSP_Rendering_Planets_PQSRenderer_SetupOceanForEditor_" data-uid="KSP.Rendering.Planets.PQSRenderer.SetupOceanForEditor*"></a>
+  <h4 id="KSP_Rendering_Planets_PQSRenderer_SetupOceanForEditor" data-uid="KSP.Rendering.Planets.PQSRenderer.SetupOceanForEditor">SetupOceanForEditor()</h4>
+  <div class="markdown level1 summary"><p>Sets the ocean up against the current <a class="xref" href="KSP.Rendering.Planets.WaterManager.html">WaterManager</a>, for the SDK planet preview.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool SetupOceanForEditor()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the ocean is set up and registered with the manager, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Rendering_Planets_PQSRenderer_SetupOceanForEditor_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>In game the ocean is set up when the renderer's resources are, after the graphics manager has created the
+water manager. The preview creates its manager later, so it sets the ocean up again once it has.</p>
+</div>
+
+
   <a id="KSP_Rendering_Planets_PQSRenderer_ShutdownForEditor_" data-uid="KSP.Rendering.Planets.PQSRenderer.ShutdownForEditor*"></a>
   <h4 id="KSP_Rendering_Planets_PQSRenderer_ShutdownForEditor" data-uid="KSP.Rendering.Planets.PQSRenderer.ShutdownForEditor">ShutdownForEditor()</h4>
   <div class="markdown level1 summary"><p>Releases native allocations by invoking <span class="xref">KSP.Rendering.Planets.PQSRenderer.Shutdown</span>, providing editor-mode access for partial-boot cleanup.</p>
@@ -2368,6 +2499,17 @@ never call back, as is a batch whose readback fails.</p>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void ShutdownForEditor()</code></pre>
+  </div>
+
+
+  <a id="KSP_Rendering_Planets_PQSRenderer_ShutdownOceanForEditor_" data-uid="KSP.Rendering.Planets.PQSRenderer.ShutdownOceanForEditor*"></a>
+  <h4 id="KSP_Rendering_Planets_PQSRenderer_ShutdownOceanForEditor" data-uid="KSP.Rendering.Planets.PQSRenderer.ShutdownOceanForEditor">ShutdownOceanForEditor()</h4>
+  <div class="markdown level1 summary"><p>Takes the ocean down without touching the rest of the renderer, for the SDK planet preview.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ShutdownOceanForEditor()</code></pre>
   </div>
 
 

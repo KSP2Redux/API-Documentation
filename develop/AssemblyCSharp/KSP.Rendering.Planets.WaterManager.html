@@ -2260,6 +2260,32 @@
   </table>
 
 
+  <a id="KSP_Rendering_Planets_WaterManager_IsEditorHosted_" data-uid="KSP.Rendering.Planets.WaterManager.IsEditorHosted*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterManager_IsEditorHosted" data-uid="KSP.Rendering.Planets.WaterManager.IsEditorHosted">IsEditorHosted</h4>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the SDK planet preview hosts the manager.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsEditorHosted { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Rendering_Planets_WaterManager_LandBasedWaterBackSurfaceShader_" data-uid="KSP.Rendering.Planets.WaterManager.LandBasedWaterBackSurfaceShader*"></a>
   <h4 id="KSP_Rendering_Planets_WaterManager_LandBasedWaterBackSurfaceShader" data-uid="KSP.Rendering.Planets.WaterManager.LandBasedWaterBackSurfaceShader">LandBasedWaterBackSurfaceShader</h4>
   <div class="markdown level1 summary"><p>Gets or sets the shader used to render the back surface of land-based water volumes.</p>
@@ -3097,6 +3123,40 @@
   </table>
 
 
+  <a id="KSP_Rendering_Planets_WaterManager_CreateForEditor_" data-uid="KSP.Rendering.Planets.WaterManager.CreateForEditor*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterManager_CreateForEditor_KSP_Rendering_Planets_IWaterEnvironment_" data-uid="KSP.Rendering.Planets.WaterManager.CreateForEditor(KSP.Rendering.Planets.IWaterEnvironment)">CreateForEditor(IWaterEnvironment)</h4>
+  <div class="markdown level1 summary"><p>Creates the manager for the SDK planet preview, replacing any manager still in place.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void CreateForEditor(IWaterEnvironment environment)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Planets.IWaterEnvironment.html">IWaterEnvironment</a></td>
+        <td><span class="parametername">environment</span></td>
+        <td><p>What the manager reads from the scene in place of the game.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Rendering_Planets_WaterManager_CreateForEditor_KSP_Rendering_Planets_IWaterEnvironment__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Nothing ticks the manager's actions in edit mode, so the preview runs them with <a class="xref" href="KSP.Rendering.Planets.WaterManager.html#KSP_Rendering_Planets_WaterManager_TickForEditor">TickForEditor()</a>
+from its camera hook. The ocean meshes finish loading before this returns, since nothing completes an
+asynchronous load between preview frames.</p>
+</div>
+
+
   <a id="KSP_Rendering_Planets_WaterManager_Destroy_" data-uid="KSP.Rendering.Planets.WaterManager.Destroy*"></a>
   <h4 id="KSP_Rendering_Planets_WaterManager_Destroy" data-uid="KSP.Rendering.Planets.WaterManager.Destroy">Destroy()</h4>
   <div class="markdown level1 summary"><p>Destroys the singleton <a class="xref" href="KSP.Rendering.Planets.WaterManager.html">WaterManager</a> instance and releases all associated GPU and native memory resources.</p>
@@ -3106,6 +3166,21 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static void Destroy()</code></pre>
   </div>
+
+
+  <a id="KSP_Rendering_Planets_WaterManager_DestroyForEditor_" data-uid="KSP.Rendering.Planets.WaterManager.DestroyForEditor*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterManager_DestroyForEditor" data-uid="KSP.Rendering.Planets.WaterManager.DestroyForEditor">DestroyForEditor()</h4>
+  <div class="markdown level1 summary"><p>Destroys an editor-hosted manager and clears the singleton, so the next preview can create a fresh one.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void DestroyForEditor()</code></pre>
+  </div>
+  <h5 id="KSP_Rendering_Planets_WaterManager_DestroyForEditor_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p><a class="xref" href="KSP.Rendering.Planets.WaterManager.html#KSP_Rendering_Planets_WaterManager_Destroy">Destroy()</a> leaves the singleton in place, because game objects torn down after it still call into
+<a class="xref" href="KSP.Rendering.Planets.WaterManager.html#KSP_Rendering_Planets_WaterManager_Instance">Instance()</a> without checking for null, such as parts unregistering their water detection.</p>
+</div>
 
 
   <a id="KSP_Rendering_Planets_WaterManager_EnumerateWaterDetectObjects_" data-uid="KSP.Rendering.Planets.WaterManager.EnumerateWaterDetectObjects*"></a>
@@ -3633,6 +3708,18 @@
   </table>
 
 
+  <a id="KSP_Rendering_Planets_WaterManager_ReleaseCameraForEditor_" data-uid="KSP.Rendering.Planets.WaterManager.ReleaseCameraForEditor*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterManager_ReleaseCameraForEditor" data-uid="KSP.Rendering.Planets.WaterManager.ReleaseCameraForEditor">ReleaseCameraForEditor()</h4>
+  <div class="markdown level1 summary"><p>Takes an editor-hosted manager's command buffers off its camera, so a paused preview stops replaying the last
+frame it drew. The next <a class="xref" href="KSP.Rendering.Planets.WaterManager.html#KSP_Rendering_Planets_WaterManager_TickForEditor">TickForEditor()</a> puts them back.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void ReleaseCameraForEditor()</code></pre>
+  </div>
+
+
   <a id="KSP_Rendering_Planets_WaterManager_ResetWaterDetectObjects_" data-uid="KSP.Rendering.Planets.WaterManager.ResetWaterDetectObjects*"></a>
   <h4 id="KSP_Rendering_Planets_WaterManager_ResetWaterDetectObjects" data-uid="KSP.Rendering.Planets.WaterManager.ResetWaterDetectObjects">ResetWaterDetectObjects()</h4>
   <div class="markdown level1 summary"><p>Rebuilds the native detection arrays to match the current set of registered objects and resets all per-object state for the next detection pass.</p>
@@ -3673,6 +3760,22 @@
   </table>
 
 
+  <a id="KSP_Rendering_Planets_WaterManager_TickForEditor_" data-uid="KSP.Rendering.Planets.WaterManager.TickForEditor*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterManager_TickForEditor" data-uid="KSP.Rendering.Planets.WaterManager.TickForEditor">TickForEditor()</h4>
+  <div class="markdown level1 summary"><p>Runs one frame of an editor-hosted manager, in the order the game's late update runs its actions, then uploads
+the generated ocean vertices the way the game camera's <code>SetOceanData</code> does before it culls.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void TickForEditor()</code></pre>
+  </div>
+  <h5 id="KSP_Rendering_Planets_WaterManager_TickForEditor_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Called from the camera's pre-cull, so the draws and command buffers it fills are consumed by the frame that
+camera is about to render.</p>
+</div>
+
+
   <a id="KSP_Rendering_Planets_WaterManager_UnRegisterDrawLandBasedWaterAction_" data-uid="KSP.Rendering.Planets.WaterManager.UnRegisterDrawLandBasedWaterAction*"></a>
   <h4 id="KSP_Rendering_Planets_WaterManager_UnRegisterDrawLandBasedWaterAction_System_Action_" data-uid="KSP.Rendering.Planets.WaterManager.UnRegisterDrawLandBasedWaterAction(System.Action)">UnRegisterDrawLandBasedWaterAction(Action)</h4>
   <div class="markdown level1 summary"><p>Removes a previously registered land-based water draw callback.</p>
@@ -3696,6 +3799,42 @@
         <td><span class="xref">Action</span></td>
         <td><span class="parametername">action</span></td>
         <td><p>The callback to remove from the land-based water draw invocation list.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_WaterManager_UnregisterOceanActions_" data-uid="KSP.Rendering.Planets.WaterManager.UnregisterOceanActions*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterManager_UnregisterOceanActions_System_Action_System_Action_" data-uid="KSP.Rendering.Planets.WaterManager.UnregisterOceanActions(System.Action,System.Action)">UnregisterOceanActions(Action, Action)</h4>
+  <div class="markdown level1 summary"><p>Clears the ocean callbacks a renderer registered, leaving them alone when another renderer has replaced them
+since.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UnregisterOceanActions(Action update, Action draw)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action</span></td>
+        <td><span class="parametername">update</span></td>
+        <td><p>The renderer's ocean update callback.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Action</span></td>
+        <td><span class="parametername">draw</span></td>
+        <td><p>The renderer's ocean draw callback.</p>
 </td>
       </tr>
     </tbody>
