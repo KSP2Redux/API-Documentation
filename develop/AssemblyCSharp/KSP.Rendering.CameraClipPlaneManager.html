@@ -159,69 +159,6 @@
   </table>
 
 
-  <a id="KSP_Rendering_CameraClipPlaneManager_FarClipPlane_" data-uid="KSP.Rendering.CameraClipPlaneManager.FarClipPlane*"></a>
-  <h4 id="KSP_Rendering_CameraClipPlaneManager_FarClipPlane_System_Double_KSP_Sim_Definitions_CelestialBodyData_KSP_Rendering_Planets_PQSData_" data-uid="KSP.Rendering.CameraClipPlaneManager.FarClipPlane(System.Double,KSP.Sim.Definitions.CelestialBodyData,KSP.Rendering.Planets.PQSData)">FarClipPlane(double, CelestialBodyData, PQSData)</h4>
-  <div class="markdown level1 summary"><p>Computes the far clip plane for a camera at the given distance from a body's center.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static float FarClipPlane(double cameraDistance, CelestialBodyData body, PQSData pqsData)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">double</span></td>
-        <td><span class="parametername">cameraDistance</span></td>
-        <td><p>The camera's distance from the body's center, in meters.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.CelestialBodyData.html">CelestialBodyData</a></td>
-        <td><span class="parametername">body</span></td>
-        <td><p>The body the camera is near.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="KSP.Rendering.Planets.PQSData.html">PQSData</a></td>
-        <td><span class="parametername">pqsData</span></td>
-        <td><p>The body's PQS data, which holds the cutoffs and the scaled-to-local transition.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">float</span></td>
-        <td><p>The far clip plane distance, in meters.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="KSP_Rendering_CameraClipPlaneManager_FarClipPlane_System_Double_KSP_Sim_Definitions_CelestialBodyData_KSP_Rendering_Planets_PQSData__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Near the surface the far plane is a multiple of the radius for the camera's altitude band, taken from the PQS
-data's view plane cutoffs, and never shorter than the farthest terrain the camera can see past the horizon. A
-multiple alone falls short of the horizon over a small body with tall terrain, and terrain past the far plane
-writes no depth, so the atmosphere draws over it as open sky.</p>
-</div>
-
-
   <a id="KSP_Rendering_CameraClipPlaneManager_Init_" data-uid="KSP.Rendering.CameraClipPlaneManager.Init*"></a>
   <h4 id="KSP_Rendering_CameraClipPlaneManager_Init_KSP_Rendering_GraphicsManager_" data-uid="KSP.Rendering.CameraClipPlaneManager.Init(KSP.Rendering.GraphicsManager)">Init(GraphicsManager)</h4>
   <div class="markdown level1 summary"><p>Initializes the manager with the specified graphics manager and performs an immediate clip plane update.</p>
@@ -245,57 +182,6 @@ writes no depth, so the atmosphere draws over it as open sky.</p>
         <td><a class="xref" href="KSP.Rendering.GraphicsManager.html">GraphicsManager</a></td>
         <td><span class="parametername">gm</span></td>
         <td><p>The graphics manager used to query camera and sphere-of-influence body data.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="KSP_Rendering_CameraClipPlaneManager_VisibleTerrainDistance_" data-uid="KSP.Rendering.CameraClipPlaneManager.VisibleTerrainDistance*"></a>
-  <h4 id="KSP_Rendering_CameraClipPlaneManager_VisibleTerrainDistance_System_Double_KSP_Sim_Definitions_CelestialBodyData_" data-uid="KSP.Rendering.CameraClipPlaneManager.VisibleTerrainDistance(System.Double,KSP.Sim.Definitions.CelestialBodyData)">VisibleTerrainDistance(double, CelestialBodyData)</h4>
-  <div class="markdown level1 summary"><p>Gets the distance from a camera to the farthest terrain it can see past a body's horizon.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static double VisibleTerrainDistance(double cameraDistance, CelestialBodyData body)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">double</span></td>
-        <td><span class="parametername">cameraDistance</span></td>
-        <td><p>The camera's distance from the body's center, in meters.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.CelestialBodyData.html">CelestialBodyData</a></td>
-        <td><span class="parametername">body</span></td>
-        <td><p>The body whose terrain heights bound the horizon.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">double</span></td>
-        <td><p>The distance to the farthest visible terrain, in meters.</p>
 </td>
       </tr>
     </tbody>
