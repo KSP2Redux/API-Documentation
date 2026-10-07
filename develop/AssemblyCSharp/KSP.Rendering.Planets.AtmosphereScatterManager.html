@@ -135,6 +135,36 @@
   </table>
 
 
+  <h4 id="KSP_Rendering_Planets_AtmosphereScatterManager_HILLAIRE_COMPOSITE_EVENT" data-uid="KSP.Rendering.Planets.AtmosphereScatterManager.HILLAIRE_COMPOSITE_EVENT">HILLAIRE_COMPOSITE_EVENT</h4>
+  <div class="markdown level1 summary"><p>The camera event the Hillaire composite runs at.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const CameraEvent HILLAIRE_COMPOSITE_EVENT = 16</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Rendering.CameraEvent.html">CameraEvent</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Rendering_Planets_AtmosphereScatterManager_HILLAIRE_COMPOSITE_EVENT_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>After the opaque scene and its depth, before transparents and post-processing, where stock's Bruneton post
+atmosphere draws at queue Transparent-50. Any later and its HDR light lands on an already tonemapped frame,
+skipping exposure, bloom and tonemapping.</p>
+</div>
+
+
   <h4 id="KSP_Rendering_Planets_AtmosphereScatterManager_LightingSystem" data-uid="KSP.Rendering.Planets.AtmosphereScatterManager.LightingSystem">LightingSystem</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
@@ -359,6 +389,69 @@ terrain.</p>
   <h5 id="KSP_Rendering_Planets_AtmosphereScatterManager_CreateFullscreenQuadMesh_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>The post shader treats the vertices as clip-space positions, so the quad covers the
 screen wherever it is placed. The caller owns the mesh.</p>
+</div>
+
+
+  <a id="KSP_Rendering_Planets_AtmosphereScatterManager_CreateHillaireComposite_" data-uid="KSP.Rendering.Planets.AtmosphereScatterManager.CreateHillaireComposite*"></a>
+  <h4 id="KSP_Rendering_Planets_AtmosphereScatterManager_CreateHillaireComposite_UnityEngine_Material_UnityEngine_Mesh_System_Boolean_" data-uid="KSP.Rendering.Planets.AtmosphereScatterManager.CreateHillaireComposite(UnityEngine.Material,UnityEngine.Mesh,System.Boolean)">CreateHillaireComposite(Material, Mesh, bool)</h4>
+  <div class="markdown level1 summary"><p>Builds the command buffer that composites a Hillaire post atmosphere over a camera's frame.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static CommandBuffer CreateHillaireComposite(Material material, Mesh fullscreenQuad, bool hdr)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Material.html">Material</a></td>
+        <td><span class="parametername">material</span></td>
+        <td><p>The bound Hillaire post atmosphere material.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Mesh.html">Mesh</a></td>
+        <td><span class="parametername">fullscreenQuad</span></td>
+        <td><p>A quad from <a class="xref" href="KSP.Rendering.Planets.AtmosphereScatterManager.html#KSP_Rendering_Planets_AtmosphereScatterManager_CreateFullscreenQuadMesh">CreateFullscreenQuadMesh()</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">hdr</span></td>
+        <td><p>Whether the camera renders HDR, which decides the scene copy's format.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Rendering.CommandBuffer.html">CommandBuffer</a></td>
+        <td><p>The composite command buffer, not yet attached to any camera.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Rendering_Planets_AtmosphereScatterManager_CreateHillaireComposite_UnityEngine_Material_UnityEngine_Mesh_System_Boolean__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The shader reads the scene and writes scene times transmittance plus in-scatter in one pass, so the buffer
+copies the camera target first. Attach it at <a class="xref" href="KSP.Rendering.Planets.AtmosphereScatterManager.html#KSP_Rendering_Planets_AtmosphereScatterManager_HILLAIRE_COMPOSITE_EVENT">HILLAIRE_COMPOSITE_EVENT</a> on the camera the
+material was bound for with <a class="xref" href="KSP.Rendering.Planets.AtmosphereScatterManager.html#KSP_Rendering_Planets_AtmosphereScatterManager_BindPostAtmosphere_UnityEngine_Camera_KSP_Rendering_IAtmosphereRenderModel_UnityEngine_Material_UnityEngine_Vector3_UnityEngine_Vector3_System_Single_System_Single_UnityEngine_RenderTexture_">BindPostAtmosphere(Camera, IAtmosphereRenderModel, Material, Vector3, Vector3, float, float, RenderTexture)</a>. Static so the SDK preview composites exactly
+as the game does.</p>
 </div>
 
 
