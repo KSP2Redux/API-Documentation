@@ -251,7 +251,7 @@
 
 
   <h4 id="KSP_Modules_Data_WheelSuspension_SuspensionDirection" data-uid="KSP.Modules.Data_WheelSuspension.SuspensionDirection">SuspensionDirection</h4>
-  <div class="markdown level1 summary"><p>The local axis along which the suspension transform travels.</p>
+  <div class="markdown level1 summary"><p>Unused by the coupled solver. Kept for part JSON compatibility.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -277,7 +277,7 @@ public Data_WheelSuspension.TransformDir SuspensionDirection</code></pre>
 
 
   <h4 id="KSP_Modules_Data_WheelSuspension_adjustForHighGee" data-uid="KSP.Modules.Data_WheelSuspension.adjustForHighGee">adjustForHighGee</h4>
-  <div class="markdown level1 summary"><p>A value indicating whether the suspension stiffens automatically when landing on high-gravity bodies.</p>
+  <div class="markdown level1 summary"><p>Unused by the coupled solver. Kept for part JSON compatibility.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -303,7 +303,7 @@ public bool adjustForHighGee</code></pre>
 
 
   <h4 id="KSP_Modules_Data_WheelSuspension_autoBoost" data-uid="KSP.Modules.Data_WheelSuspension.autoBoost">autoBoost</h4>
-  <div class="markdown level1 summary"><p>The current auto-boost factor augmented dynamically by suspension compression.</p>
+  <div class="markdown level1 summary"><p>Unused by the coupled solver. Kept for save compatibility.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -329,7 +329,7 @@ public float autoBoost</code></pre>
 
 
   <h4 id="KSP_Modules_Data_WheelSuspension_autoSpringDamper" data-uid="KSP.Modules.Data_WheelSuspension.autoSpringDamper">autoSpringDamper</h4>
-  <div class="markdown level1 summary"><p>The tweakable property controlling whether spring and damper values are computed automatically.</p>
+  <div class="markdown level1 summary"><p>The tweakable property controlling whether the spring and damper use the configured rates unscaled. When off, <a class="xref" href="KSP.Modules.Data_WheelSuspension.html#KSP_Modules_Data_WheelSuspension_springTweakable">springTweakable</a> and <a class="xref" href="KSP.Modules.Data_WheelSuspension.html#KSP_Modules_Data_WheelSuspension_damperTweakable">damperTweakable</a> scale them.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -357,7 +357,7 @@ public ModuleProperty&lt;bool&gt; autoSpringDamper</code></pre>
 
 
   <h4 id="KSP_Modules_Data_WheelSuspension_boostRatio" data-uid="KSP.Modules.Data_WheelSuspension.boostRatio">boostRatio</h4>
-  <div class="markdown level1 summary"><p>The exponent for the boost curve that responds to suspension compression.</p>
+  <div class="markdown level1 summary"><p>Unused by the coupled solver. Kept for part JSON compatibility.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -383,7 +383,7 @@ public float boostRatio</code></pre>
 
 
   <h4 id="KSP_Modules_Data_WheelSuspension_damperRatio" data-uid="KSP.Modules.Data_WheelSuspension.damperRatio">damperRatio</h4>
-  <div class="markdown level1 summary"><p>The base damping coefficient multiplied against the square root of the computed spring rate.</p>
+  <div class="markdown level1 summary"><p>Unused by the coupled solver. Kept for part JSON compatibility. The damper rate is derived from the damping ratio.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -409,7 +409,7 @@ public float damperRatio</code></pre>
 
 
   <h4 id="KSP_Modules_Data_WheelSuspension_damperTweakable" data-uid="KSP.Modules.Data_WheelSuspension.damperTweakable">damperTweakable</h4>
-  <div class="markdown level1 summary"><p>The player-adjustable damper strength multiplier applied on top of the base damper ratio.</p>
+  <div class="markdown level1 summary"><p>The player-adjustable multiplier on the damping ratio. Only applied while <a class="xref" href="KSP.Modules.Data_WheelSuspension.html#KSP_Modules_Data_WheelSuspension_autoSpringDamper">autoSpringDamper</a> is off.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -437,8 +437,34 @@ public ModuleProperty&lt;float&gt; damperTweakable</code></pre>
   </table>
 
 
+  <h4 id="KSP_Modules_Data_WheelSuspension_dampingRatio" data-uid="KSP.Modules.Data_WheelSuspension.dampingRatio">dampingRatio</h4>
+  <div class="markdown level1 summary"><p>Damping ratio in compression against the nominal sprung mass. Rebound uses five thirds of it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[KSPDefinition]
+public float dampingRatio</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <h4 id="KSP_Modules_Data_WheelSuspension_highGeeDamperTweakable" data-uid="KSP.Modules.Data_WheelSuspension.highGeeDamperTweakable">highGeeDamperTweakable</h4>
-  <div class="markdown level1 summary"><p>The multiplier applied to the computed damper while the high-Gee override is active.</p>
+  <div class="markdown level1 summary"><p>Unused by the coupled solver. Kept for part JSON compatibility.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -464,7 +490,7 @@ public float highGeeDamperTweakable</code></pre>
 
 
   <h4 id="KSP_Modules_Data_WheelSuspension_highGeeSpringTweakable" data-uid="KSP.Modules.Data_WheelSuspension.highGeeSpringTweakable">highGeeSpringTweakable</h4>
-  <div class="markdown level1 summary"><p>The multiplier applied to the computed spring rate while the high-Gee override is active.</p>
+  <div class="markdown level1 summary"><p>Unused by the coupled solver. Kept for part JSON compatibility.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -490,7 +516,7 @@ public float highGeeSpringTweakable</code></pre>
 
 
   <h4 id="KSP_Modules_Data_WheelSuspension_highGeeThreshold" data-uid="KSP.Modules.Data_WheelSuspension.highGeeThreshold">highGeeThreshold</h4>
-  <div class="markdown level1 summary"><p>The body gravity threshold in g above which the high-Gee override engages.</p>
+  <div class="markdown level1 summary"><p>Unused by the coupled solver. Kept for part JSON compatibility.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -517,7 +543,8 @@ public float highGeeThreshold</code></pre>
 
 
   <h4 id="KSP_Modules_Data_WheelSuspension_maximumLoad" data-uid="KSP.Modules.Data_WheelSuspension.maximumLoad">maximumLoad</h4>
-  <div class="markdown level1 summary"><p>The sprung mass in tonnes that this wheel is designed for.</p>
+  <div class="markdown level1 summary"><p>The rated load of the wheel in tonnes under standard gravity. Loads past it damage the wheel and
+loads past it times the explode multiplier destroy the part. Zero disables load damage.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -543,8 +570,35 @@ public float maximumLoad</code></pre>
   </table>
 
 
+  <h4 id="KSP_Modules_Data_WheelSuspension_naturalFrequency" data-uid="KSP.Modules.Data_WheelSuspension.naturalFrequency">naturalFrequency</h4>
+  <div class="markdown level1 summary"><p>Target ride frequency of the suspension in hertz. Zero uses 1.5 Hz for wheels and 2 Hz for landing legs.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[KSPDefinition]
+[Unit(&quot;Hz&quot;)]
+public float naturalFrequency</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <h4 id="KSP_Modules_Data_WheelSuspension_springRatio" data-uid="KSP.Modules.Data_WheelSuspension.springRatio">springRatio</h4>
-  <div class="markdown level1 summary"><p>The base spring strength per unit of sprung mass used to compute the WheelCollider spring rate.</p>
+  <div class="markdown level1 summary"><p>Unused by the coupled solver. Kept for part JSON compatibility. The spring rate is derived from the natural frequency.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -570,7 +624,7 @@ public float springRatio</code></pre>
 
 
   <h4 id="KSP_Modules_Data_WheelSuspension_springTweakable" data-uid="KSP.Modules.Data_WheelSuspension.springTweakable">springTweakable</h4>
-  <div class="markdown level1 summary"><p>The player-adjustable spring strength multiplier applied on top of the base spring ratio.</p>
+  <div class="markdown level1 summary"><p>The player-adjustable multiplier on the spring rate derived from the natural frequency. Only applied while <a class="xref" href="KSP.Modules.Data_WheelSuspension.html#KSP_Modules_Data_WheelSuspension_autoSpringDamper">autoSpringDamper</a> is off.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -599,7 +653,7 @@ public ModuleProperty&lt;float&gt; springTweakable</code></pre>
 
 
   <h4 id="KSP_Modules_Data_WheelSuspension_suspensionColliderName" data-uid="KSP.Modules.Data_WheelSuspension.suspensionColliderName">suspensionColliderName</h4>
-  <div class="markdown level1 summary"><p>The name of the transform that holds the disabled Unity WheelCollider.</p>
+  <div class="markdown level1 summary"><p>The name of the transform whose collider is disabled at initialisation.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -679,7 +733,7 @@ public float suspensionDistance</code></pre>
 
 
   <h4 id="KSP_Modules_Data_WheelSuspension_suspensionOffset" data-uid="KSP.Modules.Data_WheelSuspension.suspensionOffset">suspensionOffset</h4>
-  <div class="markdown level1 summary"><p>The offset in meters between the suspension transform and the Unity WheelCollider transform.</p>
+  <div class="markdown level1 summary"><p>An additional offset in meters applied to the visual suspension position along the travel axis.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -784,8 +838,35 @@ public float targetPosition</code></pre>
   </table>
 
 
+  <h4 id="KSP_Modules_Data_WheelSuspension_tireStiffness" data-uid="KSP.Modules.Data_WheelSuspension.tireStiffness">tireStiffness</h4>
+  <div class="markdown level1 summary"><p>Unused by the coupled solver. Kept for part JSON compatibility. The tire stiffness is the rated load over the tire travel on the wheel base module.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[KSPDefinition]
+[Unit(&quot;kN/m&quot;)]
+public float tireStiffness</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <h4 id="KSP_Modules_Data_WheelSuspension_useAutoBoost" data-uid="KSP.Modules.Data_WheelSuspension.useAutoBoost">useAutoBoost</h4>
-  <div class="markdown level1 summary"><p>A value indicating whether the runtime auto-boost curve is enabled.</p>
+  <div class="markdown level1 summary"><p>Unused by the coupled solver. Kept for part JSON compatibility.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -811,7 +892,7 @@ public bool useAutoBoost</code></pre>
 
 
   <h4 id="KSP_Modules_Data_WheelSuspension_useDistributedMass" data-uid="KSP.Modules.Data_WheelSuspension.useDistributedMass">useDistributedMass</h4>
-  <div class="markdown level1 summary"><p>A value indicating whether load is computed from the vessel distributed-mass solver rather than the local sprung mass.</p>
+  <div class="markdown level1 summary"><p>Unused by the coupled solver. Kept for part JSON compatibility.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>

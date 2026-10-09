@@ -286,7 +286,7 @@
   <h5 id="KSP_Modules_Module_WheelBrakes_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[ModuleCategory(&quot;Wheels&quot;)]
-[ModuleDescription(&quot;Velocity-scaled braking force&quot;)]
+[ModuleDescription(&quot;Brake torque as a bounded constraint on the wheel spin&quot;)]
 public class Module_WheelBrakes : Module_WheelSubmodule, IPartModule, IObjectAssemblyPartModule, IPartBrakes</code></pre>
   </div>
   <h3 id="constructors">Constructors
@@ -303,6 +303,35 @@ public class Module_WheelBrakes : Module_WheelSubmodule, IPartModule, IObjectAss
   </div>
   <h3 id="fields">Fields
 </h3>
+
+
+  <h4 id="KSP_Modules_Module_WheelBrakes_LOCK_TORQUE_MARGIN" data-uid="KSP.Modules.Module_WheelBrakes.LOCK_TORQUE_MARGIN">LOCK_TORQUE_MARGIN</h4>
+  <div class="markdown level1 summary"><p>Full brake torque as a multiple of the torque the tire transmits at its nominal load. At one,
+a 100 percent setting is as hard as the tire allows on a nominally loaded wheel, and the
+tweakable's range above 100 percent locks it. The configured torque of a part is far above
+that, so without this cap every setting above a percent locked the wheel and the tweakable
+had no visible effect.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const float LOCK_TORQUE_MARGIN = 1</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <h4 id="KSP_Modules_Module_WheelBrakes_StatusLight" data-uid="KSP.Modules.Module_WheelBrakes.StatusLight">StatusLight</h4>
@@ -423,6 +452,70 @@ public class Module_WheelBrakes : Module_WheelSubmodule, IPartModule, IObjectAss
   </div>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_AddDataModules">PartBehaviourModule.AddDataModules()</a></div>
+
+
+  <a id="KSP_Modules_Module_WheelBrakes_FullBrakeTorque_" data-uid="KSP.Modules.Module_WheelBrakes.FullBrakeTorque*"></a>
+  <h4 id="KSP_Modules_Module_WheelBrakes_FullBrakeTorque_System_Single_System_Single_System_Single_System_Single_" data-uid="KSP.Modules.Module_WheelBrakes.FullBrakeTorque(System.Single,System.Single,System.Single,System.Single)">FullBrakeTorque(float, float, float, float)</h4>
+  <div class="markdown level1 summary"><p>Returns the brake torque a 100 percent brake setting applies: the configured torque, capped
+at <a class="xref" href="KSP.Modules.Module_WheelBrakes.html#KSP_Modules_Module_WheelBrakes_LOCK_TORQUE_MARGIN">LOCK_TORQUE_MARGIN</a> times the torque the tire transmits at its nominal load.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float FullBrakeTorque(float configuredTorque, float peakFriction, float nominalLoad, float radius)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">configuredTorque</span></td>
+        <td><p>The part's maximum brake torque, in kilonewton metres.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">peakFriction</span></td>
+        <td><p>Peak friction coefficient of the tire.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">nominalLoad</span></td>
+        <td><p>Nominal contact load of the wheel, in kilonewtons.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">radius</span></td>
+        <td><p>Wheel radius in metres.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><p>The full brake torque in kilonewton metres.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <a id="KSP_Modules_Module_WheelBrakes_OnInitialize_" data-uid="KSP.Modules.Module_WheelBrakes.OnInitialize*"></a>

@@ -357,7 +357,7 @@ public float deflectionSharpness</code></pre>
 
 
   <h4 id="KSP_Modules_Data_WheelDamage_explodeMultiplier" data-uid="KSP.Modules.Data_WheelDamage.explodeMultiplier">explodeMultiplier</h4>
-  <div class="markdown level1 summary"><p>Multiplier on <a class="xref" href="KSP.Modules.Data_WheelDamage.html#KSP_Modules_Data_WheelDamage_impactTolerance">impactTolerance</a> above which the part is destroyed instead of merely breaking.</p>
+  <div class="markdown level1 summary"><p>Multiplier on the impact speed tolerance and on the rated load above which the part is destroyed instead of merely breaking.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -383,7 +383,7 @@ public float explodeMultiplier</code></pre>
 
 
   <h4 id="KSP_Modules_Data_WheelDamage_impactDamageColliderName" data-uid="KSP.Modules.Data_WheelDamage.impactDamageColliderName">impactDamageColliderName</h4>
-  <div class="markdown level1 summary"><p>Name of the child transform under the undamaged visual that hosts the impact-damage collider. Resolved via FindChildEx.</p>
+  <div class="markdown level1 summary"><p>Unused by the coupled solver. Kept for part JSON compatibility.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -410,7 +410,7 @@ public string impactDamageColliderName</code></pre>
 
 
   <h4 id="KSP_Modules_Data_WheelDamage_impactDamageVelocity" data-uid="KSP.Modules.Data_WheelDamage.impactDamageVelocity">impactDamageVelocity</h4>
-  <div class="markdown level1 summary"><p>Minimum projected impact velocity onto a contact normal, in metres per second, that counts as a damaging impact. Zero disables impact damage entirely.</p>
+  <div class="markdown level1 summary"><p>Touchdown approach speed along the contact normal, in metres per second, that breaks the wheel. Zero uses the part crash tolerance instead.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -437,7 +437,9 @@ public float impactDamageVelocity</code></pre>
 
 
   <h4 id="KSP_Modules_Data_WheelDamage_impactTolerance" data-uid="KSP.Modules.Data_WheelDamage.impactTolerance">impactTolerance</h4>
-  <div class="markdown level1 summary"><p>Impact force above which the wheel breaks from a single contact event. Impacts at <a class="xref" href="KSP.Modules.Data_WheelDamage.html#KSP_Modules_Data_WheelDamage_explodeMultiplier">explodeMultiplier</a> times this value destroy the part outright.</p>
+  <div class="markdown level1 summary"><p>Unused by the coupled solver. Kept for part JSON compatibility. Impacts are assessed from the touchdown speed against
+<a class="xref" href="KSP.Modules.Data_WheelDamage.html#KSP_Modules_Data_WheelDamage_impactDamageVelocity">impactDamageVelocity</a> or the part crash tolerance, and from the absorbed energy and
+sustained load against the suspension module's rated maximum load.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>

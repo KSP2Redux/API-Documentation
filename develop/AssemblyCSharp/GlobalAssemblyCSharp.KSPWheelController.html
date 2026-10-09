@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class KSPWheelController | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="Represents a KSP wheel controller component that applies drive, brake, and steering inputs to a single wheel via VehiclePhysics simulation.">
+    <meta name="description" content="Represents a KSP wheel controller component that feeds drive, brake and steering inputs of a single wheel into the coupled wheel solver.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,8 @@
 
 
   <h1 id="GlobalAssemblyCSharp_KSPWheelController" data-uid="GlobalAssemblyCSharp.KSPWheelController" class="text-break">Class KSPWheelController</h1>
-  <div class="markdown level0 summary"><p>Represents a KSP wheel controller component that applies drive, brake, and steering inputs to a single wheel via VehiclePhysics simulation.</p>
+  <div class="markdown level0 summary"><p>Represents a KSP wheel controller component that feeds drive, brake and steering inputs of a single wheel
+into the coupled wheel solver.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -187,6 +188,31 @@
   </table>
 
 
+  <h4 id="GlobalAssemblyCSharp_KSPWheelController_CanSpin" data-uid="GlobalAssemblyCSharp.KSPWheelController.CanSpin">CanSpin</h4>
+  <div class="markdown level1 summary"><p>Whether this wheel spins. Landing legs are wheels with no spin and no steering.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool CanSpin</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <h4 id="GlobalAssemblyCSharp_KSPWheelController_DriveInput" data-uid="GlobalAssemblyCSharp.KSPWheelController.DriveInput">DriveInput</h4>
   <div class="markdown level1 summary"><p>The requested drive input in the range [-1, 1], where positive values drive forward.</p>
 </div>
@@ -262,138 +288,14 @@
   </table>
 
 
-  <h4 id="GlobalAssemblyCSharp_KSPWheelController_FixedUpdateFramesToSkipOnFOSnap" data-uid="GlobalAssemblyCSharp.KSPWheelController.FixedUpdateFramesToSkipOnFOSnap">FixedUpdateFramesToSkipOnFOSnap</h4>
-  <div class="markdown level1 summary"><p>The number of fixed-update frames to hold the last pre-snap force after a floating-origin snap.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int FixedUpdateFramesToSkipOnFOSnap</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">int</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="GlobalAssemblyCSharp_KSPWheelController_KeyboardBrakes" data-uid="GlobalAssemblyCSharp.KSPWheelController.KeyboardBrakes">KeyboardBrakes</h4>
-  <div class="markdown level1 summary"><p>A value indicating whether keyboard input (B key) controls braking.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool KeyboardBrakes</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">bool</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="GlobalAssemblyCSharp_KSPWheelController_KeyboardDrive" data-uid="GlobalAssemblyCSharp.KSPWheelController.KeyboardDrive">KeyboardDrive</h4>
-  <div class="markdown level1 summary"><p>A value indicating whether keyboard input (W/S keys) controls drive torque.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool KeyboardDrive</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">bool</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="GlobalAssemblyCSharp_KSPWheelController_KeyboardSteering" data-uid="GlobalAssemblyCSharp.KSPWheelController.KeyboardSteering">KeyboardSteering</h4>
-  <div class="markdown level1 summary"><p>A value indicating whether keyboard input (A/D keys) controls steering.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool KeyboardSteering</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">bool</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
   <h4 id="GlobalAssemblyCSharp_KSPWheelController_MaxBrakeTorque" data-uid="GlobalAssemblyCSharp.KSPWheelController.MaxBrakeTorque">MaxBrakeTorque</h4>
-  <div class="markdown level1 summary"><p>The maximum brake torque, in Newton-metres, applied when the wheel is in motion.</p>
+  <div class="markdown level1 summary"><p>The maximum brake torque, in Newton-metres. The brake is a bounded constraint on the wheel spin, so
+this is also the holding torque of a parked wheel.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public float MaxBrakeTorque</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">float</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="GlobalAssemblyCSharp_KSPWheelController_MaxBrakeTorqueRest" data-uid="GlobalAssemblyCSharp.KSPWheelController.MaxBrakeTorqueRest">MaxBrakeTorqueRest</h4>
-  <div class="markdown level1 summary"><p>The maximum brake torque, in Newton-metres, applied when the wheel is at rest.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public float MaxBrakeTorqueRest</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -438,7 +340,7 @@
 
 
   <h4 id="GlobalAssemblyCSharp_KSPWheelController_MaxRpm" data-uid="GlobalAssemblyCSharp.KSPWheelController.MaxRpm">MaxRpm</h4>
-  <div class="markdown level1 summary"><p>The maximum rotational speed, in revolutions per minute, allowed for the wheel.</p>
+  <div class="markdown level1 summary"><p>The maximum rotational speed, in revolutions per minute, the drive may bring the wheel to.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -481,31 +383,6 @@
     <tbody>
       <tr>
         <td><span class="xref">float</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="GlobalAssemblyCSharp_KSPWheelController_OnShouldIgnoreForces" data-uid="GlobalAssemblyCSharp.KSPWheelController.OnShouldIgnoreForces">OnShouldIgnoreForces</h4>
-  <div class="markdown level1 summary"><p>A delegate invoked each fixed update to determine whether tire forces should be ignored for a given wheel state.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Func&lt;VehicleBase.WheelState, bool&gt; OnShouldIgnoreForces</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Func</span>&lt;<span class="xref">VehicleBase</span>.<span class="xref">WheelState</span>, <span class="xref">bool</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -587,31 +464,6 @@
   </table>
 
 
-  <h4 id="GlobalAssemblyCSharp_KSPWheelController_TireFriction" data-uid="GlobalAssemblyCSharp.KSPWheelController.TireFriction">TireFriction</h4>
-  <div class="markdown level1 summary"><p>The tire friction model applied to the controlled wheel.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public TireFriction TireFriction</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TireFriction</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
   <h4 id="GlobalAssemblyCSharp_KSPWheelController_WcTransform" data-uid="GlobalAssemblyCSharp.KSPWheelController.WcTransform">WcTransform</h4>
   <div class="markdown level1 summary"><p>The transform of the wheel collider GameObject, used for positional updates.</p>
 </div>
@@ -660,81 +512,6 @@
       </tr>
     </tbody>
   </table>
-
-
-  <h4 id="GlobalAssemblyCSharp_KSPWheelController_WheelDamping" data-uid="GlobalAssemblyCSharp.KSPWheelController.WheelDamping">WheelDamping</h4>
-  <div class="markdown level1 summary"><p>The damping coefficient applied to the wheel's rotational velocity each fixed update.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public float WheelDamping</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">float</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="GlobalAssemblyCSharp_KSPWheelController_m_directDrive" data-uid="GlobalAssemblyCSharp.KSPWheelController.m_directDrive">m_directDrive</h4>
-  <div class="markdown level1 summary"><p>The <span class="xref">VehiclePhysics.DirectDrive</span> solver block that connects motor input to the wheel.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected DirectDrive m_directDrive</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">DirectDrive</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="GlobalAssemblyCSharp_KSPWheelController_tgtRb" data-uid="GlobalAssemblyCSharp.KSPWheelController.tgtRb">tgtRb</h4>
-  <div class="markdown level1 summary"><p>The rigidbody to which suspension and tire forces are applied.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Rigidbody tgtRb</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Rigidbody.html">Rigidbody</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <h3 id="properties">Properties
 </h3>
 
@@ -759,214 +536,6 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="GlobalAssemblyCSharp_KSPWheelController_LegacyWheelLoad_" data-uid="GlobalAssemblyCSharp.KSPWheelController.LegacyWheelLoad*"></a>
-  <h4 id="GlobalAssemblyCSharp_KSPWheelController_LegacyWheelLoad" data-uid="GlobalAssemblyCSharp.KSPWheelController.LegacyWheelLoad">LegacyWheelLoad</h4>
-  <div class="markdown level1 summary"><p>Gets the wheel load expressed as a fraction of the vehicle's effective gravity, or 0 when the wheel is not grounded.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public float LegacyWheelLoad { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">float</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="GlobalAssemblyCSharp_KSPWheelController_RbTgt_" data-uid="GlobalAssemblyCSharp.KSPWheelController.RbTgt*"></a>
-  <h4 id="GlobalAssemblyCSharp_KSPWheelController_RbTgt" data-uid="GlobalAssemblyCSharp.KSPWheelController.RbTgt">RbTgt</h4>
-  <div class="markdown level1 summary"><p>Gets the target rigidbody that receives suspension and tire forces.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Rigidbody RbTgt { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Rigidbody.html">Rigidbody</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="GlobalAssemblyCSharp_KSPWheelController_SuspensionAxis_" data-uid="GlobalAssemblyCSharp.KSPWheelController.SuspensionAxis*"></a>
-  <h4 id="GlobalAssemblyCSharp_KSPWheelController_SuspensionAxis" data-uid="GlobalAssemblyCSharp.KSPWheelController.SuspensionAxis">SuspensionAxis</h4>
-  <div class="markdown level1 summary"><p>Gets the world-space suspension axis direction. Returns <code>Vector3.up</code> before initialization.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Vector3 SuspensionAxis { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Vector3</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="GlobalAssemblyCSharp_KSPWheelController_UseLockedContactFriction_" data-uid="GlobalAssemblyCSharp.KSPWheelController.UseLockedContactFriction*"></a>
-  <h4 id="GlobalAssemblyCSharp_KSPWheelController_UseLockedContactFriction" data-uid="GlobalAssemblyCSharp.KSPWheelController.UseLockedContactFriction">UseLockedContactFriction</h4>
-  <div class="markdown level1 summary"><p>Gets or sets whether a locked landing leg uses shared-body friction for raycast contacts.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool UseLockedContactFriction { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">bool</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="GlobalAssemblyCSharp_KSPWheelController_WheelBase_" data-uid="GlobalAssemblyCSharp.KSPWheelController.WheelBase*"></a>
-  <h4 id="GlobalAssemblyCSharp_KSPWheelController_WheelBase" data-uid="GlobalAssemblyCSharp.KSPWheelController.WheelBase">WheelBase</h4>
-  <div class="markdown level1 summary"><p>Gets the world-space position of the bottom of the wheel (center minus one radius in the down direction).</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Vector3 WheelBase { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Vector3</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="GlobalAssemblyCSharp_KSPWheelController_WheelCenter_" data-uid="GlobalAssemblyCSharp.KSPWheelController.WheelCenter*"></a>
-  <h4 id="GlobalAssemblyCSharp_KSPWheelController_WheelCenter" data-uid="GlobalAssemblyCSharp.KSPWheelController.WheelCenter">WheelCenter</h4>
-  <div class="markdown level1 summary"><p>Gets the world-space position of the wheel center, accounting for suspension compression.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Vector3 WheelCenter { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Vector3</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="GlobalAssemblyCSharp_KSPWheelController_WheelDown_" data-uid="GlobalAssemblyCSharp.KSPWheelController.WheelDown*"></a>
-  <h4 id="GlobalAssemblyCSharp_KSPWheelController_WheelDown" data-uid="GlobalAssemblyCSharp.KSPWheelController.WheelDown">WheelDown</h4>
-  <div class="markdown level1 summary"><p>Gets the world-space downward direction of the wheel collider, or <code>Vector3.zero</code> if no collider is assigned.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Vector3 WheelDown { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Vector3</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="GlobalAssemblyCSharp_KSPWheelController_WheelRadius_" data-uid="GlobalAssemblyCSharp.KSPWheelController.WheelRadius*"></a>
-  <h4 id="GlobalAssemblyCSharp_KSPWheelController_WheelRadius" data-uid="GlobalAssemblyCSharp.KSPWheelController.WheelRadius">WheelRadius</h4>
-  <div class="markdown level1 summary"><p>Gets the radius of the controlled wheel, in metres, or 0 if no collider is assigned.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public float WheelRadius { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">float</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -1095,30 +664,6 @@
   </table>
 
 
-  <a id="GlobalAssemblyCSharp_KSPWheelController_DoUpdateBlocks_" data-uid="GlobalAssemblyCSharp.KSPWheelController.DoUpdateBlocks*"></a>
-  <h4 id="GlobalAssemblyCSharp_KSPWheelController_DoUpdateBlocks" data-uid="GlobalAssemblyCSharp.KSPWheelController.DoUpdateBlocks">DoUpdateBlocks()</h4>
-  <div class="markdown level1 summary"><p>Called each fixed update to allow derived classes to update solver block inputs before integration.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected override void DoUpdateBlocks()</code></pre>
-  </div>
-  <h5 class="overrides">Overrides</h5>
-  <div><span class="xref">VehiclePhysics.VehicleBase.DoUpdateBlocks()</span></div>
-
-
-  <a id="GlobalAssemblyCSharp_KSPWheelController_FOSnapped_" data-uid="GlobalAssemblyCSharp.KSPWheelController.FOSnapped*"></a>
-  <h4 id="GlobalAssemblyCSharp_KSPWheelController_FOSnapped" data-uid="GlobalAssemblyCSharp.KSPWheelController.FOSnapped">FOSnapped()</h4>
-  <div class="markdown level1 summary"><p>Signals that a floating-origin snap has occurred, causing force output to be held at the pre-snap value for <a class="xref" href="GlobalAssemblyCSharp.KSPWheelController.html#KSPWheelController_FixedUpdateFramesToSkipOnFOSnap">FixedUpdateFramesToSkipOnFOSnap</a> frames.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void FOSnapped()</code></pre>
-  </div>
-
-
   <a id="GlobalAssemblyCSharp_KSPWheelController_Initialize_" data-uid="GlobalAssemblyCSharp.KSPWheelController.Initialize*"></a>
   <h4 id="GlobalAssemblyCSharp_KSPWheelController_Initialize" data-uid="GlobalAssemblyCSharp.KSPWheelController.Initialize">Initialize()</h4>
   <div class="markdown level1 summary"><p>Initializes the wheel controller if it has not already been initialized.</p>
@@ -1132,7 +677,7 @@
 
   <a id="GlobalAssemblyCSharp_KSPWheelController_OnInitialize_" data-uid="GlobalAssemblyCSharp.KSPWheelController.OnInitialize*"></a>
   <h4 id="GlobalAssemblyCSharp_KSPWheelController_OnInitialize" data-uid="GlobalAssemblyCSharp.KSPWheelController.OnInitialize">OnInitialize()</h4>
-  <div class="markdown level1 summary"><p>Called during vehicle enable to allow derived classes to configure wheels and solver blocks.</p>
+  <div class="markdown level1 summary"><p>Called during vehicle enable to allow derived classes to configure their wheels.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -1154,66 +699,6 @@
   </div>
   <h5 class="overrides">Overrides</h5>
   <div><span class="xref">VehiclePhysics.VehicleBase.OnUpdate()</span></div>
-
-
-  <a id="GlobalAssemblyCSharp_KSPWheelController_PreApplyForce_" data-uid="GlobalAssemblyCSharp.KSPWheelController.PreApplyForce*"></a>
-  <h4 id="GlobalAssemblyCSharp_KSPWheelController_PreApplyForce_UnityEngine_Vector3__" data-uid="GlobalAssemblyCSharp.KSPWheelController.PreApplyForce(UnityEngine.Vector3@)">PreApplyForce(ref Vector3)</h4>
-  <div class="markdown level1 summary"><p>Called immediately before the combined tire force is applied to the rigidbody, allowing derived classes to modify the force.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void PreApplyForce(ref Vector3 combinedTireForce)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Vector3</span></td>
-        <td><span class="parametername">combinedTireForce</span></td>
-        <td><p>The combined tire and damper force to be applied. Modify this value to override the applied force.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><span class="xref">VehiclePhysics.VehicleBase.PreApplyForce(ref UnityEngine.Vector3)</span></div>
-
-
-  <a id="GlobalAssemblyCSharp_KSPWheelController_SetRigidbodyTarget_" data-uid="GlobalAssemblyCSharp.KSPWheelController.SetRigidbodyTarget*"></a>
-  <h4 id="GlobalAssemblyCSharp_KSPWheelController_SetRigidbodyTarget_UnityEngine_Rigidbody_" data-uid="GlobalAssemblyCSharp.KSPWheelController.SetRigidbodyTarget(UnityEngine.Rigidbody)">SetRigidbodyTarget(Rigidbody)</h4>
-  <div class="markdown level1 summary"><p>Sets the rigidbody that receives forces, falling back to the vehicle's own rigidbody when <code class="paramref">tgt</code> is <code>null</code>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void SetRigidbodyTarget(Rigidbody tgt)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Rigidbody.html">Rigidbody</a></td>
-        <td><span class="parametername">tgt</span></td>
-        <td><p>The target rigidbody, or <code>null</code> to use the vehicle's own rigidbody.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
 
 
   <a id="GlobalAssemblyCSharp_KSPWheelController_SetWheelTransform_" data-uid="GlobalAssemblyCSharp.KSPWheelController.SetWheelTransform*"></a>
@@ -1249,6 +734,20 @@
       </tr>
     </tbody>
   </table>
+
+
+  <a id="GlobalAssemblyCSharp_KSPWheelController_UpdateWheelInputs_" data-uid="GlobalAssemblyCSharp.KSPWheelController.UpdateWheelInputs*"></a>
+  <h4 id="GlobalAssemblyCSharp_KSPWheelController_UpdateWheelInputs" data-uid="GlobalAssemblyCSharp.KSPWheelController.UpdateWheelInputs">UpdateWheelInputs()</h4>
+  <div class="markdown level1 summary"><p>Called each fixed update, before the wheels are staged, to allow derived classes to set the
+drive, brake and spin limit inputs of each wheel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void UpdateWheelInputs()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">VehiclePhysics.VehicleBase.UpdateWheelInputs()</span></div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>

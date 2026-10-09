@@ -929,6 +929,12 @@
       </tr>
     </tbody>
   </table>
+  <h5 id="KSP_OAB_AssemblyPartsPicker_IsHoveredByCursor_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The picker's canvas is a screen space overlay, where the UI is already in screen pixels. Projecting its corners
+through the OAB camera, as this used to, gave positions far off screen, so the check was always false and the
+gamepad next category and next filter actions that depend on it never ran. The canvas's own render mode now
+decides whether a camera is involved.</p>
+</div>
   <h3 id="methods">Methods
 </h3>
 
@@ -1432,6 +1438,10 @@
       </tr>
     </tbody>
   </table>
+  <h5 id="KSP_OAB_AssemblyPartsPicker_SetCategory_PartCategories__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Picking a real category ends any search, so the search text is cleared without running a search. Otherwise the
+box would keep showing a query that no longer filters anything.</p>
+</div>
 
 
   <a id="KSP_OAB_AssemblyPartsPicker_SetFilter_" data-uid="KSP.OAB.AssemblyPartsPicker.SetFilter*"></a>
@@ -1558,7 +1568,7 @@
 
   <a id="KSP_OAB_AssemblyPartsPicker_ToggleSearch_" data-uid="KSP.OAB.AssemblyPartsPicker.ToggleSearch*"></a>
   <h4 id="KSP_OAB_AssemblyPartsPicker_ToggleSearch_System_Boolean_" data-uid="KSP.OAB.AssemblyPartsPicker.ToggleSearch(System.Boolean)">ToggleSearch(bool)</h4>
-  <div class="markdown level1 summary"><p>Activates or deactivates the search mode, switching between search results and the standard category view.</p>
+  <div class="markdown level1 summary"><p>Opens the parts picker and focuses the search field with its text selected, so typing starts a new query.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -1578,11 +1588,15 @@
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">toggled</span></td>
-        <td><p>When <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a>, runs an immediate search query. When <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>, restores the category view.</p>
+        <td><p>The state of the search icon toggle. Every state focuses the search field.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 id="KSP_OAB_AssemblyPartsPicker_ToggleSearch_System_Boolean__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Bound to the search shortcut and the search icon. An existing query brings its results back, and an empty
+one leaves the current category in view.</p>
+</div>
 
 
   <a id="KSP_OAB_AssemblyPartsPicker_UpdateSearch_" data-uid="KSP.OAB.AssemblyPartsPicker.UpdateSearch*"></a>
@@ -1594,6 +1608,10 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void UpdateSearch()</code></pre>
   </div>
+  <h5 id="KSP_OAB_AssemblyPartsPicker_UpdateSearch_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>An empty query ends the search and shows the category that was open before it, rather than the empty no
+category view that searching switches to.</p>
+</div>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.UI.IUIViewElement.html">IUIViewElement</a>

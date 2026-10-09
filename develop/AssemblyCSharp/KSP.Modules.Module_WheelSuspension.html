@@ -286,9 +286,15 @@
   <h5 id="KSP_Modules_Module_WheelSuspension_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[ModuleCategory(&quot;Wheels&quot;)]
-[ModuleDescription(&quot;Spring and damper rates scaled to vessel mass&quot;)]
+[ModuleDescription(&quot;Fixed spring and damper rates derived from the part configuration&quot;)]
 public class Module_WheelSuspension : Module_WheelSubmodule, IPartModule, IObjectAssemblyPartModule, ILateUpdate</code></pre>
   </div>
+  <h5 id="KSP_Modules_Module_WheelSuspension_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>The spring and damper are fixed physical values per part. They are derived once from the nominal
+sprung mass, the ride frequency and the damping ratio, scaled by the player tweakables, and never
+retuned per step or per body. Ride height therefore differs between bodies, as it does for a real
+vehicle.</p>
+</div>
   <h3 id="constructors">Constructors
 </h3>
 
@@ -303,6 +309,106 @@ public class Module_WheelSuspension : Module_WheelSubmodule, IPartModule, IObjec
   </div>
   <h3 id="fields">Fields
 </h3>
+
+
+  <h4 id="KSP_Modules_Module_WheelSuspension_DEFAULT_DAMPING_RATIO" data-uid="KSP.Modules.Module_WheelSuspension.DEFAULT_DAMPING_RATIO">DEFAULT_DAMPING_RATIO</h4>
+  <div class="markdown level1 summary"><p>Default compression damping ratio.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const float DEFAULT_DAMPING_RATIO = 0.3</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Modules_Module_WheelSuspension_DEFAULT_LEG_FREQUENCY" data-uid="KSP.Modules.Module_WheelSuspension.DEFAULT_LEG_FREQUENCY">DEFAULT_LEG_FREQUENCY</h4>
+  <div class="markdown level1 summary"><p>Default ride frequency of a landing leg in hertz.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const float DEFAULT_LEG_FREQUENCY = 2</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Modules_Module_WheelSuspension_DEFAULT_WHEEL_FREQUENCY" data-uid="KSP.Modules.Module_WheelSuspension.DEFAULT_WHEEL_FREQUENCY">DEFAULT_WHEEL_FREQUENCY</h4>
+  <div class="markdown level1 summary"><p>Default ride frequency of a rover wheel in hertz.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const float DEFAULT_WHEEL_FREQUENCY = 1.5</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Modules_Module_WheelSuspension_REBOUND_RATIO_SCALE" data-uid="KSP.Modules.Module_WheelSuspension.REBOUND_RATIO_SCALE">REBOUND_RATIO_SCALE</h4>
+  <div class="markdown level1 summary"><p>Rebound damping ratio relative to the compression ratio.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const float REBOUND_RATIO_SCALE = 1.6666666</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <h4 id="KSP_Modules_Module_WheelSuspension_dataWheelsuspension" data-uid="KSP.Modules.Module_WheelSuspension.dataWheelsuspension">dataWheelsuspension</h4>
@@ -324,56 +430,6 @@ public class Module_WheelSuspension : Module_WheelSubmodule, IPartModule, IObjec
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Modules.Data_WheelSuspension.html">Data_WheelSuspension</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="KSP_Modules_Module_WheelSuspension_sprungMassEasing" data-uid="KSP.Modules.Module_WheelSuspension.sprungMassEasing">sprungMassEasing</h4>
-  <div class="markdown level1 summary"><p>A value indicating whether the sprung mass is currently being eased toward its target spring rate.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool sprungMassEasing</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">bool</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="KSP_Modules_Module_WheelSuspension_sprungMassGravity" data-uid="KSP.Modules.Module_WheelSuspension.sprungMassGravity">sprungMassGravity</h4>
-  <div class="markdown level1 summary"><p>The gravitational load on the sprung mass, in kilonewtons, used for spring rate calculations.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public float sprungMassGravity</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">float</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -407,14 +463,14 @@ public class Module_WheelSuspension : Module_WheelSubmodule, IPartModule, IObjec
 </h3>
 
 
-  <a id="KSP_Modules_Module_WheelSuspension_HighGeeOverride_" data-uid="KSP.Modules.Module_WheelSuspension.HighGeeOverride*"></a>
-  <h4 id="KSP_Modules_Module_WheelSuspension_HighGeeOverride" data-uid="KSP.Modules.Module_WheelSuspension.HighGeeOverride">HighGeeOverride</h4>
-  <div class="markdown level1 summary"><p>Gets a value indicating whether the high-g spring and damper override is currently active.</p>
+  <a id="KSP_Modules_Module_WheelSuspension_NominalSprungMass_" data-uid="KSP.Modules.Module_WheelSuspension.NominalSprungMass*"></a>
+  <h4 id="KSP_Modules_Module_WheelSuspension_NominalSprungMass" data-uid="KSP.Modules.Module_WheelSuspension.NominalSprungMass">NominalSprungMass</h4>
+  <div class="markdown level1 summary"><p>Gets the nominal sprung mass the rates were derived from, in tonnes.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool HighGeeOverride { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public float NominalSprungMass { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-condensed">
@@ -426,7 +482,7 @@ public class Module_WheelSuspension : Module_WheelSubmodule, IPartModule, IObjec
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">bool</span></td>
+        <td><span class="xref">float</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -459,6 +515,33 @@ public class Module_WheelSuspension : Module_WheelSubmodule, IPartModule, IObjec
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_PartComponentModuleType">PartBehaviourModule.PartComponentModuleType</a></div>
+
+
+  <a id="KSP_Modules_Module_WheelSuspension_RatedLoad_" data-uid="KSP.Modules.Module_WheelSuspension.RatedLoad*"></a>
+  <h4 id="KSP_Modules_Module_WheelSuspension_RatedLoad" data-uid="KSP.Modules.Module_WheelSuspension.RatedLoad">RatedLoad</h4>
+  <div class="markdown level1 summary"><p>Gets the rated load of this wheel in kilonewtons, from the configured maximum load in tonnes
+under standard gravity. Zero when the configuration gives none.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float RatedLoad { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="methods">Methods
 </h3>
 
@@ -474,6 +557,17 @@ public class Module_WheelSuspension : Module_WheelSubmodule, IPartModule, IObjec
   </div>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_AddDataModules">PartBehaviourModule.AddDataModules()</a></div>
+
+
+  <a id="KSP_Modules_Module_WheelSuspension_ApplySuspensionRates_" data-uid="KSP.Modules.Module_WheelSuspension.ApplySuspensionRates*"></a>
+  <h4 id="KSP_Modules_Module_WheelSuspension_ApplySuspensionRates" data-uid="KSP.Modules.Module_WheelSuspension.ApplySuspensionRates">ApplySuspensionRates()</h4>
+  <div class="markdown level1 summary"><p>Derives the fixed spring, damper and bump stop rates from the configuration and writes them to the wheel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ApplySuspensionRates()</code></pre>
+  </div>
 
 
   <a id="KSP_Modules_Module_WheelSuspension_OnAutoSpringDamperChanged_" data-uid="KSP.Modules.Module_WheelSuspension.OnAutoSpringDamperChanged*"></a>
@@ -646,29 +740,29 @@ public class Module_WheelSuspension : Module_WheelSubmodule, IPartModule, IObjec
   </table>
 
 
-  <a id="KSP_Modules_Module_WheelSuspension_UpdateAutoBoost_" data-uid="KSP.Modules.Module_WheelSuspension.UpdateAutoBoost*"></a>
-  <h4 id="KSP_Modules_Module_WheelSuspension_UpdateAutoBoost_System_Single_" data-uid="KSP.Modules.Module_WheelSuspension.UpdateAutoBoost(System.Single)">UpdateAutoBoost(float)</h4>
-  <div class="markdown level1 summary"><p>Updates the automatic boost value based on the current suspension compression ratio.</p>
+  <a id="KSP_Modules_Module_WheelSuspension_ResolveNominalSprungMass_" data-uid="KSP.Modules.Module_WheelSuspension.ResolveNominalSprungMass*"></a>
+  <h4 id="KSP_Modules_Module_WheelSuspension_ResolveNominalSprungMass" data-uid="KSP.Modules.Module_WheelSuspension.ResolveNominalSprungMass">ResolveNominalSprungMass()</h4>
+  <div class="markdown level1 summary"><p>Returns the nominal sprung mass of this wheel in tonnes, the rigidbody mass unit: the vessel
+mass divided by its wheel module count. It is resolved at setup and when the part count
+changes, never per step. <code>maximumLoad</code> is the rated load used for damage, not the sprung mass.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected void UpdateAutoBoost(float st)</code></pre>
+    <pre><code class="lang-csharp hljs">public float ResolveNominalSprungMass()</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
+  <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-condensed">
     <thead>
       <tr>
         <th>Type</th>
-        <th>Name</th>
         <th>Description</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td><span class="xref">float</span></td>
-        <td><span class="parametername">st</span></td>
-        <td><p>The current suspension compression ratio. Values above 0.8 increase the boost and values below 0.4 decrease it.</p>
+        <td><p>The nominal sprung mass in tonnes.</p>
 </td>
       </tr>
     </tbody>
