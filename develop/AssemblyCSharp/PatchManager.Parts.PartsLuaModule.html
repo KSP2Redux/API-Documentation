@@ -138,6 +138,73 @@ public class PartsLuaModule</code></pre>
 </h3>
 
 
+  <a id="PatchManager_Parts_PartsLuaModule_Duplicate_" data-uid="PatchManager.Parts.PartsLuaModule.Duplicate*"></a>
+  <h4 id="PatchManager_Parts_PartsLuaModule_Duplicate_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_String_System_Func_MoonSharp_Interpreter_DynValue_System_String__" data-uid="PatchManager.Parts.PartsLuaModule.Duplicate(MoonSharp.Interpreter.ScriptExecutionContext,System.String,System.String,System.Func{MoonSharp.Interpreter.DynValue,System.String})">Duplicate(ScriptExecutionContext, string, string, Func&lt;DynValue, string&gt;)</h4>
+  <div class="markdown level1 summary"><p>Registers a patch that copies each part it matches under a new name, then runs <code class="paramref">patchMethod</code>
+on the copy.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PatchDefinition Duplicate(ScriptExecutionContext context, string source, string newName, Func&lt;DynValue, string&gt; patchMethod = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global namespaces the patch name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The name of the part to copy. Supports <code>*</code> and <code>?</code> wildcards.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">newName</span></td>
+        <td><p>The name of the copy, with <code>{name}</code> standing in for the source's name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Func</span>&lt;<span class="xref">DynValue</span>, <span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">patchMethod</span></td>
+        <td><p>The callback to run on each copy, or <code>null</code> to copy without changes.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a></td>
+        <td><p>The registered patch.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PatchManager_Parts_PartsLuaModule_Duplicate_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_String_System_Func_MoonSharp_Interpreter_DynValue_System_String___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Restrict the pass and ordering like any other patch. Internal ID fields in the copy are left alone.</p>
+</div>
+
+
   <a id="PatchManager_Parts_PartsLuaModule_Patch_" data-uid="PatchManager.Parts.PartsLuaModule.Patch*"></a>
   <h4 id="PatchManager_Parts_PartsLuaModule_Patch_MoonSharp_Interpreter_ScriptExecutionContext_System_String_" data-uid="PatchManager.Parts.PartsLuaModule.Patch(MoonSharp.Interpreter.ScriptExecutionContext,System.String)">Patch(ScriptExecutionContext, string)</h4>
   <div class="markdown level1 summary"><p>Registers a part patch with the given namespaced patch name.</p>

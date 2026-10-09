@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class Summary | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="Per-run summary of patch loading and application across the Early, Default, and Late passes.">
+    <meta name="description" content="Per-run summary of patch loading and application across every pass.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,7 @@
 
 
   <h1 id="PatchManager_Shared_Summary" data-uid="PatchManager.Shared.Summary" class="text-break">Class Summary</h1>
-  <div class="markdown level0 summary"><p>Per-run summary of patch loading and application across the Early, Default, and Late passes.</p>
+  <div class="markdown level0 summary"><p>Per-run summary of patch loading and application across every pass.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -161,6 +161,31 @@
   </table>
 
 
+  <h4 id="PatchManager_Shared_Summary_PassOrder" data-uid="PatchManager.Shared.Summary.PassOrder">PassOrder</h4>
+  <div class="markdown level1 summary"><p>The names of the passes that run, in the order they run. Set once the passes are sorted.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;string&gt; PassOrder</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <h4 id="PatchManager_Shared_Summary_RecognizedModIds" data-uid="PatchManager.Shared.Summary.RecognizedModIds">RecognizedModIds</h4>
   <div class="markdown level1 summary"><p>Mod IDs the patching system has registered.</p>
 </div>
@@ -180,6 +205,31 @@
     <tbody>
       <tr>
         <td><span class="xref">HashSet</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="PatchManager_Shared_Summary_RemovedPasses" data-uid="PatchManager.Shared.Summary.RemovedPasses">RemovedPasses</h4>
+  <div class="markdown level1 summary"><p>Passes that never run, because an ordering cycle held them back.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;(string passName, string status, string context)&gt; RemovedPasses</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;(<span class="xref">string</span> <span class="xref">patchName</span>, <span class="xref">string</span> <span class="xref">status</span>, <span class="xref">string</span> <span class="xref">context</span>)&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -373,14 +423,14 @@ accumulate under one heading.</p>
 
 
   <a id="PatchManager_Shared_Summary_BeginPass_" data-uid="PatchManager.Shared.Summary.BeginPass*"></a>
-  <h4 id="PatchManager_Shared_Summary_BeginPass_PatchManager_LuaPatching_PatchDefinition_PatchPass_" data-uid="PatchManager.Shared.Summary.BeginPass(PatchManager.LuaPatching.PatchDefinition.PatchPass)">BeginPass(PatchPass)</h4>
+  <h4 id="PatchManager_Shared_Summary_BeginPass_System_String_" data-uid="PatchManager.Shared.Summary.BeginPass(System.String)">BeginPass(string)</h4>
   <div class="markdown level1 summary"><p>Sets the pass that subsequent <a class="xref" href="PatchManager.Shared.Summary.html#PatchManager_Shared_Summary_Apply_System_String_">Apply(string)</a>, <a class="xref" href="PatchManager.Shared.Summary.html#PatchManager_Shared_Summary_Skip_System_String_System_String_">Skip(string, string)</a>,
 <a class="xref" href="PatchManager.Shared.Summary.html#PatchManager_Shared_Summary_Error_System_String_System_String_">Error(string, string)</a>, and <a class="xref" href="PatchManager.Shared.Summary.html#PatchManager_Shared_Summary_RemovedAsset_System_String_">RemovedAsset(string)</a> calls are stamped with.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void BeginPass(PatchDefinition.PatchPass pass)</code></pre>
+    <pre><code class="lang-csharp hljs">public void BeginPass(string pass)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -393,7 +443,7 @@ accumulate under one heading.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a>.<a class="xref" href="PatchManager.LuaPatching.PatchDefinition.PatchPass.html">PatchPass</a></td>
+        <td><span class="xref">string</span></td>
         <td><span class="parametername">pass</span></td>
         <td><p>The pass currently being run.</p>
 </td>
@@ -563,6 +613,47 @@ accumulate under one heading.</p>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">status</span></td>
         <td><p>Short status reason (<code>MISSING</code>, <code>CONFLICT</code>, <code>CYCLE</code>).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>Optional detail describing the status.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_Shared_Summary_RemovePass_" data-uid="PatchManager.Shared.Summary.RemovePass*"></a>
+  <h4 id="PatchManager_Shared_Summary_RemovePass_System_String_System_String_System_String_" data-uid="PatchManager.Shared.Summary.RemovePass(System.String,System.String,System.String)">RemovePass(string, string, string)</h4>
+  <div class="markdown level1 summary"><p>Marks a pass as removed during setup.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemovePass(string name, string status, string context = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The pass name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">status</span></td>
+        <td><p>Short status reason, such as <code>CYCLE</code>.</p>
 </td>
       </tr>
       <tr>

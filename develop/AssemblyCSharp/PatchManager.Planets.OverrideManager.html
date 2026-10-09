@@ -103,7 +103,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Dictionary&lt;string, AtmosphereOverride&gt; AtmosphereOverrides</code></pre>
+    <pre><code class="lang-csharp hljs">public static Dictionary&lt;(string body, string layer), AtmosphereOverride&gt; AtmosphereOverrides</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -115,7 +115,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Dictionary</span>&lt;<span class="xref">string</span>, <a class="xref" href="PatchManager.Planets.Overrides.AtmosphereOverride.html">AtmosphereOverride</a>&gt;</td>
+        <td><span class="xref">Dictionary</span>&lt;(<span class="xref">string</span> <span class="xref">body</span>, <span class="xref">string</span> <span class="xref">layer</span>), <a class="xref" href="PatchManager.Planets.Overrides.AtmosphereOverride.html">AtmosphereOverride</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -151,7 +151,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Dictionary&lt;string, VolumeCloudConfigurationOverride&gt; VolumeCloudOverrides</code></pre>
+    <pre><code class="lang-csharp hljs">public static Dictionary&lt;(string body, string layer), VolumeCloudConfigurationOverride&gt; VolumeCloudOverrides</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -163,8 +163,175 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Dictionary</span>&lt;<span class="xref">string</span>, <a class="xref" href="PatchManager.Planets.Overrides.VolumeCloudConfigurationOverride.html">VolumeCloudConfigurationOverride</a>&gt;</td>
+        <td><span class="xref">Dictionary</span>&lt;(<span class="xref">string</span> <span class="xref">body</span>, <span class="xref">string</span> <span class="xref">layer</span>), <a class="xref" href="PatchManager.Planets.Overrides.VolumeCloudConfigurationOverride.html">VolumeCloudConfigurationOverride</a>&gt;</td>
         <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="PatchManager_Planets_OverrideManager_GetKey_" data-uid="PatchManager.Planets.OverrideManager.GetKey*"></a>
+  <h4 id="PatchManager_Planets_OverrideManager_GetKey_System_String_System_String_" data-uid="PatchManager.Planets.OverrideManager.GetKey(System.String,System.String)">GetKey(string, string)</h4>
+  <div class="markdown level1 summary"><p>Gets the key an override for a body in a layer is stored under.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static (string body, string layer) GetKey(string bodyName, string layer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">bodyName</span></td>
+        <td><p>The body's name, in any case.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td><p>The override's layer, or null for the default layer.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>(<span class="xref">string</span> <span class="xref">body</span>, <span class="xref">string</span> <span class="xref">layer</span>)</td>
+        <td><p>The key.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_Planets_OverrideManager_TryGetAtmosphereOverride_" data-uid="PatchManager.Planets.OverrideManager.TryGetAtmosphereOverride*"></a>
+  <h4 id="PatchManager_Planets_OverrideManager_TryGetAtmosphereOverride_System_String_System_String_PatchManager_Planets_Overrides_AtmosphereOverride__" data-uid="PatchManager.Planets.OverrideManager.TryGetAtmosphereOverride(System.String,System.String,PatchManager.Planets.Overrides.AtmosphereOverride@)">TryGetAtmosphereOverride(string, string, out AtmosphereOverride)</h4>
+  <div class="markdown level1 summary"><p>Gets the atmosphere override for a body taken from a layer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool TryGetAtmosphereOverride(string bodyName, string layer, out AtmosphereOverride atmosphereOverride)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">bodyName</span></td>
+        <td><p>The body's name, in any case.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td><p>The layer the galaxy takes the body from.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PatchManager.Planets.Overrides.AtmosphereOverride.html">AtmosphereOverride</a></td>
+        <td><span class="parametername">atmosphereOverride</span></td>
+        <td><p>The layer's override, or else the default layer's.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if either layer has an override for the body, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_Planets_OverrideManager_TryGetVolumeCloudOverride_" data-uid="PatchManager.Planets.OverrideManager.TryGetVolumeCloudOverride*"></a>
+  <h4 id="PatchManager_Planets_OverrideManager_TryGetVolumeCloudOverride_System_String_System_String_PatchManager_Planets_Overrides_VolumeCloudConfigurationOverride__" data-uid="PatchManager.Planets.OverrideManager.TryGetVolumeCloudOverride(System.String,System.String,PatchManager.Planets.Overrides.VolumeCloudConfigurationOverride@)">TryGetVolumeCloudOverride(string, string, out VolumeCloudConfigurationOverride)</h4>
+  <div class="markdown level1 summary"><p>Gets the volume cloud override for a body taken from a layer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool TryGetVolumeCloudOverride(string bodyName, string layer, out VolumeCloudConfigurationOverride volumeCloudOverride)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">bodyName</span></td>
+        <td><p>The body's name, in any case.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td><p>The layer the galaxy takes the body from.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PatchManager.Planets.Overrides.VolumeCloudConfigurationOverride.html">VolumeCloudConfigurationOverride</a></td>
+        <td><span class="parametername">volumeCloudOverride</span></td>
+        <td><p>The layer's override, or else the default layer's.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if either layer has an override for the body, false otherwise.</p>
+</td>
       </tr>
     </tbody>
   </table>

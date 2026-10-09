@@ -164,6 +164,32 @@
   </table>
 
 
+  <a id="KSP_Game_CelestialBodyProvider_HomeWorld_" data-uid="KSP.Game.CelestialBodyProvider.HomeWorld*"></a>
+  <h4 id="KSP_Game_CelestialBodyProvider_HomeWorld" data-uid="KSP.Game.CelestialBodyProvider.HomeWorld">HomeWorld</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the loaded galaxy's home world, or null before a galaxy has loaded.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SerializedHomeWorld HomeWorld { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.SerializedHomeWorld.html">SerializedHomeWorld</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Game_CelestialBodyProvider_InterstellarNeighborhood_" data-uid="KSP.Game.CelestialBodyProvider.InterstellarNeighborhood*"></a>
   <h4 id="KSP_Game_CelestialBodyProvider_InterstellarNeighborhood" data-uid="KSP.Game.CelestialBodyProvider.InterstellarNeighborhood">InterstellarNeighborhood</h4>
   <div class="markdown level1 summary"><p>Gets or sets the interstellar neighborhood definition. Setting this property more than once is rejected and logs an error.</p>
@@ -190,6 +216,57 @@
   </table>
   <h3 id="methods">Methods
 </h3>
+
+
+  <a id="KSP_Game_CelestialBodyProvider_AreSameLayer_" data-uid="KSP.Game.CelestialBodyProvider.AreSameLayer*"></a>
+  <h4 id="KSP_Game_CelestialBodyProvider_AreSameLayer_System_String_System_String_" data-uid="KSP.Game.CelestialBodyProvider.AreSameLayer(System.String,System.String)">AreSameLayer(string, string)</h4>
+  <div class="markdown level1 summary"><p>Gets whether two layers are the same, counting an empty layer as the default one.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AreSameLayer(string first, string second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>The first layer.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>The second layer.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the layers are the same, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <a id="KSP_Game_CelestialBodyProvider_Get_" data-uid="KSP.Game.CelestialBodyProvider.Get*"></a>
@@ -231,6 +308,51 @@
       <tr>
         <td><a class="xref" href="KSP.Sim.Definitions.CelestialBodyCore.html">CelestialBodyCore</a></td>
         <td><p>The <a class="xref" href="KSP.Sim.Definitions.CelestialBodyCore.html">CelestialBodyCore</a> record, or <code>null</code> if no body with that name is registered.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Game_CelestialBodyProvider_GetActiveBodyLayer_" data-uid="KSP.Game.CelestialBodyProvider.GetActiveBodyLayer*"></a>
+  <h4 id="KSP_Game_CelestialBodyProvider_GetActiveBodyLayer_System_String_" data-uid="KSP.Game.CelestialBodyProvider.GetActiveBodyLayer(System.String)">GetActiveBodyLayer(string)</h4>
+  <div class="markdown level1 summary"><p>Gets the layer the running game's galaxy takes a body's data from.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string GetActiveBodyLayer(string bodyName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">bodyName</span></td>
+        <td><p>The name of the body, in any case.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><p>The body's layer, or the default layer when no game is running.</p>
 </td>
       </tr>
     </tbody>
@@ -429,6 +551,51 @@
       <tr>
         <td><span class="xref">bool</span></td>
         <td><p><code>true</code> if the body has an atmosphere; otherwise <code>false</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Game_CelestialBodyProvider_GetBodyLayer_" data-uid="KSP.Game.CelestialBodyProvider.GetBodyLayer*"></a>
+  <h4 id="KSP_Game_CelestialBodyProvider_GetBodyLayer_System_String_" data-uid="KSP.Game.CelestialBodyProvider.GetBodyLayer(System.String)">GetBodyLayer(string)</h4>
+  <div class="markdown level1 summary"><p>Gets the layer the loaded galaxy takes a body's data from.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetBodyLayer(string bodyName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">bodyName</span></td>
+        <td><p>The name of the body.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><p>The body's layer, or the default layer for a body the galaxy does not layer.</p>
 </td>
       </tr>
     </tbody>
@@ -1442,6 +1609,108 @@ target's angular radius as the center clears the occluder's edge.</p>
   </table>
 
 
+  <a id="KSP_Game_CelestialBodyProvider_SetBodyLayer_" data-uid="KSP.Game.CelestialBodyProvider.SetBodyLayer*"></a>
+  <h4 id="KSP_Game_CelestialBodyProvider_SetBodyLayer_System_String_System_String_" data-uid="KSP.Game.CelestialBodyProvider.SetBodyLayer(System.String,System.String)">SetBodyLayer(string, string)</h4>
+  <div class="markdown level1 summary"><p>Sets the layer the loaded galaxy takes a body's data from.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetBodyLayer(string bodyName, string layer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">bodyName</span></td>
+        <td><p>The name of the body.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td><p>The body's layer, or null for the default copy.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Game_CelestialBodyProvider_ShouldReplaceCopy_" data-uid="KSP.Game.CelestialBodyProvider.ShouldReplaceCopy*"></a>
+  <h4 id="KSP_Game_CelestialBodyProvider_ShouldReplaceCopy_System_String_System_String_System_Boolean_System_String_" data-uid="KSP.Game.CelestialBodyProvider.ShouldReplaceCopy(System.String,System.String,System.Boolean,System.String)">ShouldReplaceCopy(string, string, bool, string)</h4>
+  <div class="markdown level1 summary"><p>Gets whether a copy of a body's data replaces the copy kept so far, when layers have copied it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool ShouldReplaceCopy(string activeLayer, string candidateLayer, bool hasKept, string keptLayer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">activeLayer</span></td>
+        <td><p>The layer the galaxy takes the body from.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">candidateLayer</span></td>
+        <td><p>The layer of the copy being offered.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">hasKept</span></td>
+        <td><p>Whether a copy has been kept so far.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">keptLayer</span></td>
+        <td><p>The layer of the copy kept so far.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the offered copy replaces the one kept so far, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Game_CelestialBodyProvider_ShouldReplaceCopy_System_String_System_String_System_Boolean_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>A copy in the body's layer wins, otherwise the default copy is kept, so a layer only has to copy the data
+it changes. Of several copies in the same layer, the last one offered wins, as when a body had only one.</p>
+</div>
+
+
   <a id="KSP_Game_CelestialBodyProvider_Shutdown_" data-uid="KSP.Game.CelestialBodyProvider.Shutdown*"></a>
   <h4 id="KSP_Game_CelestialBodyProvider_Shutdown" data-uid="KSP.Game.CelestialBodyProvider.Shutdown">Shutdown()</h4>
   <div class="markdown level1 summary"><p>Unsubscribes from message channels and clears the thermal cache and celestial body registries.</p>
@@ -1651,6 +1920,53 @@ target's angular radius as the center clears the occluder's edge.</p>
       <tr>
         <td><span class="xref">bool</span></td>
         <td><p><code>true</code> if a scaled-space game object was found for the body; otherwise <code>false</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Game_CelestialBodyProvider_WarnIfCopyFellBack_" data-uid="KSP.Game.CelestialBodyProvider.WarnIfCopyFellBack*"></a>
+  <h4 id="KSP_Game_CelestialBodyProvider_WarnIfCopyFellBack_System_String_System_String_System_String_System_String_" data-uid="KSP.Game.CelestialBodyProvider.WarnIfCopyFellBack(System.String,System.String,System.String,System.String)">WarnIfCopyFellBack(string, string, string, string)</h4>
+  <div class="markdown level1 summary"><p>Logs a warning when the copy kept for a body is not from the layer the galaxy asked for.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void WarnIfCopyFellBack(string dataName, string bodyName, string activeLayer, string keptLayer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">dataName</span></td>
+        <td><p>What the data is, as read in the warning.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">bodyName</span></td>
+        <td><p>The body the data belongs to.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">activeLayer</span></td>
+        <td><p>The layer the galaxy takes the body from.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">keptLayer</span></td>
+        <td><p>The layer of the copy kept.</p>
 </td>
       </tr>
     </tbody>

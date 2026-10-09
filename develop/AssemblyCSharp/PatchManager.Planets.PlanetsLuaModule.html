@@ -173,6 +173,10 @@ for further configuration.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="PatchManager_Planets_PlanetsLuaModule_CreateAtmosphereOverride_System_String_System_Action_PatchManager_LuaPatching_JsonUserData___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Setting <code>Layer</code> in the callback limits the override to galaxies that take the body from that layer, and
+names the override after the layer too, so each layer can have its own.</p>
+</div>
 
 
   <a id="PatchManager_Planets_PlanetsLuaModule_CreateCloudOverride_" data-uid="PatchManager.Planets.PlanetsLuaModule.CreateCloudOverride*"></a>
@@ -209,6 +213,315 @@ for further configuration.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="PatchManager_Planets_PlanetsLuaModule_CreateCloudOverride_System_String_System_Action_PatchManager_Planets_UserData_VolumeCloudUserData___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Setting <code>Layer</code> in the callback limits the override to galaxies that take the body from that layer, and
+names the override after the layer too, so each layer can have its own.</p>
+</div>
+
+
+  <a id="PatchManager_Planets_PlanetsLuaModule_CreateGalaxy_" data-uid="PatchManager.Planets.PlanetsLuaModule.CreateGalaxy*"></a>
+  <h4 id="PatchManager_Planets_PlanetsLuaModule_CreateGalaxy_System_String_System_Action_PatchManager_Planets_UserData_GalaxyUserData__" data-uid="PatchManager.Planets.PlanetsLuaModule.CreateGalaxy(System.String,System.Action{PatchManager.Planets.UserData.GalaxyUserData})">CreateGalaxy(string, Action&lt;GalaxyUserData&gt;)</h4>
+  <div class="markdown level1 summary"><p>Creates a new galaxy definition with no bodies under the given key and runs <code class="paramref">callback</code>
+against it for further configuration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CreateGalaxy(string galaxyDefinitionKey, Action&lt;GalaxyUserData&gt; callback)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">galaxyDefinitionKey</span></td>
+        <td><p>The key that saves and campaign packs load the galaxy definition by.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<a class="xref" href="PatchManager.Planets.UserData.GalaxyUserData.html">GalaxyUserData</a>&gt;</td>
+        <td><span class="parametername">callback</span></td>
+        <td><p>Callback that receives the new galaxy definition for further configuration.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_Planets_PlanetsLuaModule_Duplicate_" data-uid="PatchManager.Planets.PlanetsLuaModule.Duplicate*"></a>
+  <h4 id="PatchManager_Planets_PlanetsLuaModule_Duplicate_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_String_System_Func_MoonSharp_Interpreter_DynValue_System_String__" data-uid="PatchManager.Planets.PlanetsLuaModule.Duplicate(MoonSharp.Interpreter.ScriptExecutionContext,System.String,System.String,System.Func{MoonSharp.Interpreter.DynValue,System.String})">Duplicate(ScriptExecutionContext, string, string, Func&lt;DynValue, string&gt;)</h4>
+  <div class="markdown level1 summary"><p>Registers a patch that copies each celestial body it matches under a new name, then runs <code class="paramref">patchMethod</code>
+on the copy.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PatchDefinition Duplicate(ScriptExecutionContext context, string source, string newName, Func&lt;DynValue, string&gt; patchMethod = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global namespaces the patch name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The name of the celestial body to copy. Supports <code>*</code> and <code>?</code> wildcards.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">newName</span></td>
+        <td><p>The name of the copy, with <code>{name}</code> standing in for the source's name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Func</span>&lt;<span class="xref">DynValue</span>, <span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">patchMethod</span></td>
+        <td><p>The callback to run on each copy, or <code>null</code> to copy without changes.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a></td>
+        <td><p>The registered patch.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PatchManager_Planets_PlanetsLuaModule_Duplicate_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_String_System_Func_MoonSharp_Interpreter_DynValue_System_String___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Restrict the pass and ordering like any other patch. Internal ID fields in the copy are left alone.</p>
+</div>
+
+
+  <a id="PatchManager_Planets_PlanetsLuaModule_DuplicateAtmosphereOverride_" data-uid="PatchManager.Planets.PlanetsLuaModule.DuplicateAtmosphereOverride*"></a>
+  <h4 id="PatchManager_Planets_PlanetsLuaModule_DuplicateAtmosphereOverride_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_String_System_Func_MoonSharp_Interpreter_DynValue_System_String__" data-uid="PatchManager.Planets.PlanetsLuaModule.DuplicateAtmosphereOverride(MoonSharp.Interpreter.ScriptExecutionContext,System.String,System.String,System.Func{MoonSharp.Interpreter.DynValue,System.String})">DuplicateAtmosphereOverride(ScriptExecutionContext, string, string, Func&lt;DynValue, string&gt;)</h4>
+  <div class="markdown level1 summary"><p>Registers a patch that copies each atmosphere override it matches under a new name, then runs <code class="paramref">patchMethod</code>
+on the copy.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PatchDefinition DuplicateAtmosphereOverride(ScriptExecutionContext context, string source, string newName, Func&lt;DynValue, string&gt; patchMethod = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global namespaces the patch name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The name of the atmosphere override to copy. Supports <code>*</code> and <code>?</code> wildcards.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">newName</span></td>
+        <td><p>The name of the copy, with <code>{name}</code> standing in for the source's name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Func</span>&lt;<span class="xref">DynValue</span>, <span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">patchMethod</span></td>
+        <td><p>The callback to run on each copy, or <code>null</code> to copy without changes.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a></td>
+        <td><p>The registered patch.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PatchManager_Planets_PlanetsLuaModule_DuplicateAtmosphereOverride_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_String_System_Func_MoonSharp_Interpreter_DynValue_System_String___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Restrict the pass and ordering like any other patch. Internal ID fields in the copy are left alone.</p>
+</div>
+
+
+  <a id="PatchManager_Planets_PlanetsLuaModule_DuplicateCloudOverride_" data-uid="PatchManager.Planets.PlanetsLuaModule.DuplicateCloudOverride*"></a>
+  <h4 id="PatchManager_Planets_PlanetsLuaModule_DuplicateCloudOverride_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_String_System_Func_MoonSharp_Interpreter_DynValue_System_String__" data-uid="PatchManager.Planets.PlanetsLuaModule.DuplicateCloudOverride(MoonSharp.Interpreter.ScriptExecutionContext,System.String,System.String,System.Func{MoonSharp.Interpreter.DynValue,System.String})">DuplicateCloudOverride(ScriptExecutionContext, string, string, Func&lt;DynValue, string&gt;)</h4>
+  <div class="markdown level1 summary"><p>Registers a patch that copies each volume cloud override it matches under a new name, then runs <code class="paramref">patchMethod</code>
+on the copy.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PatchDefinition DuplicateCloudOverride(ScriptExecutionContext context, string source, string newName, Func&lt;DynValue, string&gt; patchMethod = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global namespaces the patch name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The name of the volume cloud override to copy. Supports <code>*</code> and <code>?</code> wildcards.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">newName</span></td>
+        <td><p>The name of the copy, with <code>{name}</code> standing in for the source's name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Func</span>&lt;<span class="xref">DynValue</span>, <span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">patchMethod</span></td>
+        <td><p>The callback to run on each copy, or <code>null</code> to copy without changes.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a></td>
+        <td><p>The registered patch.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PatchManager_Planets_PlanetsLuaModule_DuplicateCloudOverride_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_String_System_Func_MoonSharp_Interpreter_DynValue_System_String___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Restrict the pass and ordering like any other patch. Internal ID fields in the copy are left alone.</p>
+</div>
+
+
+  <a id="PatchManager_Planets_PlanetsLuaModule_DuplicateGalaxy_" data-uid="PatchManager.Planets.PlanetsLuaModule.DuplicateGalaxy*"></a>
+  <h4 id="PatchManager_Planets_PlanetsLuaModule_DuplicateGalaxy_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_String_System_Func_MoonSharp_Interpreter_DynValue_System_String__" data-uid="PatchManager.Planets.PlanetsLuaModule.DuplicateGalaxy(MoonSharp.Interpreter.ScriptExecutionContext,System.String,System.String,System.Func{MoonSharp.Interpreter.DynValue,System.String})">DuplicateGalaxy(ScriptExecutionContext, string, string, Func&lt;DynValue, string&gt;)</h4>
+  <div class="markdown level1 summary"><p>Registers a patch that copies the galaxy definition with the given key under a new key, then runs
+<code class="paramref">patchMethod</code> on the copy.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PatchDefinition DuplicateGalaxy(ScriptExecutionContext context, string galaxyDefinitionKey, string newGalaxyDefinitionKey, Func&lt;DynValue, string&gt; patchMethod = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global namespaces the patch name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">galaxyDefinitionKey</span></td>
+        <td><p>The key of the galaxy definition to copy.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">newGalaxyDefinitionKey</span></td>
+        <td><p>The key of the copy.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Func</span>&lt;<span class="xref">DynValue</span>, <span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">patchMethod</span></td>
+        <td><p>The callback to run on the copy, or <code>null</code> to copy without changes.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a></td>
+        <td><p>The registered patch.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PatchManager_Planets_PlanetsLuaModule_DuplicateGalaxy_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_String_System_Func_MoonSharp_Interpreter_DynValue_System_String___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The copy joins every other galaxy in the galaxy definition label, so <a class="xref" href="PatchManager.Planets.PlanetsLuaModule.html#PatchManager_Planets_PlanetsLuaModule_PatchGalaxy_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_String_">PatchGalaxy(ScriptExecutionContext, string, string)</a> reaches it by its
+new key. Patches ordered after the duplicate that name the source do not reach the copy.</p>
+</div>
 
 
   <a id="PatchManager_Planets_PlanetsLuaModule_Patch_" data-uid="PatchManager.Planets.PlanetsLuaModule.Patch*"></a>
@@ -422,6 +735,70 @@ for further configuration.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="PatchManager_Planets_PlanetsLuaModule_PatchDefaultGalaxy_MoonSharp_Interpreter_ScriptExecutionContext_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Every galaxy shares the galaxy definition label, so the patch is restricted to the stock galaxy and leaves its
+copies alone.</p>
+</div>
+
+
+  <a id="PatchManager_Planets_PlanetsLuaModule_PatchGalaxy_" data-uid="PatchManager.Planets.PlanetsLuaModule.PatchGalaxy*"></a>
+  <h4 id="PatchManager_Planets_PlanetsLuaModule_PatchGalaxy_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_String_" data-uid="PatchManager.Planets.PlanetsLuaModule.PatchGalaxy(MoonSharp.Interpreter.ScriptExecutionContext,System.String,System.String)">PatchGalaxy(ScriptExecutionContext, string, string)</h4>
+  <div class="markdown level1 summary"><p>Registers a patch against the galaxy definition with the given key.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PatchDefinition PatchGalaxy(ScriptExecutionContext context, string galaxyDefinitionKey, string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global namespaces <code class="paramref">name</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">galaxyDefinitionKey</span></td>
+        <td><p>The key of the galaxy definition to patch.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The patch's local name, namespaced with the host mod's ID.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a></td>
+        <td><p>The registered patch.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PatchManager_Planets_PlanetsLuaModule_PatchGalaxy_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Every galaxy shares the galaxy definition label, so the patch is restricted to the one asset named by the key.</p>
+</div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>

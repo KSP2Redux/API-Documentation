@@ -321,6 +321,37 @@ public HashSet&lt;NamePattern&gt; DisallowedNames</code></pre>
 </div>
 
 
+  <h4 id="PatchManager_LuaPatching_PatchDefinition_DuplicateNameTemplate" data-uid="PatchManager.LuaPatching.PatchDefinition.DuplicateNameTemplate">DuplicateNameTemplate</h4>
+  <div class="markdown level1 summary"><p>The name a duplicate patch gives each copy, with <code>{name}</code> standing in for the source asset's name, or
+<code>null</code> for a patch that edits assets in place.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+public string DuplicateNameTemplate</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PatchManager_LuaPatching_PatchDefinition_DuplicateNameTemplate_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>A duplicate patch copies each asset it matches under the new name in the same label, then runs its
+callback on the copy and leaves the source alone. Internal ID fields are not touched.</p>
+</div>
+
+
   <h4 id="PatchManager_LuaPatching_PatchDefinition_Label" data-uid="PatchManager.LuaPatching.PatchDefinition.Label">Label</h4>
   <div class="markdown level1 summary"><p>The addressables label whose assets this patch targets.</p>
 </div>
@@ -501,14 +532,14 @@ public PatchDefinition.PatchOrdering Ordering</code></pre>
   </table>
 
 
-  <h4 id="PatchManager_LuaPatching_PatchDefinition_Pass" data-uid="PatchManager.LuaPatching.PatchDefinition.Pass">Pass</h4>
-  <div class="markdown level1 summary"><p>The pass the patch runs in.</p>
+  <h4 id="PatchManager_LuaPatching_PatchDefinition_PassName" data-uid="PatchManager.LuaPatching.PatchDefinition.PassName">PassName</h4>
+  <div class="markdown level1 summary"><p>The namespaced name of the pass the patch runs in.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[MoonSharpHidden]
-public PatchDefinition.PatchPass Pass</code></pre>
+public string PassName</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -520,11 +551,15 @@ public PatchDefinition.PatchPass Pass</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a>.<a class="xref" href="PatchManager.LuaPatching.PatchDefinition.PatchPass.html">PatchPass</a></td>
+        <td><span class="xref">string</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
+  <h5 id="PatchManager_LuaPatching_PatchDefinition_PassName_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Passes are full sweeps over every patched label, in the order <a class="xref" href="PatchManager.LuaPatching.PassDefinition.html">PassDefinition</a> constraints
+sort into. JToken state is held in memory between passes so later passes see the output of earlier ones.</p>
+</div>
 
 
   <h4 id="PatchManager_LuaPatching_PatchDefinition_PatchMethod" data-uid="PatchManager.LuaPatching.PatchDefinition.PatchMethod">PatchMethod</h4>
@@ -714,7 +749,7 @@ mutates the wrapped JSON in place. Its non-removal return value is otherwise unu
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">errored</span></td>
-        <td><p>Set to <code>true</code> when the callback or a predicate threw, or when no <code>:Do(...)</code> block was registered.</p>
+        <td><p>Set to <code>true</code> when the callback or a predicate threw, or when a patch that is not a duplicate has no <code>:Do(...)</code> block.</p>
 </td>
       </tr>
     </tbody>
@@ -917,6 +952,33 @@ mutates the wrapped JSON in place. Its non-removal return value is otherwise unu
   </table>
 
 
+  <a id="PatchManager_LuaPatching_PatchDefinition_Default_" data-uid="PatchManager.LuaPatching.PatchDefinition.Default*"></a>
+  <h4 id="PatchManager_LuaPatching_PatchDefinition_Default" data-uid="PatchManager.LuaPatching.PatchDefinition.Default">Default()</h4>
+  <div class="markdown level1 summary"><p>Makes the patch run in the Default pass.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PatchDefinition Default()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a></td>
+        <td><p>The patch instance for chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="PatchManager_LuaPatching_PatchDefinition_Do_" data-uid="PatchManager.LuaPatching.PatchDefinition.Do*"></a>
   <h4 id="PatchManager_LuaPatching_PatchDefinition_Do_System_Func_MoonSharp_Interpreter_DynValue_System_String__" data-uid="PatchManager.LuaPatching.PatchDefinition.Do(System.Func{MoonSharp.Interpreter.DynValue,System.String})">Do(Func&lt;DynValue, string&gt;)</h4>
   <div class="markdown level1 summary"><p>Sets the patch's apply callback.</p>
@@ -976,6 +1038,52 @@ mutates the wrapped JSON in place. Its non-removal return value is otherwise unu
       <tr>
         <td><span class="xref">ScriptRuntimeException</span></td>
         <td><p>Thrown when a patch method has already been set.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_PatchDefinition_DuplicateNameFor_" data-uid="PatchManager.LuaPatching.PatchDefinition.DuplicateNameFor*"></a>
+  <h4 id="PatchManager_LuaPatching_PatchDefinition_DuplicateNameFor_System_String_" data-uid="PatchManager.LuaPatching.PatchDefinition.DuplicateNameFor(System.String)">DuplicateNameFor(string)</h4>
+  <div class="markdown level1 summary"><p>Gets the name a duplicate patch gives the copy of the named asset.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+public string DuplicateNameFor(string sourceName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">sourceName</span></td>
+        <td><p>The name of the asset being copied.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><p>The name of the copy.</p>
 </td>
       </tr>
     </tbody>
@@ -1336,6 +1444,33 @@ mutates the wrapped JSON in place. Its non-removal return value is otherwise unu
 </div>
 
 
+  <a id="PatchManager_LuaPatching_PatchDefinition_None_" data-uid="PatchManager.LuaPatching.PatchDefinition.None*"></a>
+  <h4 id="PatchManager_LuaPatching_PatchDefinition_None" data-uid="PatchManager.LuaPatching.PatchDefinition.None">None()</h4>
+  <div class="markdown level1 summary"><p>Makes the patch run in the Default pass, the same as <a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html#PatchManager_LuaPatching_PatchDefinition_Default">Default()</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PatchDefinition None()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a></td>
+        <td><p>The patch instance for chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="PatchManager_LuaPatching_PatchDefinition_NotNamed_" data-uid="PatchManager.LuaPatching.PatchDefinition.NotNamed*"></a>
   <h4 id="PatchManager_LuaPatching_PatchDefinition_NotNamed_System_String___" data-uid="PatchManager.LuaPatching.PatchDefinition.NotNamed(System.String[])">NotNamed(params string[])</h4>
   <div class="markdown level1 summary"><p>Makes the patch reject the assets with these names.</p>
@@ -1359,6 +1494,51 @@ mutates the wrapped JSON in place. Its non-removal return value is otherwise unu
         <td><span class="xref">string</span>[]</td>
         <td><span class="parametername">names</span></td>
         <td><p>The asset names to reject.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a></td>
+        <td><p>The patch instance for chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_PatchDefinition_Pass_" data-uid="PatchManager.LuaPatching.PatchDefinition.Pass*"></a>
+  <h4 id="PatchManager_LuaPatching_PatchDefinition_Pass_System_String_" data-uid="PatchManager.LuaPatching.PatchDefinition.Pass(System.String)">Pass(string)</h4>
+  <div class="markdown level1 summary"><p>Makes the patch run in the given pass.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PatchDefinition Pass(string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The pass name, namespaced to the host mod when it is not built-in and does not already carry a namespace.</p>
 </td>
       </tr>
     </tbody>

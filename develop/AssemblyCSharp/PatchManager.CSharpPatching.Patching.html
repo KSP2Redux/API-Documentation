@@ -213,6 +213,95 @@ methods (PatchPart, PatchPlanet, ...) are extension methods on <a class="xref" h
 </div>
 
 
+  <a id="PatchManager_CSharpPatching_Patching_Duplicate_" data-uid="PatchManager.CSharpPatching.Patching.Duplicate*"></a>
+  <h4 id="PatchManager_CSharpPatching_Patching_Duplicate__1_System_String_System_String_System_String_System_String_System_String_" data-uid="PatchManager.CSharpPatching.Patching.Duplicate``1(System.String,System.String,System.String,System.String,System.String)">Duplicate&lt;T&gt;(string, string, string, string, string)</h4>
+  <div class="markdown level1 summary"><p>Builds a typed fluent patch that copies each matching asset under a new name in the same label.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static PatchBuilder&lt;T&gt; Duplicate&lt;T&gt;(string modId, string converter, string label, string source, string newName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">modId</span></td>
+        <td><p>The mod ID the patch is namespaced under.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">converter</span></td>
+        <td><p>The name of the converter that produces the asset wrapper.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">label</span></td>
+        <td><p>The label whose assets to copy, which the copies keep.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The name of the asset to copy. Supports * and ? wildcards.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">newName</span></td>
+        <td><p>The name of the copy, with {name} standing in for the source asset's name.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.CSharpPatching.PatchBuilder-1.html">PatchBuilder</a>&lt;T&gt;</td>
+        <td><p>A typed fluent builder for the queued patch.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The asset wrapper type the patch's converter produces.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PatchManager_CSharpPatching_Patching_Duplicate__1_System_String_System_String_System_String_System_String_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The callback given to Do runs on the copy. Without one the asset is copied unchanged. The patch is named
+Duplicate(source -&gt; newName) under the mod ID, with the source and new name filled in.</p>
+</div>
+
+
   <a id="PatchManager_CSharpPatching_Patching_ForMod_" data-uid="PatchManager.CSharpPatching.Patching.ForMod*"></a>
   <h4 id="PatchManager_CSharpPatching_Patching_ForMod_System_String_" data-uid="PatchManager.CSharpPatching.Patching.ForMod(System.String)">ForMod(string)</h4>
   <div class="markdown level1 summary"><p>A patch scope bound to an explicit mod ID.</p>

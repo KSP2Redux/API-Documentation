@@ -858,7 +858,7 @@
 
   <a id="KSP_Game_OABProvider_GetOrbitalLaunchLocation_" data-uid="KSP.Game.OABProvider.GetOrbitalLaunchLocation*"></a>
   <h4 id="KSP_Game_OABProvider_GetOrbitalLaunchLocation_System_Double_" data-uid="KSP.Game.OABProvider.GetOrbitalLaunchLocation(System.Double)">GetOrbitalLaunchLocation(double)</h4>
-  <div class="markdown level1 summary"><p>Constructs a serialized location describing a circular low-Kerbin orbit at the given universal time epoch.</p>
+  <div class="markdown level1 summary"><p>Constructs a serialized location describing a circular low orbit of the home world at the given universal time epoch.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -930,7 +930,7 @@
 
   <a id="KSP_Game_OABProvider_GetSurfaceLaunchLocation_" data-uid="KSP.Game.OABProvider.GetSurfaceLaunchLocation*"></a>
   <h4 id="KSP_Game_OABProvider_GetSurfaceLaunchLocation_System_String_" data-uid="KSP.Game.OABProvider.GetSurfaceLaunchLocation(System.String)">GetSurfaceLaunchLocation(string)</h4>
-  <div class="markdown level1 summary"><p>Constructs a serialized location describing a surface launch at the named spawn point on Kerbin.</p>
+  <div class="markdown level1 summary"><p>Constructs a serialized location describing a surface launch at the named spawn point on the home world.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -1100,6 +1100,56 @@
       </tr>
     </tbody>
   </table>
+
+
+  <a id="KSP_Game_OABProvider_IsLaunchSiteAvailable_" data-uid="KSP.Game.OABProvider.IsLaunchSiteAvailable*"></a>
+  <h4 id="KSP_Game_OABProvider_IsLaunchSiteAvailable_KSP_Game_OABProvider_LaunchLocation_" data-uid="KSP.Game.OABProvider.IsLaunchSiteAvailable(KSP.Game.OABProvider.LaunchLocation)">IsLaunchSiteAvailable(LaunchLocation)</h4>
+  <div class="markdown level1 summary"><p>Gets whether the home world's space center has the spawn point for a launch location.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsLaunchSiteAvailable(OABProvider.LaunchLocation location)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Game.OABProvider.html">OABProvider</a>.<a class="xref" href="KSP.Game.OABProvider.LaunchLocation.html">LaunchLocation</a></td>
+        <td><span class="parametername">location</span></td>
+        <td><p>The launch location to check.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the launch location can be launched from, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Game_OABProvider_IsLaunchSiteAvailable_KSP_Game_OABProvider_LaunchLocation__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>A space center only has the sites its prefab provides, so a galaxy with its own may lack some of stock's.
+Before there is a home world, while its surface is not loaded, or while its space center is still being
+settled, no site is ruled out.</p>
+</div>
 
 
   <a id="KSP_Game_OABProvider_IsSelectedLaunchSiteAvailable_" data-uid="KSP.Game.OABProvider.IsSelectedLaunchSiteAvailable*"></a>
