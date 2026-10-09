@@ -187,6 +187,32 @@
       </tr>
     </tbody>
   </table>
+
+
+  <a id="KSP_Game_PartProvider_LoadedLayers_" data-uid="KSP.Game.PartProvider.LoadedLayers*"></a>
+  <h4 id="KSP_Game_PartProvider_LoadedLayers" data-uid="KSP.Game.PartProvider.LoadedLayers">LoadedLayers</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the part layers the loaded parts were chosen from, in order.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyList&lt;string&gt; LoadedLayers { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IReadOnlyList</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="methods">Methods
 </h3>
 
@@ -298,6 +324,60 @@
   </table>
 
 
+  <a id="KSP_Game_PartProvider_GetActiveLayers_" data-uid="KSP.Game.PartProvider.GetActiveLayers*"></a>
+  <h4 id="KSP_Game_PartProvider_GetActiveLayers_Redux_Packs_CampaignPack_KSP_Sim_SerializedGalaxyDefinition_" data-uid="KSP.Game.PartProvider.GetActiveLayers(Redux.Packs.CampaignPack,KSP.Sim.SerializedGalaxyDefinition)">GetActiveLayers(CampaignPack, SerializedGalaxyDefinition)</h4>
+  <div class="markdown level1 summary"><p>Gets the part layers a campaign builds its parts from, the campaign pack's first and the galaxy's on top.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static List&lt;string&gt; GetActiveLayers(CampaignPack campaignPack, SerializedGalaxyDefinition galaxy)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Packs.CampaignPack.html">CampaignPack</a></td>
+        <td><span class="parametername">campaignPack</span></td>
+        <td><p>The campaign's pack, or null for none, which builds from the default layer alone.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.SerializedGalaxyDefinition.html">SerializedGalaxyDefinition</a></td>
+        <td><span class="parametername">galaxy</span></td>
+        <td><p>The campaign's galaxy definition, or null for none.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td><p>The active part layers in order, a later layer taking precedence over an earlier one.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Game_PartProvider_GetActiveLayers_Redux_Packs_CampaignPack_KSP_Sim_SerializedGalaxyDefinition__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>A galaxy that replaces part layers builds from its own alone, whatever the campaign pack lists.</p>
+</div>
+
+
   <a id="KSP_Game_PartProvider_GetRawJson_" data-uid="KSP.Game.PartProvider.GetRawJson*"></a>
   <h4 id="KSP_Game_PartProvider_GetRawJson_System_String_" data-uid="KSP.Game.PartProvider.GetRawJson(System.String)">GetRawJson(string)</h4>
   <div class="markdown level1 summary"><p>Retrieves the raw JSON string for the specified part name.</p>
@@ -365,11 +445,15 @@
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">clearPartData</span></td>
-        <td><p>When true, clears <a class="xref" href="KSP.Game.PartProvider.html#KSP_Game_PartProvider_PartData">PartData</a> and marks data as not loaded.</p>
+        <td><p>When true, clears <a class="xref" href="KSP.Game.PartProvider.html#KSP_Game_PartProvider_PartData">PartData</a> and <a class="xref" href="KSP.Game.PartProvider.html#KSP_Game_PartProvider_PartJson">PartJson</a> and marks data as not loaded.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 id="KSP_Game_PartProvider_Shutdown_System_Boolean__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The raw JSON goes too, since spawned parts take their definition values from it, and so do the variant
+entries V-SwiFT caches in both dictionaries.</p>
+</div>
 
 
   <a id="KSP_Game_PartProvider_TryGet_" data-uid="KSP.Game.PartProvider.TryGet*"></a>

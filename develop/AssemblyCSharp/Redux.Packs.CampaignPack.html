@@ -311,6 +311,31 @@
   </table>
 
 
+  <h4 id="Redux_Packs_CampaignPack_PartLayers" data-uid="Redux.Packs.CampaignPack.PartLayers">PartLayers</h4>
+  <div class="markdown level1 summary"><p>The part layers this campaign pack builds its parts from, in order, with the galaxy's part layers stacked on top</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;string&gt; PartLayers</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <h4 id="Redux_Packs_CampaignPack_TechTreeLayers" data-uid="Redux.Packs.CampaignPack.TechTreeLayers">TechTreeLayers</h4>
   <div class="markdown level1 summary"><p>The list of tech tree layers that this campaign pack filters for</p>
 </div>
@@ -336,6 +361,57 @@
   </table>
   <h3 id="methods">Methods
 </h3>
+
+
+  <a id="Redux_Packs_CampaignPack_GetLayerRank_" data-uid="Redux.Packs.CampaignPack.GetLayerRank*"></a>
+  <h4 id="Redux_Packs_CampaignPack_GetLayerRank_System_Collections_Generic_IReadOnlyList_System_String__System_String_" data-uid="Redux.Packs.CampaignPack.GetLayerRank(System.Collections.Generic.IReadOnlyList{System.String},System.String)">GetLayerRank(IReadOnlyList&lt;string&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Gets where a layer stands in an ordered list of layers, an empty layer counting as the default layer</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int GetLayerRank(IReadOnlyList&lt;string&gt; layers, string layer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IReadOnlyList</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">layers</span></td>
+        <td><p>The layers in order, a later layer taking precedence over an earlier one.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td><p>The layer to look for.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><p>The layer's last index in the list, or -1 if the list does not include it.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <a id="Redux_Packs_CampaignPack_HasMissionLayer_" data-uid="Redux.Packs.CampaignPack.HasMissionLayer*"></a>
@@ -472,6 +548,73 @@ layer counts as the default layer</p>
       </tr>
     </tbody>
   </table>
+
+
+  <a id="Redux_Packs_CampaignPack_ShouldReplaceCopy_" data-uid="Redux.Packs.CampaignPack.ShouldReplaceCopy*"></a>
+  <h4 id="Redux_Packs_CampaignPack_ShouldReplaceCopy_System_Collections_Generic_IReadOnlyList_System_String__System_String_System_Boolean_System_String_" data-uid="Redux.Packs.CampaignPack.ShouldReplaceCopy(System.Collections.Generic.IReadOnlyList{System.String},System.String,System.Boolean,System.String)">ShouldReplaceCopy(IReadOnlyList&lt;string&gt;, string, bool, string)</h4>
+  <div class="markdown level1 summary"><p>Gets whether a copy of some data replaces the copy kept so far, when layers have copied it</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool ShouldReplaceCopy(IReadOnlyList&lt;string&gt; layers, string candidateLayer, bool hasKept, string keptLayer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IReadOnlyList</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">layers</span></td>
+        <td><p>The active layers in order.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">candidateLayer</span></td>
+        <td><p>The layer of the copy being offered.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">hasKept</span></td>
+        <td><p>Whether a copy has been kept so far.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">keptLayer</span></td>
+        <td><p>The layer of the copy kept so far.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the offered copy replaces the one kept so far, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Packs_CampaignPack_ShouldReplaceCopy_System_Collections_Generic_IReadOnlyList_System_String__System_String_System_Boolean_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>A copy from a later layer in the list wins and a copy from a layer outside the list is never kept, so a
+layer only has to copy the data it changes. Of several copies in the same layer, the last one offered wins.</p>
+</div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
