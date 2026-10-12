@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class InputLockManager | KSP2Redux API (Develop) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class InputLockManager | KSP2Redux API (Develop) ">
+    
+    <meta name="description" content="Manages named input control locks, maintaining a combined  bitmask from the active lock stack.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="GlobalKsp2Redux.InputLockManager">
+
+
+
+  <h1 id="GlobalKsp2Redux_InputLockManager" data-uid="GlobalKsp2Redux.InputLockManager" class="text-break">Class InputLockManager</h1>
+  <div class="markdown level0 summary"><p>Manages named input control locks, maintaining a combined <a class="xref" href="ControlTypes.html">ControlTypes</a> bitmask from the active lock stack.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><span class="xref">InputLockManager</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="GlobalKsp2Redux.html">GlobalKsp2Redux</a></h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
+  <h5 id="GlobalKsp2Redux_InputLockManager_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use KSP.IInputLockManager&quot;)]
+public static class InputLockManager</code></pre>
+  </div>
+  <h3 id="fields">Fields
+</h3>
+
+
+  <h4 id="GlobalKsp2Redux_InputLockManager_lockMask" data-uid="GlobalKsp2Redux.InputLockManager.lockMask">lockMask</h4>
+  <div class="markdown level1 summary"><p>Combined bitmask of all active control locks, recomputed whenever locks are added or removed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ulong lockMask</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ulong</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="GlobalKsp2Redux_InputLockManager_lockStack" data-uid="GlobalKsp2Redux.InputLockManager.lockStack">lockStack</h4>
+  <div class="markdown level1 summary"><p>Dictionary mapping lock identifiers to their corresponding <a class="xref" href="ControlTypes.html">ControlTypes</a> bitmask values.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Dictionary&lt;string, ulong&gt; lockStack</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Dictionary</span>&lt;<span class="xref">string</span>, <span class="xref">ulong</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="GlobalKsp2Redux_InputLockManager_LockMask_" data-uid="GlobalKsp2Redux.InputLockManager.LockMask*"></a>
+  <h4 id="GlobalKsp2Redux_InputLockManager_LockMask" data-uid="GlobalKsp2Redux.InputLockManager.LockMask">LockMask</h4>
+  <div class="markdown level1 summary"><p>Gets the current combined control lock bitmask.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ulong LockMask { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ulong</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="GlobalKsp2Redux_InputLockManager_ClearControlLocks_" data-uid="GlobalKsp2Redux.InputLockManager.ClearControlLocks*"></a>
+  <h4 id="GlobalKsp2Redux_InputLockManager_ClearControlLocks" data-uid="GlobalKsp2Redux.InputLockManager.ClearControlLocks">ClearControlLocks()</h4>
+  <div class="markdown level1 summary"><p>Removes all control locks from the lock stack and resets the combined lock mask to zero.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void ClearControlLocks()</code></pre>
+  </div>
+
+
+  <a id="GlobalKsp2Redux_InputLockManager_ControlLocks_" data-uid="GlobalKsp2Redux.InputLockManager.ControlLocks*"></a>
+  <h4 id="GlobalKsp2Redux_InputLockManager_ControlLocks_System_Int32_System_Int32_" data-uid="GlobalKsp2Redux.InputLockManager.ControlLocks(System.Int32,System.Int32)">ControlLocks(int, int)</h4>
+  <div class="markdown level1 summary"><p>Builds a rotated bitmask covering a contiguous range of bit positions from <code class="paramref">lower</code> to <code class="paramref">upper</code> inclusive.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ulong ControlLocks(int lower, int upper)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">lower</span></td>
+        <td><p>The zero-based index of the lowest bit in the range.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">upper</span></td>
+        <td><p>The zero-based index of the highest bit in the range.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ulong</span></td>
+        <td><p>A <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/integral-numeric-types">ulong</a> mask with bits set for the specified range, or zero if the range is invalid or spans 64 or more bits.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="GlobalKsp2Redux_InputLockManager_GetControlLock_" data-uid="GlobalKsp2Redux.InputLockManager.GetControlLock*"></a>
+  <h4 id="GlobalKsp2Redux_InputLockManager_GetControlLock_System_String_" data-uid="GlobalKsp2Redux.InputLockManager.GetControlLock(System.String)">GetControlLock(string)</h4>
+  <div class="markdown level1 summary"><p>Retrieves the <a class="xref" href="ControlTypes.html">ControlTypes</a> flags registered under the given lock identifier.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ControlTypes GetControlLock(string lockID)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">lockID</span></td>
+        <td><p>The unique string identifier of the lock entry to look up.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalKsp2Redux.ControlTypes.html">ControlTypes</a></td>
+        <td><p>The <a class="xref" href="ControlTypes.html">ControlTypes</a> flags for the specified lock, or <a class="xref" href="GlobalKsp2Redux.ControlTypes.html#ControlTypes_None">None</a> if no entry exists.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="GlobalKsp2Redux_InputLockManager_IsAllLocked_" data-uid="GlobalKsp2Redux.InputLockManager.IsAllLocked*"></a>
+  <h4 id="GlobalKsp2Redux_InputLockManager_IsAllLocked_ControlTypes_" data-uid="GlobalKsp2Redux.InputLockManager.IsAllLocked(ControlTypes)">IsAllLocked(ControlTypes)</h4>
+  <div class="markdown level1 summary"><p>Determines whether every flag in the specified mask is currently locked in the global mask.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsAllLocked(ControlTypes mask)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalKsp2Redux.ControlTypes.html">ControlTypes</a></td>
+        <td><span class="parametername">mask</span></td>
+        <td><p>The <a class="xref" href="ControlTypes.html">ControlTypes</a> flags that must all be locked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if all specified flags are locked, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="GlobalKsp2Redux_InputLockManager_IsAnyUnlocked_" data-uid="GlobalKsp2Redux.InputLockManager.IsAnyUnlocked*"></a>
+  <h4 id="GlobalKsp2Redux_InputLockManager_IsAnyUnlocked_ControlTypes_" data-uid="GlobalKsp2Redux.InputLockManager.IsAnyUnlocked(ControlTypes)">IsAnyUnlocked(ControlTypes)</h4>
+  <div class="markdown level1 summary"><p>Determines whether at least one flag in the specified mask is currently unlocked in the global mask.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsAnyUnlocked(ControlTypes mask)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalKsp2Redux.ControlTypes.html">ControlTypes</a></td>
+        <td><span class="parametername">mask</span></td>
+        <td><p>The <a class="xref" href="ControlTypes.html">ControlTypes</a> flags to test for any unlocked entry.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if at least one of the specified flags is not locked, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="GlobalKsp2Redux_InputLockManager_IsLocked_" data-uid="GlobalKsp2Redux.InputLockManager.IsLocked*"></a>
+  <h4 id="GlobalKsp2Redux_InputLockManager_IsLocked_ControlTypes_" data-uid="GlobalKsp2Redux.InputLockManager.IsLocked(ControlTypes)">IsLocked(ControlTypes)</h4>
+  <div class="markdown level1 summary"><p>Determines whether any of the specified control type flags are currently locked in the global mask.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsLocked(ControlTypes controlType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalKsp2Redux.ControlTypes.html">ControlTypes</a></td>
+        <td><span class="parametername">controlType</span></td>
+        <td><p>The <a class="xref" href="ControlTypes.html">ControlTypes</a> flags to test against the global lock mask.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if at least one of the specified flags is locked, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="GlobalKsp2Redux_InputLockManager_IsLocked_" data-uid="GlobalKsp2Redux.InputLockManager.IsLocked*"></a>
+  <h4 id="GlobalKsp2Redux_InputLockManager_IsLocked_ControlTypes_ControlTypes_" data-uid="GlobalKsp2Redux.InputLockManager.IsLocked(ControlTypes,ControlTypes)">IsLocked(ControlTypes, ControlTypes)</h4>
+  <div class="markdown level1 summary"><p>Determines whether any of the specified control type flags are set in the given reference mask.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsLocked(ControlTypes controlType, ControlTypes refMask)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalKsp2Redux.ControlTypes.html">ControlTypes</a></td>
+        <td><span class="parametername">controlType</span></td>
+        <td><p>The <a class="xref" href="ControlTypes.html">ControlTypes</a> flags to test.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalKsp2Redux.ControlTypes.html">ControlTypes</a></td>
+        <td><span class="parametername">refMask</span></td>
+        <td><p>The reference <a class="xref" href="ControlTypes.html">ControlTypes</a> mask to test against instead of the global lock mask.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if at least one of the specified flags is set in <code class="paramref">refMask</code>, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="GlobalKsp2Redux_InputLockManager_IsLocking_" data-uid="GlobalKsp2Redux.InputLockManager.IsLocking*"></a>
+  <h4 id="GlobalKsp2Redux_InputLockManager_IsLocking_ControlTypes_GameEvents_FromToAction_ControlTypes_ControlTypes__" data-uid="GlobalKsp2Redux.InputLockManager.IsLocking(ControlTypes,GameEvents.FromToAction{ControlTypes,ControlTypes})">IsLocking(ControlTypes, FromToAction&lt;ControlTypes, ControlTypes&gt;)</h4>
+  <div class="markdown level1 summary"><p>Determines whether the specified control type transitioned from unlocked to locked between two mask snapshots.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;deprecated&quot;, true)]
+public static bool IsLocking(ControlTypes controlType, GameEvents.FromToAction&lt;ControlTypes, ControlTypes&gt; refMasks)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalKsp2Redux.ControlTypes.html">ControlTypes</a></td>
+        <td><span class="parametername">controlType</span></td>
+        <td><p>The <a class="xref" href="ControlTypes.html">ControlTypes</a> flag to check.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GameEvents.html">GameEvents</a>.<a class="xref" href="GameEvents.FromToAction-2.html">FromToAction</a>&lt;<a class="xref" href="ControlTypes.html">ControlTypes</a>, <a class="xref" href="ControlTypes.html">ControlTypes</a>&gt;</td>
+        <td><span class="parametername">refMasks</span></td>
+        <td><p>A before/after pair of <a class="xref" href="ControlTypes.html">ControlTypes</a> masks representing the lock state transition.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if <code class="paramref">controlType</code> was unlocked in the prior mask and is locked in the new mask, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="GlobalKsp2Redux_InputLockManager_IsUnlocked_" data-uid="GlobalKsp2Redux.InputLockManager.IsUnlocked*"></a>
+  <h4 id="GlobalKsp2Redux_InputLockManager_IsUnlocked_ControlTypes_" data-uid="GlobalKsp2Redux.InputLockManager.IsUnlocked(ControlTypes)">IsUnlocked(ControlTypes)</h4>
+  <div class="markdown level1 summary"><p>Determines whether all of the specified control type flags are currently unlocked in the global mask.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsUnlocked(ControlTypes controlType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalKsp2Redux.ControlTypes.html">ControlTypes</a></td>
+        <td><span class="parametername">controlType</span></td>
+        <td><p>The <a class="xref" href="ControlTypes.html">ControlTypes</a> flags to test against the global lock mask.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if none of the specified flags are locked, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="GlobalKsp2Redux_InputLockManager_IsUnlocked_" data-uid="GlobalKsp2Redux.InputLockManager.IsUnlocked*"></a>
+  <h4 id="GlobalKsp2Redux_InputLockManager_IsUnlocked_ControlTypes_ControlTypes_" data-uid="GlobalKsp2Redux.InputLockManager.IsUnlocked(ControlTypes,ControlTypes)">IsUnlocked(ControlTypes, ControlTypes)</h4>
+  <div class="markdown level1 summary"><p>Determines whether all of the specified control type flags are absent from the given reference mask.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsUnlocked(ControlTypes controlType, ControlTypes refMask)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalKsp2Redux.ControlTypes.html">ControlTypes</a></td>
+        <td><span class="parametername">controlType</span></td>
+        <td><p>The <a class="xref" href="ControlTypes.html">ControlTypes</a> flags to test.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalKsp2Redux.ControlTypes.html">ControlTypes</a></td>
+        <td><span class="parametername">refMask</span></td>
+        <td><p>The reference <a class="xref" href="ControlTypes.html">ControlTypes</a> mask to test against instead of the global lock mask.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if none of the specified flags are set in <code class="paramref">refMask</code>, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="GlobalKsp2Redux_InputLockManager_IsUnlocking_" data-uid="GlobalKsp2Redux.InputLockManager.IsUnlocking*"></a>
+  <h4 id="GlobalKsp2Redux_InputLockManager_IsUnlocking_ControlTypes_GameEvents_FromToAction_ControlTypes_ControlTypes__" data-uid="GlobalKsp2Redux.InputLockManager.IsUnlocking(ControlTypes,GameEvents.FromToAction{ControlTypes,ControlTypes})">IsUnlocking(ControlTypes, FromToAction&lt;ControlTypes, ControlTypes&gt;)</h4>
+  <div class="markdown level1 summary"><p>Determines whether the specified control type transitioned from locked to unlocked between two mask snapshots.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;deprecated&quot;, true)]
+public static bool IsUnlocking(ControlTypes controlType, GameEvents.FromToAction&lt;ControlTypes, ControlTypes&gt; refMasks)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalKsp2Redux.ControlTypes.html">ControlTypes</a></td>
+        <td><span class="parametername">controlType</span></td>
+        <td><p>The <a class="xref" href="ControlTypes.html">ControlTypes</a> flag to check.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GameEvents.html">GameEvents</a>.<a class="xref" href="GameEvents.FromToAction-2.html">FromToAction</a>&lt;<a class="xref" href="ControlTypes.html">ControlTypes</a>, <a class="xref" href="ControlTypes.html">ControlTypes</a>&gt;</td>
+        <td><span class="parametername">refMasks</span></td>
+        <td><p>A before/after pair of <a class="xref" href="ControlTypes.html">ControlTypes</a> masks representing the lock state transition.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if <code class="paramref">controlType</code> was locked in the prior mask and is unlocked in the new mask, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="GlobalKsp2Redux_InputLockManager_RemoveControlLock_" data-uid="GlobalKsp2Redux.InputLockManager.RemoveControlLock*"></a>
+  <h4 id="GlobalKsp2Redux_InputLockManager_RemoveControlLock_System_String_" data-uid="GlobalKsp2Redux.InputLockManager.RemoveControlLock(System.String)">RemoveControlLock(string)</h4>
+  <div class="markdown level1 summary"><p>Removes the named control lock from the lock stack, if it exists, and recalculates the combined lock mask.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void RemoveControlLock(string lockID)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">lockID</span></td>
+        <td><p>The unique string identifier of the lock entry to remove.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="GlobalKsp2Redux_InputLockManager_SetControlLock_" data-uid="GlobalKsp2Redux.InputLockManager.SetControlLock*"></a>
+  <h4 id="GlobalKsp2Redux_InputLockManager_SetControlLock_ControlTypes_System_String_" data-uid="GlobalKsp2Redux.InputLockManager.SetControlLock(ControlTypes,System.String)">SetControlLock(ControlTypes, string)</h4>
+  <div class="markdown level1 summary"><p>Adds or replaces a named control lock, applying the specified <a class="xref" href="ControlTypes.html">ControlTypes</a> flags to the lock stack.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ControlTypes SetControlLock(ControlTypes locks, string lockID)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalKsp2Redux.ControlTypes.html">ControlTypes</a></td>
+        <td><span class="parametername">locks</span></td>
+        <td><p>The control type flags to lock.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">lockID</span></td>
+        <td><p>The unique string identifier for this lock entry.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalKsp2Redux.ControlTypes.html">ControlTypes</a></td>
+        <td><p>The <a class="xref" href="ControlTypes.html">ControlTypes</a> flags that were applied.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="GlobalKsp2Redux_InputLockManager_SetControlLock_" data-uid="GlobalKsp2Redux.InputLockManager.SetControlLock*"></a>
+  <h4 id="GlobalKsp2Redux_InputLockManager_SetControlLock_System_String_" data-uid="GlobalKsp2Redux.InputLockManager.SetControlLock(System.String)">SetControlLock(string)</h4>
+  <div class="markdown level1 summary"><p>Adds or replaces a named control lock using <a class="xref" href="GlobalKsp2Redux.ControlTypes.html#ControlTypes_All">All</a>, locking every control category.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ControlTypes SetControlLock(string lockID)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">lockID</span></td>
+        <td><p>The unique string identifier for this lock entry.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalKsp2Redux.ControlTypes.html">ControlTypes</a></td>
+        <td><p>The <a class="xref" href="ControlTypes.html">ControlTypes</a> flags that were applied.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from develop
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
