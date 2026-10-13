@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class CameraDriverBase | KSP2Redux API (Develop) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class CameraDriverBase | KSP2Redux API (Develop) ">
+    
+    <meta name="description" content="A base class for modular camera drivers, providing pivot and gimbal transform management, input interpretation, and validation.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="KSP.ModularCamera.CameraDriverBase">
+
+
+
+  <h1 id="KSP_ModularCamera_CameraDriverBase" data-uid="KSP.ModularCamera.CameraDriverBase" class="text-break">Class CameraDriverBase</h1>
+  <div class="markdown level0 summary"><p>A base class for modular camera drivers, providing pivot and gimbal transform management, input interpretation, and validation.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><span class="xref">CameraDriverBase</span></div>
+      <div class="level2"><a class="xref" href="KSP.CameraTemplate.CameraTemplateFPSDriver.html">CameraTemplateFPSDriver</a></div>
+      <div class="level2"><a class="xref" href="KSP.CameraTemplate.CameraTemplateOrbitDriver.html">CameraTemplateOrbitDriver</a></div>
+      <div class="level2"><a class="xref" href="KSP.ModularCamera.sample.SampleDragDriver.html">SampleDragDriver</a></div>
+      <div class="level2"><a class="xref" href="KSP.ModularCamera.sample.SampleFPSDriver.html">SampleFPSDriver</a></div>
+      <div class="level2"><a class="xref" href="KSP.ModularCamera.sample.SampleOrbitDriver.html">SampleOrbitDriver</a></div>
+      <div class="level2"><a class="xref" href="KSP.OAB.OABCameraFPSDriver.html">OABCameraFPSDriver</a></div>
+      <div class="level2"><a class="xref" href="KSP.OAB.OABCameraOrbitDriver.html">OABCameraOrbitDriver</a></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="KSP.ModularCamera.ICameraDriver.html">ICameraDriver</a></div>
+    <div><a class="xref" href="KSP.ModularCamera.ICameraDriverReadOnly.html">ICameraDriverReadOnly</a></div>
+    <div><a class="xref" href="KSP.ModularCamera.internals.ICameraDriverInternalState.html">ICameraDriverInternalState</a></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.ModularCamera.html">ModularCamera</a></h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
+  <h5 id="KSP_ModularCamera_CameraDriverBase_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class CameraDriverBase : ICameraDriver, ICameraDriverReadOnly, ICameraDriverInternalState</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase__ctor_" data-uid="KSP.ModularCamera.CameraDriverBase.#ctor*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase__ctor_KSP_ModularCamera_ICameraDriver_" data-uid="KSP.ModularCamera.CameraDriverBase.#ctor(KSP.ModularCamera.ICameraDriver)">CameraDriverBase(ICameraDriver)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="KSP.ModularCamera.CameraDriverBase.html">CameraDriverBase</a> class by copying all state from an existing driver.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CameraDriverBase(ICameraDriver other)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.ModularCamera.ICameraDriver.html">ICameraDriver</a></td>
+        <td><span class="parametername">other</span></td>
+        <td><p>The driver whose transforms, input interpreters, input modifiers, validators, and target distance are copied.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase__ctor_" data-uid="KSP.ModularCamera.CameraDriverBase.#ctor*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase__ctor_UnityEngine_Transform_UnityEngine_Transform_UnityEngine_Transform_" data-uid="KSP.ModularCamera.CameraDriverBase.#ctor(UnityEngine.Transform,UnityEngine.Transform,UnityEngine.Transform)">CameraDriverBase(Transform, Transform, Transform)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="KSP.ModularCamera.CameraDriverBase.html">CameraDriverBase</a> class with the specified transforms.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CameraDriverBase(Transform pivot, Transform gimbal, Transform camera)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
+        <td><span class="parametername">pivot</span></td>
+        <td><p>The transform used as the camera rig's pivot and position origin.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
+        <td><span class="parametername">gimbal</span></td>
+        <td><p>The transform used for gimbal-based orientation control.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
+        <td><span class="parametername">camera</span></td>
+        <td><p>The transform representing the physical camera.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_CameraDistance_" data-uid="KSP.ModularCamera.CameraDriverBase.CameraDistance*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_CameraDistance" data-uid="KSP.ModularCamera.CameraDriverBase.CameraDistance">CameraDistance</h4>
+  <div class="markdown level1 summary"><p>Gets the actual distance in world units from the pivot to the current camera position.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float CameraDistance { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_CameraOffset_" data-uid="KSP.ModularCamera.CameraDriverBase.CameraOffset*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_CameraOffset" data-uid="KSP.ModularCamera.CameraDriverBase.CameraOffset">CameraOffset</h4>
+  <div class="markdown level1 summary"><p>Gets the world-space offset from the pivot to the current camera position.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3 CameraOffset { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_CameraPosition_" data-uid="KSP.ModularCamera.CameraDriverBase.CameraPosition*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_CameraPosition" data-uid="KSP.ModularCamera.CameraDriverBase.CameraPosition">CameraPosition</h4>
+  <div class="markdown level1 summary"><p>Gets the world-space position of the camera transform.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3 CameraPosition { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_CameraTransform_" data-uid="KSP.ModularCamera.CameraDriverBase.CameraTransform*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_CameraTransform" data-uid="KSP.ModularCamera.CameraDriverBase.CameraTransform">CameraTransform</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the transform representing the physical camera position.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Transform CameraTransform { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_GimbalLocalRotation_" data-uid="KSP.ModularCamera.CameraDriverBase.GimbalLocalRotation*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_GimbalLocalRotation" data-uid="KSP.ModularCamera.CameraDriverBase.GimbalLocalRotation">GimbalLocalRotation</h4>
+  <div class="markdown level1 summary"><p>Gets the local rotation of the gimbal transform.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Quaternion GimbalLocalRotation { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Quaternion.html">Quaternion</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_GimbalToWorld_" data-uid="KSP.ModularCamera.CameraDriverBase.GimbalToWorld*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_GimbalToWorld" data-uid="KSP.ModularCamera.CameraDriverBase.GimbalToWorld">GimbalToWorld</h4>
+  <div class="markdown level1 summary"><p>Gets the gimbal-local-to-world transformation matrix derived from the gimbal transform.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Matrix4x4 GimbalToWorld { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Matrix4x4.html">Matrix4x4</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_GimbalTransform_" data-uid="KSP.ModularCamera.CameraDriverBase.GimbalTransform*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_GimbalTransform" data-uid="KSP.ModularCamera.CameraDriverBase.GimbalTransform">GimbalTransform</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the gimbal transform responsible for yaw, pitch, and roll orientation of the camera.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Transform GimbalTransform { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_GimbalWorldForward_" data-uid="KSP.ModularCamera.CameraDriverBase.GimbalWorldForward*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_GimbalWorldForward" data-uid="KSP.ModularCamera.CameraDriverBase.GimbalWorldForward">GimbalWorldForward</h4>
+  <div class="markdown level1 summary"><p>Gets the world-space forward direction of the gimbal transform.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3 GimbalWorldForward { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_GimbalWorldRight_" data-uid="KSP.ModularCamera.CameraDriverBase.GimbalWorldRight*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_GimbalWorldRight" data-uid="KSP.ModularCamera.CameraDriverBase.GimbalWorldRight">GimbalWorldRight</h4>
+  <div class="markdown level1 summary"><p>Gets the world-space right direction of the gimbal transform.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3 GimbalWorldRight { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_GimbalWorldRotation_" data-uid="KSP.ModularCamera.CameraDriverBase.GimbalWorldRotation*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_GimbalWorldRotation" data-uid="KSP.ModularCamera.CameraDriverBase.GimbalWorldRotation">GimbalWorldRotation</h4>
+  <div class="markdown level1 summary"><p>Gets the world-space rotation of the gimbal transform.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Quaternion GimbalWorldRotation { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Quaternion.html">Quaternion</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_GimbalWorldUp_" data-uid="KSP.ModularCamera.CameraDriverBase.GimbalWorldUp*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_GimbalWorldUp" data-uid="KSP.ModularCamera.CameraDriverBase.GimbalWorldUp">GimbalWorldUp</h4>
+  <div class="markdown level1 summary"><p>Gets the world-space up direction of the gimbal transform.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3 GimbalWorldUp { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_InputInterpreters_" data-uid="KSP.ModularCamera.CameraDriverBase.InputInterpreters*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_InputInterpreters" data-uid="KSP.ModularCamera.CameraDriverBase.InputInterpreters">InputInterpreters</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the map of <a class="xref" href="KSP.ModularCamera.CameraInputBinding.html">CameraInputBinding</a> values to their registered <a class="xref" href="KSP.ModularCamera.CameraInputInterpreter.html">CameraInputInterpreter</a> callbacks.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;CameraInputBinding, CameraInputInterpreter&gt; InputInterpreters { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Dictionary</span>&lt;<a class="xref" href="KSP.ModularCamera.CameraInputBinding.html">CameraInputBinding</a>, <a class="xref" href="KSP.ModularCamera.CameraInputInterpreter.html">CameraInputInterpreter</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_InputModifiers_" data-uid="KSP.ModularCamera.CameraDriverBase.InputModifiers*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_InputModifiers" data-uid="KSP.ModularCamera.CameraDriverBase.InputModifiers">InputModifiers</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the map of <a class="xref" href="KSP.ModularCamera.CameraInputBinding.html">CameraInputBinding</a> values to their ordered lists of <a class="xref" href="KSP.ModularCamera.CameraInputModifier.html">CameraInputModifier</a> callbacks.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;CameraInputBinding, List&lt;CameraInputModifier&gt;&gt; InputModifiers { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Dictionary</span>&lt;<a class="xref" href="KSP.ModularCamera.CameraInputBinding.html">CameraInputBinding</a>, <span class="xref">List</span>&lt;<a class="xref" href="KSP.ModularCamera.CameraInputModifier.html">CameraInputModifier</a>&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_Pitch_" data-uid="KSP.ModularCamera.CameraDriverBase.Pitch*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_Pitch" data-uid="KSP.ModularCamera.CameraDriverBase.Pitch">Pitch</h4>
+  <div class="markdown level1 summary"><p>Gets the current pitch angle of the gimbal in degrees, derived from the gimbal's local Euler x component.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Pitch { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_PivotLocalRotation_" data-uid="KSP.ModularCamera.CameraDriverBase.PivotLocalRotation*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_PivotLocalRotation" data-uid="KSP.ModularCamera.CameraDriverBase.PivotLocalRotation">PivotLocalRotation</h4>
+  <div class="markdown level1 summary"><p>Gets the local rotation of the pivot transform.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Quaternion PivotLocalRotation { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Quaternion.html">Quaternion</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_PivotPosition_" data-uid="KSP.ModularCamera.CameraDriverBase.PivotPosition*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_PivotPosition" data-uid="KSP.ModularCamera.CameraDriverBase.PivotPosition">PivotPosition</h4>
+  <div class="markdown level1 summary"><p>Gets the world-space position of the pivot transform.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3 PivotPosition { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_PivotToWorld_" data-uid="KSP.ModularCamera.CameraDriverBase.PivotToWorld*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_PivotToWorld" data-uid="KSP.ModularCamera.CameraDriverBase.PivotToWorld">PivotToWorld</h4>
+  <div class="markdown level1 summary"><p>Gets the pivot-local-to-world transformation matrix derived from the pivot transform.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Matrix4x4 PivotToWorld { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Matrix4x4.html">Matrix4x4</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_PivotToWorldRotation_" data-uid="KSP.ModularCamera.CameraDriverBase.PivotToWorldRotation*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_PivotToWorldRotation" data-uid="KSP.ModularCamera.CameraDriverBase.PivotToWorldRotation">PivotToWorldRotation</h4>
+  <div class="markdown level1 summary"><p>Gets the pivot transform's local rotation expressed as a world-space quaternion.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Quaternion PivotToWorldRotation { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Quaternion.html">Quaternion</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_PivotTransform_" data-uid="KSP.ModularCamera.CameraDriverBase.PivotTransform*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_PivotTransform" data-uid="KSP.ModularCamera.CameraDriverBase.PivotTransform">PivotTransform</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the pivot transform that defines the camera rig's world position and orientation origin.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Transform PivotTransform { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_Roll_" data-uid="KSP.ModularCamera.CameraDriverBase.Roll*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_Roll" data-uid="KSP.ModularCamera.CameraDriverBase.Roll">Roll</h4>
+  <div class="markdown level1 summary"><p>Gets the current roll angle of the gimbal in degrees, derived from the gimbal's local Euler z component.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Roll { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_TargetDistance_" data-uid="KSP.ModularCamera.CameraDriverBase.TargetDistance*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_TargetDistance" data-uid="KSP.ModularCamera.CameraDriverBase.TargetDistance">TargetDistance</h4>
+  <div class="markdown level1 summary"><p>Gets the desired distance in world units between the pivot and the target point along the gimbal's forward axis.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float TargetDistance { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_TargetOffset_" data-uid="KSP.ModularCamera.CameraDriverBase.TargetOffset*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_TargetOffset" data-uid="KSP.ModularCamera.CameraDriverBase.TargetOffset">TargetOffset</h4>
+  <div class="markdown level1 summary"><p>Gets the world-space offset from the pivot to the target point, computed from the gimbal orientation and target distance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3 TargetOffset { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_TargetPosition_" data-uid="KSP.ModularCamera.CameraDriverBase.TargetPosition*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_TargetPosition" data-uid="KSP.ModularCamera.CameraDriverBase.TargetPosition">TargetPosition</h4>
+  <div class="markdown level1 summary"><p>Gets the world-space position of the look target, computed from the pivot position and target offset.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3 TargetPosition { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_Validators_" data-uid="KSP.ModularCamera.CameraDriverBase.Validators*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_Validators" data-uid="KSP.ModularCamera.CameraDriverBase.Validators">Validators</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the map of <a class="xref" href="KSP.ModularCamera.ValidatorType.html">ValidatorType</a> phases to their registered <a class="xref" href="KSP.ModularCamera.Validator.html">Validator</a> delegates.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;ValidatorType, Validator&gt; Validators { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Dictionary</span>&lt;<a class="xref" href="KSP.ModularCamera.ValidatorType.html">ValidatorType</a>, <a class="xref" href="KSP.ModularCamera.Validator.html">Validator</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_WorldToGimbal_" data-uid="KSP.ModularCamera.CameraDriverBase.WorldToGimbal*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_WorldToGimbal" data-uid="KSP.ModularCamera.CameraDriverBase.WorldToGimbal">WorldToGimbal</h4>
+  <div class="markdown level1 summary"><p>Gets the world-to-gimbal-local transformation matrix derived from the gimbal transform.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Matrix4x4 WorldToGimbal { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Matrix4x4.html">Matrix4x4</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_WorldToPivot_" data-uid="KSP.ModularCamera.CameraDriverBase.WorldToPivot*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_WorldToPivot" data-uid="KSP.ModularCamera.CameraDriverBase.WorldToPivot">WorldToPivot</h4>
+  <div class="markdown level1 summary"><p>Gets the world-to-pivot-local transformation matrix derived from the pivot transform.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Matrix4x4 WorldToPivot { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Matrix4x4.html">Matrix4x4</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_Yaw_" data-uid="KSP.ModularCamera.CameraDriverBase.Yaw*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_Yaw" data-uid="KSP.ModularCamera.CameraDriverBase.Yaw">Yaw</h4>
+  <div class="markdown level1 summary"><p>Gets the current yaw angle of the gimbal in degrees, derived from the gimbal's local Euler y component.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Yaw { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_Activate_" data-uid="KSP.ModularCamera.CameraDriverBase.Activate*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_Activate_System_Boolean_" data-uid="KSP.ModularCamera.CameraDriverBase.Activate(System.Boolean)">Activate(bool)</h4>
+  <div class="markdown level1 summary"><p>Activates this driver by snapping the target distance to the current camera distance and running the activate validators.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Activate(bool validate = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">validate</span></td>
+        <td><p>When <code>true</code>, runs the <a class="xref" href="KSP.ModularCamera.ValidatorType.html#KSP_ModularCamera_ValidatorType_Activate">Activate</a> validators.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_AddInputModifier_" data-uid="KSP.ModularCamera.CameraDriverBase.AddInputModifier*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_AddInputModifier_KSP_ModularCamera_CameraInputBinding_KSP_ModularCamera_CameraInputModifier_" data-uid="KSP.ModularCamera.CameraDriverBase.AddInputModifier(KSP.ModularCamera.CameraInputBinding,KSP.ModularCamera.CameraInputModifier)">AddInputModifier(CameraInputBinding, CameraInputModifier)</h4>
+  <div class="markdown level1 summary"><p>Appends a <a class="xref" href="KSP.ModularCamera.CameraInputModifier.html">CameraInputModifier</a> to the modifier list for the specified input binding.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddInputModifier(CameraInputBinding binding, CameraInputModifier modifier)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.ModularCamera.CameraInputBinding.html">CameraInputBinding</a></td>
+        <td><span class="parametername">binding</span></td>
+        <td><p>The <a class="xref" href="KSP.ModularCamera.CameraInputBinding.html">CameraInputBinding</a> to add the modifier to.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.ModularCamera.CameraInputModifier.html">CameraInputModifier</a></td>
+        <td><span class="parametername">modifier</span></td>
+        <td><p>The modifier callback to append. Ignored when <code>null</code> or when the binding is <a class="xref" href="KSP.ModularCamera.CameraInputBinding.html#KSP_ModularCamera_CameraInputBinding_None">None</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_AddOffset_" data-uid="KSP.ModularCamera.CameraDriverBase.AddOffset*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_AddOffset_UnityEngine_Vector3_System_Boolean_" data-uid="KSP.ModularCamera.CameraDriverBase.AddOffset(UnityEngine.Vector3,System.Boolean)">AddOffset(Vector3, bool)</h4>
+  <div class="markdown level1 summary"><p>Translates the pivot by the specified world-space offset.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void AddOffset(Vector3 worldOffset, bool validate = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">worldOffset</span></td>
+        <td><p>The displacement vector added to the current pivot position in world space.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">validate</span></td>
+        <td><p>When <code>true</code>, runs the <a class="xref" href="KSP.ModularCamera.ValidatorType.html#KSP_ModularCamera_ValidatorType_PositionChange">PositionChange</a> validators after applying.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_AddValidator_" data-uid="KSP.ModularCamera.CameraDriverBase.AddValidator*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_AddValidator_KSP_ModularCamera_ValidatorType_KSP_ModularCamera_Validator_" data-uid="KSP.ModularCamera.CameraDriverBase.AddValidator(KSP.ModularCamera.ValidatorType,KSP.ModularCamera.Validator)">AddValidator(ValidatorType, Validator)</h4>
+  <div class="markdown level1 summary"><p>Appends a <a class="xref" href="KSP.ModularCamera.Validator.html">Validator</a> delegate to the invocation list for the specified validator phase, or registers it as the first delegate if none exists.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddValidator(ValidatorType type, Validator validator)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.ModularCamera.ValidatorType.html">ValidatorType</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The <a class="xref" href="KSP.ModularCamera.ValidatorType.html">ValidatorType</a> phase the validator applies to.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.ModularCamera.Validator.html">Validator</a></td>
+        <td><span class="parametername">validator</span></td>
+        <td><p>The validator delegate to register. Ignored when <code>null</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_ApplyInput_" data-uid="KSP.ModularCamera.CameraDriverBase.ApplyInput*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_ApplyInput_KSP_ModularCamera_CameraInputBinding_KSP_ModularCamera_CameraInputValueList_System_Boolean_" data-uid="KSP.ModularCamera.CameraDriverBase.ApplyInput(KSP.ModularCamera.CameraInputBinding,KSP.ModularCamera.CameraInputValueList,System.Boolean)">ApplyInput(CameraInputBinding, CameraInputValueList, bool)</h4>
+  <div class="markdown level1 summary"><p>Applies the interpreter registered for the specified binding to the given input values after passing them through all active modifiers.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ApplyInput(CameraInputBinding binding, CameraInputValueList inputValues, bool validate = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.ModularCamera.CameraInputBinding.html">CameraInputBinding</a></td>
+        <td><span class="parametername">binding</span></td>
+        <td><p>The <a class="xref" href="KSP.ModularCamera.CameraInputBinding.html">CameraInputBinding</a> identifying the interpreter to invoke.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.ModularCamera.CameraInputValueList.html">CameraInputValueList</a></td>
+        <td><span class="parametername">inputValues</span></td>
+        <td><p>The raw input values passed to the modifier and interpreter pipeline.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">validate</span></td>
+        <td><p>When <code>true</code>, passes the validate flag through to the interpreter callback.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_BindInputInterpreter_" data-uid="KSP.ModularCamera.CameraDriverBase.BindInputInterpreter*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_BindInputInterpreter_KSP_ModularCamera_CameraInputBinding_KSP_ModularCamera_CameraInputInterpreter_" data-uid="KSP.ModularCamera.CameraDriverBase.BindInputInterpreter(KSP.ModularCamera.CameraInputBinding,KSP.ModularCamera.CameraInputInterpreter)">BindInputInterpreter(CameraInputBinding, CameraInputInterpreter)</h4>
+  <div class="markdown level1 summary"><p>Registers or replaces the <a class="xref" href="KSP.ModularCamera.CameraInputInterpreter.html">CameraInputInterpreter</a> for the specified input binding, or removes it when <code class="paramref">handler</code> is <code>null</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void BindInputInterpreter(CameraInputBinding binding, CameraInputInterpreter handler)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.ModularCamera.CameraInputBinding.html">CameraInputBinding</a></td>
+        <td><span class="parametername">binding</span></td>
+        <td><p>The <a class="xref" href="KSP.ModularCamera.CameraInputBinding.html">CameraInputBinding</a> to bind the interpreter to.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.ModularCamera.CameraInputInterpreter.html">CameraInputInterpreter</a></td>
+        <td><span class="parametername">handler</span></td>
+        <td><p>The interpreter callback to register, or <code>null</code> to remove the existing binding.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_ClearInputInterpreterFor_" data-uid="KSP.ModularCamera.CameraDriverBase.ClearInputInterpreterFor*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_ClearInputInterpreterFor_KSP_ModularCamera_CameraInputBinding_" data-uid="KSP.ModularCamera.CameraDriverBase.ClearInputInterpreterFor(KSP.ModularCamera.CameraInputBinding)">ClearInputInterpreterFor(CameraInputBinding)</h4>
+  <div class="markdown level1 summary"><p>Removes the input interpreter registered for the specified binding.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ClearInputInterpreterFor(CameraInputBinding binding)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.ModularCamera.CameraInputBinding.html">CameraInputBinding</a></td>
+        <td><span class="parametername">binding</span></td>
+        <td><p>The <a class="xref" href="KSP.ModularCamera.CameraInputBinding.html">CameraInputBinding</a> whose interpreter is removed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_ClearInputInterpreters_" data-uid="KSP.ModularCamera.CameraDriverBase.ClearInputInterpreters*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_ClearInputInterpreters" data-uid="KSP.ModularCamera.CameraDriverBase.ClearInputInterpreters">ClearInputInterpreters()</h4>
+  <div class="markdown level1 summary"><p>Removes all registered input interpreters.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ClearInputInterpreters()</code></pre>
+  </div>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_ClearInputModifiers_" data-uid="KSP.ModularCamera.CameraDriverBase.ClearInputModifiers*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_ClearInputModifiers" data-uid="KSP.ModularCamera.CameraDriverBase.ClearInputModifiers">ClearInputModifiers()</h4>
+  <div class="markdown level1 summary"><p>Removes all modifiers from every input binding.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ClearInputModifiers()</code></pre>
+  </div>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_ClearInputModifiers_" data-uid="KSP.ModularCamera.CameraDriverBase.ClearInputModifiers*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_ClearInputModifiers_KSP_ModularCamera_CameraInputBinding_" data-uid="KSP.ModularCamera.CameraDriverBase.ClearInputModifiers(KSP.ModularCamera.CameraInputBinding)">ClearInputModifiers(CameraInputBinding)</h4>
+  <div class="markdown level1 summary"><p>Removes all modifiers registered for the specified input binding.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ClearInputModifiers(CameraInputBinding binding)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.ModularCamera.CameraInputBinding.html">CameraInputBinding</a></td>
+        <td><span class="parametername">binding</span></td>
+        <td><p>The <a class="xref" href="KSP.ModularCamera.CameraInputBinding.html">CameraInputBinding</a> whose modifier list is cleared.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_ClearValidators_" data-uid="KSP.ModularCamera.CameraDriverBase.ClearValidators*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_ClearValidators" data-uid="KSP.ModularCamera.CameraDriverBase.ClearValidators">ClearValidators()</h4>
+  <div class="markdown level1 summary"><p>Removes all registered validators for every phase.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ClearValidators()</code></pre>
+  </div>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_ClearValidators_" data-uid="KSP.ModularCamera.CameraDriverBase.ClearValidators*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_ClearValidators_KSP_ModularCamera_ValidatorType_" data-uid="KSP.ModularCamera.CameraDriverBase.ClearValidators(KSP.ModularCamera.ValidatorType)">ClearValidators(ValidatorType)</h4>
+  <div class="markdown level1 summary"><p>Removes all validators registered for the specified phase.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ClearValidators(ValidatorType type)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.ModularCamera.ValidatorType.html">ValidatorType</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The <a class="xref" href="KSP.ModularCamera.ValidatorType.html">ValidatorType</a> phase whose validators are removed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_Clone_" data-uid="KSP.ModularCamera.CameraDriverBase.Clone*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_Clone" data-uid="KSP.ModularCamera.CameraDriverBase.Clone">Clone()</h4>
+  <div class="markdown level1 summary"><p>Returns a shallow copy of this driver as a new <a class="xref" href="KSP.ModularCamera.ICameraDriver.html">ICameraDriver</a> instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ICameraDriver Clone()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.ModularCamera.ICameraDriver.html">ICameraDriver</a></td>
+        <td><p>A new <a class="xref" href="KSP.ModularCamera.CameraDriverBase.html">CameraDriverBase</a> initialized from this instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_CopyInputInterpretersFrom_" data-uid="KSP.ModularCamera.CameraDriverBase.CopyInputInterpretersFrom*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_CopyInputInterpretersFrom_KSP_ModularCamera_ICameraDriver_" data-uid="KSP.ModularCamera.CameraDriverBase.CopyInputInterpretersFrom(KSP.ModularCamera.ICameraDriver)">CopyInputInterpretersFrom(ICameraDriver)</h4>
+  <div class="markdown level1 summary"><p>Replaces the current input interpreter map with a shallow copy of the map from another driver.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CopyInputInterpretersFrom(ICameraDriver other)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.ModularCamera.ICameraDriver.html">ICameraDriver</a></td>
+        <td><span class="parametername">other</span></td>
+        <td><p>The driver whose input interpreters are copied into this instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_CopyInputModifiersFrom_" data-uid="KSP.ModularCamera.CameraDriverBase.CopyInputModifiersFrom*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_CopyInputModifiersFrom_KSP_ModularCamera_ICameraDriver_" data-uid="KSP.ModularCamera.CameraDriverBase.CopyInputModifiersFrom(KSP.ModularCamera.ICameraDriver)">CopyInputModifiersFrom(ICameraDriver)</h4>
+  <div class="markdown level1 summary"><p>Replaces the current input modifier map with copies of the modifier lists from another driver.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CopyInputModifiersFrom(ICameraDriver other)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.ModularCamera.ICameraDriver.html">ICameraDriver</a></td>
+        <td><span class="parametername">other</span></td>
+        <td><p>The driver whose input modifier lists are copied into this instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_CopyTransformsFrom_" data-uid="KSP.ModularCamera.CameraDriverBase.CopyTransformsFrom*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_CopyTransformsFrom_KSP_ModularCamera_ICameraDriver_" data-uid="KSP.ModularCamera.CameraDriverBase.CopyTransformsFrom(KSP.ModularCamera.ICameraDriver)">CopyTransformsFrom(ICameraDriver)</h4>
+  <div class="markdown level1 summary"><p>Copies the pivot, gimbal, and camera transform references from another driver.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CopyTransformsFrom(ICameraDriver other)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.ModularCamera.ICameraDriver.html">ICameraDriver</a></td>
+        <td><span class="parametername">other</span></td>
+        <td><p>The driver whose transforms are copied into this instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_CopyValidatorsFrom_" data-uid="KSP.ModularCamera.CameraDriverBase.CopyValidatorsFrom*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_CopyValidatorsFrom_KSP_ModularCamera_ICameraDriver_" data-uid="KSP.ModularCamera.CameraDriverBase.CopyValidatorsFrom(KSP.ModularCamera.ICameraDriver)">CopyValidatorsFrom(ICameraDriver)</h4>
+  <div class="markdown level1 summary"><p>Replaces the current validator map with a shallow copy of the map from another driver.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CopyValidatorsFrom(ICameraDriver other)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.ModularCamera.ICameraDriver.html">ICameraDriver</a></td>
+        <td><span class="parametername">other</span></td>
+        <td><p>The driver whose validator map is copied into this instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_Deactivate_" data-uid="KSP.ModularCamera.CameraDriverBase.Deactivate*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_Deactivate_System_Boolean_" data-uid="KSP.ModularCamera.CameraDriverBase.Deactivate(System.Boolean)">Deactivate(bool)</h4>
+  <div class="markdown level1 summary"><p>Deactivates this driver by running the deactivate validators.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Deactivate(bool validate = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">validate</span></td>
+        <td><p>When <code>true</code>, runs the <a class="xref" href="KSP.ModularCamera.ValidatorType.html#KSP_ModularCamera_ValidatorType_Deactivate">Deactivate</a> validators.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_ForceCameraDistanceUnvalidated_" data-uid="KSP.ModularCamera.CameraDriverBase.ForceCameraDistanceUnvalidated*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_ForceCameraDistanceUnvalidated_System_Single_" data-uid="KSP.ModularCamera.CameraDriverBase.ForceCameraDistanceUnvalidated(System.Single)">ForceCameraDistanceUnvalidated(float)</h4>
+  <div class="markdown level1 summary"><p>Positions the camera along the gimbal forward axis at the specified distance from the pivot, without triggering validators.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void ForceCameraDistanceUnvalidated(float floatDistance)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">floatDistance</span></td>
+        <td><p>The desired distance in world units. Clamped to a minimum of <code>float.Epsilon</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_ForceCameraPositionUnvalidated_" data-uid="KSP.ModularCamera.CameraDriverBase.ForceCameraPositionUnvalidated*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_ForceCameraPositionUnvalidated_UnityEngine_Vector3_" data-uid="KSP.ModularCamera.CameraDriverBase.ForceCameraPositionUnvalidated(UnityEngine.Vector3)">ForceCameraPositionUnvalidated(Vector3)</h4>
+  <div class="markdown level1 summary"><p>Moves the camera transform directly to the specified world-space position without triggering validators.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void ForceCameraPositionUnvalidated(Vector3 worldPosition)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">worldPosition</span></td>
+        <td><p>The world-space position to assign to the camera transform.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_GetModifiedInputs_" data-uid="KSP.ModularCamera.CameraDriverBase.GetModifiedInputs*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_GetModifiedInputs_KSP_ModularCamera_CameraInputBinding_KSP_ModularCamera_CameraInputValueList_" data-uid="KSP.ModularCamera.CameraDriverBase.GetModifiedInputs(KSP.ModularCamera.CameraInputBinding,KSP.ModularCamera.CameraInputValueList)">GetModifiedInputs(CameraInputBinding, CameraInputValueList)</h4>
+  <div class="markdown level1 summary"><p>Returns the result of passing the given raw inputs through all modifiers registered for the specified binding.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CameraInputValueList GetModifiedInputs(CameraInputBinding binding, CameraInputValueList rawInputs)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.ModularCamera.CameraInputBinding.html">CameraInputBinding</a></td>
+        <td><span class="parametername">binding</span></td>
+        <td><p>The <a class="xref" href="KSP.ModularCamera.CameraInputBinding.html">CameraInputBinding</a> whose modifier list is applied.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.ModularCamera.CameraInputValueList.html">CameraInputValueList</a></td>
+        <td><span class="parametername">rawInputs</span></td>
+        <td><p>The unmodified input values to transform.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.ModularCamera.CameraInputValueList.html">CameraInputValueList</a></td>
+        <td><p>A <a class="xref" href="KSP.ModularCamera.CameraInputValueList.html">CameraInputValueList</a> representing the inputs after all modifiers have been applied in order.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_IsInputInterpreted_" data-uid="KSP.ModularCamera.CameraDriverBase.IsInputInterpreted*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_IsInputInterpreted_KSP_ModularCamera_CameraInputBinding_" data-uid="KSP.ModularCamera.CameraDriverBase.IsInputInterpreted(KSP.ModularCamera.CameraInputBinding)">IsInputInterpreted(CameraInputBinding)</h4>
+  <div class="markdown level1 summary"><p>Returns a value indicating whether the specified input binding has a registered interpreter.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsInputInterpreted(CameraInputBinding binding)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.ModularCamera.CameraInputBinding.html">CameraInputBinding</a></td>
+        <td><span class="parametername">binding</span></td>
+        <td><p>The <a class="xref" href="KSP.ModularCamera.CameraInputBinding.html">CameraInputBinding</a> to check.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if an interpreter is registered for <code class="paramref">binding</code> and the binding is not <a class="xref" href="KSP.ModularCamera.CameraInputBinding.html#KSP_ModularCamera_CameraInputBinding_None">None</a>. Otherwise false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_IsInputModified_" data-uid="KSP.ModularCamera.CameraDriverBase.IsInputModified*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_IsInputModified_KSP_ModularCamera_CameraInputBinding_" data-uid="KSP.ModularCamera.CameraDriverBase.IsInputModified(KSP.ModularCamera.CameraInputBinding)">IsInputModified(CameraInputBinding)</h4>
+  <div class="markdown level1 summary"><p>Returns a value indicating whether one or more modifiers are registered for the specified input binding.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsInputModified(CameraInputBinding binding)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.ModularCamera.CameraInputBinding.html">CameraInputBinding</a></td>
+        <td><span class="parametername">binding</span></td>
+        <td><p>The <a class="xref" href="KSP.ModularCamera.CameraInputBinding.html">CameraInputBinding</a> to check.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if at least one modifier is registered for <code class="paramref">binding</code> and the binding is not <a class="xref" href="KSP.ModularCamera.CameraInputBinding.html#KSP_ModularCamera_CameraInputBinding_None">None</a>. Otherwise false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_Reset_" data-uid="KSP.ModularCamera.CameraDriverBase.Reset*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_Reset_UnityEngine_Transform_UnityEngine_Transform_UnityEngine_Transform_System_Boolean_" data-uid="KSP.ModularCamera.CameraDriverBase.Reset(UnityEngine.Transform,UnityEngine.Transform,UnityEngine.Transform,System.Boolean)">Reset(Transform, Transform, Transform, bool)</h4>
+  <div class="markdown level1 summary"><p>Reassigns the pivot, gimbal, and camera transforms, deactivating the driver before the swap and reactivating it after.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Reset(Transform pivot, Transform gimbal, Transform camera, bool validate = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
+        <td><span class="parametername">pivot</span></td>
+        <td><p>The new pivot transform.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
+        <td><span class="parametername">gimbal</span></td>
+        <td><p>The new gimbal transform.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
+        <td><span class="parametername">camera</span></td>
+        <td><p>The new camera transform.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">validate</span></td>
+        <td><p>When <code>true</code>, runs the activate and deactivate validators during the transition.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_RunValidator_" data-uid="KSP.ModularCamera.CameraDriverBase.RunValidator*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_RunValidator_KSP_ModularCamera_ValidatorType_System_Boolean_" data-uid="KSP.ModularCamera.CameraDriverBase.RunValidator(KSP.ModularCamera.ValidatorType,System.Boolean)">RunValidator(ValidatorType, bool)</h4>
+  <div class="markdown level1 summary"><p>Invokes all validators registered for the specified phase in order, guarding against circular calls and call-stack overflow.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RunValidator(ValidatorType type, bool validate = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.ModularCamera.ValidatorType.html">ValidatorType</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The <a class="xref" href="KSP.ModularCamera.ValidatorType.html">ValidatorType</a> phase whose validators are run.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">validate</span></td>
+        <td><p>When <code>false</code>, the method returns immediately without invoking any validators.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_SetPitch_" data-uid="KSP.ModularCamera.CameraDriverBase.SetPitch*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_SetPitch_System_Single_System_Boolean_" data-uid="KSP.ModularCamera.CameraDriverBase.SetPitch(System.Single,System.Boolean)">SetPitch(float, bool)</h4>
+  <div class="markdown level1 summary"><p>Sets the gimbal pitch angle, clamping the value to the range [-90, 90] degrees before applying.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void SetPitch(float value, bool validate = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The desired pitch angle in degrees.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">validate</span></td>
+        <td><p>When <code>true</code>, runs the <a class="xref" href="KSP.ModularCamera.ValidatorType.html#KSP_ModularCamera_ValidatorType_RotationChange">RotationChange</a> validators after applying.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_SetPivotPosition_" data-uid="KSP.ModularCamera.CameraDriverBase.SetPivotPosition*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_SetPivotPosition_UnityEngine_Vector3_System_Boolean_" data-uid="KSP.ModularCamera.CameraDriverBase.SetPivotPosition(UnityEngine.Vector3,System.Boolean)">SetPivotPosition(Vector3, bool)</h4>
+  <div class="markdown level1 summary"><p>Moves the pivot to the specified world-space position.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void SetPivotPosition(Vector3 worldPosition, bool validate = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">worldPosition</span></td>
+        <td><p>The target world-space position for the pivot.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">validate</span></td>
+        <td><p>When <code>true</code>, runs the <a class="xref" href="KSP.ModularCamera.ValidatorType.html#KSP_ModularCamera_ValidatorType_PositionChange">PositionChange</a> validators after applying.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_SetRoll_" data-uid="KSP.ModularCamera.CameraDriverBase.SetRoll*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_SetRoll_System_Single_System_Boolean_" data-uid="KSP.ModularCamera.CameraDriverBase.SetRoll(System.Single,System.Boolean)">SetRoll(float, bool)</h4>
+  <div class="markdown level1 summary"><p>Sets the gimbal roll angle, clamping the value to the range [-90, 90] degrees before applying.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void SetRoll(float value, bool validate = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The desired roll angle in degrees.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">validate</span></td>
+        <td><p>When <code>true</code>, runs the <a class="xref" href="KSP.ModularCamera.ValidatorType.html#KSP_ModularCamera_ValidatorType_RotationChange">RotationChange</a> validators after applying.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_SetTargetDistance_" data-uid="KSP.ModularCamera.CameraDriverBase.SetTargetDistance*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_SetTargetDistance_System_Single_System_Boolean_" data-uid="KSP.ModularCamera.CameraDriverBase.SetTargetDistance(System.Single,System.Boolean)">SetTargetDistance(float, bool)</h4>
+  <div class="markdown level1 summary"><p>Sets the desired target distance and repositions the camera along the gimbal forward axis to match.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void SetTargetDistance(float worldDistance, bool validate = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">worldDistance</span></td>
+        <td><p>The desired distance in world units. Clamped to a minimum of <code>float.Epsilon</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">validate</span></td>
+        <td><p>When <code>true</code>, runs the <a class="xref" href="KSP.ModularCamera.ValidatorType.html#KSP_ModularCamera_ValidatorType_DistanceChange">DistanceChange</a> validators after applying.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_SetYaw_" data-uid="KSP.ModularCamera.CameraDriverBase.SetYaw*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_SetYaw_System_Single_System_Boolean_" data-uid="KSP.ModularCamera.CameraDriverBase.SetYaw(System.Single,System.Boolean)">SetYaw(float, bool)</h4>
+  <div class="markdown level1 summary"><p>Sets the gimbal yaw angle without clamping.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void SetYaw(float value, bool validate = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The desired yaw angle in degrees.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">validate</span></td>
+        <td><p>When <code>true</code>, runs the <a class="xref" href="KSP.ModularCamera.ValidatorType.html#KSP_ModularCamera_ValidatorType_RotationChange">RotationChange</a> validators after applying.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_ModularCamera_CameraDriverBase_ShiftCameraToPosition_" data-uid="KSP.ModularCamera.CameraDriverBase.ShiftCameraToPosition*"></a>
+  <h4 id="KSP_ModularCamera_CameraDriverBase_ShiftCameraToPosition_UnityEngine_Vector3_System_Boolean_" data-uid="KSP.ModularCamera.CameraDriverBase.ShiftCameraToPosition(UnityEngine.Vector3,System.Boolean)">ShiftCameraToPosition(Vector3, bool)</h4>
+  <div class="markdown level1 summary"><p>Shifts the pivot so that the camera ends up at the specified world-space position.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void ShiftCameraToPosition(Vector3 worldPosition, bool validate = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">worldPosition</span></td>
+        <td><p>The desired world-space position for the camera after the shift.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">validate</span></td>
+        <td><p>When <code>true</code>, runs the <a class="xref" href="KSP.ModularCamera.ValidatorType.html#KSP_ModularCamera_ValidatorType_PositionChange">PositionChange</a> validators after applying.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="KSP.ModularCamera.ICameraDriver.html">ICameraDriver</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.ModularCamera.ICameraDriverReadOnly.html">ICameraDriverReadOnly</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.ModularCamera.internals.ICameraDriverInternalState.html">ICameraDriverInternalState</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetField__2___0_System_String_">Util.GetField&lt;T, R&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetField__2___0_System_String___1_">Util.SetField&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromProperties_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromProperties(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetFieldValue__1_System_Object_System_String_">Util.GetFieldValue&lt;T&gt;(object, string)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from develop
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
