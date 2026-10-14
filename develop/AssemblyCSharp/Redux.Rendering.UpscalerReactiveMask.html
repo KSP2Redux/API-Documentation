@@ -97,8 +97,9 @@ FSR 2 and DLSS, from what the transparent pass changed in the frame.</p>
     <pre><code class="lang-csharp hljs">public static class UpscalerReactiveMask</code></pre>
   </div>
   <h5 id="Redux_Rendering_UpscalerReactiveMask_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>Plumes, particles, reentry effects, the cloud composite and water draw without motion vectors of their own, so
-a temporal upscaler moves their history with the opaque surface behind them and leaves trails. One hook copies
+  <div class="markdown level0 remarks"><p>Particles, reentry effects, the cloud composite and water draw without motion vectors of their own, so a
+temporal upscaler moves their history with the opaque surface behind them and leaves trails. The volumetric
+exhaust draws its own motion, but its gas changes from frame to frame, so it is marked too. One hook copies
 the camera colour right before URP's transparent pass, after the full-frame passes that run ahead of it (post
 atmosphere, cloud raymarch, water background copy). A second hook after the transparent hooks compares the copy
 with the frame in <code>KSP2ReactiveMask.compute</code> and keeps the mask in the camera's frame data, where the

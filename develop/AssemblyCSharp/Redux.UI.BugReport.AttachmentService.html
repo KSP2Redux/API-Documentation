@@ -111,6 +111,58 @@
 </h3>
 
 
+  <a id="Redux_UI_BugReport_AttachmentService_CreateArchiveFromFilesAsync_" data-uid="Redux.UI.BugReport.AttachmentService.CreateArchiveFromFilesAsync*"></a>
+  <h4 id="Redux_UI_BugReport_AttachmentService_CreateArchiveFromFilesAsync_System_String_System_Collections_Generic_IReadOnlyList_System_String__" data-uid="Redux.UI.BugReport.AttachmentService.CreateArchiveFromFilesAsync(System.String,System.Collections.Generic.IReadOnlyList{System.String})">CreateArchiveFromFilesAsync(string, IReadOnlyList&lt;string&gt;)</h4>
+  <div class="markdown level1 summary"><p>Asynchronously packs several files into one zip attachment, each under its file name. Files that do not
+exist are left out.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;Attachment&gt; CreateArchiveFromFilesAsync(string name, IReadOnlyList&lt;string&gt; paths)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The attachment's file name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">IReadOnlyList</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">paths</span></td>
+        <td><p>The files to pack.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Task</span>&lt;<a class="xref" href="Redux.UI.BugReport.Attachment.html">Attachment</a>&gt;</td>
+        <td><p>The attachment, or null if none of the files exist or the archive is too large.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="Redux_UI_BugReport_AttachmentService_CreateFromFileAsync_" data-uid="Redux.UI.BugReport.AttachmentService.CreateFromFileAsync*"></a>
   <h4 id="Redux_UI_BugReport_AttachmentService_CreateFromFileAsync_System_String_" data-uid="Redux.UI.BugReport.AttachmentService.CreateFromFileAsync(System.String)">CreateFromFileAsync(string)</h4>
   <div class="markdown level1 summary"><p>Asynchronously attempts to create an attachment from a specified file path.</p>
@@ -158,7 +210,8 @@
 
   <a id="Redux_UI_BugReport_AttachmentService_CreateFromLogAsync_" data-uid="Redux.UI.BugReport.AttachmentService.CreateFromLogAsync*"></a>
   <h4 id="Redux_UI_BugReport_AttachmentService_CreateFromLogAsync" data-uid="Redux.UI.BugReport.AttachmentService.CreateFromLogAsync">CreateFromLogAsync()</h4>
-  <div class="markdown level1 summary"><p>Asynchronously attempts to create an attachment from the application's console log file.</p>
+  <div class="markdown level1 summary"><p>Asynchronously attempts to create an attachment from the application's console log file, with the user name
+replaced in home folder paths.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -281,6 +334,38 @@ in a state where saving is not possible or an error occurs.</p>
       </tr>
     </tbody>
   </table>
+
+
+  <a id="Redux_UI_BugReport_AttachmentService_CreateFromSettingsAsync_" data-uid="Redux.UI.BugReport.AttachmentService.CreateFromSettingsAsync*"></a>
+  <h4 id="Redux_UI_BugReport_AttachmentService_CreateFromSettingsAsync" data-uid="Redux.UI.BugReport.AttachmentService.CreateFromSettingsAsync">CreateFromSettingsAsync()</h4>
+  <div class="markdown level1 summary"><p>Asynchronously creates one text attachment holding every game setting: the profile settings in use, the
+profile's other settings files (input bindings, notifications, physics, cameras, OAB) and Redux's own
+configs, each under its path.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;Attachment&gt; CreateFromSettingsAsync()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Task</span>&lt;<a class="xref" href="Redux.UI.BugReport.Attachment.html">Attachment</a>&gt;</td>
+        <td><p>The attachment, or null if no settings could be read.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_UI_BugReport_AttachmentService_CreateFromSettingsAsync_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>One attachment for all of them, since a report takes at most eight. The anonymous telemetry ID is removed.</p>
+</div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
