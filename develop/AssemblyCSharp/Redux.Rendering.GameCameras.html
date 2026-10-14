@@ -98,8 +98,9 @@
   <h5 id="Redux_Rendering_GameCameras_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>The map view (the flight map and the tracking station) renders the Map layer, which no scene camera renders.
 Its camera is the current game camera while the map is open. Passes that work on the physics or KSC scene,
-such as the body motion vectors and the screen-space reflections, skip it: the body motion is a physics-space
-transform that means nothing for map-space pixels, and the scaled planets of the map reflect nothing on screen.</p>
+such as the screen-space reflections, skip it, since the scaled planets of the map reflect nothing on screen.
+The body motion vectors give it only the turn of its own sky: the body motion is a physics-space transform
+that means nothing for map-space pixels.</p>
 </div>
   <h3 id="fields">Fields
 </h3>
@@ -130,6 +131,51 @@ transform that means nothing for map-space pixels, and the scaled planets of the
   </table>
   <h3 id="methods">Methods
 </h3>
+
+
+  <a id="Redux_Rendering_GameCameras_IsCurrentMapCamera_" data-uid="Redux.Rendering.GameCameras.IsCurrentMapCamera*"></a>
+  <h4 id="Redux_Rendering_GameCameras_IsCurrentMapCamera_UnityEngine_Camera_" data-uid="Redux.Rendering.GameCameras.IsCurrentMapCamera(UnityEngine.Camera)">IsCurrentMapCamera(Camera)</h4>
+  <div class="markdown level1 summary"><p>Decides whether a camera is the game's current camera and renders the map view.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsCurrentMapCamera(Camera camera)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Camera.html">Camera</a></td>
+        <td><span class="parametername">camera</span></td>
+        <td><p>The camera URP is about to render.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the camera is the current game camera and renders the map view, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <a id="Redux_Rendering_GameCameras_IsCurrentSceneCamera_" data-uid="Redux.Rendering.GameCameras.IsCurrentSceneCamera*"></a>
