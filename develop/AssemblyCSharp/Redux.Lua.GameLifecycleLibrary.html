@@ -94,7 +94,7 @@
   <h5 id="Redux_Lua_GameLifecycleLibrary_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[MoonSharpUserData]
-public sealed class GameLifecycleLibrary</code></pre>
+public class GameLifecycleLibrary</code></pre>
   </div>
   <h5 id="Redux_Lua_GameLifecycleLibrary_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>Methods mirror the phases <a class="xref" href="Redux.Lua.GameLifecycleManager.html">GameLifecycleManager</a> drives: the generic
@@ -319,6 +319,108 @@ from the script context, so one shared instance serves every mod environment.</p
   </table>
 
 
+  <a id="Redux_Lua_GameLifecycleLibrary_OnCampaignLoaded_" data-uid="Redux.Lua.GameLifecycleLibrary.OnCampaignLoaded*"></a>
+  <h4 id="Redux_Lua_GameLifecycleLibrary_OnCampaignLoaded_MoonSharp_Interpreter_ScriptExecutionContext_MoonSharp_Interpreter_DynValue_" data-uid="Redux.Lua.GameLifecycleLibrary.OnCampaignLoaded(MoonSharp.Interpreter.ScriptExecutionContext,MoonSharp.Interpreter.DynValue)">OnCampaignLoaded(ScriptExecutionContext, DynValue)</h4>
+  <div class="markdown level1 summary"><p>Registers a closure to run each time a campaign the calling mod is enabled in finishes loading.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FeatureGatedAction OnCampaignLoaded(ScriptExecutionContext context, DynValue fn)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context, used to resolve the calling mod.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><span class="parametername">fn</span></td>
+        <td><p>The closure to register.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">FeatureGatedAction</span></td>
+        <td><p>The registered action, for gating it with features.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Lua_GameLifecycleLibrary_OnCampaignUnloading_" data-uid="Redux.Lua.GameLifecycleLibrary.OnCampaignUnloading*"></a>
+  <h4 id="Redux_Lua_GameLifecycleLibrary_OnCampaignUnloading_MoonSharp_Interpreter_ScriptExecutionContext_MoonSharp_Interpreter_DynValue_" data-uid="Redux.Lua.GameLifecycleLibrary.OnCampaignUnloading(MoonSharp.Interpreter.ScriptExecutionContext,MoonSharp.Interpreter.DynValue)">OnCampaignUnloading(ScriptExecutionContext, DynValue)</h4>
+  <div class="markdown level1 summary"><p>Registers a closure to run before a campaign the calling mod was enabled in unloads.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FeatureGatedAction OnCampaignUnloading(ScriptExecutionContext context, DynValue fn)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context, used to resolve the calling mod.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><span class="parametername">fn</span></td>
+        <td><p>The closure to register.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">FeatureGatedAction</span></td>
+        <td><p>The registered action, for gating it with features.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="Redux_Lua_GameLifecycleLibrary_OnEditor_" data-uid="Redux.Lua.GameLifecycleLibrary.OnEditor*"></a>
   <h4 id="Redux_Lua_GameLifecycleLibrary_OnEditor_MoonSharp_Interpreter_ScriptExecutionContext_MoonSharp_Interpreter_DynValue_" data-uid="Redux.Lua.GameLifecycleLibrary.OnEditor(MoonSharp.Interpreter.ScriptExecutionContext,MoonSharp.Interpreter.DynValue)">OnEditor(ScriptExecutionContext, DynValue)</h4>
   <div class="markdown level1 summary"><p>Registers a closure to fire only when the vehicle assembly editor is entered.</p>
@@ -457,6 +559,61 @@ from the script context, so one shared instance serves every mod environment.</p
       </tr>
     </tbody>
   </table>
+
+
+  <a id="Redux_Lua_GameLifecycleLibrary_OnSetActivated_" data-uid="Redux.Lua.GameLifecycleLibrary.OnSetActivated*"></a>
+  <h4 id="Redux_Lua_GameLifecycleLibrary_OnSetActivated_MoonSharp_Interpreter_ScriptExecutionContext_MoonSharp_Interpreter_DynValue_" data-uid="Redux.Lua.GameLifecycleLibrary.OnSetActivated(MoonSharp.Interpreter.ScriptExecutionContext,MoonSharp.Interpreter.DynValue)">OnSetActivated(ScriptExecutionContext, DynValue)</h4>
+  <div class="markdown level1 summary"><p>Registers a closure to run whenever a feature set becomes active, for data a mod keeps per set.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FeatureGatedAction OnSetActivated(ScriptExecutionContext context, DynValue fn)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context, used to resolve the calling mod.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><span class="parametername">fn</span></td>
+        <td><p>The closure, handed the set just activated as a table of each id mapped to true.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">FeatureGatedAction</span></td>
+        <td><p>The registered action, for gating it with features.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Lua_GameLifecycleLibrary_OnSetActivated_MoonSharp_Interpreter_ScriptExecutionContext_MoonSharp_Interpreter_DynValue__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Runs at boot for the main menu set and on every switch to another set, never on a reload into the same
+set, and only while the mod and the closure's selected features are on.</p>
+</div>
 
 
   <a id="Redux_Lua_GameLifecycleLibrary_SceneEnter_" data-uid="Redux.Lua.GameLifecycleLibrary.SceneEnter*"></a>

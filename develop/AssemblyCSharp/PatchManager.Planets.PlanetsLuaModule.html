@@ -140,14 +140,14 @@ public class PlanetsLuaModule</code></pre>
 
 
   <a id="PatchManager_Planets_PlanetsLuaModule_CreateAtmosphereOverride_" data-uid="PatchManager.Planets.PlanetsLuaModule.CreateAtmosphereOverride*"></a>
-  <h4 id="PatchManager_Planets_PlanetsLuaModule_CreateAtmosphereOverride_System_String_System_Action_PatchManager_LuaPatching_JsonUserData__" data-uid="PatchManager.Planets.PlanetsLuaModule.CreateAtmosphereOverride(System.String,System.Action{PatchManager.LuaPatching.JsonUserData})">CreateAtmosphereOverride(string, Action&lt;JsonUserData&gt;)</h4>
+  <h4 id="PatchManager_Planets_PlanetsLuaModule_CreateAtmosphereOverride_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_Action_PatchManager_LuaPatching_JsonUserData__" data-uid="PatchManager.Planets.PlanetsLuaModule.CreateAtmosphereOverride(MoonSharp.Interpreter.ScriptExecutionContext,System.String,System.Action{PatchManager.LuaPatching.JsonUserData})">CreateAtmosphereOverride(ScriptExecutionContext, string, Action&lt;JsonUserData&gt;)</h4>
   <div class="markdown level1 summary"><p>Creates a new atmosphere override for the given body and runs <code class="paramref">callback</code> against it
 for further configuration.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void CreateAtmosphereOverride(string name, Action&lt;JsonUserData&gt; callback)</code></pre>
+    <pre><code class="lang-csharp hljs">public LuaAsset CreateAtmosphereOverride(ScriptExecutionContext context, string name, Action&lt;JsonUserData&gt; callback)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -159,6 +159,12 @@ for further configuration.</p>
       </tr>
     </thead>
     <tbody>
+      <tr>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global names the creating mod.</p>
+</td>
+      </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">name</span></td>
@@ -173,21 +179,33 @@ for further configuration.</p>
       </tr>
     </tbody>
   </table>
-  <h5 id="PatchManager_Planets_PlanetsLuaModule_CreateAtmosphereOverride_System_String_System_Action_PatchManager_LuaPatching_JsonUserData___remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Setting <code>Layer</code> in the callback limits the override to galaxies that take the body from that layer, and
-names the override after the layer too, so each layer can have its own.</p>
-</div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.LuaAsset.html">LuaAsset</a></td>
+        <td><p>The queued asset, for gating it with features.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <a id="PatchManager_Planets_PlanetsLuaModule_CreateCloudOverride_" data-uid="PatchManager.Planets.PlanetsLuaModule.CreateCloudOverride*"></a>
-  <h4 id="PatchManager_Planets_PlanetsLuaModule_CreateCloudOverride_System_String_System_Action_PatchManager_Planets_UserData_VolumeCloudUserData__" data-uid="PatchManager.Planets.PlanetsLuaModule.CreateCloudOverride(System.String,System.Action{PatchManager.Planets.UserData.VolumeCloudUserData})">CreateCloudOverride(string, Action&lt;VolumeCloudUserData&gt;)</h4>
+  <h4 id="PatchManager_Planets_PlanetsLuaModule_CreateCloudOverride_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_Action_PatchManager_Planets_UserData_VolumeCloudUserData__" data-uid="PatchManager.Planets.PlanetsLuaModule.CreateCloudOverride(MoonSharp.Interpreter.ScriptExecutionContext,System.String,System.Action{PatchManager.Planets.UserData.VolumeCloudUserData})">CreateCloudOverride(ScriptExecutionContext, string, Action&lt;VolumeCloudUserData&gt;)</h4>
   <div class="markdown level1 summary"><p>Creates a new volume-cloud override for the given body and runs <code class="paramref">callback</code> against it
 for further configuration.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void CreateCloudOverride(string name, Action&lt;VolumeCloudUserData&gt; callback)</code></pre>
+    <pre><code class="lang-csharp hljs">public LuaAsset CreateCloudOverride(ScriptExecutionContext context, string name, Action&lt;VolumeCloudUserData&gt; callback)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -199,6 +217,12 @@ for further configuration.</p>
       </tr>
     </thead>
     <tbody>
+      <tr>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global names the creating mod.</p>
+</td>
+      </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">name</span></td>
@@ -213,21 +237,33 @@ for further configuration.</p>
       </tr>
     </tbody>
   </table>
-  <h5 id="PatchManager_Planets_PlanetsLuaModule_CreateCloudOverride_System_String_System_Action_PatchManager_Planets_UserData_VolumeCloudUserData___remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Setting <code>Layer</code> in the callback limits the override to galaxies that take the body from that layer, and
-names the override after the layer too, so each layer can have its own.</p>
-</div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.LuaAsset.html">LuaAsset</a></td>
+        <td><p>The queued asset, for gating it with features.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <a id="PatchManager_Planets_PlanetsLuaModule_CreateGalaxy_" data-uid="PatchManager.Planets.PlanetsLuaModule.CreateGalaxy*"></a>
-  <h4 id="PatchManager_Planets_PlanetsLuaModule_CreateGalaxy_System_String_System_Action_PatchManager_Planets_UserData_GalaxyUserData__" data-uid="PatchManager.Planets.PlanetsLuaModule.CreateGalaxy(System.String,System.Action{PatchManager.Planets.UserData.GalaxyUserData})">CreateGalaxy(string, Action&lt;GalaxyUserData&gt;)</h4>
+  <h4 id="PatchManager_Planets_PlanetsLuaModule_CreateGalaxy_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_Action_PatchManager_Planets_UserData_GalaxyUserData__" data-uid="PatchManager.Planets.PlanetsLuaModule.CreateGalaxy(MoonSharp.Interpreter.ScriptExecutionContext,System.String,System.Action{PatchManager.Planets.UserData.GalaxyUserData})">CreateGalaxy(ScriptExecutionContext, string, Action&lt;GalaxyUserData&gt;)</h4>
   <div class="markdown level1 summary"><p>Creates a new galaxy definition with no bodies under the given key and runs <code class="paramref">callback</code>
 against it for further configuration.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void CreateGalaxy(string galaxyDefinitionKey, Action&lt;GalaxyUserData&gt; callback)</code></pre>
+    <pre><code class="lang-csharp hljs">public LuaAsset CreateGalaxy(ScriptExecutionContext context, string galaxyDefinitionKey, Action&lt;GalaxyUserData&gt; callback)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -240,6 +276,12 @@ against it for further configuration.</p>
     </thead>
     <tbody>
       <tr>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global names the creating mod.</p>
+</td>
+      </tr>
+      <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">galaxyDefinitionKey</span></td>
         <td><p>The key that saves and campaign packs load the galaxy definition by.</p>
@@ -249,6 +291,22 @@ against it for further configuration.</p>
         <td><span class="xref">Action</span>&lt;<a class="xref" href="PatchManager.Planets.UserData.GalaxyUserData.html">GalaxyUserData</a>&gt;</td>
         <td><span class="parametername">callback</span></td>
         <td><p>Callback that receives the new galaxy definition for further configuration.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.LuaAsset.html">LuaAsset</a></td>
+        <td><p>The queued asset, for gating it with features.</p>
 </td>
       </tr>
     </tbody>

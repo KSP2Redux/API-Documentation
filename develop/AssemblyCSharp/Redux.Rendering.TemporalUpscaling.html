@@ -106,13 +106,13 @@ DLSS and FSR 2 run as <a class="xref" href="Redux.Rendering.ReactiveDlssUpscaler
 </h3>
 
 
-  <h4 id="Redux_Rendering_TemporalUpscaling_SMAA_LEVEL" data-uid="Redux.Rendering.TemporalUpscaling.SMAA_LEVEL">SMAA_LEVEL</h4>
-  <div class="markdown level1 summary"><p>The anti-aliasing setting level for SMAA. Stock's levels are 0 (off), 1 (fast FXAA) and 2 (FXAA).</p>
+  <h4 id="Redux_Rendering_TemporalUpscaling_FXAA_LEVEL" data-uid="Redux.Rendering.TemporalUpscaling.FXAA_LEVEL">FXAA_LEVEL</h4>
+  <div class="markdown level1 summary"><p>The anti-aliasing setting level for FXAA. Stock's levels are 0 (off), 1 (fast FXAA) and 2 (FXAA).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public const int SMAA_LEVEL = 3</code></pre>
+    <pre><code class="lang-csharp hljs">public const int FXAA_LEVEL = 2</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -131,13 +131,39 @@ DLSS and FSR 2 run as <a class="xref" href="Redux.Rendering.ReactiveDlssUpscaler
   </table>
 
 
-  <h4 id="Redux_Rendering_TemporalUpscaling_STP_LEVEL" data-uid="Redux.Rendering.TemporalUpscaling.STP_LEVEL">STP_LEVEL</h4>
-  <div class="markdown level1 summary"><p>The anti-aliasing setting level for STP. DLSS and FSR 2 follow it.</p>
+  <h4 id="Redux_Rendering_TemporalUpscaling_LEGACY_STP_LEVEL" data-uid="Redux.Rendering.TemporalUpscaling.LEGACY_STP_LEVEL">LEGACY_STP_LEVEL</h4>
+  <div class="markdown level1 summary"><p>The level that stood for STP when the anti-aliasing setting also chose the upscaler, with DLSS and FSR 2
+after it. Profiles saved then still hold these levels.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public const int STP_LEVEL = 5</code></pre>
+    <pre><code class="lang-csharp hljs">public const int LEGACY_STP_LEVEL = 5</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Rendering_TemporalUpscaling_SMAA_LEVEL" data-uid="Redux.Rendering.TemporalUpscaling.SMAA_LEVEL">SMAA_LEVEL</h4>
+  <div class="markdown level1 summary"><p>The anti-aliasing setting level for SMAA.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int SMAA_LEVEL = 3</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -175,6 +201,34 @@ DLSS and FSR 2 run as <a class="xref" href="Redux.Rendering.ReactiveDlssUpscaler
     <tbody>
       <tr>
         <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="Redux_Rendering_TemporalUpscaling_Active_" data-uid="Redux.Rendering.TemporalUpscaling.Active*"></a>
+  <h4 id="Redux_Rendering_TemporalUpscaling_Active" data-uid="Redux.Rendering.TemporalUpscaling.Active">Active</h4>
+  <div class="markdown level1 summary"><p>Gets the upscaler made active by the last <a class="xref" href="Redux.Rendering.TemporalUpscaling.html#Redux_Rendering_TemporalUpscaling_Apply_Redux_Rendering_TemporalUpscaling_Upscaler_Redux_Rendering_TemporalUpscaling_Quality_">Apply(Upscaler, Quality)</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static TemporalUpscaling.Upscaler Active { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Rendering.TemporalUpscaling.html">TemporalUpscaling</a>.<a class="xref" href="Redux.Rendering.TemporalUpscaling.Upscaler.html">Upscaler</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -239,14 +293,14 @@ asset like any other change made to it in play mode.</p>
 </div>
 
 
-  <a id="Redux_Rendering_TemporalUpscaling_FromAntiAliasingLevel_" data-uid="Redux.Rendering.TemporalUpscaling.FromAntiAliasingLevel*"></a>
-  <h4 id="Redux_Rendering_TemporalUpscaling_FromAntiAliasingLevel_System_Int32_" data-uid="Redux.Rendering.TemporalUpscaling.FromAntiAliasingLevel(System.Int32)">FromAntiAliasingLevel(int)</h4>
-  <div class="markdown level1 summary"><p>Gets the upscaler an anti-aliasing setting level selects.</p>
+  <a id="Redux_Rendering_TemporalUpscaling_CameraLevel_" data-uid="Redux.Rendering.TemporalUpscaling.CameraLevel*"></a>
+  <h4 id="Redux_Rendering_TemporalUpscaling_CameraLevel_System_Int32_Redux_Rendering_TemporalUpscaling_Upscaler_" data-uid="Redux.Rendering.TemporalUpscaling.CameraLevel(System.Int32,Redux.Rendering.TemporalUpscaling.Upscaler)">CameraLevel(int, Upscaler)</h4>
+  <div class="markdown level1 summary"><p>Gets the anti-aliasing the cameras run, which is none while a temporal upscaler smooths the frame instead.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static TemporalUpscaling.Upscaler FromAntiAliasingLevel(int level)</code></pre>
+    <pre><code class="lang-csharp hljs">public static int CameraLevel(int level, TemporalUpscaling.Upscaler active)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -264,6 +318,12 @@ asset like any other change made to it in play mode.</p>
         <td><p>The anti-aliasing setting level.</p>
 </td>
       </tr>
+      <tr>
+        <td><a class="xref" href="Redux.Rendering.TemporalUpscaling.html">TemporalUpscaling</a>.<a class="xref" href="Redux.Rendering.TemporalUpscaling.Upscaler.html">Upscaler</a></td>
+        <td><span class="parametername">active</span></td>
+        <td><p>The active upscaler.</p>
+</td>
+      </tr>
     </tbody>
   </table>
   <h5 class="returns">Returns</h5>
@@ -276,8 +336,8 @@ asset like any other change made to it in play mode.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Redux.Rendering.TemporalUpscaling.html">TemporalUpscaling</a>.<a class="xref" href="Redux.Rendering.TemporalUpscaling.Upscaler.html">Upscaler</a></td>
-        <td><p>The upscaler, or <a class="xref" href="Redux.Rendering.TemporalUpscaling.Upscaler.html#Redux_Rendering_TemporalUpscaling_Upscaler_None">None</a> for the camera anti-aliasing levels.</p>
+        <td><span class="xref">int</span></td>
+        <td><p>The camera anti-aliasing level.</p>
 </td>
       </tr>
     </tbody>
@@ -372,6 +432,51 @@ asset like any other change made to it in play mode.</p>
       </tr>
     </tbody>
   </table>
+
+
+  <a id="Redux_Rendering_TemporalUpscaling_SplitLegacyLevel_" data-uid="Redux.Rendering.TemporalUpscaling.SplitLegacyLevel*"></a>
+  <h4 id="Redux_Rendering_TemporalUpscaling_SplitLegacyLevel_System_Int32_System_Int32__Redux_Rendering_TemporalUpscaling_Upscaler__" data-uid="Redux.Rendering.TemporalUpscaling.SplitLegacyLevel(System.Int32,System.Int32@,Redux.Rendering.TemporalUpscaling.Upscaler@)">SplitLegacyLevel(int, out int, out Upscaler)</h4>
+  <div class="markdown level1 summary"><p>Splits a level of the old anti-aliasing setting, which also chose the upscaler, into the two settings.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void SplitLegacyLevel(int level, out int antiAliasing, out TemporalUpscaling.Upscaler upscaler)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">level</span></td>
+        <td><p>The stored anti-aliasing level.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">antiAliasing</span></td>
+        <td><p>The anti-aliasing level, without an upscaler.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Redux.Rendering.TemporalUpscaling.html">TemporalUpscaling</a>.<a class="xref" href="Redux.Rendering.TemporalUpscaling.Upscaler.html">Upscaler</a></td>
+        <td><span class="parametername">upscaler</span></td>
+        <td><p>The upscaler the level chose.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Rendering_TemporalUpscaling_SplitLegacyLevel_System_Int32_System_Int32__Redux_Rendering_TemporalUpscaling_Upscaler___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>An upscaler level keeps SMAA as the anti-aliasing for when the upscaler is turned off. Stock's fast FXAA
+becomes FXAA, and an unknown level becomes FXAA too, the setting's default.</p>
+</div>
 
 </article>
           </div>

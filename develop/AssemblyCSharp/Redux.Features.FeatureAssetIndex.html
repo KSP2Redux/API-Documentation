@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class FeatureAssetIndex | KSP2Redux API (Develop) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class FeatureAssetIndex | KSP2Redux API (Develop) ">
+    
+    <meta name="description" content="Decides which addressable locations the active feature set lets the game load, from an index of the loaded Addressables catalogs, and the helpers the asset loading paths use to apply it.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Redux.Features.FeatureAssetIndex">
+
+
+
+  <h1 id="Redux_Features_FeatureAssetIndex" data-uid="Redux.Features.FeatureAssetIndex" class="text-break">Class FeatureAssetIndex</h1>
+  <div class="markdown level0 summary"><p>Decides which addressable locations the active feature set lets the game load, from an index of the loaded
+Addressables catalogs, and the helpers the asset loading paths use to apply it.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><span class="xref">FeatureAssetIndex</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.Features.html">Features</a></h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
+  <h5 id="Redux_Features_FeatureAssetIndex_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class FeatureAssetIndex</code></pre>
+  </div>
+  <h5 id="Redux_Features_FeatureAssetIndex_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>A location from a mod's catalog needs that mod's default feature on. On top of that, every
+<code>feature:ModId:FeatureId</code> label it carries must be on and every <code>nofeature:ModId:FeatureId</code> label off,
+the same rule prefab patches and config entries follow. An untagged location from the game's own bundles in a
+content label belongs to that label's Ksp2Redux category, the same one Redux's content of that kind is tagged
+with. The game's own locations outside content labels always load, since the
+game itself depends on them. Until a feature set activates every helper passes locations through unchanged.</p>
+</div>
+  <h3 id="fields">Fields
+</h3>
+
+
+  <h4 id="Redux_Features_FeatureAssetIndex_StockFeatureByLabel" data-uid="Redux.Features.FeatureAssetIndex.StockFeatureByLabel">StockFeatureByLabel</h4>
+  <div class="markdown level1 summary"><p>The Ksp2Redux category each content label belongs to. The game's own assets carry no feature labels, so an
+untagged one loaded under one of these labels belongs to that category. Labels missing here are not gated.
+The SDK tags new Redux content by the same table.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly IReadOnlyDictionary&lt;string, string&gt; StockFeatureByLabel</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IReadOnlyDictionary</span>&lt;<span class="xref">string</span>, <span class="xref">string</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="Redux_Features_FeatureAssetIndex_Enabled_" data-uid="Redux.Features.FeatureAssetIndex.Enabled*"></a>
+  <h4 id="Redux_Features_FeatureAssetIndex_Enabled" data-uid="Redux.Features.FeatureAssetIndex.Enabled">Enabled</h4>
+  <div class="markdown level1 summary"><p>Gets the features the gate lets through, the active set, or <code>null</code> before one activates and the gate
+lets everything through.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ISet&lt;string&gt; Enabled { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ISet</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="Redux_Features_FeatureAssetIndex_Filter_" data-uid="Redux.Features.FeatureAssetIndex.Filter*"></a>
+  <h4 id="Redux_Features_FeatureAssetIndex_Filter_System_Collections_Generic_IEnumerable_UnityEngine_ResourceManagement_ResourceLocations_IResourceLocation__System_String_" data-uid="Redux.Features.FeatureAssetIndex.Filter(System.Collections.Generic.IEnumerable{UnityEngine.ResourceManagement.ResourceLocations.IResourceLocation},System.String)">Filter(IEnumerable&lt;IResourceLocation&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Keeps the locations the active feature set lets load under a label, logging any address that more than
+one kept location provides.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static List&lt;IResourceLocation&gt; Filter(IEnumerable&lt;IResourceLocation&gt; locations, string label)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">IResourceLocation</span>&gt;</td>
+        <td><span class="parametername">locations</span></td>
+        <td><p>The candidate locations.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">label</span></td>
+        <td><p>The label being loaded, or <code>null</code> for a load by key.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<span class="xref">IResourceLocation</span>&gt;</td>
+        <td><p>The locations that may load.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Features_FeatureAssetIndex_KeepFirst_" data-uid="Redux.Features.FeatureAssetIndex.KeepFirst*"></a>
+  <h4 id="Redux_Features_FeatureAssetIndex_KeepFirst__2_System_Collections_Generic_IDictionary___0___1____0___1_System_String_" data-uid="Redux.Features.FeatureAssetIndex.KeepFirst``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1,System.String)">KeepFirst&lt;TKey, TValue&gt;(IDictionary&lt;TKey, TValue&gt;, TKey, TValue, string)</h4>
+  <div class="markdown level1 summary"><p>Keeps the first copy of something two assets in one feature set both define, such as a part or a body by
+its name, and reports the second, since the features that provide them should conflict.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool KeepFirst&lt;TKey, TValue&gt;(IDictionary&lt;TKey, TValue&gt; chosen, TKey id, TValue copy, string what)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IDictionary</span>&lt;TKey, TValue&gt;</td>
+        <td><span class="parametername">chosen</span></td>
+        <td><p>The copies kept so far, by internal id.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">TKey</span></td>
+        <td><span class="parametername">id</span></td>
+        <td><p>The internal id the new copy defines.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td><span class="parametername">copy</span></td>
+        <td><p>The new copy.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">what</span></td>
+        <td><p>What the id names, for the report, such as &quot;part&quot;.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the copy was kept, false if an earlier one was.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TKey</span></td>
+        <td><p>The internal id type.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TValue</span></td>
+        <td><p>The loaded data type.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Features_FeatureAssetIndex_KeyOf_" data-uid="Redux.Features.FeatureAssetIndex.KeyOf*"></a>
+  <h4 id="Redux_Features_FeatureAssetIndex_KeyOf_UnityEngine_ResourceManagement_ResourceLocations_IResourceLocation_" data-uid="Redux.Features.FeatureAssetIndex.KeyOf(UnityEngine.ResourceManagement.ResourceLocations.IResourceLocation)">KeyOf(IResourceLocation)</h4>
+  <div class="markdown level1 summary"><p>Gets the key the gate identifies a location by.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string KeyOf(IResourceLocation location)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IResourceLocation</span></td>
+        <td><span class="parametername">location</span></td>
+        <td><p>The location.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><p>The location's bundle and internal id, or its internal id alone when it is not bundled.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Features_FeatureAssetIndex_KeyOf_UnityEngine_ResourceManagement_ResourceLocations_IResourceLocation__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>A built bundle gives its assets short hashed internal ids that repeat across bundles, so a bundled asset
+is told apart by its bundle too.</p>
+</div>
+
+
+  <a id="Redux_Features_FeatureAssetIndex_TryResolveKey_" data-uid="Redux.Features.FeatureAssetIndex.TryResolveKey*"></a>
+  <h4 id="Redux_Features_FeatureAssetIndex_TryResolveKey_System_Object_System_Type_System_String_UnityEngine_ResourceManagement_ResourceLocations_IResourceLocation__" data-uid="Redux.Features.FeatureAssetIndex.TryResolveKey(System.Object,System.Type,System.String,UnityEngine.ResourceManagement.ResourceLocations.IResourceLocation@)">TryResolveKey(object, Type, string, out IResourceLocation)</h4>
+  <div class="markdown level1 summary"><p>Resolves a load by key through the gate when the key names a tagged or mod-owned asset.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool TryResolveKey(object key, Type type, string label, out IResourceLocation location)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">object</span></td>
+        <td><span class="parametername">key</span></td>
+        <td><p>The key being loaded.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Type</span></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The asset type, or <code>null</code> for any.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">label</span></td>
+        <td><p>The content label the key is loaded on behalf of, or <code>null</code> for a plain load.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">IResourceLocation</span></td>
+        <td><span class="parametername">location</span></td>
+        <td><p>The allowed location, or <code>null</code> when every candidate is gated off.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the gate decided the load, false if the key is not gated and loads as usual.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from develop
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -93,7 +93,7 @@
   <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="PatchManager_Core_Cache_Json_Inventory_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class Inventory</code></pre>
+    <pre><code class="lang-csharp hljs">public class Inventory</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -215,16 +215,14 @@
   </table>
 
 
-  <a id="PatchManager_Core_Cache_Json_Inventory_InvalidationSnapshot_" data-uid="PatchManager.Core.Cache.Json.Inventory.InvalidationSnapshot*"></a>
-  <h4 id="PatchManager_Core_Cache_Json_Inventory_InvalidationSnapshot" data-uid="PatchManager.Core.Cache.Json.Inventory.InvalidationSnapshot">InvalidationSnapshot</h4>
-  <div class="markdown level1 summary"><p>Snapshot of the values of config entries tagged <code>InvalidatesPatchManagerOnChange</code> at the last
-cache build, keyed <code>{modId}:{section}/{name}</code>. The next launch diffs current values against this
-to decide whether the cache is stale - the successor to the per-binding ranWith tracking.</p>
+  <a id="PatchManager_Core_Cache_Json_Inventory_LastUsedTicks_" data-uid="PatchManager.Core.Cache.Json.Inventory.LastUsedTicks*"></a>
+  <h4 id="PatchManager_Core_Cache_Json_Inventory_LastUsedTicks" data-uid="PatchManager.Core.Cache.Json.Inventory.LastUsedTicks">LastUsedTicks</h4>
+  <div class="markdown level1 summary"><p>When the set this inventory belongs to was last patched for or loaded, in UTC ticks.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, JToken&gt; InvalidationSnapshot { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public long LastUsedTicks { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-condensed">
@@ -236,7 +234,7 @@ to decide whether the cache is stale - the successor to the per-binding ranWith 
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Dictionary</span>&lt;<span class="xref">string</span>, <span class="xref">JToken</span>&gt;</td>
+        <td><span class="xref">long</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -315,6 +313,32 @@ to decide whether the cache is stale - the successor to the per-binding ranWith 
     <tbody>
       <tr>
         <td><a class="xref" href="PatchManager.Core.Cache.Json.PatchHashes.html">PatchHashes</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_Core_Cache_Json_Inventory_PlanFiles_" data-uid="PatchManager.Core.Cache.Json.Inventory.PlanFiles*"></a>
+  <h4 id="PatchManager_Core_Cache_Json_Inventory_PlanFiles" data-uid="PatchManager.Core.Cache.Json.Inventory.PlanFiles">PlanFiles</h4>
+  <div class="markdown level1 summary"><p>The prefab patch plan files this set resolved to, relative to the plan directory.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;string&gt; PlanFiles { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<span class="xref">string</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>

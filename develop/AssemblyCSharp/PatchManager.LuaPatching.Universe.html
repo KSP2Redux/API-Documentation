@@ -153,8 +153,7 @@ through <code>PM</code>. Once loading is done, <a class="xref" href="PatchManage
 
 
   <h4 id="PatchManager_LuaPatching_Universe_AllMods" data-uid="PatchManager.LuaPatching.Universe.AllMods">AllMods</h4>
-  <div class="markdown level1 summary"><p>The set of mod IDs the universe was constructed with, used by stage scheduling and
-<a class="xref" href="PatchManager.LuaPatching.Builtin.PatchManagerCore.html#PatchManager_LuaPatching_Builtin_PatchManagerCore_Loaded_System_String_">Loaded(string)</a>.</p>
+  <div class="markdown level1 summary"><p>The set of mod IDs the universe was constructed with, the installed mods <a class="xref" href="PatchManager.LuaPatching.Universe.html#PatchManager_LuaPatching_Universe_IsModOn_System_String_">IsModOn(string)</a> checks.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -179,7 +178,7 @@ through <code>PM</code>. Once loading is done, <a class="xref" href="PatchManage
 
 
   <h4 id="PatchManager_LuaPatching_Universe_AllNewAssets" data-uid="PatchManager.LuaPatching.Universe.AllNewAssets">AllNewAssets</h4>
-  <div class="markdown level1 summary"><p>Assets queued for creation via <a class="xref" href="PatchManager.LuaPatching.Builtin.PatchManagerCore.html#PatchManager_LuaPatching_Builtin_PatchManagerCore_New_System_String_System_String_System_String_MoonSharp_Interpreter_DynValue_">New(string, string, string, DynValue)</a>.</p>
+  <div class="markdown level1 summary"><p>Assets queued for creation via <a class="xref" href="PatchManager.LuaPatching.Builtin.PatchManagerCore.html#PatchManager_LuaPatching_Builtin_PatchManagerCore_New_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_String_System_String_MoonSharp_Interpreter_DynValue_">New(ScriptExecutionContext, string, string, string, DynValue)</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -254,6 +253,31 @@ pass execution iterates only the patches in that pass.</p>
   </table>
 
 
+  <h4 id="PatchManager_LuaPatching_Universe_BeginRunCallbacks" data-uid="PatchManager.LuaPatching.Universe.BeginRunCallbacks">BeginRunCallbacks</h4>
+  <div class="markdown level1 summary"><p>Callbacks registered with <code>PM:OnBeginRun</code>, in registration order.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;FeatureGatedAction&gt; BeginRunCallbacks</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<span class="xref">FeatureGatedAction</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <h4 id="PatchManager_LuaPatching_Universe_Converters" data-uid="PatchManager.LuaPatching.Universe.Converters">Converters</h4>
   <div class="markdown level1 summary"><p>Converter instances discovered at module-init time by <a class="xref" href="PatchManager.LuaPatching.LuaPatchingModule.html">LuaPatchingModule</a>, keyed by their
 <a class="xref" href="PatchManager.LuaPatching.Attributes.ConverterAttribute.html#PatchManager_LuaPatching_Attributes_ConverterAttribute_Name">Name</a>.</p>
@@ -274,6 +298,31 @@ pass execution iterates only the patches in that pass.</p>
     <tbody>
       <tr>
         <td><span class="xref">Dictionary</span>&lt;<span class="xref">string</span>, <a class="xref" href="PatchManager.LuaPatching.IConverter.html">IConverter</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="PatchManager_LuaPatching_Universe_EndRunCallbacks" data-uid="PatchManager.LuaPatching.Universe.EndRunCallbacks">EndRunCallbacks</h4>
+  <div class="markdown level1 summary"><p>Callbacks registered with <code>PM:OnEndRun</code>, in registration order.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;FeatureGatedAction&gt; EndRunCallbacks</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<span class="xref">FeatureGatedAction</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -609,6 +658,87 @@ application (Do callbacks) and builder/query helpers stay valid regardless of th
       </tr>
     </tbody>
   </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="PatchManager_LuaPatching_Universe_EnabledFeatures_" data-uid="PatchManager.LuaPatching.Universe.EnabledFeatures*"></a>
+  <h4 id="PatchManager_LuaPatching_Universe_EnabledFeatures" data-uid="PatchManager.LuaPatching.Universe.EnabledFeatures">EnabledFeatures</h4>
+  <div class="markdown level1 summary"><p>The features the run is building for, the active set, or <code>null</code> before one activates to run every
+registration regardless of features.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ISet&lt;string&gt; EnabledFeatures { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ISet</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_Universe_EnabledNewAssets_" data-uid="PatchManager.LuaPatching.Universe.EnabledNewAssets*"></a>
+  <h4 id="PatchManager_LuaPatching_Universe_EnabledNewAssets" data-uid="PatchManager.LuaPatching.Universe.EnabledNewAssets">EnabledNewAssets</h4>
+  <div class="markdown level1 summary"><p>Gets the queued new assets whose features are on in <a class="xref" href="PatchManager.LuaPatching.Universe.html#PatchManager_LuaPatching_Universe_EnabledFeatures">EnabledFeatures</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;LuaAsset&gt; EnabledNewAssets { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="PatchManager.LuaPatching.LuaAsset.html">LuaAsset</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_Universe_ModsOn_" data-uid="PatchManager.LuaPatching.Universe.ModsOn*"></a>
+  <h4 id="PatchManager_LuaPatching_Universe_ModsOn" data-uid="PatchManager.LuaPatching.Universe.ModsOn">ModsOn</h4>
+  <div class="markdown level1 summary"><p>Gets the installed mods whose default feature is on in <a class="xref" href="PatchManager.LuaPatching.Universe.html#PatchManager_LuaPatching_Universe_EnabledFeatures">EnabledFeatures</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HashSet&lt;string&gt; ModsOn { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">HashSet</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="methods">Methods
 </h3>
 
@@ -671,6 +801,17 @@ application (Do callbacks) and builder/query helpers stay valid regardless of th
   </table>
 
 
+  <a id="PatchManager_LuaPatching_Universe_BeginRun_" data-uid="PatchManager.LuaPatching.Universe.BeginRun*"></a>
+  <h4 id="PatchManager_LuaPatching_Universe_BeginRun" data-uid="PatchManager.LuaPatching.Universe.BeginRun">BeginRun()</h4>
+  <div class="markdown level1 summary"><p>Fires every begin callback whose features are on in <a class="xref" href="PatchManager.LuaPatching.Universe.html#PatchManager_LuaPatching_Universe_EnabledFeatures">EnabledFeatures</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void BeginRun()</code></pre>
+  </div>
+
+
   <a id="PatchManager_LuaPatching_Universe_BuildPrimaryKeyMapForLabel_" data-uid="PatchManager.LuaPatching.Universe.BuildPrimaryKeyMapForLabel*"></a>
   <h4 id="PatchManager_LuaPatching_Universe_BuildPrimaryKeyMapForLabel_System_String_" data-uid="PatchManager.LuaPatching.Universe.BuildPrimaryKeyMapForLabel(System.String)">BuildPrimaryKeyMapForLabel(string)</h4>
   <div class="markdown level1 summary"><p>Returns the primary Addressables address for every <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/TextAsset.html">TextAsset</a> under
@@ -716,6 +857,17 @@ extension).</p>
       </tr>
     </tbody>
   </table>
+
+
+  <a id="PatchManager_LuaPatching_Universe_EndRun_" data-uid="PatchManager.LuaPatching.Universe.EndRun*"></a>
+  <h4 id="PatchManager_LuaPatching_Universe_EndRun" data-uid="PatchManager.LuaPatching.Universe.EndRun">EndRun()</h4>
+  <div class="markdown level1 summary"><p>Fires every end callback whose features are on in <a class="xref" href="PatchManager.LuaPatching.Universe.html#PatchManager_LuaPatching_Universe_EnabledFeatures">EnabledFeatures</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void EndRun()</code></pre>
+  </div>
 
 
   <a id="PatchManager_LuaPatching_Universe_GetAllSortedPatchesFor_" data-uid="PatchManager.LuaPatching.Universe.GetAllSortedPatchesFor*"></a>
@@ -941,6 +1093,97 @@ stage-sorted order, filtered by name pattern.</p>
   </table>
 
 
+  <a id="PatchManager_LuaPatching_Universe_IsGlobalLabel_" data-uid="PatchManager.LuaPatching.Universe.IsGlobalLabel*"></a>
+  <h4 id="PatchManager_LuaPatching_Universe_IsGlobalLabel_System_String_" data-uid="PatchManager.LuaPatching.Universe.IsGlobalLabel(System.String)">IsGlobalLabel(string)</h4>
+  <div class="markdown level1 summary"><p>Checks whether a label's content is the same in every feature set, so nothing in it is gated.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsGlobalLabel(string label)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">label</span></td>
+        <td><p>The addressables label.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the label is global, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_Universe_IsModOn_" data-uid="PatchManager.LuaPatching.Universe.IsModOn*"></a>
+  <h4 id="PatchManager_LuaPatching_Universe_IsModOn_System_String_" data-uid="PatchManager.LuaPatching.Universe.IsModOn(System.String)">IsModOn(string)</h4>
+  <div class="markdown level1 summary"><p>Checks whether a mod is installed and its default feature is on in <a class="xref" href="PatchManager.LuaPatching.Universe.html#PatchManager_LuaPatching_Universe_EnabledFeatures">EnabledFeatures</a>.
+Before a set activates, every installed mod counts as on.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsModOn(string modId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">modId</span></td>
+        <td><p>The mod ID.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the mod takes part in the set being built.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="PatchManager_LuaPatching_Universe_RunAllPatchesFor_" data-uid="PatchManager.LuaPatching.Universe.RunAllPatchesFor*"></a>
   <h4 id="PatchManager_LuaPatching_Universe_RunAllPatchesFor_PatchManager_LuaPatching_LuaAsset_System_String_System_Collections_Generic_List_PatchManager_LuaPatching_Universe_DuplicatedAsset__System_Int32__System_Int32__" data-uid="PatchManager.LuaPatching.Universe.RunAllPatchesFor(PatchManager.LuaPatching.LuaAsset,System.String,System.Collections.Generic.List{PatchManager.LuaPatching.Universe.DuplicatedAsset},System.Int32@,System.Int32@)">RunAllPatchesFor(LuaAsset, string, List&lt;DuplicatedAsset&gt;, out int, out int)</h4>
   <div class="markdown level1 summary"><p>Runs every patch matching the given new asset in <code class="paramref">pass</code> against its
@@ -1118,6 +1361,34 @@ sorts each label's patches by stage priority.</p>
   <h5 id="PatchManager_LuaPatching_Universe_SetupPatchesForRun_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>Must run after all patches have been registered and before any <code>RunAllPatchesFor</code> call.</p>
 </div>
+
+
+  <a id="PatchManager_LuaPatching_Universe_StageNewAssetsForRun_" data-uid="PatchManager.LuaPatching.Universe.StageNewAssetsForRun*"></a>
+  <h4 id="PatchManager_LuaPatching_Universe_StageNewAssetsForRun" data-uid="PatchManager.LuaPatching.Universe.StageNewAssetsForRun">StageNewAssetsForRun()</h4>
+  <div class="markdown level1 summary"><p>Builds a fresh copy of every enabled new asset for one run, so patches in one feature set's run never
+see another run's changes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;LuaAsset&gt; StageNewAssetsForRun()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="PatchManager.LuaPatching.LuaAsset.html">LuaAsset</a>&gt;</td>
+        <td><p>The copies, in registration order.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>

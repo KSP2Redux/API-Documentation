@@ -139,14 +139,14 @@ public class CampaignPacksLuaModule</code></pre>
 
 
   <a id="PatchManager_CampaignPacks_CampaignPacksLuaModule_CreateCampaignPack_" data-uid="PatchManager.CampaignPacks.CampaignPacksLuaModule.CreateCampaignPack*"></a>
-  <h4 id="PatchManager_CampaignPacks_CampaignPacksLuaModule_CreateCampaignPack_System_String_System_Action_PatchManager_LuaPatching_JsonUserData__" data-uid="PatchManager.CampaignPacks.CampaignPacksLuaModule.CreateCampaignPack(System.String,System.Action{PatchManager.LuaPatching.JsonUserData})">CreateCampaignPack(string, Action&lt;JsonUserData&gt;)</h4>
+  <h4 id="PatchManager_CampaignPacks_CampaignPacksLuaModule_CreateCampaignPack_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_Action_PatchManager_LuaPatching_JsonUserData__" data-uid="PatchManager.CampaignPacks.CampaignPacksLuaModule.CreateCampaignPack(MoonSharp.Interpreter.ScriptExecutionContext,System.String,System.Action{PatchManager.LuaPatching.JsonUserData})">CreateCampaignPack(ScriptExecutionContext, string, Action&lt;JsonUserData&gt;)</h4>
   <div class="markdown level1 summary"><p>Creates a new campaign pack with the given ID and runs <code class="paramref">callback</code> against it for further
 configuration.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void CreateCampaignPack(string id, Action&lt;JsonUserData&gt; callback)</code></pre>
+    <pre><code class="lang-csharp hljs">public LuaAsset CreateCampaignPack(ScriptExecutionContext context, string id, Action&lt;JsonUserData&gt; callback)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -158,6 +158,12 @@ configuration.</p>
       </tr>
     </thead>
     <tbody>
+      <tr>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global names the creating mod.</p>
+</td>
+      </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">id</span></td>
@@ -172,8 +178,24 @@ configuration.</p>
       </tr>
     </tbody>
   </table>
-  <h5 id="PatchManager_CampaignPacks_CampaignPacksLuaModule_CreateCampaignPack_System_String_System_Action_PatchManager_LuaPatching_JsonUserData___remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>The new pack starts from the <a class="xref" href="Redux.Packs.CampaignPack.html">CampaignPack</a> defaults, so it uses the default galaxy and layers
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.LuaAsset.html">LuaAsset</a></td>
+        <td><p>The queued asset, for gating it with features.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PatchManager_CampaignPacks_CampaignPacksLuaModule_CreateCampaignPack_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_Action_PatchManager_LuaPatching_JsonUserData___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The new pack starts from the <a class="xref" href="Redux.Packs.CampaignPack.html">CampaignPack</a> defaults, so it uses the default galaxy
 until the callback changes them.</p>
 </div>
 

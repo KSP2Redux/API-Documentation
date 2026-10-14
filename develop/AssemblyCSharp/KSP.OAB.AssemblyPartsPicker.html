@@ -1334,6 +1334,11 @@ decides whether a camera is involved.</p>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void OnLocalize()</code></pre>
   </div>
+  <h5 id="KSP_OAB_AssemblyPartsPicker_OnLocalize_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Part titles, subtitles, descriptions and manufacturers are cached on the part data, part buttons copy the
+title once when they are created, and the Group By labels are filled in once at startup. All of them are
+refreshed here so the whole picker follows the new language, not only the parts that get rebuilt.</p>
+</div>
 
 
   <a id="KSP_OAB_AssemblyPartsPicker_OnRequestPartDeleteFX_" data-uid="KSP.OAB.AssemblyPartsPicker.OnRequestPartDeleteFX*"></a>
@@ -1610,7 +1615,8 @@ one leaves the current category in view.</p>
   </div>
   <h5 id="KSP_OAB_AssemblyPartsPicker_UpdateSearch_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>An empty query ends the search and shows the category that was open before it, rather than the empty no
-category view that searching switches to.</p>
+category view that searching switches to. A query switches to no category without refreshing the category
+view, so the previous results stay up until the search results replace them.</p>
 </div>
   <h3 id="implements">Implements</h3>
   <div>

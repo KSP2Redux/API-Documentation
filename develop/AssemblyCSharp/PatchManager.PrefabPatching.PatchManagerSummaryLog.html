@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class PatchManagerSummaryLog | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="Coordinates the ordinary and prefab-patch sections of Patch Manager&#39;s single human-readable summary log.">
+    <meta name="description" content="Coordinates Patch Manager&#39;s human-readable summary log: one section per feature set patched for this session, each with its ordinary and prefab-patch parts.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,8 +81,8 @@
 
 
   <h1 id="PatchManager_PrefabPatching_PatchManagerSummaryLog" data-uid="PatchManager.PrefabPatching.PatchManagerSummaryLog" class="text-break">Class PatchManagerSummaryLog</h1>
-  <div class="markdown level0 summary"><p>Coordinates the ordinary and prefab-patch sections of Patch Manager's
-single human-readable summary log.</p>
+  <div class="markdown level0 summary"><p>Coordinates Patch Manager's human-readable summary log: one section per feature set patched for this
+session, each with its ordinary and prefab-patch parts.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -96,13 +96,58 @@ single human-readable summary log.</p>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static class PatchManagerSummaryLog</code></pre>
   </div>
+  <h5 id="PatchManager_PrefabPatching_PatchManagerSummaryLog_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>Each set's section is also kept in the set's cache directory, along with the ordinary part of its last
+rebuild, so a set whose cache is still valid in a later session shows that rebuild rather than nothing.</p>
+</div>
   <h3 id="methods">Methods
 </h3>
 
 
+  <a id="PatchManager_PrefabPatching_PatchManagerSummaryLog_BeginSet_" data-uid="PatchManager.PrefabPatching.PatchManagerSummaryLog.BeginSet*"></a>
+  <h4 id="PatchManager_PrefabPatching_PatchManagerSummaryLog_BeginSet_System_String_System_String_System_String_" data-uid="PatchManager.PrefabPatching.PatchManagerSummaryLog.BeginSet(System.String,System.String,System.String)">BeginSet(string, string, string)</h4>
+  <div class="markdown level1 summary"><p>Starts or returns to a feature set's section of the summary, so later updates land in it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void BeginSet(string setId, string header, string directory)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">setId</span></td>
+        <td><p>The set's id.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">header</span></td>
+        <td><p>What the section is headed with, such as the set's features.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">directory</span></td>
+        <td><p>The set's cache directory, where its own summary is kept.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="PatchManager_PrefabPatching_PatchManagerSummaryLog_Reset_" data-uid="PatchManager.PrefabPatching.PatchManagerSummaryLog.Reset*"></a>
   <h4 id="PatchManager_PrefabPatching_PatchManagerSummaryLog_Reset" data-uid="PatchManager.PrefabPatching.PatchManagerSummaryLog.Reset">Reset()</h4>
-  <div class="markdown level1 summary"><p>Clears both in-memory summary sections for a new play session.</p>
+  <div class="markdown level1 summary"><p>Forgets every section for a new play session.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -113,7 +158,7 @@ single human-readable summary log.</p>
 
   <a id="PatchManager_PrefabPatching_PatchManagerSummaryLog_UpdateCoreSummary_" data-uid="PatchManager.PrefabPatching.PatchManagerSummaryLog.UpdateCoreSummary*"></a>
   <h4 id="PatchManager_PrefabPatching_PatchManagerSummaryLog_UpdateCoreSummary_System_String_" data-uid="PatchManager.PrefabPatching.PatchManagerSummaryLog.UpdateCoreSummary(System.String)">UpdateCoreSummary(string)</h4>
-  <div class="markdown level1 summary"><p>Replaces the ordinary JSON-patch section of the summary.</p>
+  <div class="markdown level1 summary"><p>Replaces the ordinary JSON-patch part of the active set's section.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -141,7 +186,7 @@ single human-readable summary log.</p>
 
   <a id="PatchManager_PrefabPatching_PatchManagerSummaryLog_UpdatePrefabSummary_" data-uid="PatchManager.PrefabPatching.PatchManagerSummaryLog.UpdatePrefabSummary*"></a>
   <h4 id="PatchManager_PrefabPatching_PatchManagerSummaryLog_UpdatePrefabSummary_System_String_" data-uid="PatchManager.PrefabPatching.PatchManagerSummaryLog.UpdatePrefabSummary(System.String)">UpdatePrefabSummary(string)</h4>
-  <div class="markdown level1 summary"><p>Replaces the prefab-patch section of the summary.</p>
+  <div class="markdown level1 summary"><p>Replaces the prefab-patch part of the active set's section.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>

@@ -5,11 +5,11 @@
   <head>
     <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-      <title>Class VSwiftReduxLogger | KSP2Redux API (Develop) </title>
+      <title>Class CampaignRowViewModel | KSP2Redux API (Develop) </title>
       <meta name="viewport" content="width=device-width">
-      <meta name="title" content="Class VSwiftReduxLogger | KSP2Redux API (Develop) ">
+      <meta name="title" content="Class CampaignRowViewModel | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="implementation that forwards to a .">
+    <meta name="description" content="One campaign in the campaign selection list, described by its newest save.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -76,41 +76,38 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="VSwift.Logging.VSwiftReduxLogger">
+            <article class="content wrap" id="_content" data-uid="Redux.UI.MainMenu.CampaignSelection.CampaignRowViewModel">
 
 
 
-  <h1 id="VSwift_Logging_VSwiftReduxLogger" data-uid="VSwift.Logging.VSwiftReduxLogger" class="text-break">Class VSwiftReduxLogger</h1>
-  <div class="markdown level0 summary"><p><a class="xref" href="VSwift.Modules.Logging.IVSwiftLogger.html">IVSwiftLogger</a> implementation that forwards to a <span class="xref">SpaceWarp2.API.Logging.ILogger</span>.</p>
+  <h1 id="Redux_UI_MainMenu_CampaignSelection_CampaignRowViewModel" data-uid="Redux.UI.MainMenu.CampaignSelection.CampaignRowViewModel" class="text-break">Class CampaignRowViewModel</h1>
+  <div class="markdown level0 summary"><p>One campaign in the campaign selection list, described by its newest save.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">object</span></div>
-    <div class="level1"><span class="xref">VSwiftReduxLogger</span></div>
+    <div class="level1"><a class="xref" href="../UitkForKsp2/UitkForKsp2.MVVM.Core.ViewModelBase.html">ViewModelBase</a></div>
+    <div class="level2"><span class="xref">CampaignRowViewModel</span></div>
   </div>
-  <div class="implements">
-    <h5>Implements</h5>
-    <div><a class="xref" href="VSwift.Modules.Logging.IVSwiftLogger.html">IVSwiftLogger</a></div>
-  </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="VSwift.html">VSwift</a>.<a class="xref" href="VSwift.Logging.html">Logging</a></h6>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.UI.html">UI</a>.<a class="xref" href="Redux.UI.MainMenu.html">MainMenu</a>.<a class="xref" href="Redux.UI.MainMenu.CampaignSelection.html">CampaignSelection</a></h6>
   <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
-  <h5 id="VSwift_Logging_VSwiftReduxLogger_syntax">Syntax</h5>
+  <h5 id="Redux_UI_MainMenu_CampaignSelection_CampaignRowViewModel_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class VSwiftReduxLogger : IVSwiftLogger</code></pre>
+    <pre><code class="lang-csharp hljs">public class CampaignRowViewModel : ViewModelBase</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
 
 
-  <a id="VSwift_Logging_VSwiftReduxLogger__ctor_" data-uid="VSwift.Logging.VSwiftReduxLogger.#ctor*"></a>
-  <h4 id="VSwift_Logging_VSwiftReduxLogger__ctor_SpaceWarp2_API_Logging_ILogger_" data-uid="VSwift.Logging.VSwiftReduxLogger.#ctor(SpaceWarp2.API.Logging.ILogger)">VSwiftReduxLogger(ILogger)</h4>
-  <div class="markdown level1 summary"><p>Creates the logger forwarding to the given <span class="xref">SpaceWarp2.API.Logging.ILogger</span>.</p>
+  <a id="Redux_UI_MainMenu_CampaignSelection_CampaignRowViewModel__ctor_" data-uid="Redux.UI.MainMenu.CampaignSelection.CampaignRowViewModel.#ctor*"></a>
+  <h4 id="Redux_UI_MainMenu_CampaignSelection_CampaignRowViewModel__ctor_System_String_System_String_System_DateTime_System_String_" data-uid="Redux.UI.MainMenu.CampaignSelection.CampaignRowViewModel.#ctor(System.String,System.String,System.DateTime,System.String)">CampaignRowViewModel(string, string, DateTime, string)</h4>
+  <div class="markdown level1 summary"><p>Creates a campaign row.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public VSwiftReduxLogger(ILogger logger)</code></pre>
+    <pre><code class="lang-csharp hljs">public CampaignRowViewModel(string name, string gameMode, DateTime lastPlayedTime, string folderPath)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -123,9 +120,27 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">ILogger</span></td>
-        <td><span class="parametername">logger</span></td>
-        <td><p>The underlying Redux logger.</p>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The campaign name, which is its save folder's name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">gameMode</span></td>
+        <td><p>The game mode as a <code>#</code> localization key.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">DateTime</span></td>
+        <td><span class="parametername">lastPlayedTime</span></td>
+        <td><p>When the campaign's newest save was written.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">folderPath</span></td>
+        <td><p>The campaign's save folder.</p>
 </td>
       </tr>
     </tbody>
@@ -134,14 +149,14 @@
 </h3>
 
 
-  <a id="VSwift_Logging_VSwiftReduxLogger_Logger_" data-uid="VSwift.Logging.VSwiftReduxLogger.Logger*"></a>
-  <h4 id="VSwift_Logging_VSwiftReduxLogger_Logger" data-uid="VSwift.Logging.VSwiftReduxLogger.Logger">Logger</h4>
-  <div class="markdown level1 summary"><p>Gets the underlying Redux logger.</p>
+  <a id="Redux_UI_MainMenu_CampaignSelection_CampaignRowViewModel_FolderPath_" data-uid="Redux.UI.MainMenu.CampaignSelection.CampaignRowViewModel.FolderPath*"></a>
+  <h4 id="Redux_UI_MainMenu_CampaignSelection_CampaignRowViewModel_FolderPath" data-uid="Redux.UI.MainMenu.CampaignSelection.CampaignRowViewModel.FolderPath">FolderPath</h4>
+  <div class="markdown level1 summary"><p>Gets the campaign's save folder.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ILogger Logger { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string FolderPath { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-condensed">
@@ -153,7 +168,111 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">ILogger</span></td>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_UI_MainMenu_CampaignSelection_CampaignRowViewModel_GameMode_" data-uid="Redux.UI.MainMenu.CampaignSelection.CampaignRowViewModel.GameMode*"></a>
+  <h4 id="Redux_UI_MainMenu_CampaignSelection_CampaignRowViewModel_GameMode" data-uid="Redux.UI.MainMenu.CampaignSelection.CampaignRowViewModel.GameMode">GameMode</h4>
+  <div class="markdown level1 summary"><p>Gets the game mode as a <code>#</code> localization key.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GameMode { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_UI_MainMenu_CampaignSelection_CampaignRowViewModel_LastPlayed_" data-uid="Redux.UI.MainMenu.CampaignSelection.CampaignRowViewModel.LastPlayed*"></a>
+  <h4 id="Redux_UI_MainMenu_CampaignSelection_CampaignRowViewModel_LastPlayed" data-uid="Redux.UI.MainMenu.CampaignSelection.CampaignRowViewModel.LastPlayed">LastPlayed</h4>
+  <div class="markdown level1 summary"><p>Gets when the campaign was last played, as shown on the row.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string LastPlayed { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_UI_MainMenu_CampaignSelection_CampaignRowViewModel_LastPlayedTime_" data-uid="Redux.UI.MainMenu.CampaignSelection.CampaignRowViewModel.LastPlayedTime*"></a>
+  <h4 id="Redux_UI_MainMenu_CampaignSelection_CampaignRowViewModel_LastPlayedTime" data-uid="Redux.UI.MainMenu.CampaignSelection.CampaignRowViewModel.LastPlayedTime">LastPlayedTime</h4>
+  <div class="markdown level1 summary"><p>Gets when the campaign's newest save was written.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DateTime LastPlayedTime { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DateTime</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_UI_MainMenu_CampaignSelection_CampaignRowViewModel_Name_" data-uid="Redux.UI.MainMenu.CampaignSelection.CampaignRowViewModel.Name*"></a>
+  <h4 id="Redux_UI_MainMenu_CampaignSelection_CampaignRowViewModel_Name" data-uid="Redux.UI.MainMenu.CampaignSelection.CampaignRowViewModel.Name">Name</h4>
+  <div class="markdown level1 summary"><p>Gets the campaign name.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Name { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -162,14 +281,14 @@
 </h3>
 
 
-  <a id="VSwift_Logging_VSwiftReduxLogger_LogDebug_" data-uid="VSwift.Logging.VSwiftReduxLogger.LogDebug*"></a>
-  <h4 id="VSwift_Logging_VSwiftReduxLogger_LogDebug_System_Object_" data-uid="VSwift.Logging.VSwiftReduxLogger.LogDebug(System.Object)">LogDebug(object)</h4>
-  <div class="markdown level1 summary"><p>Logs the given object at debug level.</p>
+  <a id="Redux_UI_MainMenu_CampaignSelection_CampaignRowViewModel_FromNewestSave_" data-uid="Redux.UI.MainMenu.CampaignSelection.CampaignRowViewModel.FromNewestSave*"></a>
+  <h4 id="Redux_UI_MainMenu_CampaignSelection_CampaignRowViewModel_FromNewestSave_KSP_Game_ExtendedSaveFileInfo_" data-uid="Redux.UI.MainMenu.CampaignSelection.CampaignRowViewModel.FromNewestSave(KSP.Game.ExtendedSaveFileInfo)">FromNewestSave(ExtendedSaveFileInfo)</h4>
+  <div class="markdown level1 summary"><p>Creates the row for a campaign from its newest save.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void LogDebug(object debug)</code></pre>
+    <pre><code class="lang-csharp hljs">public static CampaignRowViewModel FromNewestSave(ExtendedSaveFileInfo newestSave)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -182,114 +301,30 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">object</span></td>
-        <td><span class="parametername">debug</span></td>
-        <td><p>The object to log.</p>
+        <td><a class="xref" href="KSP.Game.ExtendedSaveFileInfo.html">ExtendedSaveFileInfo</a></td>
+        <td><span class="parametername">newestSave</span></td>
+        <td><p>The campaign's most recently written save.</p>
 </td>
       </tr>
     </tbody>
   </table>
-
-
-  <a id="VSwift_Logging_VSwiftReduxLogger_LogError_" data-uid="VSwift.Logging.VSwiftReduxLogger.LogError*"></a>
-  <h4 id="VSwift_Logging_VSwiftReduxLogger_LogError_System_Object_" data-uid="VSwift.Logging.VSwiftReduxLogger.LogError(System.Object)">LogError(object)</h4>
-  <div class="markdown level1 summary"><p>Logs the given object at error level.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void LogError(object error)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
+  <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-condensed">
     <thead>
       <tr>
         <th>Type</th>
-        <th>Name</th>
         <th>Description</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">object</span></td>
-        <td><span class="parametername">error</span></td>
-        <td><p>The object to log.</p>
+        <td><a class="xref" href="Redux.UI.MainMenu.CampaignSelection.CampaignRowViewModel.html">CampaignRowViewModel</a></td>
+        <td><p>The campaign row.</p>
 </td>
       </tr>
     </tbody>
   </table>
-
-
-  <a id="VSwift_Logging_VSwiftReduxLogger_LogInfo_" data-uid="VSwift.Logging.VSwiftReduxLogger.LogInfo*"></a>
-  <h4 id="VSwift_Logging_VSwiftReduxLogger_LogInfo_System_Object_" data-uid="VSwift.Logging.VSwiftReduxLogger.LogInfo(System.Object)">LogInfo(object)</h4>
-  <div class="markdown level1 summary"><p>Logs the given object at info level.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void LogInfo(object info)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">object</span></td>
-        <td><span class="parametername">info</span></td>
-        <td><p>The object to log.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="VSwift_Logging_VSwiftReduxLogger_LogWarning_" data-uid="VSwift.Logging.VSwiftReduxLogger.LogWarning*"></a>
-  <h4 id="VSwift_Logging_VSwiftReduxLogger_LogWarning_System_Object_" data-uid="VSwift.Logging.VSwiftReduxLogger.LogWarning(System.Object)">LogWarning(object)</h4>
-  <div class="markdown level1 summary"><p>Logs the given object at warning level.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void LogWarning(object warning)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">object</span></td>
-        <td><span class="parametername">warning</span></td>
-        <td><p>The object to log.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="implements">Implements</h3>
-  <div>
-      <a class="xref" href="VSwift.Modules.Logging.IVSwiftLogger.html">IVSwiftLogger</a>
-  </div>
   <h3 id="extensionmethods">Extension Methods</h3>
-  <div>
-      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>
-  </div>
-  <div>
-      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromProperties_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromProperties(object, object, bool)</a>
-  </div>
-  <div>
-      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetFieldValue__1_System_Object_System_String_">Util.GetFieldValue&lt;T&gt;(object, string)</a>
-  </div>
   <div>
       <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
@@ -316,6 +351,15 @@
   </div>
   <div>
       <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromProperties_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromProperties(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetFieldValue__1_System_Object_System_String_">Util.GetFieldValue&lt;T&gt;(object, string)</a>
   </div>
 
 </article>

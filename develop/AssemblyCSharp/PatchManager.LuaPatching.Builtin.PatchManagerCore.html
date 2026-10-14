@@ -94,7 +94,7 @@
   <h5 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[MoonSharpUserData]
-public sealed class PatchManagerCore</code></pre>
+public class PatchManagerCore</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -127,66 +127,8 @@ public sealed class PatchManagerCore</code></pre>
       </tr>
     </tbody>
   </table>
-  <h3 id="fields">Fields
-</h3>
-
-
-  <h4 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_InvalidatesOnChangeTag" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.InvalidatesOnChangeTag">InvalidatesOnChangeTag</h4>
-  <div class="markdown level1 summary"><p>The metadata tag a config value carries to invalidate the patch cache when its value changes between
-launches.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public const string InvalidatesOnChangeTag = &quot;InvalidatesPatchManagerOnChange&quot;</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">string</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_InvalidatesOnChangeTag_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>The canonical constant. PM's own consumer and any C# config reference this.</p>
-</div>
   <h3 id="properties">Properties
 </h3>
-
-
-  <a id="PatchManager_LuaPatching_Builtin_PatchManagerCore_InvalidatesOnChange_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.InvalidatesOnChange*"></a>
-  <h4 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_InvalidatesOnChange" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.InvalidatesOnChange">InvalidatesOnChange</h4>
-  <div class="markdown level1 summary"><p>The cache-invalidation tag, exposed to scripts as <code>PM.InvalidatesOnChange</code> so a config entry can
-be tagged with <code>:Tag(PM.InvalidatesOnChange)</code>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string InvalidatesOnChange { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">string</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
 
 
   <a id="PatchManager_LuaPatching_Builtin_PatchManagerCore_Item_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.Item*"></a>
@@ -250,6 +192,64 @@ be tagged with <code>:Tag(PM.InvalidatesOnChange)</code>.</p>
   </table>
   <h3 id="methods">Methods
 </h3>
+
+
+  <a id="PatchManager_LuaPatching_Builtin_PatchManagerCore_DefineFeature_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.DefineFeature*"></a>
+  <h4 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_DefineFeature_MoonSharp_Interpreter_ScriptExecutionContext_System_String_MoonSharp_Interpreter_Table_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.DefineFeature(MoonSharp.Interpreter.ScriptExecutionContext,System.String,MoonSharp.Interpreter.Table)">DefineFeature(ScriptExecutionContext, string, Table)</h4>
+  <div class="markdown level1 summary"><p>Declares a feature of the calling mod.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DefineFeature(ScriptExecutionContext context, string id, Table options = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global names the declaring mod.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">id</span></td>
+        <td><p>The feature ID, namespaced to the mod when it does not already carry a namespace.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Table</span></td>
+        <td><span class="parametername">options</span></td>
+        <td><p>An optional table with <code>requires</code>, <code>conflicts</code> and <code>provides</code> lists of feature IDs, and a
+<code>recommended</code> boolean.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptRuntimeException</span></td>
+        <td><p>Thrown when called after patch registration has closed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <a id="PatchManager_LuaPatching_Builtin_PatchManagerCore_Duplicate_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.Duplicate*"></a>
@@ -351,7 +351,8 @@ by everything ordered after it. Internal ID fields are left alone. The patch is 
 
   <a id="PatchManager_LuaPatching_Builtin_PatchManagerCore_Loaded_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.Loaded*"></a>
   <h4 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_Loaded_System_String_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.Loaded(System.String)">Loaded(string)</h4>
-  <div class="markdown level1 summary"><p>Returns whether the mod with the given ID is loaded.</p>
+  <div class="markdown level1 summary"><p>Returns whether the mod with the given ID is installed and on in the feature set being built. During
+registration no set is active, so every installed mod counts as on.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -387,7 +388,92 @@ by everything ordered after it. Internal ID fields are left alone. The patch is 
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td><p>True if the mod is loaded, false otherwise.</p>
+        <td><p>True if the mod is on, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_Builtin_PatchManagerCore_New_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.New*"></a>
+  <h4 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_New_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_String_System_String_MoonSharp_Interpreter_DynValue_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.New(MoonSharp.Interpreter.ScriptExecutionContext,System.String,System.String,System.String,MoonSharp.Interpreter.DynValue)">New(ScriptExecutionContext, string, string, string, DynValue)</h4>
+  <div class="markdown level1 summary"><p>Queues a brand-new asset for creation under the given label and address.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LuaAsset New(ScriptExecutionContext context, string converter, string label, string name, DynValue newObject)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global names the creating mod.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">converter</span></td>
+        <td><p>The name of the converter that will serialize <code class="paramref">newObject</code> to JSON.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">label</span></td>
+        <td><p>The addressables label to tag the new asset with.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The asset's addressables address (globally unique).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">DynValue</span></td>
+        <td><span class="parametername">newObject</span></td>
+        <td><p>The Lua-facing value for the new asset.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.LuaAsset.html">LuaAsset</a></td>
+        <td><p>The queued asset, for gating it with features.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptRuntimeException</span></td>
+        <td><p>Thrown when <code class="paramref">converter</code> is not registered.</p>
 </td>
       </tr>
     </tbody>
@@ -396,12 +482,13 @@ by everything ordered after it. Internal ID fields are left alone. The patch is 
 
   <a id="PatchManager_LuaPatching_Builtin_PatchManagerCore_New_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.New*"></a>
   <h4 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_New_System_String_System_String_System_String_MoonSharp_Interpreter_DynValue_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.New(System.String,System.String,System.String,MoonSharp.Interpreter.DynValue)">New(string, string, string, DynValue)</h4>
-  <div class="markdown level1 summary"><p>Queues a brand-new asset for creation under the given label and address.</p>
+  <div class="markdown level1 summary"><p>Queues a brand-new asset for creation under the given label and address, without an owning mod.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void New(string converter, string label, string name, DynValue newObject)</code></pre>
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+public LuaAsset New(string converter, string label, string name, DynValue newObject)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -439,6 +526,22 @@ by everything ordered after it. Internal ID fields are left alone. The patch is 
       </tr>
     </tbody>
   </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.LuaAsset.html">LuaAsset</a></td>
+        <td><p>The queued asset.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h5 class="exceptions">Exceptions</h5>
   <table class="table table-bordered table-condensed">
     <thead>
@@ -451,6 +554,140 @@ by everything ordered after it. Internal ID fields are left alone. The patch is 
       <tr>
         <td><span class="xref">ScriptRuntimeException</span></td>
         <td><p>Thrown when <code class="paramref">converter</code> is not registered.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_Builtin_PatchManagerCore_OnBeginRun_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.OnBeginRun*"></a>
+  <h4 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_OnBeginRun_MoonSharp_Interpreter_ScriptExecutionContext_MoonSharp_Interpreter_Closure_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.OnBeginRun(MoonSharp.Interpreter.ScriptExecutionContext,MoonSharp.Interpreter.Closure)">OnBeginRun(ScriptExecutionContext, Closure)</h4>
+  <div class="markdown level1 summary"><p>Registers a callback that runs before each feature set's patch run.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FeatureGatedAction OnBeginRun(ScriptExecutionContext context, Closure callback)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global names the registering mod.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Closure</span></td>
+        <td><span class="parametername">callback</span></td>
+        <td><p>The callback, handed the set being built as a table of each id mapped to true.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">FeatureGatedAction</span></td>
+        <td><p>The registered callback, for gating it with features.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptRuntimeException</span></td>
+        <td><p>Thrown when called after patch registration has closed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_Builtin_PatchManagerCore_OnEndRun_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.OnEndRun*"></a>
+  <h4 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_OnEndRun_MoonSharp_Interpreter_ScriptExecutionContext_MoonSharp_Interpreter_Closure_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.OnEndRun(MoonSharp.Interpreter.ScriptExecutionContext,MoonSharp.Interpreter.Closure)">OnEndRun(ScriptExecutionContext, Closure)</h4>
+  <div class="markdown level1 summary"><p>Registers a callback that runs after each feature set's patch run.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FeatureGatedAction OnEndRun(ScriptExecutionContext context, Closure callback)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global names the registering mod.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Closure</span></td>
+        <td><span class="parametername">callback</span></td>
+        <td><p>The callback, handed the set that was built as a table of each id mapped to true.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">FeatureGatedAction</span></td>
+        <td><p>The registered callback, for gating it with features.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptRuntimeException</span></td>
+        <td><p>Thrown when called after patch registration has closed.</p>
 </td>
       </tr>
     </tbody>
@@ -510,6 +747,22 @@ by everything ordered after it. Internal ID fields are left alone. The patch is 
   <div class="markdown level1 remarks"><p>A declared pass runs after Early and before Late until <a class="xref" href="PatchManager.LuaPatching.PassDefinition.html#PatchManager_LuaPatching_PassDefinition_ClearOrdering">ClearOrdering()</a> removes
 those constraints.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptRuntimeException</span></td>
+        <td><p>Thrown when called after patch registration has closed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <a id="PatchManager_LuaPatching_Builtin_PatchManagerCore_Patch_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.Patch*"></a>
@@ -613,17 +866,20 @@ those constraints.</p>
       <tr>
         <td><span class="xref">ScriptExecutionContext</span></td>
         <td><span class="parametername">context</span></td>
-        <td></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global names the patching mod.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">name</span></td>
-        <td></td>
+        <td><p>The prefab patch's name, namespaced to the patching mod.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">DynValue</span></td>
         <td><span class="parametername">target</span></td>
-        <td></td>
+        <td><p>The stock prefab's Addressables key, as a string.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -638,10 +894,73 @@ those constraints.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="PatchManager.LuaPatching.Builtin.PrefabPatchLuaBuilder.html">PrefabPatchLuaBuilder</a></td>
-        <td></td>
+        <td><p>The builder for the prefab patch's operations.</p>
+</td>
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptRuntimeException</span></td>
+        <td><p>Thrown when called after patch registration has closed, or when <code class="paramref">target</code> is not a string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_Builtin_PatchManagerCore_WithFeature_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.WithFeature*"></a>
+  <h4 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_WithFeature_MoonSharp_Interpreter_ScriptExecutionContext_System_String_MoonSharp_Interpreter_Closure_" data-uid="PatchManager.LuaPatching.Builtin.PatchManagerCore.WithFeature(MoonSharp.Interpreter.ScriptExecutionContext,System.String,MoonSharp.Interpreter.Closure)">WithFeature(ScriptExecutionContext, string, Closure)</h4>
+  <div class="markdown level1 summary"><p>Runs <code class="paramref">body</code> with a feature added to every patch, created asset, prefab patch and run
+callback it registers.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void WithFeature(ScriptExecutionContext context, string id, Closure body)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">id</span></td>
+        <td><p>The feature ID, namespaced to the calling mod when it does not already carry a namespace.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Closure</span></td>
+        <td><span class="parametername">body</span></td>
+        <td><p>The function whose registrations get the feature.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PatchManager_LuaPatching_Builtin_PatchManagerCore_WithFeature_MoonSharp_Interpreter_ScriptExecutionContext_System_String_MoonSharp_Interpreter_Closure__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Scopes nest, so a registration inside two scopes needs both features. A file whose patches all belong to one
+feature wraps its body once instead of chaining <code>:Feature</code> onto every registration.</p>
+</div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>

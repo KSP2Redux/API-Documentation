@@ -98,6 +98,9 @@ literals that MoonSharp's auto-conversion does not produce. Also installed as ca
     <pre><code class="lang-csharp hljs">[MoonSharpModule(Namespace = &quot;J&quot;)]
 public class JsonModule</code></pre>
   </div>
+  <h5 id="PatchManager_LuaPatching_Builtin_JsonModule_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>MoonSharp registers only the static methods of a module type, so every helper here is static.</p>
+</div>
   <h3 id="constructors">Constructors
 </h3>
 
@@ -122,7 +125,7 @@ public class JsonModule</code></pre>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[MoonSharpModuleMethod]
-public DynValue Empty(ScriptExecutionContext context, CallbackArguments args)</code></pre>
+public static DynValue Empty(ScriptExecutionContext context, CallbackArguments args)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -168,8 +171,8 @@ public DynValue Empty(ScriptExecutionContext context, CallbackArguments args)</c
   <div class="markdown level1 remarks"><p>Use this when assigning into a fresh JSON slot that must round-trip as an array rather than an object.
 MoonSharp cannot distinguish an empty Lua table from an empty Lua array, so without an existing slot to
 take its type from, an empty <code>{}</code> becomes a JSON object by default. Existing array slots already
-preserve their type via <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_GetJTokenForDynValue_Newtonsoft_Json_Linq_JToken_MoonSharp_Interpreter_DynValue_">GetJTokenForDynValue(JToken, DynValue)</a>; this helper is
-for the no-previous-slot case.</p>
+preserve their type via <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_GetJTokenForDynValue_Newtonsoft_Json_Linq_JToken_MoonSharp_Interpreter_DynValue_">GetJTokenForDynValue(JToken, DynValue)</a>, so this helper
+is for the no-previous-slot case.</p>
 </div>
 
 
@@ -181,7 +184,7 @@ for the no-previous-slot case.</p>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[MoonSharpModuleMethod]
-public DynValue Int(ScriptExecutionContext context, CallbackArguments args)</code></pre>
+public static DynValue Int(ScriptExecutionContext context, CallbackArguments args)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -202,7 +205,7 @@ public DynValue Int(ScriptExecutionContext context, CallbackArguments args)</cod
       <tr>
         <td><span class="xref">CallbackArguments</span></td>
         <td><span class="parametername">args</span></td>
-        <td><p>Call arguments; <code>args[0]</code> is cast to a number and truncated to a long.</p>
+        <td><p>The call arguments. The first is cast to a number and truncated to a long.</p>
 </td>
       </tr>
     </tbody>
@@ -226,7 +229,7 @@ public DynValue Int(ScriptExecutionContext context, CallbackArguments args)</cod
   <h5 id="PatchManager_LuaPatching_Builtin_JsonModule_Int_MoonSharp_Interpreter_ScriptExecutionContext_MoonSharp_Interpreter_CallbackArguments__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>Use this when assigning a Lua number into a fresh JSON slot that must round-trip as an integer rather
 than a float (for example IDs or counts). Existing integer slots already preserve their type during
-assignment via <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_GetJTokenForDynValue_Newtonsoft_Json_Linq_JToken_MoonSharp_Interpreter_DynValue_">GetJTokenForDynValue(JToken, DynValue)</a>; this helper is for
+assignment via <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_GetJTokenForDynValue_Newtonsoft_Json_Linq_JToken_MoonSharp_Interpreter_DynValue_">GetJTokenForDynValue(JToken, DynValue)</a>, so this helper is for
 the no-previous-slot case.</p>
 </div>
 

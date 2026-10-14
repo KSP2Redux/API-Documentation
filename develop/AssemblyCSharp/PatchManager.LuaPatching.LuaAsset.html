@@ -93,8 +93,13 @@
   <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="PatchManager_LuaPatching_LuaAsset_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class LuaAsset</code></pre>
+    <pre><code class="lang-csharp hljs">[MoonSharpUserData]
+public class LuaAsset</code></pre>
   </div>
+  <h5 id="PatchManager_LuaPatching_LuaAsset_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>Creation helpers return it so a script can gate the asset with <a class="xref" href="PatchManager.LuaPatching.LuaAsset.html#PatchManager_LuaPatching_LuaAsset_Feature_System_String___">Feature(params string[])</a> and
+<a class="xref" href="PatchManager.LuaPatching.LuaAsset.html#PatchManager_LuaPatching_LuaAsset_NoFeature_System_String___">NoFeature(params string[])</a>. Like a patch, it also needs its mod's default feature.</p>
+</div>
   <h3 id="constructors">Constructors
 </h3>
 
@@ -118,7 +123,8 @@ switches to a different converter.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IConverter ConverterInstance</code></pre>
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+public IConverter ConverterInstance</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -144,7 +150,8 @@ runs against this asset.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DynValue CurrentValue</code></pre>
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+public DynValue CurrentValue</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -169,7 +176,34 @@ runs against this asset.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Label</code></pre>
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+public string Label</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="PatchManager_LuaPatching_LuaAsset_ModId" data-uid="PatchManager.LuaPatching.LuaAsset.ModId">ModId</h4>
+  <div class="markdown level1 summary"><p>The ID of the mod that created the asset.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+public string ModId</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -194,7 +228,8 @@ runs against this asset.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Name</code></pre>
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+public string Name</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -208,6 +243,124 @@ runs against this asset.</p>
       <tr>
         <td><span class="xref">string</span></td>
         <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="PatchManager_LuaPatching_LuaAsset_Selector" data-uid="PatchManager.LuaPatching.LuaAsset.Selector">Selector</h4>
+  <div class="markdown level1 summary"><p>The features the asset needs on and off to be created, beyond its mod's default feature.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+public FeatureSelector Selector</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">FeatureSelector</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="PatchManager_LuaPatching_LuaAsset_Feature_" data-uid="PatchManager.LuaPatching.LuaAsset.Feature*"></a>
+  <h4 id="PatchManager_LuaPatching_LuaAsset_Feature_System_String___" data-uid="PatchManager.LuaPatching.LuaAsset.Feature(System.String[])">Feature(params string[])</h4>
+  <div class="markdown level1 summary"><p>Creates the asset only when these features are on.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LuaAsset Feature(params string[] ids)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span>[]</td>
+        <td><span class="parametername">ids</span></td>
+        <td><p>The feature IDs, namespaced to the creating mod when they do not already carry a namespace.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.LuaAsset.html">LuaAsset</a></td>
+        <td><p>The asset for chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_LuaAsset_NoFeature_" data-uid="PatchManager.LuaPatching.LuaAsset.NoFeature*"></a>
+  <h4 id="PatchManager_LuaPatching_LuaAsset_NoFeature_System_String___" data-uid="PatchManager.LuaPatching.LuaAsset.NoFeature(System.String[])">NoFeature(params string[])</h4>
+  <div class="markdown level1 summary"><p>Creates the asset only when these features are off.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LuaAsset NoFeature(params string[] ids)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span>[]</td>
+        <td><span class="parametername">ids</span></td>
+        <td><p>The feature IDs, namespaced to the creating mod when they do not already carry a namespace.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.LuaAsset.html">LuaAsset</a></td>
+        <td><p>The asset for chaining.</p>
+</td>
       </tr>
     </tbody>
   </table>

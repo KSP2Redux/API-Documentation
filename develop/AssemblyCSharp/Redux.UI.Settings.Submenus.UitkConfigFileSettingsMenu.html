@@ -92,9 +92,6 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="Redux.UI.Settings.UitkSettingsSubMenu.html#Redux_UI_Settings_UitkSettingsSubMenu_OnShow_Redux_UI_Settings_SettingsLocations_">UitkSettingsSubMenu.OnShow(SettingsLocations)</a>
-    </div>
-    <div>
       <a class="xref" href="Redux.UI.Settings.UitkSettingsSubMenu.html#Redux_UI_Settings_UitkSettingsSubMenu_OnHide">UitkSettingsSubMenu.OnHide()</a>
     </div>
   </div>
@@ -109,13 +106,13 @@
 
 
   <a id="Redux_UI_Settings_Submenus_UitkConfigFileSettingsMenu__ctor_" data-uid="Redux.UI.Settings.Submenus.UitkConfigFileSettingsMenu.#ctor*"></a>
-  <h4 id="Redux_UI_Settings_Submenus_UitkConfigFileSettingsMenu__ctor_System_String_SpaceWarp2_API_Configuration_IConfigFile_" data-uid="Redux.UI.Settings.Submenus.UitkConfigFileSettingsMenu.#ctor(System.String,SpaceWarp2.API.Configuration.IConfigFile)">UitkConfigFileSettingsMenu(string, IConfigFile)</h4>
+  <h4 id="Redux_UI_Settings_Submenus_UitkConfigFileSettingsMenu__ctor_System_String_SpaceWarp2_API_Configuration_IConfigFile_SpaceWarp2_API_Configuration_IConfigFile_System_Func_SpaceWarp2_API_Configuration_IConfigEntry_System_Boolean__" data-uid="Redux.UI.Settings.Submenus.UitkConfigFileSettingsMenu.#ctor(System.String,SpaceWarp2.API.Configuration.IConfigFile,SpaceWarp2.API.Configuration.IConfigFile,System.Func{SpaceWarp2.API.Configuration.IConfigEntry,System.Boolean})">UitkConfigFileSettingsMenu(string, IConfigFile, IConfigFile, Func&lt;IConfigEntry, bool&gt;)</h4>
   <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Redux.UI.Settings.Submenus.UitkConfigFileSettingsMenu.html">UitkConfigFileSettingsMenu</a> class.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public UitkConfigFileSettingsMenu(string name, IConfigFile configFile)</code></pre>
+    <pre><code class="lang-csharp hljs">public UitkConfigFileSettingsMenu(string name, IConfigFile configFile, IConfigFile campaignConfigFile = null, Func&lt;IConfigEntry, bool&gt; isCampaignEntryShown = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -136,13 +133,55 @@
       <tr>
         <td><span class="xref">IConfigFile</span></td>
         <td><span class="parametername">configFile</span></td>
-        <td><p>The configuration file whose entries are exposed in this submenu.</p>
+        <td><p>The configuration file whose entries are exposed in this submenu, or null for a
+mod with only campaign settings.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">IConfigFile</span></td>
+        <td><span class="parametername">campaignConfigFile</span></td>
+        <td><p>The configuration file the loaded campaign keeps, shown under a Campaign
+header in the pause menu, or null for none.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Func</span>&lt;<span class="xref">IConfigEntry</span>, <span class="xref">bool</span>&gt;</td>
+        <td><span class="parametername">isCampaignEntryShown</span></td>
+        <td><p>Checked each time the submenu shows, to show each campaign entry or not,
+or null to show every one.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <h3 id="properties">Properties
 </h3>
+
+
+  <a id="Redux_UI_Settings_Submenus_UitkConfigFileSettingsMenu_Locations_" data-uid="Redux.UI.Settings.Submenus.UitkConfigFileSettingsMenu.Locations*"></a>
+  <h4 id="Redux_UI_Settings_Submenus_UitkConfigFileSettingsMenu_Locations" data-uid="Redux.UI.Settings.Submenus.UitkConfigFileSettingsMenu.Locations">Locations</h4>
+  <div class="markdown level1 summary"><p>Gets the settings screens this submenu has entries for. Campaign settings only reach the pause menu, the
+one opened with a campaign loaded.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SettingsLocations Locations { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.UI.Settings.SettingsLocations.html">SettingsLocations</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <a id="Redux_UI_Settings_Submenus_UitkConfigFileSettingsMenu_ResetKey_" data-uid="Redux.UI.Settings.Submenus.UitkConfigFileSettingsMenu.ResetKey*"></a>
@@ -238,6 +277,84 @@
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="Redux.UI.Settings.UitkSettingsSubMenu.html#Redux_UI_Settings_UitkSettingsSubMenu_BuildForView_Redux_UI_Settings_SettingsLocations_Redux_UI_Settings_SettingsSubMenuBuilder_">UitkSettingsSubMenu.BuildForView(SettingsLocations, SettingsSubMenuBuilder)</a></div>
+
+
+  <a id="Redux_UI_Settings_Submenus_UitkConfigFileSettingsMenu_IsAvailable_" data-uid="Redux.UI.Settings.Submenus.UitkConfigFileSettingsMenu.IsAvailable*"></a>
+  <h4 id="Redux_UI_Settings_Submenus_UitkConfigFileSettingsMenu_IsAvailable_Redux_UI_Settings_SettingsLocations_" data-uid="Redux.UI.Settings.Submenus.UitkConfigFileSettingsMenu.IsAvailable(Redux.UI.Settings.SettingsLocations)">IsAvailable(SettingsLocations)</h4>
+  <div class="markdown level1 summary"><p>Checks whether this sub-menu is offered each time the settings menu opens.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool IsAvailable(SettingsLocations location)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.UI.Settings.SettingsLocations.html">SettingsLocations</a></td>
+        <td><span class="parametername">location</span></td>
+        <td><p>The settings location being opened.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the sub-menu's button shows.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Redux.UI.Settings.UitkSettingsSubMenu.html#Redux_UI_Settings_UitkSettingsSubMenu_IsAvailable_Redux_UI_Settings_SettingsLocations_">UitkSettingsSubMenu.IsAvailable(SettingsLocations)</a></div>
+
+
+  <a id="Redux_UI_Settings_Submenus_UitkConfigFileSettingsMenu_OnShow_" data-uid="Redux.UI.Settings.Submenus.UitkConfigFileSettingsMenu.OnShow*"></a>
+  <h4 id="Redux_UI_Settings_Submenus_UitkConfigFileSettingsMenu_OnShow_Redux_UI_Settings_SettingsLocations_" data-uid="Redux.UI.Settings.Submenus.UitkConfigFileSettingsMenu.OnShow(Redux.UI.Settings.SettingsLocations)">OnShow(SettingsLocations)</h4>
+  <div class="markdown level1 summary"><p>Invoked when this settings sub-menu becomes visible.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void OnShow(SettingsLocations location)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.UI.Settings.SettingsLocations.html">SettingsLocations</a></td>
+        <td><span class="parametername">location</span></td>
+        <td><p>The settings location from which the sub-menu is being opened.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Redux.UI.Settings.UitkSettingsSubMenu.html#Redux_UI_Settings_UitkSettingsSubMenu_OnShow_Redux_UI_Settings_SettingsLocations_">UitkSettingsSubMenu.OnShow(SettingsLocations)</a></div>
 
 
   <a id="Redux_UI_Settings_Submenus_UitkConfigFileSettingsMenu_RevertChanges_" data-uid="Redux.UI.Settings.Submenus.UitkConfigFileSettingsMenu.RevertChanges*"></a>

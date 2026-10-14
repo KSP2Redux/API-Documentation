@@ -136,14 +136,16 @@
   </div>
 
 
-  <a id="Redux_UI_SaveLoad_ModDifferencePrompt_ShowWithDiff_" data-uid="Redux.UI.SaveLoad.ModDifferencePrompt.ShowWithDiff*"></a>
-  <h4 id="Redux_UI_SaveLoad_ModDifferencePrompt_ShowWithDiff_Redux_SaveLoad_SaveModDiff___Redux_SaveLoad_SaveModDiff___System_Action_System_Action_" data-uid="Redux.UI.SaveLoad.ModDifferencePrompt.ShowWithDiff(Redux.SaveLoad.SaveModDiff[],Redux.SaveLoad.SaveModDiff[],System.Action,System.Action)">ShowWithDiff(SaveModDiff[], SaveModDiff[], Action, Action)</h4>
-  <div class="markdown level1 summary"><p>Displays the mod-difference prompt populated with the provided save and enabled mod differences.</p>
+  <a id="Redux_UI_SaveLoad_ModDifferencePrompt_ShowForSave_" data-uid="Redux.UI.SaveLoad.ModDifferencePrompt.ShowForSave*"></a>
+  <h4 id="Redux_UI_SaveLoad_ModDifferencePrompt_ShowForSave_KSP_Sim_SerializedSaveGameMetadata_System_Action_System_Action_" data-uid="Redux.UI.SaveLoad.ModDifferencePrompt.ShowForSave(KSP.Sim.SerializedSaveGameMetadata,System.Action,System.Action)">ShowForSave(SerializedSaveGameMetadata, Action, Action)</h4>
+  <div class="markdown level1 summary"><p>Loads a save straight away when its mods match the installed ones, and otherwise shows what differs. Loading
+anyway first opens the feature editor on the features of mods the save has never seen, when it can take
+any.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void ShowWithDiff(SaveModDiff[] inSave, SaveModDiff[] enabled, Action onLoadAnyways, Action onCancel)</code></pre>
+    <pre><code class="lang-csharp hljs">public void ShowForSave(SerializedSaveGameMetadata metadata, Action onLoad, Action onCancel)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -156,27 +158,21 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Redux.SaveLoad.SaveModDiff.html">SaveModDiff</a>[]</td>
-        <td><span class="parametername">inSave</span></td>
-        <td><p>The <a class="xref" href="Redux.SaveLoad.SaveModDiff.html">SaveModDiff</a> entries recorded in the save file.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Redux.SaveLoad.SaveModDiff.html">SaveModDiff</a>[]</td>
-        <td><span class="parametername">enabled</span></td>
-        <td><p>The <a class="xref" href="Redux.SaveLoad.SaveModDiff.html">SaveModDiff</a> entries for the currently enabled mods.</p>
+        <td><a class="xref" href="KSP.Sim.SerializedSaveGameMetadata.html">SerializedSaveGameMetadata</a></td>
+        <td><span class="parametername">metadata</span></td>
+        <td><p>The save's metadata.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">Action</span></td>
-        <td><span class="parametername">onLoadAnyways</span></td>
-        <td><p>The callback invoked when the user chooses to load the save regardless of mod differences.</p>
+        <td><span class="parametername">onLoad</span></td>
+        <td><p>Starts the load.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">Action</span></td>
         <td><span class="parametername">onCancel</span></td>
-        <td><p>The callback invoked when the user cancels the load operation.</p>
+        <td><p>Called when the player goes back instead.</p>
 </td>
       </tr>
     </tbody>

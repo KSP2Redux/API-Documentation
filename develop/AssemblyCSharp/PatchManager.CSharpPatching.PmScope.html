@@ -125,6 +125,165 @@ or mod can add its own.</p>
 </h3>
 
 
+  <a id="PatchManager_CSharpPatching_PmScope_DefineFeature_" data-uid="PatchManager.CSharpPatching.PmScope.DefineFeature*"></a>
+  <h4 id="PatchManager_CSharpPatching_PmScope_DefineFeature_System_String_System_Collections_Generic_IEnumerable_System_String__System_Collections_Generic_IEnumerable_System_String__System_Collections_Generic_IEnumerable_System_String__System_Boolean_" data-uid="PatchManager.CSharpPatching.PmScope.DefineFeature(System.String,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Boolean)">DefineFeature(string, IEnumerable&lt;string&gt;, IEnumerable&lt;string&gt;, IEnumerable&lt;string&gt;, bool)</h4>
+  <div class="markdown level1 summary"><p>Declares a feature of this scope's mod.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FeatureDefinition DefineFeature(string id, IEnumerable&lt;string&gt; requires = null, IEnumerable&lt;string&gt; conflicts = null, IEnumerable&lt;string&gt; provides = null, bool isRecommended = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">id</span></td>
+        <td><p>The feature ID, namespaced to the mod when it does not already carry a namespace.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">requires</span></td>
+        <td><p>The required feature IDs, bare ones namespaced to the mod.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">conflicts</span></td>
+        <td><p>The conflicting feature IDs, bare ones namespaced to the mod.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">provides</span></td>
+        <td><p>The provided feature IDs, bare ones namespaced to the mod.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">isRecommended</span></td>
+        <td><p>Whether the mod recommends the feature.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">FeatureDefinition</span></td>
+        <td><p>The declared feature.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_CSharpPatching_PmScope_OnBeginRun_" data-uid="PatchManager.CSharpPatching.PmScope.OnBeginRun*"></a>
+  <h4 id="PatchManager_CSharpPatching_PmScope_OnBeginRun_System_Action_System_Collections_Generic_IReadOnlyCollection_System_String___" data-uid="PatchManager.CSharpPatching.PmScope.OnBeginRun(System.Action{System.Collections.Generic.IReadOnlyCollection{System.String}})">OnBeginRun(Action&lt;IReadOnlyCollection&lt;string&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Registers a callback that runs before each feature set's patch run.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FeatureGatedAction OnBeginRun(Action&lt;IReadOnlyCollection&lt;string&gt;&gt; callback)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<span class="xref">IReadOnlyCollection</span>&lt;<span class="xref">string</span>&gt;&gt;</td>
+        <td><span class="parametername">callback</span></td>
+        <td><p>The callback, handed the set being built.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">FeatureGatedAction</span></td>
+        <td><p>The registered callback, for gating it with features.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_CSharpPatching_PmScope_OnEndRun_" data-uid="PatchManager.CSharpPatching.PmScope.OnEndRun*"></a>
+  <h4 id="PatchManager_CSharpPatching_PmScope_OnEndRun_System_Action_System_Collections_Generic_IReadOnlyCollection_System_String___" data-uid="PatchManager.CSharpPatching.PmScope.OnEndRun(System.Action{System.Collections.Generic.IReadOnlyCollection{System.String}})">OnEndRun(Action&lt;IReadOnlyCollection&lt;string&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Registers a callback that runs after each feature set's patch run.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FeatureGatedAction OnEndRun(Action&lt;IReadOnlyCollection&lt;string&gt;&gt; callback)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<span class="xref">IReadOnlyCollection</span>&lt;<span class="xref">string</span>&gt;&gt;</td>
+        <td><span class="parametername">callback</span></td>
+        <td><p>The callback, handed the set that was built.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">FeatureGatedAction</span></td>
+        <td><p>The registered callback, for gating it with features.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="PatchManager_CSharpPatching_PmScope_Pass_" data-uid="PatchManager.CSharpPatching.PmScope.Pass*"></a>
   <h4 id="PatchManager_CSharpPatching_PmScope_Pass_System_String_" data-uid="PatchManager.CSharpPatching.PmScope.Pass(System.String)">Pass(string)</h4>
   <div class="markdown level1 summary"><p>Declares a pass under this scope's mod ID, for chaining its ordering.</p>

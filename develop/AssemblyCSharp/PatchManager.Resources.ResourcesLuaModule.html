@@ -206,14 +206,14 @@ on the copy.</p>
 
 
   <a id="PatchManager_Resources_ResourcesLuaModule_NewRecipe_" data-uid="PatchManager.Resources.ResourcesLuaModule.NewRecipe*"></a>
-  <h4 id="PatchManager_Resources_ResourcesLuaModule_NewRecipe_System_String_System_Action_PatchManager_Resources_UserData_RecipeUserData__" data-uid="PatchManager.Resources.ResourcesLuaModule.NewRecipe(System.String,System.Action{PatchManager.Resources.UserData.RecipeUserData})">NewRecipe(string, Action&lt;RecipeUserData&gt;)</h4>
+  <h4 id="PatchManager_Resources_ResourcesLuaModule_NewRecipe_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_Action_PatchManager_Resources_UserData_RecipeUserData__" data-uid="PatchManager.Resources.ResourcesLuaModule.NewRecipe(MoonSharp.Interpreter.ScriptExecutionContext,System.String,System.Action{PatchManager.Resources.UserData.RecipeUserData})">NewRecipe(ScriptExecutionContext, string, Action&lt;RecipeUserData&gt;)</h4>
   <div class="markdown level1 summary"><p>Creates a new recipe-style resource definition with the given name and runs <code class="paramref">callback</code>
 against it for further configuration.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void NewRecipe(string name, Action&lt;RecipeUserData&gt; callback)</code></pre>
+    <pre><code class="lang-csharp hljs">public LuaAsset NewRecipe(ScriptExecutionContext context, string name, Action&lt;RecipeUserData&gt; callback)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -225,6 +225,12 @@ against it for further configuration.</p>
       </tr>
     </thead>
     <tbody>
+      <tr>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global names the creating mod.</p>
+</td>
+      </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">name</span></td>
@@ -239,17 +245,49 @@ against it for further configuration.</p>
       </tr>
     </tbody>
   </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.LuaAsset.html">LuaAsset</a></td>
+        <td><p>The queued asset, for gating it with features.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptRuntimeException</span></td>
+        <td><p>Thrown when <code class="paramref">name</code> holds a quote or backslash.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <a id="PatchManager_Resources_ResourcesLuaModule_NewResource_" data-uid="PatchManager.Resources.ResourcesLuaModule.NewResource*"></a>
-  <h4 id="PatchManager_Resources_ResourcesLuaModule_NewResource_System_String_System_Action_PatchManager_Resources_UserData_ResourceUserData__" data-uid="PatchManager.Resources.ResourcesLuaModule.NewResource(System.String,System.Action{PatchManager.Resources.UserData.ResourceUserData})">NewResource(string, Action&lt;ResourceUserData&gt;)</h4>
+  <h4 id="PatchManager_Resources_ResourcesLuaModule_NewResource_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_Action_PatchManager_Resources_UserData_ResourceUserData__" data-uid="PatchManager.Resources.ResourcesLuaModule.NewResource(MoonSharp.Interpreter.ScriptExecutionContext,System.String,System.Action{PatchManager.Resources.UserData.ResourceUserData})">NewResource(ScriptExecutionContext, string, Action&lt;ResourceUserData&gt;)</h4>
   <div class="markdown level1 summary"><p>Creates a new plain resource definition with the given name and runs <code class="paramref">callback</code> against
 it for further configuration.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void NewResource(string name, Action&lt;ResourceUserData&gt; callback)</code></pre>
+    <pre><code class="lang-csharp hljs">public LuaAsset NewResource(ScriptExecutionContext context, string name, Action&lt;ResourceUserData&gt; callback)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -262,6 +300,12 @@ it for further configuration.</p>
     </thead>
     <tbody>
       <tr>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global names the creating mod.</p>
+</td>
+      </tr>
+      <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">name</span></td>
         <td><p>The resource name.</p>
@@ -271,6 +315,38 @@ it for further configuration.</p>
         <td><span class="xref">Action</span>&lt;<a class="xref" href="PatchManager.Resources.UserData.ResourceUserData.html">ResourceUserData</a>&gt;</td>
         <td><span class="parametername">callback</span></td>
         <td><p>Callback that receives the new resource for further configuration.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.LuaAsset.html">LuaAsset</a></td>
+        <td><p>The queued asset, for gating it with features.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptRuntimeException</span></td>
+        <td><p>Thrown when <code class="paramref">name</code> holds a quote or backslash.</p>
 </td>
       </tr>
     </tbody>
@@ -332,14 +408,14 @@ it for further configuration.</p>
 
 
   <a id="PatchManager_Resources_ResourcesLuaModule_RegisterUnits_" data-uid="PatchManager.Resources.ResourcesLuaModule.RegisterUnits*"></a>
-  <h4 id="PatchManager_Resources_ResourcesLuaModule_RegisterUnits_MoonSharp_Interpreter_DynValue_" data-uid="PatchManager.Resources.ResourcesLuaModule.RegisterUnits(MoonSharp.Interpreter.DynValue)">RegisterUnits(DynValue)</h4>
+  <h4 id="PatchManager_Resources_ResourcesLuaModule_RegisterUnits_MoonSharp_Interpreter_ScriptExecutionContext_MoonSharp_Interpreter_DynValue_" data-uid="PatchManager.Resources.ResourcesLuaModule.RegisterUnits(MoonSharp.Interpreter.ScriptExecutionContext,MoonSharp.Interpreter.DynValue)">RegisterUnits(ScriptExecutionContext, DynValue)</h4>
   <div class="markdown level1 summary"><p>Registers a JSON resource-units definition, queueing it under the <code>resource_units</code> addressables label
 with a sequential synthetic name.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void RegisterUnits(DynValue value)</code></pre>
+    <pre><code class="lang-csharp hljs">public LuaAsset RegisterUnits(ScriptExecutionContext context, DynValue value)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -352,9 +428,31 @@ with a sequential synthetic name.</p>
     </thead>
     <tbody>
       <tr>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global names the creating mod.</p>
+</td>
+      </tr>
+      <tr>
         <td><span class="xref">DynValue</span></td>
         <td><span class="parametername">value</span></td>
         <td><p>The JSON value describing the resource units, typically a <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a> wrapping a <code>JObject</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.LuaAsset.html">LuaAsset</a></td>
+        <td><p>The queued asset, for gating it with features.</p>
 </td>
       </tr>
     </tbody>

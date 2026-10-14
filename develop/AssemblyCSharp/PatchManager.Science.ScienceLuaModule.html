@@ -141,7 +141,7 @@ public class ScienceLuaModule</code></pre>
 
   <a id="PatchManager_Science_ScienceLuaModule_AddPartsToTechNode_" data-uid="PatchManager.Science.ScienceLuaModule.AddPartsToTechNode*"></a>
   <h4 id="PatchManager_Science_ScienceLuaModule_AddPartsToTechNode_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_String___" data-uid="PatchManager.Science.ScienceLuaModule.AddPartsToTechNode(MoonSharp.Interpreter.ScriptExecutionContext,System.String,System.String[])">AddPartsToTechNode(ScriptExecutionContext, string, params string[])</h4>
-  <div class="markdown level1 summary"><p>Adds the given part IDs to the tech node named <code class="paramref">nodeName</code>'s <code>UnlockedPartIds</code> list.</p>
+  <div class="markdown level1 summary"><p>Adds the given part IDs to the tech node named <code class="paramref">nodeName</code>'s <code>UnlockedPartsIDs</code> list.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -449,14 +449,14 @@ on the copy.</p>
 
 
   <a id="PatchManager_Science_ScienceLuaModule_NewExperiment_" data-uid="PatchManager.Science.ScienceLuaModule.NewExperiment*"></a>
-  <h4 id="PatchManager_Science_ScienceLuaModule_NewExperiment_System_String_System_Action_PatchManager_Science_UserData_ExperimentUserData__" data-uid="PatchManager.Science.ScienceLuaModule.NewExperiment(System.String,System.Action{PatchManager.Science.UserData.ExperimentUserData})">NewExperiment(string, Action&lt;ExperimentUserData&gt;)</h4>
+  <h4 id="PatchManager_Science_ScienceLuaModule_NewExperiment_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_Action_PatchManager_Science_UserData_ExperimentUserData__" data-uid="PatchManager.Science.ScienceLuaModule.NewExperiment(MoonSharp.Interpreter.ScriptExecutionContext,System.String,System.Action{PatchManager.Science.UserData.ExperimentUserData})">NewExperiment(ScriptExecutionContext, string, Action&lt;ExperimentUserData&gt;)</h4>
   <div class="markdown level1 summary"><p>Creates a new science experiment with the given name and runs <code class="paramref">callback</code> against it for
 further configuration.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void NewExperiment(string name, Action&lt;ExperimentUserData&gt; callback)</code></pre>
+    <pre><code class="lang-csharp hljs">public LuaAsset NewExperiment(ScriptExecutionContext context, string name, Action&lt;ExperimentUserData&gt; callback)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -469,6 +469,12 @@ further configuration.</p>
     </thead>
     <tbody>
       <tr>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global names the creating mod.</p>
+</td>
+      </tr>
+      <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">name</span></td>
         <td><p>The experiment name.</p>
@@ -478,6 +484,22 @@ further configuration.</p>
         <td><span class="xref">Action</span>&lt;<a class="xref" href="PatchManager.Science.UserData.ExperimentUserData.html">ExperimentUserData</a>&gt;</td>
         <td><span class="parametername">callback</span></td>
         <td><p>Callback that receives the new experiment for further configuration.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.LuaAsset.html">LuaAsset</a></td>
+        <td><p>The queued asset, for gating it with features.</p>
 </td>
       </tr>
     </tbody>

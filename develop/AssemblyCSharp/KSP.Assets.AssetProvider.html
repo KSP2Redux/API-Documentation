@@ -647,6 +647,58 @@
   </table>
 
 
+  <a id="KSP_Assets_AssetProvider_HasLocations_" data-uid="KSP.Assets.AssetProvider.HasLocations*"></a>
+  <h4 id="KSP_Assets_AssetProvider_HasLocations_System_String_System_Type_" data-uid="KSP.Assets.AssetProvider.HasLocations(System.String,System.Type)">HasLocations(string, Type)</h4>
+  <div class="markdown level1 summary"><p>Checks whether a key or label names any asset of a type, in the places a load looks: the assets Patch
+Manager patched or created, the registered external locators and the catalogs.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HasLocations(string key, Type type)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">key</span></td>
+        <td><p>The key or label.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Type</span></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The asset type a load would ask for.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if any locator knows the key for the type, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Assets_AssetProvider_LoadAllRaw_" data-uid="KSP.Assets.AssetProvider.LoadAllRaw*"></a>
   <h4 id="KSP_Assets_AssetProvider_LoadAllRaw__1_System_Collections_Generic_IList_UnityEngine_ResourceManagement_ResourceLocations_IResourceLocation__System_Action___0__" data-uid="KSP.Assets.AssetProvider.LoadAllRaw``1(System.Collections.Generic.IList{UnityEngine.ResourceManagement.ResourceLocations.IResourceLocation},System.Action{``0})">LoadAllRaw&lt;T&gt;(IList&lt;IResourceLocation&gt;, Action&lt;T&gt;)</h4>
   <div class="markdown level1 summary"><p>Starts an asynchronous operation that loads all assets from the given resource locations and returns the raw operation handle.</p>
@@ -1599,9 +1651,96 @@
   </table>
 
 
+  <a id="KSP_Assets_AssetProvider_LocateOverrides_" data-uid="KSP.Assets.AssetProvider.LocateOverrides*"></a>
+  <h4 id="KSP_Assets_AssetProvider_LocateOverrides_System_Object_System_Type_System_Collections_Generic_List_UnityEngine_ResourceManagement_ResourceLocations_IResourceLocation___" data-uid="KSP.Assets.AssetProvider.LocateOverrides(System.Object,System.Type,System.Collections.Generic.List{UnityEngine.ResourceManagement.ResourceLocations.IResourceLocation}@)">LocateOverrides(object, Type, out List&lt;IResourceLocation&gt;)</h4>
+  <div class="markdown level1 summary"><p>Finds a key's locations in the override locators alone.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool LocateOverrides(object key, Type type, out List&lt;IResourceLocation&gt; locations)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">object</span></td>
+        <td><span class="parametername">key</span></td>
+        <td><p>The key or label.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Type</span></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The asset type a load would ask for.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">List</span>&lt;<span class="xref">IResourceLocation</span>&gt;</td>
+        <td><span class="parametername">locations</span></td>
+        <td><p>The override locations, empty when none knows the key.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if an override locator knows the key, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Assets_AssetProvider_RegisterOverrideLocator_" data-uid="KSP.Assets.AssetProvider.RegisterOverrideLocator*"></a>
+  <h4 id="KSP_Assets_AssetProvider_RegisterOverrideLocator_UnityEngine_AddressableAssets_ResourceLocators_IResourceLocator_" data-uid="KSP.Assets.AssetProvider.RegisterOverrideLocator(UnityEngine.AddressableAssets.ResourceLocators.IResourceLocator)">RegisterOverrideLocator(IResourceLocator)</h4>
+  <div class="markdown level1 summary"><p>Registers an override resource locator, whose locations replace every other source's for the keys it
+knows, as Patch Manager's patched assets do.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RegisterOverrideLocator(IResourceLocator locator)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IResourceLocator</span></td>
+        <td><span class="parametername">locator</span></td>
+        <td><p>The <span class="xref">UnityEngine.AddressableAssets.ResourceLocators.IResourceLocator</span> to register.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Assets_AssetProvider_RegisterResourceLocator_" data-uid="KSP.Assets.AssetProvider.RegisterResourceLocator*"></a>
   <h4 id="KSP_Assets_AssetProvider_RegisterResourceLocator_UnityEngine_AddressableAssets_ResourceLocators_IResourceLocator_" data-uid="KSP.Assets.AssetProvider.RegisterResourceLocator(UnityEngine.AddressableAssets.ResourceLocators.IResourceLocator)">RegisterResourceLocator(IResourceLocator)</h4>
-  <div class="markdown level1 summary"><p>Registers an external resource locator that is consulted when resolving asset keys before the default Addressables locators.</p>
+  <div class="markdown level1 summary"><p>Registers an additive resource locator, whose locations join the catalogs' for the keys it knows.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -1807,7 +1946,7 @@
 
   <a id="KSP_Assets_AssetProvider_UnregisterResourceLocator_" data-uid="KSP.Assets.AssetProvider.UnregisterResourceLocator*"></a>
   <h4 id="KSP_Assets_AssetProvider_UnregisterResourceLocator_UnityEngine_AddressableAssets_ResourceLocators_IResourceLocator_" data-uid="KSP.Assets.AssetProvider.UnregisterResourceLocator(UnityEngine.AddressableAssets.ResourceLocators.IResourceLocator)">UnregisterResourceLocator(IResourceLocator)</h4>
-  <div class="markdown level1 summary"><p>Removes a previously registered external resource locator.</p>
+  <div class="markdown level1 summary"><p>Removes a previously registered additive or override resource locator.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>

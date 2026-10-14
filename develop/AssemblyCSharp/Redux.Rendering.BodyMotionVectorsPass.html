@@ -110,6 +110,7 @@ URP's previous view projection, so a floating-origin snap needs no special case.
 Pixels at the physics far plane show scaled space. With <a class="xref" href="Redux.Rendering.ScaledSpaceMotionData.html">ScaledSpaceMotionData</a> from the scaled pass
 they are rebuilt from the scaled depth and carried back one frame with the scaled body they lie on, and the sky is
 turned back as a direction with the scaled camera, which also turns with a rotating body under a landed camera.
+Sky seen through a body's atmosphere beside it, the halo over its limb, is carried with that body instead.
 Pixels whose object motion a KSP2 MotionVectors pass drew are marked in the motion vector depth's stencil and
 left as they are. Last, while the frame is jittered for temporal anti-aliasing or an upscaler, the instanced
 vegetation draws its own motion with its wind at this and the previous frame's time
@@ -177,6 +178,33 @@ vegetation draws its own motion with its wind at this and the previous frame's t
     <tbody>
       <tr>
         <td><span class="xref">ScriptableRenderPassInput</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Rendering_BodyMotionVectorsPass_IsAtmosphereMotionEnabled_" data-uid="Redux.Rendering.BodyMotionVectorsPass.IsAtmosphereMotionEnabled*"></a>
+  <h4 id="Redux_Rendering_BodyMotionVectorsPass_IsAtmosphereMotionEnabled" data-uid="Redux.Rendering.BodyMotionVectorsPass.IsAtmosphereMotionEnabled">IsAtmosphereMotionEnabled</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a value indicating whether sky seen through a scaled body's atmosphere beside it takes that
+body's motion rather than the sky's.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsAtmosphereMotionEnabled { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
         <td></td>
       </tr>
     </tbody>

@@ -544,6 +544,51 @@
   </table>
 
 
+  <a id="Redux_UI_Settings_SettingsSubMenuBuilder_AddGroup_" data-uid="Redux.UI.Settings.SettingsSubMenuBuilder.AddGroup*"></a>
+  <h4 id="Redux_UI_Settings_SettingsSubMenuBuilder_AddGroup_System_Action_Redux_UI_Settings_SettingsSubMenuBuilder__" data-uid="Redux.UI.Settings.SettingsSubMenuBuilder.AddGroup(System.Action{Redux.UI.Settings.SettingsSubMenuBuilder})">AddGroup(Action&lt;SettingsSubMenuBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Adds a group to the settings container and builds its contents, so the group can be shown or hidden whole.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public VisualElement AddGroup(Action&lt;SettingsSubMenuBuilder&gt; build)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<a class="xref" href="Redux.UI.Settings.SettingsSubMenuBuilder.html">SettingsSubMenuBuilder</a>&gt;</td>
+        <td><span class="parametername">build</span></td>
+        <td><p>Builds the group's headers and settings with a builder that adds into the group.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/UIElements.VisualElement.html">VisualElement</a></td>
+        <td><p>The group.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="Redux_UI_Settings_SettingsSubMenuBuilder_AddNumericSlider_" data-uid="Redux.UI.Settings.SettingsSubMenuBuilder.AddNumericSlider*"></a>
   <h4 id="Redux_UI_Settings_SettingsSubMenuBuilder_AddNumericSlider__1_System_String_System_String_KSP_Api_CoreTypes_Property___0____0___0_System_Int32_System_String_" data-uid="Redux.UI.Settings.SettingsSubMenuBuilder.AddNumericSlider``1(System.String,System.String,KSP.Api.CoreTypes.Property{``0},``0,``0,System.Int32,System.String)">AddNumericSlider&lt;T&gt;(string, string, Property&lt;T&gt;, T, T, int, string)</h4>
   <div class="markdown level1 summary"><p>Adds a numeric slider control with explicit minimum and maximum bounds to the settings menu.</p>
@@ -1222,13 +1267,13 @@
 
 
   <a id="Redux_UI_Settings_SettingsSubMenuBuilder_BuildBindingToConfigFile_" data-uid="Redux.UI.Settings.SettingsSubMenuBuilder.BuildBindingToConfigFile*"></a>
-  <h4 id="Redux_UI_Settings_SettingsSubMenuBuilder_BuildBindingToConfigFile_SpaceWarp2_API_Configuration_IConfigFile_System_Func_SpaceWarp2_API_Configuration_IConfigEntry_System_Boolean__" data-uid="Redux.UI.Settings.SettingsSubMenuBuilder.BuildBindingToConfigFile(SpaceWarp2.API.Configuration.IConfigFile,System.Func{SpaceWarp2.API.Configuration.IConfigEntry,System.Boolean})">BuildBindingToConfigFile(IConfigFile, Func&lt;IConfigEntry, bool&gt;)</h4>
+  <h4 id="Redux_UI_Settings_SettingsSubMenuBuilder_BuildBindingToConfigFile_SpaceWarp2_API_Configuration_IConfigFile_System_Func_SpaceWarp2_API_Configuration_IConfigEntry_System_Boolean__System_Action_SpaceWarp2_API_Configuration_IConfigEntry_System_Collections_Generic_IReadOnlyList_UnityEngine_UIElements_VisualElement___" data-uid="Redux.UI.Settings.SettingsSubMenuBuilder.BuildBindingToConfigFile(SpaceWarp2.API.Configuration.IConfigFile,System.Func{SpaceWarp2.API.Configuration.IConfigEntry,System.Boolean},System.Action{SpaceWarp2.API.Configuration.IConfigEntry,System.Collections.Generic.IReadOnlyList{UnityEngine.UIElements.VisualElement}})">BuildBindingToConfigFile(IConfigFile, Func&lt;IConfigEntry, bool&gt;, Action&lt;IConfigEntry, IReadOnlyList&lt;VisualElement&gt;&gt;)</h4>
   <div class="markdown level1 summary"><p>Builds settings UI for all non-hidden entries in the given configuration file, grouped by section.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void BuildBindingToConfigFile(IConfigFile configFile, Func&lt;IConfigEntry, bool&gt; canEdit = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void BuildBindingToConfigFile(IConfigFile configFile, Func&lt;IConfigEntry, bool&gt; canEdit = null, Action&lt;IConfigEntry, IReadOnlyList&lt;VisualElement&gt;&gt; onEntryBuilt = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -1250,6 +1295,13 @@
         <td><span class="xref">Func</span>&lt;<span class="xref">IConfigEntry</span>, <span class="xref">bool</span>&gt;</td>
         <td><span class="parametername">canEdit</span></td>
         <td><p>An optional predicate that controls whether each generated setting is enabled.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<span class="xref">IConfigEntry</span>, <span class="xref">IReadOnlyList</span>&lt;<a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/UIElements.VisualElement.html">VisualElement</a>&gt;&gt;</td>
+        <td><span class="parametername">onEntryBuilt</span></td>
+        <td><p>Called with each entry and the elements built for it, so they can be shown or
+hidden later.</p>
 </td>
       </tr>
     </tbody>
