@@ -196,13 +196,13 @@ stock sets to 8192 for every body light. URP takes the main light resolution fro
 
 
   <a id="Redux_Rendering_UrpQualityBridge_ApplyLegacyShadowBias_" data-uid="Redux.Rendering.UrpQualityBridge.ApplyLegacyShadowBias*"></a>
-  <h4 id="Redux_Rendering_UrpQualityBridge_ApplyLegacyShadowBias_UnityEngine_Light_System_Single_System_Single_" data-uid="Redux.Rendering.UrpQualityBridge.ApplyLegacyShadowBias(UnityEngine.Light,System.Single,System.Single)">ApplyLegacyShadowBias(Light, float, float)</h4>
-  <div class="markdown level1 summary"><p>Applies built-in pipeline shadow bias values to a light, converted to URP's bias scale.</p>
+  <h4 id="Redux_Rendering_UrpQualityBridge_ApplyLegacyShadowBias_UnityEngine_Light_System_Single_" data-uid="Redux.Rendering.UrpQualityBridge.ApplyLegacyShadowBias(UnityEngine.Light,System.Single)">ApplyLegacyShadowBias(Light, float)</h4>
+  <div class="markdown level1 summary"><p>Applies a built-in pipeline depth bias to a light, converted to URP's bias scale, with no normal bias.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void ApplyLegacyShadowBias(Light light, float depthBias, float normalBias)</code></pre>
+    <pre><code class="lang-csharp hljs">public static void ApplyLegacyShadowBias(Light light, float depthBias)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -226,14 +226,16 @@ stock sets to 8192 for every body light. URP takes the main light resolution fro
         <td><p>The built-in pipeline depth bias.</p>
 </td>
       </tr>
-      <tr>
-        <td><span class="xref">float</span></td>
-        <td><span class="parametername">normalBias</span></td>
-        <td><p>The built-in pipeline normal bias.</p>
-</td>
-      </tr>
     </tbody>
   </table>
+  <h5 id="Redux_Rendering_UrpQualityBridge_ApplyLegacyShadowBias_UnityEngine_Light_System_Single__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>URP's normal bias moves every shadow caster vertex inward along its own normal. Part and cabin meshes split
+their vertices at hard edges, so the two sides of an edge move apart and leave cracks in the shadow map. The
+vessel moves through the world between floating origin snaps, so a crack covers different texels every
+frame, and the soft shadow filter spreads each one into a flickering spot of sunlight inside the pod and on
+the kerbals' faces. The stock shadow configs all set a normal bias of 0.01, a fortieth of the built-in
+default, which is far too little to hold off acne but enough to open the cracks.</p>
+</div>
 
 
   <a id="Redux_Rendering_UrpQualityBridge_ClearCameraOverride_" data-uid="Redux.Rendering.UrpQualityBridge.ClearCameraOverride*"></a>
