@@ -3290,9 +3290,9 @@ scaled-space sun, which reaches only the scaled bodies, so the KSC came back fro
     </tbody>
   </table>
   <h5 id="KSP_Game_GameInstance_ResetUniverse_System_Action__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>A reset is refused while a save is loading. Its teardown would destroy the universe the load flow is
-building, and the flow would carry on creating vessels against it and wedge the load screen. A save in
-progress, such as an autosave, is waited for behind the curtain before anything is torn down.</p>
+  <div class="markdown level1 remarks"><p>The loaded local-space views are parked before the teardown, so the reload reattaches the terrain
+sphere and the statics on it instead of building them again. The resident part templates and body
+prefabs survive too. Only <a class="xref" href="KSP.Game.GameInstance.html#KSP_Game_GameInstance_Shutdown_System_Action_">Shutdown(Action)</a> releases any of it.</p>
 </div>
 
 
@@ -3448,6 +3448,11 @@ progress, such as an autosave, is waited for behind the curtain before anything 
       </tr>
     </tbody>
   </table>
+  <h5 id="KSP_Game_GameInstance_Shutdown_System_Action__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This is where the session-long caches go: the resident part templates, which were patched from the
+part data cleared in the same pass, and the body prefabs held warm for reverts, which belong to this
+session's galaxy. A universe reset leaves both in place.</p>
+</div>
 
 
   <a id="KSP_Game_GameInstance_TransitionToMissionControl_" data-uid="KSP.Game.GameInstance.TransitionToMissionControl*"></a>

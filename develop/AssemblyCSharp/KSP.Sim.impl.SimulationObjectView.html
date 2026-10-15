@@ -733,6 +733,13 @@
       </tr>
     </tbody>
   </table>
+  <h5 id="KSP_Sim_impl_SimulationObjectView_CreateNewViewObjectAsync_KSP_Sim_IUniverseView_KSP_Sim_impl_SimulationObjectModel_UnityEngine_Vector3_UnityEngine_Quaternion_System_Action_KSP_Sim_impl_SimulationObjectView___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>A part the OAB has already built this session has a resident, fully patched template in
+<a class="xref" href="Redux.Patching.PrefabUtils.html">PrefabUtils</a>. That template is cloned synchronously instead of going through
+Addressables, which skips the instantiate, the Patch Manager pass, the shader swap and the plume
+setup per part: most of what a launch or a revert used to spend. Parts without a template, such
+as those of a save loaded straight into flight, take the Addressables path as before.</p>
+</div>
 
 
   <a id="KSP_Sim_impl_SimulationObjectView_Destroy_" data-uid="KSP.Sim.impl.SimulationObjectView.Destroy*"></a>

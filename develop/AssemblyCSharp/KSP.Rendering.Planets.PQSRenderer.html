@@ -2213,6 +2213,13 @@ of <code class="paramref">matrix</code>, derived via <a class="xref" href="https
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void LateUpdateForEditor()</code></pre>
   </div>
+  <h5 id="KSP_Rendering_Planets_PQSRenderer_LateUpdateForEditor_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The flight camera is looked for again every frame until it is found, and the prepass waits for it. A sphere
+activated while the flight camera could not be found, as when a body is rebuilt while the vessel is still at
+another one, used to keep no camera for good. The prepass then threw every frame, and the throw also cut off
+the flush of the GPU height requests further down, so anything waiting on this body's ground waited until
+it timed out.</p>
+</div>
 
 
   <a id="KSP_Rendering_Planets_PQSRenderer_NeedsGameOceanShader_" data-uid="KSP.Rendering.Planets.PQSRenderer.NeedsGameOceanShader*"></a>

@@ -95,18 +95,46 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static class PrefabUtils</code></pre>
   </div>
-  <h3 id="methods">Methods
+  <h3 id="properties">Properties
 </h3>
 
 
-  <a id="Redux_Patching_PrefabUtils_ClonePrefab_" data-uid="Redux.Patching.PrefabUtils.ClonePrefab*"></a>
-  <h4 id="Redux_Patching_PrefabUtils_ClonePrefab_UnityEngine_GameObject_System_String_" data-uid="Redux.Patching.PrefabUtils.ClonePrefab(UnityEngine.GameObject,System.String)">ClonePrefab(GameObject, string)</h4>
-  <div class="markdown level1 summary"><p>Creates or returns a cached runtime template clone of the prefab, which can be modified without affecting the original prefab.</p>
+  <a id="Redux_Patching_PrefabUtils_TemplateCount_" data-uid="Redux.Patching.PrefabUtils.TemplateCount*"></a>
+  <h4 id="Redux_Patching_PrefabUtils_TemplateCount" data-uid="Redux.Patching.PrefabUtils.TemplateCount">TemplateCount</h4>
+  <div class="markdown level1 summary"><p>Gets the number of part templates currently cached.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static GameObject ClonePrefab(GameObject prefab, string templateKey)</code></pre>
+    <pre><code class="lang-csharp hljs">public static int TemplateCount { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="Redux_Patching_PrefabUtils_GetOrCloneTemplate_" data-uid="Redux.Patching.PrefabUtils.GetOrCloneTemplate*"></a>
+  <h4 id="Redux_Patching_PrefabUtils_GetOrCloneTemplate_UnityEngine_GameObject_System_String_System_Boolean__" data-uid="Redux.Patching.PrefabUtils.GetOrCloneTemplate(UnityEngine.GameObject,System.String,System.Boolean@)">GetOrCloneTemplate(GameObject, string, out bool)</h4>
+  <div class="markdown level1 summary"><p>Creates or returns a cached runtime template clone of the prefab, reporting whether this call built it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static GameObject GetOrCloneTemplate(GameObject prefab, string templateKey, out bool created)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -130,6 +158,12 @@
         <td><p>The logical part-specific cache key for the cloned template.</p>
 </td>
       </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">created</span></td>
+        <td><p>Set to true when the template was built by this call and still needs its one-time patching.</p>
+</td>
+      </tr>
     </tbody>
   </table>
   <h5 class="returns">Returns</h5>
@@ -150,15 +184,26 @@
   </table>
 
 
-  <a id="Redux_Patching_PrefabUtils_ReleaseTemplate_" data-uid="Redux.Patching.PrefabUtils.ReleaseTemplate*"></a>
-  <h4 id="Redux_Patching_PrefabUtils_ReleaseTemplate_System_String_" data-uid="Redux.Patching.PrefabUtils.ReleaseTemplate(System.String)">ReleaseTemplate(string)</h4>
-  <div class="markdown level1 summary"><p>Destroys the cached template for <code class="paramref">templateKey</code> and drops it from the cache, so a
-later <a class="xref" href="Redux.Patching.PrefabUtils.html#Redux_Patching_PrefabUtils_ClonePrefab_UnityEngine_GameObject_System_String_">ClonePrefab(GameObject, string)</a> rebuilds it. No-op if the key was never cached.</p>
+  <a id="Redux_Patching_PrefabUtils_ReleaseAllTemplates_" data-uid="Redux.Patching.PrefabUtils.ReleaseAllTemplates*"></a>
+  <h4 id="Redux_Patching_PrefabUtils_ReleaseAllTemplates" data-uid="Redux.Patching.PrefabUtils.ReleaseAllTemplates">ReleaseAllTemplates()</h4>
+  <div class="markdown level1 summary"><p>Destroys every cached template. Called when the session ends and the part data the templates were
+patched from is cleared with it.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void ReleaseTemplate(string templateKey)</code></pre>
+    <pre><code class="lang-csharp hljs">public static void ReleaseAllTemplates()</code></pre>
+  </div>
+
+
+  <a id="Redux_Patching_PrefabUtils_TryGetTemplate_" data-uid="Redux.Patching.PrefabUtils.TryGetTemplate*"></a>
+  <h4 id="Redux_Patching_PrefabUtils_TryGetTemplate_System_String_UnityEngine_GameObject__" data-uid="Redux.Patching.PrefabUtils.TryGetTemplate(System.String,UnityEngine.GameObject@)">TryGetTemplate(string, out GameObject)</h4>
+  <div class="markdown level1 summary"><p>Returns the cached, already patched template for <code class="paramref">templateKey</code> if one exists.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool TryGetTemplate(string templateKey, out GameObject template)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -173,7 +218,30 @@ later <a class="xref" href="Redux.Patching.PrefabUtils.html#Redux_Patching_Prefa
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">templateKey</span></td>
-        <td></td>
+        <td><p>The logical part-specific cache key.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">GameObject</span></td>
+        <td><span class="parametername">template</span></td>
+        <td><p>The cached disabled template, or <code>null</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if a live template is cached, false otherwise.</p>
+</td>
       </tr>
     </tbody>
   </table>

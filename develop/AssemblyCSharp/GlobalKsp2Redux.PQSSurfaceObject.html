@@ -501,6 +501,43 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void OrientWithSurface()</code></pre>
   </div>
+
+
+  <a id="GlobalKsp2Redux_PQSSurfaceObject_Rebind_" data-uid="GlobalKsp2Redux.PQSSurfaceObject.Rebind*"></a>
+  <h4 id="GlobalKsp2Redux_PQSSurfaceObject_Rebind_KSP_Sim_impl_CelestialBodyBehavior_" data-uid="GlobalKsp2Redux.PQSSurfaceObject.Rebind(KSP.Sim.impl.CelestialBodyBehavior)">Rebind(CelestialBodyBehavior)</h4>
+  <div class="markdown level1 summary"><p>Points this surface object at the body that now owns its terrain sphere: rebuilds its transform model
+on that body's frame and hands it back to the body's surface proxy.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Rebind(CelestialBodyBehavior celestialBody)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.CelestialBodyBehavior.html">CelestialBodyBehavior</a></td>
+        <td><span class="parametername">celestialBody</span></td>
+        <td><p>The body view that reclaimed the sphere.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="GlobalKsp2Redux_PQSSurfaceObject_Rebind_KSP_Sim_impl_CelestialBodyBehavior__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The sphere this object sits on can be parked across a universe reset and reattached to a new body view,
+while the body, the simulation frame the transform model hung from and the surface proxy that held the
+object are all destroyed with the old universe. The transform model is rebuilt rather than re-parented,
+since re-parenting converts through the dead frame. The cached body-relative placement is reused, so
+the object is not positioned a second time.</p>
+</div>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.Rendering.Planets.IPQSTerrainBlocker.html">IPQSTerrainBlocker</a>

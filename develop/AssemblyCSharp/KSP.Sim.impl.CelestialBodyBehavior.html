@@ -441,6 +441,11 @@
       </tr>
     </tbody>
   </table>
+  <h5 id="KSP_Sim_impl_CelestialBodyBehavior_BeginSpawnLocalSpaceView_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Holds the PQS prefab resident while this is the current body before instantiating it. A universe reset releases
+this instance, which would otherwise drop the prefab's bundle, so the reload after a revert
+instantiates from memory instead of from disk.</p>
+</div>
 
 
   <a id="KSP_Sim_impl_CelestialBodyBehavior_BeginSpawnScaledSpaceView_" data-uid="KSP.Sim.impl.CelestialBodyBehavior.BeginSpawnScaledSpaceView*"></a>
@@ -452,6 +457,10 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void BeginSpawnScaledSpaceView()</code></pre>
   </div>
+  <h5 id="KSP_Sim_impl_CelestialBodyBehavior_BeginSpawnScaledSpaceView_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Holds the scaled-space prefab resident for the session before instantiating it, for the same reason
+<a class="xref" href="KSP.Sim.impl.CelestialBodyBehavior.html#KSP_Sim_impl_CelestialBodyBehavior_BeginSpawnLocalSpaceView">BeginSpawnLocalSpaceView()</a> holds the PQS prefab.</p>
+</div>
 
 
   <a id="KSP_Sim_impl_CelestialBodyBehavior_CoroutineSpawnLocalSpaceView_" data-uid="KSP.Sim.impl.CelestialBodyBehavior.CoroutineSpawnLocalSpaceView*"></a>
@@ -1077,6 +1086,38 @@
       </tr>
     </tbody>
   </table>
+
+
+  <a id="KSP_Sim_impl_CelestialBodyBehavior_TryParkLocalSpaceView_" data-uid="KSP.Sim.impl.CelestialBodyBehavior.TryParkLocalSpaceView*"></a>
+  <h4 id="KSP_Sim_impl_CelestialBodyBehavior_TryParkLocalSpaceView" data-uid="KSP.Sim.impl.CelestialBodyBehavior.TryParkLocalSpaceView">TryParkLocalSpaceView()</h4>
+  <div class="markdown level1 summary"><p>Detaches the loaded local-space view from this body and parks it for the body that reloads it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryParkLocalSpaceView()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the view was parked, false if there was nothing complete to park.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Sim_impl_CelestialBodyBehavior_TryParkLocalSpaceView_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Called before a universe reset tears the body view down. A view still loading, or still spawning
+its surface objects, is left to be destroyed with the body, since it could not be handed back
+whole. After parking, this body reads as having no local space.</p>
+</div>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.Sim.impl.ISurfaceProvider.html">ISurfaceProvider</a>

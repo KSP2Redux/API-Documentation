@@ -1619,7 +1619,7 @@
 
   <a id="KSP_OAB_ObjectAssemblyPartTracker_OnPartPrefabLoaded_" data-uid="KSP.OAB.ObjectAssemblyPartTracker.OnPartPrefabLoaded*"></a>
   <h4 id="KSP_OAB_ObjectAssemblyPartTracker_OnPartPrefabLoaded_KSP_OAB_IObjectAssemblyAvailablePart_UnityEngine_GameObject_" data-uid="KSP.OAB.ObjectAssemblyPartTracker.OnPartPrefabLoaded(KSP.OAB.IObjectAssemblyAvailablePart,UnityEngine.GameObject)">OnPartPrefabLoaded(IObjectAssemblyAvailablePart, GameObject)</h4>
-  <div class="markdown level1 summary"><p>Processes a loaded part prefab by cloning it, applying patches and shaders, instantiating plumes, and finalizing all existing master-list parts that share the same name.</p>
+  <div class="markdown level1 summary"><p>Processes a loaded part prefab by cloning it, applying patches and shaders, and finalizing all existing master-list parts that share the same name.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -1650,6 +1650,11 @@
       </tr>
     </tbody>
   </table>
+  <h5 id="KSP_OAB_ObjectAssemblyPartTracker_OnPartPrefabLoaded_KSP_OAB_IObjectAssemblyAvailablePart_UnityEngine_GameObject__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Templates live for the whole session, so a part opened in an earlier OAB visit comes back already
+patched. The patches and the shader swap are applied only to a template this call built, since
+applying them again would patch the part twice.</p>
+</div>
 
 
   <a id="KSP_OAB_ObjectAssemblyPartTracker_PartAssemblyCount_" data-uid="KSP.OAB.ObjectAssemblyPartTracker.PartAssemblyCount*"></a>
@@ -1849,19 +1854,6 @@
       </tr>
     </tbody>
   </table>
-
-
-  <a id="KSP_OAB_ObjectAssemblyPartTracker_ReleaseLoadedPartAssets_" data-uid="KSP.OAB.ObjectAssemblyPartTracker.ReleaseLoadedPartAssets*"></a>
-  <h4 id="KSP_OAB_ObjectAssemblyPartTracker_ReleaseLoadedPartAssets" data-uid="KSP.OAB.ObjectAssemblyPartTracker.ReleaseLoadedPartAssets">ReleaseLoadedPartAssets()</h4>
-  <div class="markdown level1 summary"><p>Releases the cached template clones this tracker loaded, so they are not pinned in memory after the OAB
-is left. Called from <a class="xref" href="KSP.OAB.ObjectAssemblyBuilder.html#KSP_OAB_ObjectAssemblyBuilder_Shutdown">Shutdown()</a>. The next OAB entry reloads and
-re-clones them on demand.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void ReleaseLoadedPartAssets()</code></pre>
-  </div>
 
 
   <a id="KSP_OAB_ObjectAssemblyPartTracker_RemovePartFromMasterList_" data-uid="KSP.OAB.ObjectAssemblyPartTracker.RemovePartFromMasterList*"></a>

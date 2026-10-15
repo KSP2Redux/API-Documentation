@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class ResidentBodyAssets | KSP2Redux API (Develop) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class ResidentBodyAssets | KSP2Redux API (Develop) ">
+    
+    <meta name="description" content="Keeps the celestial body prefabs resident across universe resets.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Redux.Assets.ResidentBodyAssets">
+
+
+
+  <h1 id="Redux_Assets_ResidentBodyAssets" data-uid="Redux.Assets.ResidentBodyAssets" class="text-break">Class ResidentBodyAssets</h1>
+  <div class="markdown level0 summary"><p>Keeps the celestial body prefabs resident across universe resets.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><span class="xref">ResidentBodyAssets</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.Assets.html">Assets</a></h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
+  <h5 id="Redux_Assets_ResidentBodyAssets_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class ResidentBodyAssets</code></pre>
+  </div>
+  <h5 id="Redux_Assets_ResidentBodyAssets_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>The PQS and scaled space prefabs are instantiated through Addressables and released whenever the
+universe is reset, which drops their bundles and makes every revert reload Kerbin and the KSC from
+disk. Retaining one asset load per key keeps the bundles in memory across resets. Scaled-space handles
+stay for the session. A PQS handle stays only while its body is the current one:
+<a class="xref" href="Redux.CelestialBody.LocalSpaceParking.html#Redux_CelestialBody_LocalSpaceParking_KeepOnly_KSP_Game_GameInstance_KSP_Sim_impl_CelestialBodyComponent_">KeepOnly(GameInstance, CelestialBodyComponent)</a> releases the others as the next body
+loads. Everything left is released on the way back to the main menu, when the part data and templates
+go too.</p>
+</div>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="Redux_Assets_ResidentBodyAssets_Count_" data-uid="Redux.Assets.ResidentBodyAssets.Count*"></a>
+  <h4 id="Redux_Assets_ResidentBodyAssets_Count" data-uid="Redux.Assets.ResidentBodyAssets.Count">Count</h4>
+  <div class="markdown level1 summary"><p>Gets the number of celestial body asset keys currently held resident.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int Count { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Assets_ResidentBodyAssets_Keys_" data-uid="Redux.Assets.ResidentBodyAssets.Keys*"></a>
+  <h4 id="Redux_Assets_ResidentBodyAssets_Keys" data-uid="Redux.Assets.ResidentBodyAssets.Keys">Keys</h4>
+  <div class="markdown level1 summary"><p>Gets the asset keys currently held resident.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IEnumerable&lt;string&gt; Keys { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="Redux_Assets_ResidentBodyAssets_Release_" data-uid="Redux.Assets.ResidentBodyAssets.Release*"></a>
+  <h4 id="Redux_Assets_ResidentBodyAssets_Release_System_String_" data-uid="Redux.Assets.ResidentBodyAssets.Release(System.String)">Release(string)</h4>
+  <div class="markdown level1 summary"><p>Releases the prefab held under <code class="paramref">assetKey</code>. The bundle unloads once no instance of
+the prefab is alive either, so this is how a body that is no longer current lets its bundles go.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool Release(string assetKey)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">assetKey</span></td>
+        <td><p>The addressable key of the prefab.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if a handle was released, false if the key was not retained.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Assets_ResidentBodyAssets_ReleaseAll_" data-uid="Redux.Assets.ResidentBodyAssets.ReleaseAll*"></a>
+  <h4 id="Redux_Assets_ResidentBodyAssets_ReleaseAll" data-uid="Redux.Assets.ResidentBodyAssets.ReleaseAll">ReleaseAll()</h4>
+  <div class="markdown level1 summary"><p>Releases every retained prefab so the bundles can unload with the rest of the session.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void ReleaseAll()</code></pre>
+  </div>
+
+
+  <a id="Redux_Assets_ResidentBodyAssets_Retain_" data-uid="Redux.Assets.ResidentBodyAssets.Retain*"></a>
+  <h4 id="Redux_Assets_ResidentBodyAssets_Retain_System_String_" data-uid="Redux.Assets.ResidentBodyAssets.Retain(System.String)">Retain(string)</h4>
+  <div class="markdown level1 summary"><p>Holds the prefab behind <code class="paramref">assetKey</code> in memory until <a class="xref" href="Redux.Assets.ResidentBodyAssets.html#Redux_Assets_ResidentBodyAssets_ReleaseAll">ReleaseAll()</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Retain(string assetKey)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">assetKey</span></td>
+        <td><p>The addressable key of a body's local space or scaled space prefab. Empty keys are ignored.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from develop
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
