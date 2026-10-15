@@ -150,6 +150,68 @@
   </table>
 
 
+  <a id="Redux_Ecs_Systems_ThermalUpdate_ThermalIntegrator_Evaluate_" data-uid="Redux.Ecs.Systems.ThermalUpdate.ThermalIntegrator.Evaluate*"></a>
+  <h4 id="Redux_Ecs_Systems_ThermalUpdate_ThermalIntegrator_Evaluate_Redux_Ecs_Components_ThermalFluxState__System_Double_System_Double_" data-uid="Redux.Ecs.Systems.ThermalUpdate.ThermalIntegrator.Evaluate(Redux.Ecs.Components.ThermalFluxState@,System.Double,System.Double)">Evaluate(in ThermalFluxState, double, double)</h4>
+  <div class="markdown level1 summary"><p>Evaluate environmental and generated power at a candidate temperature with the difficulty heat scale applied.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static double Evaluate(in ThermalFluxState flux, double temperature, double heatScale)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Ecs.Components.ThermalFluxState.html">ThermalFluxState</a></td>
+        <td><span class="parametername">flux</span></td>
+        <td><p>The rate coefficients.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">temperature</span></td>
+        <td><p>The candidate temperature in K.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">heatScale</span></td>
+        <td><p>The difficulty multiplier on temperature-independent incoming power.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><p>Net power before active cooling, in kW.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Ecs_Systems_ThermalUpdate_ThermalIntegrator_Evaluate_Redux_Ecs_Components_ThermalFluxState__System_Double_System_Double__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The heat scale multiplies only the temperature-independent incoming power. Atmospheric exchange and
+radiation are not scaled, so the setting moves the temperature a part settles at instead of only how
+fast it gets there.</p>
+</div>
+
+
   <a id="Redux_Ecs_Systems_ThermalUpdate_ThermalIntegrator_Integrate_" data-uid="Redux.Ecs.Systems.ThermalUpdate.ThermalIntegrator.Integrate*"></a>
   <h4 id="Redux_Ecs_Systems_ThermalUpdate_ThermalIntegrator_Integrate_Redux_Ecs_Components_ThermalFluxState__System_Double_System_Double_System_Double_System_Double_System_Double_System_Double_System_Double_" data-uid="Redux.Ecs.Systems.ThermalUpdate.ThermalIntegrator.Integrate(Redux.Ecs.Components.ThermalFluxState@,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">Integrate(in ThermalFluxState, double, double, double, double, double, double, double)</h4>
   <div class="markdown level1 summary"><p>Integrate one constant-environment interval without crossing its thermal equilibrium.</p>
@@ -196,7 +258,8 @@
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">heatScale</span></td>
-        <td><p>The difficulty multiplier on incoming and passive power.</p>
+        <td><p>The difficulty multiplier on temperature-independent incoming power. Atmospheric exchange, radiation
+and active cooling are not scaled, so the setting moves the temperature a part settles at.</p>
 </td>
       </tr>
       <tr>
@@ -295,7 +358,7 @@ temperature is used as a clamp, so genuine heating remains capable of destroying
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">heatScale</span></td>
-        <td><p>The difficulty heat multiplier.</p>
+        <td><p>The difficulty multiplier on temperature-independent incoming power.</p>
 </td>
       </tr>
       <tr>
