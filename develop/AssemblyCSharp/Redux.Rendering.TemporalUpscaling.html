@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class TemporalUpscaling | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="Selects URP&#39;s temporal upscaler (STP, DLSS or FSR 2) and its render resolution for the whole pipeline.">
+    <meta name="description" content="Selects URP&#39;s temporal upscaler (STP, DLSS or FSR 2, 3 or 4) and its render resolution for the whole pipeline.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,7 @@
 
 
   <h1 id="Redux_Rendering_TemporalUpscaling" data-uid="Redux.Rendering.TemporalUpscaling" class="text-break">Class TemporalUpscaling</h1>
-  <div class="markdown level0 summary"><p>Selects URP's temporal upscaler (STP, DLSS or FSR 2) and its render resolution for the whole pipeline.</p>
+  <div class="markdown level0 summary"><p>Selects URP's temporal upscaler (STP, DLSS or FSR 2, 3 or 4) and its render resolution for the whole pipeline.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -98,9 +98,12 @@
   <h5 id="Redux_Rendering_TemporalUpscaling_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>URP 17.6 has one active upscaler per pipeline, stored by name on the pipeline asset, and per-upscaler options
 sub-assets in that asset. A temporal upscaler also turns on the camera jitter, the motion vectors and the
-history that URP's TAA uses. DLSS and FSR 2 pick their render size from a quality mode, STP from the render scale.
-DLSS and FSR 2 run as <a class="xref" href="Redux.Rendering.ReactiveDlssUpscaler.html">ReactiveDlssUpscaler</a> and <a class="xref" href="Redux.Rendering.ReactiveFsr2Upscaler.html">ReactiveFsr2Upscaler</a>, which add
-<a class="xref" href="Redux.Rendering.UpscalerReactiveMask.html">UpscalerReactiveMask</a>'s mask over transparents.</p>
+history that URP's TAA uses. DLSS and FSR pick their render size from a quality mode, STP from the render scale.
+DLSS and FSR 2 run as <a class="xref" href="Redux.Rendering.ReactiveDlssUpscaler.html">ReactiveDlssUpscaler</a> and <a class="xref" href="Redux.Rendering.ReactiveFsr2Upscaler.html">ReactiveFsr2Upscaler</a>, and FSR 3 and 4
+as <a class="xref" href="Redux.Rendering.FfxUpscaler.html">FfxUpscaler</a>, which all add <a class="xref" href="Redux.Rendering.UpscalerReactiveMask.html">UpscalerReactiveMask</a>'s mask over transparents. While
+the ReduxStreamline plugin runs NVIDIA Streamline for <a class="xref" href="Redux.Rendering.FrameGeneration.html">FrameGeneration</a>, Unity's DLSS is unavailable,
+and DLSS runs as <a class="xref" href="Redux.Rendering.StreamlineDlssUpscaler.html">StreamlineDlssUpscaler</a> instead, with the same mask. Without an upscaler, the TAA
+setting runs <a class="xref" href="Redux.Rendering.TemporalAntiAliasing.html">TemporalAntiAliasing</a> the same way, at native resolution in place of URP's TAA.</p>
 </div>
   <h3 id="fields">Fields
 </h3>
@@ -211,7 +214,7 @@ after it. Profiles saved then still hold these levels.</p>
 
   <a id="Redux_Rendering_TemporalUpscaling_Active_" data-uid="Redux.Rendering.TemporalUpscaling.Active*"></a>
   <h4 id="Redux_Rendering_TemporalUpscaling_Active" data-uid="Redux.Rendering.TemporalUpscaling.Active">Active</h4>
-  <div class="markdown level1 summary"><p>Gets the upscaler made active by the last <a class="xref" href="Redux.Rendering.TemporalUpscaling.html#Redux_Rendering_TemporalUpscaling_Apply_Redux_Rendering_TemporalUpscaling_Upscaler_Redux_Rendering_TemporalUpscaling_Quality_">Apply(Upscaler, Quality)</a>.</p>
+  <div class="markdown level1 summary"><p>Gets the upscaler made active by the last <a class="xref" href="Redux.Rendering.TemporalUpscaling.html#Redux_Rendering_TemporalUpscaling_Apply_Redux_Rendering_TemporalUpscaling_Upscaler_Redux_Rendering_TemporalUpscaling_Quality_Redux_Rendering_TemporalUpscaling_DlssModel_System_Int32_">Apply(Upscaler, Quality, DlssModel, int)</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -238,13 +241,13 @@ after it. Profiles saved then still hold these levels.</p>
 
 
   <a id="Redux_Rendering_TemporalUpscaling_Apply_" data-uid="Redux.Rendering.TemporalUpscaling.Apply*"></a>
-  <h4 id="Redux_Rendering_TemporalUpscaling_Apply_Redux_Rendering_TemporalUpscaling_Upscaler_Redux_Rendering_TemporalUpscaling_Quality_" data-uid="Redux.Rendering.TemporalUpscaling.Apply(Redux.Rendering.TemporalUpscaling.Upscaler,Redux.Rendering.TemporalUpscaling.Quality)">Apply(Upscaler, Quality)</h4>
+  <h4 id="Redux_Rendering_TemporalUpscaling_Apply_Redux_Rendering_TemporalUpscaling_Upscaler_Redux_Rendering_TemporalUpscaling_Quality_Redux_Rendering_TemporalUpscaling_DlssModel_System_Int32_" data-uid="Redux.Rendering.TemporalUpscaling.Apply(Redux.Rendering.TemporalUpscaling.Upscaler,Redux.Rendering.TemporalUpscaling.Quality,Redux.Rendering.TemporalUpscaling.DlssModel,System.Int32)">Apply(Upscaler, Quality, DlssModel, int)</h4>
   <div class="markdown level1 summary"><p>Makes an upscaler the pipeline's active one, at the given render resolution.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static TemporalUpscaling.Upscaler Apply(TemporalUpscaling.Upscaler upscaler, TemporalUpscaling.Quality quality)</code></pre>
+    <pre><code class="lang-csharp hljs">public static TemporalUpscaling.Upscaler Apply(TemporalUpscaling.Upscaler upscaler, TemporalUpscaling.Quality quality, TemporalUpscaling.DlssModel dlssModel, int antiAliasingLevel)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -268,6 +271,19 @@ after it. Profiles saved then still hold these levels.</p>
         <td><p>The render resolution to use it at.</p>
 </td>
       </tr>
+      <tr>
+        <td><a class="xref" href="Redux.Rendering.TemporalUpscaling.html">TemporalUpscaling</a>.<a class="xref" href="Redux.Rendering.TemporalUpscaling.DlssModel.html">DlssModel</a></td>
+        <td><span class="parametername">dlssModel</span></td>
+        <td><p>The model DLSS uses, at every quality.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">antiAliasingLevel</span></td>
+        <td><p>The anti-aliasing setting level, which runs <a class="xref" href="Redux.Rendering.TemporalAntiAliasing.html">TemporalAntiAliasing</a>
+for TAA while no upscaler is chosen.</p>
+</td>
+      </tr>
     </tbody>
   </table>
   <h5 class="returns">Returns</h5>
@@ -286,7 +302,7 @@ after it. Profiles saved then still hold these levels.</p>
       </tr>
     </tbody>
   </table>
-  <h5 id="Redux_Rendering_TemporalUpscaling_Apply_Redux_Rendering_TemporalUpscaling_Upscaler_Redux_Rendering_TemporalUpscaling_Quality__remarks">Remarks</h5>
+  <h5 id="Redux_Rendering_TemporalUpscaling_Apply_Redux_Rendering_TemporalUpscaling_Upscaler_Redux_Rendering_TemporalUpscaling_Quality_Redux_Rendering_TemporalUpscaling_DlssModel_System_Int32__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>An upscaler the machine cannot run falls back to none, since URP would otherwise jitter the frame and
 upscale it bilinearly. The selection lives on the pipeline asset, so in the editor it is written to the
 asset like any other change made to it in play mode.</p>

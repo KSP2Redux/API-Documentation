@@ -101,6 +101,12 @@ their motion in URP's motion vectors, after URP's own pass.</p>
       <h4><a class="xref" href="Redux.Rendering.CommandCameraRenderHook.html">CommandCameraRenderHook</a></h4>
       <section><p>A camera render hook that records ordinary <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Rendering.CommandBuffer.html">CommandBuffer</a> commands against the camera targets.</p>
 </section>
+      <h4><a class="xref" href="Redux.Rendering.FfxUpscaler.html">FfxUpscaler</a></h4>
+      <section><p>AMD FSR 3.1 and FSR 4 as a URP upscaler, through AMD's FidelityFX API and Redux's ReduxFfx native plugin.</p>
+</section>
+      <h4><a class="xref" href="Redux.Rendering.FrameGeneration.html">FrameGeneration</a></h4>
+      <section><p>Runs NVIDIA DLSS Frame Generation, which shows generated frames between the rendered ones.</p>
+</section>
       <h4><a class="xref" href="Redux.Rendering.GBufferDepthCopyPass.html">GBufferDepthCopyPass</a></h4>
       <section><p>Copies the camera depth right after the G-buffer and binds the copy as <code>_CameraDepthTexture</code> for the
 <a class="xref" href="Redux.Rendering.IGBufferDepthReader.html">IGBufferDepthReader</a> hooks that render on the camera.</p>
@@ -171,12 +177,18 @@ culled and projected with the disabled scaled camera, into the flight camera's c
       <h4><a class="xref" href="Redux.Rendering.ScreenSpaceReflectionsPass.html">ScreenSpaceReflectionsPass</a></h4>
       <section><p>Screen-space reflections on KSP2 G-buffer surfaces, traced against the current frame after the skybox.</p>
 </section>
+      <h4><a class="xref" href="Redux.Rendering.StreamlineDlssUpscaler.html">StreamlineDlssUpscaler</a></h4>
+      <section><p>NVIDIA DLSS Super Resolution as a URP upscaler, through NVIDIA Streamline in the ReduxStreamline plugin.</p>
+</section>
+      <h4><a class="xref" href="Redux.Rendering.TemporalAntiAliasing.html">TemporalAntiAliasing</a></h4>
+      <section><p>Redux's temporal anti-aliasing, which the TAA setting runs in place of URP's own.</p>
+</section>
       <h4><a class="xref" href="Redux.Rendering.TemporalHistoryCuts.html">TemporalHistoryCuts</a></h4>
       <section><p>Drops the temporal history of the flight camera on a cut, so TAA, the temporal upscalers and the temporal SSR
 pass do not blend in the frames before it.</p>
 </section>
       <h4><a class="xref" href="Redux.Rendering.TemporalUpscaling.html">TemporalUpscaling</a></h4>
-      <section><p>Selects URP's temporal upscaler (STP, DLSS or FSR 2) and its render resolution for the whole pipeline.</p>
+      <section><p>Selects URP's temporal upscaler (STP, DLSS or FSR 2, 3 or 4) and its render resolution for the whole pipeline.</p>
 </section>
       <h4><a class="xref" href="Redux.Rendering.TerrainIceLook.html">TerrainIceLook</a></h4>
       <section><p>Redux's look for the icy lowlands of Minmus and Vall: their ice layer becomes near-mirror smooth, flatter and
@@ -219,8 +231,15 @@ Interfaces
     <h3 id="enums">
 Enums
 </h3>
+      <h4><a class="xref" href="Redux.Rendering.FrameGeneration.Mode.html">FrameGeneration.Mode</a></h4>
+      <section><p>How many frames are shown for each rendered one. A fixed multiplier's value is the number of frames it
+generates after each rendered one.</p>
+</section>
       <h4><a class="xref" href="Redux.Rendering.MotionVectorDebugPass.DebugMode.html">MotionVectorDebugPass.DebugMode</a></h4>
       <section><p>The view to draw.</p>
+</section>
+      <h4><a class="xref" href="Redux.Rendering.TemporalUpscaling.DlssModel.html">TemporalUpscaling.DlssModel</a></h4>
+      <section><p>The DLSS model that rebuilds the frame, which NVIDIA calls a render preset.</p>
 </section>
       <h4><a class="xref" href="Redux.Rendering.TemporalUpscaling.Quality.html">TemporalUpscaling.Quality</a></h4>
       <section><p>The render resolution of a temporal upscaler, from native down to a third of the output.</p>

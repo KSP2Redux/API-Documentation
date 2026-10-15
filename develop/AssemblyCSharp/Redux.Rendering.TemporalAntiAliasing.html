@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class TemporalAntiAliasing | KSP2Redux API (Develop) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class TemporalAntiAliasing | KSP2Redux API (Develop) ">
+    
+    <meta name="description" content="Redux&#39;s temporal anti-aliasing, which the TAA setting runs in place of URP&#39;s own.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Redux.Rendering.TemporalAntiAliasing">
+
+
+
+  <h1 id="Redux_Rendering_TemporalAntiAliasing" data-uid="Redux.Rendering.TemporalAntiAliasing" class="text-break">Class TemporalAntiAliasing</h1>
+  <div class="markdown level0 summary"><p>Redux's temporal anti-aliasing, which the TAA setting runs in place of URP's own.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><span class="xref">AbstractUpscaler</span></div>
+    <div class="level2"><span class="xref">TemporalAntiAliasing</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.Rendering.html">Rendering</a></h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
+  <h5 id="Redux_Rendering_TemporalAntiAliasing_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class TemporalAntiAliasing : AbstractUpscaler</code></pre>
+  </div>
+  <h5 id="Redux_Rendering_TemporalAntiAliasing_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>
+The resolve is ReduxBetterAA's custom TAA by Michionlion (MIT), ported to URP in
+<code>TemporalAntiAliasing.shader</code>. It rebuilds the current frame from its jittered samples, takes motion from
+the nearest surface around each pixel, reprojects the history with a sharpened cubic filter and clips it
+against the neighbourhood in YCoCg. Depth agreement, motion and sudden changes of brightness lower the history
+weight, invalid motion falls back to reprojecting by the camera alone, and the background rotates with the
+camera without its translation. Sharpening applies to the output only, never to the history.
+</p>
+<p>
+It runs as a native-resolution URP upscaler, which gives it URP's jitter, the camera's colour, depth and motion,
+and a per-camera context for its history, and makes URP skip its own TAA pass. <a class="xref" href="Redux.Rendering.TemporalUpscaling.html">TemporalUpscaling</a>
+selects it for the TAA setting while no upscaler is chosen, and <a class="xref" href="Redux.Rendering.UpscalerReactiveMask.html">UpscalerReactiveMask</a>'s mask lowers
+the history of transparent effects, which draw no motion of their own.
+</p>
+</div>
+  <h3 id="constructors">Constructors
+</h3>
+
+
+  <a id="Redux_Rendering_TemporalAntiAliasing__ctor_" data-uid="Redux.Rendering.TemporalAntiAliasing.#ctor*"></a>
+  <h4 id="Redux_Rendering_TemporalAntiAliasing__ctor" data-uid="Redux.Rendering.TemporalAntiAliasing.#ctor">TemporalAntiAliasing()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TemporalAntiAliasing()</code></pre>
+  </div>
+  <h3 id="fields">Fields
+</h3>
+
+
+  <h4 id="Redux_Rendering_TemporalAntiAliasing_NAME" data-uid="Redux.Rendering.TemporalAntiAliasing.NAME">NAME</h4>
+  <div class="markdown level1 summary"><p>The upscaler's name in URP's upscaler list.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NAME = &quot;Temporal Anti-aliasing (Redux)&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="Redux_Rendering_TemporalAntiAliasing_DebugView_" data-uid="Redux.Rendering.TemporalAntiAliasing.DebugView*"></a>
+  <h4 id="Redux_Rendering_TemporalAntiAliasing_DebugView" data-uid="Redux.Rendering.TemporalAntiAliasing.DebugView">DebugView</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the debug view: 0 for the resolved frame, 1 the de-jittered current frame, 2 the history,
+3 the reprojected history, 4 the depth rejection, 5 the reactive response, 6 the history weight, 7 the
+neighbourhood extent, 8 the motion and 9 the depth edges.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int DebugView { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Rendering_TemporalAntiAliasing_IsSupported_" data-uid="Redux.Rendering.TemporalAntiAliasing.IsSupported*"></a>
+  <h4 id="Redux_Rendering_TemporalAntiAliasing_IsSupported" data-uid="Redux.Rendering.TemporalAntiAliasing.IsSupported">IsSupported</h4>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the resolve can run: its shader has not failed to load, and runs on this
+device once it has.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsSupported { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Rendering_TemporalAntiAliasing_IsSupported_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The shader loads on the first frame the resolve renders after <a class="xref" href="Redux.ReduxAssets.html">ReduxAssets</a> has set up Redux's
+Addressables. Until then the frames pass through unjittered and unresolved.</p>
+</div>
+
+
+  <a id="Redux_Rendering_TemporalAntiAliasing_isTemporal_" data-uid="Redux.Rendering.TemporalAntiAliasing.isTemporal*"></a>
+  <h4 id="Redux_Rendering_TemporalAntiAliasing_isTemporal" data-uid="Redux.Rendering.TemporalAntiAliasing.isTemporal">isTemporal</h4>
+  <div class="markdown level1 summary"><p>Returns true if the upscaler uses temporal information from previous frames.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool isTemporal { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">UnityEngine.Rendering.AbstractUpscaler.isTemporal</span></div>
+
+
+  <a id="Redux_Rendering_TemporalAntiAliasing_name_" data-uid="Redux.Rendering.TemporalAntiAliasing.name*"></a>
+  <h4 id="Redux_Rendering_TemporalAntiAliasing_name" data-uid="Redux.Rendering.TemporalAntiAliasing.name">name</h4>
+  <div class="markdown level1 summary"><p>Gets the display name of the upscaler (e.g., &quot;FSR2&quot;).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string name { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">UnityEngine.Rendering.AbstractUpscaler.name</span></div>
+
+
+  <a id="Redux_Rendering_TemporalAntiAliasing_supportsSharpening_" data-uid="Redux.Rendering.TemporalAntiAliasing.supportsSharpening*"></a>
+  <h4 id="Redux_Rendering_TemporalAntiAliasing_supportsSharpening" data-uid="Redux.Rendering.TemporalAntiAliasing.supportsSharpening">supportsSharpening</h4>
+  <div class="markdown level1 summary"><p>Returns true if the upscaler supports sharpening within the upscaling pass.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool supportsSharpening { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">UnityEngine.Rendering.AbstractUpscaler.supportsSharpening</span></div>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="Redux_Rendering_TemporalAntiAliasing_CalculateJitter_" data-uid="Redux.Rendering.TemporalAntiAliasing.CalculateJitter*"></a>
+  <h4 id="Redux_Rendering_TemporalAntiAliasing_CalculateJitter_System_Int32_System_Single_UnityEngine_Vector2__System_Boolean__" data-uid="Redux.Rendering.TemporalAntiAliasing.CalculateJitter(System.Int32,System.Single,UnityEngine.Vector2@,System.Boolean@)">CalculateJitter(int, float, out Vector2, out bool)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void CalculateJitter(int frameIndex, float upscaleRatio, out Vector2 jitter, out bool allowScaling)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">frameIndex</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">upscaleRatio</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector2</span></td>
+        <td><span class="parametername">jitter</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">allowScaling</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">UnityEngine.Rendering.AbstractUpscaler.CalculateJitter(int, float, out UnityEngine.Vector2, out bool)</span></div>
+  <h5 id="Redux_Rendering_TemporalAntiAliasing_CalculateJitter_System_Int32_System_Single_UnityEngine_Vector2__System_Boolean___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>ReduxBetterAA's sequence: Halton 2 and 3 over eight frames, at three quarters of a pixel. None before the
+shader has loaded, since nothing would resolve the jitter.</p>
+</div>
+
+
+  <a id="Redux_Rendering_TemporalAntiAliasing_CreateContext_" data-uid="Redux.Rendering.TemporalAntiAliasing.CreateContext*"></a>
+  <h4 id="Redux_Rendering_TemporalAntiAliasing_CreateContext_UnityEngine_Rendering_UpscalerOptions_UnityEngine_Vector2Int_" data-uid="Redux.Rendering.TemporalAntiAliasing.CreateContext(UnityEngine.Rendering.UpscalerOptions,UnityEngine.Vector2Int)">CreateContext(UpscalerOptions, Vector2Int)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override IUpscalerContext CreateContext(UpscalerOptions options, Vector2Int displayResolution)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UpscalerOptions</span></td>
+        <td><span class="parametername">options</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector2Int</span></td>
+        <td><span class="parametername">displayResolution</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IUpscalerContext</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">UnityEngine.Rendering.AbstractUpscaler.CreateContext(UnityEngine.Rendering.UpscalerOptions, UnityEngine.Vector2Int)</span></div>
+
+
+  <a id="Redux_Rendering_TemporalAntiAliasing_EnsureRegistered_" data-uid="Redux.Rendering.TemporalAntiAliasing.EnsureRegistered*"></a>
+  <h4 id="Redux_Rendering_TemporalAntiAliasing_EnsureRegistered" data-uid="Redux.Rendering.TemporalAntiAliasing.EnsureRegistered">EnsureRegistered()</h4>
+  <div class="markdown level1 summary"><p>Registers the upscaler before the session's pipeline is created. Registering again has no effect.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void EnsureRegistered()</code></pre>
+  </div>
+
+
+  <a id="Redux_Rendering_TemporalAntiAliasing_GetResolutionInfo_" data-uid="Redux.Rendering.TemporalAntiAliasing.GetResolutionInfo*"></a>
+  <h4 id="Redux_Rendering_TemporalAntiAliasing_GetResolutionInfo_UnityEngine_Vector2Int_UnityEngine_Rendering_UpscalerOptions_" data-uid="Redux.Rendering.TemporalAntiAliasing.GetResolutionInfo(UnityEngine.Vector2Int,UnityEngine.Rendering.UpscalerOptions)">GetResolutionInfo(Vector2Int, UpscalerOptions)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override UpscalerResolutionInfo GetResolutionInfo(Vector2Int displayResolution, UpscalerOptions options)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector2Int</span></td>
+        <td><span class="parametername">displayResolution</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">UpscalerOptions</span></td>
+        <td><span class="parametername">options</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UpscalerResolutionInfo</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">UnityEngine.Rendering.AbstractUpscaler.GetResolutionInfo(UnityEngine.Vector2Int, UnityEngine.Rendering.UpscalerOptions)</span></div>
+  <h5 id="Redux_Rendering_TemporalAntiAliasing_GetResolutionInfo_UnityEngine_Vector2Int_UnityEngine_Rendering_UpscalerOptions__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Default implementation reports <span class="xref">UnityEngine.Rendering.UpscalerResolutionConstraint.None</span>: the upscaler has no quality
+mode, so the pipeline drives the render resolution. Override in quality-mode upscalers to
+return <span class="xref">UnityEngine.Rendering.UpscalerResolutionInfo.Fixed(UnityEngine.Vector2Int)</span>/<span class="xref">UnityEngine.Rendering.UpscalerResolutionInfo.Range(UnityEngine.Vector2Int,UnityEngine.Vector2Int)</span>.</p>
+</div>
+
+
+  <a id="Redux_Rendering_TemporalAntiAliasing_RecordRenderGraph_" data-uid="Redux.Rendering.TemporalAntiAliasing.RecordRenderGraph*"></a>
+  <h4 id="Redux_Rendering_TemporalAntiAliasing_RecordRenderGraph_UnityEngine_Rendering_RenderGraphModule_RenderGraph_UnityEngine_Rendering_ContextContainer_" data-uid="Redux.Rendering.TemporalAntiAliasing.RecordRenderGraph(UnityEngine.Rendering.RenderGraphModule.RenderGraph,UnityEngine.Rendering.ContextContainer)">RecordRenderGraph(RenderGraph, ContextContainer)</h4>
+  <div class="markdown level1 summary"><p>This function is called during render graph recording and allows the implementing class to register the relevant passes and resources to the passed in render graph.
+To access information about the current execution context (current camera, ...) the ContextContainer can be queried. See the render pipeline documentation
+for more information on the types that are available in the context container. (The exact types available may differ based on the currently active render pipeline).
+This is where custom rendering occurs. Specific details are left to the implementation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void RecordRenderGraph(RenderGraph renderGraph, ContextContainer frameData)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">RenderGraph</span></td>
+        <td><span class="parametername">renderGraph</span></td>
+        <td><p>The graph to register resources and passes with.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">ContextContainer</span></td>
+        <td><span class="parametername">frameData</span></td>
+        <td><p>A ContextContainer that allows querying information about the current execution context (.e.g. RenderPipeline camera info).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">UnityEngine.Rendering.AbstractUpscaler.RecordRenderGraph(UnityEngine.Rendering.RenderGraphModule.RenderGraph, UnityEngine.Rendering.ContextContainer)</span></div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetField__2___0_System_String_">Util.GetField&lt;T, R&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetField__2___0_System_String___1_">Util.SetField&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromProperties_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromProperties(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetFieldValue__1_System_Object_System_String_">Util.GetFieldValue&lt;T&gt;(object, string)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from develop
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
