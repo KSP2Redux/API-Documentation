@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class PunctualShadowResolution | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="Sizes the shadow map of every shadowed spot and point light by how much of the screen the light covers, as the Built-in pipeline did.">
+    <meta name="description" content="Sizes the shadow map of every shadowed spot and point light by how much of the screen the light covers, as the Built-in pipeline did, and filters their shadows softly.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -82,7 +82,7 @@
 
   <h1 id="Redux_Rendering_PunctualShadowResolution" data-uid="Redux.Rendering.PunctualShadowResolution" class="text-break">Class PunctualShadowResolution</h1>
   <div class="markdown level0 summary"><p>Sizes the shadow map of every shadowed spot and point light by how much of the screen the light covers, as the
-Built-in pipeline did.</p>
+Built-in pipeline did, and filters their shadows softly.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -97,12 +97,20 @@ Built-in pipeline did.</p>
     <pre><code class="lang-csharp hljs">public static class PunctualShadowResolution</code></pre>
   </div>
   <h5 id="Redux_Rendering_PunctualShadowResolution_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>URP gives every shadowed additional light the same tier unless told otherwise, and halves all of them together
+  <div class="markdown level0 remarks"><p>
+URP gives every shadowed additional light the same tier unless told otherwise, and halves all of them together
 while more are in view than fit its atlas. The KSC's floodlights at night (130 shadowed spot lights) then shrank
 and grew back as lights left and entered the view, and their shadows jumped (#1871). The Built-in pipeline picked
 each light's map from its projected size. Before the main camera renders, each shadowed punctual light it can see
 gets the URP tier nearest to that: High for a light covering a large part of the screen, Low for a distant one.
-A light only changes tier once its size is clearly past a threshold, and lights on the Custom tier are left alone.</p>
+A light only changes tier once its size is clearly past a threshold, and lights on the Custom tier are left alone.
+</p>
+<p>
+The High tier holds a few large maps rather than many (see <a class="xref" href="Redux.Rendering.UrpQualityBridge.html">UrpQualityBridge</a>), so only as many
+lights in view take it as fit in the atlas beside the rest, those that already have it first, and point lights,
+which need six maps, stop at Medium. The stock lights cast hard shadows, which show every texel of a floodlight's
+wide cone as a step, so they are switched to soft ones.
+</p>
 </div>
 
 </article>

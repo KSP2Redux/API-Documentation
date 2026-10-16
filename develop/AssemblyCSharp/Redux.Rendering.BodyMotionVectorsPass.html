@@ -112,10 +112,9 @@ they are rebuilt from the scaled depth and carried back one frame with the scale
 turned back as a direction with the scaled camera, which also turns with a rotating body under a landed camera.
 Sky seen through a body's atmosphere beside it, the halo over its limb, is carried with that body instead.
 Pixels whose object motion a KSP2 MotionVectors pass drew are marked in the motion vector depth's stencil and
-left as they are. Last, while the frame is jittered for temporal anti-aliasing or an upscaler, or frame generation
-runs, the instanced vegetation draws its own motion with its wind at this and the previous frame's time
-(<a class="xref" href="Redux.Rendering.VegetationMotionDraws.html">VegetationMotionDraws</a>). The temporal SSR pass, the temporal upscalers and
-<a class="xref" href="Redux.Rendering.FrameGeneration.html">FrameGeneration</a> read the result.
+left as they are. Last, while the frame is jittered for temporal anti-aliasing or an upscaler, the instanced
+vegetation draws its own motion with its wind at this and the previous frame's time
+(<a class="xref" href="Redux.Rendering.VegetationMotionDraws.html">VegetationMotionDraws</a>). The temporal SSR pass and the temporal upscalers read the result.
 The map camera draws its own sky at a far plane 3e10 near planes out, where URP's camera motion comes out as NaN,
 and the upscalers then showed the stars with each frame's raw jitter (#1917). While a temporal technique runs on
 it, its pixels at the far plane turn as directions with the map camera itself, and nothing else changes.</p>
