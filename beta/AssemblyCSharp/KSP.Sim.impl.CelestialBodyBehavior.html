@@ -133,7 +133,7 @@
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Sim.html">Sim</a>.<a class="xref" href="KSP.Sim.impl.html">impl</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="KSP_Sim_impl_CelestialBodyBehavior_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class CelestialBodyBehavior : ViewObjectComponent&lt;CelestialBodyComponent&gt;, ISurfaceProvider</code></pre>
@@ -441,6 +441,11 @@
       </tr>
     </tbody>
   </table>
+  <h5 id="KSP_Sim_impl_CelestialBodyBehavior_BeginSpawnLocalSpaceView_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Holds the PQS prefab resident while this is the current body before instantiating it. A universe reset releases
+this instance, which would otherwise drop the prefab's bundle, so the reload after a revert
+instantiates from memory instead of from disk.</p>
+</div>
 
 
   <a id="KSP_Sim_impl_CelestialBodyBehavior_BeginSpawnScaledSpaceView_" data-uid="KSP.Sim.impl.CelestialBodyBehavior.BeginSpawnScaledSpaceView*"></a>
@@ -452,6 +457,10 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void BeginSpawnScaledSpaceView()</code></pre>
   </div>
+  <h5 id="KSP_Sim_impl_CelestialBodyBehavior_BeginSpawnScaledSpaceView_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Holds the scaled-space prefab resident for the session before instantiating it, for the same reason
+<a class="xref" href="KSP.Sim.impl.CelestialBodyBehavior.html#KSP_Sim_impl_CelestialBodyBehavior_BeginSpawnLocalSpaceView">BeginSpawnLocalSpaceView()</a> holds the PQS prefab.</p>
+</div>
 
 
   <a id="KSP_Sim_impl_CelestialBodyBehavior_CoroutineSpawnLocalSpaceView_" data-uid="KSP.Sim.impl.CelestialBodyBehavior.CoroutineSpawnLocalSpaceView*"></a>
@@ -497,6 +506,9 @@
       </tr>
     </tbody>
   </table>
+  <h5 id="KSP_Sim_impl_CelestialBodyBehavior_CoroutineSpawnLocalSpaceView_System_Boolean__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Ends without a loaded view when <a class="xref" href="KSP.Sim.impl.CelestialBodyBehavior.html#KSP_Sim_impl_CelestialBodyBehavior_DestroyLocalSpaceView">DestroyLocalSpaceView()</a> runs before the load finished, so callers check <a class="xref" href="KSP.Sim.impl.CelestialBodyBehavior.html#KSP_Sim_impl_CelestialBodyBehavior_IsLocalSpaceLoaded">IsLocalSpaceLoaded</a> afterwards.</p>
+</div>
 
 
   <a id="KSP_Sim_impl_CelestialBodyBehavior_CoroutineSpawnScaledSpaceView_" data-uid="KSP.Sim.impl.CelestialBodyBehavior.CoroutineSpawnScaledSpaceView*"></a>
@@ -528,7 +540,7 @@
 
   <a id="KSP_Sim_impl_CelestialBodyBehavior_DestroyLocalSpaceView_" data-uid="KSP.Sim.impl.CelestialBodyBehavior.DestroyLocalSpaceView*"></a>
   <h4 id="KSP_Sim_impl_CelestialBodyBehavior_DestroyLocalSpaceView" data-uid="KSP.Sim.impl.CelestialBodyBehavior.DestroyLocalSpaceView">DestroyLocalSpaceView()</h4>
-  <div class="markdown level1 summary"><p>Destroys the local-space view, including the surface proxy and PQS controller, and resets the load state.</p>
+  <div class="markdown level1 summary"><p>Destroys the local-space view, including the surface proxy and PQS controller, and resets the load state, which also ends a load still waiting on the view.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -751,7 +763,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><a class="xref" href="GlobalKsp2Redux.Vector3d.html">Vector3d</a></td>
         <td><span class="parametername">physicsSpacePosition</span></td>
         <td><p>The position in physics space to convert.</p>
 </td>
@@ -821,7 +833,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><a class="xref" href="GlobalKsp2Redux.Vector3d.html">Vector3d</a></td>
         <td><p>The body-relative surface normal vector at the specified coordinates.</p>
 </td>
       </tr>
@@ -877,7 +889,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><a class="xref" href="GlobalKsp2Redux.Vector3d.html">Vector3d</a></td>
         <td><p>The body-relative Cartesian position at the specified surface coordinates and altitude.</p>
 </td>
       </tr>
@@ -922,7 +934,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="GlobalAssemblyCSharp.PQSSurfaceObject.html">PQSSurfaceObject</a></td>
+        <td><a class="xref" href="GlobalKsp2Redux.PQSSurfaceObject.html">PQSSurfaceObject</a></td>
         <td><p>The matching <a class="xref" href="PQSSurfaceObject.html">PQSSurfaceObject</a>, or null if the key is not present.</p>
 </td>
       </tr>
@@ -1077,19 +1089,51 @@
       </tr>
     </tbody>
   </table>
+
+
+  <a id="KSP_Sim_impl_CelestialBodyBehavior_TryParkLocalSpaceView_" data-uid="KSP.Sim.impl.CelestialBodyBehavior.TryParkLocalSpaceView*"></a>
+  <h4 id="KSP_Sim_impl_CelestialBodyBehavior_TryParkLocalSpaceView" data-uid="KSP.Sim.impl.CelestialBodyBehavior.TryParkLocalSpaceView">TryParkLocalSpaceView()</h4>
+  <div class="markdown level1 summary"><p>Detaches the loaded local-space view from this body and parks it for the body that reloads it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryParkLocalSpaceView()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the view was parked, false if there was nothing complete to park.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Sim_impl_CelestialBodyBehavior_TryParkLocalSpaceView_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Called before a universe reset tears the body view down. A view still loading, or still spawning
+its surface objects, is left to be destroyed with the body, since it could not be handed back
+whole. After parking, this body reads as having no local space.</p>
+</div>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.Sim.impl.ISurfaceProvider.html">ISurfaceProvider</a>
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
@@ -1102,6 +1146,12 @@
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
   </div>
   <div>
       <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>

@@ -101,9 +101,6 @@
       <a class="xref" href="KSP.Rendering.impl.CameraRenderStackBase.html#KSP_Rendering_impl_CameraRenderStackBase_debugCamera">CameraRenderStackBase.debugCamera</a>
     </div>
     <div>
-      <a class="xref" href="KSP.Rendering.impl.CameraRenderStackBase.html#KSP_Rendering_impl_CameraRenderStackBase_SetRenderCamerasEnabled_System_Boolean_">CameraRenderStackBase.SetRenderCamerasEnabled(bool)</a>
-    </div>
-    <div>
       <a class="xref" href="KSP.Rendering.impl.CameraRenderStackBase.html#KSP_Rendering_impl_CameraRenderStackBase_ApplyCameraShot_KSP_Sim_ICameraShot_">CameraRenderStackBase.ApplyCameraShot(ICameraShot)</a>
     </div>
     <div>
@@ -138,7 +135,7 @@
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Rendering.html">Rendering</a>.<a class="xref" href="KSP.Rendering.impl.html">impl</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="KSP_Rendering_impl_FlightCameraRenderStack_Scaled_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class FlightCameraRenderStack_Scaled : CameraRenderStackBase, ICameraRenderStack</code></pre>
@@ -198,6 +195,36 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void Cleanup()</code></pre>
   </div>
+
+
+  <a id="KSP_Rendering_impl_FlightCameraRenderStack_Scaled_DrawInside_" data-uid="KSP.Rendering.impl.FlightCameraRenderStack_Scaled.DrawInside*"></a>
+  <h4 id="KSP_Rendering_impl_FlightCameraRenderStack_Scaled_DrawInside_UnityEngine_Camera_" data-uid="KSP.Rendering.impl.FlightCameraRenderStack_Scaled.DrawInside(UnityEngine.Camera)">DrawInside(Camera)</h4>
+  <div class="markdown level1 summary"><p>Draws scaled space at the start of <code class="paramref">hostCamera</code>'s frame instead of rendering the
+scaled camera, which then only defines the view.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DrawInside(Camera hostCamera)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Camera.html">Camera</a></td>
+        <td><span class="parametername">hostCamera</span></td>
+        <td><p>The physics-space camera that shows both spaces.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <a id="KSP_Rendering_impl_FlightCameraRenderStack_Scaled_GetCameraEffectsSystem_" data-uid="KSP.Rendering.impl.FlightCameraRenderStack_Scaled.GetCameraEffectsSystem*"></a>
@@ -569,6 +596,37 @@
   <div><a class="xref" href="KSP.Rendering.impl.CameraRenderStackBase.html#KSP_Rendering_impl_CameraRenderStackBase_ScreenToWorldPoint_UnityEngine_Vector3_">CameraRenderStackBase.ScreenToWorldPoint(Vector3)</a></div>
 
 
+  <a id="KSP_Rendering_impl_FlightCameraRenderStack_Scaled_SetRenderCamerasEnabled_" data-uid="KSP.Rendering.impl.FlightCameraRenderStack_Scaled.SetRenderCamerasEnabled*"></a>
+  <h4 id="KSP_Rendering_impl_FlightCameraRenderStack_Scaled_SetRenderCamerasEnabled_System_Boolean_" data-uid="KSP.Rendering.impl.FlightCameraRenderStack_Scaled.SetRenderCamerasEnabled(System.Boolean)">SetRenderCamerasEnabled(bool)</h4>
+  <div class="markdown level1 summary"><p>Sets the enabled state of all render cameras in this stack.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void SetRenderCamerasEnabled(bool enabled)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">enabled</span></td>
+        <td><p>When <code>true</code>, enables all render cameras. Otherwise disables them.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.Rendering.impl.CameraRenderStackBase.html#KSP_Rendering_impl_CameraRenderStackBase_SetRenderCamerasEnabled_System_Boolean_">CameraRenderStackBase.SetRenderCamerasEnabled(bool)</a></div>
+
+
   <a id="KSP_Rendering_impl_FlightCameraRenderStack_Scaled_ViewportPointToRay_" data-uid="KSP.Rendering.impl.FlightCameraRenderStack_Scaled.ViewportPointToRay*"></a>
   <h4 id="KSP_Rendering_impl_FlightCameraRenderStack_Scaled_ViewportPointToRay_UnityEngine_Vector3_" data-uid="KSP.Rendering.impl.FlightCameraRenderStack_Scaled.ViewportPointToRay(UnityEngine.Vector3)">ViewportPointToRay(Vector3)</h4>
   <div class="markdown level1 summary"><p>Casts a ray from the main render camera through the given viewport-space point.</p>
@@ -808,13 +866,13 @@
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
@@ -827,6 +885,12 @@
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
   </div>
   <div>
       <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>

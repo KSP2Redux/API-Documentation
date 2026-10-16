@@ -90,11 +90,16 @@
     <div class="level1"><span class="xref">LuaAsset</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PatchManager.html">PatchManager</a>.<a class="xref" href="PatchManager.LuaPatching.html">LuaPatching</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="PatchManager_LuaPatching_LuaAsset_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class LuaAsset</code></pre>
+    <pre><code class="lang-csharp hljs">[MoonSharpUserData]
+public class LuaAsset</code></pre>
   </div>
+  <h5 id="PatchManager_LuaPatching_LuaAsset_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>Creation helpers return it so a script can gate the asset with <a class="xref" href="PatchManager.LuaPatching.LuaAsset.html#PatchManager_LuaPatching_LuaAsset_Feature_System_String___">Feature(params string[])</a> and
+<a class="xref" href="PatchManager.LuaPatching.LuaAsset.html#PatchManager_LuaPatching_LuaAsset_NoFeature_System_String___">NoFeature(params string[])</a>. Like a patch, it also needs its mod's default feature.</p>
+</div>
   <h3 id="constructors">Constructors
 </h3>
 
@@ -118,7 +123,8 @@ switches to a different converter.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IConverter ConverterInstance</code></pre>
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+public IConverter ConverterInstance</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -144,7 +150,8 @@ runs against this asset.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DynValue CurrentValue</code></pre>
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+public DynValue CurrentValue</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -169,7 +176,34 @@ runs against this asset.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Label</code></pre>
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+public string Label</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="PatchManager_LuaPatching_LuaAsset_ModId" data-uid="PatchManager.LuaPatching.LuaAsset.ModId">ModId</h4>
+  <div class="markdown level1 summary"><p>The ID of the mod that created the asset.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+public string ModId</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -194,7 +228,8 @@ runs against this asset.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Name</code></pre>
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+public string Name</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -211,15 +246,133 @@ runs against this asset.</p>
       </tr>
     </tbody>
   </table>
+
+
+  <h4 id="PatchManager_LuaPatching_LuaAsset_Selector" data-uid="PatchManager.LuaPatching.LuaAsset.Selector">Selector</h4>
+  <div class="markdown level1 summary"><p>The features the asset needs on and off to be created, beyond its mod's default feature.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MoonSharpHidden]
+public FeatureSelector Selector</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">FeatureSelector</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="PatchManager_LuaPatching_LuaAsset_Feature_" data-uid="PatchManager.LuaPatching.LuaAsset.Feature*"></a>
+  <h4 id="PatchManager_LuaPatching_LuaAsset_Feature_System_String___" data-uid="PatchManager.LuaPatching.LuaAsset.Feature(System.String[])">Feature(params string[])</h4>
+  <div class="markdown level1 summary"><p>Creates the asset only when these features are on.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LuaAsset Feature(params string[] ids)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span>[]</td>
+        <td><span class="parametername">ids</span></td>
+        <td><p>The feature IDs, namespaced to the creating mod when they do not already carry a namespace.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.LuaAsset.html">LuaAsset</a></td>
+        <td><p>The asset for chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_LuaPatching_LuaAsset_NoFeature_" data-uid="PatchManager.LuaPatching.LuaAsset.NoFeature*"></a>
+  <h4 id="PatchManager_LuaPatching_LuaAsset_NoFeature_System_String___" data-uid="PatchManager.LuaPatching.LuaAsset.NoFeature(System.String[])">NoFeature(params string[])</h4>
+  <div class="markdown level1 summary"><p>Creates the asset only when these features are off.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LuaAsset NoFeature(params string[] ids)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span>[]</td>
+        <td><span class="parametername">ids</span></td>
+        <td><p>The feature IDs, namespaced to the creating mod when they do not already carry a namespace.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.LuaAsset.html">LuaAsset</a></td>
+        <td><p>The asset for chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
@@ -232,6 +385,12 @@ runs against this asset.</p>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
   </div>
   <div>
       <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>

@@ -90,17 +90,19 @@
     <div class="level1"><span class="xref">ScatterShaderMapping</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.CelestialBody.html">CelestialBody</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="Redux_CelestialBody_ScatterShaderMapping_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static class ScatterShaderMapping</code></pre>
   </div>
   <h5 id="Redux_CelestialBody_ScatterShaderMapping_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>Scatter materials authored in this project cannot reference the base-game scatter shaders
-directly. Those shaders live in the ksp2.catalog AssetBundle and carry no AssetDatabase GUID,
-so a serialized reference to one cannot be written into a .mat asset. Materials therefore
-reference a Redux stand-in declaring the same properties, and the real shader is bound when
-Vegetation Studio builds its per item material copies. This mirrors what
+  <div class="markdown level0 remarks"><p>Scatter materials authored in the SDK or a mod project cannot reference the base-game scatter
+shaders directly. Their URP ports ship in Redux's replacement shader bundle and carry no
+AssetDatabase GUID there, so a serialized reference to one cannot be written into a .mat asset.
+Materials therefore reference a Redux stand-in with the same properties and passes, and the
+real shader is bound when Vegetation Studio builds its per item material copies. The swap
+still matters for mod bundles built against the Built-in pipeline, whose embedded stand-in
+copies cannot render under URP. This mirrors what
 <a class="xref" href="Redux.CelestialBody.CelestialSimulationMaterialReplacer.html">CelestialSimulationMaterialReplacer</a> does for the surface material, except that
 the scatter path has no component of its own to hang the swap on, because the item prefab is
 never instantiated for the rendered field.</p>

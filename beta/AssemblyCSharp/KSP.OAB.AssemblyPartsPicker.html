@@ -132,7 +132,7 @@
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.OAB.html">OAB</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="KSP_OAB_AssemblyPartsPicker_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class AssemblyPartsPicker : UIViewElement, IUIViewElement</code></pre>
@@ -371,7 +371,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="GlobalAssemblyCSharp.PartCategories.html">PartCategories</a></td>
+        <td><a class="xref" href="GlobalKsp2Redux.PartCategories.html">PartCategories</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -671,7 +671,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="GlobalAssemblyCSharp.UIPartDropPreview.html">UIPartDropPreview</a></td>
+        <td><a class="xref" href="GlobalKsp2Redux.UIPartDropPreview.html">UIPartDropPreview</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -896,7 +896,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="GlobalAssemblyCSharp.UITrashCanWidget.html">UITrashCanWidget</a></td>
+        <td><a class="xref" href="GlobalKsp2Redux.UITrashCanWidget.html">UITrashCanWidget</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -929,6 +929,12 @@
       </tr>
     </tbody>
   </table>
+  <h5 id="KSP_OAB_AssemblyPartsPicker_IsHoveredByCursor_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The picker's canvas is a screen space overlay, where the UI is already in screen pixels. Projecting its corners
+through the OAB camera, as this used to, gave positions far off screen, so the check was always false and the
+gamepad next category and next filter actions that depend on it never ran. The canvas's own render mode now
+decides whether a camera is involved.</p>
+</div>
   <h3 id="methods">Methods
 </h3>
 
@@ -1083,7 +1089,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="GlobalAssemblyCSharp.PartCategories.html">PartCategories</a></td>
+        <td><a class="xref" href="GlobalKsp2Redux.PartCategories.html">PartCategories</a></td>
         <td><span class="parametername">partCategory</span></td>
         <td><p>The part category whose button to locate.</p>
 </td>
@@ -1328,6 +1334,11 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void OnLocalize()</code></pre>
   </div>
+  <h5 id="KSP_OAB_AssemblyPartsPicker_OnLocalize_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Part titles, subtitles, descriptions and manufacturers are cached on the part data, part buttons copy the
+title once when they are created, and the Group By labels are filled in once at startup. All of them are
+refreshed here so the whole picker follows the new language, not only the parts that get rebuilt.</p>
+</div>
 
 
   <a id="KSP_OAB_AssemblyPartsPicker_OnRequestPartDeleteFX_" data-uid="KSP.OAB.AssemblyPartsPicker.OnRequestPartDeleteFX*"></a>
@@ -1425,13 +1436,17 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="GlobalAssemblyCSharp.PartCategories.html">PartCategories</a></td>
+        <td><a class="xref" href="GlobalKsp2Redux.PartCategories.html">PartCategories</a></td>
         <td><span class="parametername">categoryToUse</span></td>
         <td><p>The category to make active.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 id="KSP_OAB_AssemblyPartsPicker_SetCategory_PartCategories__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Picking a real category ends any search, so the search text is cleared without running a search. Otherwise the
+box would keep showing a query that no longer filters anything.</p>
+</div>
 
 
   <a id="KSP_OAB_AssemblyPartsPicker_SetFilter_" data-uid="KSP.OAB.AssemblyPartsPicker.SetFilter*"></a>
@@ -1558,7 +1573,7 @@
 
   <a id="KSP_OAB_AssemblyPartsPicker_ToggleSearch_" data-uid="KSP.OAB.AssemblyPartsPicker.ToggleSearch*"></a>
   <h4 id="KSP_OAB_AssemblyPartsPicker_ToggleSearch_System_Boolean_" data-uid="KSP.OAB.AssemblyPartsPicker.ToggleSearch(System.Boolean)">ToggleSearch(bool)</h4>
-  <div class="markdown level1 summary"><p>Activates or deactivates the search mode, switching between search results and the standard category view.</p>
+  <div class="markdown level1 summary"><p>Opens the parts picker and focuses the search field with its text selected, so typing starts a new query.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -1578,11 +1593,15 @@
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">toggled</span></td>
-        <td><p>When <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a>, runs an immediate search query. When <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>, restores the category view.</p>
+        <td><p>The state of the search icon toggle. Every state focuses the search field.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 id="KSP_OAB_AssemblyPartsPicker_ToggleSearch_System_Boolean__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Bound to the search shortcut and the search icon. An existing query brings its results back, and an empty
+one leaves the current category in view.</p>
+</div>
 
 
   <a id="KSP_OAB_AssemblyPartsPicker_UpdateSearch_" data-uid="KSP.OAB.AssemblyPartsPicker.UpdateSearch*"></a>
@@ -1594,19 +1613,24 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void UpdateSearch()</code></pre>
   </div>
+  <h5 id="KSP_OAB_AssemblyPartsPicker_UpdateSearch_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>An empty query ends the search and shows the category that was open before it, rather than the empty no
+category view that searching switches to. A query switches to no category without refreshing the category
+view, so the previous results stay up until the search results replace them.</p>
+</div>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.UI.IUIViewElement.html">IUIViewElement</a>
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
@@ -1619,6 +1643,12 @@
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
   </div>
   <div>
       <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>

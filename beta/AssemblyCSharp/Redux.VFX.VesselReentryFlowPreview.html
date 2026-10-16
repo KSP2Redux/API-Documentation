@@ -90,7 +90,7 @@
     <div class="level1"><span class="xref">VesselReentryFlowPreview</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.VFX.html">VFX</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="Redux_VFX_VesselReentryFlowPreview_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class VesselReentryFlowPreview : MonoBehaviour</code></pre>
@@ -217,7 +217,7 @@
 
   <a id="Redux_VFX_VesselReentryFlowPreview_BuildPhaseMilliseconds_" data-uid="Redux.VFX.VesselReentryFlowPreview.BuildPhaseMilliseconds*"></a>
   <h4 id="Redux_VFX_VesselReentryFlowPreview_BuildPhaseMilliseconds" data-uid="Redux.VFX.VesselReentryFlowPreview.BuildPhaseMilliseconds">BuildPhaseMilliseconds</h4>
-  <div class="markdown level1 summary"><p>Gets bounds preparation and command recording CPU times in milliseconds.</p>
+  <div class="markdown level1 summary"><p>Gets bounds preparation and per-camera parameter setup CPU times in milliseconds.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -300,7 +300,7 @@ simulation restores vessel geometry before the next rendered frame.</p>
 
   <a id="Redux_VFX_VesselReentryFlowPreview_CommandBuildCount_" data-uid="Redux.VFX.VesselReentryFlowPreview.CommandBuildCount*"></a>
   <h4 id="Redux_VFX_VesselReentryFlowPreview_CommandBuildCount" data-uid="Redux.VFX.VesselReentryFlowPreview.CommandBuildCount">CommandBuildCount</h4>
-  <div class="markdown level1 summary"><p>Gets the number of command list recordings, including geometry and output changes.</p>
+  <div class="markdown level1 summary"><p>Gets the number of capture layout rebuilds, from geometry, instancing and output option changes.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -322,6 +322,10 @@ simulation restores vessel geometry before the next rendered frame.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="Redux_VFX_VesselReentryFlowPreview_CommandBuildCount_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The render hook records the field and volume commands every frame. This counts the changes that
+rebuild the capture batches and pass layout.</p>
+</div>
 
 
   <a id="Redux_VFX_VesselReentryFlowPreview_EmissionIntensity_" data-uid="Redux.VFX.VesselReentryFlowPreview.EmissionIntensity*"></a>
@@ -885,13 +889,13 @@ simulation restores vessel geometry before the next rendered frame.</p>
   </table>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
@@ -904,6 +908,12 @@ simulation restores vessel geometry before the next rendered frame.</p>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
   </div>
   <div>
       <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>

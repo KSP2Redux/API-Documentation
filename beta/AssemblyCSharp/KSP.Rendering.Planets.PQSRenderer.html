@@ -113,7 +113,7 @@
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Rendering.html">Rendering</a>.<a class="xref" href="KSP.Rendering.Planets.html">Planets</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="KSP_Rendering_Planets_PQSRenderer_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[AwesomeTechnologiesScriptOrder(50)]
@@ -885,6 +885,56 @@ public class PQSRenderer : KerbalMonoBehaviour, IPQSRenderer</code></pre>
   </table>
 
 
+  <h4 id="KSP_Rendering_Planets_PQSRenderer_OCEAN_LAVA_STAND_IN_SHADER" data-uid="KSP.Rendering.Planets.PQSRenderer.OCEAN_LAVA_STAND_IN_SHADER">OCEAN_LAVA_STAND_IN_SHADER</h4>
+  <div class="markdown level1 summary"><p>The name of the SDK's stand-in for the lava shader.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string OCEAN_LAVA_STAND_IN_SHADER = &quot;KSP2/Environment/Ocean/OceanLavaShader (SDK Stand-in)&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQSRenderer_OCEAN_WATER_STAND_IN_SHADER" data-uid="KSP.Rendering.Planets.PQSRenderer.OCEAN_WATER_STAND_IN_SHADER">OCEAN_WATER_STAND_IN_SHADER</h4>
+  <div class="markdown level1 summary"><p>The name of the SDK's stand-in for the water shader.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string OCEAN_WATER_STAND_IN_SHADER = &quot;KSP2/Environment/Ocean/OceanWater (SDK Stand-in)&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <h4 id="KSP_Rendering_Planets_PQSRenderer_OceanColliderIsTrigger" data-uid="KSP.Rendering.Planets.PQSRenderer.OceanColliderIsTrigger">OceanColliderIsTrigger</h4>
   <div class="markdown level1 summary"><p>Flag indicating whether the ocean collider is configured as a trigger.</p>
 </div>
@@ -1128,7 +1178,7 @@ public class PQSRenderer : KerbalMonoBehaviour, IPQSRenderer</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="GlobalAssemblyCSharp.PQSDecalController.html">PQSDecalController</a></td>
+        <td><a class="xref" href="GlobalKsp2Redux.PQSDecalController.html">PQSDecalController</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -1428,7 +1478,7 @@ public class PQSRenderer : KerbalMonoBehaviour, IPQSRenderer</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="GlobalAssemblyCSharp.OceanWaveSpectrum.html">OceanWaveSpectrum</a></td>
+        <td><a class="xref" href="GlobalKsp2Redux.OceanWaveSpectrum.html">OceanWaveSpectrum</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -1794,7 +1844,7 @@ instantiating the prefab into a live scene. Idempotent on the allocations it own
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="GlobalAssemblyCSharp.Vector3d.html">Vector3d</a></td>
+        <td><a class="xref" href="GlobalKsp2Redux.Vector3d.html">Vector3d</a></td>
         <td><span class="parametername">directionFromPlanetCenter</span></td>
         <td><p>Unit vector pointing from the planet center to the surface point.</p>
 </td>
@@ -1811,7 +1861,7 @@ instantiating the prefab into a live scene. Idempotent on the allocations it own
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="GlobalAssemblyCSharp.Matrix4x4D.html">Matrix4x4D</a></td>
+        <td><a class="xref" href="GlobalKsp2Redux.Matrix4x4D.html">Matrix4x4D</a></td>
         <td><p>A <a class="xref" href="Matrix4x4D.html">Matrix4x4D</a> representing the TRS transform that rotates the up axis to align
 with <code class="paramref">directionFromPlanetCenter</code>.</p>
 </td>
@@ -2163,6 +2213,64 @@ of <code class="paramref">matrix</code>, derived via <a class="xref" href="https
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void LateUpdateForEditor()</code></pre>
   </div>
+  <h5 id="KSP_Rendering_Planets_PQSRenderer_LateUpdateForEditor_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The flight camera is looked for again every frame until it is found, and the prepass waits for it. A sphere
+activated while the flight camera could not be found, as when a body is rebuilt while the vessel is still at
+another one, used to keep no camera for good. The prepass then threw every frame, and the throw also cut off
+the flush of the GPU height requests further down, so anything waiting on this body's ground waited until
+it timed out.</p>
+</div>
+
+
+  <a id="KSP_Rendering_Planets_PQSRenderer_NeedsGameOceanShader_" data-uid="KSP.Rendering.Planets.PQSRenderer.NeedsGameOceanShader*"></a>
+  <h4 id="KSP_Rendering_Planets_PQSRenderer_NeedsGameOceanShader_UnityEngine_Material_" data-uid="KSP.Rendering.Planets.PQSRenderer.NeedsGameOceanShader(UnityEngine.Material)">NeedsGameOceanShader(Material)</h4>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether an ocean material has to be moved onto the game's shader before it draws.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool NeedsGameOceanShader(Material material)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Material.html">Material</a></td>
+        <td><span class="parametername">material</span></td>
+        <td><p>The material to check.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the material is on a stand-in or has no usable shader, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Rendering_Planets_PQSRenderer_NeedsGameOceanShader_UnityEngine_Material__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>A material saved in the SDK's or a mod's project cannot reference the ocean shader, which only ships in Redux's
+replacement shader bundle. It is authored on the SDK's stand-in, which carries the same properties, or comes back
+on Unity's error shader when the reference was lost. Either way it keeps the values and keywords it was saved
+with.</p>
+</div>
 
 
   <a id="KSP_Rendering_Planets_PQSRenderer_OceanColliderName_" data-uid="KSP.Rendering.Planets.PQSRenderer.OceanColliderName*"></a>
@@ -2354,9 +2462,40 @@ of <code class="paramref">matrix</code>, derived via <a class="xref" href="https
     </tbody>
   </table>
   <h5 id="KSP_Rendering_Planets_PQSRenderer_RequestHeightsGPU_Unity_Collections_NativeArray_Unity_Mathematics_float3__Unity_Collections_NativeArray_System_Single__System_Action__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Every request made in a frame goes out in one SampleHeights dispatch at the end of that frame, and the heights
-land one to three frames later. Requests still pending or in flight when the renderer shuts down are dropped and
+  <div class="markdown level1 remarks"><p>Requests go out in one SampleHeights dispatch at the end of each frame, as many as one dispatch can hold, and
+the rest wait for the next frame. The heights land one to three frames after their dispatch. Requests still pending or in flight when the renderer shuts down are dropped and
 never call back, as is a batch whose readback fails.</p>
+</div>
+
+
+  <a id="KSP_Rendering_Planets_PQSRenderer_SetupOceanForEditor_" data-uid="KSP.Rendering.Planets.PQSRenderer.SetupOceanForEditor*"></a>
+  <h4 id="KSP_Rendering_Planets_PQSRenderer_SetupOceanForEditor" data-uid="KSP.Rendering.Planets.PQSRenderer.SetupOceanForEditor">SetupOceanForEditor()</h4>
+  <div class="markdown level1 summary"><p>Sets the ocean up against the current <a class="xref" href="KSP.Rendering.Planets.WaterManager.html">WaterManager</a>, for the SDK planet preview.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool SetupOceanForEditor()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the ocean is set up and registered with the manager, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Rendering_Planets_PQSRenderer_SetupOceanForEditor_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>In game the ocean is set up when the renderer's resources are, after the graphics manager has created the
+water manager. The preview creates its manager later, so it sets the ocean up again once it has.</p>
 </div>
 
 
@@ -2369,6 +2508,79 @@ never call back, as is a batch whose readback fails.</p>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void ShutdownForEditor()</code></pre>
   </div>
+
+
+  <a id="KSP_Rendering_Planets_PQSRenderer_ShutdownOceanForEditor_" data-uid="KSP.Rendering.Planets.PQSRenderer.ShutdownOceanForEditor*"></a>
+  <h4 id="KSP_Rendering_Planets_PQSRenderer_ShutdownOceanForEditor" data-uid="KSP.Rendering.Planets.PQSRenderer.ShutdownOceanForEditor">ShutdownOceanForEditor()</h4>
+  <div class="markdown level1 summary"><p>Takes the ocean down without touching the rest of the renderer, for the SDK planet preview.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ShutdownOceanForEditor()</code></pre>
+  </div>
+
+
+  <a id="KSP_Rendering_Planets_PQSRenderer_TryGetShadowCasterDraw_" data-uid="KSP.Rendering.Planets.PQSRenderer.TryGetShadowCasterDraw*"></a>
+  <h4 id="KSP_Rendering_Planets_PQSRenderer_TryGetShadowCasterDraw_UnityEngine_Material__UnityEngine_ComputeBuffer__System_Int32__" data-uid="KSP.Rendering.Planets.PQSRenderer.TryGetShadowCasterDraw(UnityEngine.Material@,UnityEngine.ComputeBuffer@,System.Int32@)">TryGetShadowCasterDraw(out Material, out ComputeBuffer, out int)</h4>
+  <div class="markdown level1 summary"><p>Gets the draw that casts the terrain's shadow into any light's view: every visible quad's triangles,
+straight from the quad mesh buffer through the local-space shadow material, with no camera culling.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryGetShadowCasterDraw(out Material material, out ComputeBuffer quadMesh, out int vertexCount)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Material.html">Material</a></td>
+        <td><span class="parametername">material</span></td>
+        <td><p>The terrain shadow caster material.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeBuffer.html">ComputeBuffer</a></td>
+        <td><span class="parametername">quadMesh</span></td>
+        <td><p>The visible quads' triangles in world space.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">vertexCount</span></td>
+        <td><p>The vertices to draw.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the terrain draws this frame and has quads.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Rendering_Planets_PQSRenderer_TryGetShadowCasterDraw_UnityEngine_Material__UnityEngine_ComputeBuffer__System_Int32___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Redux.Planets.TerrainShadowCascades draws it. The material needs <code>QuadMeshDataBuffer</code>, <code>_PQSToWorld</code>,
+<code>_Index</code> 0 and <code>_Transition</code> 0 from a property block.</p>
+</div>
 
 
   <a id="KSP_Rendering_Planets_PQSRenderer_UpdateDecalFloatingOrigin_" data-uid="KSP.Rendering.Planets.PQSRenderer.UpdateDecalFloatingOrigin*"></a>
@@ -2386,13 +2598,13 @@ never call back, as is a batch whose readback fails.</p>
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
@@ -2405,6 +2617,12 @@ never call back, as is a batch whose readback fails.</p>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
   </div>
   <div>
       <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>

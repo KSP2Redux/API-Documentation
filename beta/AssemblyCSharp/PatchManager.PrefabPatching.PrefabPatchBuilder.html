@@ -91,10 +91,10 @@ by visual prefab-variant compilation.</p>
     <div class="level1"><span class="xref">PrefabPatchBuilder</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PatchManager.html">PatchManager</a>.<a class="xref" href="PatchManager.PrefabPatching.html">PrefabPatching</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="PatchManager_PrefabPatching_PrefabPatchBuilder_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class PrefabPatchBuilder</code></pre>
+    <pre><code class="lang-csharp hljs">public class PrefabPatchBuilder</code></pre>
   </div>
   <h5 id="PatchManager_PrefabPatching_PrefabPatchBuilder_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>Calls only mutate an in-memory <a class="xref" href="PatchManager.PrefabPatching.PrefabPatchManifest.html">PrefabPatchManifest</a>. Call
@@ -184,6 +184,34 @@ window. Dependency and ordering methods share the
         <td><span class="parametername">address</span></td>
         <td><p>The stock prefab Addressables key.</p>
 </td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="PatchManager_PrefabPatching_PrefabPatchBuilder_Selector_" data-uid="PatchManager.PrefabPatching.PrefabPatchBuilder.Selector*"></a>
+  <h4 id="PatchManager_PrefabPatching_PrefabPatchBuilder_Selector" data-uid="PatchManager.PrefabPatching.PrefabPatchBuilder.Selector">Selector</h4>
+  <div class="markdown level1 summary"><p>Gets the features the patch needs on and off, beyond the owning mod's default feature.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FeatureSelector Selector { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">FeatureSelector</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -858,6 +886,49 @@ window. Dependency and ordering methods share the
   </table>
 
 
+  <a id="PatchManager_PrefabPatching_PrefabPatchBuilder_Feature_" data-uid="PatchManager.PrefabPatching.PrefabPatchBuilder.Feature*"></a>
+  <h4 id="PatchManager_PrefabPatching_PrefabPatchBuilder_Feature_System_String___" data-uid="PatchManager.PrefabPatching.PrefabPatchBuilder.Feature(System.String[])">Feature(params string[])</h4>
+  <div class="markdown level1 summary"><p>Applies the patch only when the supplied features are on, bare IDs namespaced to the owning mod.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PrefabPatchBuilder Feature(params string[] ids)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span>[]</td>
+        <td><span class="parametername">ids</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.PrefabPatching.PrefabPatchBuilder.html">PrefabPatchBuilder</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="PatchManager_PrefabPatching_PrefabPatchBuilder_First_" data-uid="PatchManager.PrefabPatching.PrefabPatchBuilder.First*"></a>
   <h4 id="PatchManager_PrefabPatching_PrefabPatchBuilder_First" data-uid="PatchManager.PrefabPatching.PrefabPatchBuilder.First">First()</h4>
   <div class="markdown level1 summary"><p>Places the patch in the First bucket of its pass.</p>
@@ -1030,6 +1101,49 @@ window. Dependency and ordering methods share the
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public PrefabPatchBuilder NeedsPatch(params string[] ids)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span>[]</td>
+        <td><span class="parametername">ids</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.PrefabPatching.PrefabPatchBuilder.html">PrefabPatchBuilder</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_PrefabPatching_PrefabPatchBuilder_NoFeature_" data-uid="PatchManager.PrefabPatching.PrefabPatchBuilder.NoFeature*"></a>
+  <h4 id="PatchManager_PrefabPatching_PrefabPatchBuilder_NoFeature_System_String___" data-uid="PatchManager.PrefabPatching.PrefabPatchBuilder.NoFeature(System.String[])">NoFeature(params string[])</h4>
+  <div class="markdown level1 summary"><p>Applies the patch only when the supplied features are off, bare IDs namespaced to the owning mod.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PrefabPatchBuilder NoFeature(params string[] ids)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -1500,13 +1614,13 @@ window. Dependency and ordering methods share the
   </table>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
@@ -1519,6 +1633,12 @@ window. Dependency and ordering methods share the
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
   </div>
   <div>
       <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>

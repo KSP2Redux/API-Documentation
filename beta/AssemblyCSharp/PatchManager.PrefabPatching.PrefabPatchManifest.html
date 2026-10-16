@@ -94,10 +94,10 @@
     <div><a class="xref" href="PatchManager.PrefabPatching.IPatchRelationships.html">IPatchRelationships</a></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PatchManager.html">PatchManager</a>.<a class="xref" href="PatchManager.PrefabPatching.html">PrefabPatching</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="PatchManager_PrefabPatching_PrefabPatchManifest_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class PrefabPatchManifest : IPatchRelationships</code></pre>
+    <pre><code class="lang-csharp hljs">public class PrefabPatchManifest : IPatchRelationships</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -340,6 +340,31 @@
   </table>
 
 
+  <h4 id="PatchManager_PrefabPatching_PrefabPatchManifest_Features" data-uid="PatchManager.PrefabPatching.PrefabPatchManifest.Features">Features</h4>
+  <div class="markdown level1 summary"><p>Qualified features that must be on, beyond the owning mod's default feature.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string[] Features</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <h4 id="PatchManager_PrefabPatching_PrefabPatchManifest_ManifestHash" data-uid="PatchManager.PrefabPatching.PrefabPatchManifest.ManifestHash">ManifestHash</h4>
   <div class="markdown level1 summary"><p>The normalized content hash, excluding runtime ownership.</p>
 </div>
@@ -422,6 +447,31 @@
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public string[] NeedsPatches</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="PatchManager_PrefabPatching_PrefabPatchManifest_NoFeatures" data-uid="PatchManager.PrefabPatching.PrefabPatchManifest.NoFeatures">NoFeatures</h4>
+  <div class="markdown level1 summary"><p>Qualified features that must be off.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string[] NoFeatures</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -613,19 +663,75 @@
       </tr>
     </tbody>
   </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="PatchManager_PrefabPatching_PrefabPatchManifest_ShouldSerializeFeatures_" data-uid="PatchManager.PrefabPatching.PrefabPatchManifest.ShouldSerializeFeatures*"></a>
+  <h4 id="PatchManager_PrefabPatching_PrefabPatchManifest_ShouldSerializeFeatures" data-uid="PatchManager.PrefabPatching.PrefabPatchManifest.ShouldSerializeFeatures">ShouldSerializeFeatures()</h4>
+  <div class="markdown level1 summary"><p>Gets whether <a class="xref" href="PatchManager.PrefabPatching.PrefabPatchManifest.html#PatchManager_PrefabPatching_PrefabPatchManifest_Features">Features</a> is written out.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ShouldSerializeFeatures()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the manifest needs any feature on, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_PrefabPatching_PrefabPatchManifest_ShouldSerializeNoFeatures_" data-uid="PatchManager.PrefabPatching.PrefabPatchManifest.ShouldSerializeNoFeatures*"></a>
+  <h4 id="PatchManager_PrefabPatching_PrefabPatchManifest_ShouldSerializeNoFeatures" data-uid="PatchManager.PrefabPatching.PrefabPatchManifest.ShouldSerializeNoFeatures">ShouldSerializeNoFeatures()</h4>
+  <div class="markdown level1 summary"><p>Gets whether <a class="xref" href="PatchManager.PrefabPatching.PrefabPatchManifest.html#PatchManager_PrefabPatching_PrefabPatchManifest_NoFeatures">NoFeatures</a> is written out.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ShouldSerializeNoFeatures()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the manifest needs any feature off, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="PatchManager.PrefabPatching.IPatchRelationships.html">IPatchRelationships</a>
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
@@ -638,6 +744,12 @@
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
   </div>
   <div>
       <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>

@@ -91,7 +91,7 @@ identity through the <code>Script</code> global and the host can cancel it.</p>
     <div class="level1"><span class="xref">ScriptRunRegistry</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.Lua.html">Lua</a>.<a class="xref" href="Redux.Lua.Scripting.html">Scripting</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="Redux_Lua_Scripting_ScriptRunRegistry_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static class ScriptRunRegistry</code></pre>
@@ -100,10 +100,8 @@ identity through the <code>Script</code> global and the host can cancel it.</p>
   <div class="markdown level0 remarks"><p>A &quot;run&quot; is one console or CLI execution, opened with <a class="xref" href="Redux.Lua.Scripting.ScriptRunRegistry.html#Redux_Lua_Scripting_ScriptRunRegistry_BeginScriptRun_System_String_System_String_System_String_">BeginScriptRun(string, string, string)</a> and keyed by an id. The
 host marks which run is executing with <a class="xref" href="Redux.Lua.Scripting.ScriptRunRegistry.html#Redux_Lua_Scripting_ScriptRunRegistry_SetCurrentScriptRun_System_String_">SetCurrentScriptRun(string)</a> around each resume, so the
 <code>Script</code> global reads the right run off ambient state. Coroutines a run spawns are owned by
-<a class="xref" href="Redux.Lua.ModCoroutineRunner.html">ModCoroutineRunner</a> (keyed by the same id), not tracked here. The static surface
-(<a class="xref" href="Redux.Lua.Scripting.ScriptRunRegistry.html#Redux_Lua_Scripting_ScriptRunRegistry_BeginScriptRun_System_String_System_String_System_String_">BeginScriptRun(string, string, string)</a>, <a class="xref" href="Redux.Lua.Scripting.ScriptRunRegistry.html#Redux_Lua_Scripting_ScriptRunRegistry_SetCurrentScriptRun_System_String_">SetCurrentScriptRun(string)</a>, <a class="xref" href="Redux.Lua.Scripting.ScriptRunRegistry.html#Redux_Lua_Scripting_ScriptRunRegistry_ClearCurrentScriptRun_System_String_">ClearCurrentScriptRun(string)</a>,
-<a class="xref" href="Redux.Lua.Scripting.ScriptRunRegistry.html#Redux_Lua_Scripting_ScriptRunRegistry_CompleteScriptRun_System_String_">CompleteScriptRun(string)</a>, <a class="xref" href="Redux.Lua.Scripting.ScriptRunRegistry.html#Redux_Lua_Scripting_ScriptRunRegistry_CancelScriptRun_System_String_">CancelScriptRun(string)</a>, <a class="xref" href="Redux.Lua.Scripting.ScriptRunRegistry.html#Redux_Lua_Scripting_ScriptRunRegistry_IsScriptRunActive_System_String_">IsScriptRunActive(string)</a>) is the
-contract the SpaceWarp console reaches by reflection through <a class="xref" href="KSP.ScriptInterop.LuaScriptUtilityMgr.html">LuaScriptUtilityMgr</a>.</p>
+<a class="xref" href="Redux.Lua.ModCoroutineRunner.html">ModCoroutineRunner</a> (keyed by the same id), not tracked here. The SpaceWarp console and the CLI
+drive their runs through this static surface.</p>
 </div>
   <h3 id="methods">Methods
 </h3>

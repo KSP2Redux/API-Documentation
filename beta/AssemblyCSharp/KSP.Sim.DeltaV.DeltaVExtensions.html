@@ -90,7 +90,7 @@
     <div class="level1"><span class="xref">DeltaVExtensions</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Sim.html">Sim</a>.<a class="xref" href="KSP.Sim.DeltaV.html">DeltaV</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="KSP_Sim_DeltaV_DeltaVExtensions_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static class DeltaVExtensions</code></pre>
@@ -481,7 +481,8 @@ clamped, making the shown altitude disagree with the computed one.</p>
 
   <a id="KSP_Sim_DeltaV_DeltaVExtensions_LastStageWithEngine_" data-uid="KSP.Sim.DeltaV.DeltaVExtensions.LastStageWithEngine*"></a>
   <h4 id="KSP_Sim_DeltaV_DeltaVExtensions_LastStageWithEngine_KSP_Sim_DeltaV_VesselDeltaVComponent_" data-uid="KSP.Sim.DeltaV.DeltaVExtensions.LastStageWithEngine(KSP.Sim.DeltaV.VesselDeltaVComponent)">LastStageWithEngine(VesselDeltaVComponent)</h4>
-  <div class="markdown level1 summary"><p>Returns the activation stage index of the last stage that contains at least one engine part.</p>
+  <div class="markdown level1 summary"><p>Returns the activation stage index of the last stage that contains at least one engine the delta-V
+simulation counts for thrust.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -517,11 +518,15 @@ clamped, making the shown altitude disagree with the computed one.</p>
     <tbody>
       <tr>
         <td><span class="xref">int</span></td>
-        <td><p>The activation stage index of the last engine-bearing stage, or 0 if no engine parts are found in any stage.</p>
+        <td><p>The activation stage index of the last stage with a thrust engine, or 0 if no stage has one.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 id="KSP_Sim_DeltaV_DeltaVExtensions_LastStageWithEngine_KSP_Sim_DeltaV_VesselDeltaVComponent__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Sepratrons are category Engine but run a nonThrustMotor mode the delta-V simulation never tracks. Picking a
+stage that holds only those would give the Engineer's Report a TWR of 0.</p>
+</div>
 
 
   <a id="KSP_Sim_DeltaV_DeltaVExtensions_ModeIsFlight_" data-uid="KSP.Sim.DeltaV.DeltaVExtensions.ModeIsFlight*"></a>

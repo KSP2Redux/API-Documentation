@@ -90,7 +90,7 @@
     <div class="level1"><span class="xref">AtmosphereScatterManager</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Rendering.html">Rendering</a>.<a class="xref" href="KSP.Rendering.Planets.html">Planets</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="KSP_Rendering_Planets_AtmosphereScatterManager_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class AtmosphereScatterManager : MonoBehaviour</code></pre>
@@ -161,6 +161,63 @@
 </h3>
 
 
+  <a id="KSP_Rendering_Planets_AtmosphereScatterManager_BindLocalAtmosphere_" data-uid="KSP.Rendering.Planets.AtmosphereScatterManager.BindLocalAtmosphere*"></a>
+  <h4 id="KSP_Rendering_Planets_AtmosphereScatterManager_BindLocalAtmosphere_UnityEngine_Material_KSP_Rendering_IAtmosphereRenderModel_UnityEngine_Vector3_UnityEngine_Vector3_UnityEngine_RenderTexture_" data-uid="KSP.Rendering.Planets.AtmosphereScatterManager.BindLocalAtmosphere(UnityEngine.Material,KSP.Rendering.IAtmosphereRenderModel,UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.RenderTexture)">BindLocalAtmosphere(Material, IAtmosphereRenderModel, Vector3, Vector3, RenderTexture)</h4>
+  <div class="markdown level1 summary"><p>Binds an atmosphere to a material that composites inside it, such as the volumetric clouds.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void BindLocalAtmosphere(Material material, IAtmosphereRenderModel model, Vector3 planetCenterKilometers, Vector3 sunDirection, RenderTexture oceanDepth)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Material.html">Material</a></td>
+        <td><span class="parametername">material</span></td>
+        <td><p>The material to bind to.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.IAtmosphereRenderModel.html">IAtmosphereRenderModel</a></td>
+        <td><span class="parametername">model</span></td>
+        <td><p>The atmosphere to bind.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">planetCenterKilometers</span></td>
+        <td><p>The planet center in world space, in kilometers.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">sunDirection</span></td>
+        <td><p>The world-space direction toward the sun.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">RenderTexture</span></td>
+        <td><span class="parametername">oceanDepth</span></td>
+        <td><p>The ocean depth target, or <code>null</code> when nothing draws an ocean.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Rendering_Planets_AtmosphereScatterManager_BindLocalAtmosphere_UnityEngine_Material_KSP_Rendering_IAtmosphereRenderModel_UnityEngine_Vector3_UnityEngine_Vector3_UnityEngine_RenderTexture__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Static so a host without a running scatter manager, such as the SDK planet preview, binds exactly what the
+game does.</p>
+</div>
+
+
   <a id="KSP_Rendering_Planets_AtmosphereScatterManager_BindLocalAtmosphereDataToMaterial_" data-uid="KSP.Rendering.Planets.AtmosphereScatterManager.BindLocalAtmosphereDataToMaterial*"></a>
   <h4 id="KSP_Rendering_Planets_AtmosphereScatterManager_BindLocalAtmosphereDataToMaterial_UnityEngine_Material_" data-uid="KSP.Rendering.Planets.AtmosphereScatterManager.BindLocalAtmosphereDataToMaterial(UnityEngine.Material)">BindLocalAtmosphereDataToMaterial(Material)</h4>
   <div class="markdown level1 summary"></div>
@@ -186,6 +243,77 @@
       </tr>
     </tbody>
   </table>
+
+
+  <a id="KSP_Rendering_Planets_AtmosphereScatterManager_BindPostAtmosphere_" data-uid="KSP.Rendering.Planets.AtmosphereScatterManager.BindPostAtmosphere*"></a>
+  <h4 id="KSP_Rendering_Planets_AtmosphereScatterManager_BindPostAtmosphere_KSP_Rendering_IAtmosphereRenderModel_UnityEngine_Material_UnityEngine_Vector3_UnityEngine_Vector3_System_Single_System_Single_UnityEngine_RenderTexture_" data-uid="KSP.Rendering.Planets.AtmosphereScatterManager.BindPostAtmosphere(KSP.Rendering.IAtmosphereRenderModel,UnityEngine.Material,UnityEngine.Vector3,UnityEngine.Vector3,System.Single,System.Single,UnityEngine.RenderTexture)">BindPostAtmosphere(IAtmosphereRenderModel, Material, Vector3, Vector3, float, float, RenderTexture)</h4>
+  <div class="markdown level1 summary"><p>Writes everything the local-space post atmosphere shader reads into a material.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void BindPostAtmosphere(IAtmosphereRenderModel model, Material material, Vector3 planetCenterKilometers, Vector3 sunDirection, float transition, float ditheringScale, RenderTexture oceanDepth)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.IAtmosphereRenderModel.html">IAtmosphereRenderModel</a></td>
+        <td><span class="parametername">model</span></td>
+        <td><p>The atmosphere model to bind.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Material.html">Material</a></td>
+        <td><span class="parametername">material</span></td>
+        <td><p>The post atmosphere material to write into.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">planetCenterKilometers</span></td>
+        <td><p>The planet center in world space, in kilometers.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">sunDirection</span></td>
+        <td><p>The direction toward the sun, in world space.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">transition</span></td>
+        <td><p>The local-to-scaled transition. Zero draws the post atmosphere at full strength.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">ditheringScale</span></td>
+        <td><p>The dithering scale of the transition.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">RenderTexture</span></td>
+        <td><span class="parametername">oceanDepth</span></td>
+        <td><p>The ocean depth target, or <code>null</code> for a body drawn without an ocean.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Rendering_Planets_AtmosphereScatterManager_BindPostAtmosphere_KSP_Rendering_IAtmosphereRenderModel_UnityEngine_Material_UnityEngine_Vector3_UnityEngine_Vector3_System_Single_System_Single_UnityEngine_RenderTexture__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Needs no <a class="xref" href="KSP.Rendering.Planets.AtmosphereScatterManager.html#KSP_Rendering_Planets_AtmosphereScatterManager_GraphicsManager">GraphicsManager</a>, so the SDK preview can drive the same shader in edit
+mode. Draw the material with a <a class="xref" href="KSP.Rendering.Planets.PostAtmosphereRenderHook.html">PostAtmosphereRenderHook</a> and its
+<a class="xref" href="KSP.Rendering.Planets.PostAtmosphereRenderHook.html#KSP_Rendering_Planets_PostAtmosphereRenderHook_Submit_UnityEngine_Camera_">Submit(Camera)</a>. The hook also asks URP for the camera depth texture
+the shader reads to stop rays at the terrain.</p>
+</div>
 
 
   <a id="KSP_Rendering_Planets_AtmosphereScatterManager_Cleanup_" data-uid="KSP.Rendering.Planets.AtmosphereScatterManager.Cleanup*"></a>
@@ -507,13 +635,13 @@
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
@@ -526,6 +654,12 @@
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
   </div>
   <div>
       <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>

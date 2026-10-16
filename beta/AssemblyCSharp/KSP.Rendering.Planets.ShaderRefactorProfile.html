@@ -94,7 +94,7 @@ single enum value plus a single table entry.</p>
     <div class="level1"><span class="xref">ShaderRefactorProfile</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Rendering.html">Rendering</a>.<a class="xref" href="KSP.Rendering.Planets.html">Planets</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="KSP_Rendering_Planets_ShaderRefactorProfile_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public sealed class ShaderRefactorProfile</code></pre>
@@ -309,8 +309,8 @@ When true the deferred-decal mask pass also sits two indices further along.</p>
   <a id="KSP_Rendering_Planets_ShaderRefactorProfile_GetDecalSurfacePassIndex_" data-uid="KSP.Rendering.Planets.ShaderRefactorProfile.GetDecalSurfacePassIndex*"></a>
   <h4 id="KSP_Rendering_Planets_ShaderRefactorProfile_GetDecalSurfacePassIndex" data-uid="KSP.Rendering.Planets.ShaderRefactorProfile.GetDecalSurfacePassIndex">GetDecalSurfacePassIndex()</h4>
   <div class="markdown level1 summary"><p>The deferred decal mask/surface pass index. Sits two indices further along when the shader
-exposes the three decal prepass variants. Modern: 15 (<a class="xref" href="KSP.Rendering.Planets.ShaderRefactorProfile.html#KSP_Rendering_Planets_ShaderRefactorProfile_PassOffset">PassOffset</a> 7 + 8);
-legacy: 6.</p>
+exposes the three decal prepass variants: 8 in the URP shader, 15 in the Built-in pipeline
+shader, 6 in the legacy one.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -336,10 +336,8 @@ legacy: 6.</p>
 
   <a id="KSP_Rendering_Planets_ShaderRefactorProfile_GetDepthPassIndex_" data-uid="KSP.Rendering.Planets.ShaderRefactorProfile.GetDepthPassIndex*"></a>
   <h4 id="KSP_Rendering_Planets_ShaderRefactorProfile_GetDepthPassIndex" data-uid="KSP.Rendering.Planets.ShaderRefactorProfile.GetDepthPassIndex">GetDepthPassIndex()</h4>
-  <div class="markdown level1 summary"><p>The custom depth prepass index. Modern shaders place it at 11 (<a class="xref" href="KSP.Rendering.Planets.ShaderRefactorProfile.html#KSP_Rendering_Planets_ShaderRefactorProfile_PassOffset">PassOffset</a> 7</p>
-<ul>
-<li>4). The legacy layout has it at 4.</li>
-</ul>
+  <div class="markdown level1 summary"><p>The custom depth prepass index, <a class="xref" href="KSP.Rendering.Planets.ShaderRefactorProfile.html#KSP_Rendering_Planets_ShaderRefactorProfile_PassOffset">PassOffset</a> + 4. The URP shader has it at 4,
+the Built-in pipeline shaders at 11 (offset 7) or 4 (legacy, offset 0).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -367,8 +365,8 @@ legacy: 6.</p>
   <h4 id="KSP_Rendering_Planets_ShaderRefactorProfile_GetPrepassIndex_System_Int32_" data-uid="KSP.Rendering.Planets.ShaderRefactorProfile.GetPrepassIndex(System.Int32)">GetPrepassIndex(int)</h4>
   <div class="markdown level1 summary"><p>The local-space prepass index. <code class="paramref">decalVariant</code> selects the decal variant
 (0 = NoDecals, 1 = 4Decals, 2 = InfDecals) when <a class="xref" href="KSP.Rendering.Planets.ShaderRefactorProfile.html#KSP_Rendering_Planets_ShaderRefactorProfile_UsesDecalPrepassVariants">UsesDecalPrepassVariants</a> is
-true. The legacy single prepass uses variant 0. Modern variants land at 12-14
-(<a class="xref" href="KSP.Rendering.Planets.ShaderRefactorProfile.html#KSP_Rendering_Planets_ShaderRefactorProfile_PassOffset">PassOffset</a> 7 + 5..7). The legacy single prepass is at 5.</p>
+true. The legacy single prepass uses variant 0. The variants land at <a class="xref" href="KSP.Rendering.Planets.ShaderRefactorProfile.html#KSP_Rendering_Planets_ShaderRefactorProfile_PassOffset">PassOffset</a> + 5..7:
+5-7 in the URP shader, 12-14 in the Built-in pipeline shader. The legacy single prepass is at 5.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -443,13 +441,13 @@ plugged in without modifying the built-in table.</p>
   </table>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
@@ -462,6 +460,12 @@ plugged in without modifying the built-in table.</p>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
   </div>
   <div>
       <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>

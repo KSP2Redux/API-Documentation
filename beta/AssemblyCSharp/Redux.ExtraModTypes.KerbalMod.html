@@ -89,10 +89,7 @@
     <div class="level1"><a class="xref" href="KSP.Game.KerbalMonoBehaviour.html">KerbalMonoBehaviour</a></div>
     <div class="level2"><span class="xref">KerbalMod</span></div>
       <div class="level3"><a class="xref" href="PatchManager.PatchManager.html">PatchManager</a></div>
-  </div>
-  <div class="implements">
-    <h5>Implements</h5>
-    <div><a class="xref" href="../SpaceWarp/SpaceWarp2.API.Mods.ISpaceWarpMod.html">ISpaceWarpMod</a></div>
+      <div class="level3"><a class="xref" href="VSwift.VSwiftPlugin.html">VSwiftPlugin</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -113,10 +110,10 @@
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.ExtraModTypes.html">ExtraModTypes</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="Redux_ExtraModTypes_KerbalMod_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract class KerbalMod : KerbalMonoBehaviour, ISpaceWarpMod</code></pre>
+    <pre><code class="lang-csharp hljs">public abstract class KerbalMod : KerbalMonoBehaviour</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -132,6 +129,32 @@
   </div>
   <h3 id="properties">Properties
 </h3>
+
+
+  <a id="Redux_ExtraModTypes_KerbalMod_Enabled_" data-uid="Redux.ExtraModTypes.KerbalMod.Enabled*"></a>
+  <h4 id="Redux_ExtraModTypes_KerbalMod_Enabled" data-uid="Redux.ExtraModTypes.KerbalMod.Enabled">Enabled</h4>
+  <div class="markdown level1 summary"><p>Gets whether this mod's default feature is on in the active set, so it should act in the loaded campaign.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Enabled { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <a id="Redux_ExtraModTypes_KerbalMod_PM_" data-uid="Redux.ExtraModTypes.KerbalMod.PM*"></a>
@@ -184,7 +207,7 @@ throws, because PatchManager has by then already flushed the fluent queue and ru
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="../ReduxLib/ReduxLib.Configuration.IConfigFile.html">IConfigFile</a></td>
+        <td><span class="xref">IConfigFile</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -210,7 +233,7 @@ throws, because PatchManager has by then already flushed the fluent queue and ru
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="../ReduxLib/ReduxLib.Logging.ILogger.html">ILogger</a></td>
+        <td><span class="xref">ILogger</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -236,7 +259,7 @@ throws, because PatchManager has by then already flushed the fluent queue and ru
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="../SpaceWarp/SpaceWarp2.API.Mods.SpaceWarpPluginDescriptor.html">SpaceWarpPluginDescriptor</a></td>
+        <td><span class="xref">SpaceWarpPluginDescriptor</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -272,6 +295,28 @@ throws, because PatchManager has by then already flushed the fluent queue and ru
   </table>
 
 
+  <a id="Redux_ExtraModTypes_KerbalMod_OnCampaignLoaded_" data-uid="Redux.ExtraModTypes.KerbalMod.OnCampaignLoaded*"></a>
+  <h4 id="Redux_ExtraModTypes_KerbalMod_OnCampaignLoaded" data-uid="Redux.ExtraModTypes.KerbalMod.OnCampaignLoaded">OnCampaignLoaded()</h4>
+  <div class="markdown level1 summary"><p>Called once a campaign this mod is enabled in has loaded.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void OnCampaignLoaded()</code></pre>
+  </div>
+
+
+  <a id="Redux_ExtraModTypes_KerbalMod_OnCampaignUnloading_" data-uid="Redux.ExtraModTypes.KerbalMod.OnCampaignUnloading*"></a>
+  <h4 id="Redux_ExtraModTypes_KerbalMod_OnCampaignUnloading" data-uid="Redux.ExtraModTypes.KerbalMod.OnCampaignUnloading">OnCampaignUnloading()</h4>
+  <div class="markdown level1 summary"><p>Called before that campaign unloads, to undo what <a class="xref" href="Redux.ExtraModTypes.KerbalMod.html#Redux_ExtraModTypes_KerbalMod_OnCampaignLoaded">OnCampaignLoaded()</a> set up.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void OnCampaignUnloading()</code></pre>
+  </div>
+
+
   <a id="Redux_ExtraModTypes_KerbalMod_OnInitialized_" data-uid="Redux.ExtraModTypes.KerbalMod.OnInitialized*"></a>
   <h4 id="Redux_ExtraModTypes_KerbalMod_OnInitialized" data-uid="Redux.ExtraModTypes.KerbalMod.OnInitialized">OnInitialized()</h4>
   <div class="markdown level1 summary"><p>Called during the mod's initialization phase.</p>
@@ -303,19 +348,15 @@ throws, because PatchManager has by then already flushed the fluent queue and ru
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public virtual void OnPreInitialized()</code></pre>
   </div>
-  <h3 id="implements">Implements</h3>
-  <div>
-      <a class="xref" href="../SpaceWarp/SpaceWarp2.API.Mods.ISpaceWarpMod.html">ISpaceWarpMod</a>
-  </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
@@ -328,6 +369,12 @@ throws, because PatchManager has by then already flushed the fluent queue and ru
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
   </div>
   <div>
       <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>

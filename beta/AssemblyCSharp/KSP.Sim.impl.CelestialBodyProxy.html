@@ -109,7 +109,7 @@
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Sim.html">Sim</a>.<a class="xref" href="KSP.Sim.impl.html">impl</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="KSP_Sim_impl_CelestialBodyProxy_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class CelestialBodyProxy : KerbalMonoBehaviour</code></pre>
@@ -150,7 +150,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="GlobalAssemblyCSharp.LocalTransformCacher.html">LocalTransformCacher</a></td>
+        <td><a class="xref" href="GlobalKsp2Redux.LocalTransformCacher.html">LocalTransformCacher</a></td>
         <td><span class="parametername">toAdd</span></td>
         <td><p>The <a class="xref" href="LocalTransformCacher.html">LocalTransformCacher</a> to add and reparent under this proxy.</p>
 </td>
@@ -217,6 +217,35 @@
   </table>
 
 
+  <a id="KSP_Sim_impl_CelestialBodyProxy_RemoveFromProxy_" data-uid="KSP.Sim.impl.CelestialBodyProxy.RemoveFromProxy*"></a>
+  <h4 id="KSP_Sim_impl_CelestialBodyProxy_RemoveFromProxy_LocalTransformCacher_" data-uid="KSP.Sim.impl.CelestialBodyProxy.RemoveFromProxy(LocalTransformCacher)">RemoveFromProxy(LocalTransformCacher)</h4>
+  <div class="markdown level1 summary"><p>Stops tracking a transform added with <a class="xref" href="KSP.Sim.impl.CelestialBodyProxy.html#KSP_Sim_impl_CelestialBodyProxy_AddToProxy_LocalTransformCacher_">AddToProxy(LocalTransformCacher)</a>, ahead of it being destroyed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveFromProxy(LocalTransformCacher toRemove)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalKsp2Redux.LocalTransformCacher.html">LocalTransformCacher</a></td>
+        <td><span class="parametername">toRemove</span></td>
+        <td><p>The cacher of the transform to stop tracking.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Sim_impl_CelestialBodyProxy_SnapToPhysXOrigin_" data-uid="KSP.Sim.impl.CelestialBodyProxy.SnapToPhysXOrigin*"></a>
   <h4 id="KSP_Sim_impl_CelestialBodyProxy_SnapToPhysXOrigin" data-uid="KSP.Sim.impl.CelestialBodyProxy.SnapToPhysXOrigin">SnapToPhysXOrigin()</h4>
   <div class="markdown level1 summary"><p>Repositions the proxy reference transform to the current PhysX floating-origin position and snaps all registered child transforms to match.</p>
@@ -229,23 +258,47 @@
 
 
   <a id="KSP_Sim_impl_CelestialBodyProxy_UnregisterProxyTarget_" data-uid="KSP.Sim.impl.CelestialBodyProxy.UnregisterProxyTarget*"></a>
-  <h4 id="KSP_Sim_impl_CelestialBodyProxy_UnregisterProxyTarget" data-uid="KSP.Sim.impl.CelestialBodyProxy.UnregisterProxyTarget">UnregisterProxyTarget()</h4>
-  <div class="markdown level1 summary"><p>Unregisters the current proxy target, restoring all tracked child transforms to their original parent and cached local positions and rotations.</p>
+  <h4 id="KSP_Sim_impl_CelestialBodyProxy_UnregisterProxyTarget_UnityEngine_Transform_" data-uid="KSP.Sim.impl.CelestialBodyProxy.UnregisterProxyTarget(UnityEngine.Transform)">UnregisterProxyTarget(Transform)</h4>
+  <div class="markdown level1 summary"><p>Unregisters the current proxy target, restoring all tracked child transforms to their cached local
+positions and rotations under <code class="paramref">parent</code>, or under the current target when none is given.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void UnregisterProxyTarget()</code></pre>
+    <pre><code class="lang-csharp hljs">public void UnregisterProxyTarget(Transform parent = null)</code></pre>
   </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Where to reparent the objects, or <code>null</code> for the current proxy target.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Sim_impl_CelestialBodyProxy_UnregisterProxyTarget_UnityEngine_Transform__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Parking the terrain sphere across a universe reset passes the sphere: the proxy is destroyed with the
+universe, so the surface objects it holds have to travel with the sphere instead, and the body that
+reclaims the sphere hands them to its new proxy again.</p>
+</div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
@@ -258,6 +311,12 @@
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
   </div>
   <div>
       <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>

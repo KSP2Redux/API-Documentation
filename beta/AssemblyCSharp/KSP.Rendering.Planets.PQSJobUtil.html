@@ -90,7 +90,7 @@
     <div class="level1"><span class="xref">PQSJobUtil</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Rendering.html">Rendering</a>.<a class="xref" href="KSP.Rendering.Planets.html">Planets</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="KSP_Rendering_Planets_PQSJobUtil_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class PQSJobUtil</code></pre>
@@ -386,7 +386,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="GlobalAssemblyCSharp.DecalInstance.html">DecalInstance</a></td>
+        <td><a class="xref" href="GlobalKsp2Redux.DecalInstance.html">DecalInstance</a></td>
         <td><span class="parametername">decal</span></td>
         <td><p>The <a class="xref" href="DecalInstance.html">DecalInstance</a> describing the decal's parameters and placement.</p>
 </td>
@@ -584,7 +584,7 @@
 
   <a id="KSP_Rendering_Planets_PQSJobUtil_GetShaderSphericalUVs_" data-uid="KSP.Rendering.Planets.PQSJobUtil.GetShaderSphericalUVs*"></a>
   <h4 id="KSP_Rendering_Planets_PQSJobUtil_GetShaderSphericalUVs_Unity_Mathematics_float3_" data-uid="KSP.Rendering.Planets.PQSJobUtil.GetShaderSphericalUVs(Unity.Mathematics.float3)">GetShaderSphericalUVs(float3)</h4>
-  <div class="markdown level1 summary"><p>Returns the spherical UV the bundled terrain compute shader assigns to a surface direction.</p>
+  <div class="markdown level1 summary"><p>Returns the spherical UV the terrain compute shaders assign to a surface direction.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -1411,7 +1411,7 @@ CPU height, biome and decal lookups land on the texels the terrain was drawn fro
 
   <a id="KSP_Rendering_Planets_PQSJobUtil_ShaderAsin_" data-uid="KSP.Rendering.Planets.PQSJobUtil.ShaderAsin*"></a>
   <h4 id="KSP_Rendering_Planets_PQSJobUtil_ShaderAsin_System_Single_" data-uid="KSP.Rendering.Planets.PQSJobUtil.ShaderAsin(System.Single)">ShaderAsin(float)</h4>
-  <div class="markdown level1 summary"><p>Returns the arcsine as the bundled terrain compute shader computes it.</p>
+  <div class="markdown level1 summary"><p>Returns the arcsine as the terrain compute shaders compute it.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -1453,17 +1453,24 @@ CPU height, biome and decal lookups land on the texels the terrain was drawn fro
     </tbody>
   </table>
   <h5 id="KSP_Rendering_Planets_PQSJobUtil_ShaderAsin_System_Single__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>FXC compiled that shader and expanded <code>asin</code> into Abramowitz and Stegun 4.4.45, a four-term
+  <div class="markdown level1 remarks"><p>
+FXC compiled the stock shader and expanded <code>asin</code> into Abramowitz and Stegun 4.4.45, a four-term
 polynomial accurate to about 7e-5 radians. Tiled height maps repeat hundreds of times around a
 body, so CPU code that samples terrain has to round the same way to land on the same texels.
 Measured against the live kernel on Direct3D11. The input is clamped to [-1, 1], so a direction
-one rounding step past unit length gives the pole rather than NaN.</p>
+one rounding step past unit length gives the pole rather than NaN.
+</p>
+<p>
+The expansion gives plus or minus 7e-5 at zero, and that jump at the equator shifted the tiled maps
+by tens of metres, a terrain step straight across every body (#1883). Redux's terrain shaders take the
+offset out over a narrow band around zero, and so does this. Outside the band it is the stock value.
+</p>
 </div>
 
 
   <a id="KSP_Rendering_Planets_PQSJobUtil_ShaderAtan2_" data-uid="KSP.Rendering.Planets.PQSJobUtil.ShaderAtan2*"></a>
   <h4 id="KSP_Rendering_Planets_PQSJobUtil_ShaderAtan2_System_Single_System_Single_" data-uid="KSP.Rendering.Planets.PQSJobUtil.ShaderAtan2(System.Single,System.Single)">ShaderAtan2(float, float)</h4>
-  <div class="markdown level1 summary"><p>Returns the four-quadrant arctangent as the bundled terrain compute shader computes it.</p>
+  <div class="markdown level1 summary"><p>Returns the four-quadrant arctangent as the terrain compute shaders compute it.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -1511,20 +1518,28 @@ one rounding step past unit length gives the pole rather than NaN.</p>
     </tbody>
   </table>
   <h5 id="KSP_Rendering_Planets_PQSJobUtil_ShaderAtan2_System_Single_System_Single__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>FXC expanded <code>atan2</code> into Hastings' ninth-order odd polynomial on the first octant,
+  <div class="markdown level1 remarks"><p>
+FXC expanded <code>atan2</code> into Hastings' ninth-order odd polynomial on the first octant,
 accurate to about 1e-5 radians, then folds the result out to the full circle. Measured against
 the live kernel on Direct3D11. The shader divides zero by zero when both arguments are zero, so
-that case returns zero here instead.</p>
+that case returns zero here instead.
+</p>
+<p>
+The polynomial overshoots pi/4 by about 1e-5 at the octant boundary, so the angles on the two sides of
+each boundary, the meridians where the arguments are equal in size, unfolded 2e-5 apart (#1883). Redux's
+terrain shaders take the overshoot out as the octant ratio nears 1, and so does this. Away from the
+boundaries it is the stock value.
+</p>
 </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
@@ -1537,6 +1552,12 @@ that case returns zero here instead.</p>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
   </div>
   <div>
       <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>

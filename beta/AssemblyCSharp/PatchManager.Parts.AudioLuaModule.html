@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class AudioLuaModule | KSP2Redux API (Beta) ">
     
-    
+    <meta name="description" content="Lua module exposed under the global PM.Audio, for binding registered audio presets to parts.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,8 @@
 
 
   <h1 id="PatchManager_Parts_AudioLuaModule" data-uid="PatchManager.Parts.AudioLuaModule" class="text-break">Class AudioLuaModule</h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>Lua module exposed under the global <code>PM.Audio</code>, for binding registered audio presets to parts.</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
@@ -89,7 +90,7 @@
     <div class="level1"><span class="xref">AudioLuaModule</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PatchManager.html">PatchManager</a>.<a class="xref" href="PatchManager.Parts.html">Parts</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="PatchManager_Parts_AudioLuaModule_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[PatchManagerModule(&quot;Audio&quot;)]
@@ -102,7 +103,8 @@ public class AudioLuaModule</code></pre>
 
   <a id="PatchManager_Parts_AudioLuaModule__ctor_" data-uid="PatchManager.Parts.AudioLuaModule.#ctor*"></a>
   <h4 id="PatchManager_Parts_AudioLuaModule__ctor_PatchManager_LuaPatching_Builtin_PatchManagerCore_PatchManager_LuaPatching_Universe_" data-uid="PatchManager.Parts.AudioLuaModule.#ctor(PatchManager.LuaPatching.Builtin.PatchManagerCore,PatchManager.LuaPatching.Universe)">AudioLuaModule(PatchManagerCore, Universe)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Creates the module. It keeps no state, so both arguments are unused.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -121,12 +123,14 @@ public class AudioLuaModule</code></pre>
       <tr>
         <td><a class="xref" href="PatchManager.LuaPatching.Builtin.PatchManagerCore.html">PatchManagerCore</a></td>
         <td><span class="parametername">pmc</span></td>
-        <td></td>
+        <td><p>The <code>PM</code> instance the module is exposed under.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="PatchManager.LuaPatching.Universe.html">Universe</a></td>
         <td><span class="parametername">universe</span></td>
-        <td></td>
+        <td><p>The patching universe.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -136,7 +140,9 @@ public class AudioLuaModule</code></pre>
 
   <a id="PatchManager_Parts_AudioLuaModule_EnsurePreset_" data-uid="PatchManager.Parts.AudioLuaModule.EnsurePreset*"></a>
   <h4 id="PatchManager_Parts_AudioLuaModule_EnsurePreset_PatchManager_Parts_UserData_PartUserData_System_String_System_String_System_Boolean_" data-uid="PatchManager.Parts.AudioLuaModule.EnsurePreset(PatchManager.Parts.UserData.PartUserData,System.String,System.String,System.Boolean)">EnsurePreset(PartUserData, string, string, bool)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Binds a registered audio preset to a transform of a part, adding <code>Module_PartAudioPreset</code> when the part
+has none. A binding for the same preset and transform is updated rather than duplicated.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -155,34 +161,54 @@ public class AudioLuaModule</code></pre>
       <tr>
         <td><a class="xref" href="PatchManager.Parts.UserData.PartUserData.html">PartUserData</a></td>
         <td><span class="parametername">part</span></td>
-        <td></td>
+        <td><p>The part to bind the preset to.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">presetId</span></td>
-        <td></td>
+        <td><p>The registered preset ID, matching the PresetId of a PartAudioPresetDefinition.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">targetTransformPath</span></td>
-        <td></td>
+        <td><p>The transform path within the part, or nil for the part root.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">overrideExistingAudio</span></td>
-        <td></td>
+        <td><p>Whether the preset replaces existing audio components at the transform rather than adding alongside them.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptRuntimeException</span></td>
+        <td><p>Thrown when <code class="paramref">part</code> is nil or <code class="paramref">presetId</code> is blank.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
@@ -195,6 +221,12 @@ public class AudioLuaModule</code></pre>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
   </div>
   <div>
       <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>

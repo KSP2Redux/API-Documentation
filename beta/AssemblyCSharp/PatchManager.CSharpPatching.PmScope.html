@@ -85,7 +85,7 @@
 </div>
   <div class="markdown level0 conceptual"></div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PatchManager.html">PatchManager</a>.<a class="xref" href="PatchManager.CSharpPatching.html">CSharpPatching</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="PatchManager_CSharpPatching_PmScope_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public readonly struct PmScope</code></pre>
@@ -121,27 +121,260 @@ or mod can add its own.</p>
       </tr>
     </tbody>
   </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="PatchManager_CSharpPatching_PmScope_DefineFeature_" data-uid="PatchManager.CSharpPatching.PmScope.DefineFeature*"></a>
+  <h4 id="PatchManager_CSharpPatching_PmScope_DefineFeature_System_String_System_Collections_Generic_IEnumerable_System_String__System_Collections_Generic_IEnumerable_System_String__System_Collections_Generic_IEnumerable_System_String__System_Boolean_" data-uid="PatchManager.CSharpPatching.PmScope.DefineFeature(System.String,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Boolean)">DefineFeature(string, IEnumerable&lt;string&gt;, IEnumerable&lt;string&gt;, IEnumerable&lt;string&gt;, bool)</h4>
+  <div class="markdown level1 summary"><p>Declares a feature of this scope's mod.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FeatureDefinition DefineFeature(string id, IEnumerable&lt;string&gt; requires = null, IEnumerable&lt;string&gt; conflicts = null, IEnumerable&lt;string&gt; provides = null, bool isRecommended = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">id</span></td>
+        <td><p>The feature ID, namespaced to the mod when it does not already carry a namespace.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">requires</span></td>
+        <td><p>The required feature IDs, bare ones namespaced to the mod.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">conflicts</span></td>
+        <td><p>The conflicting feature IDs, bare ones namespaced to the mod.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">provides</span></td>
+        <td><p>The provided feature IDs, bare ones namespaced to the mod.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">isRecommended</span></td>
+        <td><p>Whether the mod recommends the feature.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">FeatureDefinition</span></td>
+        <td><p>The declared feature.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_CSharpPatching_PmScope_OnBeginRun_" data-uid="PatchManager.CSharpPatching.PmScope.OnBeginRun*"></a>
+  <h4 id="PatchManager_CSharpPatching_PmScope_OnBeginRun_System_Action_System_Collections_Generic_IReadOnlyCollection_System_String___" data-uid="PatchManager.CSharpPatching.PmScope.OnBeginRun(System.Action{System.Collections.Generic.IReadOnlyCollection{System.String}})">OnBeginRun(Action&lt;IReadOnlyCollection&lt;string&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Registers a callback that runs before each feature set's patch run.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FeatureGatedAction OnBeginRun(Action&lt;IReadOnlyCollection&lt;string&gt;&gt; callback)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<span class="xref">IReadOnlyCollection</span>&lt;<span class="xref">string</span>&gt;&gt;</td>
+        <td><span class="parametername">callback</span></td>
+        <td><p>The callback, handed the set being built.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">FeatureGatedAction</span></td>
+        <td><p>The registered callback, for gating it with features.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_CSharpPatching_PmScope_OnEndRun_" data-uid="PatchManager.CSharpPatching.PmScope.OnEndRun*"></a>
+  <h4 id="PatchManager_CSharpPatching_PmScope_OnEndRun_System_Action_System_Collections_Generic_IReadOnlyCollection_System_String___" data-uid="PatchManager.CSharpPatching.PmScope.OnEndRun(System.Action{System.Collections.Generic.IReadOnlyCollection{System.String}})">OnEndRun(Action&lt;IReadOnlyCollection&lt;string&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Registers a callback that runs after each feature set's patch run.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FeatureGatedAction OnEndRun(Action&lt;IReadOnlyCollection&lt;string&gt;&gt; callback)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<span class="xref">IReadOnlyCollection</span>&lt;<span class="xref">string</span>&gt;&gt;</td>
+        <td><span class="parametername">callback</span></td>
+        <td><p>The callback, handed the set that was built.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">FeatureGatedAction</span></td>
+        <td><p>The registered callback, for gating it with features.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_CSharpPatching_PmScope_Pass_" data-uid="PatchManager.CSharpPatching.PmScope.Pass*"></a>
+  <h4 id="PatchManager_CSharpPatching_PmScope_Pass_System_String_" data-uid="PatchManager.CSharpPatching.PmScope.Pass(System.String)">Pass(string)</h4>
+  <div class="markdown level1 summary"><p>Declares a pass under this scope's mod ID, for chaining its ordering.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PassDefinition Pass(string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The pass name, namespaced to the mod unless built-in or already namespaced.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.PassDefinition.html">PassDefinition</a></td>
+        <td><p>The pass, for chaining its ordering.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
       <a class="xref" href="PatchManager.CSharpPatching.PrefabPatchingCSharpPatching.html#PatchManager_CSharpPatching_PrefabPatchingCSharpPatching_PatchPrefab_PatchManager_CSharpPatching_PmScope_System_String_System_String_">PrefabPatchingCSharpPatching.PatchPrefab(PmScope, string, string)</a>
   </div>
   <div>
+      <a class="xref" href="PatchManager.CampaignPacks.CampaignPacksPatchExtensions.html#PatchManager_CampaignPacks_CampaignPacksPatchExtensions_DuplicateCampaignPack_PatchManager_CSharpPatching_PmScope_System_String_System_String_">CampaignPacksPatchExtensions.DuplicateCampaignPack(PmScope, string, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="PatchManager.CampaignPacks.CampaignPacksPatchExtensions.html#PatchManager_CampaignPacks_CampaignPacksPatchExtensions_PatchCampaignPack_PatchManager_CSharpPatching_PmScope_System_String_">CampaignPacksPatchExtensions.PatchCampaignPack(PmScope, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="PatchManager.Generic.GenericPatchExtensions.html#PatchManager_Generic_GenericPatchExtensions_DuplicateJson_PatchManager_CSharpPatching_PmScope_System_String_System_String_System_String_">GenericPatchExtensions.DuplicateJson(PmScope, string, string, string)</a>
+  </div>
+  <div>
       <a class="xref" href="PatchManager.Generic.GenericPatchExtensions.html#PatchManager_Generic_GenericPatchExtensions_PatchJson_PatchManager_CSharpPatching_PmScope_System_String_System_String_">GenericPatchExtensions.PatchJson(PmScope, string, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="PatchManager.Missions.MissionsPatchExtensions.html#PatchManager_Missions_MissionsPatchExtensions_DuplicateMission_PatchManager_CSharpPatching_PmScope_System_String_System_String_">MissionsPatchExtensions.DuplicateMission(PmScope, string, string)</a>
   </div>
   <div>
       <a class="xref" href="PatchManager.Missions.MissionsPatchExtensions.html#PatchManager_Missions_MissionsPatchExtensions_PatchMission_PatchManager_CSharpPatching_PmScope_System_String_">MissionsPatchExtensions.PatchMission(PmScope, string)</a>
   </div>
   <div>
+      <a class="xref" href="PatchManager.Parts.PartsPatchExtensions.html#PatchManager_Parts_PartsPatchExtensions_DuplicatePart_PatchManager_CSharpPatching_PmScope_System_String_System_String_">PartsPatchExtensions.DuplicatePart(PmScope, string, string)</a>
+  </div>
+  <div>
       <a class="xref" href="PatchManager.Parts.PartsPatchExtensions.html#PatchManager_Parts_PartsPatchExtensions_PatchPart_PatchManager_CSharpPatching_PmScope_System_String_">PartsPatchExtensions.PatchPart(PmScope, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="PatchManager.Planets.PlanetsPatchExtensions.html#PatchManager_Planets_PlanetsPatchExtensions_DuplicateAtmosphereOverride_PatchManager_CSharpPatching_PmScope_System_String_System_String_">PlanetsPatchExtensions.DuplicateAtmosphereOverride(PmScope, string, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="PatchManager.Planets.PlanetsPatchExtensions.html#PatchManager_Planets_PlanetsPatchExtensions_DuplicateCloudOverride_PatchManager_CSharpPatching_PmScope_System_String_System_String_">PlanetsPatchExtensions.DuplicateCloudOverride(PmScope, string, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="PatchManager.Planets.PlanetsPatchExtensions.html#PatchManager_Planets_PlanetsPatchExtensions_DuplicateGalaxy_PatchManager_CSharpPatching_PmScope_System_String_System_String_">PlanetsPatchExtensions.DuplicateGalaxy(PmScope, string, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="PatchManager.Planets.PlanetsPatchExtensions.html#PatchManager_Planets_PlanetsPatchExtensions_DuplicatePlanet_PatchManager_CSharpPatching_PmScope_System_String_System_String_">PlanetsPatchExtensions.DuplicatePlanet(PmScope, string, string)</a>
   </div>
   <div>
       <a class="xref" href="PatchManager.Planets.PlanetsPatchExtensions.html#PatchManager_Planets_PlanetsPatchExtensions_PatchAtmosphereOverride_PatchManager_CSharpPatching_PmScope_System_String_">PlanetsPatchExtensions.PatchAtmosphereOverride(PmScope, string)</a>
@@ -153,10 +386,28 @@ or mod can add its own.</p>
       <a class="xref" href="PatchManager.Planets.PlanetsPatchExtensions.html#PatchManager_Planets_PlanetsPatchExtensions_PatchDefaultGalaxy_PatchManager_CSharpPatching_PmScope_System_String_">PlanetsPatchExtensions.PatchDefaultGalaxy(PmScope, string)</a>
   </div>
   <div>
+      <a class="xref" href="PatchManager.Planets.PlanetsPatchExtensions.html#PatchManager_Planets_PlanetsPatchExtensions_PatchGalaxy_PatchManager_CSharpPatching_PmScope_System_String_System_String_">PlanetsPatchExtensions.PatchGalaxy(PmScope, string, string)</a>
+  </div>
+  <div>
       <a class="xref" href="PatchManager.Planets.PlanetsPatchExtensions.html#PatchManager_Planets_PlanetsPatchExtensions_PatchPlanet_PatchManager_CSharpPatching_PmScope_System_String_">PlanetsPatchExtensions.PatchPlanet(PmScope, string)</a>
   </div>
   <div>
+      <a class="xref" href="PatchManager.Resources.ResourcesPatchExtensions.html#PatchManager_Resources_ResourcesPatchExtensions_DuplicateResource_PatchManager_CSharpPatching_PmScope_System_String_System_String_">ResourcesPatchExtensions.DuplicateResource(PmScope, string, string)</a>
+  </div>
+  <div>
       <a class="xref" href="PatchManager.Resources.ResourcesPatchExtensions.html#PatchManager_Resources_ResourcesPatchExtensions_PatchResource_PatchManager_CSharpPatching_PmScope_System_String_">ResourcesPatchExtensions.PatchResource(PmScope, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="PatchManager.Science.SciencePatchExtensions.html#PatchManager_Science_SciencePatchExtensions_DuplicateDiscoverables_PatchManager_CSharpPatching_PmScope_System_String_System_String_">SciencePatchExtensions.DuplicateDiscoverables(PmScope, string, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="PatchManager.Science.SciencePatchExtensions.html#PatchManager_Science_SciencePatchExtensions_DuplicateExperiment_PatchManager_CSharpPatching_PmScope_System_String_System_String_">SciencePatchExtensions.DuplicateExperiment(PmScope, string, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="PatchManager.Science.SciencePatchExtensions.html#PatchManager_Science_SciencePatchExtensions_DuplicateScienceRegion_PatchManager_CSharpPatching_PmScope_System_String_System_String_">SciencePatchExtensions.DuplicateScienceRegion(PmScope, string, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="PatchManager.Science.SciencePatchExtensions.html#PatchManager_Science_SciencePatchExtensions_DuplicateTechNode_PatchManager_CSharpPatching_PmScope_System_String_System_String_">SciencePatchExtensions.DuplicateTechNode(PmScope, string, string)</a>
   </div>
   <div>
       <a class="xref" href="PatchManager.Science.SciencePatchExtensions.html#PatchManager_Science_SciencePatchExtensions_PatchDiscoverables_PatchManager_CSharpPatching_PmScope_System_String_">SciencePatchExtensions.PatchDiscoverables(PmScope, string)</a>
@@ -181,6 +432,12 @@ or mod can add its own.</p>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
   </div>
   <div>
       <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>

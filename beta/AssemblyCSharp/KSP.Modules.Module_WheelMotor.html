@@ -116,6 +116,9 @@
       <a class="xref" href="KSP.Modules.Module_WheelSubmodule.html#KSP_Modules_Module_WheelSubmodule_SetWheelBase">Module_WheelSubmodule.SetWheelBase()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Modules.Module_WheelSubmodule.html#KSP_Modules_Module_WheelSubmodule_OnShutdown">Module_WheelSubmodule.OnShutdown()</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Modules.Module_WheelSubmodule.html#KSP_Modules_Module_WheelSubmodule_OnWheelInit_KSPWheelController_">Module_WheelSubmodule.OnWheelInit(KSPWheelController)</a>
     </div>
     <div>
@@ -282,7 +285,7 @@
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Modules.html">Modules</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="KSP_Modules_Module_WheelMotor_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[ModuleCategory(&quot;Wheels&quot;)]
@@ -331,7 +334,7 @@ public class Module_WheelMotor : Module_WheelSubmodule, IPartModule, IObjectAsse
 
 
   <h4 id="KSP_Modules_Module_WheelMotor_dataWheelMotor" data-uid="KSP.Modules.Module_WheelMotor.dataWheelMotor">dataWheelMotor</h4>
-  <div class="markdown level1 summary"><p>The <a class="xref" href="KSP.Modules.Data_WheelMotor.html">Data_WheelMotor</a> data module holding motor drive configuration, traction control settings, and runtime motor state.</p>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="KSP.Modules.Data_WheelMotor.html">Data_WheelMotor</a> data module holding motor drive configuration and runtime motor state.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -398,33 +401,6 @@ public class Module_WheelMotor : Module_WheelSubmodule, IPartModule, IObjectAsse
   </div>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_AddDataModules">PartBehaviourModule.AddDataModules()</a></div>
-
-
-  <a id="KSP_Modules_Module_WheelMotor_GetMaxSpeed_" data-uid="KSP.Modules.Module_WheelMotor.GetMaxSpeed*"></a>
-  <h4 id="KSP_Modules_Module_WheelMotor_GetMaxSpeed" data-uid="KSP.Modules.Module_WheelMotor.GetMaxSpeed">GetMaxSpeed()</h4>
-  <div class="markdown level1 summary"><p>Returns the maximum wheel speed supported by the motor, derived from the upper bound of the torque curve.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public float GetMaxSpeed()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">float</span></td>
-        <td><p>The maximum speed in meters per second at which the motor can produce torque.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
 
 
   <a id="KSP_Modules_Module_WheelMotor_GetMotorEnabled_" data-uid="KSP.Modules.Module_WheelMotor.GetMotorEnabled*"></a>
@@ -624,19 +600,6 @@ public class Module_WheelMotor : Module_WheelSubmodule, IPartModule, IObjectAsse
   <div><a class="xref" href="KSP.Sim.Definitions.PartBehaviourModule.html#KSP_Sim_Definitions_PartBehaviourModule_OnModuleOABFixedUpdate_System_Single_">PartBehaviourModule.OnModuleOABFixedUpdate(float)</a></div>
 
 
-  <a id="KSP_Modules_Module_WheelMotor_OnShutdown_" data-uid="KSP.Modules.Module_WheelMotor.OnShutdown*"></a>
-  <h4 id="KSP_Modules_Module_WheelMotor_OnShutdown" data-uid="KSP.Modules.Module_WheelMotor.OnShutdown">OnShutdown()</h4>
-  <div class="markdown level1 summary"><p>Shuts down this submodule by unregistering from the owning <a class="xref" href="KSP.Modules.Module_WheelBase.html">Module_WheelBase</a> and detaching the subsystem-modified callback.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected override void OnShutdown()</code></pre>
-  </div>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="KSP.Modules.Module_WheelSubmodule.html#KSP_Modules_Module_WheelSubmodule_OnShutdown">Module_WheelSubmodule.OnShutdown()</a></div>
-
-
   <a id="KSP_Modules_Module_WheelMotor_OnWheelSetup_" data-uid="KSP.Modules.Module_WheelMotor.OnWheelSetup*"></a>
   <h4 id="KSP_Modules_Module_WheelMotor_OnWheelSetup" data-uid="KSP.Modules.Module_WheelMotor.OnWheelSetup">OnWheelSetup()</h4>
   <div class="markdown level1 summary"><p>Performs submodule-specific setup once the <a class="xref" href="KSPWheelController.html">KSPWheelController</a> has been assigned and base initialization is complete.</p>
@@ -657,13 +620,13 @@ public class Module_WheelMotor : Module_WheelSubmodule, IPartModule, IObjectAsse
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
@@ -676,6 +639,12 @@ public class Module_WheelMotor : Module_WheelSubmodule, IPartModule, IObjectAsse
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
   </div>
   <div>
       <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>

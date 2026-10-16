@@ -92,12 +92,15 @@ literals that MoonSharp's auto-conversion does not produce. Also installed as ca
     <div class="level1"><span class="xref">JsonModule</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PatchManager.html">PatchManager</a>.<a class="xref" href="PatchManager.LuaPatching.html">LuaPatching</a>.<a class="xref" href="PatchManager.LuaPatching.Builtin.html">Builtin</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="PatchManager_LuaPatching_Builtin_JsonModule_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[MoonSharpModule(Namespace = &quot;J&quot;)]
 public class JsonModule</code></pre>
   </div>
+  <h5 id="PatchManager_LuaPatching_Builtin_JsonModule_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>MoonSharp registers only the static methods of a module type, so every helper here is static.</p>
+</div>
   <h3 id="constructors">Constructors
 </h3>
 
@@ -122,7 +125,7 @@ public class JsonModule</code></pre>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[MoonSharpModuleMethod]
-public DynValue Empty(ScriptExecutionContext context, CallbackArguments args)</code></pre>
+public static DynValue Empty(ScriptExecutionContext context, CallbackArguments args)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -168,8 +171,8 @@ public DynValue Empty(ScriptExecutionContext context, CallbackArguments args)</c
   <div class="markdown level1 remarks"><p>Use this when assigning into a fresh JSON slot that must round-trip as an array rather than an object.
 MoonSharp cannot distinguish an empty Lua table from an empty Lua array, so without an existing slot to
 take its type from, an empty <code>{}</code> becomes a JSON object by default. Existing array slots already
-preserve their type via <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_GetJTokenForDynValue_Newtonsoft_Json_Linq_JToken_MoonSharp_Interpreter_DynValue_">GetJTokenForDynValue(JToken, DynValue)</a>; this helper is
-for the no-previous-slot case.</p>
+preserve their type via <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_GetJTokenForDynValue_Newtonsoft_Json_Linq_JToken_MoonSharp_Interpreter_DynValue_">GetJTokenForDynValue(JToken, DynValue)</a>, so this helper
+is for the no-previous-slot case.</p>
 </div>
 
 
@@ -181,7 +184,7 @@ for the no-previous-slot case.</p>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[MoonSharpModuleMethod]
-public DynValue Int(ScriptExecutionContext context, CallbackArguments args)</code></pre>
+public static DynValue Int(ScriptExecutionContext context, CallbackArguments args)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -202,7 +205,7 @@ public DynValue Int(ScriptExecutionContext context, CallbackArguments args)</cod
       <tr>
         <td><span class="xref">CallbackArguments</span></td>
         <td><span class="parametername">args</span></td>
-        <td><p>Call arguments; <code>args[0]</code> is cast to a number and truncated to a long.</p>
+        <td><p>The call arguments. The first is cast to a number and truncated to a long.</p>
 </td>
       </tr>
     </tbody>
@@ -226,7 +229,7 @@ public DynValue Int(ScriptExecutionContext context, CallbackArguments args)</cod
   <h5 id="PatchManager_LuaPatching_Builtin_JsonModule_Int_MoonSharp_Interpreter_ScriptExecutionContext_MoonSharp_Interpreter_CallbackArguments__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>Use this when assigning a Lua number into a fresh JSON slot that must round-trip as an integer rather
 than a float (for example IDs or counts). Existing integer slots already preserve their type during
-assignment via <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_GetJTokenForDynValue_Newtonsoft_Json_Linq_JToken_MoonSharp_Interpreter_DynValue_">GetJTokenForDynValue(JToken, DynValue)</a>; this helper is for
+assignment via <a class="xref" href="PatchManager.LuaPatching.JsonUserData.html#PatchManager_LuaPatching_JsonUserData_GetJTokenForDynValue_Newtonsoft_Json_Linq_JToken_MoonSharp_Interpreter_DynValue_">GetJTokenForDynValue(JToken, DynValue)</a>, so this helper is for
 the no-previous-slot case.</p>
 </div>
 
@@ -262,13 +265,13 @@ metamethod so <code>J(value)</code> from Lua converts <code class="paramref">val
   </table>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
@@ -281,6 +284,12 @@ metamethod so <code>J(value)</code> from Lua converts <code class="paramref">val
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
   </div>
   <div>
       <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>

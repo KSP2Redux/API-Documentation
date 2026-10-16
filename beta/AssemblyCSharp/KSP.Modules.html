@@ -255,7 +255,7 @@ Classes
       <section><p>Data definition for the <a class="xref" href="KSP.Modules.Module_WheelBogey.html">Module_WheelBogey</a> wheel bogey module.</p>
 </section>
       <h4><a class="xref" href="KSP.Modules.Data_WheelBrakes.html">Data_WheelBrakes</a></h4>
-      <section><p>The current brake input applied to the wheel.</p>
+      <section><p>Represents the serializable data definition for <a class="xref" href="KSP.Modules.Module_WheelBrakes.html">Module_WheelBrakes</a>.</p>
 </section>
       <h4><a class="xref" href="KSP.Modules.Data_WheelDamage.html">Data_WheelDamage</a></h4>
       <section><p>Data definition for the <a class="xref" href="KSP.Modules.Module_WheelDamage.html">Module_WheelDamage</a> wheel damage module.</p>
@@ -264,7 +264,7 @@ Classes
       <section><p>Data definition for the <a class="xref" href="KSP.Modules.Module_WheelLock.html">Module_WheelLock</a> wheel lock module, configuring brake torque applied to landing legs.</p>
 </section>
       <h4><a class="xref" href="KSP.Modules.Data_WheelMotor.html">Data_WheelMotor</a></h4>
-      <section><p>Serializable data definition for the <a class="xref" href="KSP.Modules.Module_WheelMotor.html">Module_WheelMotor</a> part module, holding motor drive configuration, traction control settings, and runtime motor state.</p>
+      <section><p>Serializable data definition for the <a class="xref" href="KSP.Modules.Module_WheelMotor.html">Module_WheelMotor</a> part module, holding motor drive configuration and runtime motor state.</p>
 </section>
       <h4><a class="xref" href="KSP.Modules.Data_WheelMotorSteering.html">Data_WheelMotorSteering</a></h4>
       <section><p>Data definition for the <a class="xref" href="KSP.Modules.Module_WheelMotorSteering.html">Module_WheelMotorSteering</a> wheel motor steering module.</p>
@@ -475,6 +475,12 @@ sticker projector: shader properties, projector-space math, and per-target rende
       <h4><a class="xref" href="KSP.Modules.ThrustTransformGroup.html">ThrustTransformGroup</a></h4>
       <section><p>Represents a named thrust transform and its proportional contribution multiplier.</p>
 </section>
+      <h4><a class="xref" href="KSP.Modules.WheelImpactRule.html">WheelImpactRule</a></h4>
+      <section><p>Physical damage criteria for a wheel or landing leg, from the solver's outputs. Damage is energy
+based: the work the bump stop absorbs beyond the design travel plus the kinetic energy of a
+touchdown, decaying between hits, against a capacity derived from the rated load and the travel.
+A load alone, however high for one step, never breaks a wheel. A sustained structural overload does.</p>
+</section>
       <h4><a class="xref" href="KSP.Modules.WheelSubsystem.html">WheelSubsystem</a></h4>
       <section><p>Represents a named subsystem within a wheel module, associating a type flag with an owning part behaviour.</p>
 </section>
@@ -501,6 +507,9 @@ Structs
 </section>
       <h4><a class="xref" href="KSP.Modules.PartCollider.html">PartCollider</a></h4>
       <section><p>Represents a collider associated with a specific part.</p>
+</section>
+      <h4><a class="xref" href="KSP.Modules.WheelImpactState.html">WheelImpactState</a></h4>
+      <section><p>Per wheel accumulator of the damage rule.</p>
 </section>
     <h3 id="enums">
 Enums
@@ -570,14 +579,14 @@ Enums
       <h4><a class="xref" href="KSP.Modules.HeatshieldStatus.html">HeatshieldStatus</a></h4>
       <section><p>Represents the operational status of a heatshield part module.</p>
 </section>
-      <h4><a class="xref" href="KSP.Modules.Module_WheelBase.DriftCorrectionState.html">Module_WheelBase.DriftCorrectionState</a></h4>
-      <section><p>States of drift correction applied during wheel simulation.</p>
-</section>
       <h4><a class="xref" href="KSP.Modules.ResourceConversionState.html">ResourceConversionState</a></h4>
       <section><p>Represents the operational state of a resource converter.</p>
 </section>
       <h4><a class="xref" href="KSP.Modules.TransmissionState.html">TransmissionState</a></h4>
       <section><p>The current state of a data transmission.</p>
+</section>
+      <h4><a class="xref" href="KSP.Modules.WheelImpactOutcome.html">WheelImpactOutcome</a></h4>
+      <section><p>Outcome of an impact or overload assessment of a wheel.</p>
 </section>
       <h4><a class="xref" href="KSP.Modules.WheelSubsystem.SystemTypes.html">WheelSubsystem.SystemTypes</a></h4>
       <section><p>Bitmask flags identifying the functional subsystems present in a wheel module.</p>

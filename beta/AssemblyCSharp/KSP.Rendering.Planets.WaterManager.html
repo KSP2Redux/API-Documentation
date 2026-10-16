@@ -90,7 +90,7 @@
     <div class="level1"><span class="xref">WaterManager</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Rendering.html">Rendering</a>.<a class="xref" href="KSP.Rendering.Planets.html">Planets</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="KSP_Rendering_Planets_WaterManager_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class WaterManager</code></pre>
@@ -175,12 +175,13 @@
 
 
   <h4 id="KSP_Rendering_Planets_WaterManager_DrawOceanCommand" data-uid="KSP.Rendering.Planets.WaterManager.DrawOceanCommand">DrawOceanCommand</h4>
-  <div class="markdown level1 summary"><p>Command buffer that records draw calls for the ocean surface mesh.</p>
+  <div class="markdown level1 summary"><p>Commands that animate the ocean surface: wave animation, normal and foam textures, and the shallow depth
+texture.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public CommandBuffer DrawOceanCommand</code></pre>
+    <pre><code class="lang-csharp hljs">public WaterCommandList DrawOceanCommand</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -192,20 +193,24 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Rendering.CommandBuffer.html">CommandBuffer</a></td>
+        <td><a class="xref" href="KSP.Rendering.Planets.WaterCommandList.html">WaterCommandList</a></td>
         <td></td>
       </tr>
     </tbody>
   </table>
+  <h5 id="KSP_Rendering_Planets_WaterManager_DrawOceanCommand_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Recorded every late update and replayed for the water camera after its opaque pass, before the masks and
+depth below.</p>
+</div>
 
 
   <h4 id="KSP_Rendering_Planets_WaterManager_DrawUnderWaterCommand" data-uid="KSP.Rendering.Planets.WaterManager.DrawUnderWaterCommand">DrawUnderWaterCommand</h4>
-  <div class="markdown level1 summary"><p>Command buffer that records the full-screen underwater post-process pass.</p>
+  <div class="markdown level1 summary"><p>Commands that generate the underwater lighting texture the full-screen underwater effect reads.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public CommandBuffer DrawUnderWaterCommand</code></pre>
+    <pre><code class="lang-csharp hljs">public WaterCommandList DrawUnderWaterCommand</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -217,11 +222,14 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Rendering.CommandBuffer.html">CommandBuffer</a></td>
+        <td><a class="xref" href="KSP.Rendering.Planets.WaterCommandList.html">WaterCommandList</a></td>
         <td></td>
       </tr>
     </tbody>
   </table>
+  <h5 id="KSP_Rendering_Planets_WaterManager_DrawUnderWaterCommand_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Replayed for the water camera before post-processing, after the camera depth texture is complete.</p>
+</div>
 
 
   <h4 id="KSP_Rendering_Planets_WaterManager_GenerateFarFoamCycleTextureShader" data-uid="KSP.Rendering.Planets.WaterManager.GenerateFarFoamCycleTextureShader">GenerateFarFoamCycleTextureShader</h4>
@@ -275,12 +283,12 @@
 
 
   <h4 id="KSP_Rendering_Planets_WaterManager_GenerateLandbasedWaterMaskCommand" data-uid="KSP.Rendering.Planets.WaterManager.GenerateLandbasedWaterMaskCommand">GenerateLandbasedWaterMaskCommand</h4>
-  <div class="markdown level1 summary"><p>Command buffer that generates the land-based water mask texture.</p>
+  <div class="markdown level1 summary"><p>Commands that generate the land-based water mask texture.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public CommandBuffer GenerateLandbasedWaterMaskCommand</code></pre>
+    <pre><code class="lang-csharp hljs">public WaterCommandList GenerateLandbasedWaterMaskCommand</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -292,7 +300,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Rendering.CommandBuffer.html">CommandBuffer</a></td>
+        <td><a class="xref" href="KSP.Rendering.Planets.WaterCommandList.html">WaterCommandList</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -350,12 +358,12 @@
 
 
   <h4 id="KSP_Rendering_Planets_WaterManager_GenerateUnderOceanMaskCommand" data-uid="KSP.Rendering.Planets.WaterManager.GenerateUnderOceanMaskCommand">GenerateUnderOceanMaskCommand</h4>
-  <div class="markdown level1 summary"><p>Command buffer that generates the under-ocean mask texture.</p>
+  <div class="markdown level1 summary"><p>Commands that generate the under-ocean mask texture.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public CommandBuffer GenerateUnderOceanMaskCommand</code></pre>
+    <pre><code class="lang-csharp hljs">public WaterCommandList GenerateUnderOceanMaskCommand</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -367,7 +375,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Rendering.CommandBuffer.html">CommandBuffer</a></td>
+        <td><a class="xref" href="KSP.Rendering.Planets.WaterCommandList.html">WaterCommandList</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -425,12 +433,12 @@
 
 
   <h4 id="KSP_Rendering_Planets_WaterManager_GenerateWaterDepthCommand" data-uid="KSP.Rendering.Planets.WaterManager.GenerateWaterDepthCommand">GenerateWaterDepthCommand</h4>
-  <div class="markdown level1 summary"><p>Command buffer that drives the water depth generation pass.</p>
+  <div class="markdown level1 summary"><p>Commands that render the water depth, two-sided water depth and terrain depth textures.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public CommandBuffer GenerateWaterDepthCommand</code></pre>
+    <pre><code class="lang-csharp hljs">public WaterCommandList GenerateWaterDepthCommand</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -442,7 +450,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Rendering.CommandBuffer.html">CommandBuffer</a></td>
+        <td><a class="xref" href="KSP.Rendering.Planets.WaterCommandList.html">WaterCommandList</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -468,31 +476,6 @@
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeShader.html">ComputeShader</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="KSP_Rendering_Planets_WaterManager_InitWaterDefaultDepthTextureCommand" data-uid="KSP.Rendering.Planets.WaterManager.InitWaterDefaultDepthTextureCommand">InitWaterDefaultDepthTextureCommand</h4>
-  <div class="markdown level1 summary"><p>Command buffer that initializes the water default depth texture at the start of a frame.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public CommandBuffer InitWaterDefaultDepthTextureCommand</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Rendering.CommandBuffer.html">CommandBuffer</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -2260,6 +2243,32 @@
   </table>
 
 
+  <a id="KSP_Rendering_Planets_WaterManager_IsEditorHosted_" data-uid="KSP.Rendering.Planets.WaterManager.IsEditorHosted*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterManager_IsEditorHosted" data-uid="KSP.Rendering.Planets.WaterManager.IsEditorHosted">IsEditorHosted</h4>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the SDK planet preview hosts the manager.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsEditorHosted { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Rendering_Planets_WaterManager_LandBasedWaterBackSurfaceShader_" data-uid="KSP.Rendering.Planets.WaterManager.LandBasedWaterBackSurfaceShader*"></a>
   <h4 id="KSP_Rendering_Planets_WaterManager_LandBasedWaterBackSurfaceShader" data-uid="KSP.Rendering.Planets.WaterManager.LandBasedWaterBackSurfaceShader">LandBasedWaterBackSurfaceShader</h4>
   <div class="markdown level1 summary"><p>Gets or sets the shader used to render the back surface of land-based water volumes.</p>
@@ -2488,32 +2497,6 @@
     <tbody>
       <tr>
         <td><span class="xref">int</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="KSP_Rendering_Planets_WaterManager_ScreenSpaceShadowTexture_" data-uid="KSP.Rendering.Planets.WaterManager.ScreenSpaceShadowTexture*"></a>
-  <h4 id="KSP_Rendering_Planets_WaterManager_ScreenSpaceShadowTexture" data-uid="KSP.Rendering.Planets.WaterManager.ScreenSpaceShadowTexture">ScreenSpaceShadowTexture</h4>
-  <div class="markdown level1 summary"><p>Gets the render texture used for screen-space shadow data applied to the water surface.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public RenderTexture ScreenSpaceShadowTexture { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">RenderTexture</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -3097,6 +3080,40 @@
   </table>
 
 
+  <a id="KSP_Rendering_Planets_WaterManager_CreateForEditor_" data-uid="KSP.Rendering.Planets.WaterManager.CreateForEditor*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterManager_CreateForEditor_KSP_Rendering_Planets_IWaterEnvironment_" data-uid="KSP.Rendering.Planets.WaterManager.CreateForEditor(KSP.Rendering.Planets.IWaterEnvironment)">CreateForEditor(IWaterEnvironment)</h4>
+  <div class="markdown level1 summary"><p>Creates the manager for the SDK planet preview, replacing any manager still in place.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void CreateForEditor(IWaterEnvironment environment)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Rendering.Planets.IWaterEnvironment.html">IWaterEnvironment</a></td>
+        <td><span class="parametername">environment</span></td>
+        <td><p>What the manager reads from the scene in place of the game.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Rendering_Planets_WaterManager_CreateForEditor_KSP_Rendering_Planets_IWaterEnvironment__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Nothing ticks the manager's actions in edit mode, so the preview runs them with <a class="xref" href="KSP.Rendering.Planets.WaterManager.html#KSP_Rendering_Planets_WaterManager_TickForEditor">TickForEditor()</a>
+from its camera hook. The ocean meshes finish loading before this returns, since nothing completes an
+asynchronous load between preview frames.</p>
+</div>
+
+
   <a id="KSP_Rendering_Planets_WaterManager_Destroy_" data-uid="KSP.Rendering.Planets.WaterManager.Destroy*"></a>
   <h4 id="KSP_Rendering_Planets_WaterManager_Destroy" data-uid="KSP.Rendering.Planets.WaterManager.Destroy">Destroy()</h4>
   <div class="markdown level1 summary"><p>Destroys the singleton <a class="xref" href="KSP.Rendering.Planets.WaterManager.html">WaterManager</a> instance and releases all associated GPU and native memory resources.</p>
@@ -3106,6 +3123,21 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static void Destroy()</code></pre>
   </div>
+
+
+  <a id="KSP_Rendering_Planets_WaterManager_DestroyForEditor_" data-uid="KSP.Rendering.Planets.WaterManager.DestroyForEditor*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterManager_DestroyForEditor" data-uid="KSP.Rendering.Planets.WaterManager.DestroyForEditor">DestroyForEditor()</h4>
+  <div class="markdown level1 summary"><p>Destroys an editor-hosted manager and clears the singleton, so the next preview can create a fresh one.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void DestroyForEditor()</code></pre>
+  </div>
+  <h5 id="KSP_Rendering_Planets_WaterManager_DestroyForEditor_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p><a class="xref" href="KSP.Rendering.Planets.WaterManager.html#KSP_Rendering_Planets_WaterManager_Destroy">Destroy()</a> leaves the singleton in place, because game objects torn down after it still call into
+<a class="xref" href="KSP.Rendering.Planets.WaterManager.html#KSP_Rendering_Planets_WaterManager_Instance">Instance()</a> without checking for null, such as parts unregistering their water detection.</p>
+</div>
 
 
   <a id="KSP_Rendering_Planets_WaterManager_EnumerateWaterDetectObjects_" data-uid="KSP.Rendering.Planets.WaterManager.EnumerateWaterDetectObjects*"></a>
@@ -3131,51 +3163,6 @@
         <td><span class="xref">Action</span>&lt;<a class="xref" href="KSP.Rendering.Planets.WaterManager.html">WaterManager</a>.<a class="xref" href="KSP.Rendering.Planets.WaterManager.WaterDetectEntry.html">WaterDetectEntry</a>&gt;</td>
         <td><span class="parametername">func</span></td>
         <td><p>The callback to invoke, receiving each <a class="xref" href="KSP.Rendering.Planets.WaterManager.WaterDetectEntry.html">WaterManager.WaterDetectEntry</a> in turn.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <a id="KSP_Rendering_Planets_WaterManager_GetDetectObjectBody_" data-uid="KSP.Rendering.Planets.WaterManager.GetDetectObjectBody*"></a>
-  <h4 id="KSP_Rendering_Planets_WaterManager_GetDetectObjectBody_System_Int32_" data-uid="KSP.Rendering.Planets.WaterManager.GetDetectObjectBody(System.Int32)">GetDetectObjectBody(int)</h4>
-  <div class="markdown level1 summary"><p>Returns the celestial body associated with the water detect object at the given list index.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public CelestialBodyComponent GetDetectObjectBody(int index)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">int</span></td>
-        <td><span class="parametername">index</span></td>
-        <td><p>Zero-based index into the internal list of registered detect objects.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
-        <td><p>The <a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a> for the object at that index, or <code>null</code> if the index is out of range.</p>
 </td>
       </tr>
     </tbody>
@@ -3495,6 +3482,57 @@
   </table>
 
 
+  <a id="KSP_Rendering_Planets_WaterManager_MarkDetectObjectsOnBody_" data-uid="KSP.Rendering.Planets.WaterManager.MarkDetectObjectsOnBody*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterManager_MarkDetectObjectsOnBody_KSP_Sim_impl_CelestialBodyComponent_Unity_Collections_NativeArray_System_Boolean__" data-uid="KSP.Rendering.Planets.WaterManager.MarkDetectObjectsOnBody(KSP.Sim.impl.CelestialBodyComponent,Unity.Collections.NativeArray{System.Boolean})">MarkDetectObjectsOnBody(CelestialBodyComponent, NativeArray&lt;bool&gt;)</h4>
+  <div class="markdown level1 summary"><p>Marks which registered detect objects belong to a body, so that body's ocean tests only its own objects.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool MarkDetectObjectsOnBody(CelestialBodyComponent body, NativeArray&lt;bool&gt; isOnBody)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
+        <td><span class="parametername">body</span></td>
+        <td><p>The body whose ocean is being tested.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Collections.NativeArray.html">NativeArray</a>&lt;<span class="xref">bool</span>&gt;</td>
+        <td><span class="parametername">isOnBody</span></td>
+        <td><p>Receives, per entry index, whether that entry belongs to <code class="paramref">body</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if any entry belongs to <code class="paramref">body</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Rendering_Planets_WaterManager_RegisterDrawLandBasedWaterAction_" data-uid="KSP.Rendering.Planets.WaterManager.RegisterDrawLandBasedWaterAction*"></a>
   <h4 id="KSP_Rendering_Planets_WaterManager_RegisterDrawLandBasedWaterAction_System_Action_" data-uid="KSP.Rendering.Planets.WaterManager.RegisterDrawLandBasedWaterAction(System.Action)">RegisterDrawLandBasedWaterAction(Action)</h4>
   <div class="markdown level1 summary"><p>Registers a callback to be invoked each frame when land-based water draw calls are issued.</p>
@@ -3627,6 +3665,18 @@
   </table>
 
 
+  <a id="KSP_Rendering_Planets_WaterManager_ReleaseCameraForEditor_" data-uid="KSP.Rendering.Planets.WaterManager.ReleaseCameraForEditor*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterManager_ReleaseCameraForEditor" data-uid="KSP.Rendering.Planets.WaterManager.ReleaseCameraForEditor">ReleaseCameraForEditor()</h4>
+  <div class="markdown level1 summary"><p>Stops an editor-hosted manager's render hooks drawing for its camera, so a paused preview stops replaying the
+last frame it recorded. The next <a class="xref" href="KSP.Rendering.Planets.WaterManager.html#KSP_Rendering_Planets_WaterManager_TickForEditor">TickForEditor()</a> hands the camera back.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void ReleaseCameraForEditor()</code></pre>
+  </div>
+
+
   <a id="KSP_Rendering_Planets_WaterManager_ResetWaterDetectObjects_" data-uid="KSP.Rendering.Planets.WaterManager.ResetWaterDetectObjects*"></a>
   <h4 id="KSP_Rendering_Planets_WaterManager_ResetWaterDetectObjects" data-uid="KSP.Rendering.Planets.WaterManager.ResetWaterDetectObjects">ResetWaterDetectObjects()</h4>
   <div class="markdown level1 summary"><p>Rebuilds the native detection arrays to match the current set of registered objects and resets all per-object state for the next detection pass.</p>
@@ -3667,6 +3717,22 @@
   </table>
 
 
+  <a id="KSP_Rendering_Planets_WaterManager_TickForEditor_" data-uid="KSP.Rendering.Planets.WaterManager.TickForEditor*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterManager_TickForEditor" data-uid="KSP.Rendering.Planets.WaterManager.TickForEditor">TickForEditor()</h4>
+  <div class="markdown level1 summary"><p>Runs one frame of an editor-hosted manager, in the order the game's late update runs its actions, then uploads
+the generated ocean vertices the way the game camera's <code>SetOceanData</code> does before it culls.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void TickForEditor()</code></pre>
+  </div>
+  <h5 id="KSP_Rendering_Planets_WaterManager_TickForEditor_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Called before the camera renders, so the draws and command lists it fills are consumed by the frame that
+camera is about to render.</p>
+</div>
+
+
   <a id="KSP_Rendering_Planets_WaterManager_UnRegisterDrawLandBasedWaterAction_" data-uid="KSP.Rendering.Planets.WaterManager.UnRegisterDrawLandBasedWaterAction*"></a>
   <h4 id="KSP_Rendering_Planets_WaterManager_UnRegisterDrawLandBasedWaterAction_System_Action_" data-uid="KSP.Rendering.Planets.WaterManager.UnRegisterDrawLandBasedWaterAction(System.Action)">UnRegisterDrawLandBasedWaterAction(Action)</h4>
   <div class="markdown level1 summary"><p>Removes a previously registered land-based water draw callback.</p>
@@ -3690,6 +3756,42 @@
         <td><span class="xref">Action</span></td>
         <td><span class="parametername">action</span></td>
         <td><p>The callback to remove from the land-based water draw invocation list.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_WaterManager_UnregisterOceanActions_" data-uid="KSP.Rendering.Planets.WaterManager.UnregisterOceanActions*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterManager_UnregisterOceanActions_System_Action_System_Action_" data-uid="KSP.Rendering.Planets.WaterManager.UnregisterOceanActions(System.Action,System.Action)">UnregisterOceanActions(Action, Action)</h4>
+  <div class="markdown level1 summary"><p>Clears the ocean callbacks a renderer registered, leaving them alone when another renderer has replaced them
+since.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UnregisterOceanActions(Action update, Action draw)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action</span></td>
+        <td><span class="parametername">update</span></td>
+        <td><p>The renderer's ocean update callback.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Action</span></td>
+        <td><span class="parametername">draw</span></td>
+        <td><p>The renderer's ocean draw callback.</p>
 </td>
       </tr>
     </tbody>
@@ -3810,13 +3912,13 @@
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
@@ -3829,6 +3931,12 @@
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
   </div>
   <div>
       <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>

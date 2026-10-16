@@ -85,7 +85,7 @@
 </div>
   <div class="markdown level0 conceptual"></div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.Planets.html">Planets</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="Redux_Planets_TerrainHeightSampler_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public struct TerrainHeightSampler</code></pre>
@@ -101,7 +101,7 @@ average there.
 <p>
 Each of these is reproduced deliberately, because the shader does it:
 </p>
-<ol><li>UVs come from FXC's polynomial expansions of atan2 and asin, see <a class="xref" href="KSP.Rendering.Planets.PQSJobUtil.html#KSP_Rendering_Planets_PQSJobUtil_GetShaderSphericalUVs_Unity_Mathematics_float3_">GetShaderSphericalUVs(float3)</a>.</li><li>Tiled maps blend a side projection at (2u, v) times the UV scale with a top projection at (x, z) / 2 times the UV scale, weighted by 1 - |y|^contrast toward the side.</li><li>The global map and every tier sample biquadratically, whatever the body's filtering modes say, and both masks bilinearly. Only biquadratic has been verified, and every body checked uses it.</li><li>An sRGB mask is decoded to linear before it is filtered, alpha excepted, as the hardware does. Minmus ships its layer mask that way.</li><li>Layer mask weights are divided by their sum. A missing layer mask reads as black, which zeroes every tier.</li><li>A tier channel's sub-zone weight is the dot product of the sub-zone mask with the channel's filter, neither normalized nor clamped, so overlapping zones stack. With sub-zones on it applies to all four tiers, and a black sub-zone mask leaves only the global map.</li><li>Tiers 3 and 4 exist only with sub-zones on, and a missing map in either reads as white.</li><li>Decal footprints are measured on the base sphere, the body radius less the ocean altitude, whatever the terrain height. Decals cull and clip at the body radius, so terrain height never clips one.</li><li>Decal height and alpha are read through the low half of each packed texel pair, so every odd texel column repeats its even neighbour.</li><li>No pole caps and no pole direction offset. The height kernel never reads the offset, and only applies a cap past a radius of 1,000.</li></ol>
+<ol><li>UVs come from FXC's polynomial expansions of atan2 and asin, see <a class="xref" href="KSP.Rendering.Planets.PQSJobUtil.html#KSP_Rendering_Planets_PQSJobUtil_GetShaderSphericalUVs_Unity_Mathematics_float3_">GetShaderSphericalUVs(float3)</a>. Redux's build of the shader closes the seams they leave at the equator and the octant meridians (#1883), and so does this.</li><li>Tiled maps blend a side projection at (2u, v) times the UV scale with a top projection at (x, z) / 2 times the UV scale, weighted by 1 - |y|^contrast toward the side.</li><li>The global map and every tier sample biquadratically, whatever the body's filtering modes say, and both masks bilinearly. Only biquadratic has been verified, and every body checked uses it.</li><li>Both masks repeat across the antimeridian and clamp at the poles. The stock shader clamped them across the antimeridian too, which stepped the terrain there, and Redux's build repeats them.</li><li>An sRGB mask is decoded to linear before it is filtered, alpha excepted, as the hardware does. Minmus ships its layer mask that way.</li><li>Layer mask weights are divided by their sum. A missing layer mask reads as black, which zeroes every tier.</li><li>A tier channel's sub-zone weight is the dot product of the sub-zone mask with the channel's filter, neither normalized nor clamped, so overlapping zones stack. With sub-zones on it applies to all four tiers, and a black sub-zone mask leaves only the global map.</li><li>Tiers 3 and 4 exist only with sub-zones on, and a missing map in either reads as white.</li><li>Decal footprints are measured on the base sphere, the body radius less the ocean altitude, whatever the terrain height. Decals cull and clip at the body radius, so terrain height never clips one.</li><li>Decal height and alpha are read texel by texel. The stock shader kept only the low half of each packed texel pair, so every odd texel column repeated its even neighbour, and Redux's build reads each texel's own half.</li><li>Within |y| = 0.999 of a pole the direction moves by y times <a class="xref" href="Redux.Planets.TerrainHeightSampler.html#Redux_Planets_TerrainHeightSampler_PoleDirectionOffset">PoleDirectionOffset</a> before the UV and the height are taken, as the drawn mesh does it. Redux's build of the shader ramps the offset in over 0.0001 in |y|, where stock switched it on at once and left a step around the pole, and takes the colliders' heights the same way. Stock colliders ignored the offset.</li><li>Pole caps apply by latitude, as on the drawn mesh. Stock colliders only applied a cap past a radius of 1,000.</li></ol>
 <p>
 Burst-compatible. Every container has to be valid before the sampler goes into a job, which
 <a class="xref" href="Redux.Planets.TerrainHeightSamplerCache.html#Redux_Planets_TerrainHeightSamplerCache_Build_KSP_Rendering_Planets_PQSData_HeightMapInfo_System_Double_System_Double_System_Double_PQSDecalController_System_Boolean_">Build(HeightMapInfo, double, double, double, PQSDecalController, bool)</a> guarantees.
@@ -836,6 +836,56 @@ Burst-compatible. Every container has to be valid before the sampler goes into a
   </table>
 
 
+  <h4 id="Redux_Planets_TerrainHeightSampler_NorthCap" data-uid="Redux.Planets.TerrainHeightSampler.NorthCap">NorthCap</h4>
+  <div class="markdown level1 summary"><p>The cap the terrain fades to near the north pole.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerrainPoleCap NorthCap</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainPoleCap.html">TerrainPoleCap</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_PoleDirectionOffset" data-uid="Redux.Planets.TerrainHeightSampler.PoleDirectionOffset">PoleDirectionOffset</h4>
+  <div class="markdown level1 summary"><p>The body's pole direction offset in x and z, which moves directions near a pole off the axis before the maps are read.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float2 PoleDirectionOffset</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <h4 id="Redux_Planets_TerrainHeightSampler_SeaLevelRadius" data-uid="Redux.Planets.TerrainHeightSampler.SeaLevelRadius">SeaLevelRadius</h4>
   <div class="markdown level1 summary"><p>The body radius in meters, where decals cull and clip.</p>
 </div>
@@ -855,6 +905,31 @@ Burst-compatible. Every container has to be valid before the sampler goes into a
     <tbody>
       <tr>
         <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Planets_TerrainHeightSampler_SouthCap" data-uid="Redux.Planets.TerrainHeightSampler.SouthCap">SouthCap</h4>
+  <div class="markdown level1 summary"><p>The cap the terrain fades to near the south pole.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TerrainPoleCap SouthCap</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Planets.TerrainPoleCap.html">TerrainPoleCap</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -1279,7 +1354,8 @@ Burst-compatible. Every container has to be valid before the sampler goes into a
   <div class="markdown level1 remarks"><p>Marches in steps no longer than the ray could fall before meeting terrain of up to about 72 degrees, then
 bisects to 1 cm. Reports a miss once the ray leaves <a class="xref" href="Redux.Planets.TerrainHeightSampler.html#Redux_Planets_TerrainHeightSampler_MaxTerrainRadius">MaxTerrainRadius</a>, passes
 <code class="paramref">maxDistance</code>, or runs out of 2048 steps, which a ray skimming low over tens of kilometers
-of terrain can do. A ray starting under the terrain hits at its origin.</p>
+of terrain can do. A ray starting under the terrain hits at its origin. A ray with a non-finite or zero
+direction, a non-finite origin or distance, or its origin at the body center is a miss.</p>
 </div>
 
 
@@ -1592,13 +1668,13 @@ of terrain can do. A ray starting under the terrain hits at its origin.</p>
   </table>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
@@ -1611,6 +1687,12 @@ of terrain can do. A ray starting under the terrain hits at its origin.</p>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
   </div>
   <div>
       <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>

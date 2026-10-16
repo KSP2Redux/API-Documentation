@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class EclipseOccluderTable | KSP2Redux API (Beta) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class EclipseOccluderTable | KSP2Redux API (Beta) ">
+    
+    <meta name="description" content="The star and the bodies that can eclipse it, uploaded once per frame in scaled space for KSP2Eclipse.hlsl, and the occluders of each scaled body.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Redux.Rendering.Eclipses.EclipseOccluderTable">
+
+
+
+  <h1 id="Redux_Rendering_Eclipses_EclipseOccluderTable" data-uid="Redux.Rendering.Eclipses.EclipseOccluderTable" class="text-break">Class EclipseOccluderTable</h1>
+  <div class="markdown level0 summary"><p>The star and the bodies that can eclipse it, uploaded once per frame in scaled space for
+<code>KSP2Eclipse.hlsl</code>, and the occluders of each scaled body.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><span class="xref">EclipseOccluderTable</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.Rendering.html">Rendering</a>.<a class="xref" href="Redux.Rendering.Eclipses.html">Eclipses</a></h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
+  <h5 id="Redux_Rendering_Eclipses_EclipseOccluderTable_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class EclipseOccluderTable</code></pre>
+  </div>
+  <h5 id="Redux_Rendering_Eclipses_EclipseOccluderTable_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>A scaled body is eclipsed by its parent unless the parent is a star, by its siblings when the parent is not a
+star, and by its own moons (URP/notes/eclipses.md, section 3.2). Never by itself, which its own lighting already
+shades. Positions come from the simulation through the scaled-space frame, as
+<a class="xref" href="KSP.Sim.impl.ScaledPlanetaryBodyView.html">ScaledPlanetaryBodyView</a> places the bodies, so the table does not depend on which of them updated
+first. While the map is open the map camera draws from a second table in map space (<a class="xref" href="Redux.Rendering.Eclipses.EclipseOccluderTable.html#Redux_Rendering_Eclipses_EclipseOccluderTable_UploadMap_KSP_Map_Map3DView_KSP_Sim_impl_CelestialBodyComponent_System_Collections_Generic_IReadOnlyList_KSP_Sim_impl_CelestialBodyComponent__">UploadMap(Map3DView, CelestialBodyComponent, IReadOnlyList&lt;CelestialBodyComponent&gt;)</a>).</p>
+</div>
+  <h3 id="fields">Fields
+</h3>
+
+
+  <h4 id="Redux_Rendering_Eclipses_EclipseOccluderTable_MAX_LOCAL_OCCLUDERS" data-uid="Redux.Rendering.Eclipses.EclipseOccluderTable.MAX_LOCAL_OCCLUDERS">MAX_LOCAL_OCCLUDERS</h4>
+  <div class="markdown level1 summary"><p>The size of the local occluder table, the same as <code>KSP2_ECLIPSE_MAX_LOCAL_OCCLUDERS</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int MAX_LOCAL_OCCLUDERS = 8</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Rendering_Eclipses_EclipseOccluderTable_MAX_OCCLUDERS" data-uid="Redux.Rendering.Eclipses.EclipseOccluderTable.MAX_OCCLUDERS">MAX_OCCLUDERS</h4>
+  <div class="markdown level1 summary"><p>The size of the occluder table, the same as <code>KSP2_ECLIPSE_MAX_OCCLUDERS</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int MAX_OCCLUDERS = 32</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Rendering_Eclipses_EclipseOccluderTable_MAX_OCCLUDERS_PER_RECEIVER" data-uid="Redux.Rendering.Eclipses.EclipseOccluderTable.MAX_OCCLUDERS_PER_RECEIVER">MAX_OCCLUDERS_PER_RECEIVER</h4>
+  <div class="markdown level1 summary"><p>How many occluders one receiver can list.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int MAX_OCCLUDERS_PER_RECEIVER = 8</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="Redux_Rendering_Eclipses_EclipseOccluderTable_DebugRingTiltDegrees_" data-uid="Redux.Rendering.Eclipses.EclipseOccluderTable.DebugRingTiltDegrees*"></a>
+  <h4 id="Redux_Rendering_Eclipses_EclipseOccluderTable_DebugRingTiltDegrees" data-uid="Redux.Rendering.Eclipses.EclipseOccluderTable.DebugRingTiltDegrees">DebugRingTiltDegrees</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a tilt, in degrees, of the plane the ring shadow is cast through, for checking the shadow at any
+season. The ring itself is not moved. 0 in play.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float DebugRingTiltDegrees { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Rendering_Eclipses_EclipseOccluderTable_LocalSceneEnabled_" data-uid="Redux.Rendering.Eclipses.EclipseOccluderTable.LocalSceneEnabled*"></a>
+  <h4 id="Redux_Rendering_Eclipses_EclipseOccluderTable_LocalSceneEnabled" data-uid="Redux.Rendering.Eclipses.EclipseOccluderTable.LocalSceneEnabled">LocalSceneEnabled</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a value indicating whether the local scene's main light is darkened per pixel. Off, the local
+sun only carries the eclipse at the observer, as in stock.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool LocalSceneEnabled { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="Redux_Rendering_Eclipses_EclipseOccluderTable_FindMapBody_" data-uid="Redux.Rendering.Eclipses.EclipseOccluderTable.FindMapBody*"></a>
+  <h4 id="Redux_Rendering_Eclipses_EclipseOccluderTable_FindMapBody_UnityEngine_Component_" data-uid="Redux.Rendering.Eclipses.EclipseOccluderTable.FindMapBody(UnityEngine.Component)">FindMapBody(Component)</h4>
+  <div class="markdown level1 summary"><p>Finds the body a map clone draws, from the body data of the clone a component belongs to. The map clones the
+scaled bodies with no scaled view to name their body.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static CelestialBodyComponent FindMapBody(Component component)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Component.html">Component</a></td>
+        <td><span class="parametername">component</span></td>
+        <td><p>A component on the clone or below it.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
+        <td><p>The body, or null outside a clone or before the universe has loaded.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Rendering_Eclipses_EclipseOccluderTable_SetReceiverOccluders_" data-uid="Redux.Rendering.Eclipses.EclipseOccluderTable.SetReceiverOccluders*"></a>
+  <h4 id="Redux_Rendering_Eclipses_EclipseOccluderTable_SetReceiverOccluders_KSP_Sim_impl_CelestialBodyComponent_UnityEngine_Material_System_Boolean_" data-uid="Redux.Rendering.Eclipses.EclipseOccluderTable.SetReceiverOccluders(KSP.Sim.impl.CelestialBodyComponent,UnityEngine.Material,System.Boolean)">SetReceiverOccluders(CelestialBodyComponent, Material, bool)</h4>
+  <div class="markdown level1 summary"><p>Sets a scaled body's occluders on a material that draws it, as table indices with -1 for none.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void SetReceiverOccluders(CelestialBodyComponent receiver, Material material, bool includeSelf = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
+        <td><span class="parametername">receiver</span></td>
+        <td><p>The body the material draws.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Material.html">Material</a></td>
+        <td><span class="parametername">material</span></td>
+        <td><p>The material, whose shader reads <code>_KSP2EclipseOccluderIndices0</code> and <code>1</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">includeSelf</span></td>
+        <td><p>Whether the body hides the star from its own surface.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Rendering_Eclipses_EclipseOccluderTable_SetReceiverOccluders_KSP_Sim_impl_CelestialBodyComponent_UnityEngine_Material_System_Boolean__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>With <code class="paramref">includeSelf</code> the body is its own first occluder: a point on its surface then sees
+the star only above its horizon, which darkens the sun-facing slopes of the normal-mapped night side that
+the surface's own lighting leaves lit.</p>
+</div>
+
+
+  <a id="Redux_Rendering_Eclipses_EclipseOccluderTable_TryGetOccluderIndex_" data-uid="Redux.Rendering.Eclipses.EclipseOccluderTable.TryGetOccluderIndex*"></a>
+  <h4 id="Redux_Rendering_Eclipses_EclipseOccluderTable_TryGetOccluderIndex_KSP_Sim_impl_CelestialBodyComponent_System_Int32__" data-uid="Redux.Rendering.Eclipses.EclipseOccluderTable.TryGetOccluderIndex(KSP.Sim.impl.CelestialBodyComponent,System.Int32@)">TryGetOccluderIndex(CelestialBodyComponent, out int)</h4>
+  <div class="markdown level1 summary"><p>Finds where a body sits in this frame's occluder table.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool TryGetOccluderIndex(CelestialBodyComponent body, out int index)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
+        <td><span class="parametername">body</span></td>
+        <td><p>The body.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>Its index in <code>_KSP2EclipseOccluders</code>, or -1.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True when the body is in the table.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Rendering_Eclipses_EclipseOccluderTable_Upload_" data-uid="Redux.Rendering.Eclipses.EclipseOccluderTable.Upload*"></a>
+  <h4 id="Redux_Rendering_Eclipses_EclipseOccluderTable_Upload_KSP_Sim_IScaledSpaceFrame_KSP_Sim_impl_CelestialBodyComponent_System_Collections_Generic_IReadOnlyList_KSP_Sim_impl_CelestialBodyComponent__" data-uid="Redux.Rendering.Eclipses.EclipseOccluderTable.Upload(KSP.Sim.IScaledSpaceFrame,KSP.Sim.impl.CelestialBodyComponent,System.Collections.Generic.IReadOnlyList{KSP.Sim.impl.CelestialBodyComponent})">Upload(IScaledSpaceFrame, CelestialBodyComponent, IReadOnlyList&lt;CelestialBodyComponent&gt;)</h4>
+  <div class="markdown level1 summary"><p>Uploads the star and the occluder table for this frame.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Upload(IScaledSpaceFrame scaledSpace, CelestialBodyComponent star, IReadOnlyList&lt;CelestialBodyComponent&gt; bodies)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.IScaledSpaceFrame.html">IScaledSpaceFrame</a></td>
+        <td><span class="parametername">scaledSpace</span></td>
+        <td><p>The scaled-space frame the scaled bodies are drawn in.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
+        <td><span class="parametername">star</span></td>
+        <td><p>The star whose light the bodies block.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">IReadOnlyList</span>&lt;<a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a>&gt;</td>
+        <td><span class="parametername">bodies</span></td>
+        <td><p>Every celestial body. Stars are left out, and bodies past the table size too.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Rendering_Eclipses_EclipseOccluderTable_UploadLocal_" data-uid="Redux.Rendering.Eclipses.EclipseOccluderTable.UploadLocal*"></a>
+  <h4 id="Redux_Rendering_Eclipses_EclipseOccluderTable_UploadLocal_KSP_Sim_IPhysicsSpaceProvider_UnityEngine_Camera_KSP_Sim_Position_KSP_Sim_impl_CelestialBodyComponent_System_Collections_Generic_IReadOnlyList_KSP_Sim_impl_CelestialBodyComponent__" data-uid="Redux.Rendering.Eclipses.EclipseOccluderTable.UploadLocal(KSP.Sim.IPhysicsSpaceProvider,UnityEngine.Camera,KSP.Sim.Position,KSP.Sim.impl.CelestialBodyComponent,System.Collections.Generic.IReadOnlyList{KSP.Sim.impl.CelestialBodyComponent})">UploadLocal(IPhysicsSpaceProvider, Camera, Position, CelestialBodyComponent, IReadOnlyList&lt;CelestialBodyComponent&gt;)</h4>
+  <div class="markdown level1 summary"><p>Uploads the star, the observer and the bodies around the observer in physics space, for the local
+scene's sun per pixel (<code>KSP2_EclipseLocalSunFactor</code>).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void UploadLocal(IPhysicsSpaceProvider physicsSpace, Camera localCamera, Position observer, CelestialBodyComponent star, IReadOnlyList&lt;CelestialBodyComponent&gt; occluders)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.IPhysicsSpaceProvider.html">IPhysicsSpaceProvider</a></td>
+        <td><span class="parametername">physicsSpace</span></td>
+        <td><p>The physics-space frame the local scene is drawn in.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Camera.html">Camera</a></td>
+        <td><span class="parametername">localCamera</span></td>
+        <td><p>The camera that draws the local scene.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.Position.html">Position</a></td>
+        <td><span class="parametername">observer</span></td>
+        <td><p>Where the local sun's eclipse was measured, the point the pixels are compared with.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
+        <td><span class="parametername">star</span></td>
+        <td><p>The star.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">IReadOnlyList</span>&lt;<a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a>&gt;</td>
+        <td><span class="parametername">occluders</span></td>
+        <td><p>The bodies that can hide the star from the observer, the observer's own body included. Stars are left
+out, and bodies past <a class="xref" href="Redux.Rendering.Eclipses.EclipseOccluderTable.html#Redux_Rendering_Eclipses_EclipseOccluderTable_MAX_LOCAL_OCCLUDERS">MAX_LOCAL_OCCLUDERS</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Rendering_Eclipses_EclipseOccluderTable_UploadLocal_KSP_Sim_IPhysicsSpaceProvider_UnityEngine_Camera_KSP_Sim_Position_KSP_Sim_impl_CelestialBodyComponent_System_Collections_Generic_IReadOnlyList_KSP_Sim_impl_CelestialBodyComponent___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The table only reaches the camera that draws the local scene, and only in a frame it was uploaded for.
+Every other camera (map, menus, portraits) sees an empty table, so one left over from flight, which is
+in physics space, never darkens them.</p>
+</div>
+
+
+  <a id="Redux_Rendering_Eclipses_EclipseOccluderTable_UploadMap_" data-uid="Redux.Rendering.Eclipses.EclipseOccluderTable.UploadMap*"></a>
+  <h4 id="Redux_Rendering_Eclipses_EclipseOccluderTable_UploadMap_KSP_Map_Map3DView_KSP_Sim_impl_CelestialBodyComponent_System_Collections_Generic_IReadOnlyList_KSP_Sim_impl_CelestialBodyComponent__" data-uid="Redux.Rendering.Eclipses.EclipseOccluderTable.UploadMap(KSP.Map.Map3DView,KSP.Sim.impl.CelestialBodyComponent,System.Collections.Generic.IReadOnlyList{KSP.Sim.impl.CelestialBodyComponent})">UploadMap(Map3DView, CelestialBodyComponent, IReadOnlyList&lt;CelestialBodyComponent&gt;)</h4>
+  <div class="markdown level1 summary"><p>Builds the table in map space for the map camera: the star and the bodies where the map draws them, at the size
+it draws them, the ring nearest the map camera, and the occluders of each body the map draws.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void UploadMap(Map3DView mapView, CelestialBodyComponent star, IReadOnlyList&lt;CelestialBodyComponent&gt; bodies)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Map.Map3DView.html">Map3DView</a></td>
+        <td><span class="parametername">mapView</span></td>
+        <td><p>The map view whose bodies are drawn.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
+        <td><span class="parametername">star</span></td>
+        <td><p>The star whose light the bodies block.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">IReadOnlyList</span>&lt;<a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a>&gt;</td>
+        <td><span class="parametername">bodies</span></td>
+        <td><p>Every celestial body. Stars are left out, and bodies past the table size too.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Rendering_Eclipses_EclipseOccluderTable_UploadMap_KSP_Map_Map3DView_KSP_Sim_impl_CelestialBodyComponent_System_Collections_Generic_IReadOnlyList_KSP_Sim_impl_CelestialBodyComponent___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The map lights every body from the star's map position (<a class="xref" href="KSP.Rendering.CelestialBodyMapLighting.html">CelestialBodyMapLighting</a>), so around the
+focus the map table's shadows fall where its light does. Only the map camera reads it, through the table hook,
+and every other camera keeps the scaled table. The bodies take the same order as in <a class="xref" href="Redux.Rendering.Eclipses.EclipseOccluderTable.html#Redux_Rendering_Eclipses_EclipseOccluderTable_Upload_KSP_Sim_IScaledSpaceFrame_KSP_Sim_impl_CelestialBodyComponent_System_Collections_Generic_IReadOnlyList_KSP_Sim_impl_CelestialBodyComponent__">Upload(IScaledSpaceFrame, CelestialBodyComponent, IReadOnlyList&lt;CelestialBodyComponent&gt;)</a>, so a
+receiver's indices hold in both tables.</p>
+</div>
+
+
+  <a id="Redux_Rendering_Eclipses_EclipseOccluderTable_UploadRing_" data-uid="Redux.Rendering.Eclipses.EclipseOccluderTable.UploadRing*"></a>
+  <h4 id="Redux_Rendering_Eclipses_EclipseOccluderTable_UploadRing_KSP_Sim_IScaledSpaceFrame_KSP_Sim_IPhysicsSpaceProvider_KSP_Sim_Position_" data-uid="Redux.Rendering.Eclipses.EclipseOccluderTable.UploadRing(KSP.Sim.IScaledSpaceFrame,KSP.Sim.IPhysicsSpaceProvider,KSP.Sim.Position)">UploadRing(IScaledSpaceFrame, IPhysicsSpaceProvider, Position)</h4>
+  <div class="markdown level1 summary"><p>Uploads the ring nearest the observer for its shadow (<code>KSP2_EclipseRingTransmittance</code>): in scaled space for
+the scaled receivers and in physics space for the local scene.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void UploadRing(IScaledSpaceFrame scaledSpace, IPhysicsSpaceProvider physicsSpace, Position observer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.IScaledSpaceFrame.html">IScaledSpaceFrame</a></td>
+        <td><span class="parametername">scaledSpace</span></td>
+        <td><p>The scaled-space frame the scaled receivers draw in.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.IPhysicsSpaceProvider.html">IPhysicsSpaceProvider</a></td>
+        <td><span class="parametername">physicsSpace</span></td>
+        <td><p>The physics-space frame the local scene is drawn in.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.Position.html">Position</a></td>
+        <td><span class="parametername">observer</span></td>
+        <td><p>The observer, to pick the nearest ring.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Rendering_Eclipses_EclipseOccluderTable_UploadRing_KSP_Sim_IScaledSpaceFrame_KSP_Sim_IPhysicsSpaceProvider_KSP_Sim_Position__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>A ring shadows anything whose ray toward the star crosses it, so no receiver lists it. Only one ring is
+uploaded, the one whose body is nearest the observer: stock has a single ringed body (Dres).</p>
+</div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from prerelease
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

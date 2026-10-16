@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class Data_WheelMotor | KSP2Redux API (Beta) ">
     
-    <meta name="description" content="Serializable data definition for the  part module, holding motor drive configuration, traction control settings, and runtime motor state.">
+    <meta name="description" content="Serializable data definition for the  part module, holding motor drive configuration and runtime motor state.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,7 @@
 
 
   <h1 id="KSP_Modules_Data_WheelMotor" data-uid="KSP.Modules.Data_WheelMotor" class="text-break">Class Data_WheelMotor</h1>
-  <div class="markdown level0 summary"><p>Serializable data definition for the <a class="xref" href="KSP.Modules.Module_WheelMotor.html">Module_WheelMotor</a> part module, holding motor drive configuration, traction control settings, and runtime motor state.</p>
+  <div class="markdown level0 summary"><p>Serializable data definition for the <a class="xref" href="KSP.Modules.Module_WheelMotor.html">Module_WheelMotor</a> part module, holding motor drive configuration and runtime motor state.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -223,7 +223,7 @@
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Modules.html">Modules</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="KSP_Modules_Data_WheelMotor_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public sealed class Data_WheelMotor : ModuleData</code></pre>
@@ -271,7 +271,7 @@ public float DriveInput</code></pre>
 
 
   <h4 id="KSP_Modules_Data_WheelMotor_MaxDriveTorque" data-uid="KSP.Modules.Data_WheelMotor.MaxDriveTorque">MaxDriveTorque</h4>
-  <div class="markdown level1 summary"><p>Maximum torque the motor will apply to the wheel this frame after applying the drive limiter and traction control.</p>
+  <div class="markdown level1 summary"><p>Maximum torque the motor can apply to the wheel this frame, from the torque curve at the current wheel speed.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -376,7 +376,7 @@ public bool MotorOperative</code></pre>
 
 
   <h4 id="KSP_Modules_Data_WheelMotor_MotorPhysXActive" data-uid="KSP.Modules.Data_WheelMotor.MotorPhysXActive">MotorPhysXActive</h4>
-  <div class="markdown level1 summary"><p>Whether the PhysX wheel motor is currently active on the physics collider.</p>
+  <div class="markdown level1 summary"><p>Whether the motor is currently driving the wheel and consuming resources.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -453,7 +453,7 @@ public double ResourceFractionOutput</code></pre>
 
 
   <h4 id="KSP_Modules_Data_WheelMotor_autoTorque" data-uid="KSP.Modules.Data_WheelMotor.autoTorque">autoTorque</h4>
-  <div class="markdown level1 summary"><p>Whether the motor automatically scales torque output to maintain traction control.</p>
+  <div class="markdown level1 summary"><p>Unused by the coupled solver and hidden in the PAM. Kept for part JSON and save compatibility.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -716,7 +716,7 @@ public FloatCurve torqueCurve</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="GlobalAssemblyCSharp.FloatCurve.html">FloatCurve</a></td>
+        <td><a class="xref" href="GlobalKsp2Redux.FloatCurve.html">FloatCurve</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -724,7 +724,7 @@ public FloatCurve torqueCurve</code></pre>
 
 
   <h4 id="KSP_Modules_Data_WheelMotor_tractionControlScale" data-uid="KSP.Modules.Data_WheelMotor.tractionControlScale">tractionControlScale</h4>
-  <div class="markdown level1 summary"><p>Traction control sensitivity scale applied to torque reduction when wheel slip is detected.</p>
+  <div class="markdown level1 summary"><p>Unused by the coupled solver and hidden in the PAM. Kept for part JSON and save compatibility.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -1190,13 +1190,13 @@ public float wheelSpeedMax</code></pre>
   <div><a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_SetupResourceRequest_KSP_Sim_ResourceSystem_ResourceFlowRequestBroker_">ModuleData.SetupResourceRequest(ResourceFlowRequestBroker)</a></div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
@@ -1209,6 +1209,12 @@ public float wheelSpeedMax</code></pre>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
   </div>
   <div>
       <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>

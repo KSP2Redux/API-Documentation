@@ -91,7 +91,7 @@ experiments, regions, and tech nodes.</p>
     <div class="level1"><span class="xref">ScienceLuaModule</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PatchManager.html">PatchManager</a>.<a class="xref" href="PatchManager.Science.html">Science</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="PatchManager_Science_ScienceLuaModule_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[PatchManagerModule(&quot;Science&quot;)]
@@ -141,7 +141,7 @@ public class ScienceLuaModule</code></pre>
 
   <a id="PatchManager_Science_ScienceLuaModule_AddPartsToTechNode_" data-uid="PatchManager.Science.ScienceLuaModule.AddPartsToTechNode*"></a>
   <h4 id="PatchManager_Science_ScienceLuaModule_AddPartsToTechNode_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_String___" data-uid="PatchManager.Science.ScienceLuaModule.AddPartsToTechNode(MoonSharp.Interpreter.ScriptExecutionContext,System.String,System.String[])">AddPartsToTechNode(ScriptExecutionContext, string, params string[])</h4>
-  <div class="markdown level1 summary"><p>Adds the given part IDs to the tech node named <code class="paramref">nodeName</code>'s <code>UnlockedPartIds</code> list.</p>
+  <div class="markdown level1 summary"><p>Adds the given part IDs to the tech node named <code class="paramref">nodeName</code>'s <code>UnlockedPartsIDs</code> list.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -180,15 +180,15 @@ public class ScienceLuaModule</code></pre>
   </table>
 
 
-  <a id="PatchManager_Science_ScienceLuaModule_NewExperiment_" data-uid="PatchManager.Science.ScienceLuaModule.NewExperiment*"></a>
-  <h4 id="PatchManager_Science_ScienceLuaModule_NewExperiment_System_String_System_Action_PatchManager_Science_UserData_ExperimentUserData__" data-uid="PatchManager.Science.ScienceLuaModule.NewExperiment(System.String,System.Action{PatchManager.Science.UserData.ExperimentUserData})">NewExperiment(string, Action&lt;ExperimentUserData&gt;)</h4>
-  <div class="markdown level1 summary"><p>Creates a new science experiment with the given name and runs <code class="paramref">callback</code> against it for
-further configuration.</p>
+  <a id="PatchManager_Science_ScienceLuaModule_DuplicateDiscoverables_" data-uid="PatchManager.Science.ScienceLuaModule.DuplicateDiscoverables*"></a>
+  <h4 id="PatchManager_Science_ScienceLuaModule_DuplicateDiscoverables_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_String_System_Func_MoonSharp_Interpreter_DynValue_System_String__" data-uid="PatchManager.Science.ScienceLuaModule.DuplicateDiscoverables(MoonSharp.Interpreter.ScriptExecutionContext,System.String,System.String,System.Func{MoonSharp.Interpreter.DynValue,System.String})">DuplicateDiscoverables(ScriptExecutionContext, string, string, Func&lt;DynValue, string&gt;)</h4>
+  <div class="markdown level1 summary"><p>Registers a patch that copies each discoverables set it matches under a new name, then runs <code class="paramref">patchMethod</code>
+on the copy.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void NewExperiment(string name, Action&lt;ExperimentUserData&gt; callback)</code></pre>
+    <pre><code class="lang-csharp hljs">public PatchDefinition DuplicateDiscoverables(ScriptExecutionContext context, string source, string newName, Func&lt;DynValue, string&gt; patchMethod = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -200,6 +200,280 @@ further configuration.</p>
       </tr>
     </thead>
     <tbody>
+      <tr>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global namespaces the patch name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The name of the discoverables set to copy. Supports <code>*</code> and <code>?</code> wildcards.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">newName</span></td>
+        <td><p>The name of the copy, with <code>{name}</code> standing in for the source's name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Func</span>&lt;<span class="xref">DynValue</span>, <span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">patchMethod</span></td>
+        <td><p>The callback to run on each copy, or <code>null</code> to copy without changes.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a></td>
+        <td><p>The registered patch.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PatchManager_Science_ScienceLuaModule_DuplicateDiscoverables_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_String_System_Func_MoonSharp_Interpreter_DynValue_System_String___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Restrict the pass and ordering like any other patch. Internal ID fields in the copy are left alone.</p>
+</div>
+
+
+  <a id="PatchManager_Science_ScienceLuaModule_DuplicateExperiments_" data-uid="PatchManager.Science.ScienceLuaModule.DuplicateExperiments*"></a>
+  <h4 id="PatchManager_Science_ScienceLuaModule_DuplicateExperiments_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_String_System_Func_MoonSharp_Interpreter_DynValue_System_String__" data-uid="PatchManager.Science.ScienceLuaModule.DuplicateExperiments(MoonSharp.Interpreter.ScriptExecutionContext,System.String,System.String,System.Func{MoonSharp.Interpreter.DynValue,System.String})">DuplicateExperiments(ScriptExecutionContext, string, string, Func&lt;DynValue, string&gt;)</h4>
+  <div class="markdown level1 summary"><p>Registers a patch that copies each experiment it matches under a new name, then runs <code class="paramref">patchMethod</code>
+on the copy.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PatchDefinition DuplicateExperiments(ScriptExecutionContext context, string source, string newName, Func&lt;DynValue, string&gt; patchMethod = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global namespaces the patch name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The name of the experiment to copy. Supports <code>*</code> and <code>?</code> wildcards.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">newName</span></td>
+        <td><p>The name of the copy, with <code>{name}</code> standing in for the source's name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Func</span>&lt;<span class="xref">DynValue</span>, <span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">patchMethod</span></td>
+        <td><p>The callback to run on each copy, or <code>null</code> to copy without changes.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a></td>
+        <td><p>The registered patch.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PatchManager_Science_ScienceLuaModule_DuplicateExperiments_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_String_System_Func_MoonSharp_Interpreter_DynValue_System_String___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Restrict the pass and ordering like any other patch. Internal ID fields in the copy are left alone.</p>
+</div>
+
+
+  <a id="PatchManager_Science_ScienceLuaModule_DuplicateRegions_" data-uid="PatchManager.Science.ScienceLuaModule.DuplicateRegions*"></a>
+  <h4 id="PatchManager_Science_ScienceLuaModule_DuplicateRegions_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_String_System_Func_MoonSharp_Interpreter_DynValue_System_String__" data-uid="PatchManager.Science.ScienceLuaModule.DuplicateRegions(MoonSharp.Interpreter.ScriptExecutionContext,System.String,System.String,System.Func{MoonSharp.Interpreter.DynValue,System.String})">DuplicateRegions(ScriptExecutionContext, string, string, Func&lt;DynValue, string&gt;)</h4>
+  <div class="markdown level1 summary"><p>Registers a patch that copies each science region set it matches under a new name, then runs <code class="paramref">patchMethod</code>
+on the copy.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PatchDefinition DuplicateRegions(ScriptExecutionContext context, string source, string newName, Func&lt;DynValue, string&gt; patchMethod = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global namespaces the patch name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The name of the science region set to copy. Supports <code>*</code> and <code>?</code> wildcards.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">newName</span></td>
+        <td><p>The name of the copy, with <code>{name}</code> standing in for the source's name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Func</span>&lt;<span class="xref">DynValue</span>, <span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">patchMethod</span></td>
+        <td><p>The callback to run on each copy, or <code>null</code> to copy without changes.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a></td>
+        <td><p>The registered patch.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PatchManager_Science_ScienceLuaModule_DuplicateRegions_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_String_System_Func_MoonSharp_Interpreter_DynValue_System_String___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Restrict the pass and ordering like any other patch. Internal ID fields in the copy are left alone.</p>
+</div>
+
+
+  <a id="PatchManager_Science_ScienceLuaModule_DuplicateTechNodes_" data-uid="PatchManager.Science.ScienceLuaModule.DuplicateTechNodes*"></a>
+  <h4 id="PatchManager_Science_ScienceLuaModule_DuplicateTechNodes_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_String_System_Func_MoonSharp_Interpreter_DynValue_System_String__" data-uid="PatchManager.Science.ScienceLuaModule.DuplicateTechNodes(MoonSharp.Interpreter.ScriptExecutionContext,System.String,System.String,System.Func{MoonSharp.Interpreter.DynValue,System.String})">DuplicateTechNodes(ScriptExecutionContext, string, string, Func&lt;DynValue, string&gt;)</h4>
+  <div class="markdown level1 summary"><p>Registers a patch that copies each tech node it matches under a new name, then runs <code class="paramref">patchMethod</code>
+on the copy.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PatchDefinition DuplicateTechNodes(ScriptExecutionContext context, string source, string newName, Func&lt;DynValue, string&gt; patchMethod = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global namespaces the patch name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The name of the tech node to copy. Supports <code>*</code> and <code>?</code> wildcards.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">newName</span></td>
+        <td><p>The name of the copy, with <code>{name}</code> standing in for the source's name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Func</span>&lt;<span class="xref">DynValue</span>, <span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">patchMethod</span></td>
+        <td><p>The callback to run on each copy, or <code>null</code> to copy without changes.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.PatchDefinition.html">PatchDefinition</a></td>
+        <td><p>The registered patch.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PatchManager_Science_ScienceLuaModule_DuplicateTechNodes_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_String_System_Func_MoonSharp_Interpreter_DynValue_System_String___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Restrict the pass and ordering like any other patch. Internal ID fields in the copy are left alone.</p>
+</div>
+
+
+  <a id="PatchManager_Science_ScienceLuaModule_NewExperiment_" data-uid="PatchManager.Science.ScienceLuaModule.NewExperiment*"></a>
+  <h4 id="PatchManager_Science_ScienceLuaModule_NewExperiment_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_Action_PatchManager_Science_UserData_ExperimentUserData__" data-uid="PatchManager.Science.ScienceLuaModule.NewExperiment(MoonSharp.Interpreter.ScriptExecutionContext,System.String,System.Action{PatchManager.Science.UserData.ExperimentUserData})">NewExperiment(ScriptExecutionContext, string, Action&lt;ExperimentUserData&gt;)</h4>
+  <div class="markdown level1 summary"><p>Creates a new science experiment with the given name and runs <code class="paramref">callback</code> against it for
+further configuration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LuaAsset NewExperiment(ScriptExecutionContext context, string name, Action&lt;ExperimentUserData&gt; callback)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global names the creating mod.</p>
+</td>
+      </tr>
       <tr>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">name</span></td>
@@ -214,6 +488,83 @@ further configuration.</p>
       </tr>
     </tbody>
   </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.LuaAsset.html">LuaAsset</a></td>
+        <td><p>The queued asset, for gating it with features.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="PatchManager_Science_ScienceLuaModule_NewTechNode_" data-uid="PatchManager.Science.ScienceLuaModule.NewTechNode*"></a>
+  <h4 id="PatchManager_Science_ScienceLuaModule_NewTechNode_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_Action_PatchManager_LuaPatching_JsonUserData__" data-uid="PatchManager.Science.ScienceLuaModule.NewTechNode(MoonSharp.Interpreter.ScriptExecutionContext,System.String,System.Action{PatchManager.LuaPatching.JsonUserData})">NewTechNode(ScriptExecutionContext, string, Action&lt;JsonUserData&gt;)</h4>
+  <div class="markdown level1 summary"><p>Creates a new tech node with the given ID and runs <code class="paramref">callback</code> against it for further
+configuration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LuaAsset NewTechNode(ScriptExecutionContext context, string name, Action&lt;JsonUserData&gt; callback)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ScriptExecutionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The Lua execution context. Its env's <code>ModId</code> global names the creating mod.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The node's ID, which is also its asset name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<a class="xref" href="PatchManager.LuaPatching.JsonUserData.html">JsonUserData</a>&gt;</td>
+        <td><span class="parametername">callback</span></td>
+        <td><p>Callback that receives the new node for further configuration.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PatchManager.LuaPatching.LuaAsset.html">LuaAsset</a></td>
+        <td><p>The queued asset, for gating it with features.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PatchManager_Science_ScienceLuaModule_NewTechNode_MoonSharp_Interpreter_ScriptExecutionContext_System_String_System_Action_PatchManager_LuaPatching_JsonUserData___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The node starts with every field the game reads, its lists empty, so the callback can append to them.</p>
+</div>
 
 
   <a id="PatchManager_Science_ScienceLuaModule_PatchDiscoverables_" data-uid="PatchManager.Science.ScienceLuaModule.PatchDiscoverables*"></a>
@@ -432,13 +783,13 @@ further configuration.</p>
 </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
@@ -451,6 +802,12 @@ further configuration.</p>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
   </div>
   <div>
       <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>

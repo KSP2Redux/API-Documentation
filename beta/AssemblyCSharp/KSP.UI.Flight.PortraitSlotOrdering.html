@@ -91,7 +91,7 @@ load order, which let an empty seat take a visible slot while a Kerbal waited on
     <div class="level1"><span class="xref">PortraitSlotOrdering</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.UI.html">UI</a>.<a class="xref" href="KSP.UI.Flight.html">Flight</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="KSP_UI_Flight_PortraitSlotOrdering_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static class PortraitSlotOrdering</code></pre>
@@ -191,6 +191,94 @@ slots there are to page through.</p>
       <tr>
         <td><span class="xref">float</span></td>
         <td><p>A value from 0 on the first page to 1 on the last. A single page sits at 0.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_UI_Flight_PortraitSlotOrdering_NextRenderSlot_" data-uid="KSP.UI.Flight.PortraitSlotOrdering.NextRenderSlot*"></a>
+  <h4 id="KSP_UI_Flight_PortraitSlotOrdering_NextRenderSlot__1_System_Collections_Generic_IReadOnlyList___0__System_Int32_System_Func___0_System_Boolean__System_Func___0_System_Boolean__System_Boolean__" data-uid="KSP.UI.Flight.PortraitSlotOrdering.NextRenderSlot``1(System.Collections.Generic.IReadOnlyList{``0},System.Int32,System.Func{``0,System.Boolean},System.Func{``0,System.Boolean},System.Boolean@)">NextRenderSlot&lt;T&gt;(IReadOnlyList&lt;T&gt;, int, Func&lt;T, bool&gt;, Func&lt;T, bool&gt;, out bool)</h4>
+  <div class="markdown level1 summary"><p>Picks the slot a portrait render tick belongs to and whether it renders. Each slot with a camera gets one
+tick in turn, as in stock, so every portrait refreshes at stock's rate. A slot that needs no render (an
+empty seat already drawn) lets its tick pass instead of handing it to the next slot, which would have
+rendered a lone kerbal once per tick rather than once per round.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int NextRenderSlot&lt;T&gt;(IReadOnlyList&lt;T&gt; slots, int lastIndex, Func&lt;T, bool&gt; hasCamera, Func&lt;T, bool&gt; needsRender, out bool render)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IReadOnlyList</span>&lt;T&gt;</td>
+        <td><span class="parametername">slots</span></td>
+        <td><p>The slots of the page on show.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">lastIndex</span></td>
+        <td><p>The slot the previous tick belonged to.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Func</span>&lt;T, <span class="xref">bool</span>&gt;</td>
+        <td><span class="parametername">hasCamera</span></td>
+        <td><p>Whether a slot has a camera. Slots without one are skipped, as in stock.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Func</span>&lt;T, <span class="xref">bool</span>&gt;</td>
+        <td><span class="parametername">needsRender</span></td>
+        <td><p>Whether a slot's portrait is due a render.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">render</span></td>
+        <td><p>Whether the returned slot renders on this tick.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><p>The slot this tick belongs to, or -1 when no slot has a camera.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The slot type.</p>
 </td>
       </tr>
     </tbody>

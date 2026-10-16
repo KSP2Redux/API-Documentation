@@ -90,7 +90,7 @@
     <div class="level1"><span class="xref">AssemblyFilterContainer</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.OAB.html">OAB</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="KSP_OAB_AssemblyFilterContainer_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class AssemblyFilterContainer : MonoBehaviour</code></pre>
@@ -112,7 +112,7 @@
 
 
   <h4 id="KSP_OAB_AssemblyFilterContainer_Family" data-uid="KSP.OAB.AssemblyFilterContainer.Family">Family</h4>
-  <div class="markdown level1 summary"><p>The part family identifier associated with this filter container.</p>
+  <div class="markdown level1 summary"><p>The part family identifier associated with this filter container, or its name group heading when the picker groups by name.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -403,6 +403,35 @@
   </div>
 
 
+  <a id="KSP_OAB_AssemblyFilterContainer_DeactivateFilterButtons_" data-uid="KSP.OAB.AssemblyFilterContainer.DeactivateFilterButtons*"></a>
+  <h4 id="KSP_OAB_AssemblyFilterContainer_DeactivateFilterButtons_System_Collections_Generic_HashSet_UnityEngine_GameObject__" data-uid="KSP.OAB.AssemblyFilterContainer.DeactivateFilterButtons(System.Collections.Generic.HashSet{UnityEngine.GameObject})">DeactivateFilterButtons(HashSet&lt;GameObject&gt;)</h4>
+  <div class="markdown level1 summary"><p>Ensures the container is expanded and then deactivates the child filter buttons, leaving the ones in <code class="paramref">buttonsToKeep</code> as they are.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DeactivateFilterButtons(HashSet&lt;GameObject&gt; buttonsToKeep)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">HashSet</span>&lt;<span class="xref">GameObject</span>&gt;</td>
+        <td><span class="parametername">buttonsToKeep</span></td>
+        <td><p>The buttons that stay active, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> to deactivate every button.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_OAB_AssemblyFilterContainer_GetButton_" data-uid="KSP.OAB.AssemblyFilterContainer.GetButton*"></a>
   <h4 id="KSP_OAB_AssemblyFilterContainer_GetButton_System_Int32_" data-uid="KSP.OAB.AssemblyFilterContainer.GetButton(System.Int32)">GetButton(int)</h4>
   <div class="markdown level1 summary"><p>Returns the button GameObject at the specified index within the buttons container.</p>
@@ -587,6 +616,22 @@
   </table>
 
 
+  <a id="KSP_OAB_AssemblyFilterContainer_ResetFilterColors_" data-uid="KSP.OAB.AssemblyFilterContainer.ResetFilterColors*"></a>
+  <h4 id="KSP_OAB_AssemblyFilterContainer_ResetFilterColors" data-uid="KSP.OAB.AssemblyFilterContainer.ResetFilterColors">ResetFilterColors()</h4>
+  <div class="markdown level1 summary"><p>Puts back the tint and highlight colors the container had when it was created.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ResetFilterColors()</code></pre>
+  </div>
+  <h5 id="KSP_OAB_AssemblyFilterContainer_ResetFilterColors_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Groupings that color their headers, such as size and mass, call <a class="xref" href="KSP.OAB.AssemblyFilterContainer.html#KSP_OAB_AssemblyFilterContainer_SetFilterColor_UnityEngine_Color_">SetFilterColor(Color)</a> and
+<a class="xref" href="KSP.OAB.AssemblyFilterContainer.html#KSP_OAB_AssemblyFilterContainer_SetFilterHighlightColor_UnityEngine_Color_">SetFilterHighlightColor(Color)</a>. Containers are reused across groupings, so a grouping that does not color
+its headers calls this to drop the colors left by the previous one.</p>
+</div>
+
+
   <a id="KSP_OAB_AssemblyFilterContainer_SetFilter_" data-uid="KSP.OAB.AssemblyFilterContainer.SetFilter*"></a>
   <h4 id="KSP_OAB_AssemblyFilterContainer_SetFilter_KSP_OAB_AssemblyPartFilterType_System_Int32_" data-uid="KSP.OAB.AssemblyFilterContainer.SetFilter(KSP.OAB.AssemblyPartFilterType,System.Int32)">SetFilter(AssemblyPartFilterType, int)</h4>
   <div class="markdown level1 summary"><p>Assigns the filter type and subtype index that this container represents.</p>
@@ -767,13 +812,13 @@
   </table>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
@@ -786,6 +831,12 @@
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
   </div>
   <div>
       <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>

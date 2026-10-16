@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class WaterCommandList | KSP2Redux API (Beta) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class WaterCommandList | KSP2Redux API (Beta) ">
+    
+    <meta name="description" content="A list of rendering commands that the water systems record during late update and a camera render hook replays.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="KSP.Rendering.Planets.WaterCommandList">
+
+
+
+  <h1 id="KSP_Rendering_Planets_WaterCommandList" data-uid="KSP.Rendering.Planets.WaterCommandList" class="text-break">Class WaterCommandList</h1>
+  <div class="markdown level0 summary"><p>A list of rendering commands that the water systems record during late update and a camera render hook replays.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><span class="xref">WaterCommandList</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Rendering.html">Rendering</a>.<a class="xref" href="KSP.Rendering.Planets.html">Planets</a></h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
+  <h5 id="KSP_Rendering_Planets_WaterCommandList_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class WaterCommandList</code></pre>
+  </div>
+  <h5 id="KSP_Rendering_Planets_WaterCommandList_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>The Built-in pipeline let the water code fill a <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Rendering.CommandBuffer.html">CommandBuffer</a> that ran at a camera event. A URP
+render graph pass records into a command buffer of its own, which cannot execute another one, so the commands are
+kept here and written into the pass's buffer by <a class="xref" href="KSP.Rendering.Planets.WaterCommandList.html#KSP_Rendering_Planets_WaterCommandList_Replay_UnityEngine_Rendering_CommandBuffer_">Replay(CommandBuffer)</a>. The methods mirror the
+<a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Rendering.CommandBuffer.html">CommandBuffer</a> overloads the water code uses. Values and vector arrays are copied at record time.
+Materials, property blocks, buffers and textures are referenced and read when the list is replayed.</p>
+</div>
+  <h3 id="constructors">Constructors
+</h3>
+
+
+  <a id="KSP_Rendering_Planets_WaterCommandList__ctor_" data-uid="KSP.Rendering.Planets.WaterCommandList.#ctor*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterCommandList__ctor_System_String_" data-uid="KSP.Rendering.Planets.WaterCommandList.#ctor(System.String)">WaterCommandList(string)</h4>
+  <div class="markdown level1 summary"><p>Creates an empty command list.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public WaterCommandList(string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The name the list's commands are grouped under in the frame debugger and profiler.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="KSP_Rendering_Planets_WaterCommandList_IsEmpty_" data-uid="KSP.Rendering.Planets.WaterCommandList.IsEmpty*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterCommandList_IsEmpty" data-uid="KSP.Rendering.Planets.WaterCommandList.IsEmpty">IsEmpty</h4>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the list holds no commands.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsEmpty { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_WaterCommandList_Name_" data-uid="KSP.Rendering.Planets.WaterCommandList.Name*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterCommandList_Name" data-uid="KSP.Rendering.Planets.WaterCommandList.Name">Name</h4>
+  <div class="markdown level1 summary"><p>Gets the name the list's commands are grouped under in the frame debugger and profiler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Name { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="KSP_Rendering_Planets_WaterCommandList_Clear_" data-uid="KSP.Rendering.Planets.WaterCommandList.Clear*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterCommandList_Clear" data-uid="KSP.Rendering.Planets.WaterCommandList.Clear">Clear()</h4>
+  <div class="markdown level1 summary"><p>Removes every recorded command.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Clear()</code></pre>
+  </div>
+
+
+  <a id="KSP_Rendering_Planets_WaterCommandList_ClearRenderTarget_" data-uid="KSP.Rendering.Planets.WaterCommandList.ClearRenderTarget*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterCommandList_ClearRenderTarget_System_Boolean_System_Boolean_UnityEngine_Color_" data-uid="KSP.Rendering.Planets.WaterCommandList.ClearRenderTarget(System.Boolean,System.Boolean,UnityEngine.Color)">ClearRenderTarget(bool, bool, Color)</h4>
+  <div class="markdown level1 summary"><p>Records clearing the active render target.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ClearRenderTarget(bool clearDepth, bool clearColor, Color backgroundColor)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">clearDepth</span></td>
+        <td><p>Whether to clear depth to 1.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">clearColor</span></td>
+        <td><p>Whether to clear color.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Color.html">Color</a></td>
+        <td><span class="parametername">backgroundColor</span></td>
+        <td><p>The color to clear to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_WaterCommandList_CopyTexture_" data-uid="KSP.Rendering.Planets.WaterCommandList.CopyTexture*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterCommandList_CopyTexture_UnityEngine_Rendering_RenderTargetIdentifier_UnityEngine_Rendering_RenderTargetIdentifier_" data-uid="KSP.Rendering.Planets.WaterCommandList.CopyTexture(UnityEngine.Rendering.RenderTargetIdentifier,UnityEngine.Rendering.RenderTargetIdentifier)">CopyTexture(RenderTargetIdentifier, RenderTargetIdentifier)</h4>
+  <div class="markdown level1 summary"><p>Records copying one texture into another of the same size and format.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CopyTexture(RenderTargetIdentifier src, RenderTargetIdentifier dst)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Rendering.RenderTargetIdentifier.html">RenderTargetIdentifier</a></td>
+        <td><span class="parametername">src</span></td>
+        <td><p>The texture to copy from.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Rendering.RenderTargetIdentifier.html">RenderTargetIdentifier</a></td>
+        <td><span class="parametername">dst</span></td>
+        <td><p>The texture to copy into.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_WaterCommandList_DispatchCompute_" data-uid="KSP.Rendering.Planets.WaterCommandList.DispatchCompute*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterCommandList_DispatchCompute_UnityEngine_ComputeShader_System_Int32_System_Int32_System_Int32_System_Int32_" data-uid="KSP.Rendering.Planets.WaterCommandList.DispatchCompute(UnityEngine.ComputeShader,System.Int32,System.Int32,System.Int32,System.Int32)">DispatchCompute(ComputeShader, int, int, int, int)</h4>
+  <div class="markdown level1 summary"><p>Records a compute shader dispatch.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DispatchCompute(ComputeShader computeShader, int kernelIndex, int threadGroupsX, int threadGroupsY, int threadGroupsZ)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeShader.html">ComputeShader</a></td>
+        <td><span class="parametername">computeShader</span></td>
+        <td><p>The compute shader.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">kernelIndex</span></td>
+        <td><p>The kernel to run.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">threadGroupsX</span></td>
+        <td><p>The number of thread groups along X.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">threadGroupsY</span></td>
+        <td><p>The number of thread groups along Y.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">threadGroupsZ</span></td>
+        <td><p>The number of thread groups along Z.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_WaterCommandList_DrawMesh_" data-uid="KSP.Rendering.Planets.WaterCommandList.DrawMesh*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterCommandList_DrawMesh_UnityEngine_Mesh_UnityEngine_Matrix4x4_UnityEngine_Material_System_Int32_System_Int32_" data-uid="KSP.Rendering.Planets.WaterCommandList.DrawMesh(UnityEngine.Mesh,UnityEngine.Matrix4x4,UnityEngine.Material,System.Int32,System.Int32)">DrawMesh(Mesh, Matrix4x4, Material, int, int)</h4>
+  <div class="markdown level1 summary"><p>Records drawing a mesh with one pass of a material.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DrawMesh(Mesh mesh, Matrix4x4 matrix, Material material, int submeshIndex, int shaderPass)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Mesh.html">Mesh</a></td>
+        <td><span class="parametername">mesh</span></td>
+        <td><p>The mesh to draw.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Matrix4x4.html">Matrix4x4</a></td>
+        <td><span class="parametername">matrix</span></td>
+        <td><p>The object-to-world matrix.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Material.html">Material</a></td>
+        <td><span class="parametername">material</span></td>
+        <td><p>The material to draw with.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">submeshIndex</span></td>
+        <td><p>The submesh to draw.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">shaderPass</span></td>
+        <td><p>The shader pass to use.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_WaterCommandList_DrawProcedural_" data-uid="KSP.Rendering.Planets.WaterCommandList.DrawProcedural*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterCommandList_DrawProcedural_UnityEngine_Matrix4x4_UnityEngine_Material_System_Int32_UnityEngine_MeshTopology_System_Int32_System_Int32_UnityEngine_MaterialPropertyBlock_" data-uid="KSP.Rendering.Planets.WaterCommandList.DrawProcedural(UnityEngine.Matrix4x4,UnityEngine.Material,System.Int32,UnityEngine.MeshTopology,System.Int32,System.Int32,UnityEngine.MaterialPropertyBlock)">DrawProcedural(Matrix4x4, Material, int, MeshTopology, int, int, MaterialPropertyBlock)</h4>
+  <div class="markdown level1 summary"><p>Records a procedural draw without a mesh.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DrawProcedural(Matrix4x4 matrix, Material material, int shaderPass, MeshTopology topology, int vertexCount, int instanceCount = 1, MaterialPropertyBlock properties = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Matrix4x4.html">Matrix4x4</a></td>
+        <td><span class="parametername">matrix</span></td>
+        <td><p>The object-to-world matrix.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Material.html">Material</a></td>
+        <td><span class="parametername">material</span></td>
+        <td><p>The material to draw with.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">shaderPass</span></td>
+        <td><p>The shader pass to use.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/MeshTopology.html">MeshTopology</a></td>
+        <td><span class="parametername">topology</span></td>
+        <td><p>The primitive topology.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">vertexCount</span></td>
+        <td><p>The number of vertices to draw.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">instanceCount</span></td>
+        <td><p>The number of instances to draw.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/MaterialPropertyBlock.html">MaterialPropertyBlock</a></td>
+        <td><span class="parametername">properties</span></td>
+        <td><p>Extra material properties for the draw, read at replay, or <code>null</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_WaterCommandList_DrawRenderer_" data-uid="KSP.Rendering.Planets.WaterCommandList.DrawRenderer*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterCommandList_DrawRenderer_UnityEngine_Renderer_UnityEngine_Material_System_Int32_System_Int32_" data-uid="KSP.Rendering.Planets.WaterCommandList.DrawRenderer(UnityEngine.Renderer,UnityEngine.Material,System.Int32,System.Int32)">DrawRenderer(Renderer, Material, int, int)</h4>
+  <div class="markdown level1 summary"><p>Records drawing a renderer with a material.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DrawRenderer(Renderer renderer, Material material, int submeshIndex = 0, int shaderPass = -1)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Renderer.html">Renderer</a></td>
+        <td><span class="parametername">renderer</span></td>
+        <td><p>The renderer to draw.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Material.html">Material</a></td>
+        <td><span class="parametername">material</span></td>
+        <td><p>The material to draw with.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">submeshIndex</span></td>
+        <td><p>The submesh to draw.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">shaderPass</span></td>
+        <td><p>The shader pass to use, or -1 for every pass.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_WaterCommandList_GenerateMips_" data-uid="KSP.Rendering.Planets.WaterCommandList.GenerateMips*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterCommandList_GenerateMips_UnityEngine_RenderTexture_" data-uid="KSP.Rendering.Planets.WaterCommandList.GenerateMips(UnityEngine.RenderTexture)">GenerateMips(RenderTexture)</h4>
+  <div class="markdown level1 summary"><p>Records generating the mip chain of a render texture.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GenerateMips(RenderTexture rt)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">RenderTexture</span></td>
+        <td><span class="parametername">rt</span></td>
+        <td><p>The render texture.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_WaterCommandList_Replay_" data-uid="KSP.Rendering.Planets.WaterCommandList.Replay*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterCommandList_Replay_UnityEngine_Rendering_CommandBuffer_" data-uid="KSP.Rendering.Planets.WaterCommandList.Replay(UnityEngine.Rendering.CommandBuffer)">Replay(CommandBuffer)</h4>
+  <div class="markdown level1 summary"><p>Writes every recorded command, in order, into a command buffer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Replay(CommandBuffer cmd)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Rendering.CommandBuffer.html">CommandBuffer</a></td>
+        <td><span class="parametername">cmd</span></td>
+        <td><p>The command buffer of the render pass that executes the commands.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Rendering_Planets_WaterCommandList_Replay_UnityEngine_Rendering_CommandBuffer__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The commands can change the render target. The caller binds its own targets again afterwards.</p>
+</div>
+
+
+  <a id="KSP_Rendering_Planets_WaterCommandList_SetComputeBufferParam_" data-uid="KSP.Rendering.Planets.WaterCommandList.SetComputeBufferParam*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterCommandList_SetComputeBufferParam_UnityEngine_ComputeShader_System_Int32_System_Int32_UnityEngine_ComputeBuffer_" data-uid="KSP.Rendering.Planets.WaterCommandList.SetComputeBufferParam(UnityEngine.ComputeShader,System.Int32,System.Int32,UnityEngine.ComputeBuffer)">SetComputeBufferParam(ComputeShader, int, int, ComputeBuffer)</h4>
+  <div class="markdown level1 summary"><p>Records binding a compute buffer to a compute shader kernel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetComputeBufferParam(ComputeShader computeShader, int kernelIndex, int nameID, ComputeBuffer buffer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeShader.html">ComputeShader</a></td>
+        <td><span class="parametername">computeShader</span></td>
+        <td><p>The compute shader.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">kernelIndex</span></td>
+        <td><p>The kernel the buffer is bound for.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">nameID</span></td>
+        <td><p>The buffer's property ID.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeBuffer.html">ComputeBuffer</a></td>
+        <td><span class="parametername">buffer</span></td>
+        <td><p>The buffer.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_WaterCommandList_SetComputeFloatParam_" data-uid="KSP.Rendering.Planets.WaterCommandList.SetComputeFloatParam*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterCommandList_SetComputeFloatParam_UnityEngine_ComputeShader_System_Int32_System_Single_" data-uid="KSP.Rendering.Planets.WaterCommandList.SetComputeFloatParam(UnityEngine.ComputeShader,System.Int32,System.Single)">SetComputeFloatParam(ComputeShader, int, float)</h4>
+  <div class="markdown level1 summary"><p>Records setting a float parameter of a compute shader.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetComputeFloatParam(ComputeShader computeShader, int nameID, float val)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeShader.html">ComputeShader</a></td>
+        <td><span class="parametername">computeShader</span></td>
+        <td><p>The compute shader.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">nameID</span></td>
+        <td><p>The parameter's property ID.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">val</span></td>
+        <td><p>The value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_WaterCommandList_SetComputeFloatParam_" data-uid="KSP.Rendering.Planets.WaterCommandList.SetComputeFloatParam*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterCommandList_SetComputeFloatParam_UnityEngine_ComputeShader_System_String_System_Single_" data-uid="KSP.Rendering.Planets.WaterCommandList.SetComputeFloatParam(UnityEngine.ComputeShader,System.String,System.Single)">SetComputeFloatParam(ComputeShader, string, float)</h4>
+  <div class="markdown level1 summary"><p>Records setting a float parameter of a compute shader.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetComputeFloatParam(ComputeShader computeShader, string name, float val)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeShader.html">ComputeShader</a></td>
+        <td><span class="parametername">computeShader</span></td>
+        <td><p>The compute shader.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The parameter's name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">val</span></td>
+        <td><p>The value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_WaterCommandList_SetComputeIntParam_" data-uid="KSP.Rendering.Planets.WaterCommandList.SetComputeIntParam*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterCommandList_SetComputeIntParam_UnityEngine_ComputeShader_System_Int32_System_Int32_" data-uid="KSP.Rendering.Planets.WaterCommandList.SetComputeIntParam(UnityEngine.ComputeShader,System.Int32,System.Int32)">SetComputeIntParam(ComputeShader, int, int)</h4>
+  <div class="markdown level1 summary"><p>Records setting an integer parameter of a compute shader.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetComputeIntParam(ComputeShader computeShader, int nameID, int val)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeShader.html">ComputeShader</a></td>
+        <td><span class="parametername">computeShader</span></td>
+        <td><p>The compute shader.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">nameID</span></td>
+        <td><p>The parameter's property ID.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">val</span></td>
+        <td><p>The value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_WaterCommandList_SetComputeMatrixParam_" data-uid="KSP.Rendering.Planets.WaterCommandList.SetComputeMatrixParam*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterCommandList_SetComputeMatrixParam_UnityEngine_ComputeShader_System_Int32_UnityEngine_Matrix4x4_" data-uid="KSP.Rendering.Planets.WaterCommandList.SetComputeMatrixParam(UnityEngine.ComputeShader,System.Int32,UnityEngine.Matrix4x4)">SetComputeMatrixParam(ComputeShader, int, Matrix4x4)</h4>
+  <div class="markdown level1 summary"><p>Records setting a matrix parameter of a compute shader.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetComputeMatrixParam(ComputeShader computeShader, int nameID, Matrix4x4 val)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeShader.html">ComputeShader</a></td>
+        <td><span class="parametername">computeShader</span></td>
+        <td><p>The compute shader.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">nameID</span></td>
+        <td><p>The parameter's property ID.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Matrix4x4.html">Matrix4x4</a></td>
+        <td><span class="parametername">val</span></td>
+        <td><p>The value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_WaterCommandList_SetComputeMatrixParam_" data-uid="KSP.Rendering.Planets.WaterCommandList.SetComputeMatrixParam*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterCommandList_SetComputeMatrixParam_UnityEngine_ComputeShader_System_String_UnityEngine_Matrix4x4_" data-uid="KSP.Rendering.Planets.WaterCommandList.SetComputeMatrixParam(UnityEngine.ComputeShader,System.String,UnityEngine.Matrix4x4)">SetComputeMatrixParam(ComputeShader, string, Matrix4x4)</h4>
+  <div class="markdown level1 summary"><p>Records setting a matrix parameter of a compute shader.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetComputeMatrixParam(ComputeShader computeShader, string name, Matrix4x4 val)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeShader.html">ComputeShader</a></td>
+        <td><span class="parametername">computeShader</span></td>
+        <td><p>The compute shader.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The parameter's name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Matrix4x4.html">Matrix4x4</a></td>
+        <td><span class="parametername">val</span></td>
+        <td><p>The value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_WaterCommandList_SetComputeTextureParam_" data-uid="KSP.Rendering.Planets.WaterCommandList.SetComputeTextureParam*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterCommandList_SetComputeTextureParam_UnityEngine_ComputeShader_System_Int32_System_Int32_UnityEngine_Rendering_RenderTargetIdentifier_" data-uid="KSP.Rendering.Planets.WaterCommandList.SetComputeTextureParam(UnityEngine.ComputeShader,System.Int32,System.Int32,UnityEngine.Rendering.RenderTargetIdentifier)">SetComputeTextureParam(ComputeShader, int, int, RenderTargetIdentifier)</h4>
+  <div class="markdown level1 summary"><p>Records binding a texture to a compute shader kernel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetComputeTextureParam(ComputeShader computeShader, int kernelIndex, int nameID, RenderTargetIdentifier rt)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeShader.html">ComputeShader</a></td>
+        <td><span class="parametername">computeShader</span></td>
+        <td><p>The compute shader.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">kernelIndex</span></td>
+        <td><p>The kernel the texture is bound for.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">nameID</span></td>
+        <td><p>The texture's property ID.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Rendering.RenderTargetIdentifier.html">RenderTargetIdentifier</a></td>
+        <td><span class="parametername">rt</span></td>
+        <td><p>The texture.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_WaterCommandList_SetComputeTextureParam_" data-uid="KSP.Rendering.Planets.WaterCommandList.SetComputeTextureParam*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterCommandList_SetComputeTextureParam_UnityEngine_ComputeShader_System_Int32_System_Int32_UnityEngine_Rendering_RenderTargetIdentifier_System_Int32_" data-uid="KSP.Rendering.Planets.WaterCommandList.SetComputeTextureParam(UnityEngine.ComputeShader,System.Int32,System.Int32,UnityEngine.Rendering.RenderTargetIdentifier,System.Int32)">SetComputeTextureParam(ComputeShader, int, int, RenderTargetIdentifier, int)</h4>
+  <div class="markdown level1 summary"><p>Records binding one mip level of a texture to a compute shader kernel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetComputeTextureParam(ComputeShader computeShader, int kernelIndex, int nameID, RenderTargetIdentifier rt, int mipLevel)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeShader.html">ComputeShader</a></td>
+        <td><span class="parametername">computeShader</span></td>
+        <td><p>The compute shader.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">kernelIndex</span></td>
+        <td><p>The kernel the texture is bound for.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">nameID</span></td>
+        <td><p>The texture's property ID.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Rendering.RenderTargetIdentifier.html">RenderTargetIdentifier</a></td>
+        <td><span class="parametername">rt</span></td>
+        <td><p>The texture.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">mipLevel</span></td>
+        <td><p>The mip level to bind.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_WaterCommandList_SetComputeTextureParam_" data-uid="KSP.Rendering.Planets.WaterCommandList.SetComputeTextureParam*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterCommandList_SetComputeTextureParam_UnityEngine_ComputeShader_System_Int32_System_String_UnityEngine_Rendering_RenderTargetIdentifier_" data-uid="KSP.Rendering.Planets.WaterCommandList.SetComputeTextureParam(UnityEngine.ComputeShader,System.Int32,System.String,UnityEngine.Rendering.RenderTargetIdentifier)">SetComputeTextureParam(ComputeShader, int, string, RenderTargetIdentifier)</h4>
+  <div class="markdown level1 summary"><p>Records binding a texture to a compute shader kernel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetComputeTextureParam(ComputeShader computeShader, int kernelIndex, string name, RenderTargetIdentifier rt)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeShader.html">ComputeShader</a></td>
+        <td><span class="parametername">computeShader</span></td>
+        <td><p>The compute shader.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">kernelIndex</span></td>
+        <td><p>The kernel the texture is bound for.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The texture's name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Rendering.RenderTargetIdentifier.html">RenderTargetIdentifier</a></td>
+        <td><span class="parametername">rt</span></td>
+        <td><p>The texture.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_WaterCommandList_SetComputeVectorArrayParam_" data-uid="KSP.Rendering.Planets.WaterCommandList.SetComputeVectorArrayParam*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterCommandList_SetComputeVectorArrayParam_UnityEngine_ComputeShader_System_Int32_UnityEngine_Vector4___" data-uid="KSP.Rendering.Planets.WaterCommandList.SetComputeVectorArrayParam(UnityEngine.ComputeShader,System.Int32,UnityEngine.Vector4[])">SetComputeVectorArrayParam(ComputeShader, int, Vector4[])</h4>
+  <div class="markdown level1 summary"><p>Records setting a vector array parameter of a compute shader. The values are copied, so the caller may reuse
+the array.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetComputeVectorArrayParam(ComputeShader computeShader, int nameID, Vector4[] values)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeShader.html">ComputeShader</a></td>
+        <td><span class="parametername">computeShader</span></td>
+        <td><p>The compute shader.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">nameID</span></td>
+        <td><p>The parameter's property ID.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector4</span>[]</td>
+        <td><span class="parametername">values</span></td>
+        <td><p>The values.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_WaterCommandList_SetComputeVectorParam_" data-uid="KSP.Rendering.Planets.WaterCommandList.SetComputeVectorParam*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterCommandList_SetComputeVectorParam_UnityEngine_ComputeShader_System_Int32_UnityEngine_Vector4_" data-uid="KSP.Rendering.Planets.WaterCommandList.SetComputeVectorParam(UnityEngine.ComputeShader,System.Int32,UnityEngine.Vector4)">SetComputeVectorParam(ComputeShader, int, Vector4)</h4>
+  <div class="markdown level1 summary"><p>Records setting a vector parameter of a compute shader.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetComputeVectorParam(ComputeShader computeShader, int nameID, Vector4 val)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeShader.html">ComputeShader</a></td>
+        <td><span class="parametername">computeShader</span></td>
+        <td><p>The compute shader.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">nameID</span></td>
+        <td><p>The parameter's property ID.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector4</span></td>
+        <td><span class="parametername">val</span></td>
+        <td><p>The value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_WaterCommandList_SetComputeVectorParam_" data-uid="KSP.Rendering.Planets.WaterCommandList.SetComputeVectorParam*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterCommandList_SetComputeVectorParam_UnityEngine_ComputeShader_System_String_UnityEngine_Vector4_" data-uid="KSP.Rendering.Planets.WaterCommandList.SetComputeVectorParam(UnityEngine.ComputeShader,System.String,UnityEngine.Vector4)">SetComputeVectorParam(ComputeShader, string, Vector4)</h4>
+  <div class="markdown level1 summary"><p>Records setting a vector parameter of a compute shader.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetComputeVectorParam(ComputeShader computeShader, string name, Vector4 val)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeShader.html">ComputeShader</a></td>
+        <td><span class="parametername">computeShader</span></td>
+        <td><p>The compute shader.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The parameter's name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector4</span></td>
+        <td><span class="parametername">val</span></td>
+        <td><p>The value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_WaterCommandList_SetRenderTarget_" data-uid="KSP.Rendering.Planets.WaterCommandList.SetRenderTarget*"></a>
+  <h4 id="KSP_Rendering_Planets_WaterCommandList_SetRenderTarget_UnityEngine_Rendering_RenderTargetIdentifier_" data-uid="KSP.Rendering.Planets.WaterCommandList.SetRenderTarget(UnityEngine.Rendering.RenderTargetIdentifier)">SetRenderTarget(RenderTargetIdentifier)</h4>
+  <div class="markdown level1 summary"><p>Records binding a render target as the active one, as <span class="xref">UnityEngine.Rendering.CommandBuffer.SetRenderTarget(UnityEngine.Rendering.RenderTargetIdentifier)</span> does.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetRenderTarget(RenderTargetIdentifier rt)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Rendering.RenderTargetIdentifier.html">RenderTargetIdentifier</a></td>
+        <td><span class="parametername">rt</span></td>
+        <td><p>The render target to bind.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetField__2___0_System_String_">Util.GetField&lt;T, R&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetField__2___0_System_String___1_">Util.SetField&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromProperties_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromProperties(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetFieldValue__1_System_Object_System_String_">Util.GetFieldValue&lt;T&gt;(object, string)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from prerelease
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -89,7 +89,7 @@
     <div class="level1"><span class="xref">ModDifferencePrompt</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.UI.html">UI</a>.<a class="xref" href="Redux.UI.SaveLoad.html">SaveLoad</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="Redux_UI_SaveLoad_ModDifferencePrompt_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class ModDifferencePrompt</code></pre>
@@ -136,14 +136,16 @@
   </div>
 
 
-  <a id="Redux_UI_SaveLoad_ModDifferencePrompt_ShowWithDiff_" data-uid="Redux.UI.SaveLoad.ModDifferencePrompt.ShowWithDiff*"></a>
-  <h4 id="Redux_UI_SaveLoad_ModDifferencePrompt_ShowWithDiff_Redux_SaveLoad_SaveModDiff___Redux_SaveLoad_SaveModDiff___System_Action_System_Action_" data-uid="Redux.UI.SaveLoad.ModDifferencePrompt.ShowWithDiff(Redux.SaveLoad.SaveModDiff[],Redux.SaveLoad.SaveModDiff[],System.Action,System.Action)">ShowWithDiff(SaveModDiff[], SaveModDiff[], Action, Action)</h4>
-  <div class="markdown level1 summary"><p>Displays the mod-difference prompt populated with the provided save and enabled mod differences.</p>
+  <a id="Redux_UI_SaveLoad_ModDifferencePrompt_ShowForSave_" data-uid="Redux.UI.SaveLoad.ModDifferencePrompt.ShowForSave*"></a>
+  <h4 id="Redux_UI_SaveLoad_ModDifferencePrompt_ShowForSave_KSP_Sim_SerializedSaveGameMetadata_System_String_System_Action_System_Action_" data-uid="Redux.UI.SaveLoad.ModDifferencePrompt.ShowForSave(KSP.Sim.SerializedSaveGameMetadata,System.String,System.Action,System.Action)">ShowForSave(SerializedSaveGameMetadata, string, Action, Action)</h4>
+  <div class="markdown level1 summary"><p>Loads a save straight away when its mods match the installed ones, and otherwise shows what differs. Loading
+anyway first opens the feature editor on the features of mods the save has never seen, when it can take
+any, then records the installed mods and the picked features in every save of the campaign.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void ShowWithDiff(SaveModDiff[] inSave, SaveModDiff[] enabled, Action onLoadAnyways, Action onCancel)</code></pre>
+    <pre><code class="lang-csharp hljs">public void ShowForSave(SerializedSaveGameMetadata metadata, string saveFilePath, Action onLoad, Action onCancel)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -156,40 +158,40 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Redux.SaveLoad.SaveModDiff.html">SaveModDiff</a>[]</td>
-        <td><span class="parametername">inSave</span></td>
-        <td><p>The <a class="xref" href="Redux.SaveLoad.SaveModDiff.html">SaveModDiff</a> entries recorded in the save file.</p>
+        <td><a class="xref" href="KSP.Sim.SerializedSaveGameMetadata.html">SerializedSaveGameMetadata</a></td>
+        <td><span class="parametername">metadata</span></td>
+        <td><p>The save's metadata.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Redux.SaveLoad.SaveModDiff.html">SaveModDiff</a>[]</td>
-        <td><span class="parametername">enabled</span></td>
-        <td><p>The <a class="xref" href="Redux.SaveLoad.SaveModDiff.html">SaveModDiff</a> entries for the currently enabled mods.</p>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">saveFilePath</span></td>
+        <td><p>The save's file.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">Action</span></td>
-        <td><span class="parametername">onLoadAnyways</span></td>
-        <td><p>The callback invoked when the user chooses to load the save regardless of mod differences.</p>
+        <td><span class="parametername">onLoad</span></td>
+        <td><p>Starts the load.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">Action</span></td>
         <td><span class="parametername">onCancel</span></td>
-        <td><p>The callback invoked when the user cancels the load operation.</p>
+        <td><p>Called when the player goes back instead.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
@@ -202,6 +204,12 @@
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
   </div>
   <div>
       <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>

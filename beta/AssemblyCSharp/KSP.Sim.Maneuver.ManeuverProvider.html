@@ -90,7 +90,7 @@
     <div class="level1"><span class="xref">ManeuverProvider</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Sim.html">Sim</a>.<a class="xref" href="KSP.Sim.Maneuver.html">Maneuver</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="KSP_Sim_Maneuver_ManeuverProvider_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class ManeuverProvider</code></pre>
@@ -457,6 +457,9 @@
       </tr>
     </tbody>
   </table>
+  <h5 id="KSP_Sim_Maneuver_ManeuverProvider_NormalizedManeuverTime_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Holds <a class="xref" href="KSP.Sim.Maneuver.ManeuverProvider.html#KSP_Sim_Maneuver_ManeuverProvider_NORMALIZED_MANEUVER_BOUND">NORMALIZED_MANEUVER_BOUND</a> whenever the active vessel has no maneuver node.</p>
+</div>
 
 
   <a id="KSP_Sim_Maneuver_ManeuverProvider_StagingIndicators_" data-uid="KSP.Sim.Maneuver.ManeuverProvider.StagingIndicators*"></a>
@@ -614,9 +617,7 @@ public ContextListProperty&lt;StageIndicatorDataContext&gt; StagingIndicators { 
 
   <a id="KSP_Sim_Maneuver_ManeuverProvider_OnEngineThrustCalculationComplete_" data-uid="KSP.Sim.Maneuver.ManeuverProvider.OnEngineThrustCalculationComplete*"></a>
   <h4 id="KSP_Sim_Maneuver_ManeuverProvider_OnEngineThrustCalculationComplete_KSP_Messages_MessageCenterMessage_" data-uid="KSP.Sim.Maneuver.ManeuverProvider.OnEngineThrustCalculationComplete(KSP.Messages.MessageCenterMessage)">OnEngineThrustCalculationComplete(MessageCenterMessage)</h4>
-  <div class="markdown level1 summary"><p>Once engine thrust calculation is complete, check if there is an active node and if _isPendingTwrUpdate is true.
-Invoke OnManeuverNodeBurnChanged to recalculate burn time and revalidate UI if conditions are met.
-If not, return.</p>
+  <div class="markdown level1 summary"><p>Recalculates the active node's burn after the active vessel finishes a full delta-v calculation requested by a thrust limiter change.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -636,7 +637,8 @@ If not, return.</p>
       <tr>
         <td><a class="xref" href="KSP.Messages.MessageCenterMessage.html">MessageCenterMessage</a></td>
         <td><span class="parametername">msg</span></td>
-        <td></td>
+        <td><p>The completed vessel delta-v calculation message.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -644,7 +646,7 @@ If not, return.</p>
 
   <a id="KSP_Sim_Maneuver_ManeuverProvider_OnEngineThrustLimiterChanged_" data-uid="KSP.Sim.Maneuver.ManeuverProvider.OnEngineThrustLimiterChanged*"></a>
   <h4 id="KSP_Sim_Maneuver_ManeuverProvider_OnEngineThrustLimiterChanged_KSP_Messages_MessageCenterMessage_" data-uid="KSP.Sim.Maneuver.ManeuverProvider.OnEngineThrustLimiterChanged(KSP.Messages.MessageCenterMessage)">OnEngineThrustLimiterChanged(MessageCenterMessage)</h4>
-  <div class="markdown level1 summary"><p>The player has changed the engine thrust limiter, set _isPendingTwrUpdate to true to update the maneuver once it is done calculating</p>
+  <div class="markdown level1 summary"><p>Requests fresh stage burn data after an engine thrust limiter on the active vessel changes, so the active node's burn time is recalculated once that data is ready.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -664,7 +666,8 @@ If not, return.</p>
       <tr>
         <td><a class="xref" href="KSP.Messages.MessageCenterMessage.html">MessageCenterMessage</a></td>
         <td><span class="parametername">msg</span></td>
-        <td></td>
+        <td><p>The flight thrust limiter change message.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -816,13 +819,13 @@ If not, return.</p>
   </table>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
@@ -835,6 +838,12 @@ If not, return.</p>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
   </div>
   <div>
       <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>

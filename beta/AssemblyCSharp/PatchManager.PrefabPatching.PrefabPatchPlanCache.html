@@ -91,10 +91,10 @@ dependency ordering, target validation, and conflict analysis.</p>
     <div class="level1"><span class="xref">PrefabPatchPlanCache</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PatchManager.html">PatchManager</a>.<a class="xref" href="PatchManager.PrefabPatching.html">PrefabPatching</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="PatchManager_PrefabPatching_PrefabPatchPlanCache_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class PrefabPatchPlanCache</code></pre>
+    <pre><code class="lang-csharp hljs">public class PrefabPatchPlanCache</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -195,13 +195,13 @@ dependency ordering, target validation, and conflict analysis.</p>
 
 
   <a id="PatchManager_PrefabPatching_PrefabPatchPlanCache_GetPath_" data-uid="PatchManager.PrefabPatching.PrefabPatchPlanCache.GetPath*"></a>
-  <h4 id="PatchManager_PrefabPatching_PrefabPatchPlanCache_GetPath_PatchManager_PrefabPatching_PrefabPatchPrefabIdentity_" data-uid="PatchManager.PrefabPatching.PrefabPatchPlanCache.GetPath(PatchManager.PrefabPatching.PrefabPatchPrefabIdentity)">GetPath(PrefabPatchPrefabIdentity)</h4>
-  <div class="markdown level1 summary"><p>Gets the cache file path for a target prefab identity.</p>
+  <h4 id="PatchManager_PrefabPatching_PrefabPatchPlanCache_GetPath_PatchManager_PrefabPatching_PrefabPatchPrefabIdentity_System_String_" data-uid="PatchManager.PrefabPatching.PrefabPatchPlanCache.GetPath(PatchManager.PrefabPatching.PrefabPatchPrefabIdentity,System.String)">GetPath(PrefabPatchPrefabIdentity, string)</h4>
+  <div class="markdown level1 summary"><p>Gets the cache file path for a target prefab identity resolved from one set of inputs.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string GetPath(PrefabPatchPrefabIdentity target)</code></pre>
+    <pre><code class="lang-csharp hljs">public string GetPath(PrefabPatchPrefabIdentity target, string sourceFingerprint)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -217,6 +217,12 @@ dependency ordering, target validation, and conflict analysis.</p>
         <td><a class="xref" href="PatchManager.PrefabPatching.PrefabPatchPrefabIdentity.html">PrefabPatchPrefabIdentity</a></td>
         <td><span class="parametername">target</span></td>
         <td><p>Target prefab identity.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">sourceFingerprint</span></td>
+        <td><p>The fingerprint of the inputs the plan is resolved from.</p>
 </td>
       </tr>
     </tbody>
@@ -237,6 +243,9 @@ dependency ordering, target validation, and conflict analysis.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="PatchManager_PrefabPatching_PrefabPatchPlanCache_GetPath_PatchManager_PrefabPatching_PrefabPatchPrefabIdentity_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The inputs are part of the name, so feature sets that patch one prefab differently keep a plan each.</p>
+</div>
 
 
   <a id="PatchManager_PrefabPatching_PrefabPatchPlanCache_LoadOrResolve_" data-uid="PatchManager.PrefabPatching.PrefabPatchPlanCache.LoadOrResolve*"></a>
@@ -302,13 +311,13 @@ dependency ordering, target validation, and conflict analysis.</p>
   </table>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="GlobalAssemblyCSharp.ObjectExtensions.html#GlobalAssemblyCSharp_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
@@ -321,6 +330,12 @@ dependency ordering, target validation, and conflict analysis.</p>
   </div>
   <div>
       <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
   </div>
   <div>
       <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>

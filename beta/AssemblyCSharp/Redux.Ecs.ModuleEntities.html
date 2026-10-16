@@ -95,7 +95,7 @@ binding paths.</p>
     <div class="level1"><span class="xref">ModuleEntities</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.Ecs.html">Ecs</a></h6>
-  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="Redux_Ecs_ModuleEntities_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static class ModuleEntities</code></pre>
@@ -283,6 +283,47 @@ No-ops on parts that carry no modules.</p>
       </tr>
     </tbody>
   </table>
+
+
+  <a id="Redux_Ecs_ModuleEntities_UnbindAll_" data-uid="Redux.Ecs.ModuleEntities.UnbindAll*"></a>
+  <h4 id="Redux_Ecs_ModuleEntities_UnbindAll_Unity_Entities_EntityManager_Unity_Entities_Entity_" data-uid="Redux.Ecs.ModuleEntities.UnbindAll(Unity.Entities.EntityManager,Unity.Entities.Entity)">UnbindAll(EntityManager, Entity)</h4>
+  <div class="markdown level1 summary"><p>Unbinds the <a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a> of every module entity recorded on <code class="paramref">partEntity</code>
+and leaves the entities alive.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void UnbindAll(EntityManager em, Entity partEntity)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td><p>The entity manager of the world that owns the part.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">partEntity</span></td>
+        <td><p>The part entity whose module data is unbound.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Ecs_ModuleEntities_UnbindAll_Unity_Entities_EntityManager_Unity_Entities_Entity__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>For a part whose entity is destroyed later as a whole. The <span class="xref">Unity.Entities.LinkedEntityGroup</span> cascade
+destroys the module entities with it but unbinds nothing, so without this a <a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a>
+keeps pointing at a dead entity. No-ops on parts that carry no modules.</p>
+</div>
 
 
   <a id="Redux_Ecs_ModuleEntities_UnstampVessel_" data-uid="Redux.Ecs.ModuleEntities.UnstampVessel*"></a>
