@@ -110,6 +110,83 @@
 </h3>
 
 
+  <h4 id="Redux_SaveLoad_PerCampaignModInformation_FILE_NAME" data-uid="Redux.SaveLoad.PerCampaignModInformation.FILE_NAME">FILE_NAME</h4>
+  <div class="markdown level1 summary"><p>The name of the campaign data file in a campaign's save folder.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string FILE_NAME = &quot;data.campaign&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_SaveLoad_PerCampaignModInformation_KnownMods" data-uid="Redux.SaveLoad.PerCampaignModInformation.KnownMods">KnownMods</h4>
+  <div class="markdown level1 summary"><p>The mods the player has loaded the campaign with, past the mod prompt. A save that differs from the
+installed mods only by these does not prompt again. Null when none were recorded.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;SaveModInformation&gt; KnownMods</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="Redux.SaveLoad.SaveModInformation.html">SaveModInformation</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_SaveLoad_PerCampaignModInformation_RequestedFeatures" data-uid="Redux.SaveLoad.PerCampaignModInformation.RequestedFeatures">RequestedFeatures</h4>
+  <div class="markdown level1 summary"><p>The features the campaign plays with, when they were set after its saves were written. Every load of the
+campaign uses them over the load's own save, so no save needs rewriting. Null when never set.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;string&gt; RequestedFeatures</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <h4 id="Redux_SaveLoad_PerCampaignModInformation_SerializedPluginSaveData" data-uid="Redux.SaveLoad.PerCampaignModInformation.SerializedPluginSaveData">SerializedPluginSaveData</h4>
   <div class="markdown level1 summary"><p>Serialized save data entries for each registered mod in a campaign.</p>
 </div>
@@ -130,6 +207,94 @@
       <tr>
         <td><span class="xref">List</span>&lt;<span class="xref">PluginSaveData</span>&gt;</td>
         <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="Redux_SaveLoad_PerCampaignModInformation_ReadCampaignScope_" data-uid="Redux.SaveLoad.PerCampaignModInformation.ReadCampaignScope*"></a>
+  <h4 id="Redux_SaveLoad_PerCampaignModInformation_ReadCampaignScope_System_String_" data-uid="Redux.SaveLoad.PerCampaignModInformation.ReadCampaignScope(System.String)">ReadCampaignScope(string)</h4>
+  <div class="markdown level1 summary"><p>Reads the campaign-wide fields of a campaign's data file, leaving the mods' data alone.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static PerCampaignModInformation ReadCampaignScope(string campaignFolder)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">campaignFolder</span></td>
+        <td><p>The campaign's save folder.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.SaveLoad.PerCampaignModInformation.html">PerCampaignModInformation</a></td>
+        <td><p>The campaign-wide fields, each null when the file or the field is missing or unreadable.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_SaveLoad_PerCampaignModInformation_WriteCampaignScope_" data-uid="Redux.SaveLoad.PerCampaignModInformation.WriteCampaignScope*"></a>
+  <h4 id="Redux_SaveLoad_PerCampaignModInformation_WriteCampaignScope_System_String_System_Collections_Generic_IReadOnlyList_System_String__System_Collections_Generic_IReadOnlyList_Redux_SaveLoad_SaveModInformation__" data-uid="Redux.SaveLoad.PerCampaignModInformation.WriteCampaignScope(System.String,System.Collections.Generic.IReadOnlyList{System.String},System.Collections.Generic.IReadOnlyList{Redux.SaveLoad.SaveModInformation})">WriteCampaignScope(string, IReadOnlyList&lt;string&gt;, IReadOnlyList&lt;SaveModInformation&gt;)</h4>
+  <div class="markdown level1 summary"><p>Sets the campaign-wide fields in a campaign's data file and keeps everything else in it as it was.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void WriteCampaignScope(string campaignFolder, IReadOnlyList&lt;string&gt; requestedFeatures, IReadOnlyList&lt;SaveModInformation&gt; knownMods)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">campaignFolder</span></td>
+        <td><p>The campaign's save folder.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">IReadOnlyList</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">requestedFeatures</span></td>
+        <td><p>The features to record, or null to leave them as they are.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">IReadOnlyList</span>&lt;<a class="xref" href="Redux.SaveLoad.SaveModInformation.html">SaveModInformation</a>&gt;</td>
+        <td><span class="parametername">knownMods</span></td>
+        <td><p>The mods to record, or null to leave them as they are.</p>
+</td>
       </tr>
     </tbody>
   </table>
