@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class FPSUIManager | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="Manages the FPS counter UI window, displaying current and smoothed frame rate and frame time statistics.">
+    <meta name="description" content="Manages the FPS counter window, which shows the average frame rate and frame time, the CPU and GPU time, and which part of the frame limits the frame rate.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,8 @@
 
 
   <h1 id="KSP_UI_FPSUIManager" data-uid="KSP.UI.FPSUIManager" class="text-break">Class FPSUIManager</h1>
-  <div class="markdown level0 summary"><p>Manages the FPS counter UI window, displaying current and smoothed frame rate and frame time statistics.</p>
+  <div class="markdown level0 summary"><p>Manages the FPS counter window, which shows the average frame rate and frame time, the CPU and GPU time, and
+which part of the frame limits the frame rate.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -126,24 +127,223 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public FPSUIManager()</code></pre>
   </div>
-  <h3 id="methods">Methods
+  <h3 id="fields">Fields
 </h3>
 
 
-  <a id="KSP_UI_FPSUIManager_OnLocalizeEvent_" data-uid="KSP.UI.FPSUIManager.OnLocalizeEvent*"></a>
-  <h4 id="KSP_UI_FPSUIManager_OnLocalizeEvent" data-uid="KSP.UI.FPSUIManager.OnLocalizeEvent">OnLocalizeEvent()</h4>
-  <div class="markdown level1 summary"><p>Refreshes localized display strings in response to a localization change event.</p>
+  <h4 id="KSP_UI_FPSUIManager_WINDOW_ASSET_KEY" data-uid="KSP.UI.FPSUIManager.WINDOW_ASSET_KEY">WINDOW_ASSET_KEY</h4>
+  <div class="markdown level1 summary"><p>The addressable key of the FPS counter window UXML.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void OnLocalizeEvent()</code></pre>
+    <pre><code class="lang-csharp hljs">public const string WINDOW_ASSET_KEY = &quot;Assets/ReduxAssets/UI/Performance/FPSWindow.uxml&quot;</code></pre>
   </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="KSP_UI_FPSUIManager_BottleneckText_" data-uid="KSP.UI.FPSUIManager.BottleneckText*"></a>
+  <h4 id="KSP_UI_FPSUIManager_BottleneckText" data-uid="KSP.UI.FPSUIManager.BottleneckText">BottleneckText</h4>
+  <div class="markdown level1 summary"><p>Gets the localized name of the part of the frame that limits the frame rate.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string BottleneckText { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_UI_FPSUIManager_CloseCommand_" data-uid="KSP.UI.FPSUIManager.CloseCommand*"></a>
+  <h4 id="KSP_UI_FPSUIManager_CloseCommand" data-uid="KSP.UI.FPSUIManager.CloseCommand">CloseCommand</h4>
+  <div class="markdown level1 summary"><p>Gets the command that closes the FPS counter and turns the Show FPS setting off.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RelayCommand CloseCommand { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="../UitkForKsp2/UitkForKsp2.MVVM.Commands.RelayCommand.html">RelayCommand</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_UI_FPSUIManager_CpuTimeText_" data-uid="KSP.UI.FPSUIManager.CpuTimeText*"></a>
+  <h4 id="KSP_UI_FPSUIManager_CpuTimeText" data-uid="KSP.UI.FPSUIManager.CpuTimeText">CpuTimeText</h4>
+  <div class="markdown level1 summary"><p>Gets the average time of the slower CPU thread, main or render.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string CpuTimeText { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_UI_FPSUIManager_FpsText_" data-uid="KSP.UI.FPSUIManager.FpsText*"></a>
+  <h4 id="KSP_UI_FPSUIManager_FpsText" data-uid="KSP.UI.FPSUIManager.FpsText">FpsText</h4>
+  <div class="markdown level1 summary"><p>Gets the average frame rate and frame time of the last update interval.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string FpsText { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_UI_FPSUIManager_GpuTimeText_" data-uid="KSP.UI.FPSUIManager.GpuTimeText*"></a>
+  <h4 id="KSP_UI_FPSUIManager_GpuTimeText" data-uid="KSP.UI.FPSUIManager.GpuTimeText">GpuTimeText</h4>
+  <div class="markdown level1 summary"><p>Gets the average GPU time.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GpuTimeText { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="KSP_UI_FPSUIManager_CreateWindow_" data-uid="KSP.UI.FPSUIManager.CreateWindow*"></a>
+  <h4 id="KSP_UI_FPSUIManager_CreateWindow_UnityEngine_UIElements_VisualTreeAsset_UnityEngine_Transform_" data-uid="KSP.UI.FPSUIManager.CreateWindow(UnityEngine.UIElements.VisualTreeAsset,UnityEngine.Transform)">CreateWindow(VisualTreeAsset, Transform)</h4>
+  <div class="markdown level1 summary"><p>Creates the FPS counter window and the manager that drives it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static FPSUIManager CreateWindow(VisualTreeAsset windowAsset, Transform parent)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/UIElements.VisualTreeAsset.html">VisualTreeAsset</a></td>
+        <td><span class="parametername">windowAsset</span></td>
+        <td><p>The FPS counter window UXML.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>The transform the window is parented to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.UI.FPSUIManager.html">FPSUIManager</a></td>
+        <td><p>The manager of the new window.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <a id="KSP_UI_FPSUIManager_SetShowFPS_" data-uid="KSP.UI.FPSUIManager.SetShowFPS*"></a>
   <h4 id="KSP_UI_FPSUIManager_SetShowFPS_System_Boolean_" data-uid="KSP.UI.FPSUIManager.SetShowFPS(System.Boolean)">SetShowFPS(bool)</h4>
-  <div class="markdown level1 summary"><p>Sets whether the FPS counter UI is visible and actively collecting frame time data.</p>
+  <div class="markdown level1 summary"><p>Shows or hides the FPS counter and stores the choice as the Show FPS setting.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -163,8 +363,35 @@
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">value</span></td>
-        <td><p>Whether to show and activate the FPS counter.</p>
+        <td><p>True to show the FPS counter, false to hide it.</p>
 </td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="events">Events
+</h3>
+
+
+  <h4 id="KSP_UI_FPSUIManager_propertyChanged" data-uid="KSP.UI.FPSUIManager.propertyChanged">propertyChanged</h4>
+  <div class="markdown level1 summary"><p>Occurs when a bound property of the FPS counter changes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;BindablePropertyChangedEventArgs&gt; propertyChanged</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EventHandler</span>&lt;<a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/UIElements.BindablePropertyChangedEventArgs.html">BindablePropertyChangedEventArgs</a>&gt;</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
