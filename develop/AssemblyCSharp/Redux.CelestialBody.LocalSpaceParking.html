@@ -102,11 +102,12 @@ revert took. KSP1 keeps its planets through a scene switch. Here the view is det
 before the teardown reaches it, held inactive until the body that reloads it claims it, and handed
 back to that body, which re-points everything in the view that referenced the old universe. Only the
 current body is ever kept: <a class="xref" href="Redux.CelestialBody.LocalSpaceParking.html#Redux_CelestialBody_LocalSpaceParking_KeepOnly_KSP_Game_GameInstance_KSP_Sim_impl_CelestialBodyComponent_">KeepOnly(GameInstance, CelestialBodyComponent)</a> drops every other parked view and releases every
-other body's prefab as a body's local space starts loading, so a hop to another body rebuilds it and
-there is never more than one planet's terrain and bundles in memory. Each parked sphere keeps its quad
-tree, height sampler and spawned statics, while its renderer has released its GPU buffers and colliders
-on deactivation. What it really pins is its planet's bundles, through the instance itself. Views nobody
-reclaims are dropped when the session ends.</p>
+other body's local-space prefab as a body's local space starts loading, so a hop to another body
+rebuilds it and there is never more than one planet's terrain and bundles in memory. Scaled-space
+prefabs are bounded at the same point, to the bodies seen around the current one. Each parked sphere
+keeps its quad tree, height sampler and spawned statics, while its renderer has released its GPU buffers
+and colliders on deactivation. What it really pins is its planet's bundles, through the instance itself.
+Views nobody reclaims are dropped when the session ends.</p>
 </div>
   <h3 id="properties">Properties
 </h3>
@@ -224,9 +225,10 @@ reclaims are dropped when the session ends.</p>
 
   <a id="Redux_CelestialBody_LocalSpaceParking_KeepOnly_" data-uid="Redux.CelestialBody.LocalSpaceParking.KeepOnly*"></a>
   <h4 id="Redux_CelestialBody_LocalSpaceParking_KeepOnly_KSP_Game_GameInstance_KSP_Sim_impl_CelestialBodyComponent_" data-uid="Redux.CelestialBody.LocalSpaceParking.KeepOnly(KSP.Game.GameInstance,KSP.Sim.impl.CelestialBodyComponent)">KeepOnly(GameInstance, CelestialBodyComponent)</h4>
-  <div class="markdown level1 summary"><p>Drops every parked view and releases every retained local-space prefab except those of
-<code class="paramref">body</code>. Called as a body's local space starts loading, before it instantiates, so
-the previous body's terrain and bundles go before the next body's arrive.</p>
+  <div class="markdown level1 summary"><p>Drops every parked view, releases every retained local-space prefab except those of
+<code class="paramref">body</code>, and releases every retained scaled-space prefab <code class="paramref">body</code> has
+no use for. Called as a body's local space starts loading, before it instantiates, so the previous
+body's terrain and bundles go before the next body's arrive.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -274,8 +276,12 @@ the previous body's terrain and bundles go before the next body's arrive.</p>
     </tbody>
   </table>
   <h5 id="Redux_CelestialBody_LocalSpaceParking_KeepOnly_KSP_Game_GameInstance_KSP_Sim_impl_CelestialBodyComponent__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Scaled-space prefabs stay retained: every body has a scaled view alive for the whole session, so
-their bundles are loaded whatever the handles say.</p>
+  <div class="markdown level1 remarks"><p>One body is parked at a time, and its scaled space goes with it: scaled-space prefabs stay only for the
+current body's neighbourhood that <span class="xref">Redux.CelestialBody.LocalSpaceParking.IsScaledSpaceNeeded``1(``0,``0,System.Func{``0,``0},System.Func{``0,System.Boolean})</span> picks, the bodies the stock
+visibility pass loads scaled views for around it, so a revert to the same body still reloads all of
+them from memory. Every other body's scaled bundles used to stay for the session, and after a tour of
+the system their cloud cubemaps and masks pushed the VAB past the texture streaming budget (#2034). A released body whose scaled view is still alive keeps its bundles through the
+instance until the visibility pass unloads it.</p>
 </div>
 
 
