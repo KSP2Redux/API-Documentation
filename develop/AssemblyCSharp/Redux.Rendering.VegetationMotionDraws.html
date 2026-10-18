@@ -133,13 +133,13 @@ material has a <a class="xref" href="Redux.Rendering.VegetationMotionDraws.html#
 
 
   <a id="Redux_Rendering_VegetationMotionDraws_DrawMotion_" data-uid="Redux.Rendering.VegetationMotionDraws.DrawMotion*"></a>
-  <h4 id="Redux_Rendering_VegetationMotionDraws_DrawMotion_UnityEngine_Rendering_RasterCommandBuffer_UnityEngine_Camera_" data-uid="Redux.Rendering.VegetationMotionDraws.DrawMotion(UnityEngine.Rendering.RasterCommandBuffer,UnityEngine.Camera)">DrawMotion(RasterCommandBuffer, Camera)</h4>
+  <h4 id="Redux_Rendering_VegetationMotionDraws_DrawMotion_UnityEngine_Rendering_CommandBuffer_UnityEngine_Camera_UnityEngine_Matrix4x4_System_Boolean_" data-uid="Redux.Rendering.VegetationMotionDraws.DrawMotion(UnityEngine.Rendering.CommandBuffer,UnityEngine.Camera,UnityEngine.Matrix4x4,System.Boolean)">DrawMotion(CommandBuffer, Camera, Matrix4x4, bool)</h4>
   <div class="markdown level1 summary"><p>Draws the motion vector pass of every vegetation draw recorded for a camera this frame.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void DrawMotion(RasterCommandBuffer cmd, Camera camera)</code></pre>
+    <pre><code class="lang-csharp hljs">public static void DrawMotion(CommandBuffer cmd, Camera camera, Matrix4x4 previousFromCurrent, bool historyValid)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -152,7 +152,7 @@ material has a <a class="xref" href="Redux.Rendering.VegetationMotionDraws.html#
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">RasterCommandBuffer</span></td>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Rendering.CommandBuffer.html">CommandBuffer</a></td>
         <td><span class="parametername">cmd</span></td>
         <td><p>The command buffer of the motion vector target.</p>
 </td>
@@ -161,6 +161,18 @@ material has a <a class="xref" href="Redux.Rendering.VegetationMotionDraws.html#
         <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Camera.html">Camera</a></td>
         <td><span class="parametername">camera</span></td>
         <td><p>The camera.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Matrix4x4.html">Matrix4x4</a></td>
+        <td><span class="parametername">previousFromCurrent</span></td>
+        <td><p>The mapping from current to previous body world coordinates.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">historyValid</span></td>
+        <td><p>Whether the body and camera history describe the preceding submitted frame.</p>
 </td>
       </tr>
     </tbody>
@@ -205,7 +217,7 @@ material has a <a class="xref" href="Redux.Rendering.VegetationMotionDraws.html#
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td><p>True if <a class="xref" href="Redux.Rendering.VegetationMotionDraws.html#Redux_Rendering_VegetationMotionDraws_DrawMotion_UnityEngine_Rendering_RasterCommandBuffer_UnityEngine_Camera_">DrawMotion(RasterCommandBuffer, Camera)</a> would draw something for the camera.</p>
+        <td><p>True if <a class="xref" href="Redux.Rendering.VegetationMotionDraws.html#Redux_Rendering_VegetationMotionDraws_DrawMotion_UnityEngine_Rendering_CommandBuffer_UnityEngine_Camera_UnityEngine_Matrix4x4_System_Boolean_">DrawMotion(CommandBuffer, Camera, Matrix4x4, bool)</a> would draw something for the camera.</p>
 </td>
       </tr>
     </tbody>
@@ -213,13 +225,13 @@ material has a <a class="xref" href="Redux.Rendering.VegetationMotionDraws.html#
 
 
   <a id="Redux_Rendering_VegetationMotionDraws_Record_" data-uid="Redux.Rendering.VegetationMotionDraws.Record*"></a>
-  <h4 id="Redux_Rendering_VegetationMotionDraws_Record_UnityEngine_Camera_UnityEngine_Mesh_System_Int32_UnityEngine_Material_UnityEngine_GraphicsBuffer_UnityEngine_GraphicsBuffer_" data-uid="Redux.Rendering.VegetationMotionDraws.Record(UnityEngine.Camera,UnityEngine.Mesh,System.Int32,UnityEngine.Material,UnityEngine.GraphicsBuffer,UnityEngine.GraphicsBuffer)">Record(Camera, Mesh, int, Material, GraphicsBuffer, GraphicsBuffer)</h4>
+  <h4 id="Redux_Rendering_VegetationMotionDraws_Record_UnityEngine_Camera_UnityEngine_Mesh_System_Int32_UnityEngine_Material_UnityEngine_GraphicsBuffer_UnityEngine_GraphicsBuffer_UnityEngine_MaterialPropertyBlock_" data-uid="Redux.Rendering.VegetationMotionDraws.Record(UnityEngine.Camera,UnityEngine.Mesh,System.Int32,UnityEngine.Material,UnityEngine.GraphicsBuffer,UnityEngine.GraphicsBuffer,UnityEngine.MaterialPropertyBlock)">Record(Camera, Mesh, int, Material, GraphicsBuffer, GraphicsBuffer, MaterialPropertyBlock)</h4>
   <div class="markdown level1 summary"><p>Records one vegetation draw for a camera this frame. Draws of materials without the motion pass are ignored.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void Record(Camera camera, Mesh mesh, int submesh, Material material, GraphicsBuffer arguments, GraphicsBuffer instances)</code></pre>
+    <pre><code class="lang-csharp hljs">public static void Record(Camera camera, Mesh mesh, int submesh, Material material, GraphicsBuffer arguments, GraphicsBuffer instances, MaterialPropertyBlock properties = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -265,6 +277,12 @@ material has a <a class="xref" href="Redux.Rendering.VegetationMotionDraws.html#
         <td><span class="xref">GraphicsBuffer</span></td>
         <td><span class="parametername">instances</span></td>
         <td><p>The camera's visible instance buffer.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/MaterialPropertyBlock.html">MaterialPropertyBlock</a></td>
+        <td><span class="parametername">properties</span></td>
+        <td><p>The current draw properties, copied before the caller reuses its block.</p>
 </td>
       </tr>
     </tbody>
