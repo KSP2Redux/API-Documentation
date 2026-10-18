@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class ModuleEntities | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="Creates and tears down the per-instance entity that backs a single part module. Every module gets its own entity carrying its generated state component(s), config blob, the managed module object, and a  back-reference to the part. The part entity records its modules in a  buffer. Shared by the flight () and editor () binding paths.">
+    <meta name="description" content="Creates the per-instance entity shared by flight and OAB module binding paths. Each module carries native state, config and a ModulePart owner link. The part records its module entities in PartModuleRef and owns their native destruction through its linked cascade.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,12 +81,9 @@
 
 
   <h1 id="Redux_Ecs_ModuleEntities" data-uid="Redux.Ecs.ModuleEntities" class="text-break">Class ModuleEntities</h1>
-  <div class="markdown level0 summary"><p>Creates and tears down the per-instance entity that backs a single part module. Every module gets
-its own entity carrying its generated state component(s), config blob, the managed module object,
-and a <a class="xref" href="Redux.Ecs.Components.ModulePart.html">ModulePart</a> back-reference to the part. The part entity records its modules in
-a <a class="xref" href="Redux.Ecs.Components.PartModuleRef.html">PartModuleRef</a> buffer. Shared by the flight
-(<a class="xref" href="KSP.Sim.impl.PartComponent.html">PartComponent</a>) and editor (<a class="xref" href="KSP.OAB.ObjectAssemblyPart.html">ObjectAssemblyPart</a>)
-binding paths.</p>
+  <div class="markdown level0 summary"><p>Creates the per-instance entity shared by flight and OAB module binding paths. Each module
+carries native state, config and a ModulePart owner link. The part records its module
+entities in PartModuleRef and owns their native destruction through its linked cascade.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -105,18 +102,13 @@ binding paths.</p>
 
 
   <a id="Redux_Ecs_ModuleEntities_Create_" data-uid="Redux.Ecs.ModuleEntities.Create*"></a>
-  <h4 id="Redux_Ecs_ModuleEntities_Create_Unity_Entities_EntityManager_Unity_Entities_Entity_System_Object_KSP_Sim_Definitions_ModuleDataList_System_Collections_Generic_IReadOnlyDictionary_System_Type_Newtonsoft_Json_Linq_JObject__" data-uid="Redux.Ecs.ModuleEntities.Create(Unity.Entities.EntityManager,Unity.Entities.Entity,System.Object,KSP.Sim.Definitions.ModuleDataList,System.Collections.Generic.IReadOnlyDictionary{System.Type,Newtonsoft.Json.Linq.JObject})">Create(EntityManager, Entity, object, ModuleDataList, IReadOnlyDictionary&lt;Type, JObject&gt;)</h4>
-  <div class="markdown level1 summary"><p>Creates the module entity for <code class="paramref">module</code>, links it to <code class="paramref">partEntity</code>,
-mirrors the part's current vessel membership onto it, binds each of the module's
-<a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a>, and appends it to the part's <a class="xref" href="Redux.Ecs.Components.PartModuleRef.html">PartModuleRef</a> buffer.
-Serialized state carried in <code class="paramref">pendingStateJson</code> (keyed by data type) is
-applied to each data object immediately after its bind, so the values land directly in ECS.
-Returns the new module entity.</p>
+  <h4 id="Redux_Ecs_ModuleEntities_Create_Unity_Entities_EntityManager_Unity_Entities_Entity_System_Object_System_Collections_Generic_IReadOnlyDictionary_System_Type_Newtonsoft_Json_Linq_JObject__" data-uid="Redux.Ecs.ModuleEntities.Create(Unity.Entities.EntityManager,Unity.Entities.Entity,System.Object,System.Collections.Generic.IReadOnlyDictionary{System.Type,Newtonsoft.Json.Linq.JObject})">Create(EntityManager, Entity, object, IReadOnlyDictionary&lt;Type, JObject&gt;)</h4>
+  <div class="markdown level1 summary"><p>Bind a module's original data objects, apply saved state, and link its entity to the part.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Entity Create(EntityManager em, Entity partEntity, object module, ModuleDataList dataModules, IReadOnlyDictionary&lt;Type, JObject&gt; pendingStateJson = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Entity Create(EntityManager em, Entity partEntity, object module, IReadOnlyDictionary&lt;Type, JObject&gt; pendingStateJson = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -131,27 +123,26 @@ Returns the new module entity.</p>
       <tr>
         <td><span class="xref">EntityManager</span></td>
         <td><span class="parametername">em</span></td>
-        <td></td>
+        <td><p>The owning world's entity manager.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Entity</span></td>
         <td><span class="parametername">partEntity</span></td>
-        <td></td>
+        <td><p>The live managed part's entity.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">object</span></td>
         <td><span class="parametername">module</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="KSP.Sim.Definitions.ModuleDataList.html">ModuleDataList</a></td>
-        <td><span class="parametername">dataModules</span></td>
-        <td></td>
+        <td><p>The flight module or OAB behaviour retained by that part.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">IReadOnlyDictionary</span>&lt;<span class="xref">Type</span>, <span class="xref">JObject</span>&gt;</td>
         <td><span class="parametername">pendingStateJson</span></td>
-        <td></td>
+        <td><p>Saved state to apply after binding, keyed by data type.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -166,7 +157,8 @@ Returns the new module entity.</p>
     <tbody>
       <tr>
         <td><span class="xref">Entity</span></td>
-        <td></td>
+        <td><p>The module's native entity.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -174,14 +166,12 @@ Returns the new module entity.</p>
 
   <a id="Redux_Ecs_ModuleEntities_Destroy_" data-uid="Redux.Ecs.ModuleEntities.Destroy*"></a>
   <h4 id="Redux_Ecs_ModuleEntities_Destroy_Unity_Entities_EntityManager_Unity_Entities_Entity_Unity_Entities_Entity_" data-uid="Redux.Ecs.ModuleEntities.Destroy(Unity.Entities.EntityManager,Unity.Entities.Entity,Unity.Entities.Entity)">Destroy(EntityManager, Entity, Entity)</h4>
-  <div class="markdown level1 summary"><p>Destroys a single module entity, unbinding its <a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a> first, and removes
-it from the part's <a class="xref" href="Redux.Ecs.Components.PartModuleRef.html">PartModuleRef</a> buffer. No-ops if the world is gone or the
-entity is already destroyed.</p>
+  <div class="markdown level1 summary"><p>Shut down and unbind one managed module before removing its native entity.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void Destroy(EntityManager em, Entity partEntity, Entity moduleEntity)</code></pre>
+    <pre><code class="lang-csharp hljs">public static void Destroy(EntityManager em, Entity partEntity, Entity entity)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -196,31 +186,33 @@ entity is already destroyed.</p>
       <tr>
         <td><span class="xref">EntityManager</span></td>
         <td><span class="parametername">em</span></td>
-        <td></td>
+        <td><p>The owning world's entity manager.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Entity</span></td>
         <td><span class="parametername">partEntity</span></td>
-        <td></td>
+        <td><p>The live part owner.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Entity</span></td>
-        <td><span class="parametername">moduleEntity</span></td>
-        <td></td>
+        <td><span class="parametername">entity</span></td>
+        <td><p>The module entity to remove.</p>
+</td>
       </tr>
     </tbody>
   </table>
 
 
-  <a id="Redux_Ecs_ModuleEntities_DestroyAll_" data-uid="Redux.Ecs.ModuleEntities.DestroyAll*"></a>
-  <h4 id="Redux_Ecs_ModuleEntities_DestroyAll_Unity_Entities_EntityManager_Unity_Entities_Entity_" data-uid="Redux.Ecs.ModuleEntities.DestroyAll(Unity.Entities.EntityManager,Unity.Entities.Entity)">DestroyAll(EntityManager, Entity)</h4>
-  <div class="markdown level1 summary"><p>Destroys every module entity recorded on <code class="paramref">partEntity</code> and clears the buffer.
-No-ops on parts that carry no modules.</p>
+  <a id="Redux_Ecs_ModuleEntities_GetFlightModule_" data-uid="Redux.Ecs.ModuleEntities.GetFlightModule*"></a>
+  <h4 id="Redux_Ecs_ModuleEntities_GetFlightModule_Unity_Entities_EntityManager_Unity_Entities_Entity_" data-uid="Redux.Ecs.ModuleEntities.GetFlightModule(Unity.Entities.EntityManager,Unity.Entities.Entity)">GetFlightModule(EntityManager, Entity)</h4>
+  <div class="markdown level1 summary"><p>Resolve the original flight target for a query-selected module instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void DestroyAll(EntityManager em, Entity partEntity)</code></pre>
+    <pre><code class="lang-csharp hljs">public static PartComponentModule GetFlightModule(EntityManager em, Entity entity)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -235,12 +227,30 @@ No-ops on parts that carry no modules.</p>
       <tr>
         <td><span class="xref">EntityManager</span></td>
         <td><span class="parametername">em</span></td>
-        <td></td>
+        <td><p>The owning world's entity manager.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Entity</span></td>
-        <td><span class="parametername">partEntity</span></td>
-        <td></td>
+        <td><span class="parametername">entity</span></td>
+        <td><p>A module entity carrying ModulePart.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.PartComponentModule.html">PartComponentModule</a></td>
+        <td><p>The flight module, or null if its owner or binding has ended.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -248,8 +258,7 @@ No-ops on parts that carry no modules.</p>
 
   <a id="Redux_Ecs_ModuleEntities_StampVessel_" data-uid="Redux.Ecs.ModuleEntities.StampVessel*"></a>
   <h4 id="Redux_Ecs_ModuleEntities_StampVessel_Unity_Entities_EntityManager_Unity_Entities_Entity_Redux_Ecs_Components_PartVessel_" data-uid="Redux.Ecs.ModuleEntities.StampVessel(Unity.Entities.EntityManager,Unity.Entities.Entity,Redux.Ecs.Components.PartVessel)">StampVessel(EntityManager, Entity, PartVessel)</h4>
-  <div class="markdown level1 summary"><p>Re-stamps the given <a class="xref" href="Redux.Ecs.Components.PartVessel.html">PartVessel</a> onto every module entity of a part, mirroring
-<a class="xref" href="Redux.Ecs.Components.PartMembership.html#Redux_Ecs_Components_PartMembership_Stamp_Unity_Entities_EntityManager_Unity_Entities_Entity_Unity_Entities_Entity_">Stamp(EntityManager, Entity, Entity)</a>.</p>
+  <div class="markdown level1 summary"><p>Mirror the part's vessel membership onto its modules.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -285,15 +294,14 @@ No-ops on parts that carry no modules.</p>
   </table>
 
 
-  <a id="Redux_Ecs_ModuleEntities_UnbindAll_" data-uid="Redux.Ecs.ModuleEntities.UnbindAll*"></a>
-  <h4 id="Redux_Ecs_ModuleEntities_UnbindAll_Unity_Entities_EntityManager_Unity_Entities_Entity_" data-uid="Redux.Ecs.ModuleEntities.UnbindAll(Unity.Entities.EntityManager,Unity.Entities.Entity)">UnbindAll(EntityManager, Entity)</h4>
-  <div class="markdown level1 summary"><p>Unbinds the <a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a> of every module entity recorded on <code class="paramref">partEntity</code>
-and leaves the entities alive.</p>
+  <a id="Redux_Ecs_ModuleEntities_TryGetData_" data-uid="Redux.Ecs.ModuleEntities.TryGetData*"></a>
+  <h4 id="Redux_Ecs_ModuleEntities_TryGetData__1_Unity_Entities_EntityManager_Unity_Entities_Entity___0__" data-uid="Redux.Ecs.ModuleEntities.TryGetData``1(Unity.Entities.EntityManager,Unity.Entities.Entity,``0@)">TryGetData&lt;T&gt;(EntityManager, Entity, out T)</h4>
+  <div class="markdown level1 summary"><p>Resolve original data through the live part owner and exact module entity.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void UnbindAll(EntityManager em, Entity partEntity)</code></pre>
+    <pre><code class="lang-csharp hljs">public static bool TryGetData&lt;T&gt;(EntityManager em, Entity entity, out T data) where T : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -308,28 +316,98 @@ and leaves the entities alive.</p>
       <tr>
         <td><span class="xref">EntityManager</span></td>
         <td><span class="parametername">em</span></td>
-        <td><p>The entity manager of the world that owns the part.</p>
+        <td><p>The owning world's entity manager.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">Entity</span></td>
-        <td><span class="parametername">partEntity</span></td>
-        <td><p>The part entity whose module data is unbound.</p>
+        <td><span class="parametername">entity</span></td>
+        <td><p>The module entity.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">data</span></td>
+        <td><p>The original data instance, if its binding remains live.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Redux_Ecs_ModuleEntities_UnbindAll_Unity_Entities_EntityManager_Unity_Entities_Entity__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>For a part whose entity is destroyed later as a whole. The <span class="xref">Unity.Entities.LinkedEntityGroup</span> cascade
-destroys the module entities with it but unbinds nothing, so without this a <a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a>
-keeps pointing at a dead entity. No-ops on parts that carry no modules.</p>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>Whether the owner still holds this module and data binding.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The managed module data type.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Ecs_ModuleEntities_TryGetData__1_Unity_Entities_EntityManager_Unity_Entities_Entity___0___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The caller establishes ModulePart presence. A queued entry's owner may have been removed.</p>
 </div>
+
+
+  <a id="Redux_Ecs_ModuleEntities_Unbind_" data-uid="Redux.Ecs.ModuleEntities.Unbind*"></a>
+  <h4 id="Redux_Ecs_ModuleEntities_Unbind_Unity_Entities_EntityManager_System_Object_" data-uid="Redux.Ecs.ModuleEntities.Unbind(Unity.Entities.EntityManager,System.Object)">Unbind(EntityManager, object)</h4>
+  <div class="markdown level1 summary"><p>Snapshot and detach managed bindings before their native state is removed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Unbind(EntityManager em, object module)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td><p>The owning world's entity manager.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">object</span></td>
+        <td><span class="parametername">module</span></td>
+        <td><p>The managed owner of this module's data.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <a id="Redux_Ecs_ModuleEntities_UnstampVessel_" data-uid="Redux.Ecs.ModuleEntities.UnstampVessel*"></a>
   <h4 id="Redux_Ecs_ModuleEntities_UnstampVessel_Unity_Entities_EntityManager_Unity_Entities_Entity_" data-uid="Redux.Ecs.ModuleEntities.UnstampVessel(Unity.Entities.EntityManager,Unity.Entities.Entity)">UnstampVessel(EntityManager, Entity)</h4>
-  <div class="markdown level1 summary"><p>Strips <a class="xref" href="Redux.Ecs.Components.PartVessel.html">PartVessel</a> from every module entity of a part, mirroring
-<a class="xref" href="Redux.Ecs.Components.PartMembership.html#Redux_Ecs_Components_PartMembership_Unstamp_Unity_Entities_EntityManager_Unity_Entities_Entity_">Unstamp(EntityManager, Entity)</a>.</p>
+  <div class="markdown level1 summary"><p>Remove vessel membership from the part's modules.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>

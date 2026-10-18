@@ -92,6 +92,9 @@ Classes
       <section><p>A <a class="xref" href="KSP.Sim.Definitions.ModuleProperty-1.html">ModuleProperty&lt;T&gt;</a> that forwards writes to a field of the
 unmanaged ECS component <code class="typeparamref">TComponent</code>.</p>
 </section>
+      <h4><a class="xref" href="Redux.Ecs.ManagedBridgeHandles.html">ManagedBridgeHandles</a></h4>
+      <section><p>Releases handles owned by ECS cleanup components.</p>
+</section>
       <h4><a class="xref" href="Redux.Ecs.MassModifiers.html">MassModifiers</a></h4>
       <section><p>Pull-model reduce of a part's per-module <a class="xref" href="Redux.Ecs.Components.MassModifierData.html">MassModifierData</a> contributions.</p>
 </section>
@@ -99,12 +102,9 @@ unmanaged ECS component <code class="typeparamref">TComponent</code>.</p>
       <section><p>This is used by codegen to mark the field used to implement field change tracking.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.ModuleEntities.html">ModuleEntities</a></h4>
-      <section><p>Creates and tears down the per-instance entity that backs a single part module. Every module gets
-its own entity carrying its generated state component(s), config blob, the managed module object,
-and a <a class="xref" href="Redux.Ecs.Components.ModulePart.html">ModulePart</a> back-reference to the part. The part entity records its modules in
-a <a class="xref" href="Redux.Ecs.Components.PartModuleRef.html">PartModuleRef</a> buffer. Shared by the flight
-(<a class="xref" href="KSP.Sim.impl.PartComponent.html">PartComponent</a>) and editor (<a class="xref" href="KSP.OAB.ObjectAssemblyPart.html">ObjectAssemblyPart</a>)
-binding paths.</p>
+      <section><p>Creates the per-instance entity shared by flight and OAB module binding paths. Each module
+carries native state, config and a ModulePart owner link. The part records its module
+entities in PartModuleRef and owns their native destruction through its linked cascade.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.ModulePropertyAttribute.html">ModulePropertyAttribute</a></h4>
       <section><p>Marks a field on a <code>[PartModuleDefinition]</code> class or component as
@@ -149,6 +149,9 @@ for <a class="xref" href="Redux.Ecs.PartModuleDefinitionAttribute.html">PartModu
     <h3 id="interfaces">
 Interfaces
 </h3>
+      <h4><a class="xref" href="Redux.Ecs.IManagedBridgeReference.html">IManagedBridgeReference</a></h4>
+      <section><p>An unmanaged cleanup component owning a strong managed-object handle.</p>
+</section>
       <h4><a class="xref" href="Redux.Ecs.IPartModuleData.html">IPartModuleData</a></h4>
       <section><p>An interface for unmanaged part module components. Its members will be
 automatically implemented by codegen.</p>
