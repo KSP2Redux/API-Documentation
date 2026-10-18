@@ -368,6 +368,67 @@ The entity is the request's identity. The returned value is stored by the caller
   </table>
 
 
+  <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestManager_GetFlowNodes_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.GetFlowNodes*"></a>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestManager_GetFlowNodes_KSP_Sim_ResourceSystem_IFlowNode_KSP_Sim_ResourceSystem_FlowDirection_KSP_Sim_ResourceSystem_ResourceFlowMode_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.GetFlowNodes(KSP.Sim.ResourceSystem.IFlowNode,KSP.Sim.ResourceSystem.FlowDirection,KSP.Sim.ResourceSystem.ResourceFlowMode)">GetFlowNodes(IFlowNode, FlowDirection, ResourceFlowMode)</h4>
+  <div class="markdown level1 summary"><p>Queries reachable flow nodes using this manager's cached graph solver.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyPriorityGroupCollection&lt;IFlowNode&gt; GetFlowNodes(IFlowNode target, FlowDirection direction, ResourceFlowMode mode)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.ResourceSystem.IFlowNode.html">IFlowNode</a></td>
+        <td><span class="parametername">target</span></td>
+        <td><p>The part from which resource flow is queried.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.ResourceSystem.FlowDirection.html">FlowDirection</a></td>
+        <td><span class="parametername">direction</span></td>
+        <td><p>The direction of the flow query.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowMode.html">ResourceFlowMode</a></td>
+        <td><span class="parametername">mode</span></td>
+        <td><p>The flow mode, including its crossfeed restrictions.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.ResourceSystem.IReadOnlyPriorityGroupCollection-1.html">IReadOnlyPriorityGroupCollection</a>&lt;<a class="xref" href="KSP.Sim.ResourceSystem.IFlowNode.html">IFlowNode</a>&gt;</td>
+        <td><p>The cached priority groups of reachable nodes.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Sim_ResourceSystem_ResourceFlowRequestManager_GetFlowNodes_KSP_Sim_ResourceSystem_IFlowNode_KSP_Sim_ResourceSystem_FlowDirection_KSP_Sim_ResourceSystem_ResourceFlowMode__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Tank locks do not change connectivity. Callers selecting storage must also check
+<a class="xref" href="KSP.Sim.ResourceSystem.FuelTankControls.html#KSP_Sim_ResourceSystem_FuelTankControls_IsEnabled_KSP_Sim_ResourceSystem_IFlowNode_">IsEnabled(IFlowNode)</a> on the returned nodes.</p>
+</div>
+
+
   <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestManager_GetRequestInstructions_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.GetRequestInstructions*"></a>
   <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestManager_GetRequestInstructions_Unity_Entities_Entity_System_Collections_Generic_List_Redux_Ecs_Components_ResourceFlowInstructionData__" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.GetRequestInstructions(Unity.Entities.Entity,System.Collections.Generic.List{Redux.Ecs.Components.ResourceFlowInstructionData})">GetRequestInstructions(Entity, List&lt;ResourceFlowInstructionData&gt;)</h4>
   <div class="markdown level1 summary"><p>Copies the compiled instruction rows for the specified request into the provided list.</p>

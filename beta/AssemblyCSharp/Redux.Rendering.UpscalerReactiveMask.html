@@ -103,7 +103,9 @@ exhaust draws its own motion, but its gas changes from frame to frame, so it is 
 the camera colour right before URP's transparent pass, after the full-frame passes that run ahead of it (post
 atmosphere, cloud raymarch, water background copy). A second hook after the transparent hooks compares the copy
 with the frame in <code>KSP2ReactiveMask.compute</code> and keeps the mask in the camera's frame data, where the
-upscalers read it. Both run only on the current game camera and only while <a class="xref" href="Redux.Rendering.UpscalerReactiveMask.html#Redux_Rendering_UpscalerReactiveMask_IsActive">IsActive</a> is set.</p>
+upscalers read it. Scaled rings, clouds and cloud shadows also replay their exact visible contribution into a
+separate mask, since they draw before that copy. Host opaque geometry hides this early coverage before it is
+merged with the late transparent mask. Both hooks use the camera frame that actually consumes the selected temporal upscaler.</p>
 </div>
   <h3 id="properties">Properties
 </h3>
