@@ -127,7 +127,7 @@
     <pre><code class="lang-csharp hljs">public class VolumeCloudRenderer : EffectBase</code></pre>
   </div>
   <h5 id="KSP_VolumeCloud_VolumeCloudRenderer_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>LateUpdate prepares the frame: render targets, material state and which steps run. Three
+  <div class="markdown level0 remarks"><p>Before camera culling, the render descriptor sizes the targets and prepares material state. Three
 <a class="xref" href="Redux.Rendering.ICameraRenderHook.html">ICameraRenderHook</a> instances then record those steps on the hosting camera. The cloud shadow goes
 into <code>_CloudsShadowTexture</code> right after URP's depth prepass, the raymarch and reprojection run before
 transparents, and the shadow target is cleared again after post-processing. The composite and depth quads are
@@ -501,7 +501,7 @@ its first Start. The renderer then draws only from <a class="xref" href="KSP.Vol
 
   <a id="KSP_VolumeCloud_VolumeCloudRenderer_RenderForEditor_" data-uid="KSP.VolumeCloud.VolumeCloudRenderer.RenderForEditor*"></a>
   <h4 id="KSP_VolumeCloud_VolumeCloudRenderer_RenderForEditor" data-uid="KSP.VolumeCloud.VolumeCloudRenderer.RenderForEditor">RenderForEditor()</h4>
-  <div class="markdown level1 summary"><p>Prepares this frame's clouds for the hosting camera.</p>
+  <div class="markdown level1 summary"><p>Requests this frame's clouds for the hosting camera.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
