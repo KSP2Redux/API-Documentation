@@ -101,13 +101,13 @@
 
 
   <a id="Redux_UI_MainMenu_CampaignSelection_CampaignRowViewModel__ctor_" data-uid="Redux.UI.MainMenu.CampaignSelection.CampaignRowViewModel.#ctor*"></a>
-  <h4 id="Redux_UI_MainMenu_CampaignSelection_CampaignRowViewModel__ctor_System_String_System_String_System_DateTime_System_String_" data-uid="Redux.UI.MainMenu.CampaignSelection.CampaignRowViewModel.#ctor(System.String,System.String,System.DateTime,System.String)">CampaignRowViewModel(string, string, DateTime, string)</h4>
+  <h4 id="Redux_UI_MainMenu_CampaignSelection_CampaignRowViewModel__ctor_System_String_System_String_System_DateTime_System_String_System_Boolean_" data-uid="Redux.UI.MainMenu.CampaignSelection.CampaignRowViewModel.#ctor(System.String,System.String,System.DateTime,System.String,System.Boolean)">CampaignRowViewModel(string, string, DateTime, string, bool)</h4>
   <div class="markdown level1 summary"><p>Creates a campaign row.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public CampaignRowViewModel(string name, string gameMode, DateTime lastPlayedTime, string folderPath)</code></pre>
+    <pre><code class="lang-csharp hljs">public CampaignRowViewModel(string name, string gameMode, DateTime lastPlayedTime, string folderPath, bool isNewestSaveCorrupt = false)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -141,6 +141,12 @@
         <td><span class="xref">string</span></td>
         <td><span class="parametername">folderPath</span></td>
         <td><p>The campaign's save folder.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">isNewestSaveCorrupt</span></td>
+        <td><p>Whether the campaign's newest save could not be read.</p>
 </td>
       </tr>
     </tbody>
@@ -195,6 +201,33 @@
     <tbody>
       <tr>
         <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_UI_MainMenu_CampaignSelection_CampaignRowViewModel_IsNewestSaveCorrupt_" data-uid="Redux.UI.MainMenu.CampaignSelection.CampaignRowViewModel.IsNewestSaveCorrupt*"></a>
+  <h4 id="Redux_UI_MainMenu_CampaignSelection_CampaignRowViewModel_IsNewestSaveCorrupt" data-uid="Redux.UI.MainMenu.CampaignSelection.CampaignRowViewModel.IsNewestSaveCorrupt">IsNewestSaveCorrupt</h4>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the campaign's newest save could not be read, which the row shows as a
+warning in place of the game mode.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsNewestSaveCorrupt { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -320,6 +353,52 @@
       <tr>
         <td><a class="xref" href="Redux.UI.MainMenu.CampaignSelection.CampaignRowViewModel.html">CampaignRowViewModel</a></td>
         <td><p>The campaign row.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_UI_MainMenu_CampaignSelection_CampaignRowViewModel_FromUnreadableSave_" data-uid="Redux.UI.MainMenu.CampaignSelection.CampaignRowViewModel.FromUnreadableSave*"></a>
+  <h4 id="Redux_UI_MainMenu_CampaignSelection_CampaignRowViewModel_FromUnreadableSave_KSP_Game_SaveFileInfo_" data-uid="Redux.UI.MainMenu.CampaignSelection.CampaignRowViewModel.FromUnreadableSave(KSP.Game.SaveFileInfo)">FromUnreadableSave(SaveFileInfo)</h4>
+  <div class="markdown level1 summary"><p>Creates the row for a campaign whose newest save could not be read, so the campaign stays listed with a
+warning and can still be opened for its older saves or deleted.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static CampaignRowViewModel FromUnreadableSave(SaveFileInfo newestSave)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Game.SaveFileInfo.html">SaveFileInfo</a></td>
+        <td><span class="parametername">newestSave</span></td>
+        <td><p>The campaign's most recently written save file.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.UI.MainMenu.CampaignSelection.CampaignRowViewModel.html">CampaignRowViewModel</a></td>
+        <td><p>The campaign row, dated by the file's write time.</p>
 </td>
       </tr>
     </tbody>
