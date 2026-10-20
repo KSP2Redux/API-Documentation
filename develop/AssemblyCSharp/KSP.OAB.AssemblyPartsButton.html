@@ -456,26 +456,31 @@
   </table>
 
 
-  <a id="KSP_OAB_AssemblyPartsButton_OnDestroy_" data-uid="KSP.OAB.AssemblyPartsButton.OnDestroy*"></a>
-  <h4 id="KSP_OAB_AssemblyPartsButton_OnDestroy" data-uid="KSP.OAB.AssemblyPartsButton.OnDestroy">OnDestroy()</h4>
-  <div class="markdown level1 summary"><p>Unsubscribes the favorites-removed message handler when the button is destroyed.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void OnDestroy()</code></pre>
-  </div>
-
-
   <a id="KSP_OAB_AssemblyPartsButton_OnDisable_" data-uid="KSP.OAB.AssemblyPartsButton.OnDisable*"></a>
   <h4 id="KSP_OAB_AssemblyPartsButton_OnDisable" data-uid="KSP.OAB.AssemblyPartsButton.OnDisable">OnDisable()</h4>
-  <div class="markdown level1 summary"><p>Disposes the active subscription handle when the button is disabled.</p>
+  <div class="markdown level1 summary"><p>Disposes the active subscription handles when the button is disabled.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void OnDisable()</code></pre>
   </div>
+
+
+  <a id="KSP_OAB_AssemblyPartsButton_OnEnable_" data-uid="KSP.OAB.AssemblyPartsButton.OnEnable*"></a>
+  <h4 id="KSP_OAB_AssemblyPartsButton_OnEnable" data-uid="KSP.OAB.AssemblyPartsButton.OnEnable">OnEnable()</h4>
+  <div class="markdown level1 summary"><p>Subscribes the favorites-removed message handler while the button is shown.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnEnable()</code></pre>
+  </div>
+  <h5 id="KSP_OAB_AssemblyPartsButton_OnEnable_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Most buttons wait in the inactive holding pen and are destroyed with the VAB without ever being active.
+Unity skips OnDestroy for those, so a subscription made at initialization outlived every VAB visit and kept
+the destroyed button and its icon alive.</p>
+</div>
 
 
   <a id="KSP_OAB_AssemblyPartsButton_OnPointerEnter_" data-uid="KSP.OAB.AssemblyPartsButton.OnPointerEnter*"></a>
