@@ -284,6 +284,63 @@
       </tr>
     </tbody>
   </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="KSP_Sim_impl_ScaledPlanetaryBodyView_SortTransparentLayers_" data-uid="KSP.Sim.impl.ScaledPlanetaryBodyView.SortTransparentLayers*"></a>
+  <h4 id="KSP_Sim_impl_ScaledPlanetaryBodyView_SortTransparentLayers_UnityEngine_Transform_UnityEngine_Vector3_System_Collections_Generic_List_UnityEngine_Renderer__System_Int32__" data-uid="KSP.Sim.impl.ScaledPlanetaryBodyView.SortTransparentLayers(UnityEngine.Transform,UnityEngine.Vector3,System.Collections.Generic.List{UnityEngine.Renderer},System.Int32@)">SortTransparentLayers(Transform, Vector3, List&lt;Renderer&gt;, ref int)</h4>
+  <div class="markdown level1 summary"><p>Draws a scaled body's transparent layers (atmosphere shells, clouds, rings) before those of every body nearer
+the camera, by a sorting order from the body's distance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void SortTransparentLayers(Transform body, Vector3 cameraPosition, List&lt;Renderer&gt; layers, ref int hierarchyCount)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
+        <td><span class="parametername">body</span></td>
+        <td><p>The root of the body's scaled visual.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">cameraPosition</span></td>
+        <td><p>The position of the camera that draws the body.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Renderer.html">Renderer</a>&gt;</td>
+        <td><span class="parametername">layers</span></td>
+        <td><p>The caller's cache of the body's renderers, refilled when its hierarchy changes.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">hierarchyCount</span></td>
+        <td><p>The hierarchy count the cache was filled at, -1 to refill it.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Sim_impl_ScaledPlanetaryBodyView_SortTransparentLayers_UnityEngine_Transform_UnityEngine_Vector3_System_Collections_Generic_List_UnityEngine_Renderer__System_Int32___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Transparents sort by render queue before distance, so every body's clouds drew after every body's atmosphere,
+and Jool's clouds covered the atmosphere of Laythe in front of them (#2156). The sorting order comes first, so
+the bodies sort back to front as wholes, and within a body the queues keep its layers in order. Every order is
+negative, so what is not a body (orbit lines, spheres of influence, icons) still draws after the bodies, as its
+later queues had it.</p>
+</div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
