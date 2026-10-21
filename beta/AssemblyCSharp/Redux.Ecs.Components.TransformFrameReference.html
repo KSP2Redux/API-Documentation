@@ -5,11 +5,11 @@
   <head>
     <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-      <title>Struct CheckDuplicateVertsJob | KSP2Redux API (Beta) </title>
+      <title>Struct TransformFrameReference | KSP2Redux API (Beta) </title>
       <meta name="viewport" content="width=device-width">
-      <meta name="title" content="Struct CheckDuplicateVertsJob | KSP2Redux API (Beta) ">
+      <meta name="title" content="Struct TransformFrameReference | KSP2Redux API (Beta) ">
     
-    <meta name="description" content="Burst-compiled parallel job that identifies duplicate mesh vertices within a squared merge distance and records index remapping pairs.">
+    <meta name="description" content="Owns the interface handle installed by managed frame creation and released by frame disposal or bridge cleanup. Native-only frames do not carry this component. Transformd is the ordinary lifetime signal.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -76,109 +76,37 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="KSP2.Utility.MeshUtils.CheckDuplicateVertsJob">
+            <article class="content wrap" id="_content" data-uid="Redux.Ecs.Components.TransformFrameReference">
 
 
 
-  <h1 id="KSP2_Utility_MeshUtils_CheckDuplicateVertsJob" data-uid="KSP2.Utility.MeshUtils.CheckDuplicateVertsJob" class="text-break">Struct CheckDuplicateVertsJob</h1>
-  <div class="markdown level0 summary"><p>Burst-compiled parallel job that identifies duplicate mesh vertices within a squared merge distance and records index remapping pairs.</p>
+  <h1 id="Redux_Ecs_Components_TransformFrameReference" data-uid="Redux.Ecs.Components.TransformFrameReference" class="text-break">Struct TransformFrameReference</h1>
+  <div class="markdown level0 summary"><p>Owns the interface handle installed by managed frame creation and released by frame disposal or bridge cleanup.
+Native-only frames do not carry this component. Transformd is the ordinary lifetime signal.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="KSP2.html">KSP2</a>.<a class="xref" href="KSP2.Utility.html">Utility</a>.<a class="xref" href="KSP2.Utility.MeshUtils.html">MeshUtils</a></h6>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Redux.Ecs.IManagedBridgeReference.html">IManagedBridgeReference</a></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.Ecs.html">Ecs</a>.<a class="xref" href="Redux.Ecs.Components.html">Components</a></h6>
   <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
-  <h5 id="KSP2_Utility_MeshUtils_CheckDuplicateVertsJob_syntax">Syntax</h5>
+  <h5 id="Redux_Ecs_Components_TransformFrameReference_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public struct CheckDuplicateVertsJob</code></pre>
+    <pre><code class="lang-csharp hljs">public struct TransformFrameReference : IManagedBridgeReference</code></pre>
   </div>
-  <h3 id="fields">Fields
+  <h3 id="constructors">Constructors
 </h3>
 
 
-  <h4 id="KSP2_Utility_MeshUtils_CheckDuplicateVertsJob_IndicesMap" data-uid="KSP2.Utility.MeshUtils.CheckDuplicateVertsJob.IndicesMap">IndicesMap</h4>
-  <div class="markdown level1 summary"><p>Output array of index remapping pairs, two entries per vertex: the vertex index followed by the index of the first earlier duplicate found within merge distance, or the vertex index itself when no duplicate exists.</p>
+  <a id="Redux_Ecs_Components_TransformFrameReference__ctor_" data-uid="Redux.Ecs.Components.TransformFrameReference.#ctor*"></a>
+  <h4 id="Redux_Ecs_Components_TransformFrameReference__ctor_Redux_Ecs_TransformEntityInterface_" data-uid="Redux.Ecs.Components.TransformFrameReference.#ctor(Redux.Ecs.TransformEntityInterface)">TransformFrameReference(TransformEntityInterface)</h4>
+  <div class="markdown level1 summary"><p>Allocates the owning handle for a managed frame.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public NativeArray&lt;int&gt; IndicesMap</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Collections.NativeArray.html">NativeArray</a>&lt;<span class="xref">int</span>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="KSP2_Utility_MeshUtils_CheckDuplicateVertsJob_MergeDistanceSquared" data-uid="KSP2.Utility.MeshUtils.CheckDuplicateVertsJob.MergeDistanceSquared">MergeDistanceSquared</h4>
-  <div class="markdown level1 summary"><p>Squared distance threshold below which two vertices are considered duplicates.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public float MergeDistanceSquared</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">float</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="KSP2_Utility_MeshUtils_CheckDuplicateVertsJob_Verts" data-uid="KSP2.Utility.MeshUtils.CheckDuplicateVertsJob.Verts">Verts</h4>
-  <div class="markdown level1 summary"><p>Read-only array of vertex positions to check for duplicates.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public NativeArray&lt;float3&gt; Verts</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Collections.NativeArray.html">NativeArray</a>&lt;<span class="xref">float3</span>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="methods">Methods
-</h3>
-
-
-  <a id="KSP2_Utility_MeshUtils_CheckDuplicateVertsJob_Execute_" data-uid="KSP2.Utility.MeshUtils.CheckDuplicateVertsJob.Execute*"></a>
-  <h4 id="KSP2_Utility_MeshUtils_CheckDuplicateVertsJob_Execute_System_Int32_" data-uid="KSP2.Utility.MeshUtils.CheckDuplicateVertsJob.Execute(System.Int32)">Execute(int)</h4>
-  <div class="markdown level1 summary"><p>Checks the vertex at <code class="paramref">index</code> against all earlier vertices and writes the remapping pair to <a class="xref" href="KSP2.Utility.MeshUtils.CheckDuplicateVertsJob.html#KSP2_Utility_MeshUtils_CheckDuplicateVertsJob_IndicesMap">IndicesMap</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Execute(int index)</code></pre>
+    <pre><code class="lang-csharp hljs">public TransformFrameReference(TransformEntityInterface frame)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -191,13 +119,70 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">int</span></td>
-        <td><span class="parametername">index</span></td>
-        <td><p>Index of the vertex to process in the current parallel iteration.</p>
-</td>
+        <td><a class="xref" href="Redux.Ecs.TransformEntityInterface.html">TransformEntityInterface</a></td>
+        <td><span class="parametername">frame</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="Redux_Ecs_Components_TransformFrameReference_Frame_" data-uid="Redux.Ecs.Components.TransformFrameReference.Frame*"></a>
+  <h4 id="Redux_Ecs_Components_TransformFrameReference_Frame" data-uid="Redux.Ecs.Components.TransformFrameReference.Frame">Frame</h4>
+  <div class="markdown level1 summary"><p>Gets the original frame interface, or null once release begins.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly TransformEntityInterface Frame { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Ecs.TransformEntityInterface.html">TransformEntityInterface</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Ecs_Components_TransformFrameReference_Handle_" data-uid="Redux.Ecs.Components.TransformFrameReference.Handle*"></a>
+  <h4 id="Redux_Ecs_Components_TransformFrameReference_Handle" data-uid="Redux.Ecs.Components.TransformFrameReference.Handle">Handle</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the strong handle owned by this cleanup component.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GCHandle Handle { readonly get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">GCHandle</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Redux.Ecs.IManagedBridgeReference.html">IManagedBridgeReference</a>
+  </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>

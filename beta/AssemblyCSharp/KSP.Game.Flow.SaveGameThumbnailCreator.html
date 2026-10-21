@@ -135,81 +135,6 @@
       </tr>
     </tbody>
   </table>
-
-
-  <h4 id="KSP_Game_Flow_SaveGameThumbnailCreator__finalTexture" data-uid="KSP.Game.Flow.SaveGameThumbnailCreator._finalTexture">_finalTexture</h4>
-  <div class="markdown level1 summary"><p>Scaled render texture that holds the final thumbnail image at the target resolution.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected RenderTexture _finalTexture</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">RenderTexture</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="KSP_Game_Flow_SaveGameThumbnailCreator__grabTexture" data-uid="KSP.Game.Flow.SaveGameThumbnailCreator._grabTexture">_grabTexture</h4>
-  <div class="markdown level1 summary"><p>Full-resolution render texture used to capture the raw screen contents.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected RenderTexture _grabTexture</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">RenderTexture</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="KSP_Game_Flow_SaveGameThumbnailCreator__rawBuffer" data-uid="KSP.Game.Flow.SaveGameThumbnailCreator._rawBuffer">_rawBuffer</h4>
-  <div class="markdown level1 summary"><p>Native byte buffer that receives the raw pixel data from the GPU readback operation.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected NativeArray&lt;byte&gt; _rawBuffer</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Collections.NativeArray.html">NativeArray</a>&lt;<span class="xref">byte</span>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <h3 id="properties">Properties
 </h3>
 
@@ -370,13 +295,13 @@
 
 
   <a id="KSP_Game_Flow_SaveGameThumbnailCreator_OnCompleteReadback_" data-uid="KSP.Game.Flow.SaveGameThumbnailCreator.OnCompleteReadback*"></a>
-  <h4 id="KSP_Game_Flow_SaveGameThumbnailCreator_OnCompleteReadback_UnityEngine_Rendering_AsyncGPUReadbackRequest_System_String_" data-uid="KSP.Game.Flow.SaveGameThumbnailCreator.OnCompleteReadback(UnityEngine.Rendering.AsyncGPUReadbackRequest,System.String)">OnCompleteReadback(AsyncGPUReadbackRequest, string)</h4>
-  <div class="markdown level1 summary"><p>Handles the completion of the asynchronous GPU readback by encoding the pixel buffer and writing the image to disk.</p>
+  <h4 id="KSP_Game_Flow_SaveGameThumbnailCreator_OnCompleteReadback_UnityEngine_Rendering_AsyncGPUReadbackRequest_System_String_UnityEngine_RenderTexture_UnityEngine_RenderTexture_Unity_Collections_NativeArray_System_Byte__" data-uid="KSP.Game.Flow.SaveGameThumbnailCreator.OnCompleteReadback(UnityEngine.Rendering.AsyncGPUReadbackRequest,System.String,UnityEngine.RenderTexture,UnityEngine.RenderTexture,Unity.Collections.NativeArray{System.Byte})">OnCompleteReadback(AsyncGPUReadbackRequest, string, RenderTexture, RenderTexture, NativeArray&lt;byte&gt;)</h4>
+  <div class="markdown level1 summary"><p>Encodes the read back pixels and writes the image to disk, then releases the capture's textures and buffer.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected void OnCompleteReadback(AsyncGPUReadbackRequest request, string path)</code></pre>
+    <pre><code class="lang-csharp hljs">protected void OnCompleteReadback(AsyncGPUReadbackRequest request, string path, RenderTexture grabTexture, RenderTexture finalTexture, NativeArray&lt;byte&gt; rawBuffer)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -400,8 +325,29 @@
         <td><p>The file path where the encoded image is written.</p>
 </td>
       </tr>
+      <tr>
+        <td><span class="xref">RenderTexture</span></td>
+        <td><span class="parametername">grabTexture</span></td>
+        <td><p>The full-resolution capture the thumbnail was scaled from.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">RenderTexture</span></td>
+        <td><span class="parametername">finalTexture</span></td>
+        <td><p>The thumbnail-sized texture that was read back.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Collections.NativeArray.html">NativeArray</a>&lt;<span class="xref">byte</span>&gt;</td>
+        <td><span class="parametername">rawBuffer</span></td>
+        <td><p>The buffer holding the read back pixels of <code class="paramref">finalTexture</code>.</p>
+</td>
+      </tr>
     </tbody>
   </table>
+  <h5 id="KSP_Game_Flow_SaveGameThumbnailCreator_OnCompleteReadback_UnityEngine_Rendering_AsyncGPUReadbackRequest_System_String_UnityEngine_RenderTexture_UnityEngine_RenderTexture_Unity_Collections_NativeArray_System_Byte___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The textures and the buffer belong to one capture and are released whether the readback or the write fails.</p>
+</div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>

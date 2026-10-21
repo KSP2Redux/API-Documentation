@@ -109,7 +109,8 @@ camera without its translation. Sharpening applies to the output only, never to 
 It runs as a native-resolution URP upscaler, which gives it URP's jitter, the camera's colour, depth and motion,
 and a per-camera context for its history, and makes URP skip its own TAA pass. <a class="xref" href="Redux.Rendering.TemporalUpscaling.html">TemporalUpscaling</a>
 selects it for the TAA setting while no upscaler is chosen, and <a class="xref" href="Redux.Rendering.UpscalerReactiveMask.html">UpscalerReactiveMask</a>'s mask lowers
-the history of transparent effects, which draw no motion of their own.
+the history of transparent effects as their appearance changes. Effects that supply their own motion also
+mark its coverage so the resolve preserves it over sky and opaque silhouettes.
 </p>
 </div>
   <h3 id="constructors">Constructors

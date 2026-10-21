@@ -97,12 +97,15 @@ Addressables catalogs, and the helpers the asset loading paths use to apply it.<
     <pre><code class="lang-csharp hljs">public static class FeatureAssetIndex</code></pre>
   </div>
   <h5 id="Redux_Features_FeatureAssetIndex_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>A location from a mod's catalog needs that mod's default feature on. On top of that, every
-<code>feature:ModId:FeatureId</code> label it carries must be on and every <code>nofeature:ModId:FeatureId</code> label off,
-the same rule prefab patches and config entries follow. An untagged location from the game's own bundles in a
-content label belongs to that label's Ksp2Redux category, the same one Redux's content of that kind is tagged
-with. The game's own locations outside content labels always load, since the
-game itself depends on them. Until a feature set activates every helper passes locations through unchanged.</p>
+  <div class="markdown level0 remarks"><p>Every <code>feature:ModId:FeatureId</code> label a location carries must be on and every
+<code>nofeature:ModId:FeatureId</code> label off, the same rule prefab patches and config entries follow, and a tagged
+location from a mod's catalog also needs that mod's default feature. Content is what a feature set reads: the
+game's content labels, the labels mods load per set, and whatever Patch Manager reads as patch input. An
+untagged mod location in content needs its mod's default feature. Outside content it loads in every set, so a
+mod's UI and icons are there before a campaign. An untagged location from the game's own bundles in a content
+label belongs to that label's Ksp2Redux category, the same one Redux's content of that kind is tagged with, and
+anywhere else always loads, since the game itself depends on it. Until a feature set activates every helper
+passes locations through unchanged.</p>
 </div>
   <h3 id="fields">Fields
 </h3>
@@ -195,6 +198,57 @@ lets everything through.</p>
 </h3>
 
 
+  <a id="Redux_Features_FeatureAssetIndex_AllowsAny_" data-uid="Redux.Features.FeatureAssetIndex.AllowsAny*"></a>
+  <h4 id="Redux_Features_FeatureAssetIndex_AllowsAny_System_Collections_Generic_IEnumerable_UnityEngine_ResourceManagement_ResourceLocations_IResourceLocation__System_String_" data-uid="Redux.Features.FeatureAssetIndex.AllowsAny(System.Collections.Generic.IEnumerable{UnityEngine.ResourceManagement.ResourceLocations.IResourceLocation},System.String)">AllowsAny(IEnumerable&lt;IResourceLocation&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Checks whether the active feature set lets any of some locations load, without reporting duplicates.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AllowsAny(IEnumerable&lt;IResourceLocation&gt; locations, string label)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">IResourceLocation</span>&gt;</td>
+        <td><span class="parametername">locations</span></td>
+        <td><p>The candidate locations.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">label</span></td>
+        <td><p>The label or key being looked up.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if at least one location may load, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="Redux_Features_FeatureAssetIndex_Filter_" data-uid="Redux.Features.FeatureAssetIndex.Filter*"></a>
   <h4 id="Redux_Features_FeatureAssetIndex_Filter_System_Collections_Generic_IEnumerable_UnityEngine_ResourceManagement_ResourceLocations_IResourceLocation__System_String_" data-uid="Redux.Features.FeatureAssetIndex.Filter(System.Collections.Generic.IEnumerable{UnityEngine.ResourceManagement.ResourceLocations.IResourceLocation},System.String)">Filter(IEnumerable&lt;IResourceLocation&gt;, string)</h4>
   <div class="markdown level1 summary"><p>Keeps the locations the active feature set lets load under a label, logging any address that more than
@@ -204,6 +258,58 @@ one kept location provides.</p>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static List&lt;IResourceLocation&gt; Filter(IEnumerable&lt;IResourceLocation&gt; locations, string label)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">IResourceLocation</span>&gt;</td>
+        <td><span class="parametername">locations</span></td>
+        <td><p>The candidate locations.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">label</span></td>
+        <td><p>The label being loaded, or <code>null</code> for a load by key.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<span class="xref">IResourceLocation</span>&gt;</td>
+        <td><p>The locations that may load.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Features_FeatureAssetIndex_FilterContent_" data-uid="Redux.Features.FeatureAssetIndex.FilterContent*"></a>
+  <h4 id="Redux_Features_FeatureAssetIndex_FilterContent_System_Collections_Generic_IEnumerable_UnityEngine_ResourceManagement_ResourceLocations_IResourceLocation__System_String_" data-uid="Redux.Features.FeatureAssetIndex.FilterContent(System.Collections.Generic.IEnumerable{UnityEngine.ResourceManagement.ResourceLocations.IResourceLocation},System.String)">FilterContent(IEnumerable&lt;IResourceLocation&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Keeps the locations the active feature set lets load as content, whatever the label, the way patch input
+is filtered.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static List&lt;IResourceLocation&gt; FilterContent(IEnumerable&lt;IResourceLocation&gt; locations, string label)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -382,13 +488,13 @@ is told apart by its bundle too.</p>
 
 
   <a id="Redux_Features_FeatureAssetIndex_TryResolveKey_" data-uid="Redux.Features.FeatureAssetIndex.TryResolveKey*"></a>
-  <h4 id="Redux_Features_FeatureAssetIndex_TryResolveKey_System_Object_System_Type_System_String_UnityEngine_ResourceManagement_ResourceLocations_IResourceLocation__" data-uid="Redux.Features.FeatureAssetIndex.TryResolveKey(System.Object,System.Type,System.String,UnityEngine.ResourceManagement.ResourceLocations.IResourceLocation@)">TryResolveKey(object, Type, string, out IResourceLocation)</h4>
+  <h4 id="Redux_Features_FeatureAssetIndex_TryResolveKey_System_Object_System_Type_System_String_System_Boolean_UnityEngine_ResourceManagement_ResourceLocations_IResourceLocation__" data-uid="Redux.Features.FeatureAssetIndex.TryResolveKey(System.Object,System.Type,System.String,System.Boolean,UnityEngine.ResourceManagement.ResourceLocations.IResourceLocation@)">TryResolveKey(object, Type, string, bool, out IResourceLocation)</h4>
   <div class="markdown level1 summary"><p>Resolves a load by key through the gate when the key names a tagged or mod-owned asset.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static bool TryResolveKey(object key, Type type, string label, out IResourceLocation location)</code></pre>
+    <pre><code class="lang-csharp hljs">public static bool TryResolveKey(object key, Type type, string label, bool isContent, out IResourceLocation location)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -416,6 +522,12 @@ is told apart by its bundle too.</p>
         <td><span class="xref">string</span></td>
         <td><span class="parametername">label</span></td>
         <td><p>The content label the key is loaded on behalf of, or <code>null</code> for a plain load.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">isContent</span></td>
+        <td><p>True if the key is loaded as content whatever the label, as patch input is.</p>
 </td>
       </tr>
       <tr>

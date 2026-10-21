@@ -804,6 +804,59 @@ leaves component and entity removal to the cascade.</p>
   </table>
 
 
+  <a id="Redux_Ecs_TransformEntityInterface_CreateStandalone_" data-uid="Redux.Ecs.TransformEntityInterface.CreateStandalone*"></a>
+  <h4 id="Redux_Ecs_TransformEntityInterface_CreateStandalone_Unity_Entities_EntityManager_KSP_Sim_TransformFrameType_KSP_Sim_impl_ITransformModelInternal_" data-uid="Redux.Ecs.TransformEntityInterface.CreateStandalone(Unity.Entities.EntityManager,KSP.Sim.TransformFrameType,KSP.Sim.impl.ITransformModelInternal)">CreateStandalone(EntityManager, TransformFrameType, ITransformModelInternal)</h4>
+  <div class="markdown level1 summary"><p>Creates a managed standalone frame in the specified world.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static TransformEntityInterface CreateStandalone(EntityManager em, TransformFrameType type, ITransformModelInternal owner)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityManager</span></td>
+        <td><span class="parametername">em</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.TransformFrameType.html">TransformFrameType</a></td>
+        <td><span class="parametername">type</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.ITransformModelInternal.html">ITransformModelInternal</a></td>
+        <td><span class="parametername">owner</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Ecs.TransformEntityInterface.html">TransformEntityInterface</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="Redux_Ecs_TransformEntityInterface_CreateStandaloneTransformEntity_" data-uid="Redux.Ecs.TransformEntityInterface.CreateStandaloneTransformEntity*"></a>
   <h4 id="Redux_Ecs_TransformEntityInterface_CreateStandaloneTransformEntity_Unity_Entities_EntityManager__Unity_Entities_Entity__Unity_Entities_Entity__" data-uid="Redux.Ecs.TransformEntityInterface.CreateStandaloneTransformEntity(Unity.Entities.EntityManager@,Unity.Entities.Entity@,Unity.Entities.Entity@)">CreateStandaloneTransformEntity(in EntityManager, in Entity, out Entity)</h4>
   <div class="markdown level1 summary"><p>Create a parentless entity with components required by the transform system, without creating an TransformEntityInterface.</p>
@@ -916,22 +969,11 @@ early-out, leaving the parent holding a dead child entry.</p>
       <tr>
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">disposing</span></td>
-        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> when called from <a class="xref" href="Redux.Ecs.TransformEntityInterface.html#Redux_Ecs_TransformEntityInterface_Dispose">Dispose()</a>, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a> when called from the finalizer.</p>
+        <td><p>True to perform explicit disposal while native state remains available.</p>
 </td>
       </tr>
     </tbody>
   </table>
-
-
-  <a id="Redux_Ecs_TransformEntityInterface_Finalize_" data-uid="Redux.Ecs.TransformEntityInterface.Finalize*"></a>
-  <h4 id="Redux_Ecs_TransformEntityInterface_Finalize" data-uid="Redux.Ecs.TransformEntityInterface.Finalize">~TransformEntityInterface()</h4>
-  <div class="markdown level1 summary"><p>Finalizer that invokes the protected dispose path when the instance is collected without an explicit <a class="xref" href="Redux.Ecs.TransformEntityInterface.html#Redux_Ecs_TransformEntityInterface_Dispose">Dispose()</a> call.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected ~TransformEntityInterface()</code></pre>
-  </div>
 
 
   <a id="Redux_Ecs_TransformEntityInterface_FindCommonParent_" data-uid="Redux.Ecs.TransformEntityInterface.FindCommonParent*"></a>
@@ -1164,6 +1206,49 @@ managed frame (e.g. a standalone transform entity created without an interface).
         <td><span class="parametername">owner</span></td>
         <td><p>The internal transform model that owns this frame.</p>
 </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Ecs_TransformEntityInterface_Initialize_" data-uid="Redux.Ecs.TransformEntityInterface.Initialize*"></a>
+  <h4 id="Redux_Ecs_TransformEntityInterface_Initialize_Unity_Entities_World_Unity_Entities_Entity_KSP_Sim_TransformFrameType_KSP_Sim_impl_ITransformModelInternal_" data-uid="Redux.Ecs.TransformEntityInterface.Initialize(Unity.Entities.World,Unity.Entities.Entity,KSP.Sim.TransformFrameType,KSP.Sim.impl.ITransformModelInternal)">Initialize(World, Entity, TransformFrameType, ITransformModelInternal)</h4>
+  <div class="markdown level1 summary"><p>Initializes the interface with its frame's owning world.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Initialize(World world, Entity entity, TransformFrameType type, ITransformModelInternal owner)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">World</span></td>
+        <td><span class="parametername">world</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">entity</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.TransformFrameType.html">TransformFrameType</a></td>
+        <td><span class="parametername">type</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.ITransformModelInternal.html">ITransformModelInternal</a></td>
+        <td><span class="parametername">owner</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>

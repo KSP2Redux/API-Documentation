@@ -86,21 +86,11 @@
 Classes
 </h3>
       <h4><a class="xref" href="Redux.Ecs.Components.CurrentPatchedConicsOrbit.html">CurrentPatchedConicsOrbit</a></h4>
-      <section><p>Managed ECS component representing the current patched-conics orbit patch for an entity.
+      <section><p>Managed facade owned by an OrbiterComponent for its entity's current patched-conics orbit.
 Unmanaged orbital data is read from and written to the entity's <a class="xref" href="Redux.Ecs.Components.PatchedConicsOrbitData.html">PatchedConicsOrbitData</a>
 component. Managed-side state (velocity, patch graph) is stored directly on this class.
 The reference body is identified by <a class="xref" href="Redux.Ecs.Components.PatchedConicsOrbitData.html#Redux_Ecs_Components_PatchedConicsOrbitData_ReferenceBodyEntity">ReferenceBodyEntity</a> and
 resolved to a <a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a> on demand via <a class="xref" href="Redux.Ecs.Components.SimObjectManagedData.html">SimObjectManagedData</a>.</p>
-</section>
-      <h4><a class="xref" href="Redux.Ecs.Components.ModuleManagedData.html">ModuleManagedData</a></h4>
-      <section><p>Managed back-reference from a module entity to its <a class="xref" href="KSP.Sim.Definitions.ModuleData.html">ModuleData</a> entries, letting
-<a class="xref" href="Redux.Ecs.ModuleEntities.html">ModuleEntities</a> unbind the managed side before the entity is destroyed.</p>
-</section>
-      <h4><a class="xref" href="Redux.Ecs.Components.OabAssemblyManagedData.html">OabAssemblyManagedData</a></h4>
-      <section><p>Managed back-reference from an editor assembly entity to its <a class="xref" href="KSP.OAB.ObjectAssembly.html">ObjectAssembly</a>.</p>
-</section>
-      <h4><a class="xref" href="Redux.Ecs.Components.OabPartManagedData.html">OabPartManagedData</a></h4>
-      <section><p>Managed back-reference from an editor part entity to its <a class="xref" href="KSP.OAB.ObjectAssemblyPart.html">ObjectAssemblyPart</a>.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.PartMembership.html">PartMembership</a></h4>
       <section><p>Stamps and strips the part-owner membership component set (<a class="xref" href="Redux.Ecs.Components.PartVessel.html">PartVessel</a>,
@@ -119,8 +109,6 @@ is the sole identity of a request: it carries <a class="xref" href="Redux.Ecs.Co
       <section><p>Reserved values for <a class="xref" href="Redux.Ecs.Components.ResourceFlowRequest.html#Redux_Ecs_Components_ResourceFlowRequest_Index">Index</a>. The index is a caller-defined
 discriminator, never an identity or dedup key.</p>
 </section>
-      <h4><a class="xref" href="Redux.Ecs.Components.SimObjectManagedData.html">SimObjectManagedData</a></h4>
-      <section></section>
     <h3 id="structs">
 Structs
 </h3>
@@ -160,6 +148,9 @@ cooler module entity from the managed required-resource settings with names reso
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.CoolingEnergyToApply.html">CoolingEnergyToApply</a></h4>
       <section></section>
+      <h4><a class="xref" href="Redux.Ecs.Components.DataTransmitterTag.html">DataTransmitterTag</a></h4>
+      <section><p>Identifies flight transmitters installed by ModuleEntities for telemetry's module query.</p>
+</section>
       <h4><a class="xref" href="Redux.Ecs.Components.MassModifierData.html">MassModifierData</a></h4>
       <section><p>Per-module mass contribution, written on a module entity by its part-module system and scattered into the
 owning part's <a class="xref" href="Redux.Ecs.Components.PartMassModifier.html">PartMassModifier</a> by MassAggregateSystem.</p>
@@ -172,6 +163,12 @@ and resolves its owning part's data through this back-reference.</p>
       <section><p>The resource-flow request entity owned by a part-module entity. Backs
 <a class="xref" href="KSP.Sim.Definitions.ModuleData.html#KSP_Sim_Definitions_ModuleData_RequestEntity">RequestEntity</a>. Added when the module first allocates a
 request.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.OabPartIsLiveTag.html">OabPartIsLiveTag</a></h4>
+      <section><p>Marks a live editor part binding. Its removal lets managed bridge cleanup release OabPartManagedData.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.OabPartManagedData.html">OabPartManagedData</a></h4>
+      <section><p>Owns the editor part handle installed by ObjectAssemblyPart and released by managed bridge cleanup.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.OrbitStabilityData.html">OrbitStabilityData</a></h4>
       <section><p>Tracks whether a vessel's patched-conics orbit is currently stable, so
@@ -303,6 +300,9 @@ entity it is expressed in.</p>
       <section><p>Unmanaged type flags for a <a class="xref" href="KSP.Sim.impl.SimulationObjectModel.html">SimulationObjectModel</a>, packed into a single
 bitset and exposed as boolean accessors.</p>
 </section>
+      <h4><a class="xref" href="Redux.Ecs.Components.SimObjectManagedData.html">SimObjectManagedData</a></h4>
+      <section><p>Owns the model handle installed by SimulationObjectModel and released by managed bridge cleanup.</p>
+</section>
       <h4><a class="xref" href="Redux.Ecs.Components.TelemetryData.html">TelemetryData</a></h4>
       <section><p>Unmanaged source of truth for the plain flight-telemetry state of a simulation object, exposed as accessor
 properties on <a class="xref" href="KSP.Sim.impl.TelemetryComponent.html">TelemetryComponent</a>.</p>
@@ -327,6 +327,10 @@ vessel's altitude.</p>
       <h4><a class="xref" href="Redux.Ecs.Components.TransformChild.html">TransformChild</a></h4>
       <section><p>The transform entities parented to this entity - the downward half of the hierarchy whose upward
 half is <span class="xref">Unity.Transforms.Parent</span> and <a class="xref" href="Redux.Ecs.Components.AncestorList.html">AncestorList</a>.</p>
+</section>
+      <h4><a class="xref" href="Redux.Ecs.Components.TransformFrameReference.html">TransformFrameReference</a></h4>
+      <section><p>Owns the interface handle installed by managed frame creation and released by frame disposal or bridge cleanup.
+Native-only frames do not carry this component. Transformd is the ordinary lifetime signal.</p>
 </section>
       <h4><a class="xref" href="Redux.Ecs.Components.Transformd.html">Transformd</a></h4>
       <section><p>Struct representing ECS transform data.</p>

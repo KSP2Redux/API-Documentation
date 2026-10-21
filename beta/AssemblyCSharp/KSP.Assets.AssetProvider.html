@@ -189,6 +189,74 @@
   </table>
 
 
+  <a id="KSP_Assets_AssetProvider_CreateAsyncRaw_" data-uid="KSP.Assets.AssetProvider.CreateAsyncRaw*"></a>
+  <h4 id="KSP_Assets_AssetProvider_CreateAsyncRaw_System_String_UnityEngine_Vector3_UnityEngine_Quaternion_UnityEngine_Transform_" data-uid="KSP.Assets.AssetProvider.CreateAsyncRaw(System.String,UnityEngine.Vector3,UnityEngine.Quaternion,UnityEngine.Transform)">CreateAsyncRaw(string, Vector3, Quaternion, Transform)</h4>
+  <div class="markdown level1 summary"><p>Asynchronously instantiates the <span class="xref">UnityEngine.GameObject</span> identified by the given key at the specified position and rotation without pooling and returns the operation handle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AsyncOperationHandle&lt;GameObject&gt; CreateAsyncRaw(string key, Vector3 position, Quaternion rotation, Transform parent = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">key</span></td>
+        <td><p>The addressable key identifying the prefab to instantiate.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">position</span></td>
+        <td><p>The world-space position at which to place the new instance.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Quaternion.html">Quaternion</a></td>
+        <td><span class="parametername">rotation</span></td>
+        <td><p>The world-space rotation to apply to the new instance.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>The optional parent transform to attach the new instance to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">AsyncOperationHandle</span>&lt;<span class="xref">GameObject</span>&gt;</td>
+        <td><p>An <span class="xref">UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationHandle&lt;TObject&gt;</span> that completes with the instantiated <span class="xref">UnityEngine.GameObject</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Assets_AssetProvider_CreateAsyncRaw_System_String_UnityEngine_Vector3_UnityEngine_Quaternion_UnityEngine_Transform__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>An instance of a prefab already in memory is made inside this call, so the handle can come back done. A
+<code>Completed</code> handler added to a done handle waits for the next Addressables update, after the instance's
+Start may have run. Check <code>IsDone</code> first when the instance has to be set up before it starts.</p>
+</div>
+
+
   <a id="KSP_Assets_AssetProvider_CreateAsync_" data-uid="KSP.Assets.AssetProvider.CreateAsync*"></a>
   <h4 id="KSP_Assets_AssetProvider_CreateAsync__1_System_String_System_Action___0__" data-uid="KSP.Assets.AssetProvider.CreateAsync``1(System.String,System.Action{``0})">CreateAsync&lt;T&gt;(string, Action&lt;T&gt;)</h4>
   <div class="markdown level1 summary"><p>Asynchronously creates an instance of the asset identified by the given key and invokes a callback with the result.</p>
@@ -692,11 +760,15 @@ Manager patched or created, the registered external locators and the catalogs.</
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td><p>True if any locator knows the key for the type, false otherwise.</p>
+        <td><p>True if any locator knows the key for the type and the gate lets one of its catalog locations
+load, false otherwise.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 id="KSP_Assets_AssetProvider_HasLocations_System_String_System_Type__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>A catalog location counts only when the active feature set lets it load.</p>
+</div>
 
 
   <a id="KSP_Assets_AssetProvider_LoadAllRaw_" data-uid="KSP.Assets.AssetProvider.LoadAllRaw*"></a>

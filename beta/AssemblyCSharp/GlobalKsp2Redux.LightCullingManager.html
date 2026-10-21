@@ -131,7 +131,7 @@
 
 
   <h4 id="GlobalKsp2Redux_LightCullingManager_LightQuadMaterial" data-uid="GlobalKsp2Redux.LightCullingManager.LightQuadMaterial">LightQuadMaterial</h4>
-  <div class="markdown level1 summary"><p>The material applied to instanced light quad draws.</p>
+  <div class="markdown level1 summary"><p>The material instanced light quads are drawn with when their own quad has none.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -348,13 +348,13 @@
 
 
   <a id="GlobalKsp2Redux_LightCullingManager_SetLightQuadLODInfo_" data-uid="GlobalKsp2Redux.LightCullingManager.SetLightQuadLODInfo*"></a>
-  <h4 id="GlobalKsp2Redux_LightCullingManager_SetLightQuadLODInfo_System_Int32_UnityEngine_Transform_UnityEngine_Color_System_Single_" data-uid="GlobalKsp2Redux.LightCullingManager.SetLightQuadLODInfo(System.Int32,UnityEngine.Transform,UnityEngine.Color,System.Single)">SetLightQuadLODInfo(int, Transform, Color, float)</h4>
-  <div class="markdown level1 summary"><p>Stores the TRS matrix, emission color, and alpha maximum for the light quad at the given index, initializing per-quad arrays if needed.</p>
+  <h4 id="GlobalKsp2Redux_LightCullingManager_SetLightQuadLODInfo_System_Int32_UnityEngine_Transform_UnityEngine_Material_" data-uid="GlobalKsp2Redux.LightCullingManager.SetLightQuadLODInfo(System.Int32,UnityEngine.Transform,UnityEngine.Material)">SetLightQuadLODInfo(int, Transform, Material)</h4>
+  <div class="markdown level1 summary"><p>Stores the world matrix and material of the light quad at the given index, initializing the matrix array if needed.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void SetLightQuadLODInfo(int index, Transform t, Color emissionColor, float alphaMax)</code></pre>
+    <pre><code class="lang-csharp hljs">public void SetLightQuadLODInfo(int index, Transform t, Material material)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -375,23 +375,21 @@
       <tr>
         <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
         <td><span class="parametername">t</span></td>
-        <td><p>Transform whose position, rotation, and scale define the TRS matrix for the quad.</p>
+        <td><p>Transform of the quad.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Color.html">Color</a></td>
-        <td><span class="parametername">emissionColor</span></td>
-        <td><p>Emission color passed to the instanced material property block.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">float</span></td>
-        <td><span class="parametername">alphaMax</span></td>
-        <td><p>Maximum alpha value passed to the instanced material property block.</p>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Material.html">Material</a></td>
+        <td><span class="parametername">material</span></td>
+        <td><p>The quad's own material, or <code>null</code> to draw it with <a class="xref" href="GlobalKsp2Redux.LightCullingManager.html#LightCullingManager_LightQuadMaterial">LightQuadMaterial</a>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 id="GlobalKsp2Redux_LightCullingManager_SetLightQuadLODInfo_System_Int32_UnityEngine_Transform_UnityEngine_Material__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The quad is drawn with its own world matrix, scale of its parents included, and with its own material, which the
+instanced draw needs instancing enabled on.</p>
+</div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
