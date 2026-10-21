@@ -127,10 +127,10 @@
     <pre><code class="lang-csharp hljs">public class VolumeCloudRenderer : EffectBase</code></pre>
   </div>
   <h5 id="KSP_VolumeCloud_VolumeCloudRenderer_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>Before camera culling, the render descriptor sizes the targets and prepares material state. Three
-<a class="xref" href="Redux.Rendering.ICameraRenderHook.html">ICameraRenderHook</a> instances then record those steps on the hosting camera. The cloud shadow goes
-into <code>_CloudsShadowTexture</code> right after URP's depth prepass, the raymarch and reprojection run before
-transparents, and the shadow target is cleared again after post-processing. The composite and depth quads are
+  <div class="markdown level0 remarks"><p>Pre-cull prepares history targets, material state and stage selection at the camera render size. Camera hooks record the shadow after
+the G-buffer, raymarch and reconstruction before transparents, and motion/reactive inputs after transparents.
+Working textures belong to that camera graph. Histories retain external ownership. Published cloud globals
+return to neutral textures after post-processing. The composite and depth quads are
 drawn with <span class="xref">UnityEngine.Graphics.DrawMesh(UnityEngine.Mesh,UnityEngine.Vector3,UnityEngine.Quaternion,UnityEngine.Material,System.Int32,UnityEngine.Camera)</span> in their stock
 transparent queue slots.</p>
 </div>
