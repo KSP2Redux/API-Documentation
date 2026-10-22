@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Enum ShaderRefactorState | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="Selects which planet rendering shader variant  drives. The per-variant behaviour (which shader, pass offset, and pipeline features) is described by .">
+    <meta name="description" content="Retired terrain shader selections, retained for previously serialized data.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -82,17 +82,19 @@
 
 
   <h1 id="KSP_Rendering_Planets_ShaderRefactorState" data-uid="KSP.Rendering.Planets.ShaderRefactorState" class="text-break">Enum ShaderRefactorState</h1>
-  <div class="markdown level0 summary"><p>Selects which planet rendering shader variant <a class="xref" href="KSP.Rendering.Planets.PQSRenderer.html">PQSRenderer</a> drives. The
-per-variant behaviour (which shader, pass offset, and pipeline features) is described by
-<a class="xref" href="KSP.Rendering.Planets.ShaderRefactorProfile.html">ShaderRefactorProfile</a>.</p>
+  <div class="markdown level0 summary"><p>Retired terrain shader selections, retained for previously serialized data.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.Rendering.html">Rendering</a>.<a class="xref" href="KSP.Rendering.Planets.html">Planets</a></h6>
   <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
   <h5 id="KSP_Rendering_Planets_ShaderRefactorState_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public enum ShaderRefactorState</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Terrain shader selection has been retired. All terrain uses the production URP shader.&quot;)]
+public enum ShaderRefactorState</code></pre>
   </div>
+  <h5 id="KSP_Rendering_Planets_ShaderRefactorState_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>All terrain now uses the production URP shader. These values no longer select a renderer.</p>
+</div>
   <h3 id="fields">Fields
 </h3>
   <table class="table table-bordered table-condensed">
@@ -105,17 +107,17 @@ per-variant behaviour (which shader, pass offset, and pipeline features) is desc
     </thead></thead><tbody>
       <tr>
         <td id="KSP_Rendering_Planets_ShaderRefactorState_Decompiled">Decompiled</td>
-        <td><p>The URP port of the in-repo decompiled Redux shader, swapped onto a copy of any surface material authored on a stand-in.</p>
+        <td><p>The former production URP shader selection.</p>
 </td>
       </tr>
       <tr>
         <td id="KSP_Rendering_Planets_ShaderRefactorState_Standard">Standard</td>
-        <td><p>The production refactored shader (<code>KSP2/Environment/CelestialBody_Local</code>) used as-is.</p>
+        <td><p>The former authored-material selection.</p>
 </td>
       </tr>
       <tr>
         <td id="KSP_Rendering_Planets_ShaderRefactorState_SwapOld">SwapOld</td>
-        <td><p>The legacy shader (<code>CelestialBody_Local_Old</code>), swapped onto a copy of the surface material.</p>
+        <td><p>The retired legacy renderer selection.</p>
 </td>
       </tr>
     </tbody>
