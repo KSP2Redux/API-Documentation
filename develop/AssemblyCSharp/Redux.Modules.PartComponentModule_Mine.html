@@ -204,6 +204,121 @@
 </h3>
 
 
+  <a id="Redux_Modules_PartComponentModule_Mine_IsHeatRequested_" data-uid="Redux.Modules.PartComponentModule_Mine.IsHeatRequested*"></a>
+  <h4 id="Redux_Modules_PartComponentModule_Mine_IsHeatRequested_Redux_Modules_MineState_System_Boolean_System_Boolean_" data-uid="Redux.Modules.PartComponentModule_Mine.IsHeatRequested(Redux.Modules.MineState,System.Boolean,System.Boolean)">IsHeatRequested(MineState, bool, bool)</h4>
+  <div class="markdown level1 summary"><p>Returns whether the mine asks the thermal auto-shutdown for its heat this tick.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsHeatRequested(MineState status, bool hasOverheated, bool hasEnoughResources)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.Modules.MineState.html">MineState</a></td>
+        <td><span class="parametername">status</span></td>
+        <td><p>The mine's current state.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">hasOverheated</span></td>
+        <td><p>Whether the thermal auto-shutdown has latched an overheat.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">hasEnoughResources</span></td>
+        <td><p>Whether the mine can draw its inputs.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the mine is running and should generate heat.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_Modules_PartComponentModule_Mine_IsInputRejected_" data-uid="Redux.Modules.PartComponentModule_Mine.IsInputRejected*"></a>
+  <h4 id="Redux_Modules_PartComponentModule_Mine_IsInputRejected_System_Boolean_System_Collections_Generic_IReadOnlyList_KSP_Sim_ResourceSystem_ResourceDefinitionID__System_Collections_Generic_IReadOnlyList_KSP_Sim_ResourceUnitsPair__" data-uid="Redux.Modules.PartComponentModule_Mine.IsInputRejected(System.Boolean,System.Collections.Generic.IReadOnlyList{KSP.Sim.ResourceSystem.ResourceDefinitionID},System.Collections.Generic.IReadOnlyList{KSP.Sim.ResourceUnitsPair})">IsInputRejected(bool, IReadOnlyList&lt;ResourceDefinitionID&gt;, IReadOnlyList&lt;ResourceUnitsPair&gt;)</h4>
+  <div class="markdown level1 summary"><p>Returns whether the mine's last flow request was turned down for want of one of its inputs rather than
+for lack of room for one of its products.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsInputRejected(bool deliveryAccepted, IReadOnlyList&lt;ResourceDefinitionID&gt; resourcesNotProcessed, IReadOnlyList&lt;ResourceUnitsPair&gt; products)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">deliveryAccepted</span></td>
+        <td><p>Whether the last request was delivered.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">IReadOnlyList</span>&lt;<a class="xref" href="KSP.Sim.ResourceSystem.ResourceDefinitionID.html">ResourceDefinitionID</a>&gt;</td>
+        <td><span class="parametername">resourcesNotProcessed</span></td>
+        <td><p>The resources the request could not move, first failure first.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">IReadOnlyList</span>&lt;<a class="xref" href="KSP.Sim.ResourceUnitsPair.html">ResourceUnitsPair</a>&gt;</td>
+        <td><span class="parametername">products</span></td>
+        <td><p>The mine's products.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the mine is short of an input.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="Redux_Modules_PartComponentModule_Mine_OnShutdown_" data-uid="Redux.Modules.PartComponentModule_Mine.OnShutdown*"></a>
   <h4 id="Redux_Modules_PartComponentModule_Mine_OnShutdown" data-uid="Redux.Modules.PartComponentModule_Mine.OnShutdown">OnShutdown()</h4>
   <div class="markdown level1 summary"><p>Called when the module is shutting down, allowing derived modules to release resources and detach from systems.</p>
