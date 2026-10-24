@@ -100,7 +100,8 @@ the same name when one exists.</p>
   <div class="markdown level0 remarks"><p>With the install converted, stock content reaches only URP shaders and this finds nothing. It is the
 fallback for development installs that were not converted and for mod bundles built against the
 Built-in pipeline. A shader counts as Built-in when a pass uses a Built-in lighting mode (ForwardBase,
-Deferred and so on, in any case) or none of its subshaders runs on this device, unless it is one of URP's
+Deferred and so on, in any case), has a known URP port but no RenderPipeline tag, or none of its subshaders
+runs on this device, unless it is one of URP's
 own hidden shaders, which a player build strips for the features the game leaves off (XR, HDR output,
 decal buffers).
 Unity's own unnamed error material is not reported. Loaded shaders are checked after
@@ -229,8 +230,8 @@ The remap is on unless the game starts with <code>-redux-no-legacy-shader-remap<
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td><p>True when a pass uses a Built-in lighting mode or no subshader runs on this device, false otherwise and
-for the URP replacement shaders.</p>
+        <td><p>True when a pass uses a Built-in lighting mode, an untagged shader has a known URP port, or no subshader
+runs on this device, false otherwise and for the URP replacement shaders.</p>
 </td>
       </tr>
     </tbody>

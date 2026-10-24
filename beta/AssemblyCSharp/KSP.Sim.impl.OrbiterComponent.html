@@ -867,13 +867,13 @@ belongs in <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_
 
 
   <a id="KSP_Sim_impl_OrbiterComponent_SetState_" data-uid="KSP.Sim.impl.OrbiterComponent.SetState*"></a>
-  <h4 id="KSP_Sim_impl_OrbiterComponent_SetState_KSP_Sim_State_KeplerOrbitState_System_Double_KSP_Sim_ISimulationModelMap_" data-uid="KSP.Sim.impl.OrbiterComponent.SetState(KSP.Sim.State.KeplerOrbitState,System.Double,KSP.Sim.ISimulationModelMap)">SetState(KeplerOrbitState, double, ISimulationModelMap)</h4>
+  <h4 id="KSP_Sim_impl_OrbiterComponent_SetState_KSP_Sim_State_KeplerOrbitState_System_Double_KSP_Sim_ISimulationModelMap_System_Boolean_" data-uid="KSP.Sim.impl.OrbiterComponent.SetState(KSP.Sim.State.KeplerOrbitState,System.Double,KSP.Sim.ISimulationModelMap,System.Boolean)">SetState(KeplerOrbitState, double, ISimulationModelMap, bool)</h4>
   <div class="markdown level1 summary"><p>Applies the given Kepler orbit state to the patched-conics orbit, fires reference-body change and orbital-state events, and synchronises rigidbody position and velocity.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void SetState(KeplerOrbitState state, double universalTime, ISimulationModelMap simulationModelMap)</code></pre>
+    <pre><code class="lang-csharp hljs">public void SetState(KeplerOrbitState state, double universalTime, ISimulationModelMap simulationModelMap, bool syncRigidbody = true)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -901,6 +901,13 @@ belongs in <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_
         <td><a class="xref" href="KSP.Sim.ISimulationModelMap.html">ISimulationModelMap</a></td>
         <td><span class="parametername">simulationModelMap</span></td>
         <td><p>The simulation model map used to resolve the reference body from its GUID.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">syncRigidbody</span></td>
+        <td><p>False to leave the rigidbody where it is, for a vessel whose rigidbody was restored on its own. The orbit is
+its centre of mass's, so moving the rigidbody root onto it shifts the vessel.</p>
 </td>
       </tr>
     </tbody>

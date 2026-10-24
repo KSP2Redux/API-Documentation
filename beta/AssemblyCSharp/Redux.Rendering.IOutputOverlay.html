@@ -106,13 +106,15 @@
     <pre><code class="lang-csharp hljs">public interface IOutputOverlay : ICameraRenderHook</code></pre>
   </div>
   <h5 id="Redux_Rendering_IOutputOverlay_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>An overlay records at <span class="xref">UnityEngine.Rendering.Universal.RenderPassEvent.AfterRenderingPostProcessing</span>. It draws at the output size
+  <div class="markdown level0 remarks"><p>An overlay records at <span class="xref">UnityEngine.Rendering.Universal.RenderPassEvent.AfterRenderingPostProcessing</span> or a few events later
+to order dependent overlays. It draws at the output size
 with the camera's unjittered view-projection and depth-tests against <a class="xref" href="Redux.Rendering.OutputOverlay.html#Redux_Rendering_OutputOverlay_GetSceneDepth_UnityEngine_Rendering_RenderGraphModule_RenderGraph_UnityEngine_Rendering_ContextContainer_UnityEngine_Rendering_RenderGraphModule_TextureHandle_UnityEngine_Rendering_RenderGraphModule_TextureHandle_">GetSceneDepth(RenderGraph, ContextContainer, TextureHandle, TextureHandle)</a>,
-so temporal anti-aliasing and the temporal upscalers never take it into their history. Thin lines and small
-icons write no motion vectors or depth, and a temporal upscaler smears or dims them as the camera moves.
-<a class="xref" href="Redux.Rendering.CameraRenderHooksFeature.html">CameraRenderHooksFeature</a> enqueues overlays ahead of the other hooks at their event, right after
-URP's post-processing and before Redux's after-post effects. <a class="xref" href="Redux.Rendering.CommandCameraRenderHook.html">CommandCameraRenderHook</a> sets the
-depth and the matrices up for its subclasses.</p>
+so temporal anti-aliasing and the temporal upscalers never take it into their history.
+<a class="xref" href="Redux.Rendering.CameraRenderHooksFeature.html">CameraRenderHooksFeature</a> enqueues overlays after the scene's tone curve and FXAA, but before
+HDR output encoding. Colors are linear Rec. 709 relative to paper white. Map overlays share a private
+depth/stencil copy so gizmos cannot change scene depth. Other cameras' overlays only read depth and reuse
+it when its size matches the output. <a class="xref" href="Redux.Rendering.CommandCameraRenderHook.html">CommandCameraRenderHook</a> sets the depth and matrices up
+for its subclasses. Screen-space UI Toolkit panels keep their own native rendering path.</p>
 </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>

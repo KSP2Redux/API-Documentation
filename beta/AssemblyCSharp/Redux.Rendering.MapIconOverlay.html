@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class MapIconOverlay | KSP2Redux API (Beta) ">
     
-    <meta name="description" content="Draws the map view&#39;s icons as an output overlay after post-processing.">
+    <meta name="description" content="Draws the map view&#39;s icons and maneuver gizmos at output resolution after post-processing.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,7 @@
 
 
   <h1 id="Redux_Rendering_MapIconOverlay" data-uid="Redux.Rendering.MapIconOverlay" class="text-break">Class MapIconOverlay</h1>
-  <div class="markdown level0 summary"><p>Draws the map view's icons as an output overlay after post-processing.</p>
+  <div class="markdown level0 summary"><p>Draws the map view's icons and maneuver gizmos at output resolution after post-processing.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -101,11 +101,9 @@
     <pre><code class="lang-csharp hljs">public sealed class MapIconOverlay : IOutputOverlay, ICameraRenderHook</code></pre>
   </div>
   <h5 id="Redux_Rendering_MapIconOverlay_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>The icons are <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/SpriteRenderer.html">SpriteRenderer</a>s on the Map layer with <code>KSP2/UI/Sprite (Depth Offset)</code>, whose
-pass is tagged <code>KSP2MapIcon</code> so URP's transparent pass leaves them out. This hook draws the camera's
-visible ones from its culling results with URP's transparent sorting, at the output size, with the unjittered
-view-projection and against the scene depth. A temporal upscaler otherwise gave them the motion of the sky
-behind them and dimmed and smeared them as the map turned.</p>
+  <div class="markdown level0 remarks"><p>The <code>KSP2MapIcon</code>, <code>KSP2MapGizmoDepth</code> and <code>KSP2MapGizmo</code> shader tags
+keep these objects out of URP's scene passes. Gizmo depth is drawn against a private copy of scene depth.
+All draws use the output size and unjittered projection, so scene reconstruction leaves the widgets sharp.</p>
 </div>
   <h3 id="constructors">Constructors
 </h3>

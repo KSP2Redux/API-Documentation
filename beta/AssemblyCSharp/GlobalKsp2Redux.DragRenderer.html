@@ -281,13 +281,13 @@
 
 
   <a id="GlobalKsp2Redux_DragRenderer_RenderPartDragCubes_" data-uid="GlobalKsp2Redux.DragRenderer.RenderPartDragCubes*"></a>
-  <h4 id="GlobalKsp2Redux_DragRenderer_RenderPartDragCubes_UnityEngine_GameObject_System_Collections_Generic_List_DragCube__DragRenderContext_System_Boolean_System_Boolean_" data-uid="GlobalKsp2Redux.DragRenderer.RenderPartDragCubes(UnityEngine.GameObject,System.Collections.Generic.List{DragCube},DragRenderContext,System.Boolean,System.Boolean)">RenderPartDragCubes(GameObject, List&lt;DragCube&gt;, DragRenderContext, bool, bool)</h4>
+  <h4 id="GlobalKsp2Redux_DragRenderer_RenderPartDragCubes_UnityEngine_GameObject_System_Collections_Generic_List_DragCube__DragRenderContext_System_Boolean_System_Boolean_UnityEngine_Transform_" data-uid="GlobalKsp2Redux.DragRenderer.RenderPartDragCubes(UnityEngine.GameObject,System.Collections.Generic.List{DragCube},DragRenderContext,System.Boolean,System.Boolean,UnityEngine.Transform)">RenderPartDragCubes(GameObject, List&lt;DragCube&gt;, DragRenderContext, bool, bool, Transform)</h4>
   <div class="markdown level1 summary"><p>Instantiates the given prefab, configures the aero camera and textures, and renders drag cubes for each face into the provided drag cube list.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IEnumerator RenderPartDragCubes(GameObject prefab, List&lt;DragCube&gt; dragCubes, DragRenderContext dragCubeContext, bool outputTextures = false, bool doSynchronously = false)</code></pre>
+    <pre><code class="lang-csharp hljs">public IEnumerator RenderPartDragCubes(GameObject prefab, List&lt;DragCube&gt; dragCubes, DragRenderContext dragCubeContext, bool outputTextures = false, bool doSynchronously = false, Transform partFrame = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -327,6 +327,13 @@
         <td><span class="xref">bool</span></td>
         <td><span class="parametername">doSynchronously</span></td>
         <td><p>When <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a>, runs all rendering steps synchronously rather than across multiple frames.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
+        <td><span class="parametername">partFrame</span></td>
+        <td><p>The part's root when <code class="paramref">prefab</code> is a node below it, such as its model. The cubes are then baked in the part's frame,
+which is the frame the game reads them in.</p>
 </td>
       </tr>
     </tbody>

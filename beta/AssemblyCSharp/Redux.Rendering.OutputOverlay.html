@@ -208,9 +208,10 @@ texture.</p>
   </table>
   <h5 id="Redux_Rendering_OutputOverlay_GetSceneDepth_UnityEngine_Rendering_RenderGraphModule_RenderGraph_UnityEngine_Rendering_ContextContainer_UnityEngine_Rendering_RenderGraphModule_TextureHandle_UnityEngine_Rendering_RenderGraphModule_TextureHandle__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>After a temporal upscaler the colour is at the output size and the camera depth is not. The camera depth is
-then copied once per camera frame, nearest texel, into a depth target at the colour's size. Otherwise the
-camera depth is returned as it is. Without the copy shader the target stays cleared and nothing occludes the
-overlays.</p>
+copied once per camera frame, nearest texel, into a depth target at the colour's size. Map cameras always
+use a private depth/stencil copy for depth-writing gizmos and menu masks. Other cameras reuse matching
+scene depth or get a depth-only copy. Without the copy shader the target stays cleared and nothing
+occludes the overlays.</p>
 </div>
 
 

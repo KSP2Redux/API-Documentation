@@ -160,31 +160,6 @@ public class PQSRenderer : KerbalMonoBehaviour, IPQSRenderer</code></pre>
   </table>
 
 
-  <h4 id="KSP_Rendering_Planets_PQSRenderer_BlendDistance" data-uid="KSP.Rendering.Planets.PQSRenderer.BlendDistance">BlendDistance</h4>
-  <div class="markdown level1 summary"><p>Distance threshold at which terrain-water blending transitions.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public float BlendDistance</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">float</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
   <h4 id="KSP_Rendering_Planets_PQSRenderer_BucketMaskFlat" data-uid="KSP.Rendering.Planets.PQSRenderer.BucketMaskFlat">BucketMaskFlat</h4>
   <div class="markdown level1 summary"><p>Bitmask for identifying flat-shaded terrain buckets in triplanar texture selection.</p>
 </div>
@@ -279,6 +254,56 @@ public class PQSRenderer : KerbalMonoBehaviour, IPQSRenderer</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQSRenderer_DECAL_SURFACE_PASS_INDEX" data-uid="KSP.Rendering.Planets.PQSRenderer.DECAL_SURFACE_PASS_INDEX">DECAL_SURFACE_PASS_INDEX</h4>
+  <div class="markdown level1 summary"><p>The deferred decal mask pass index.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int DECAL_SURFACE_PASS_INDEX = 8</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQSRenderer_DEPTH_PASS_INDEX" data-uid="KSP.Rendering.Planets.PQSRenderer.DEPTH_PASS_INDEX">DEPTH_PASS_INDEX</h4>
+  <div class="markdown level1 summary"><p>The custom terrain depth pass index.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int DEPTH_PASS_INDEX = 4</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -554,31 +579,6 @@ public class PQSRenderer : KerbalMonoBehaviour, IPQSRenderer</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">int</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="KSP_Rendering_Planets_PQSRenderer_DepthBuffer" data-uid="KSP.Rendering.Planets.PQSRenderer.DepthBuffer">DepthBuffer</h4>
-  <div class="markdown level1 summary"><p>Render texture holding the depth buffer used for terrain blending.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public RenderTexture DepthBuffer</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">RenderTexture</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -1235,13 +1235,13 @@ public class PQSRenderer : KerbalMonoBehaviour, IPQSRenderer</code></pre>
   </table>
 
 
-  <h4 id="KSP_Rendering_Planets_PQSRenderer_RenderDepthTexture" data-uid="KSP.Rendering.Planets.PQSRenderer.RenderDepthTexture">RenderDepthTexture</h4>
-  <div class="markdown level1 summary"><p>Flag indicating whether the depth texture pass is rendered for scatter blending.</p>
+  <h4 id="KSP_Rendering_Planets_PQSRenderer_SURFACE_SHADER_NAME" data-uid="KSP.Rendering.Planets.PQSRenderer.SURFACE_SHADER_NAME">SURFACE_SHADER_NAME</h4>
+  <div class="markdown level1 summary"><p>The production shader used for terrain, including materials authored on stock or SDK shaders.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool RenderDepthTexture</code></pre>
+    <pre><code class="lang-csharp hljs">public const string SURFACE_SHADER_NAME = &quot;KSP2/Environment/CelestialBody/CelestialBody_Local&quot;</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -1253,7 +1253,7 @@ public class PQSRenderer : KerbalMonoBehaviour, IPQSRenderer</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">bool</span></td>
+        <td><span class="xref">string</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -1279,31 +1279,6 @@ public class PQSRenderer : KerbalMonoBehaviour, IPQSRenderer</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="KSP_Rendering_Planets_PQSRenderer_ShaderRefactorState" data-uid="KSP.Rendering.Planets.PQSRenderer.ShaderRefactorState">ShaderRefactorState</h4>
-  <div class="markdown level1 summary"><p>The currently active shader variant used for planet surface rendering.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static ShaderRefactorState ShaderRefactorState</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="KSP.Rendering.Planets.ShaderRefactorState.html">ShaderRefactorState</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -1967,6 +1942,51 @@ with <code class="paramref">directionFromPlanetCenter</code>.</p>
   </table>
 
 
+  <a id="KSP_Rendering_Planets_PQSRenderer_GetPrepassIndex_" data-uid="KSP.Rendering.Planets.PQSRenderer.GetPrepassIndex*"></a>
+  <h4 id="KSP_Rendering_Planets_PQSRenderer_GetPrepassIndex_System_Int32_" data-uid="KSP.Rendering.Planets.PQSRenderer.GetPrepassIndex(System.Int32)">GetPrepassIndex(int)</h4>
+  <div class="markdown level1 summary"><p>Gets the local-space prepass index for a decal variant.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int GetPrepassIndex(int decalVariant = 0)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">decalVariant</span></td>
+        <td><p>The decal variant: 0 for none, 1 for four, or 2 for unlimited.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><p>The local-space prepass index.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Rendering_Planets_PQSRenderer_GetRotationFromMatrix_" data-uid="KSP.Rendering.Planets.PQSRenderer.GetRotationFromMatrix*"></a>
   <h4 id="KSP_Rendering_Planets_PQSRenderer_GetRotationFromMatrix_UnityEngine_Matrix4x4_" data-uid="KSP.Rendering.Planets.PQSRenderer.GetRotationFromMatrix(UnityEngine.Matrix4x4)">GetRotationFromMatrix(Matrix4x4)</h4>
   <div class="markdown level1 summary"><p>Extracts a rotation quaternion from the given transformation matrix.</p>
@@ -2206,7 +2226,7 @@ of <code class="paramref">matrix</code>, derived via <a class="xref" href="https
 
   <a id="KSP_Rendering_Planets_PQSRenderer_LateUpdateForEditor_" data-uid="KSP.Rendering.Planets.PQSRenderer.LateUpdateForEditor*"></a>
   <h4 id="KSP_Rendering_Planets_PQSRenderer_LateUpdateForEditor" data-uid="KSP.Rendering.Planets.PQSRenderer.LateUpdateForEditor">LateUpdateForEditor()</h4>
-  <div class="markdown level1 summary"><p>Performs the late-update logic for both play mode and editor mode, updating the terrain collider tiles, preparing the prepass, and updating debug counters.</p>
+  <div class="markdown level1 summary"><p>Updates terrain collider tiles, prepares the camera prepass geometry, and updates debug counters in play mode and editor previews.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
