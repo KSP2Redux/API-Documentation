@@ -1055,6 +1055,43 @@
   </table>
 
 
+  <a id="KSP_OAB_ObjectAssemblyBuilder_IsAssembling_" data-uid="KSP.OAB.ObjectAssemblyBuilder.IsAssembling*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyBuilder_IsAssembling" data-uid="KSP.OAB.ObjectAssemblyBuilder.IsAssembling">IsAssembling</h4>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether a dropped part is still being assembled across frames, so the craft is only partly built.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsAssembling { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_OAB_ObjectAssemblyBuilder_IsAssembling_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+Code that edits, saves or serializes the craft, mods and the game CLI included, must call
+<a class="xref" href="KSP.OAB.ObjectAssemblyBuilder.html#KSP_OAB_ObjectAssemblyBuilder_CompleteAssembly">CompleteAssembly()</a> first, or check this and wait. Until then some symmetry copies do not exist yet,
+and the parts below the copies' roots are in no symmetry set.
+</p>
+<p>
+While it is true the placement tool ignores editing input and leaves the held part alone. Builder actions that
+edit, save or leave the craft, history snapshots and symmetry syncs complete the assembly first. The camera stays free.
+</p>
+</div>
+
+
   <a id="KSP_OAB_ObjectAssemblyBuilder_IsLoaded_" data-uid="KSP.OAB.ObjectAssemblyBuilder.IsLoaded*"></a>
   <h4 id="KSP_OAB_ObjectAssemblyBuilder_IsLoaded" data-uid="KSP.OAB.ObjectAssemblyBuilder.IsLoaded">IsLoaded</h4>
   <div class="markdown level1 summary"><p>Gets a value indicating whether the builder has completed initialization and is ready for interaction.</p>
@@ -1408,6 +1445,21 @@
       </tr>
     </tbody>
   </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyBuilder_CompleteAssembly_" data-uid="KSP.OAB.ObjectAssemblyBuilder.CompleteAssembly*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyBuilder_CompleteAssembly" data-uid="KSP.OAB.ObjectAssemblyBuilder.CompleteAssembly">CompleteAssembly()</h4>
+  <div class="markdown level1 summary"><p>Runs whatever is left of the drop being assembled, all at once.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CompleteAssembly()</code></pre>
+  </div>
+  <h5 id="KSP_OAB_ObjectAssemblyBuilder_CompleteAssembly_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Call this before editing, saving or serializing the craft. It does nothing when no drop is assembling, and
+nothing when called from inside one of the drop's own steps.</p>
+</div>
 
 
   <a id="KSP_OAB_ObjectAssemblyBuilder_Configure_" data-uid="KSP.OAB.ObjectAssemblyBuilder.Configure*"></a>
