@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class ResourceFlowRequestManager | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="Manages resource flow requests for a part owner, coordinating request registration, prioritization, and delivery via a flow graph. Each request is its own ECS entity (the entity is the request&#39;s identity); this manager creates, drives, and tears those entities down and runs the managed delivery solve over them. Request inputs live in each entity&#39;s  buffer and outputs in its  (+  buffer).">
+    <meta name="description" content="Manages resource flow requests for a part owner: registration, commands, and the container routes a request can reach through the flow graph. Each request is its own ECS entity, the entity being the request&#39;s identity. Request inputs live in each entity&#39;s  buffer and outputs in its  and  buffer.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,11 +81,11 @@
 
 
   <h1 id="KSP_Sim_ResourceSystem_ResourceFlowRequestManager" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestManager" class="text-break">Class ResourceFlowRequestManager</h1>
-  <div class="markdown level0 summary"><p>Manages resource flow requests for a part owner, coordinating request registration, prioritization, and
-delivery via a flow graph. Each request is its own ECS entity (the entity is the request's identity);
-this manager creates, drives, and tears those entities down and runs the managed delivery solve over
-them. Request inputs live in each entity's <a class="xref" href="Redux.Ecs.Components.ResourceFlowInstructionData.html">ResourceFlowInstructionData</a> buffer and outputs
-in its <a class="xref" href="Redux.Ecs.Components.ResourceFlowResponse.html">ResourceFlowResponse</a> (+ <a class="xref" href="Redux.Ecs.Components.ResourceFlowFailedResource.html">ResourceFlowFailedResource</a> buffer).</p>
+  <div class="markdown level0 summary"><p>Manages resource flow requests for a part owner: registration, commands, and the container routes a
+request can reach through the flow graph. Each request is its own ECS entity, the entity being the
+request's identity. Request inputs live in each entity's <a class="xref" href="Redux.Ecs.Components.ResourceFlowInstructionData.html">ResourceFlowInstructionData</a>
+buffer and outputs in its <a class="xref" href="Redux.Ecs.Components.ResourceFlowResponse.html">ResourceFlowResponse</a> and <a class="xref" href="Redux.Ecs.Components.ResourceFlowFailedResource.html">ResourceFlowFailedResource</a>
+buffer.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -99,6 +99,12 @@ in its <a class="xref" href="Redux.Ecs.Components.ResourceFlowResponse.html">Res
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class ResourceFlowRequestManager</code></pre>
   </div>
+  <h5 id="KSP_Sim_ResourceSystem_ResourceFlowRequestManager_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>In flight the requests are solved by the vessel's <a class="xref" href="Redux.ResourceFlow.ResourceNetwork.html">ResourceNetwork</a>, which
+<a class="xref" href="Redux.ResourceFlow.ResourceFlowSystem.html">ResourceFlowSystem</a> ticks every fixed update for every vessel. The network rates every
+request as a process and solves all of them together, so the result does not depend on request order or
+on the length of the tick.</p>
+</div>
   <h3 id="constructors">Constructors
 </h3>
 
@@ -180,6 +186,62 @@ in its <a class="xref" href="Redux.Ecs.Components.ResourceFlowResponse.html">Res
         <td><span class="parametername">partOwner</span></td>
         <td><p>The part owner component this manager tracks flow requests for.</p>
 </td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestManager_Network_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.Network*"></a>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestManager_Network" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.Network">Network</h4>
+  <div class="markdown level1 summary"><p>Gets the flight resource network that solves this manager's requests, or null in the OAB.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ResourceNetwork Network { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Redux.ResourceFlow.ResourceNetwork.html">ResourceNetwork</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestManager_UsesLightCycle_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.UsesLightCycle*"></a>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestManager_UsesLightCycle" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.UsesLightCycle">UsesLightCycle</h4>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the resource network models the vessel's day and night itself, as it
+does during time warp and for unloaded vessels. A solar panel then requests its full-light rate with
+<a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.html#KSP_Sim_ResourceSystem_ResourceFlowRequestManager_SetRequestLightModulated_Unity_Entities_Entity_System_Boolean_">SetRequestLightModulated(Entity, bool)</a> and the network applies the shadow of the main body.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool UsesLightCycle { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -292,6 +354,17 @@ The entity is the request's identity. The returned value is stored by the caller
       </tr>
     </tbody>
   </table>
+
+
+  <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestManager_Dispose_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.Dispose*"></a>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestManager_Dispose" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"><p>Releases the flight resource network. Safe to call more than once.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
 
 
   <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestManager_ForceRemoveRequest_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.ForceRemoveRequest*"></a>
@@ -426,6 +499,47 @@ The entity is the request's identity. The returned value is stored by the caller
   <h5 id="KSP_Sim_ResourceSystem_ResourceFlowRequestManager_GetFlowNodes_KSP_Sim_ResourceSystem_IFlowNode_KSP_Sim_ResourceSystem_FlowDirection_KSP_Sim_ResourceSystem_ResourceFlowMode__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>Tank locks do not change connectivity. Callers selecting storage must also check
 <a class="xref" href="KSP.Sim.ResourceSystem.FuelTankControls.html#KSP_Sim_ResourceSystem_FuelTankControls_IsEnabled_KSP_Sim_ResourceSystem_IFlowNode_">IsEnabled(IFlowNode)</a> on the returned nodes.</p>
+</div>
+
+
+  <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestManager_GetRequestContainerGroupKeys_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.GetRequestContainerGroupKeys*"></a>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestManager_GetRequestContainerGroupKeys_Unity_Entities_Entity_System_Collections_Generic_List_KSP_Sim_ResourceSystem_ResourceFlowRequestManager_RequestPriorityContainerGroupKey__" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.GetRequestContainerGroupKeys(Unity.Entities.Entity,System.Collections.Generic.List{KSP.Sim.ResourceSystem.ResourceFlowRequestManager.RequestPriorityContainerGroupKey})">GetRequestContainerGroupKeys(Entity, List&lt;RequestPriorityContainerGroupKey&gt;)</h4>
+  <div class="markdown level1 summary"><p>Lists the keys <a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.html#KSP_Sim_ResourceSystem_ResourceFlowRequestManager_GetRequestResourceContainerParts_Unity_Entities_Entity_">GetRequestResourceContainerParts(Entity)</a> returns for a request, in the same order,
+without building the container groups.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetRequestContainerGroupKeys(Entity request, List&lt;ResourceFlowRequestManager.RequestPriorityContainerGroupKey&gt; keys)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request to query.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.html">ResourceFlowRequestManager</a>.<a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.RequestPriorityContainerGroupKey.html">RequestPriorityContainerGroupKey</a>&gt;</td>
+        <td><span class="parametername">keys</span></td>
+        <td><p>Receives the keys, after it is cleared.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Sim_ResourceSystem_ResourceFlowRequestManager_GetRequestContainerGroupKeys_Unity_Entities_Entity_System_Collections_Generic_List_KSP_Sim_ResourceSystem_ResourceFlowRequestManager_RequestPriorityContainerGroupKey___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The delta-V propellant lists read only the keys. Building the groups cost two allocations and a resource read
+for each container of each of the request's instructions, about 860 000 of them for the Mammoth rocket's 463
+engines on the first calculation after a launch.</p>
 </div>
 
 
@@ -1153,6 +1267,117 @@ The entity is the request's identity. The returned value is stored by the caller
   </table>
 
 
+  <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestManager_SetRequestLevelControl_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.SetRequestLevelControl*"></a>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestManager_SetRequestLevelControl_Unity_Entities_Entity_KSP_Sim_ResourceSystem_ResourceDefinitionID_System_Single_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.SetRequestLevelControl(Unity.Entities.Entity,KSP.Sim.ResourceSystem.ResourceDefinitionID,System.Single)">SetRequestLevelControl(Entity, ResourceDefinitionID, float)</h4>
+  <div class="markdown level1 summary"><p>Makes a request a level control: it then runs only while the storage it produces
+<code class="paramref">resource</code> into is filled to <code class="paramref">fraction</code> or less, and at that level
+only as hard as needed to hold it, as a fuel cell backing up a battery does.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool SetRequestLevelControl(Entity request, ResourceDefinitionID resource, float fraction)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request to configure.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.ResourceSystem.ResourceDefinitionID.html">ResourceDefinitionID</a></td>
+        <td><span class="parametername">resource</span></td>
+        <td><p>The resource whose fill is held, or the invalid id to remove the control.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">fraction</span></td>
+        <td><p>The fill fraction to hold, from 0 to 1.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the request exists, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestManager_SetRequestLightModulated_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.SetRequestLightModulated*"></a>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestManager_SetRequestLightModulated_Unity_Entities_Entity_System_Boolean_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.SetRequestLightModulated(Unity.Entities.Entity,System.Boolean)">SetRequestLightModulated(Entity, bool)</h4>
+  <div class="markdown level1 summary"><p>Marks a producer whose rate holds only in starlight, so the resource network turns it off in the
+shadow of the main body while it models the vessel's day and night.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool SetRequestLightModulated(Entity request, bool lightModulated)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Entity</span></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request to mark.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">lightModulated</span></td>
+        <td><p>True to have the network apply the shadow, false to clear the mark.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the request exists, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestManager_TryGetRequestsByResource_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.TryGetRequestsByResource*"></a>
   <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestManager_TryGetRequestsByResource_System_String_KSP_Sim_ResourceSystem_FlowDirection_System_Collections_Generic_List_Unity_Entities_Entity___" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.TryGetRequestsByResource(System.String,KSP.Sim.ResourceSystem.FlowDirection,System.Collections.Generic.List{Unity.Entities.Entity}@)">TryGetRequestsByResource(string, FlowDirection, out List&lt;Entity&gt;)</h4>
   <div class="markdown level1 summary"><p>Returns a value indicating whether any registered requests match the specified resource name and flow direction.</p>
@@ -1269,7 +1494,8 @@ The entity is the request's identity. The returned value is stored by the caller
 
   <a id="KSP_Sim_ResourceSystem_ResourceFlowRequestManager_UpdateFlowRequests_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.UpdateFlowRequests*"></a>
   <h4 id="KSP_Sim_ResourceSystem_ResourceFlowRequestManager_UpdateFlowRequests_System_Double_System_Double_" data-uid="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.UpdateFlowRequests(System.Double,System.Double)">UpdateFlowRequests(double, double)</h4>
-  <div class="markdown level1 summary"><p>Processes all active flow requests for the current simulation tick, delivering or rejecting resources and raising <a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.html#KSP_Sim_ResourceSystem_ResourceFlowRequestManager_RequestsUpdated">RequestsUpdated</a>.</p>
+  <div class="markdown level1 summary"><p>Solves this vessel's resource network over one tick right away, outside the regular
+<a class="xref" href="Redux.ResourceFlow.ResourceFlowSystem.html">ResourceFlowSystem</a> update, and raises <a class="xref" href="KSP.Sim.ResourceSystem.ResourceFlowRequestManager.html#KSP_Sim_ResourceSystem_ResourceFlowRequestManager_RequestsUpdated">RequestsUpdated</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -1289,17 +1515,22 @@ The entity is the request's identity. The returned value is stored by the caller
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">tickUniversalTime</span></td>
-        <td><p>The universal time of the current simulation tick.</p>
+        <td><p>The universal time at the end of the tick.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">tickDeltaTime</span></td>
-        <td><p>The duration of the current simulation tick in seconds.</p>
+        <td><p>The duration of the tick in seconds.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 id="KSP_Sim_ResourceSystem_ResourceFlowRequestManager_UpdateFlowRequests_System_Double_System_Double__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The regular update already ticks every vessel each fixed update, so a tick ending no later than the last
+one the network ran is skipped rather than run on top of it, which changed storage twice. Nothing in the
+game calls it.</p>
+</div>
   <h3 id="events">Events
 </h3>
 

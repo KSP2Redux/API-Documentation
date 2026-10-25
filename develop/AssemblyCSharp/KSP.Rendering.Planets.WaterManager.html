@@ -379,6 +379,32 @@ depth below.</p>
   </table>
 
 
+  <h4 id="KSP_Rendering_Planets_WaterManager_HeightAboveOcean" data-uid="KSP.Rendering.Planets.WaterManager.HeightAboveOcean">HeightAboveOcean</h4>
+  <div class="markdown level1 summary"><p>Output array receiving each detect object's height above its body's ocean surface, in meters, or NaN when no
+ocean tested it this pass.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NativeArray&lt;float&gt; HeightAboveOcean</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Unity.Collections.NativeArray.html">NativeArray</a>&lt;<span class="xref">float</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <h4 id="KSP_Rendering_Planets_WaterManager_IsCameraUnderWater" data-uid="KSP.Rendering.Planets.WaterManager.IsCameraUnderWater">IsCameraUnderWater</h4>
   <div class="markdown level1 summary"><p>Gets a value indicating whether the main camera is currently submerged beneath the water surface.</p>
 </div>
@@ -3326,6 +3352,11 @@ last frame it recorded. The next <a class="xref" href="KSP.Rendering.Planets.Wat
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void ResetWaterDetectObjects()</code></pre>
   </div>
+  <h5 id="KSP_Rendering_Planets_WaterManager_ResetWaterDetectObjects_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>An object that the last pass found high above its ocean is skipped until it could have come down to the
+water. A part's position takes a frame chain and its bounds to work out, so testing every part of a station
+in orbit every frame cost several milliseconds and could never find water.</p>
+</div>
 
 
   <a id="KSP_Rendering_Planets_WaterManager_SetOceanActive_" data-uid="KSP.Rendering.Planets.WaterManager.SetOceanActive*"></a>

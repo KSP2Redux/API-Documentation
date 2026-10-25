@@ -5,11 +5,11 @@
   <head>
     <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-      <title>Class GBufferDepthCopyPass | KSP2Redux API (Develop) </title>
+      <title>Struct VesselStepState | KSP2Redux API (Develop) </title>
       <meta name="viewport" content="width=device-width">
-      <meta name="title" content="Class GBufferDepthCopyPass | KSP2Redux API (Develop) ">
+      <meta name="title" content="Struct VesselStepState | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="Copies the camera depth right after the G-buffer and binds the copy as _CameraDepthTexture for the  hooks that render on the camera.">
+    <meta name="description" content="The values a loaded vessel&#39;s gimbals and engines share in one physics step: the control frame&#39;s axes and the centre of mass in physics space, the centre of mass in the control frame, and the sea level altitude.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -76,58 +76,41 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Redux.Rendering.GBufferDepthCopyPass">
+            <article class="content wrap" id="_content" data-uid="Redux.Ecs.Components.VesselStepState">
 
 
 
-  <h1 id="Redux_Rendering_GBufferDepthCopyPass" data-uid="Redux.Rendering.GBufferDepthCopyPass" class="text-break">Class GBufferDepthCopyPass</h1>
-  <div class="markdown level0 summary"><p>Copies the camera depth right after the G-buffer and binds the copy as <code>_CameraDepthTexture</code> for the
-<a class="xref" href="Redux.Rendering.IGBufferDepthReader.html">IGBufferDepthReader</a> hooks that render on the camera.</p>
+  <h1 id="Redux_Ecs_Components_VesselStepState" data-uid="Redux.Ecs.Components.VesselStepState" class="text-break">Struct VesselStepState</h1>
+  <div class="markdown level0 summary"><p>The values a loaded vessel's gimbals and engines share in one physics step: the control frame's axes and the
+centre of mass in physics space, the centre of mass in the control frame, and the sea level altitude.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
-  <div class="inheritance">
-    <h5>Inheritance</h5>
-    <div class="level0"><span class="xref">object</span></div>
-    <div class="level1"><span class="xref">GBufferDepthCopyPass</span></div>
-  </div>
-  <div class="implements">
-    <h5>Implements</h5>
-    <div><a class="xref" href="Redux.Rendering.ICameraRenderHook.html">ICameraRenderHook</a></div>
-  </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.Rendering.html">Rendering</a></h6>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.Ecs.html">Ecs</a>.<a class="xref" href="Redux.Ecs.Components.html">Components</a></h6>
   <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
-  <h5 id="Redux_Rendering_GBufferDepthCopyPass_syntax">Syntax</h5>
+  <h5 id="Redux_Ecs_Components_VesselStepState_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class GBufferDepthCopyPass : ICameraRenderHook</code></pre>
+    <pre><code class="lang-csharp hljs">public struct VesselStepState</code></pre>
   </div>
-  <h5 id="Redux_Rendering_GBufferDepthCopyPass_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>The copy holds the G-buffer surfaces only, since the forward-only opaques draw after the deferred lights, as in
-stock's deferred path. URP's own depth copy later in the frame binds <code>_CameraDepthTexture</code> again with the
-full depth. Cameras without a G-buffer get no copy, so readers only run on deferred base cameras.</p>
+  <h5 id="Redux_Ecs_Components_VesselStepState_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p><a class="xref" href="Redux.Ecs.Components.VesselStepState.html#Redux_Ecs_Components_VesselStepState_ControlFrame">ControlFrame</a> is set by <a class="xref" href="KSP.Sim.impl.VesselComponent.html">VesselComponent</a> as the vessel starts. The rest
+is written in Burst by <a class="xref" href="Redux.Ecs.Systems.ViewLegacyFixedUpdateSystem.html">ViewLegacyFixedUpdateSystem</a> once per step, after the
+parts' view fixed updates and before the flight input and the part modules' fixed updates, which do not move
+the vessel. <a class="xref" href="KSP.Modules.Module_Gimbal.html">Module_Gimbal</a> and <a class="xref" href="KSP.Modules.Module_Engine.html">Module_Engine</a> read it
+through <span class="xref">KSP.Sim.impl.VesselBehavior.TryGetStepState(Redux.Ecs.Components.VesselStepState@)</span> during those updates. Each running gimbal of
+a large rocket otherwise converted the same directions and the centre of mass through the frame hierarchy on
+its own.</p>
 </div>
-  <h3 id="constructors">Constructors
-</h3>
-
-
-  <a id="Redux_Rendering_GBufferDepthCopyPass__ctor_" data-uid="Redux.Rendering.GBufferDepthCopyPass.#ctor*"></a>
-  <h4 id="Redux_Rendering_GBufferDepthCopyPass__ctor" data-uid="Redux.Rendering.GBufferDepthCopyPass.#ctor">GBufferDepthCopyPass()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public GBufferDepthCopyPass()</code></pre>
-  </div>
   <h3 id="fields">Fields
 </h3>
 
 
-  <h4 id="Redux_Rendering_GBufferDepthCopyPass_READER_EVENT" data-uid="Redux.Rendering.GBufferDepthCopyPass.READER_EVENT">READER_EVENT</h4>
-  <div class="markdown level1 summary"><p>The event the readers record at, right after the copy.</p>
+  <h4 id="Redux_Ecs_Components_VesselStepState_AltitudeFromSeaLevel" data-uid="Redux.Ecs.Components.VesselStepState.AltitudeFromSeaLevel">AltitudeFromSeaLevel</h4>
+  <div class="markdown level1 summary"><p>The vessel's altitude above sea level, in metres.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public const RenderPassEvent READER_EVENT = (RenderPassEvent)221</code></pre>
+    <pre><code class="lang-csharp hljs">public double AltitudeFromSeaLevel</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
@@ -139,51 +122,22 @@ full depth. Cameras without a G-buffer get no copy, so readers only run on defer
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">RenderPassEvent</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="properties">Properties
-</h3>
-
-
-  <a id="Redux_Rendering_GBufferDepthCopyPass_Event_" data-uid="Redux.Rendering.GBufferDepthCopyPass.Event*"></a>
-  <h4 id="Redux_Rendering_GBufferDepthCopyPass_Event" data-uid="Redux.Rendering.GBufferDepthCopyPass.Event">Event</h4>
-  <div class="markdown level1 summary"><p>Gets the point of the URP frame the hook records at.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public RenderPassEvent Event { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">RenderPassEvent</span></td>
+        <td><span class="xref">double</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
 
 
-  <a id="Redux_Rendering_GBufferDepthCopyPass_Inputs_" data-uid="Redux.Rendering.GBufferDepthCopyPass.Inputs*"></a>
-  <h4 id="Redux_Rendering_GBufferDepthCopyPass_Inputs" data-uid="Redux.Rendering.GBufferDepthCopyPass.Inputs">Inputs</h4>
-  <div class="markdown level1 summary"><p>Gets the camera textures the hook reads, so URP produces them for cameras the hook renders on.</p>
+  <h4 id="Redux_Ecs_Components_VesselStepState_ControlAxisForward" data-uid="Redux.Ecs.Components.VesselStepState.ControlAxisForward">ControlAxisForward</h4>
+  <div class="markdown level1 summary"><p>The control frame's forward axis in physics space.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ScriptableRenderPassInput Inputs { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public Vector3 ControlAxisForward</code></pre>
   </div>
-  <h5 class="propertyValue">Property Value</h5>
+  <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
     <thead>
       <tr>
@@ -193,54 +147,47 @@ full depth. Cameras without a G-buffer get no copy, so readers only run on defer
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">ScriptableRenderPassInput</span></td>
+        <td><span class="xref">Vector3</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
-  <h3 id="methods">Methods
-</h3>
 
 
-  <a id="Redux_Rendering_GBufferDepthCopyPass_EnsureRegistered_" data-uid="Redux.Rendering.GBufferDepthCopyPass.EnsureRegistered*"></a>
-  <h4 id="Redux_Rendering_GBufferDepthCopyPass_EnsureRegistered" data-uid="Redux.Rendering.GBufferDepthCopyPass.EnsureRegistered">EnsureRegistered()</h4>
-  <div class="markdown level1 summary"><p>Registers the copy. Readers call this when they register. Registering again has no effect.</p>
+  <h4 id="Redux_Ecs_Components_VesselStepState_ControlAxisRight" data-uid="Redux.Ecs.Components.VesselStepState.ControlAxisRight">ControlAxisRight</h4>
+  <div class="markdown level1 summary"><p>The control frame's right axis in physics space.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void EnsureRegistered()</code></pre>
+    <pre><code class="lang-csharp hljs">public Vector3 ControlAxisRight</code></pre>
   </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
 
 
-  <a id="Redux_Rendering_GBufferDepthCopyPass_GetCopy_" data-uid="Redux.Rendering.GBufferDepthCopyPass.GetCopy*"></a>
-  <h4 id="Redux_Rendering_GBufferDepthCopyPass_GetCopy_UnityEngine_Rendering_ContextContainer_" data-uid="Redux.Rendering.GBufferDepthCopyPass.GetCopy(UnityEngine.Rendering.ContextContainer)">GetCopy(ContextContainer)</h4>
-  <div class="markdown level1 summary"><p>Gets the copy recorded for the camera being rendered, which a reader's pass uses.</p>
+  <h4 id="Redux_Ecs_Components_VesselStepState_ControlAxisUp" data-uid="Redux.Ecs.Components.VesselStepState.ControlAxisUp">ControlAxisUp</h4>
+  <div class="markdown level1 summary"><p>The control frame's up axis in physics space.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static TextureHandle GetCopy(ContextContainer frameData)</code></pre>
+    <pre><code class="lang-csharp hljs">public Vector3 ControlAxisUp</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">ContextContainer</span></td>
-        <td><span class="parametername">frameData</span></td>
-        <td><p>URP's frame data for the camera.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
+  <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
     <thead>
       <tr>
@@ -250,77 +197,47 @@ full depth. Cameras without a G-buffer get no copy, so readers only run on defer
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">TextureHandle</span></td>
-        <td><p>The copy, or an invalid handle when the camera got none.</p>
-</td>
+        <td><span class="xref">Vector3</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
 
 
-  <a id="Redux_Rendering_GBufferDepthCopyPass_RecordRenderGraph_" data-uid="Redux.Rendering.GBufferDepthCopyPass.RecordRenderGraph*"></a>
-  <h4 id="Redux_Rendering_GBufferDepthCopyPass_RecordRenderGraph_UnityEngine_Rendering_RenderGraphModule_RenderGraph_UnityEngine_Rendering_ContextContainer_" data-uid="Redux.Rendering.GBufferDepthCopyPass.RecordRenderGraph(UnityEngine.Rendering.RenderGraphModule.RenderGraph,UnityEngine.Rendering.ContextContainer)">RecordRenderGraph(RenderGraph, ContextContainer)</h4>
-  <div class="markdown level1 summary"><p>Records the hook's passes into the render graph.</p>
+  <h4 id="Redux_Ecs_Components_VesselStepState_ControlCenterOfMass" data-uid="Redux.Ecs.Components.VesselStepState.ControlCenterOfMass">ControlCenterOfMass</h4>
+  <div class="markdown level1 summary"><p>The vessel's centre of mass in the control frame.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void RecordRenderGraph(RenderGraph renderGraph, ContextContainer frameData)</code></pre>
+    <pre><code class="lang-csharp hljs">public Vector3 ControlCenterOfMass</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
+  <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
     <thead>
       <tr>
         <th>Type</th>
-        <th>Name</th>
         <th>Description</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">RenderGraph</span></td>
-        <td><span class="parametername">renderGraph</span></td>
-        <td><p>The render graph of the current camera.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">ContextContainer</span></td>
-        <td><span class="parametername">frameData</span></td>
-        <td><p>URP's frame data (camera, resources, lights).</p>
-</td>
+        <td><span class="xref">Vector3</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
 
 
-  <a id="Redux_Rendering_GBufferDepthCopyPass_ShouldRender_" data-uid="Redux.Rendering.GBufferDepthCopyPass.ShouldRender*"></a>
-  <h4 id="Redux_Rendering_GBufferDepthCopyPass_ShouldRender_UnityEngine_Camera_" data-uid="Redux.Rendering.GBufferDepthCopyPass.ShouldRender(UnityEngine.Camera)">ShouldRender(Camera)</h4>
-  <div class="markdown level1 summary"><p>Decides whether the hook renders for a camera this frame.</p>
+  <h4 id="Redux_Ecs_Components_VesselStepState_ControlFrame" data-uid="Redux.Ecs.Components.VesselStepState.ControlFrame">ControlFrame</h4>
+  <div class="markdown level1 summary"><p>The body frame entity of the vessel's control transform.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool ShouldRender(Camera camera)</code></pre>
+    <pre><code class="lang-csharp hljs">public Entity ControlFrame</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Camera.html">Camera</a></td>
-        <td><span class="parametername">camera</span></td>
-        <td><p>The camera URP is about to render.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
+  <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
     <thead>
       <tr>
@@ -330,16 +247,61 @@ full depth. Cameras without a G-buffer get no copy, so readers only run on defer
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">bool</span></td>
-        <td><p>True if the hook renders for the camera, false otherwise.</p>
-</td>
+        <td><span class="xref">Entity</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
-  <h3 id="implements">Implements</h3>
-  <div>
-      <a class="xref" href="Redux.Rendering.ICameraRenderHook.html">ICameraRenderHook</a>
+
+
+  <h4 id="Redux_Ecs_Components_VesselStepState_PhysicsCenterOfMass" data-uid="Redux.Ecs.Components.VesselStepState.PhysicsCenterOfMass">PhysicsCenterOfMass</h4>
+  <div class="markdown level1 summary"><p>The vessel's centre of mass in physics space.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3 PhysicsCenterOfMass</code></pre>
   </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Ecs_Components_VesselStepState_StepTime" data-uid="Redux.Ecs.Components.VesselStepState.StepTime">StepTime</h4>
+  <div class="markdown level1 summary"><p>The fixed time of the step the values were written in, or NaN when they could not be worked out.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double StepTime</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>

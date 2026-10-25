@@ -106,6 +106,9 @@
       <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnDestroyed">ObjectComponent.OnDestroyed()</a>
     </div>
     <div>
+      <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnStart_System_Double_">ObjectComponent.OnStart(double)</a>
+    </div>
+    <div>
       <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnUpdate_System_Double_System_Double_">ObjectComponent.OnUpdate(double, double)</a>
     </div>
     <div>
@@ -504,7 +507,7 @@
 
   <a id="KSP_Sim_impl_PartOwnerComponent_Parts_" data-uid="KSP.Sim.impl.PartOwnerComponent.Parts*"></a>
   <h4 id="KSP_Sim_impl_PartOwnerComponent_Parts" data-uid="KSP.Sim.impl.PartOwnerComponent.Parts">Parts</h4>
-  <div class="markdown level1 summary"><p>Gets the list of <a class="xref" href="KSP.Sim.impl.PartComponent.html">PartComponent</a> instances belonging to this part owner.</p>
+  <div class="markdown level1 summary"><p>Gets a new list of the <a class="xref" href="KSP.Sim.impl.PartComponent.html">PartComponent</a> instances belonging to this part owner.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -1516,7 +1519,7 @@ with IsCompoundJoint. (Struts, joint refinorcement, fuel tubes, etc.</p>
 
   <a id="KSP_Sim_impl_PartOwnerComponent_OnDispose_" data-uid="KSP.Sim.impl.PartOwnerComponent.OnDispose*"></a>
   <h4 id="KSP_Sim_impl_PartOwnerComponent_OnDispose" data-uid="KSP.Sim.impl.PartOwnerComponent.OnDispose">OnDispose()</h4>
-  <div class="markdown level1 summary"><p>Unsubscribes all event handlers and message subscriptions.</p>
+  <div class="markdown level1 summary"><p>Unsubscribes all event handlers and frees the resource network.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -1529,7 +1532,7 @@ with IsCompoundJoint. (Struts, joint refinorcement, fuel tubes, etc.</p>
 
   <a id="KSP_Sim_impl_PartOwnerComponent_OnFixedUpdate_" data-uid="KSP.Sim.impl.PartOwnerComponent.OnFixedUpdate*"></a>
   <h4 id="KSP_Sim_impl_PartOwnerComponent_OnFixedUpdate_System_Double_System_Double_" data-uid="KSP.Sim.impl.PartOwnerComponent.OnFixedUpdate(System.Double,System.Double)">OnFixedUpdate(double, double)</h4>
-  <div class="markdown level1 summary"><p>Performs per-fixed-update processing including physics recalculation, part relationship updates, resource flow, and solar insolation.</p>
+  <div class="markdown level1 summary"><p>Performs per-fixed-update processing including part relationship updates and solar insolation.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -1562,6 +1565,10 @@ with IsCompoundJoint. (Struts, joint refinorcement, fuel tubes, etc.</p>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnFixedUpdate_System_Double_System_Double_">ObjectComponent.OnFixedUpdate(double, double)</a></div>
+  <h5 id="KSP_Sim_impl_PartOwnerComponent_OnFixedUpdate_System_Double_System_Double__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Resource flow is not ticked here. <a class="xref" href="Redux.ResourceFlow.ResourceFlowSystem.html">ResourceFlowSystem</a> ticks every
+vessel's resource network after the legacy fixed update.</p>
+</div>
 
 
   <a id="KSP_Sim_impl_PartOwnerComponent_OnLateUpdate_" data-uid="KSP.Sim.impl.PartOwnerComponent.OnLateUpdate*"></a>
@@ -1593,37 +1600,6 @@ with IsCompoundJoint. (Struts, joint refinorcement, fuel tubes, etc.</p>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnLateUpdate_System_Double_">ObjectComponent.OnLateUpdate(double)</a></div>
-
-
-  <a id="KSP_Sim_impl_PartOwnerComponent_OnStart_" data-uid="KSP.Sim.impl.PartOwnerComponent.OnStart*"></a>
-  <h4 id="KSP_Sim_impl_PartOwnerComponent_OnStart_System_Double_" data-uid="KSP.Sim.impl.PartOwnerComponent.OnStart(System.Double)">OnStart(double)</h4>
-  <div class="markdown level1 summary"><p>Subscribes to resource container change messages when this component starts.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void OnStart(double universalTime)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">double</span></td>
-        <td><span class="parametername">universalTime</span></td>
-        <td><p>The universal time at which the component starts.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_ObjectComponent_OnStart_System_Double_">ObjectComponent.OnStart(double)</a></div>
 
 
   <a id="KSP_Sim_impl_PartOwnerComponent_RecalculatePhysicsStats_" data-uid="KSP.Sim.impl.PartOwnerComponent.RecalculatePhysicsStats*"></a>

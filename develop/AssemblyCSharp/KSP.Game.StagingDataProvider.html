@@ -892,6 +892,22 @@
   </table>
 
 
+  <a id="KSP_Game_StagingDataProvider_BeginPartBatch_" data-uid="KSP.Game.StagingDataProvider.BeginPartBatch*"></a>
+  <h4 id="KSP_Game_StagingDataProvider_BeginPartBatch" data-uid="KSP.Game.StagingDataProvider.BeginPartBatch">BeginPartBatch()</h4>
+  <div class="markdown level1 summary"><p>Starts a batch of <a class="xref" href="KSP.Game.StagingDataProvider.html#KSP_Game_StagingDataProvider_AddPart_KSP_OAB_IObjectAssemblyPart_">AddPart(IObjectAssemblyPart)</a> calls, which announce the part list once when
+<a class="xref" href="KSP.Game.StagingDataProvider.html#KSP_Game_StagingDataProvider_EndPartBatch">EndPartBatch()</a> ends the batch.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void BeginPartBatch()</code></pre>
+  </div>
+  <h5 id="KSP_Game_StagingDataProvider_BeginPartBatch_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The announcement validates every stage and rebuilds the parts bin. During additions it changes only the
+bin, which nothing in the batch reads, so validating once at the end gives the same staging.</p>
+</div>
+
+
   <a id="KSP_Game_StagingDataProvider_BufferVesselPartSymmetrySets_" data-uid="KSP.Game.StagingDataProvider.BufferVesselPartSymmetrySets*"></a>
   <h4 id="KSP_Game_StagingDataProvider_BufferVesselPartSymmetrySets_System_Collections_Generic_List_KSP_Sim_Definitions_SymmetrySetData__" data-uid="KSP.Game.StagingDataProvider.BufferVesselPartSymmetrySets(System.Collections.Generic.List{KSP.Sim.Definitions.SymmetrySetData})">BufferVesselPartSymmetrySets(List&lt;SymmetrySetData&gt;)</h4>
   <div class="markdown level1 summary"><p>Stores a list of vessel symmetry set data for later use when building the staging stack during flight mode.</p>
@@ -946,6 +962,17 @@
 <a class="xref" href="KSP.Game.StagingDataProvider.html#KSP_Game_StagingDataProvider_RestoreExpandedStateAfterDeltaVTool">RestoreExpandedStateAfterDeltaVTool()</a>. It is kept because it is stock public API that mods
 may call, and because it is the unconditional collapse a caller wanting that behaviour still needs.</p>
 </div>
+
+
+  <a id="KSP_Game_StagingDataProvider_EndPartBatch_" data-uid="KSP.Game.StagingDataProvider.EndPartBatch*"></a>
+  <h4 id="KSP_Game_StagingDataProvider_EndPartBatch" data-uid="KSP.Game.StagingDataProvider.EndPartBatch">EndPartBatch()</h4>
+  <div class="markdown level1 summary"><p>Ends a batch started with <a class="xref" href="KSP.Game.StagingDataProvider.html#KSP_Game_StagingDataProvider_BeginPartBatch">BeginPartBatch()</a>, announcing the part list if the batch added any.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void EndPartBatch()</code></pre>
+  </div>
 
 
   <a id="KSP_Game_StagingDataProvider_EngineModeChanged_" data-uid="KSP.Game.StagingDataProvider.EngineModeChanged*"></a>
@@ -1204,6 +1231,22 @@ may call, and because it is the unconditional collapse a caller wanting that beh
       </tr>
     </tbody>
   </table>
+
+
+  <a id="KSP_Game_StagingDataProvider_InitializeOABPartSymmetrySets_" data-uid="KSP.Game.StagingDataProvider.InitializeOABPartSymmetrySets*"></a>
+  <h4 id="KSP_Game_StagingDataProvider_InitializeOABPartSymmetrySets" data-uid="KSP.Game.StagingDataProvider.InitializeOABPartSymmetrySets">InitializeOABPartSymmetrySets()</h4>
+  <div class="markdown level1 summary"><p>Adds the symmetry set of every staged part whose set has not been added yet, then applies the new sets to
+the staging folders, each folder announcing its new order once.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void InitializeOABPartSymmetrySets()</code></pre>
+  </div>
+  <h5 id="KSP_Game_StagingDataProvider_InitializeOABPartSymmetrySets_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Gives the same order and IDs as adding and applying the sets one at a time, since a folder's order depends
+only on its own parts and the sets reach it in the same order.</p>
+</div>
 
 
   <a id="KSP_Game_StagingDataProvider_MoveFromSourceFolderToTargetStageListAtIndex_" data-uid="KSP.Game.StagingDataProvider.MoveFromSourceFolderToTargetStageListAtIndex*"></a>

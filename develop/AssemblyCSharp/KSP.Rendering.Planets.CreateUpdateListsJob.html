@@ -90,6 +90,11 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public struct CreateUpdateListsJob</code></pre>
   </div>
+  <h5 id="KSP_Rendering_Planets_CreateUpdateListsJob_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>Each batch gathers its quads for every list on its own and appends them with one atomic add per list. An atomic
+add for every quad, from every worker on the same three list lengths, made the job contend with itself, and the
+main thread waits for it every frame a sphere subdivides.</p>
+</div>
   <h3 id="fields">Fields
 </h3>
 
@@ -472,13 +477,13 @@
 
 
   <a id="KSP_Rendering_Planets_CreateUpdateListsJob_Execute_" data-uid="KSP.Rendering.Planets.CreateUpdateListsJob.Execute*"></a>
-  <h4 id="KSP_Rendering_Planets_CreateUpdateListsJob_Execute_System_Int32_" data-uid="KSP.Rendering.Planets.CreateUpdateListsJob.Execute(System.Int32)">Execute(int)</h4>
-  <div class="markdown level1 summary"><p>Processes the quad at the given index and adds it to the appropriate update lists based on its current state and job configuration.</p>
+  <h4 id="KSP_Rendering_Planets_CreateUpdateListsJob_Execute_System_Int32_System_Int32_" data-uid="KSP.Rendering.Planets.CreateUpdateListsJob.Execute(System.Int32,System.Int32)">Execute(int, int)</h4>
+  <div class="markdown level1 summary"><p>Processes the quads of one batch and adds each to the update lists its state and the job configuration call for.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Execute(int i)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Execute(int startIndex, int count)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -492,8 +497,14 @@
     <tbody>
       <tr>
         <td><span class="xref">int</span></td>
-        <td><span class="parametername">i</span></td>
-        <td><p>The index of the quad to process within <a class="xref" href="KSP.Rendering.Planets.CreateUpdateListsJob.html#KSP_Rendering_Planets_CreateUpdateListsJob_QuadStates">QuadStates</a>, <a class="xref" href="KSP.Rendering.Planets.CreateUpdateListsJob.html#KSP_Rendering_Planets_CreateUpdateListsJob_AllQuadList">AllQuadList</a>, and <a class="xref" href="KSP.Rendering.Planets.CreateUpdateListsJob.html#KSP_Rendering_Planets_CreateUpdateListsJob_PQs">PQs</a>.</p>
+        <td><span class="parametername">startIndex</span></td>
+        <td><p>The index of the batch's first quad within <a class="xref" href="KSP.Rendering.Planets.CreateUpdateListsJob.html#KSP_Rendering_Planets_CreateUpdateListsJob_QuadStates">QuadStates</a>, <a class="xref" href="KSP.Rendering.Planets.CreateUpdateListsJob.html#KSP_Rendering_Planets_CreateUpdateListsJob_AllQuadList">AllQuadList</a>, and <a class="xref" href="KSP.Rendering.Planets.CreateUpdateListsJob.html#KSP_Rendering_Planets_CreateUpdateListsJob_PQs">PQs</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">count</span></td>
+        <td><p>The number of quads in the batch.</p>
 </td>
       </tr>
     </tbody>

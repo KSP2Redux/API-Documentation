@@ -285,6 +285,56 @@ public class PQSRenderer : KerbalMonoBehaviour, IPQSRenderer</code></pre>
   </table>
 
 
+  <h4 id="KSP_Rendering_Planets_PQSRenderer_DECAL_VARIANT_PASS_COUNT" data-uid="KSP.Rendering.Planets.PQSRenderer.DECAL_VARIANT_PASS_COUNT">DECAL_VARIANT_PASS_COUNT</h4>
+  <div class="markdown level1 summary"><p>The number of consecutive passes covering no decals, four decals and unlimited decals.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int DECAL_VARIANT_PASS_COUNT = 3</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQSRenderer_DEPTH_ONLY_PASS_INDEX" data-uid="KSP.Rendering.Planets.PQSRenderer.DEPTH_ONLY_PASS_INDEX">DEPTH_ONLY_PASS_INDEX</h4>
+  <div class="markdown level1 summary"><p>The early terrain depth-only pass index.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int DEPTH_ONLY_PASS_INDEX = 2</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <h4 id="KSP_Rendering_Planets_PQSRenderer_DEPTH_PASS_INDEX" data-uid="KSP.Rendering.Planets.PQSRenderer.DEPTH_PASS_INDEX">DEPTH_PASS_INDEX</h4>
   <div class="markdown level1 summary"><p>The custom terrain depth pass index.</p>
 </div>
@@ -685,6 +735,31 @@ public class PQSRenderer : KerbalMonoBehaviour, IPQSRenderer</code></pre>
   </table>
 
 
+  <h4 id="KSP_Rendering_Planets_PQSRenderer_FORWARD_PASS_INDEX" data-uid="KSP.Rendering.Planets.PQSRenderer.FORWARD_PASS_INDEX">FORWARD_PASS_INDEX</h4>
+  <div class="markdown level1 summary"><p>The forward terrain surface pass index.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int FORWARD_PASS_INDEX = 0</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <h4 id="KSP_Rendering_Planets_PQSRenderer_FarClip" data-uid="KSP.Rendering.Planets.PQSRenderer.FarClip">FarClip</h4>
   <div class="markdown level1 summary"><p>The far clipping plane distance for the renderer.</p>
 </div>
@@ -729,6 +804,31 @@ public class PQSRenderer : KerbalMonoBehaviour, IPQSRenderer</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_Rendering_Planets_PQSRenderer_GBUFFER_PASS_INDEX" data-uid="KSP.Rendering.Planets.PQSRenderer.GBUFFER_PASS_INDEX">GBUFFER_PASS_INDEX</h4>
+  <div class="markdown level1 summary"><p>The deferred terrain G-buffer pass index.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int GBUFFER_PASS_INDEX = 9</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -1709,7 +1809,7 @@ instantiating the prefab into a live scene. Idempotent on the allocations it own
 
   <a id="KSP_Rendering_Planets_PQSRenderer_DrawPlanet_" data-uid="KSP.Rendering.Planets.PQSRenderer.DrawPlanet*"></a>
   <h4 id="KSP_Rendering_Planets_PQSRenderer_DrawPlanet" data-uid="KSP.Rendering.Planets.PQSRenderer.DrawPlanet">DrawPlanet()</h4>
-  <div class="markdown level1 summary"><p>Submits all queued PQS quad draw calls for the current frame, including depth, deferred-decal surface, overlay, and shadow passes.</p>
+  <div class="markdown level1 summary"><p>Submits all queued PQS quad draw calls for the current frame, for graph-owned surface, decal and overlay rendering.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -1793,6 +1893,51 @@ instantiating the prefab into a live scene. Idempotent on the allocations it own
       <tr>
         <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeBuffer.html">ComputeBuffer</a></td>
         <td><p>The <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeBuffer.html">ComputeBuffer</a> containing decal instance records.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Rendering_Planets_PQSRenderer_GetEarlyNormalsPassIndex_" data-uid="KSP.Rendering.Planets.PQSRenderer.GetEarlyNormalsPassIndex*"></a>
+  <h4 id="KSP_Rendering_Planets_PQSRenderer_GetEarlyNormalsPassIndex_System_Int32_" data-uid="KSP.Rendering.Planets.PQSRenderer.GetEarlyNormalsPassIndex(System.Int32)">GetEarlyNormalsPassIndex(int)</h4>
+  <div class="markdown level1 summary"><p>Gets the early terrain normal pass index for a decal variant.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int GetEarlyNormalsPassIndex(int decalVariant = 0)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">decalVariant</span></td>
+        <td><p>The decal variant: 0 for none, 1 for four, or 2 for unlimited.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><p>The early terrain normal pass index.</p>
 </td>
       </tr>
     </tbody>
@@ -2222,6 +2367,51 @@ of <code class="paramref">matrix</code>, derived via <a class="xref" href="https
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void InitResources()</code></pre>
   </div>
+
+
+  <a id="KSP_Rendering_Planets_PQSRenderer_IsOceanCollider_" data-uid="KSP.Rendering.Planets.PQSRenderer.IsOceanCollider*"></a>
+  <h4 id="KSP_Rendering_Planets_PQSRenderer_IsOceanCollider_UnityEngine_Collider_" data-uid="KSP.Rendering.Planets.PQSRenderer.IsOceanCollider(UnityEngine.Collider)">IsOceanCollider(Collider)</h4>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether a collider is on the ocean collider object of a renderer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsOceanCollider(Collider collider)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Collider.html">Collider</a></td>
+        <td><span class="parametername">collider</span></td>
+        <td><p>The collider to test.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p><code>true</code> if the collider is on an ocean collider object, the only objects named <a class="xref" href="KSP.Rendering.Planets.PQSRenderer.html#KSP_Rendering_Planets_PQSRenderer_OceanColliderName">OceanColliderName()</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <a id="KSP_Rendering_Planets_PQSRenderer_LateUpdateForEditor_" data-uid="KSP.Rendering.Planets.PQSRenderer.LateUpdateForEditor*"></a>

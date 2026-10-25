@@ -264,6 +264,33 @@
 </h3>
 
 
+  <a id="KSP_Sim_ResourceSystem_ResourceContainer_ContentsVersion_" data-uid="KSP.Sim.ResourceSystem.ResourceContainer.ContentsVersion*"></a>
+  <h4 id="KSP_Sim_ResourceSystem_ResourceContainer_ContentsVersion" data-uid="KSP.Sim.ResourceSystem.ResourceContainer.ContentsVersion">ContentsVersion</h4>
+  <div class="markdown level1 summary"><p>Counts the changes <a class="xref" href="KSP.Sim.ResourceSystem.ResourceContainer.html#KSP_Sim_ResourceSystem_ResourceContainer_ContentsChanged">ContentsChanged</a> reported, so a reader that polls can tell whether the
+stored amounts changed since it last looked.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int ContentsVersion { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Sim_ResourceSystem_ResourceContainer_Entity_" data-uid="KSP.Sim.ResourceSystem.ResourceContainer.Entity*"></a>
   <h4 id="KSP_Sim_ResourceSystem_ResourceContainer_Entity" data-uid="KSP.Sim.ResourceSystem.ResourceContainer.Entity">Entity</h4>
   <div class="markdown level1 summary"><p>The container's storage entity, or <span class="xref">Unity.Entities.Entity.Null</span> until first write.</p>
@@ -1611,6 +1638,36 @@ exists or the world is gone, so it can run during scene teardown.</p>
         <td><span class="xref">double</span></td>
         <td><p>The number of units actually reserved, capped by the available empty space. Zero if the resource is not contained.</p>
 </td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="events">Events
+</h3>
+
+
+  <h4 id="KSP_Sim_ResourceSystem_ResourceContainer_ContentsChanged" data-uid="KSP.Sim.ResourceSystem.ResourceContainer.ContentsChanged">ContentsChanged</h4>
+  <div class="markdown level1 summary"><p>Raised after the stored amounts or capacities of this container changed, through its own methods or
+through the resource network writing its storage directly. Unlike
+<a class="xref" href="KSP.Messages.ResourceContainerChangedMessage.html">ResourceContainerChangedMessage</a>, which goes to every subscriber in the game, this reaches
+only the listeners of this container.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event Action ContentsChanged</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>

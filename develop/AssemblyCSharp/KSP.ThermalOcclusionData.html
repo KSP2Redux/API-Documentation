@@ -130,56 +130,6 @@
 </h3>
 
 
-  <h4 id="KSP_ThermalOcclusionData_BoundsCenter" data-uid="KSP.ThermalOcclusionData.BoundsCenter">BoundsCenter</h4>
-  <div class="markdown level1 summary"><p>The world-space center of the part's axis-aligned bounding box.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Vector3 BoundsCenter</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Vector3</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h4 id="KSP_ThermalOcclusionData_BoundsVertices" data-uid="KSP.ThermalOcclusionData.BoundsVertices">BoundsVertices</h4>
-  <div class="markdown level1 summary"><p>The eight world-space corner vertices of the part's bounding box.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public UnsafeList&lt;float3&gt; BoundsVertices</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">UnsafeList</span>&lt;<span class="xref">float3</span>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-
   <h4 id="KSP_ThermalOcclusionData_InvFineness" data-uid="KSP.ThermalOcclusionData.InvFineness">InvFineness</h4>
   <div class="markdown level1 summary"><p>The inverse fineness ratio of the part, representing how blunt or tapered its aerodynamic profile is.</p>
 </div>
@@ -353,6 +303,37 @@
       </tr>
     </tbody>
   </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="KSP_ThermalOcclusionData_IsHeatshield_" data-uid="KSP.ThermalOcclusionData.IsHeatshield*"></a>
+  <h4 id="KSP_ThermalOcclusionData_IsHeatshield" data-uid="KSP.ThermalOcclusionData.IsHeatshield">IsHeatshield</h4>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the part is a heat shield, whose shadow starts at its shielding plane.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsHeatshield { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_ThermalOcclusionData_IsHeatshield_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Looked up again only when a part's module list changed.</p>
+</div>
   <h3 id="methods">Methods
 </h3>
 
@@ -456,14 +437,14 @@
   </table>
 
 
-  <a id="KSP_ThermalOcclusionData_GetOcclusionUpdateJobData_" data-uid="KSP.ThermalOcclusionData.GetOcclusionUpdateJobData*"></a>
-  <h4 id="KSP_ThermalOcclusionData_GetOcclusionUpdateJobData_UnityEngine_Vector3_Vector3d_KSP_ThermalOcclusionData_OcclusionUpdateJobInputData__" data-uid="KSP.ThermalOcclusionData.GetOcclusionUpdateJobData(UnityEngine.Vector3,Vector3d,KSP.ThermalOcclusionData.OcclusionUpdateJobInputData@)">GetOcclusionUpdateJobData(Vector3, Vector3d, out OcclusionUpdateJobInputData)</h4>
-  <div class="markdown level1 summary"><p>Populates an <a class="xref" href="KSP.ThermalOcclusionData.OcclusionUpdateJobInputData.html">ThermalOcclusionData.OcclusionUpdateJobInputData</a> struct with the current bounds geometry and aerodynamic parameters for this part.</p>
+  <a id="KSP_ThermalOcclusionData_GetOccluderInput_" data-uid="KSP.ThermalOcclusionData.GetOccluderInput*"></a>
+  <h4 id="KSP_ThermalOcclusionData_GetOccluderInput_KSP_ThermalOcclusionData_OccluderInput__" data-uid="KSP.ThermalOcclusionData.GetOccluderInput(KSP.ThermalOcclusionData.OccluderInput@)">GetOccluderInput(out OccluderInput)</h4>
+  <div class="markdown level1 summary"><p>Gets the inputs of the bounds projection for this part.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void GetOcclusionUpdateJobData(Vector3 velocityVector, Vector3d partPos, out ThermalOcclusionData.OcclusionUpdateJobInputData inputData)</code></pre>
+    <pre><code class="lang-csharp hljs">public void GetOccluderInput(out ThermalOcclusionData.OccluderInput input)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -476,21 +457,9 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Vector3</span></td>
-        <td><span class="parametername">velocityVector</span></td>
-        <td><p>The world-space velocity vector of the vessel, used as the projection direction.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="GlobalKsp2Redux.Vector3d.html">Vector3d</a></td>
-        <td><span class="parametername">partPos</span></td>
-        <td><p>The world-space position of the part.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="KSP.ThermalOcclusionData.html">ThermalOcclusionData</a>.<a class="xref" href="KSP.ThermalOcclusionData.OcclusionUpdateJobInputData.html">OcclusionUpdateJobInputData</a></td>
-        <td><span class="parametername">inputData</span></td>
-        <td><p>When this method returns, contains the job input data for this part, or a default value if the part or its transform is null.</p>
+        <td><a class="xref" href="KSP.ThermalOcclusionData.html">ThermalOcclusionData</a>.<a class="xref" href="KSP.ThermalOcclusionData.OccluderInput.html">OccluderInput</a></td>
+        <td><span class="parametername">input</span></td>
+        <td><p>Receives the part's weighted drag cube box and its cube areas, or an input without bounds for a part with no drag data.</p>
 </td>
       </tr>
     </tbody>

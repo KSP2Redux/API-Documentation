@@ -377,6 +377,36 @@
   </table>
 
 
+  <a id="KSP_Sim_impl_AtmosphereTransitionVFXHandling_CalcRotationSpeedOfVessel_" data-uid="KSP.Sim.impl.AtmosphereTransitionVFXHandling.CalcRotationSpeedOfVessel*"></a>
+  <h4 id="KSP_Sim_impl_AtmosphereTransitionVFXHandling_CalcRotationSpeedOfVessel_UnityEngine_Quaternion_" data-uid="KSP.Sim.impl.AtmosphereTransitionVFXHandling.CalcRotationSpeedOfVessel(UnityEngine.Quaternion)">CalcRotationSpeedOfVessel(Quaternion)</h4>
+  <div class="markdown level1 summary"><p>Calculates the angular velocity magnitude of the vessel from its current rotation, read by the caller, and the
+rotation this handler saw last.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CalcRotationSpeedOfVessel(Quaternion vesselRotation)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Quaternion.html">Quaternion</a></td>
+        <td><span class="parametername">vesselRotation</span></td>
+        <td><p>The vessel's rotation in its parent frame.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Sim_impl_AtmosphereTransitionVFXHandling_ClearAtmosphericVFXPropertyBlocks_" data-uid="KSP.Sim.impl.AtmosphereTransitionVFXHandling.ClearAtmosphericVFXPropertyBlocks*"></a>
   <h4 id="KSP_Sim_impl_AtmosphereTransitionVFXHandling_ClearAtmosphericVFXPropertyBlocks" data-uid="KSP.Sim.impl.AtmosphereTransitionVFXHandling.ClearAtmosphericVFXPropertyBlocks">ClearAtmosphericVFXPropertyBlocks()</h4>
   <div class="markdown level1 summary"><p>Clears all material property block overrides from the renderers in the in-atmosphere and out-of-atmosphere VFX lists.</p>
@@ -550,6 +580,43 @@
   </table>
 
 
+  <a id="KSP_Sim_impl_AtmosphereTransitionVFXHandling_RecordVesselState_" data-uid="KSP.Sim.impl.AtmosphereTransitionVFXHandling.RecordVesselState*"></a>
+  <h4 id="KSP_Sim_impl_AtmosphereTransitionVFXHandling_RecordVesselState_UnityEngine_Quaternion_System_Single_" data-uid="KSP.Sim.impl.AtmosphereTransitionVFXHandling.RecordVesselState(UnityEngine.Quaternion,System.Single)">RecordVesselState(Quaternion, float)</h4>
+  <div class="markdown level1 summary"><p>Records the vessel's rotation and static pressure for a frame in which nothing reads the spin rate or the
+normalized pressure, so the next <a class="xref" href="KSP.Sim.impl.AtmosphereTransitionVFXHandling.html#KSP_Sim_impl_AtmosphereTransitionVFXHandling_CalcRotationSpeedOfVessel_UnityEngine_Quaternion_">CalcRotationSpeedOfVessel(Quaternion)</a> measures from this
+frame. <a class="xref" href="KSP.Sim.impl.AtmosphereTransitionVFXHandling.html#KSP_Sim_impl_AtmosphereTransitionVFXHandling_VesselAngularVelocity">VesselAngularVelocity</a> and <a class="xref" href="KSP.Sim.impl.AtmosphereTransitionVFXHandling.html#KSP_Sim_impl_AtmosphereTransitionVFXHandling_VesselPressureNormalized">VesselPressureNormalized</a> keep their old values.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RecordVesselState(Quaternion vesselRotation, float pressurekPa)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Quaternion.html">Quaternion</a></td>
+        <td><span class="parametername">vesselRotation</span></td>
+        <td><p>The vessel's rotation in its parent frame.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">pressurekPa</span></td>
+        <td><p>The vessel's static pressure, in kilopascals.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Sim_impl_AtmosphereTransitionVFXHandling_SetAtmosphericVFXAlpha_" data-uid="KSP.Sim.impl.AtmosphereTransitionVFXHandling.SetAtmosphericVFXAlpha*"></a>
   <h4 id="KSP_Sim_impl_AtmosphereTransitionVFXHandling_SetAtmosphericVFXAlpha" data-uid="KSP.Sim.impl.AtmosphereTransitionVFXHandling.SetAtmosphericVFXAlpha">SetAtmosphericVFXAlpha()</h4>
   <div class="markdown level1 summary"><p>Updates the alpha of all registered atmospheric and vacuum VFX materials based on the current normalized vessel pressure.</p>
@@ -559,6 +626,35 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void SetAtmosphericVFXAlpha()</code></pre>
   </div>
+
+
+  <a id="KSP_Sim_impl_AtmosphereTransitionVFXHandling_SetVesselPressure_" data-uid="KSP.Sim.impl.AtmosphereTransitionVFXHandling.SetVesselPressure*"></a>
+  <h4 id="KSP_Sim_impl_AtmosphereTransitionVFXHandling_SetVesselPressure_System_Single_" data-uid="KSP.Sim.impl.AtmosphereTransitionVFXHandling.SetVesselPressure(System.Single)">SetVesselPressure(float)</h4>
+  <div class="markdown level1 summary"><p>Updates the pressure and normalized pressure fields from a vessel's static pressure read by the caller.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetVesselPressure(float pressurekPa)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">pressurekPa</span></td>
+        <td><p>The vessel's static pressure, in kilopascals.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>

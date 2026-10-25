@@ -103,7 +103,9 @@ vessel, since on rails in time warp the vessel and its camera fall through Unity
 hundreds of metres a frame and floating-origin snaps move both at once. Neither changes the picture, and a reset
 there would leave URP's previous view-projection on this frame while every moving object keeps last frame's
 transform, which gives the vessel large false motion vectors. Set from beginCameraRendering, before URP builds
-the camera's data, so the reset takes this frame.</p>
+the camera's data, so the reset takes this frame.
+Zoom input moves along the viewing axis continuously. Keep its reprojectable history, including while paused,
+when a wheel step can move the camera farther than the cut threshold. A changed camera solution still cuts.</p>
 </div>
 
 </article>

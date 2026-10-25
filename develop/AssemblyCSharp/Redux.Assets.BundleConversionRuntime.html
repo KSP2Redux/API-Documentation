@@ -109,6 +109,11 @@ The editor converts into a cache folder of the project instead (<a class="xref" 
 to the install. The copies come from the cache, and the bundles the launcher would edit in place are read
 through a stream that shows the recorded edits over the stock bytes (<a class="xref" href="Redux.Assets.BundleConversionRuntime.html#Redux_Assets_BundleConversionRuntime_TryOpenPatched_System_String_System_IO_Stream__">TryOpenPatched(string, out Stream)</a>).
 </p>
+<p>
+Bundles whose cloud cubemaps the converter stored in smaller formats are read through the same stream in the
+game and the editor alike. Their overlay shows new header bytes and the converted pixels, which come from a
+data file beside the copies, while the stock file stays as Steam installed it.
+</p>
 </div>
   <h3 id="properties">Properties
 </h3>
@@ -263,7 +268,8 @@ same wherever it is, so the install's file of that name is the same bundle.</p>
 
   <a id="Redux_Assets_BundleConversionRuntime_TryOpenPatched_" data-uid="Redux.Assets.BundleConversionRuntime.TryOpenPatched*"></a>
   <h4 id="Redux_Assets_BundleConversionRuntime_TryOpenPatched_System_String_System_IO_Stream__" data-uid="Redux.Assets.BundleConversionRuntime.TryOpenPatched(System.String,System.IO.Stream@)">TryOpenPatched(string, out Stream)</h4>
-  <div class="markdown level1 summary"><p>Opens a stock bundle with the in-place edits of a cache conversion applied while it is read.</p>
+  <div class="markdown level1 summary"><p>Opens a stock bundle with the in-place edits of a cache conversion, and its texture overlay, applied while
+it is read.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -305,8 +311,8 @@ same wherever it is, so the install's file of that name is the same bundle.</p>
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td><p>True if the cache records in-place edits for the bundle and the file holds their stock or converted bytes,
-false otherwise.</p>
+        <td><p>True if the conversion records in-place edits of a cache or a texture overlay for the bundle, and the file
+holds the stock or converted bytes they expect, false otherwise.</p>
 </td>
       </tr>
     </tbody>
