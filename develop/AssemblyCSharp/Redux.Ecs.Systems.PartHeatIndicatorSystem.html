@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class PartHeatIndicatorSystem | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="Works out every part&#39;s temperature ratio for its heat warning indicator, and the screen positions of the indicators of the parts hot enough to show one.">
+    <meta name="description" content="Works out every part&#39;s temperature ratio, and gives the parts hot enough to show a heat warning their indicators and its screen positions.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,8 +81,8 @@
 
 
   <h1 id="Redux_Ecs_Systems_PartHeatIndicatorSystem" data-uid="Redux.Ecs.Systems.PartHeatIndicatorSystem" class="text-break">Class PartHeatIndicatorSystem</h1>
-  <div class="markdown level0 summary"><p>Works out every part's temperature ratio for its heat warning indicator, and the screen positions of the
-indicators of the parts hot enough to show one.</p>
+  <div class="markdown level0 summary"><p>Works out every part's temperature ratio, and gives the parts hot enough to show a heat warning their indicators
+and its screen positions.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -103,7 +103,9 @@ public class PartHeatIndicatorSystem : SystemBase</code></pre>
   <div class="markdown level0 remarks"><p>The ratios are written in Burst during the late update, and the indicators read them in the next frame's update,
 as they read the values the parts' own late updates wrote in stock. A screen position needs the camera where it
 renders the frame, which the flight camera only reaches in the game's late update. It is worked out as that
-camera begins rendering, and only for the parts whose <a class="xref" href="Redux.Ecs.Components.PartHeatWarning.html">PartHeatWarning</a> is enabled.</p>
+camera begins rendering, and only for the parts whose <a class="xref" href="Redux.Ecs.Components.PartHeatRatio.html">PartHeatRatio</a> is enabled. Those parts take
+an indicator from the pool then, and give it back once they have cooled down. Every part held one in stock, and
+the indicators of the cold parts cost each frame and each vessel load.</p>
 </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -157,6 +159,19 @@ camera begins rendering, and only for the parts whose <a class="xref" href="Redu
   </div>
   <h5 class="overrides">Overrides</h5>
   <div><span class="xref">Unity.Entities.ComponentSystemBase.OnDestroy()</span></div>
+
+
+  <a id="Redux_Ecs_Systems_PartHeatIndicatorSystem_OnStopRunning_" data-uid="Redux.Ecs.Systems.PartHeatIndicatorSystem.OnStopRunning*"></a>
+  <h4 id="Redux_Ecs_Systems_PartHeatIndicatorSystem_OnStopRunning" data-uid="Redux.Ecs.Systems.PartHeatIndicatorSystem.OnStopRunning">OnStopRunning()</h4>
+  <div class="markdown level1 summary"><p>Forgets the warning parts once no part is left.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnStopRunning()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Unity.Entities.ComponentSystemBase.OnStopRunning()</span></div>
 
 
   <a id="Redux_Ecs_Systems_PartHeatIndicatorSystem_OnUpdate_" data-uid="Redux.Ecs.Systems.PartHeatIndicatorSystem.OnUpdate*"></a>

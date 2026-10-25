@@ -238,8 +238,133 @@ tracker has shut down.</p>
       </tr>
     </tbody>
   </table>
+
+
+  <a id="KSP_Sim_impl_PartHeatIndicatorTracker_WarningFrame_" data-uid="KSP.Sim.impl.PartHeatIndicatorTracker.WarningFrame*"></a>
+  <h4 id="KSP_Sim_impl_PartHeatIndicatorTracker_WarningFrame" data-uid="KSP.Sim.impl.PartHeatIndicatorTracker.WarningFrame">WarningFrame</h4>
+  <div class="markdown level1 summary"><p>Gets the frame in which the tracked part was last hot enough to show its heat warning.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int WarningFrame { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Sim_impl_PartHeatIndicatorTracker_WarningRatio_" data-uid="KSP.Sim.impl.PartHeatIndicatorTracker.WarningRatio*"></a>
+  <h4 id="KSP_Sim_impl_PartHeatIndicatorTracker_WarningRatio" data-uid="KSP.Sim.impl.PartHeatIndicatorTracker.WarningRatio">WarningRatio</h4>
+  <div class="markdown level1 summary"><p>Gets the temperature ratio of the tracked part the last time it was hot enough to show its heat warning.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float WarningRatio { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="methods">Methods
 </h3>
+
+
+  <a id="KSP_Sim_impl_PartHeatIndicatorTracker_HideWarning_" data-uid="KSP.Sim.impl.PartHeatIndicatorTracker.HideWarning*"></a>
+  <h4 id="KSP_Sim_impl_PartHeatIndicatorTracker_HideWarning" data-uid="KSP.Sim.impl.PartHeatIndicatorTracker.HideWarning">HideWarning()</h4>
+  <div class="markdown level1 summary"><p>Hides the heat warning of a part that has cooled down and returns its indicator to the pool.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void HideWarning()</code></pre>
+  </div>
+
+
+  <a id="KSP_Sim_impl_PartHeatIndicatorTracker_ShowWarning_" data-uid="KSP.Sim.impl.PartHeatIndicatorTracker.ShowWarning*"></a>
+  <h4 id="KSP_Sim_impl_PartHeatIndicatorTracker_ShowWarning_System_Single_UnityEngine_Camera_System_Int32_" data-uid="KSP.Sim.impl.PartHeatIndicatorTracker.ShowWarning(System.Single,UnityEngine.Camera,System.Int32)">ShowWarning(float, Camera, int)</h4>
+  <div class="markdown level1 summary"><p>Records that the tracked part is hot enough to show its heat warning, positions it for the given camera, and
+takes an indicator from the pool if it holds none.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ShowWarning(float ratio, Camera viewCamera, int frame)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">ratio</span></td>
+        <td><p>The part's temperature over its maximum temperature.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Camera.html">Camera</a></td>
+        <td><span class="parametername">viewCamera</span></td>
+        <td><p>The camera used to compute screen and viewport positions.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">frame</span></td>
+        <td><p>The current frame.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the part took an indicator, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Sim_impl_PartHeatIndicatorTracker_ShowWarning_System_Single_UnityEngine_Camera_System_Int32__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p><a class="xref" href="Redux.Ecs.Systems.PartHeatIndicatorSystem.html">PartHeatIndicatorSystem</a> calls this as the camera begins rendering, and calls
+<a class="xref" href="KSP.Sim.impl.PartHeatIndicatorTracker.html#KSP_Sim_impl_PartHeatIndicatorTracker_HideWarning">HideWarning()</a> in the first frame the part is no longer hot enough.</p>
+</div>
 
 
   <a id="KSP_Sim_impl_PartHeatIndicatorTracker_Shutdown_" data-uid="KSP.Sim.impl.PartHeatIndicatorTracker.Shutdown*"></a>
@@ -280,10 +405,6 @@ tracker has shut down.</p>
       </tr>
     </tbody>
   </table>
-  <h5 id="KSP_Sim_impl_PartHeatIndicatorTracker_UpdateData_UnityEngine_Camera__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p><a class="xref" href="Redux.Ecs.Systems.PartHeatIndicatorSystem.html">PartHeatIndicatorSystem</a> calls this for the parts hot enough to show their
-indicator, as the camera begins rendering.</p>
-</div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>

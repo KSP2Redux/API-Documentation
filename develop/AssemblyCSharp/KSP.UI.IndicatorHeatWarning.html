@@ -294,6 +294,20 @@
   <div><a class="xref" href="KSP.UI.Indicator.html#KSP_UI_Indicator_Hide">Indicator.Hide()</a></div>
 
 
+  <a id="KSP_UI_IndicatorHeatWarning_LoadPrefab_" data-uid="KSP.UI.IndicatorHeatWarning.LoadPrefab*"></a>
+  <h4 id="KSP_UI_IndicatorHeatWarning_LoadPrefab" data-uid="KSP.UI.IndicatorHeatWarning.LoadPrefab">LoadPrefab()</h4>
+  <div class="markdown level1 summary"><p>Starts loading the indicator prefab unless it has loaded or is loading.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void LoadPrefab()</code></pre>
+  </div>
+  <h5 id="KSP_UI_IndicatorHeatWarning_LoadPrefab_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>No part warns until the prefab has loaded, which gives the warning threshold.</p>
+</div>
+
+
   <a id="KSP_UI_IndicatorHeatWarning_OnUpdate_" data-uid="KSP.UI.IndicatorHeatWarning.OnUpdate*"></a>
   <h4 id="KSP_UI_IndicatorHeatWarning_OnUpdate" data-uid="KSP.UI.IndicatorHeatWarning.OnUpdate">OnUpdate()</h4>
   <div class="markdown level1 summary"><p>Performs per-frame update logic, including game object tracking and time-based auto-dismiss.</p>
@@ -307,6 +321,18 @@
   <div><a class="xref" href="KSP.UI.Indicator.html#KSP_UI_Indicator_OnUpdate">Indicator.OnUpdate()</a></div>
 
 
+  <a id="KSP_UI_IndicatorHeatWarning_ReleaseCooledIndicator_" data-uid="KSP.UI.IndicatorHeatWarning.ReleaseCooledIndicator*"></a>
+  <h4 id="KSP_UI_IndicatorHeatWarning_ReleaseCooledIndicator" data-uid="KSP.UI.IndicatorHeatWarning.ReleaseCooledIndicator">ReleaseCooledIndicator()</h4>
+  <div class="markdown level1 summary"><p>Hides the warning of a part that has cooled down and releases this indicator back to the indicator provider
+pool.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ReleaseCooledIndicator()</code></pre>
+  </div>
+
+
   <a id="KSP_UI_IndicatorHeatWarning_ReleaseIndicator_" data-uid="KSP.UI.IndicatorHeatWarning.ReleaseIndicator*"></a>
   <h4 id="KSP_UI_IndicatorHeatWarning_ReleaseIndicator" data-uid="KSP.UI.IndicatorHeatWarning.ReleaseIndicator">ReleaseIndicator()</h4>
   <div class="markdown level1 summary"><p>Releases this indicator back to the indicator provider pool.</p>
@@ -318,14 +344,14 @@
   </div>
 
 
-  <a id="KSP_UI_IndicatorHeatWarning_RequestIndicatorAsync_" data-uid="KSP.UI.IndicatorHeatWarning.RequestIndicatorAsync*"></a>
-  <h4 id="KSP_UI_IndicatorHeatWarning_RequestIndicatorAsync_KSP_Sim_impl_PartHeatIndicatorTracker_System_Action_KSP_UI_IndicatorHeatWarning__" data-uid="KSP.UI.IndicatorHeatWarning.RequestIndicatorAsync(KSP.Sim.impl.PartHeatIndicatorTracker,System.Action{KSP.UI.IndicatorHeatWarning})">RequestIndicatorAsync(PartHeatIndicatorTracker, Action&lt;IndicatorHeatWarning&gt;)</h4>
-  <div class="markdown level1 summary"><p>Requests a heat warning indicator for the specified part tracker, loading the prefab asynchronously if it has not yet been loaded.</p>
+  <a id="KSP_UI_IndicatorHeatWarning_RequestIndicator_" data-uid="KSP.UI.IndicatorHeatWarning.RequestIndicator*"></a>
+  <h4 id="KSP_UI_IndicatorHeatWarning_RequestIndicator_KSP_Sim_impl_PartHeatIndicatorTracker_" data-uid="KSP.UI.IndicatorHeatWarning.RequestIndicator(KSP.Sim.impl.PartHeatIndicatorTracker)">RequestIndicator(PartHeatIndicatorTracker)</h4>
+  <div class="markdown level1 summary"><p>Takes a heat warning indicator from the pool for the specified part tracker.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void RequestIndicatorAsync(PartHeatIndicatorTracker partTracker, Action&lt;IndicatorHeatWarning&gt; callback)</code></pre>
+    <pre><code class="lang-csharp hljs">public static IndicatorHeatWarning RequestIndicator(PartHeatIndicatorTracker partTracker)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -343,14 +369,27 @@
         <td><p>The <a class="xref" href="KSP.Sim.impl.PartHeatIndicatorTracker.html">PartHeatIndicatorTracker</a> whose part the indicator will track.</p>
 </td>
       </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
       <tr>
-        <td><span class="xref">Action</span>&lt;<a class="xref" href="KSP.UI.IndicatorHeatWarning.html">IndicatorHeatWarning</a>&gt;</td>
-        <td><span class="parametername">callback</span></td>
-        <td><p>Invoked with the newly initialized <a class="xref" href="KSP.UI.IndicatorHeatWarning.html">IndicatorHeatWarning</a> instance once it is ready.</p>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.UI.IndicatorHeatWarning.html">IndicatorHeatWarning</a></td>
+        <td><p>The indicator, initialized for the part.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 id="KSP_UI_IndicatorHeatWarning_RequestIndicator_KSP_Sim_impl_PartHeatIndicatorTracker__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Only a part hot enough to warn holds an indicator. <a class="xref" href="KSP.UI.IndicatorHeatWarning.html#KSP_UI_IndicatorHeatWarning_LoadPrefab">LoadPrefab()</a> must have finished first.</p>
+</div>
 
 
   <a id="KSP_UI_IndicatorHeatWarning_SetViewState_" data-uid="KSP.UI.IndicatorHeatWarning.SetViewState*"></a>
