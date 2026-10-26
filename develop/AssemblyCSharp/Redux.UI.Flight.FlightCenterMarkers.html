@@ -5,11 +5,11 @@
   <head>
     <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-      <title>Class PreciseReentryPanel | KSP2Redux API (Develop) </title>
+      <title>Class FlightCenterMarkers | KSP2Redux API (Develop) </title>
       <meta name="viewport" content="width=device-width">
-      <meta name="title" content="Class PreciseReentryPanel | KSP2Redux API (Develop) ">
+      <meta name="title" content="Class FlightCenterMarkers | KSP2Redux API (Develop) ">
     
-    <meta name="description" content="The Precise Reentry button on the flight app bar, left of the overflow button, with the panel of toggles that opens above it.">
+    <meta name="description" content="Shows the VAB center of mass, thrust and lift markers on the active vessel in flight.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -76,55 +76,134 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Redux.UI.Flight.PreciseReentryPanel">
+            <article class="content wrap" id="_content" data-uid="Redux.UI.Flight.FlightCenterMarkers">
 
 
 
-  <h1 id="Redux_UI_Flight_PreciseReentryPanel" data-uid="Redux.UI.Flight.PreciseReentryPanel" class="text-break">Class PreciseReentryPanel</h1>
-  <div class="markdown level0 summary"><p>The Precise Reentry button on the flight app bar, left of the overflow button, with the panel of
-toggles that opens above it.</p>
+  <h1 id="Redux_UI_Flight_FlightCenterMarkers" data-uid="Redux.UI.Flight.FlightCenterMarkers" class="text-break">Class FlightCenterMarkers</h1>
+  <div class="markdown level0 summary"><p>Shows the VAB center of mass, thrust and lift markers on the active vessel in flight.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">object</span></div>
-    <div class="level1"><span class="xref">PreciseReentryPanel</span></div>
+    <div class="level1"><span class="xref">FlightCenterMarkers</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Redux.html">Redux</a>.<a class="xref" href="Redux.UI.html">UI</a>.<a class="xref" href="Redux.UI.Flight.html">Flight</a></h6>
   <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
-  <h5 id="Redux_UI_Flight_PreciseReentryPanel_syntax">Syntax</h5>
+  <h5 id="Redux_UI_Flight_FlightCenterMarkers_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class PreciseReentryPanel : MonoBehaviour</code></pre>
+    <pre><code class="lang-csharp hljs">public class FlightCenterMarkers : MonoBehaviour</code></pre>
   </div>
-  <h5 id="Redux_UI_Flight_PreciseReentryPanel_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>The button, panel and toggles are copies of the stock overflow ones, so they look and animate the
-same. The component sits on the app bar, which outlives the flight scene, so it can rebuild the
-button each time the HUD announces the bar.</p>
+  <h5 id="Redux_UI_Flight_FlightCenterMarkers_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>The markers are the stock VAB marker models. Center of thrust counts the ignited engines, or every engine before
+any is lit. Center of lift uses the same reference airflow as the VAB marker, along the vessel's own axis, so it
+shows the vessel's layout rather than the moment's angle of attack.</p>
 </div>
   <h3 id="constructors">Constructors
 </h3>
 
 
-  <a id="Redux_UI_Flight_PreciseReentryPanel__ctor_" data-uid="Redux.UI.Flight.PreciseReentryPanel.#ctor*"></a>
-  <h4 id="Redux_UI_Flight_PreciseReentryPanel__ctor" data-uid="Redux.UI.Flight.PreciseReentryPanel.#ctor">PreciseReentryPanel()</h4>
+  <a id="Redux_UI_Flight_FlightCenterMarkers__ctor_" data-uid="Redux.UI.Flight.FlightCenterMarkers.#ctor*"></a>
+  <h4 id="Redux_UI_Flight_FlightCenterMarkers__ctor" data-uid="Redux.UI.Flight.FlightCenterMarkers.#ctor">FlightCenterMarkers()</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public PreciseReentryPanel()</code></pre>
+    <pre><code class="lang-csharp hljs">public FlightCenterMarkers()</code></pre>
   </div>
-  <h3 id="methods">Methods
+  <h3 id="properties">Properties
 </h3>
 
 
-  <a id="Redux_UI_Flight_PreciseReentryPanel_Initialize_" data-uid="Redux.UI.Flight.PreciseReentryPanel.Initialize*"></a>
-  <h4 id="Redux_UI_Flight_PreciseReentryPanel_Initialize" data-uid="Redux.UI.Flight.PreciseReentryPanel.Initialize">Initialize()</h4>
-  <div class="markdown level1 summary"><p>Has the button built whenever the flight app bar is.</p>
+  <a id="Redux_UI_Flight_FlightCenterMarkers_IsCenterOfLiftShown_" data-uid="Redux.UI.Flight.FlightCenterMarkers.IsCenterOfLiftShown*"></a>
+  <h4 id="Redux_UI_Flight_FlightCenterMarkers_IsCenterOfLiftShown" data-uid="Redux.UI.Flight.FlightCenterMarkers.IsCenterOfLiftShown">IsCenterOfLiftShown</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a value indicating whether the center of lift marker is shown.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void Initialize()</code></pre>
+    <pre><code class="lang-csharp hljs">public static bool IsCenterOfLiftShown { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_UI_Flight_FlightCenterMarkers_IsCenterOfMassShown_" data-uid="Redux.UI.Flight.FlightCenterMarkers.IsCenterOfMassShown*"></a>
+  <h4 id="Redux_UI_Flight_FlightCenterMarkers_IsCenterOfMassShown" data-uid="Redux.UI.Flight.FlightCenterMarkers.IsCenterOfMassShown">IsCenterOfMassShown</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a value indicating whether the center of mass marker is shown.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsCenterOfMassShown { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_UI_Flight_FlightCenterMarkers_IsCenterOfThrustShown_" data-uid="Redux.UI.Flight.FlightCenterMarkers.IsCenterOfThrustShown*"></a>
+  <h4 id="Redux_UI_Flight_FlightCenterMarkers_IsCenterOfThrustShown" data-uid="Redux.UI.Flight.FlightCenterMarkers.IsCenterOfThrustShown">IsCenterOfThrustShown</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a value indicating whether the center of thrust marker is shown.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsCenterOfThrustShown { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="Redux_UI_Flight_FlightCenterMarkers_EnsureCreated_" data-uid="Redux.UI.Flight.FlightCenterMarkers.EnsureCreated*"></a>
+  <h4 id="Redux_UI_Flight_FlightCenterMarkers_EnsureCreated" data-uid="Redux.UI.Flight.FlightCenterMarkers.EnsureCreated">EnsureCreated()</h4>
+  <div class="markdown level1 summary"><p>Creates the marker host once, which then follows whatever vessel is active.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void EnsureCreated()</code></pre>
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
