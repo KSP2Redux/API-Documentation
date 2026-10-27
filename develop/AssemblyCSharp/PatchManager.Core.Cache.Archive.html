@@ -95,6 +95,13 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class Archive</code></pre>
   </div>
+  <h5 id="PatchManager_Core_Cache_Archive_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>The archive lives in memory, and one <span class="xref">System.IO.Compression.ZipArchive</span> is kept open over it for reads and one for
+writes, rather than a new one per call. Opening an archive parses its whole central directory, and closing
+one in update mode rewrites every entry, so a fresh archive per file made reading or writing a label of N
+files cost N squared. Switching between reading and writing closes the open one first, so the stream always
+holds a complete zip whenever the other mode or <a class="xref" href="PatchManager.Core.Cache.Archive.html#PatchManager_Core_Cache_Archive_Save">Save()</a> needs it.</p>
+</div>
   <h3 id="constructors">Constructors
 </h3>
 
