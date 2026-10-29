@@ -2641,6 +2641,61 @@ belongs in <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_
   </table>
 
 
+  <a id="KSP_Sim_impl_TelemetryComponent_TryGetMovementVelocitiesNow_" data-uid="KSP.Sim.impl.TelemetryComponent.TryGetMovementVelocitiesNow*"></a>
+  <h4 id="KSP_Sim_impl_TelemetryComponent_TryGetMovementVelocitiesNow_KSP_Sim_Vector__KSP_Sim_Vector__" data-uid="KSP.Sim.impl.TelemetryComponent.TryGetMovementVelocitiesNow(KSP.Sim.Vector@,KSP.Sim.Vector@)">TryGetMovementVelocitiesNow(out Vector, out Vector)</h4>
+  <div class="markdown level1 summary"><p>Works out the root's velocity relative to its sphere-of-influence body as it is now, not as of the last update.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryGetMovementVelocitiesNow(out Vector orbital, out Vector surface)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.Vector.html">Vector</a></td>
+        <td><span class="parametername">orbital</span></td>
+        <td><p>When this method returns true, the velocity relative to the body's celestial frame.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.Vector.html">Vector</a></td>
+        <td><span class="parametername">surface</span></td>
+        <td><p>When this method returns true, the velocity relative to the body's surface.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True when the body and the root are known, false before the first update.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Sim_impl_TelemetryComponent_TryGetMovementVelocitiesNow_KSP_Sim_Vector__KSP_Sim_Vector___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The telemetry fields are refreshed once per frame, and a frame can hold more than one physics step, so
+anything that differences velocities every step reads these instead.</p>
+</div>
+
+
   <a id="KSP_Sim_impl_TelemetryComponent_UnregisterCommNetNode_" data-uid="KSP.Sim.impl.TelemetryComponent.UnregisterCommNetNode*"></a>
   <h4 id="KSP_Sim_impl_TelemetryComponent_UnregisterCommNetNode" data-uid="KSP.Sim.impl.TelemetryComponent.UnregisterCommNetNode">UnregisterCommNetNode()</h4>
   <div class="markdown level1 summary"><p>Removes this object's node from the CommNet graph. Called by the destroy sequence. The node
