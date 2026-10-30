@@ -292,6 +292,32 @@ they have to be told the same thing, so it is worked out once for the planet rat
 </div>
 
 
+  <a id="Redux_UI_MainMenu_MainMenuPlanetInstance_SunColor_" data-uid="Redux.UI.MainMenu.MainMenuPlanetInstance.SunColor*"></a>
+  <h4 id="Redux_UI_MainMenu_MainMenuPlanetInstance_SunColor" data-uid="Redux.UI.MainMenu.MainMenuPlanetInstance.SunColor">SunColor</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the stellar light colour for this body.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color SunColor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Color.html">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="Redux_UI_MainMenu_MainMenuPlanetInstance_SunScale_" data-uid="Redux.UI.MainMenu.MainMenuPlanetInstance.SunScale*"></a>
   <h4 id="Redux_UI_MainMenu_MainMenuPlanetInstance_SunScale" data-uid="Redux.UI.MainMenu.MainMenuPlanetInstance.SunScale">SunScale</h4>
   <div class="markdown level1 summary"><p>Gets or sets how bright the menu's sun is for this body, as a multiple of the brightness the menu was
@@ -385,7 +411,7 @@ the managers that loaded their models.</p>
 
   <a id="Redux_UI_MainMenu_MainMenuPlanetInstance_SetCloudLighting_" data-uid="Redux.UI.MainMenu.MainMenuPlanetInstance.SetCloudLighting*"></a>
   <h4 id="Redux_UI_MainMenu_MainMenuPlanetInstance_SetCloudLighting_UnityEngine_Vector3_UnityEngine_Color_System_Single_" data-uid="Redux.UI.MainMenu.MainMenuPlanetInstance.SetCloudLighting(UnityEngine.Vector3,UnityEngine.Color,System.Single)">SetCloudLighting(Vector3, Color, float)</h4>
-  <div class="markdown level1 summary"><p>Tells this planet's clouds how big it is and what is lighting it.</p>
+  <div class="markdown level1 summary"><p>Tells this planet's atmosphere and clouds how big it is and what is lighting it.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -423,8 +449,8 @@ the managers that loaded their models.</p>
     </tbody>
   </table>
   <h5 id="Redux_UI_MainMenu_MainMenuPlanetInstance_SetCloudLighting_UnityEngine_Vector3_UnityEngine_Color_System_Single__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Unlike the atmosphere, the cloud component is left running: it turns each layer against the wind, sizes
-them, orders them and binds their probes every frame, which is far more than is worth reproducing. Only
+  <div class="markdown level1 remarks"><p>The cloud component turns each layer against the wind, sizes them, orders them and binds their probes
+every frame, which is far more than is worth reproducing. Only
 what it gets wrong outside flight is written over. It assumes flight's fixed scaled space and a star
 light the menu does not have, so it would draw the clouds at the wrong size, lit white from straight up.
 This has to be called after the component's own update rather than before, or the frame's copy to the
@@ -463,8 +489,7 @@ layers carries its values rather than these.</p>
 
   <a id="Redux_UI_MainMenu_MainMenuPlanetInstance_TryBindAtmosphere_" data-uid="Redux.UI.MainMenu.MainMenuPlanetInstance.TryBindAtmosphere*"></a>
   <h4 id="Redux_UI_MainMenu_MainMenuPlanetInstance_TryBindAtmosphere_UnityEngine_Vector3_" data-uid="Redux.UI.MainMenu.MainMenuPlanetInstance.TryBindAtmosphere(UnityEngine.Vector3)">TryBindAtmosphere(Vector3)</h4>
-  <div class="markdown level1 summary"><p>Binds the atmosphere model to the shell materials and tells them how big this planet is and where its
-light comes from.</p>
+  <div class="markdown level1 summary"><p>Binds the atmosphere under the authored unit-intensity sunlight.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -500,15 +525,66 @@ light comes from.</p>
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
+        <td><p>True if the atmosphere was bound, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Redux_UI_MainMenu_MainMenuPlanetInstance_TryBindAtmosphere_" data-uid="Redux.UI.MainMenu.MainMenuPlanetInstance.TryBindAtmosphere*"></a>
+  <h4 id="Redux_UI_MainMenu_MainMenuPlanetInstance_TryBindAtmosphere_UnityEngine_Vector3_System_Single_" data-uid="Redux.UI.MainMenu.MainMenuPlanetInstance.TryBindAtmosphere(UnityEngine.Vector3,System.Single)">TryBindAtmosphere(Vector3, float)</h4>
+  <div class="markdown level1 summary"><p>Binds the atmosphere model to the shell materials and tells them how big this planet is and where its
+light comes from.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryBindAtmosphere(Vector3 sunDirection, float sunIntensity)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">sunDirection</span></td>
+        <td><p>The direction light arrives from.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">sunIntensity</span></td>
+        <td><p>How strong that light is relative to the authored atmosphere.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
         <td><p>True if the atmosphere was bound, false if this body has none or could not be measured.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Redux_UI_MainMenu_MainMenuPlanetInstance_TryBindAtmosphere_UnityEngine_Vector3__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This is the half of the component's own update that the menu can run. The other half reads the map
-camera every frame, which the menu does not have, so the component is stopped and this is called in its
-place. Both values it needs are fixed for as long as the planet is up.</p>
+  <h5 id="Redux_UI_MainMenu_MainMenuPlanetInstance_TryBindAtmosphere_UnityEngine_Vector3_System_Single__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The menu supplies its own view parameters because it has no map camera. The component keeps
+refreshing material bindings so atmosphere textures loaded asynchronously reach the shells.</p>
 </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>

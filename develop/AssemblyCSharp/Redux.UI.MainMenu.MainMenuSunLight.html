@@ -99,8 +99,8 @@ sun on screen.</p>
   <h5 id="Redux_UI_MainMenu_MainMenuSunLight_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>Nothing in the game drives either of these in the menu. The lighting system that scales a star by distance
 gives up as soon as it sees the main menu, and no code anywhere writes a flare's brightness, so both are
-exactly what the scene was authored with. That makes the authored values the one arrangement known to look
-right, which is why they are captured and scaled from rather than replaced.</p>
+exactly what the scene was authored with. The planet's light can take its star's authored intensity and
+colour, while craft keys and flares retain their ratios to the captured scene lighting.</p>
 </div>
   <h3 id="properties">Properties
 </h3>
@@ -276,6 +276,41 @@ directions, so a flare left at the brightness of a star the scene is no longer l
 second, nearer one. The craft keys go with them for the same reason, since a craft still burning at
 Kerbin brightness against a body out past Jool reads as lit by something nearer than the star.</p>
 </div>
+
+
+  <a id="Redux_UI_MainMenu_MainMenuSunLight_SetScale_" data-uid="Redux.UI.MainMenu.MainMenuSunLight.SetScale*"></a>
+  <h4 id="Redux_UI_MainMenu_MainMenuSunLight_SetScale_System_Single_UnityEngine_Color_" data-uid="Redux.UI.MainMenu.MainMenuSunLight.SetScale(System.Single,UnityEngine.Color)">SetScale(float, Color)</h4>
+  <div class="markdown level1 summary"><p>Scales the menu lighting and applies the star's colour to the planet's sun.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetScale(float scale, Color color)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">scale</span></td>
+        <td><p>What to multiply the authored brightness by.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Color.html">Color</a></td>
+        <td><span class="parametername">color</span></td>
+        <td><p>The stellar light colour. Craft keys and fill retain their authored colours.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
