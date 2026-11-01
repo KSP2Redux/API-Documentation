@@ -1,0 +1,1769 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class ObjectAssemblyCameraManager | KSP2Redux API (Develop) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class ObjectAssemblyCameraManager | KSP2Redux API (Develop) ">
+    
+    <meta name="description" content="Camera manager for the Object Assembly Building, extending  with orbit, zoom, auto-focus, and gimbal-state controls.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="KSP.OAB.ObjectAssemblyCameraManager">
+
+
+
+  <h1 id="KSP_OAB_ObjectAssemblyCameraManager" data-uid="KSP.OAB.ObjectAssemblyCameraManager" class="text-break">Class ObjectAssemblyCameraManager</h1>
+  <div class="markdown level0 summary"><p>Camera manager for the Object Assembly Building, extending <a class="xref" href="KSP.Game.KerbalCameraBehaviour.html">KerbalCameraBehaviour</a> with orbit, zoom, auto-focus, and gimbal-state controls.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><a class="xref" href="KSP.Game.KerbalMonoBehaviour.html">KerbalMonoBehaviour</a></div>
+    <div class="level2"><a class="xref" href="KSP.Game.KerbalCameraBehaviour.html">KerbalCameraBehaviour</a></div>
+    <div class="level3"><span class="xref">ObjectAssemblyCameraManager</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="KSP.Sim.ICameraGimbalStateProvider.html">ICameraGimbalStateProvider</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="KSP.Game.KerbalCameraBehaviour.html#KSP_Game_KerbalCameraBehaviour_CurrentCameraMode">KerbalCameraBehaviour.CurrentCameraMode</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Game.KerbalCameraBehaviour.html#KSP_Game_KerbalCameraBehaviour_CameraTargetIsLocked">KerbalCameraBehaviour.CameraTargetIsLocked</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Game.KerbalCameraBehaviour.html#KSP_Game_KerbalCameraBehaviour_CameraOrbitTarget">KerbalCameraBehaviour.CameraOrbitTarget</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Game">KerbalMonoBehaviour.Game</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Assets">KerbalMonoBehaviour.Assets</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_Messages">KerbalMonoBehaviour.Messages</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_CFXSystem">KerbalMonoBehaviour.CFXSystem</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.Game.KerbalMonoBehaviour.html#KSP_Game_KerbalMonoBehaviour_IsGameShuttingDown">KerbalMonoBehaviour.IsGameShuttingDown</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="KSP.html">KSP</a>.<a class="xref" href="KSP.OAB.html">OAB</a></h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
+  <h5 id="KSP_OAB_ObjectAssemblyCameraManager_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class ObjectAssemblyCameraManager : KerbalCameraBehaviour, ICameraGimbalStateProvider</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager__ctor_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.#ctor*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager__ctor" data-uid="KSP.OAB.ObjectAssemblyCameraManager.#ctor">ObjectAssemblyCameraManager()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ObjectAssemblyCameraManager()</code></pre>
+  </div>
+  <h3 id="fields">Fields
+</h3>
+
+
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_CameraOrbitTargetBlendDuration" data-uid="KSP.OAB.ObjectAssemblyCameraManager.CameraOrbitTargetBlendDuration">CameraOrbitTargetBlendDuration</h4>
+  <div class="markdown level1 summary"><p>The duration in seconds of the blend animation when changing the camera orbit target.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float CameraOrbitTargetBlendDuration</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_CameraResetBlendDuration" data-uid="KSP.OAB.ObjectAssemblyCameraManager.CameraResetBlendDuration">CameraResetBlendDuration</h4>
+  <div class="markdown level1 summary"><p>The duration in seconds of the blend animation when resetting the camera.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float CameraResetBlendDuration</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_CurrentCameraTargetPosition" data-uid="KSP.OAB.ObjectAssemblyCameraManager.CurrentCameraTargetPosition">CurrentCameraTargetPosition</h4>
+  <div class="markdown level1 summary"><p>The current world position of the camera orbit target, including any pan offsets.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3 CurrentCameraTargetPosition</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_CurrentCameraTargetPositionNoPanOffset" data-uid="KSP.OAB.ObjectAssemblyCameraManager.CurrentCameraTargetPositionNoPanOffset">CurrentCameraTargetPositionNoPanOffset</h4>
+  <div class="markdown level1 summary"><p>The current world position of the camera orbit target, excluding any pan offsets.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3 CurrentCameraTargetPositionNoPanOffset</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_DefaultHorizontalCameraRotation" data-uid="KSP.OAB.ObjectAssemblyCameraManager.DefaultHorizontalCameraRotation">DefaultHorizontalCameraRotation</h4>
+  <div class="markdown level1 summary"><p>The default gimbal rotation used as the starting horizontal orientation when resetting the camera.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Quaternion DefaultHorizontalCameraRotation</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Quaternion.html">Quaternion</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_DefaultVerticalCameraRotation" data-uid="KSP.OAB.ObjectAssemblyCameraManager.DefaultVerticalCameraRotation">DefaultVerticalCameraRotation</h4>
+  <div class="markdown level1 summary"><p>The default gimbal rotation used as the starting vertical orientation when resetting the camera.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Quaternion DefaultVerticalCameraRotation</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Quaternion.html">Quaternion</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_EnableCameraToPartPositionAdjustment" data-uid="KSP.OAB.ObjectAssemblyCameraManager.EnableCameraToPartPositionAdjustment">EnableCameraToPartPositionAdjustment</h4>
+  <div class="markdown level1 summary"><p>A value indicating whether the feature that adjusts the camera position when a part is off-screen is enabled.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool EnableCameraToPartPositionAdjustment</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_ForceOrbitTargetMoved" data-uid="KSP.OAB.ObjectAssemblyCameraManager.ForceOrbitTargetMoved">ForceOrbitTargetMoved</h4>
+  <div class="markdown level1 summary"><p>A value indicating whether the next orbit target moved check should be forced regardless of distance threshold.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ForceOrbitTargetMoved</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_IsCameraRotateInputActive" data-uid="KSP.OAB.ObjectAssemblyCameraManager.IsCameraRotateInputActive">IsCameraRotateInputActive</h4>
+  <div class="markdown level1 summary"><p>A value indicating whether a camera rotate input action is currently active.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsCameraRotateInputActive</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_MinZoom" data-uid="KSP.OAB.ObjectAssemblyCameraManager.MinZoom">MinZoom</h4>
+  <div class="markdown level1 summary"><p>The minimum allowed zoom distance in perspective mode.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float MinZoom</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_OrthoMaxZoom" data-uid="KSP.OAB.ObjectAssemblyCameraManager.OrthoMaxZoom">OrthoMaxZoom</h4>
+  <div class="markdown level1 summary"><p>The maximum allowed orthographic size when in orthographic mode.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float OrthoMaxZoom</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_OrthoMinZoom" data-uid="KSP.OAB.ObjectAssemblyCameraManager.OrthoMinZoom">OrthoMinZoom</h4>
+  <div class="markdown level1 summary"><p>The minimum allowed orthographic size when in orthographic mode.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float OrthoMinZoom</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_OrthogonalPanOffset" data-uid="KSP.OAB.ObjectAssemblyCameraManager.OrthogonalPanOffset">OrthogonalPanOffset</h4>
+  <div class="markdown level1 summary"><p>The accumulated orthogonal pan offset applied to the camera orbit target position.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float OrthogonalPanOffset</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_PartAutoFocusAction" data-uid="KSP.OAB.ObjectAssemblyCameraManager.PartAutoFocusAction">PartAutoFocusAction</h4>
+  <div class="markdown level1 summary"><p>The input action binding that triggers auto-focus on a part.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AutoFocusActionBind PartAutoFocusAction</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.OAB.AutoFocusActionBind.html">AutoFocusActionBind</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_PartHalfHeightPercentage" data-uid="KSP.OAB.ObjectAssemblyCameraManager.PartHalfHeightPercentage">PartHalfHeightPercentage</h4>
+  <div class="markdown level1 summary"><p>The fractional half-height of a part, in the range [0, 1], used to determine the reference point checked against screen bounds.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float PartHalfHeightPercentage</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_ScreenHalfHeightPercentage" data-uid="KSP.OAB.ObjectAssemblyCameraManager.ScreenHalfHeightPercentage">ScreenHalfHeightPercentage</h4>
+  <div class="markdown level1 summary"><p>The fractional half-height of the screen, in the range [0, 1], outside which a part is considered off-screen vertically.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float ScreenHalfHeightPercentage</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_ScreenHalfWidthPercentage" data-uid="KSP.OAB.ObjectAssemblyCameraManager.ScreenHalfWidthPercentage">ScreenHalfWidthPercentage</h4>
+  <div class="markdown level1 summary"><p>The fractional half-width of the screen, in the range [0, 1], outside which a part is considered off-screen horizontally.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float ScreenHalfWidthPercentage</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_TargetCameraPosition" data-uid="KSP.OAB.ObjectAssemblyCameraManager.TargetCameraPosition">TargetCameraPosition</h4>
+  <div class="markdown level1 summary"><p>The target world position for the camera pivot, used as the destination of blend operations.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3 TargetCameraPosition</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_TargetCameraRotation" data-uid="KSP.OAB.ObjectAssemblyCameraManager.TargetCameraRotation">TargetCameraRotation</h4>
+  <div class="markdown level1 summary"><p>The target rotation for the camera gimbal, used as the destination of blend operations.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Quaternion TargetCameraRotation</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Quaternion.html">Quaternion</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_VerticalPanOffset" data-uid="KSP.OAB.ObjectAssemblyCameraManager.VerticalPanOffset">VerticalPanOffset</h4>
+  <div class="markdown level1 summary"><p>The accumulated vertical pan offset applied to the camera orbit target position.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float VerticalPanOffset</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_cameraSettingsPrefab" data-uid="KSP.OAB.ObjectAssemblyCameraManager.cameraSettingsPrefab">cameraSettingsPrefab</h4>
+  <div class="markdown level1 summary"><p>The camera prefab whose settings are copied when the OAB camera is spawned.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Camera cameraSettingsPrefab</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Camera.html">Camera</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_currentCubeOrientation" data-uid="KSP.OAB.ObjectAssemblyCameraManager.currentCubeOrientation">currentCubeOrientation</h4>
+  <div class="markdown level1 summary"><p>The current orientation of the orientation cube, tracking the camera's facing direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Quaternion currentCubeOrientation</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Quaternion.html">Quaternion</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_initialCameraPivotDistance" data-uid="KSP.OAB.ObjectAssemblyCameraManager.initialCameraPivotDistance">initialCameraPivotDistance</h4>
+  <div class="markdown level1 summary"><p>The initial distance in units between the camera and its pivot point at spawn.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float initialCameraPivotDistance</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_Camera_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.Camera*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_Camera" data-uid="KSP.OAB.ObjectAssemblyCameraManager.Camera">Camera</h4>
+  <div class="markdown level1 summary"><p>Gets the underlying Unity <a class="xref" href="KSP.OAB.ObjectAssemblyCameraManager.html#KSP_OAB_ObjectAssemblyCameraManager_Camera">Camera</a> component.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Camera Camera { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Camera.html">Camera</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_CameraGimbal_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.CameraGimbal*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_CameraGimbal" data-uid="KSP.OAB.ObjectAssemblyCameraManager.CameraGimbal">CameraGimbal</h4>
+  <div class="markdown level1 summary"><p>Gets the gimbal transform used as the camera's rotational pivot.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Transform CameraGimbal { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_CameraManagerRoot_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.CameraManagerRoot*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_CameraManagerRoot" data-uid="KSP.OAB.ObjectAssemblyCameraManager.CameraManagerRoot">CameraManagerRoot</h4>
+  <div class="markdown level1 summary"><p>Gets the root <span class="xref">UnityEngine.GameObject</span> of this camera manager.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GameObject CameraManagerRoot { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">GameObject</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_CameraPivot_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.CameraPivot*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_CameraPivot" data-uid="KSP.OAB.ObjectAssemblyCameraManager.CameraPivot">CameraPivot</h4>
+  <div class="markdown level1 summary"><p>Gets the pivot transform the camera orbits around.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Transform CameraPivot { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_CameraTransform_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.CameraTransform*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_CameraTransform" data-uid="KSP.OAB.ObjectAssemblyCameraManager.CameraTransform">CameraTransform</h4>
+  <div class="markdown level1 summary"><p>Gets the transform of the underlying Unity camera.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Transform CameraTransform { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_CameraWorldPosition_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.CameraWorldPosition*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_CameraWorldPosition" data-uid="KSP.OAB.ObjectAssemblyCameraManager.CameraWorldPosition">CameraWorldPosition</h4>
+  <div class="markdown level1 summary"><p>Gets the world-space position of the camera.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3 CameraWorldPosition { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_CurCameraPivotDistance_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.CurCameraPivotDistance*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_CurCameraPivotDistance" data-uid="KSP.OAB.ObjectAssemblyCameraManager.CurCameraPivotDistance">CurCameraPivotDistance</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the current distance between the camera and its pivot point.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float CurCameraPivotDistance { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_GimbalTransform_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.GimbalTransform*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_GimbalTransform" data-uid="KSP.OAB.ObjectAssemblyCameraManager.GimbalTransform">GimbalTransform</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the transform that acts as the camera gimbal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Transform GimbalTransform { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_InitialCameraPivotDistance_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.InitialCameraPivotDistance*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_InitialCameraPivotDistance" data-uid="KSP.OAB.ObjectAssemblyCameraManager.InitialCameraPivotDistance">InitialCameraPivotDistance</h4>
+  <div class="markdown level1 summary"><p>Gets the initial camera pivot distance, clamped to a minimum of 0.0001.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float InitialCameraPivotDistance { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_IsCameraBlending_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.IsCameraBlending*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_IsCameraBlending" data-uid="KSP.OAB.ObjectAssemblyCameraManager.IsCameraBlending">IsCameraBlending</h4>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether a camera blend animation is currently in progress.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsCameraBlending { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_PivotTransform_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.PivotTransform*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_PivotTransform" data-uid="KSP.OAB.ObjectAssemblyCameraManager.PivotTransform">PivotTransform</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the transform that acts as the camera pivot point.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Transform PivotTransform { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_SuppressCameraReposition_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.SuppressCameraReposition*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_SuppressCameraReposition" data-uid="KSP.OAB.ObjectAssemblyCameraManager.SuppressCameraReposition">SuppressCameraReposition</h4>
+  <div class="markdown level1 summary"><p>When true, camera repositioning triggered by vessel-load events (e.g. during undo/redo) is suppressed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool SuppressCameraReposition { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_ApplyZoom_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.ApplyZoom*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_ApplyZoom_System_Single_System_Boolean_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.ApplyZoom(System.Single,System.Boolean)">ApplyZoom(float, bool)</h4>
+  <div class="markdown level1 summary"><p>Applies a zoom delta to the camera, adjusting either the orthographic size or the pivot distance depending on the current projection mode.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ApplyZoom(float dZoom, bool omitCameraZoomedMessages)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">dZoom</span></td>
+        <td><p>The amount to subtract from the current zoom value. Positive values zoom in.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">omitCameraZoomedMessages</span></td>
+        <td><p>When true, suppresses publishing the camera zoomed message.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_BlendCameraTo_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.BlendCameraTo*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_BlendCameraTo_UnityEngine_Vector3_UnityEngine_Quaternion_System_Single_System_Single_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.BlendCameraTo(UnityEngine.Vector3,UnityEngine.Quaternion,System.Single,System.Single)">BlendCameraTo(Vector3, Quaternion, float, float)</h4>
+  <div class="markdown level1 summary"><p>Begins a smooth blend of the camera gimbal to a target position, rotation, and pivot distance over a given duration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void BlendCameraTo(Vector3 position, Quaternion rotation, float distance, float duration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">position</span></td>
+        <td><p>The world-space target position for the gimbal.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Quaternion.html">Quaternion</a></td>
+        <td><span class="parametername">rotation</span></td>
+        <td><p>The target rotation for the gimbal. If invalid, the current gimbal rotation is used.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">distance</span></td>
+        <td><p>The target pivot distance, clamped to the minimum zoom value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>The duration in seconds over which to perform the blend.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_BlendCameraToTransform_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.BlendCameraToTransform*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_BlendCameraToTransform_UnityEngine_Transform_System_Single_System_Single_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.BlendCameraToTransform(UnityEngine.Transform,System.Single,System.Single)">BlendCameraToTransform(Transform, float, float)</h4>
+  <div class="markdown level1 summary"><p>Begins a smooth blend of the camera to match the position and rotation of a given transform.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void BlendCameraToTransform(Transform transform, float stickLengthOverride = 0, float duration = 0)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
+        <td><span class="parametername">transform</span></td>
+        <td><p>The target transform to blend toward.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">stickLengthOverride</span></td>
+        <td><p>The pivot distance override. When zero or negative, the initial pivot distance is used.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>The duration in seconds over which to perform the blend.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_CameraOrthoMode_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.CameraOrthoMode*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_CameraOrthoMode" data-uid="KSP.OAB.ObjectAssemblyCameraManager.CameraOrthoMode">CameraOrthoMode()</h4>
+  <div class="markdown level1 summary"><p>Returns a value indicating whether the camera is currently in orthographic mode.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool CameraOrthoMode()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if orthographic mode is active, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_ComputeCameraRotation_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.ComputeCameraRotation*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_ComputeCameraRotation_UnityEngine_Vector3_UnityEngine_Vector3_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.ComputeCameraRotation(UnityEngine.Vector3,UnityEngine.Vector3)">ComputeCameraRotation(Vector3, Vector3)</h4>
+  <div class="markdown level1 summary"><p>Computes a camera rotation quaternion that looks along a given forward direction, using a fallback up vector when the forward direction is nearly parallel to world up.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Quaternion ComputeCameraRotation(Vector3 forward, Vector3 fallbackUp)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">forward</span></td>
+        <td><p>The desired forward direction for the camera.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">fallbackUp</span></td>
+        <td><p>The up vector to use when <code class="paramref">forward</code> is nearly aligned with the world up axis.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Quaternion.html">Quaternion</a></td>
+        <td><p>A <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Quaternion.html">Quaternion</a> representing the computed look-at rotation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_FixupCameraOrbitTargetPart_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.FixupCameraOrbitTargetPart*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_FixupCameraOrbitTargetPart" data-uid="KSP.OAB.ObjectAssemblyCameraManager.FixupCameraOrbitTargetPart">FixupCameraOrbitTargetPart()</h4>
+  <div class="markdown level1 summary"><p>Reconciles the camera orbit target part after a scene state change, restoring the tracked part by GUID or falling back to the anchor or environment center.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void FixupCameraOrbitTargetPart()</code></pre>
+  </div>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_GetCameraRay_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.GetCameraRay*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_GetCameraRay" data-uid="KSP.OAB.ObjectAssemblyCameraManager.GetCameraRay">GetCameraRay()</h4>
+  <div class="markdown level1 summary"><p>Returns a ray from the camera through the current mouse screen position.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Ray GetCameraRay()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Ray.html">Ray</a></td>
+        <td><p>A <a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Ray.html">Ray</a> originating from the camera toward the mouse cursor.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_GetForwardNormal_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.GetForwardNormal*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_GetForwardNormal" data-uid="KSP.OAB.ObjectAssemblyCameraManager.GetForwardNormal">GetForwardNormal()</h4>
+  <div class="markdown level1 summary"><p>Returns the forward direction of the camera transform as a normalized vector.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3 GetForwardNormal()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><p>The forward normal vector of the camera transform.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_GetPostProcessLayer_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.GetPostProcessLayer*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_GetPostProcessLayer" data-uid="KSP.OAB.ObjectAssemblyCameraManager.GetPostProcessLayer">GetPostProcessLayer()</h4>
+  <div class="markdown level1 summary"><p>Returns the post-process layer component attached to the underlying Unity camera.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PostProcessLayer GetPostProcessLayer()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">PostProcessLayer</span></td>
+        <td><p>The <span class="xref">UnityEngine.Rendering.PostProcessing.PostProcessLayer</span> instance, or null if none is present.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_Initialize_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.Initialize*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_Initialize" data-uid="KSP.OAB.ObjectAssemblyCameraManager.Initialize">Initialize()</h4>
+  <div class="markdown level1 summary"><p>Initializes the camera by resetting its settings and setting up the camera follow drivers.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Initialize()</code></pre>
+  </div>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_OnFirstPartPlaced_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.OnFirstPartPlaced*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_OnFirstPartPlaced_KSP_Messages_MessageCenterMessage_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.OnFirstPartPlaced(KSP.Messages.MessageCenterMessage)">OnFirstPartPlaced(MessageCenterMessage)</h4>
+  <div class="markdown level1 summary"><p>Handles a <a class="xref" href="KSP.Messages.FirstPartPlacedMessage.html">FirstPartPlacedMessage</a> by resetting the camera when the OAB orientation has changed since the previous part placement.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnFirstPartPlaced(MessageCenterMessage partPlacedMessage)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Messages.MessageCenterMessage.html">MessageCenterMessage</a></td>
+        <td><span class="parametername">partPlacedMessage</span></td>
+        <td><p>The message indicating the first part was placed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_OnPartPlacedMessage_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.OnPartPlacedMessage*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_OnPartPlacedMessage_KSP_Messages_MessageCenterMessage_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.OnPartPlacedMessage(KSP.Messages.MessageCenterMessage)">OnPartPlacedMessage(MessageCenterMessage)</h4>
+  <div class="markdown level1 summary"><p>Handles a <a class="xref" href="KSP.Messages.PartPlacedMessage.html">PartPlacedMessage</a> by updating the camera orbit target to the newly placed part when appropriate.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnPartPlacedMessage(MessageCenterMessage msg)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Messages.MessageCenterMessage.html">MessageCenterMessage</a></td>
+        <td><span class="parametername">msg</span></td>
+        <td><p>The message containing the placed part information.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_ProcessCameraBlend_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.ProcessCameraBlend*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_ProcessCameraBlend_System_Single_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.ProcessCameraBlend(System.Single)">ProcessCameraBlend(float)</h4>
+  <div class="markdown level1 summary"><p>Advances the active camera blend animation by the specified time step, interpolating pivot and gimbal transforms.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ProcessCameraBlend(float deltaTime)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">deltaTime</span></td>
+        <td><p>The elapsed time in seconds since the last update.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_ProcessOrbitTargetMoved_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.ProcessOrbitTargetMoved*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_ProcessOrbitTargetMoved" data-uid="KSP.OAB.ObjectAssemblyCameraManager.ProcessOrbitTargetMoved">ProcessOrbitTargetMoved()</h4>
+  <div class="markdown level1 summary"><p>Checks whether the camera orbit target has moved beyond the movement threshold and, when rotation input is active, resets pan offsets and restarts the orbit blend.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ProcessOrbitTargetMoved()</code></pre>
+  </div>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_RefreshCameraOrbitTarget_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.RefreshCameraOrbitTarget*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_RefreshCameraOrbitTarget" data-uid="KSP.OAB.ObjectAssemblyCameraManager.RefreshCameraOrbitTarget">RefreshCameraOrbitTarget()</h4>
+  <div class="markdown level1 summary"><p>Refreshes the camera orbit target by re-applying the current orbit target part or falling back to the environment center.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RefreshCameraOrbitTarget()</code></pre>
+  </div>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_ResetCamera_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.ResetCamera*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_ResetCamera_System_Boolean_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.ResetCamera(System.Boolean)">ResetCamera(bool)</h4>
+  <div class="markdown level1 summary"><p>Resets the camera to the default pivot distance and orientation, targeting the assembly anchor if present or the environment center otherwise.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ResetCamera(bool instant)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">instant</span></td>
+        <td><p>When true, the camera snaps to the reset state immediately with no blend duration.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_SetEvents_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.SetEvents*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_SetEvents_KSP_OAB_ObjectAssemblyBuilderEvents_KSP_OAB_ObjectAssemblyUIEvents_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.SetEvents(KSP.OAB.ObjectAssemblyBuilderEvents,KSP.OAB.ObjectAssemblyUIEvents)">SetEvents(ObjectAssemblyBuilderEvents, ObjectAssemblyUIEvents)</h4>
+  <div class="markdown level1 summary"><p>Registers the builder and UI event objects and subscribes to world-rotate start and stop events.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetEvents(ObjectAssemblyBuilderEvents builder, ObjectAssemblyUIEvents ui)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.OAB.ObjectAssemblyBuilderEvents.html">ObjectAssemblyBuilderEvents</a></td>
+        <td><span class="parametername">builder</span></td>
+        <td><p>The builder events source to register.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.OAB.ObjectAssemblyUIEvents.html">ObjectAssemblyUIEvents</a></td>
+        <td><span class="parametername">ui</span></td>
+        <td><p>The UI events source to register.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_SetOrthoMode_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.SetOrthoMode*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_SetOrthoMode_System_Boolean_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.SetOrthoMode(System.Boolean)">SetOrthoMode(bool)</h4>
+  <div class="markdown level1 summary"><p>Sets whether the camera renders in orthographic or perspective projection mode.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetOrthoMode(bool on)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">on</span></td>
+        <td><p>Pass true to enable orthographic mode, or false for perspective mode.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_ToggleCameraPanningAxis_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.ToggleCameraPanningAxis*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_ToggleCameraPanningAxis" data-uid="KSP.OAB.ObjectAssemblyCameraManager.ToggleCameraPanningAxis">ToggleCameraPanningAxis()</h4>
+  <div class="markdown level1 summary"><p>Toggles the camera panning axis between VAB (vertical) and airplane (horizontal) orientations and initiates a blend to the new target rotation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ToggleCameraPanningAxis()</code></pre>
+  </div>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_TryGetGimbalState_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.TryGetGimbalState*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_TryGetGimbalState_KSP_Sim_GimbalState__" data-uid="KSP.OAB.ObjectAssemblyCameraManager.TryGetGimbalState(KSP.Sim.GimbalState@)">TryGetGimbalState(out GimbalState)</h4>
+  <div class="markdown level1 summary"><p>Attempts to compute the current gimbal state of the camera.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryGetGimbalState(out GimbalState cameraGimbalState)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.GimbalState.html">GimbalState</a></td>
+        <td><span class="parametername">cameraGimbalState</span></td>
+        <td><p>When this method returns, contains the computed gimbal state if successful.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the gimbal state was computed successfully, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_UpdateCameraOrbitTargetPart_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.UpdateCameraOrbitTargetPart*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_UpdateCameraOrbitTargetPart_KSP_OAB_IObjectAssemblyPart_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.UpdateCameraOrbitTargetPart(KSP.OAB.IObjectAssemblyPart)">UpdateCameraOrbitTargetPart(IObjectAssemblyPart)</h4>
+  <div class="markdown level1 summary"><p>Sets the camera orbit target to a given assembly part, resetting pan offsets and updating the tracked part reference.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UpdateCameraOrbitTargetPart(IObjectAssemblyPart targetPart)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.OAB.IObjectAssemblyPart.html">IObjectAssemblyPart</a></td>
+        <td><span class="parametername">targetPart</span></td>
+        <td><p>The assembly part to set as the orbit target.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_UpdateCameraOrbitTargetTransform_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.UpdateCameraOrbitTargetTransform*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_UpdateCameraOrbitTargetTransform_UnityEngine_Transform_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.UpdateCameraOrbitTargetTransform(UnityEngine.Transform)">UpdateCameraOrbitTargetTransform(Transform)</h4>
+  <div class="markdown level1 summary"><p>Sets the camera orbit target to a given transform, resetting pan offsets and clearing any previously tracked part.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UpdateCameraOrbitTargetTransform(Transform targetTransform)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
+        <td><span class="parametername">targetTransform</span></td>
+        <td><p>The transform to set as the orbit target.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_OAB_ObjectAssemblyCameraManager_UpdateCameraOrbitTargetTransformBounds_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.UpdateCameraOrbitTargetTransformBounds*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCameraManager_UpdateCameraOrbitTargetTransformBounds_UnityEngine_Transform_UnityEngine_Bounds_" data-uid="KSP.OAB.ObjectAssemblyCameraManager.UpdateCameraOrbitTargetTransformBounds(UnityEngine.Transform,UnityEngine.Bounds)">UpdateCameraOrbitTargetTransformBounds(Transform, Bounds)</h4>
+  <div class="markdown level1 summary"><p>Sets the camera orbit target to a transform with explicit bounds, switching to orbital mode and initiating a blend to the computed target position.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UpdateCameraOrbitTargetTransformBounds(Transform targetTransform, Bounds targetBounds)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
+        <td><span class="parametername">targetTransform</span></td>
+        <td><p>The transform to orbit around.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Bounds.html">Bounds</a></td>
+        <td><span class="parametername">targetBounds</span></td>
+        <td><p>The world-space bounds of the target, used to adjust the camera position.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="KSP.Sim.ICameraGimbalStateProvider.html">ICameraGimbalStateProvider</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetField__2___0_System_String_">Util.GetField&lt;T, R&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetField__2___0_System_String___1_">Util.SetField&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromProperties_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromProperties(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetFieldValue__1_System_Object_System_String_">Util.GetFieldValue&lt;T&gt;(object, string)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from develop
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class TripPlannerSystem | KSP2Redux API (Develop) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class TripPlannerSystem | KSP2Redux API (Develop) ">
+    
+    <meta name="description" content="Manages trip planning data and provides path-finding between trip nodes, delta-v calculation, and transfer window estimation for interplanetary travel.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="GlobalKsp2Redux.TripPlannerSystem">
+
+
+
+  <h1 id="GlobalKsp2Redux_TripPlannerSystem" data-uid="GlobalKsp2Redux.TripPlannerSystem" class="text-break">Class TripPlannerSystem</h1>
+  <div class="markdown level0 summary"><p>Manages trip planning data and provides path-finding between trip nodes, delta-v calculation, and transfer window estimation for interplanetary travel.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><span class="xref">TripPlannerSystem</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="GlobalKsp2Redux.html">GlobalKsp2Redux</a></h6>
+  <h6><strong>Assembly</strong>: Ksp2Redux.dll</h6>
+  <h5 id="GlobalKsp2Redux_TripPlannerSystem_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class TripPlannerSystem</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+
+
+  <a id="GlobalKsp2Redux_TripPlannerSystem__ctor_" data-uid="GlobalKsp2Redux.TripPlannerSystem.#ctor*"></a>
+  <h4 id="GlobalKsp2Redux_TripPlannerSystem__ctor_TripData_" data-uid="GlobalKsp2Redux.TripPlannerSystem.#ctor(TripData)">TripPlannerSystem(TripData)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="TripPlannerSystem.html">TripPlannerSystem</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TripPlannerSystem(TripData deserializedTripData)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalKsp2Redux.TripData.html">TripData</a></td>
+        <td><span class="parametername">deserializedTripData</span></td>
+        <td><p>The deserialized <a class="xref" href="TripData.html">TripData</a> used to build the internal trip planning graph.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="GlobalKsp2Redux_TripPlannerSystem_CurrentOriginNode_" data-uid="GlobalKsp2Redux.TripPlannerSystem.CurrentOriginNode*"></a>
+  <h4 id="GlobalKsp2Redux_TripPlannerSystem_CurrentOriginNode" data-uid="GlobalKsp2Redux.TripPlannerSystem.CurrentOriginNode">CurrentOriginNode</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the current origin <a class="xref" href="TripNode.html">TripNode</a> for the active trip plan.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TripNode CurrentOriginNode { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalKsp2Redux.TripNode.html">TripNode</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="GlobalKsp2Redux_TripPlannerSystem_FindPath_" data-uid="GlobalKsp2Redux.TripPlannerSystem.FindPath*"></a>
+  <h4 id="GlobalKsp2Redux_TripPlannerSystem_FindPath_TripNode_TripNode_System_Boolean_" data-uid="GlobalKsp2Redux.TripPlannerSystem.FindPath(TripNode,TripNode,System.Boolean)">FindPath(TripNode, TripNode, bool)</h4>
+  <div class="markdown level1 summary"><p>Returns the ordered list of <a class="xref" href="TripEdge.html">TripEdge</a> segments that form a path from <code class="paramref">current</code> to <code class="paramref">target</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;TripEdge&gt; FindPath(TripNode current, TripNode target, bool isTwoWay)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalKsp2Redux.TripNode.html">TripNode</a></td>
+        <td><span class="parametername">current</span></td>
+        <td><p>The <a class="xref" href="TripNode.html">TripNode</a> at which the path begins.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalKsp2Redux.TripNode.html">TripNode</a></td>
+        <td><span class="parametername">target</span></td>
+        <td><p>The <a class="xref" href="TripNode.html">TripNode</a> at which the path ends.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">isTwoWay</span></td>
+        <td><p>A value indicating whether the path should be treated as bidirectional.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="TripEdge.html">TripEdge</a>&gt;</td>
+        <td><p>A list of <a class="xref" href="TripEdge.html">TripEdge</a> objects representing each leg of the path, in traversal order.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="GlobalKsp2Redux_TripPlannerSystem_GetNode_" data-uid="GlobalKsp2Redux.TripPlannerSystem.GetNode*"></a>
+  <h4 id="GlobalKsp2Redux_TripPlannerSystem_GetNode_TripNodeType_System_String_" data-uid="GlobalKsp2Redux.TripPlannerSystem.GetNode(TripNodeType,System.String)">GetNode(TripNodeType, string)</h4>
+  <div class="markdown level1 summary"><p>Returns the <a class="xref" href="TripNode.html">TripNode</a> that matches the specified node type and celestial body name.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TripNode GetNode(TripNodeType nodeType, string cbName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalKsp2Redux.TripNodeType.html">TripNodeType</a></td>
+        <td><span class="parametername">nodeType</span></td>
+        <td><p>The <a class="xref" href="TripNodeType.html">TripNodeType</a> to match against candidate nodes.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">cbName</span></td>
+        <td><p>The name of the celestial body whose associated node is requested.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalKsp2Redux.TripNode.html">TripNode</a></td>
+        <td><p>The matching <a class="xref" href="TripNode.html">TripNode</a>, or the default value if no match is found.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="GlobalKsp2Redux_TripPlannerSystem_GetTotalTripDV_" data-uid="GlobalKsp2Redux.TripPlannerSystem.GetTotalTripDV*"></a>
+  <h4 id="GlobalKsp2Redux_TripPlannerSystem_GetTotalTripDV_System_Collections_Generic_List_TripEdge__" data-uid="GlobalKsp2Redux.TripPlannerSystem.GetTotalTripDV(System.Collections.Generic.List{TripEdge})">GetTotalTripDV(List&lt;TripEdge&gt;)</h4>
+  <div class="markdown level1 summary"><p>Calculates the total delta-v cost for a sequence of <a class="xref" href="TripEdge.html">TripEdge</a> segments.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double GetTotalTripDV(List&lt;TripEdge&gt; edges)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="TripEdge.html">TripEdge</a>&gt;</td>
+        <td><span class="parametername">edges</span></td>
+        <td><p>The list of <a class="xref" href="TripEdge.html">TripEdge</a> segments whose costs are summed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><p>The combined delta-v cost, in meters per second, across all edges including inclination costs. Returns zero when the list is null or empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="GlobalKsp2Redux_TripPlannerSystem_HasDataOnCelestialBody_" data-uid="GlobalKsp2Redux.TripPlannerSystem.HasDataOnCelestialBody*"></a>
+  <h4 id="GlobalKsp2Redux_TripPlannerSystem_HasDataOnCelestialBody_System_String_KSP_Sim_impl_CelestialBodyComponent__" data-uid="GlobalKsp2Redux.TripPlannerSystem.HasDataOnCelestialBody(System.String,KSP.Sim.impl.CelestialBodyComponent@)">HasDataOnCelestialBody(string, out CelestialBodyComponent)</h4>
+  <div class="markdown level1 summary"><p>Returns a value indicating whether the trip planner holds data for the named celestial body.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HasDataOnCelestialBody(string celestialBodyName, out CelestialBodyComponent celestialBodycomponent)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">celestialBodyName</span></td>
+        <td><p>The name of the celestial body to look up.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a></td>
+        <td><span class="parametername">celestialBodycomponent</span></td>
+        <td><p>When this method returns, contains the <a class="xref" href="KSP.Sim.impl.CelestialBodyComponent.html">CelestialBodyComponent</a> associated with the named body, or <code>null</code> if no data is found.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the trip planner has data for the specified celestial body. Otherwise, false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="GlobalKsp2Redux_TripPlannerSystem_TryGetTransferWindow_" data-uid="GlobalKsp2Redux.TripPlannerSystem.TryGetTransferWindow*"></a>
+  <h4 id="GlobalKsp2Redux_TripPlannerSystem_TryGetTransferWindow_TripNode_TripNode_System_Collections_Generic_List_TripEdge__System_Double_System_Double__System_Double__" data-uid="GlobalKsp2Redux.TripPlannerSystem.TryGetTransferWindow(TripNode,TripNode,System.Collections.Generic.List{TripEdge},System.Double,System.Double@,System.Double@)">TryGetTransferWindow(TripNode, TripNode, List&lt;TripEdge&gt;, double, out double, out double)</h4>
+  <div class="markdown level1 summary"><p>Returns a value indicating whether a transfer window can be determined for the path between two <a class="xref" href="TripNode.html">TripNode</a> endpoints.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryGetTransferWindow(TripNode startNode, TripNode endNode, List&lt;TripEdge&gt; path, double UT, out double windowStartTime, out double windowEndTime)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalKsp2Redux.TripNode.html">TripNode</a></td>
+        <td><span class="parametername">startNode</span></td>
+        <td><p>The <a class="xref" href="TripNode.html">TripNode</a> representing the departure point.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalKsp2Redux.TripNode.html">TripNode</a></td>
+        <td><span class="parametername">endNode</span></td>
+        <td><p>The <a class="xref" href="TripNode.html">TripNode</a> representing the arrival point.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="TripEdge.html">TripEdge</a>&gt;</td>
+        <td><span class="parametername">path</span></td>
+        <td><p>The list of <a class="xref" href="TripEdge.html">TripEdge</a> segments connecting the start and end nodes.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">UT</span></td>
+        <td><p>The universal time, in seconds, from which to search for a transfer window.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">windowStartTime</span></td>
+        <td><p>When this method returns, contains the universal time at which the transfer window opens, or -1 if none was found.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">windowEndTime</span></td>
+        <td><p>When this method returns, contains the universal time at which the transfer window closes, or -1 if none was found.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if a valid transfer window was located. Otherwise, false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Let__2___0_System_Func___0___1__">ObjectExtensions.Let&lt;T, R&gt;(T, Func&lt;T, R&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Use__1___0_System_Action___0__">ObjectExtensions.Use&lt;T&gt;(T, Action&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_CallPrivateVoidMethod__1___0_System_String_System_Object___">Util.CallPrivateVoidMethod&lt;T&gt;(T, string, params object[])</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetField__2___0_System_String_">Util.GetField&lt;T, R&gt;(T, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetField__2___0_System_String___1_">Util.SetField&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_SetProperty__2___0_System_String___1_">Util.SetProperty&lt;T, V&gt;(T, string, V)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_JsonClone__1___0_">GeneralExtensions.JsonClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="VSwift.Modules.Extensions.GeneralExtensions.html#VSwift_Modules_Extensions_GeneralExtensions_ToJToken__1___0_">GeneralExtensions.ToJToken&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromFields_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromFields(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="KSP.Sim.Converters.TypeConverters.html#KSP_Sim_Converters_TypeConverters_CopyPropertiesFromProperties_System_Object_System_Object_System_Boolean_">TypeConverters.CopyPropertiesFromProperties(object, object, bool)</a>
+  </div>
+  <div>
+      <a class="xref" href="Redux.WorldVis.Util.html#Redux_WorldVis_Util_GetFieldValue__1_System_Object_System_String_">Util.GetFieldValue&lt;T&gt;(object, string)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Built from develop
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
