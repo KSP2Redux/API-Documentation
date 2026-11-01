@@ -892,6 +892,22 @@
   </table>
 
 
+  <a id="KSP_Game_StagingDataProvider_BeginPartBatch_" data-uid="KSP.Game.StagingDataProvider.BeginPartBatch*"></a>
+  <h4 id="KSP_Game_StagingDataProvider_BeginPartBatch" data-uid="KSP.Game.StagingDataProvider.BeginPartBatch">BeginPartBatch()</h4>
+  <div class="markdown level1 summary"><p>Starts a batch of <a class="xref" href="KSP.Game.StagingDataProvider.html#KSP_Game_StagingDataProvider_AddPart_KSP_OAB_IObjectAssemblyPart_">AddPart(IObjectAssemblyPart)</a> calls, which announce the part list once when
+<a class="xref" href="KSP.Game.StagingDataProvider.html#KSP_Game_StagingDataProvider_EndPartBatch">EndPartBatch()</a> ends the batch.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void BeginPartBatch()</code></pre>
+  </div>
+  <h5 id="KSP_Game_StagingDataProvider_BeginPartBatch_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The announcement validates every stage and rebuilds the parts bin. During additions it changes only the
+bin, which nothing in the batch reads, so validating once at the end gives the same staging.</p>
+</div>
+
+
   <a id="KSP_Game_StagingDataProvider_BufferVesselPartSymmetrySets_" data-uid="KSP.Game.StagingDataProvider.BufferVesselPartSymmetrySets*"></a>
   <h4 id="KSP_Game_StagingDataProvider_BufferVesselPartSymmetrySets_System_Collections_Generic_List_KSP_Sim_Definitions_SymmetrySetData__" data-uid="KSP.Game.StagingDataProvider.BufferVesselPartSymmetrySets(System.Collections.Generic.List{KSP.Sim.Definitions.SymmetrySetData})">BufferVesselPartSymmetrySets(List&lt;SymmetrySetData&gt;)</h4>
   <div class="markdown level1 summary"><p>Stores a list of vessel symmetry set data for later use when building the staging stack during flight mode.</p>
@@ -946,6 +962,17 @@
 <a class="xref" href="KSP.Game.StagingDataProvider.html#KSP_Game_StagingDataProvider_RestoreExpandedStateAfterDeltaVTool">RestoreExpandedStateAfterDeltaVTool()</a>. It is kept because it is stock public API that mods
 may call, and because it is the unconditional collapse a caller wanting that behaviour still needs.</p>
 </div>
+
+
+  <a id="KSP_Game_StagingDataProvider_EndPartBatch_" data-uid="KSP.Game.StagingDataProvider.EndPartBatch*"></a>
+  <h4 id="KSP_Game_StagingDataProvider_EndPartBatch" data-uid="KSP.Game.StagingDataProvider.EndPartBatch">EndPartBatch()</h4>
+  <div class="markdown level1 summary"><p>Ends a batch started with <a class="xref" href="KSP.Game.StagingDataProvider.html#KSP_Game_StagingDataProvider_BeginPartBatch">BeginPartBatch()</a>, announcing the part list if the batch added any.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void EndPartBatch()</code></pre>
+  </div>
 
 
   <a id="KSP_Game_StagingDataProvider_EngineModeChanged_" data-uid="KSP.Game.StagingDataProvider.EngineModeChanged*"></a>
@@ -1206,6 +1233,22 @@ may call, and because it is the unconditional collapse a caller wanting that beh
   </table>
 
 
+  <a id="KSP_Game_StagingDataProvider_InitializeOABPartSymmetrySets_" data-uid="KSP.Game.StagingDataProvider.InitializeOABPartSymmetrySets*"></a>
+  <h4 id="KSP_Game_StagingDataProvider_InitializeOABPartSymmetrySets" data-uid="KSP.Game.StagingDataProvider.InitializeOABPartSymmetrySets">InitializeOABPartSymmetrySets()</h4>
+  <div class="markdown level1 summary"><p>Adds the symmetry set of every staged part whose set has not been added yet, then applies the new sets to
+the staging folders, each folder announcing its new order once.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void InitializeOABPartSymmetrySets()</code></pre>
+  </div>
+  <h5 id="KSP_Game_StagingDataProvider_InitializeOABPartSymmetrySets_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Gives the same order and IDs as adding and applying the sets one at a time, since a folder's order depends
+only on its own parts and the sets reach it in the same order.</p>
+</div>
+
+
   <a id="KSP_Game_StagingDataProvider_MoveFromSourceFolderToTargetStageListAtIndex_" data-uid="KSP.Game.StagingDataProvider.MoveFromSourceFolderToTargetStageListAtIndex*"></a>
   <h4 id="KSP_Game_StagingDataProvider_MoveFromSourceFolderToTargetStageListAtIndex_System_Int32_System_Int32_System_Int32_System_Int32_System_Int32_" data-uid="KSP.Game.StagingDataProvider.MoveFromSourceFolderToTargetStageListAtIndex(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">MoveFromSourceFolderToTargetStageListAtIndex(int, int, int, int, int)</h4>
   <div class="markdown level1 summary"><p>Moves a single part from a source stage folder to a target stage list at the specified index, carrying along any symmetry companions.</p>
@@ -1449,6 +1492,48 @@ fires that means another desync is happening</p>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void OnMainAssemblyChanged()</code></pre>
   </div>
+
+
+  <a id="KSP_Game_StagingDataProvider_OpenPartInPartsManager_" data-uid="KSP.Game.StagingDataProvider.OpenPartInPartsManager*"></a>
+  <h4 id="KSP_Game_StagingDataProvider_OpenPartInPartsManager_System_Int32_System_Int32_System_Int32_" data-uid="KSP.Game.StagingDataProvider.OpenPartInPartsManager(System.Int32,System.Int32,System.Int32)">OpenPartInPartsManager(int, int, int)</h4>
+  <div class="markdown level1 summary"><p>Opens the Part Manager on the part shown at the given stage, part group and folder indices, the way
+right-clicking the part itself does.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OpenPartInPartsManager(int stageIndex, int partGroupIndex, int folderIndex)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">stageIndex</span></td>
+        <td><p>The zero-based index of the stage containing the part.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">partGroupIndex</span></td>
+        <td><p>The zero-based index of the part within its folder.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">folderIndex</span></td>
+        <td><p>The zero-based index of the part group folder within the stage.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <a id="KSP_Game_StagingDataProvider_RemovePart_" data-uid="KSP.Game.StagingDataProvider.RemovePart*"></a>

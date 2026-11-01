@@ -141,13 +141,13 @@ and at no other time.</p>
 
 
   <a id="Redux_UI_MainMenu_MainMenuVesselPlumes_MarkFiringStage_" data-uid="Redux.UI.MainMenu.MainMenuVesselPlumes.MarkFiringStage*"></a>
-  <h4 id="Redux_UI_MainMenu_MainMenuVesselPlumes_MarkFiringStage_KSP_Sim_State_StagingState_System_Collections_Generic_IReadOnlyDictionary_KSP_Sim_impl_IGGuid_UnityEngine_GameObject__" data-uid="Redux.UI.MainMenu.MainMenuVesselPlumes.MarkFiringStage(KSP.Sim.State.StagingState,System.Collections.Generic.IReadOnlyDictionary{KSP.Sim.impl.IGGuid,UnityEngine.GameObject})">MarkFiringStage(StagingState, IReadOnlyDictionary&lt;IGGuid, GameObject&gt;)</h4>
-  <div class="markdown level1 summary"><p>Marks the parts whose engines would be burning if the craft were flying.</p>
+  <h4 id="Redux_UI_MainMenu_MainMenuVesselPlumes_MarkFiringStage_KSP_Sim_State_StagingState_System_Collections_Generic_IReadOnlyDictionary_KSP_Sim_impl_IGGuid_UnityEngine_GameObject__UnityEngine_Transform_" data-uid="Redux.UI.MainMenu.MainMenuVesselPlumes.MarkFiringStage(KSP.Sim.State.StagingState,System.Collections.Generic.IReadOnlyDictionary{KSP.Sim.impl.IGGuid,UnityEngine.GameObject},UnityEngine.Transform)">MarkFiringStage(StagingState, IReadOnlyDictionary&lt;IGGuid, GameObject&gt;, Transform)</h4>
+  <div class="markdown level1 summary"><p>Marks the parts whose engines would be burning as the craft leaves.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void MarkFiringStage(StagingState staging, IReadOnlyDictionary&lt;IGGuid, GameObject&gt; partsByGuid)</code></pre>
+    <pre><code class="lang-csharp hljs">public static void MarkFiringStage(StagingState staging, IReadOnlyDictionary&lt;IGGuid, GameObject&gt; partsByGuid, Transform craft)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -171,11 +171,21 @@ and at no other time.</p>
         <td><p>The parts that were built, by the identity the staging refers to them by.</p>
 </td>
       </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Transform.html">Transform</a></td>
+        <td><span class="parametername">craft</span></td>
+        <td><p>The craft's root, whose up is the way it leaves.</p>
+</td>
+      </tr>
     </tbody>
   </table>
-  <h5 id="Redux_UI_MainMenu_MainMenuVesselPlumes_MarkFiringStage_KSP_Sim_State_StagingState_System_Collections_Generic_IReadOnlyDictionary_KSP_Sim_impl_IGGuid_UnityEngine_GameObject___remarks">Remarks</h5>
+  <h5 id="Redux_UI_MainMenu_MainMenuVesselPlumes_MarkFiringStage_KSP_Sim_State_StagingState_System_Collections_Generic_IReadOnlyDictionary_KSP_Sim_impl_IGGuid_UnityEngine_GameObject__UnityEngine_Transform__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>Staging counts down to the parachute, so the stage a craft leaves the pad on is the highest numbered
-one rather than the first in the list.</p>
+one rather than the first in the list. A craft leaves along its nose, though, and a station's highest
+stage can be the engine of a lander docked to its side, which then fired sideways while the station
+flew off with its own engines dark (#2201). So the highest stage with an engine pushing the craft the
+way it leaves fires, and only those of its engines. A craft with no such engine falls back to its
+highest stage.</p>
 </div>
 
 

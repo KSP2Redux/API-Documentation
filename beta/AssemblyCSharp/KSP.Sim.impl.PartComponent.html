@@ -256,6 +256,11 @@
       </tr>
     </tbody>
   </table>
+  <h5 id="KSP_Sim_impl_PartComponent_ActivationStage_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The stage is a component read through the entity manager, and staging, the fuel flow priorities and every
+tank's priority readout read it far more often than any stage changes. <a class="xref" href="KSP.Sim.impl.PartComponent.html#KSP_Sim_impl_PartComponent_SetStageIndex_System_Int32_System_Boolean_">SetStageIndex(int, bool)</a> is the
+only writer, so the value is kept until some part's stage changes or the part's entity does.</p>
+</div>
 
 
   <a id="KSP_Sim_impl_PartComponent_AirstreamArea_" data-uid="KSP.Sim.impl.PartComponent.AirstreamArea*"></a>
@@ -3077,13 +3082,13 @@ belongs in <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_
 
 
   <a id="KSP_Sim_impl_PartComponent_SetPartOwner_" data-uid="KSP.Sim.impl.PartComponent.SetPartOwner*"></a>
-  <h4 id="KSP_Sim_impl_PartComponent_SetPartOwner_KSP_Sim_impl_PartOwnerComponent_System_Boolean_System_Boolean_System_Boolean_" data-uid="KSP.Sim.impl.PartComponent.SetPartOwner(KSP.Sim.impl.PartOwnerComponent,System.Boolean,System.Boolean,System.Boolean)">SetPartOwner(PartOwnerComponent, bool, bool, bool)</h4>
+  <h4 id="KSP_Sim_impl_PartComponent_SetPartOwner_KSP_Sim_impl_PartOwnerComponent_System_Boolean_System_Boolean_System_Boolean_System_Boolean_" data-uid="KSP.Sim.impl.PartComponent.SetPartOwner(KSP.Sim.impl.PartOwnerComponent,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">SetPartOwner(PartOwnerComponent, bool, bool, bool, bool)</h4>
   <div class="markdown level1 summary"><p>Change the owner of a part</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public List&lt;PartComponent&gt; SetPartOwner(PartOwnerComponent newPartOwner, bool isRecursive, bool ignoreChildrenOfCompoundParts = false, bool destroyOldOwnerOnEmpty = true)</code></pre>
+    <pre><code class="lang-csharp hljs">public List&lt;PartComponent&gt; SetPartOwner(PartOwnerComponent newPartOwner, bool isRecursive, bool ignoreChildrenOfCompoundParts = false, bool destroyOldOwnerOnEmpty = true, bool fireChangedEvents = true)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -3119,6 +3124,13 @@ belongs in <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_
         <td><p>Should the old part owner be destroyed if this removes the last part</p>
 </td>
       </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">fireChangedEvents</span></td>
+        <td><p>Whether both owners fire their parts-changed events. A caller that moves many parts at once passes false and
+fires them once for all of them.</p>
+</td>
+      </tr>
     </tbody>
   </table>
   <h5 class="returns">Returns</h5>
@@ -3137,7 +3149,7 @@ belongs in <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_
       </tr>
     </tbody>
   </table>
-  <h5 id="KSP_Sim_impl_PartComponent_SetPartOwner_KSP_Sim_impl_PartOwnerComponent_System_Boolean_System_Boolean_System_Boolean__remarks">Remarks</h5>
+  <h5 id="KSP_Sim_impl_PartComponent_SetPartOwner_KSP_Sim_impl_PartOwnerComponent_System_Boolean_System_Boolean_System_Boolean_System_Boolean__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>Similar to <a class="xref" href="KSP.Sim.impl.PartOwnerComponent.html#KSP_Sim_impl_PartOwnerComponent_Remove_KSP_Sim_impl_PartComponent_System_Boolean_System_Boolean_">Remove(PartComponent, bool, bool)</a> this did not used to have the destroy on empty parameter, for
 reasons to do with the vessel merge path destroying the vessel to early</p>
 </div>

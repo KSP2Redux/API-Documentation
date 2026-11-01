@@ -513,6 +513,32 @@ public Action OnInternalRefresh</code></pre>
   </table>
 
 
+  <h4 id="KSP_OAB_ObjectAssemblyBuilderEvents_OnInternalRefreshBatchClosed" data-uid="KSP.OAB.ObjectAssemblyBuilderEvents.OnInternalRefreshBatchClosed">OnInternalRefreshBatchClosed</h4>
+  <div class="markdown level1 summary"><p>Callback invoked when the outermost internal refresh batch closes, before the deferred refresh fires. State kept only for the duration of a placement is released here.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[LogIgnore]
+public Action OnInternalRefreshBatchClosed</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <h4 id="KSP_OAB_ObjectAssemblyBuilderEvents_OnLateUpdate" data-uid="KSP.OAB.ObjectAssemblyBuilderEvents.OnLateUpdate">OnLateUpdate</h4>
   <div class="markdown level1 summary"><p>Callback invoked during the builder's late update cycle.</p>
 </div>
@@ -2693,6 +2719,91 @@ public Action OnUpdate</code></pre>
       </tr>
     </tbody>
   </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="KSP_OAB_ObjectAssemblyBuilderEvents_IsInternalRefreshBatched_" data-uid="KSP.OAB.ObjectAssemblyBuilderEvents.IsInternalRefreshBatched*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyBuilderEvents_IsInternalRefreshBatched" data-uid="KSP.OAB.ObjectAssemblyBuilderEvents.IsInternalRefreshBatched">IsInternalRefreshBatched</h4>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether an internal refresh batch is open, so that <a class="xref" href="KSP.OAB.ObjectAssemblyBuilderEvents.html#KSP_OAB_ObjectAssemblyBuilderEvents_RequestInternalRefresh">RequestInternalRefresh()</a> defers instead of firing.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsInternalRefreshBatched { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="KSP_OAB_ObjectAssemblyBuilderEvents_BeginInternalRefreshBatch_" data-uid="KSP.OAB.ObjectAssemblyBuilderEvents.BeginInternalRefreshBatch*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyBuilderEvents_BeginInternalRefreshBatch" data-uid="KSP.OAB.ObjectAssemblyBuilderEvents.BeginInternalRefreshBatch">BeginInternalRefreshBatch()</h4>
+  <div class="markdown level1 summary"><p>Opens an internal refresh batch. While at least one batch is open, every <a class="xref" href="KSP.OAB.ObjectAssemblyBuilderEvents.html#KSP_OAB_ObjectAssemblyBuilderEvents_RequestInternalRefresh">RequestInternalRefresh()</a> only marks a refresh as pending.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void BeginInternalRefreshBatch()</code></pre>
+  </div>
+  <h5 id="KSP_OAB_ObjectAssemblyBuilderEvents_BeginInternalRefreshBatch_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Each call must be paired with <a class="xref" href="KSP.OAB.ObjectAssemblyBuilderEvents.html#KSP_OAB_ObjectAssemblyBuilderEvents_EndInternalRefreshBatch">EndInternalRefreshBatch()</a> in a finally block. Batches nest, and the outermost close fires the pending refresh once.</p>
+</div>
+
+
+  <a id="KSP_OAB_ObjectAssemblyBuilderEvents_CancelPendingInternalRefresh_" data-uid="KSP.OAB.ObjectAssemblyBuilderEvents.CancelPendingInternalRefresh*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyBuilderEvents_CancelPendingInternalRefresh" data-uid="KSP.OAB.ObjectAssemblyBuilderEvents.CancelPendingInternalRefresh">CancelPendingInternalRefresh()</h4>
+  <div class="markdown level1 summary"><p>Drops a refresh deferred by an open batch, so that closing the batch fires nothing unless a new request arrives.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CancelPendingInternalRefresh()</code></pre>
+  </div>
+  <h5 id="KSP_OAB_ObjectAssemblyBuilderEvents_CancelPendingInternalRefresh_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>For a batch whose work was undone: after the craft was rebuilt from history, the load path fires its own refresh
+once the restored parts finalize, and the one left pending by the destroyed parts would run against a half-restored craft.</p>
+</div>
+
+
+  <a id="KSP_OAB_ObjectAssemblyBuilderEvents_EndInternalRefreshBatch_" data-uid="KSP.OAB.ObjectAssemblyBuilderEvents.EndInternalRefreshBatch*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyBuilderEvents_EndInternalRefreshBatch" data-uid="KSP.OAB.ObjectAssemblyBuilderEvents.EndInternalRefreshBatch">EndInternalRefreshBatch()</h4>
+  <div class="markdown level1 summary"><p>Closes an internal refresh batch. Closing the outermost batch fires <a class="xref" href="KSP.OAB.ObjectAssemblyBuilderEvents.html#KSP_OAB_ObjectAssemblyBuilderEvents_OnInternalRefresh">OnInternalRefresh</a> once if any refresh was requested while it was open.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void EndInternalRefreshBatch()</code></pre>
+  </div>
+
+
+  <a id="KSP_OAB_ObjectAssemblyBuilderEvents_RequestInternalRefresh_" data-uid="KSP.OAB.ObjectAssemblyBuilderEvents.RequestInternalRefresh*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyBuilderEvents_RequestInternalRefresh" data-uid="KSP.OAB.ObjectAssemblyBuilderEvents.RequestInternalRefresh">RequestInternalRefresh()</h4>
+  <div class="markdown level1 summary"><p>Fires <a class="xref" href="KSP.OAB.ObjectAssemblyBuilderEvents.html#KSP_OAB_ObjectAssemblyBuilderEvents_OnInternalRefresh">OnInternalRefresh</a>, or marks it pending when a batch opened by <a class="xref" href="KSP.OAB.ObjectAssemblyBuilderEvents.html#KSP_OAB_ObjectAssemblyBuilderEvents_BeginInternalRefreshBatch">BeginInternalRefreshBatch()</a> is active.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RequestInternalRefresh()</code></pre>
+  </div>
+  <h5 id="KSP_OAB_ObjectAssemblyBuilderEvents_RequestInternalRefresh_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Per-part edits raise this rather than invoking <a class="xref" href="KSP.OAB.ObjectAssemblyBuilderEvents.html#KSP_OAB_ObjectAssemblyBuilderEvents_OnInternalRefresh">OnInternalRefresh</a> directly, so that a multi-part placement
+rebuilds staging and the engineer report once instead of once per part.</p>
+</div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="GlobalKsp2Redux.ObjectExtensions.html#GlobalKsp2Redux_ObjectExtensions_Apply__1___0_System_Action___0__">ObjectExtensions.Apply&lt;T&gt;(T, Action&lt;T&gt;)</a>

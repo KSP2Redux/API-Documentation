@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class MainMenuVesselLights | KSP2Redux API (Beta) ">
     
-    <meta name="description" content="Turns a menu craft&#39;s own lights on, for the bodies where the sun is not enough to see it by.">
+    <meta name="description" content="Puts a menu craft&#39;s lights and lit surfaces in the state the craft was saved with.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,7 @@
 
 
   <h1 id="Redux_UI_MainMenu_MainMenuVesselLights" data-uid="Redux.UI.MainMenu.MainMenuVesselLights" class="text-break">Class MainMenuVesselLights</h1>
-  <div class="markdown level0 summary"><p>Turns a menu craft's own lights on, for the bodies where the sun is not enough to see it by.</p>
+  <div class="markdown level0 summary"><p>Puts a menu craft's lights and lit surfaces in the state the craft was saved with.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -97,11 +97,41 @@
   </div>
   <h5 id="Redux_UI_MainMenu_MainMenuVesselLights_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>This happens in two halves, because a menu craft has no vessel behind it and the builder destroys every
-part module as soon as it has read their state. What each part lights up is written down while its modules
-are still there, and switched later off that record rather than off the modules, which by then are gone.</p>
+part module as soon as it has read their state. What each part lights up, and whether its own switch was
+on, is written down while its modules are still there. It is applied later off that record rather than off
+the modules, which by then are gone.</p>
 </div>
   <h3 id="methods">Methods
 </h3>
+
+
+  <a id="Redux_UI_MainMenu_MainMenuVesselLights_ApplyAuthoredState_" data-uid="Redux.UI.MainMenu.MainMenuVesselLights.ApplyAuthoredState*"></a>
+  <h4 id="Redux_UI_MainMenu_MainMenuVesselLights_ApplyAuthoredState_UnityEngine_GameObject_" data-uid="Redux.UI.MainMenu.MainMenuVesselLights.ApplyAuthoredState(UnityEngine.GameObject)">ApplyAuthoredState(GameObject)</h4>
+  <div class="markdown level1 summary"><p>Puts each part of a craft in the state its own switch was saved in.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void ApplyAuthoredState(GameObject root)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">GameObject</span></td>
+        <td><span class="parametername">root</span></td>
+        <td><p>The built craft.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <a id="Redux_UI_MainMenu_MainMenuVesselLights_Capture_" data-uid="Redux.UI.MainMenu.MainMenuVesselLights.Capture*"></a>
@@ -148,41 +178,6 @@ are still there, and switched later off that record rather than off the modules,
 takes its module data from. A menu part's modules are added at runtime from this same data and then
 destroyed again, so going through them adds a step that can only lose.</p>
 </div>
-
-
-  <a id="Redux_UI_MainMenu_MainMenuVesselLights_SetLit_" data-uid="Redux.UI.MainMenu.MainMenuVesselLights.SetLit*"></a>
-  <h4 id="Redux_UI_MainMenu_MainMenuVesselLights_SetLit_UnityEngine_GameObject_System_Boolean_" data-uid="Redux.UI.MainMenu.MainMenuVesselLights.SetLit(UnityEngine.GameObject,System.Boolean)">SetLit(GameObject, bool)</h4>
-  <div class="markdown level1 summary"><p>Sets whether a craft lights itself.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void SetLit(GameObject root, bool lit)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">GameObject</span></td>
-        <td><span class="parametername">root</span></td>
-        <td><p>The built craft.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">bool</span></td>
-        <td><span class="parametername">lit</span></td>
-        <td><p>Whether its lights and lit surfaces should be on.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
 
 </article>
           </div>

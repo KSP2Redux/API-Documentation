@@ -1877,6 +1877,84 @@ in editor tools.</p>
   </table>
 
 
+  <a id="KSP_IO_IOProvider_GetConverterOrder_" data-uid="KSP.IO.IOProvider.GetConverterOrder*"></a>
+  <h4 id="KSP_IO_IOProvider_GetConverterOrder_Newtonsoft_Json_JsonSerializer_" data-uid="KSP.IO.IOProvider.GetConverterOrder(Newtonsoft.Json.JsonSerializer)">GetConverterOrder(JsonSerializer)</h4>
+  <div class="markdown level1 summary"><p>Lists the converters a serializer asks about a type, in the order it asks them, with the game settings'
+first-match converter replaced by the full list it answers for.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static List&lt;JsonConverter&gt; GetConverterOrder(JsonSerializer serializer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">JsonSerializer</span></td>
+        <td><span class="parametername">serializer</span></td>
+        <td><p>The serializer whose converters to list.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<span class="xref">JsonConverter</span>&gt;</td>
+        <td><p>The converters, each once.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_IO_IOProvider_GetConverterOrder_Newtonsoft_Json_JsonSerializer__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>A serializer made from <a class="xref" href="KSP.IO.IOProvider.html#KSP_IO_IOProvider_GetDefaultSerializerSettings">GetDefaultSerializerSettings()</a> holds one converter that answers for
+every other, so code that looks for the converter taking a type, or for a converter of a given kind,
+reads this list instead of <span class="xref">Newtonsoft.Json.JsonSerializer.Converters</span>.</p>
+</div>
+
+
+  <a id="KSP_IO_IOProvider_GetDefaultSerializer_" data-uid="KSP.IO.IOProvider.GetDefaultSerializer*"></a>
+  <h4 id="KSP_IO_IOProvider_GetDefaultSerializer" data-uid="KSP.IO.IOProvider.GetDefaultSerializer">GetDefaultSerializer()</h4>
+  <div class="markdown level1 summary"><p>Returns a serializer with the default Unity-compatible settings, shared by the calls on this thread.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static JsonSerializer GetDefaultSerializer()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">JsonSerializer</span></td>
+        <td><p>The default serializer of the calling thread. Its settings must not be changed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_IO_IOProvider_GetDefaultSerializerSettings_" data-uid="KSP.IO.IOProvider.GetDefaultSerializerSettings*"></a>
   <h4 id="KSP_IO_IOProvider_GetDefaultSerializerSettings" data-uid="KSP.IO.IOProvider.GetDefaultSerializerSettings">GetDefaultSerializerSettings()</h4>
   <div class="markdown level1 summary"><p>Returns the default Unity-compatible JSON serializer settings.</p>

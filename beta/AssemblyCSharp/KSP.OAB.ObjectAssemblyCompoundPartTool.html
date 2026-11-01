@@ -173,9 +173,6 @@
       <a class="xref" href="KSP.OAB.ObjectAssemblyPlacementTool.html#KSP_OAB_ObjectAssemblyPlacementTool_Initialize">ObjectAssemblyPlacementTool.Initialize()</a>
     </div>
     <div>
-      <a class="xref" href="KSP.OAB.ObjectAssemblyPlacementTool.html#KSP_OAB_ObjectAssemblyPlacementTool_Dispose">ObjectAssemblyPlacementTool.Dispose()</a>
-    </div>
-    <div>
       <a class="xref" href="KSP.OAB.ObjectAssemblyPlacementTool.html#KSP_OAB_ObjectAssemblyPlacementTool_Terminate">ObjectAssemblyPlacementTool.Terminate()</a>
     </div>
     <div>
@@ -303,6 +300,9 @@
     </div>
     <div>
       <a class="xref" href="KSP.OAB.ObjectAssemblyTool.html#KSP_OAB_ObjectAssemblyTool__OAB_HUD">ObjectAssemblyTool._OAB_HUD</a>
+    </div>
+    <div>
+      <a class="xref" href="KSP.OAB.ObjectAssemblyTool.html#KSP_OAB_ObjectAssemblyTool_Dispose">ObjectAssemblyTool.Dispose()</a>
     </div>
     <div>
       <a class="xref" href="KSP.OAB.ObjectAssemblyTool.html#KSP_OAB_ObjectAssemblyTool_Reset">ObjectAssemblyTool.Reset()</a>
@@ -674,6 +674,19 @@
   <div><a class="xref" href="KSP.OAB.ObjectAssemblyPlacementTool.html#KSP_OAB_ObjectAssemblyPlacementTool_OnLateUpdate">ObjectAssemblyPlacementTool.OnLateUpdate()</a></div>
 
 
+  <a id="KSP_OAB_ObjectAssemblyCompoundPartTool_OnPlacementAssembled_" data-uid="KSP.OAB.ObjectAssemblyCompoundPartTool.OnPlacementAssembled*"></a>
+  <h4 id="KSP_OAB_ObjectAssemblyCompoundPartTool_OnPlacementAssembled" data-uid="KSP.OAB.ObjectAssemblyCompoundPartTool.OnPlacementAssembled">OnPlacementAssembled()</h4>
+  <div class="markdown level1 summary"><p>Records the history snapshot of the last drop. Runs once the drop's refresh batch has closed, so the snapshot sees the final staging state.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnPlacementAssembled()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="KSP.OAB.ObjectAssemblyPlacementTool.html#KSP_OAB_ObjectAssemblyPlacementTool_OnPlacementAssembled">ObjectAssemblyPlacementTool.OnPlacementAssembled()</a></div>
+
+
   <a id="KSP_OAB_ObjectAssemblyCompoundPartTool_OnPlacingPart_" data-uid="KSP.OAB.ObjectAssemblyCompoundPartTool.OnPlacingPart*"></a>
   <h4 id="KSP_OAB_ObjectAssemblyCompoundPartTool_OnPlacingPart_System_Boolean_" data-uid="KSP.OAB.ObjectAssemblyCompoundPartTool.OnPlacingPart(System.Boolean)">OnPlacingPart(bool)</h4>
   <div class="markdown level1 summary"><p>Handles the logic for placing the currently grabbed part, attaching it via node or surface as appropriate.</p>
@@ -712,13 +725,18 @@
     <tbody>
       <tr>
         <td><span class="xref">bool</span></td>
-        <td><p>True if the placement succeeded and the part was dropped, false otherwise.</p>
+        <td><p>True if the placement succeeded or is still assembling, false if the part was not placed.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="KSP.OAB.ObjectAssemblyPlacementTool.html#KSP_OAB_ObjectAssemblyPlacementTool_OnPlacingPart_System_Boolean_">ObjectAssemblyPlacementTool.OnPlacingPart(bool)</a></div>
+  <h5 id="KSP_OAB_ObjectAssemblyCompoundPartTool_OnPlacingPart_System_Boolean__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The placement runs through <span class="xref">KSP.OAB.ObjectAssemblyBuilder.StartAssembly(System.Collections.IEnumerator,System.Action)</span>, which builds the symmetry copies of a
+large drop part by part over the following frames. The attach targets are read when it starts, so the caller can
+clear its tracking fields straight away.</p>
+</div>
 
 
   <a id="KSP_OAB_ObjectAssemblyCompoundPartTool_ResetToolState_" data-uid="KSP.OAB.ObjectAssemblyCompoundPartTool.ResetToolState*"></a>

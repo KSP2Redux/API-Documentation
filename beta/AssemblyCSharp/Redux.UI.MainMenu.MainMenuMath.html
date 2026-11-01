@@ -215,32 +215,6 @@ this power, which is why a room lit at half the wattage does not look half as br
       </tr>
     </tbody>
   </table>
-
-
-  <h4 id="Redux_UI_MainMenu_MainMenuMath_VESSEL_LIGHT_SUN_SCALE" data-uid="Redux.UI.MainMenu.MainMenuMath.VESSEL_LIGHT_SUN_SCALE">VESSEL_LIGHT_SUN_SCALE</h4>
-  <div class="markdown level1 summary"><p>How dim the sun has to get before a craft turns its own lights on. Half the light the menu was built
-around, which falls between Duna and Dres with neither of them anywhere near it.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public const float VESSEL_LIGHT_SUN_SCALE = 0.5</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">float</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <h3 id="methods">Methods
 </h3>
 
@@ -564,57 +538,6 @@ own, and hard coding the roster would stop a body added later from ever being pu
   <div class="markdown level1 remarks"><p>A name that is already mixed case is taken verbatim, since bodies like AsteroidA01 carry capitals a
 naive rule would flatten. Only an all lowercase name has its first letter raised, so that the common
 case of writing &quot;eve&quot; in a hand written manifest resolves.</p>
-</div>
-
-
-  <a id="Redux_UI_MainMenu_MainMenuMath_ShouldLightVessel_" data-uid="Redux.UI.MainMenu.MainMenuMath.ShouldLightVessel*"></a>
-  <h4 id="Redux_UI_MainMenu_MainMenuMath_ShouldLightVessel_System_Single_" data-uid="Redux.UI.MainMenu.MainMenuMath.ShouldLightVessel(System.Single)">ShouldLightVessel(float)</h4>
-  <div class="markdown level1 summary"><p>Works out whether a craft should have its own lights on for the body it is being shown against.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static bool ShouldLightVessel(float sunScale)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">float</span></td>
-        <td><span class="parametername">sunScale</span></td>
-        <td><p>How bright the sun is for that body, against the body the menu was lit for.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">bool</span></td>
-        <td><p>True if the craft should light itself.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="Redux_UI_MainMenu_MainMenuMath_ShouldLightVessel_System_Single__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>A craft at Jool or Eeloo is lit by a fifth of the sun Kerbin gets, and a menu is meant to show it off
-rather than to be accurate about how little of it can be made out. The threshold sits where nothing in
-the stock system is near it: Dres is the dimmest body above the line by a comfortable margin and Duna
-the brightest below, so no body is one rounding away from flipping.</p>
 </div>
 
 
@@ -1274,6 +1197,69 @@ body's own prefab knows nothing about what it orbits. The galaxy definition is w
 down, and it is the same definition Patch Manager edits, so a body moved by a patch and a body added by
 one both answer here.</p>
 </div>
+
+
+  <a id="Redux_UI_MainMenu_MainMenuMath_TrySolveStarOrbitRadius_" data-uid="Redux.UI.MainMenu.MainMenuMath.TrySolveStarOrbitRadius*"></a>
+  <h4 id="Redux_UI_MainMenu_MainMenuMath_TrySolveStarOrbitRadius_KSP_Sim_SerializedGalaxyDefinition_System_String_System_String__System_Double__" data-uid="Redux.UI.MainMenu.MainMenuMath.TrySolveStarOrbitRadius(KSP.Sim.SerializedGalaxyDefinition,System.String,System.String@,System.Double@)">TrySolveStarOrbitRadius(SerializedGalaxyDefinition, string, out string, out double)</h4>
+  <div class="markdown level1 summary"><p>Resolve a body's root star and the semi major axis of the orbit around that star.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool TrySolveStarOrbitRadius(SerializedGalaxyDefinition definition, string bodyName, out string starName, out double radiusMetres)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.SerializedGalaxyDefinition.html">SerializedGalaxyDefinition</a></td>
+        <td><span class="parametername">definition</span></td>
+        <td><p>The galaxy definition, which may be <code>null</code> if none has loaded.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">bodyName</span></td>
+        <td><p>The body to measure, which is its identifier in the definition.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">starName</span></td>
+        <td><p>Receives the root star's identifier, or <code>null</code> when no orbit can be resolved.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">radiusMetres</span></td>
+        <td><p>Receives the semi major axis of the orbit that goes around the star.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the root star and orbit were resolved, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 
 </article>
           </div>

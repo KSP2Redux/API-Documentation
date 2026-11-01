@@ -121,6 +121,58 @@ entity is the identity, so there is no handle and no buffer slice.</p>
   </table>
 
 
+  <h4 id="Redux_Ecs_Components_ResourceFlowRequest_FLAG_LIGHT_MODULATED" data-uid="Redux.Ecs.Components.ResourceFlowRequest.FLAG_LIGHT_MODULATED">FLAG_LIGHT_MODULATED</h4>
+  <div class="markdown level1 summary"><p>Marks a producer whose rate holds only in starlight. While the resource network models the vessel's
+day and night itself, during time warp and for unloaded vessels, it turns the request off in the
+shadow of the vessel's main body.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const byte FLAG_LIGHT_MODULATED = 1</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">byte</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Ecs_Components_ResourceFlowRequest_Flags" data-uid="Redux.Ecs.Components.ResourceFlowRequest.Flags">Flags</h4>
+  <div class="markdown level1 summary"><p>Solver options, a combination of the <code>FLAG_</code> constants.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public byte Flags</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">byte</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <h4 id="Redux_Ecs_Components_ResourceFlowRequest_FlowPriorityOffset" data-uid="Redux.Ecs.Components.ResourceFlowRequest.FlowPriorityOffset">FlowPriorityOffset</h4>
   <div class="markdown level1 summary"><p>Numeric offset applied to this request's priority during the resource-flow solve.</p>
 </div>
@@ -148,12 +200,65 @@ entity is the identity, so there is no handle and no buffer slice.</p>
 
   <h4 id="Redux_Ecs_Components_ResourceFlowRequest_Index" data-uid="Redux.Ecs.Components.ResourceFlowRequest.Index">Index</h4>
   <div class="markdown level1 summary"><p>Caller-defined index, never an identity or dedup key. Multi-request modules use it to tell their
-own requests apart; <a class="xref" href="Redux.Ecs.Components.ResourceRequestIndex.html#Redux_Ecs_Components_ResourceRequestIndex_UserTransfer">UserTransfer</a> marks UI/CLI transfers.</p>
+own requests apart. <a class="xref" href="Redux.Ecs.Components.ResourceRequestIndex.html#Redux_Ecs_Components_ResourceRequestIndex_UserTransfer">UserTransfer</a> marks UI/CLI transfers.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public ushort Index</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ushort</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Ecs_Components_ResourceFlowRequest_LevelFraction" data-uid="Redux.Ecs.Components.ResourceFlowRequest.LevelFraction">LevelFraction</h4>
+  <div class="markdown level1 summary"><p>The fill fraction, from 0 to 1, that the level control holds.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float LevelFraction</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4 id="Redux_Ecs_Components_ResourceFlowRequest_LevelResource" data-uid="Redux.Ecs.Components.ResourceFlowRequest.LevelResource">LevelResource</h4>
+  <div class="markdown level1 summary"><p>The resource a level control holds, or zero. A request with a level control runs only while the
+combined fill of the storage it produces this resource into is at or below
+<a class="xref" href="Redux.Ecs.Components.ResourceFlowRequest.html#Redux_Ecs_Components_ResourceFlowRequest_LevelFraction">LevelFraction</a>, and at that level only as hard as needed to keep it there, as a fuel
+cell that backs up a battery does.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ushort LevelResource</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-condensed">
