@@ -361,7 +361,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static bool StartCase(string caseId, double seconds = 20, double warmupSeconds = 5, bool continuous = false, bool uploadReport = false)</code></pre>
+    <pre><code class="lang-csharp hljs">public static bool StartCase(string caseId, double seconds = 0, double warmupSeconds = 5, bool continuous = false, bool uploadReport = false)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -382,7 +382,7 @@
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">seconds</span></td>
-        <td><p>The measured duration per case from one to 300 seconds.</p>
+        <td><p>The measured duration per case, or zero to use the suite default.</p>
 </td>
       </tr>
       <tr>
@@ -423,6 +423,81 @@
   </table>
 
 
+  <a id="Redux_Benchmark_BenchmarkWindow_StartSuite_" data-uid="Redux.Benchmark.BenchmarkWindow.StartSuite*"></a>
+  <h4 id="Redux_Benchmark_BenchmarkWindow_StartSuite_System_String_System_String_System_Double_System_Double_System_Boolean_System_Boolean_" data-uid="Redux.Benchmark.BenchmarkWindow.StartSuite(System.String,System.String,System.Double,System.Double,System.Boolean,System.Boolean)">StartSuite(string, string, double, double, bool, bool)</h4>
+  <div class="markdown level1 summary"><p>Begin an independent JSON suite or one of its cases.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool StartSuite(string suiteFile, string caseId = &quot;tour&quot;, double seconds = 0, double warmupSeconds = 5, bool continuous = false, bool uploadReport = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">suiteFile</span></td>
+        <td><p>The top-level JSON filename in the benchmark cases directory.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">caseId</span></td>
+        <td><p>The case identifier, or tour for the suite's ordered cases.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">seconds</span></td>
+        <td><p>The measured duration per case, or zero to use the suite default.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">warmupSeconds</span></td>
+        <td><p>The warm-up duration per case from zero to 60 seconds.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">continuous</span></td>
+        <td><p>Whether to repeat until Stop or Escape.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">uploadReport</span></td>
+        <td><p>Whether to upload a completed or manually stopped report without a dialog.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the selected suite started, false if it is unavailable or a run is active.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="Redux_Benchmark_BenchmarkWindow_StartTour_" data-uid="Redux.Benchmark.BenchmarkWindow.StartTour*"></a>
   <h4 id="Redux_Benchmark_BenchmarkWindow_StartTour_System_Double_System_Double_System_Boolean_System_Boolean_" data-uid="Redux.Benchmark.BenchmarkWindow.StartTour(System.Double,System.Double,System.Boolean,System.Boolean)">StartTour(double, double, bool, bool)</h4>
   <div class="markdown level1 summary"><p>Begin the ordered tour defined by the loaded case catalog.</p>
@@ -430,7 +505,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static bool StartTour(double seconds = 20, double warmupSeconds = 5, bool continuous = false, bool uploadReport = false)</code></pre>
+    <pre><code class="lang-csharp hljs">public static bool StartTour(double seconds = 0, double warmupSeconds = 5, bool continuous = false, bool uploadReport = false)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -445,7 +520,7 @@
       <tr>
         <td><span class="xref">double</span></td>
         <td><span class="parametername">seconds</span></td>
-        <td><p>The measured duration per case from one to 300 seconds.</p>
+        <td><p>The measured duration per case, or zero to use the suite default.</p>
 </td>
       </tr>
       <tr>
