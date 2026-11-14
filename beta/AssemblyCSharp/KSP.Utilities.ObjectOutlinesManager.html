@@ -563,6 +563,129 @@
   </div>
 
 
+  <a id="KSP_Utilities_ObjectOutlinesManager_IsOverrideInPlace_" data-uid="KSP.Utilities.ObjectOutlinesManager.IsOverrideInPlace*"></a>
+  <h4 id="KSP_Utilities_ObjectOutlinesManager_IsOverrideInPlace_System_Collections_Generic_List_KSP_Utilities_ObjectOutlinesManager_OutlineOverride__" data-uid="KSP.Utilities.ObjectOutlinesManager.IsOverrideInPlace(System.Collections.Generic.List{KSP.Utilities.ObjectOutlinesManager.OutlineOverride})">IsOverrideInPlace(List&lt;OutlineOverride&gt;)</h4>
+  <div class="markdown level1 summary"><p>Determines whether every outline of an override still has the overriding color, which another caller
+clearing or outlining the part ends.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsOverrideInPlace(List&lt;ObjectOutlinesManager.OutlineOverride&gt; overrides)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="KSP.Utilities.ObjectOutlinesManager.html">ObjectOutlinesManager</a>.<a class="xref" href="KSP.Utilities.ObjectOutlinesManager.OutlineOverride.html">OutlineOverride</a>&gt;</td>
+        <td><span class="parametername">overrides</span></td>
+        <td><p>The entries that <a class="xref" href="KSP.Utilities.ObjectOutlinesManager.html#KSP_Utilities_ObjectOutlinesManager_OverrideOutlineOnPart_KSP_Sim_impl_PartBehavior_UnityEngine_Color_System_Collections_Generic_List_KSP_Utilities_ObjectOutlinesManager_OutlineOverride__">OverrideOutlineOnPart(PartBehavior, Color, List&lt;OutlineOverride&gt;)</a> recorded.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if there are entries and all of them are still in place, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_Utilities_ObjectOutlinesManager_OverrideOutlineOnPart_" data-uid="KSP.Utilities.ObjectOutlinesManager.OverrideOutlineOnPart*"></a>
+  <h4 id="KSP_Utilities_ObjectOutlinesManager_OverrideOutlineOnPart_KSP_Sim_impl_PartBehavior_UnityEngine_Color_System_Collections_Generic_List_KSP_Utilities_ObjectOutlinesManager_OutlineOverride__" data-uid="KSP.Utilities.ObjectOutlinesManager.OverrideOutlineOnPart(KSP.Sim.impl.PartBehavior,UnityEngine.Color,System.Collections.Generic.List{KSP.Utilities.ObjectOutlinesManager.OutlineOverride})">OverrideOutlineOnPart(PartBehavior, Color, List&lt;OutlineOverride&gt;)</h4>
+  <div class="markdown level1 summary"><p>Outlines the renderers of a flight-scene part in a color for a while, on top of any outline they already
+have, and records each change so that <a class="xref" href="KSP.Utilities.ObjectOutlinesManager.html#KSP_Utilities_ObjectOutlinesManager_RestoreOutlines_System_Collections_Generic_List_KSP_Utilities_ObjectOutlinesManager_OutlineOverride__">RestoreOutlines(List&lt;OutlineOverride&gt;)</a> removes the outlines it added and gives
+the others their color back.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OverrideOutlineOnPart(PartBehavior part, Color color, List&lt;ObjectOutlinesManager.OutlineOverride&gt; overrides)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.Sim.impl.PartBehavior.html">PartBehavior</a></td>
+        <td><span class="parametername">part</span></td>
+        <td><p>The part to outline. Nothing happens if this is null, while mouse look runs or while the UI is hidden.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Color.html">Color</a></td>
+        <td><span class="parametername">color</span></td>
+        <td><p>The color of the outline.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="KSP.Utilities.ObjectOutlinesManager.html">ObjectOutlinesManager</a>.<a class="xref" href="KSP.Utilities.ObjectOutlinesManager.OutlineOverride.html">OutlineOverride</a>&gt;</td>
+        <td><span class="parametername">overrides</span></td>
+        <td><p>Receives one entry per outline that was added or recolored.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Utilities_ObjectOutlinesManager_OverrideOutlineOnPart_KSP_Sim_impl_PartBehavior_UnityEngine_Color_System_Collections_Generic_List_KSP_Utilities_ObjectOutlinesManager_OutlineOverride___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>A renderer has one outline, shared by every caller that outlined it. An outline that another caller adds or
+recolors after the override belongs to that caller again, and a restore leaves it alone.</p>
+</div>
+
+
+  <a id="KSP_Utilities_ObjectOutlinesManager_RestoreOutlines_" data-uid="KSP.Utilities.ObjectOutlinesManager.RestoreOutlines*"></a>
+  <h4 id="KSP_Utilities_ObjectOutlinesManager_RestoreOutlines_System_Collections_Generic_List_KSP_Utilities_ObjectOutlinesManager_OutlineOverride__" data-uid="KSP.Utilities.ObjectOutlinesManager.RestoreOutlines(System.Collections.Generic.List{KSP.Utilities.ObjectOutlinesManager.OutlineOverride})">RestoreOutlines(List&lt;OutlineOverride&gt;)</h4>
+  <div class="markdown level1 summary"><p>Undoes an override: removes the outlines it added and gives the others their previous color, except where
+another caller has since taken the outline over. Clears the list.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RestoreOutlines(List&lt;ObjectOutlinesManager.OutlineOverride&gt; overrides)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="KSP.Utilities.ObjectOutlinesManager.html">ObjectOutlinesManager</a>.<a class="xref" href="KSP.Utilities.ObjectOutlinesManager.OutlineOverride.html">OutlineOverride</a>&gt;</td>
+        <td><span class="parametername">overrides</span></td>
+        <td><p>The entries that <a class="xref" href="KSP.Utilities.ObjectOutlinesManager.html#KSP_Utilities_ObjectOutlinesManager_OverrideOutlineOnPart_KSP_Sim_impl_PartBehavior_UnityEngine_Color_System_Collections_Generic_List_KSP_Utilities_ObjectOutlinesManager_OutlineOverride__">OverrideOutlineOnPart(PartBehavior, Color, List&lt;OutlineOverride&gt;)</a> recorded.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_Utilities_ObjectOutlinesManager_SetLayer_" data-uid="KSP.Utilities.ObjectOutlinesManager.SetLayer*"></a>
   <h4 id="KSP_Utilities_ObjectOutlinesManager_SetLayer_System_String_" data-uid="KSP.Utilities.ObjectOutlinesManager.SetLayer(System.String)">SetLayer(string)</h4>
   <div class="markdown level1 summary"><p>Sets the layer identifier to the layer whose name matches <code class="paramref">layerName</code>.</p>

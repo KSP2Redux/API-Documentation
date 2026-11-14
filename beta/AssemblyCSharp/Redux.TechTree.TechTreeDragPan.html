@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class TechTreeDragPan | KSP2Redux API (Beta) ">
     
-    <meta name="description" content="Reports left-button drags across the R&amp;amp;D Center&#39;s tech tree, so the tree can be panned by dragging.">
+    <meta name="description" content="Reports left or middle button drags across the R&amp;amp;D Center&#39;s tech tree, so the tree can be panned by dragging.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,7 @@
 
 
   <h1 id="Redux_TechTree_TechTreeDragPan" data-uid="Redux.TechTree.TechTreeDragPan" class="text-break">Class TechTreeDragPan</h1>
-  <div class="markdown level0 summary"><p>Reports left-button drags across the R&amp;D Center's tech tree, so the tree can be panned by dragging.</p>
+  <div class="markdown level0 summary"><p>Reports left or middle button drags across the R&amp;D Center's tech tree, so the tree can be panned by dragging.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -97,7 +97,9 @@
   </div>
   <h5 id="Redux_TechTree_TechTreeDragPan_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>Placed on the tree's viewport. A drag that starts on a node also pans, since nodes take only clicks, and the
-event system drops the click once the pointer has moved past the drag threshold.</p>
+event system drops the click once the pointer has moved past the drag threshold. The pointer's movement is
+measured in the viewport's own units, the units the tree is positioned in, so the tree stays under the cursor
+whatever the canvas scaling.</p>
 </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -113,34 +115,6 @@ event system drops the click once the pointer has moved past the drag threshold.
   </div>
   <h3 id="methods">Methods
 </h3>
-
-
-  <a id="Redux_TechTree_TechTreeDragPan_OnBeginDrag_" data-uid="Redux.TechTree.TechTreeDragPan.OnBeginDrag*"></a>
-  <h4 id="Redux_TechTree_TechTreeDragPan_OnBeginDrag_UnityEngine_EventSystems_PointerEventData_" data-uid="Redux.TechTree.TechTreeDragPan.OnBeginDrag(UnityEngine.EventSystems.PointerEventData)">OnBeginDrag(PointerEventData)</h4>
-  <div class="markdown level1 summary"><p>Called by a BaseInputModule before a drag is started.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void OnBeginDrag(PointerEventData eventData)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">PointerEventData</span></td>
-        <td><span class="parametername">eventData</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
 
 
   <a id="Redux_TechTree_TechTreeDragPan_OnDrag_" data-uid="Redux.TechTree.TechTreeDragPan.OnDrag*"></a>
@@ -174,7 +148,7 @@ event system drops the click once the pointer has moved past the drag threshold.
 
 
   <h4 id="Redux_TechTree_TechTreeDragPan_OnPanned" data-uid="Redux.TechTree.TechTreeDragPan.OnPanned">OnPanned</h4>
-  <div class="markdown level1 summary"><p>Raised for each step of a drag with how far the pointer moved, in canvas units.</p>
+  <div class="markdown level1 summary"><p>Raised for each step of a drag with how far the pointer moved, in the viewport's local units.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>

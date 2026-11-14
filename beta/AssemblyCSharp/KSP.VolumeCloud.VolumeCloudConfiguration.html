@@ -111,6 +111,31 @@
 </h3>
 
 
+  <h4 id="KSP_VolumeCloud_VolumeCloudConfiguration_CLOUDS_LAYER_CAPACITY" data-uid="KSP.VolumeCloud.VolumeCloudConfiguration.CLOUDS_LAYER_CAPACITY">CLOUDS_LAYER_CAPACITY</h4>
+  <div class="markdown level1 summary"><p>The most cloud layers the shaders' layer table holds, CLOUDS_LAYER_CAPACITY in CumulusCloudCommon.hlsl.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int CLOUDS_LAYER_CAPACITY = 16</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <h4 id="KSP_VolumeCloud_VolumeCloudConfiguration_COEFFICIENT_SCALE" data-uid="KSP.VolumeCloud.VolumeCloudConfiguration.COEFFICIENT_SCALE">COEFFICIENT_SCALE</h4>
   <div class="markdown level1 summary"><p>The scale factor applied to scattering coefficients.</p>
 </div>
@@ -2951,6 +2976,41 @@
   </table>
 
 
+  <a id="KSP_VolumeCloud_VolumeCloudConfiguration_BindCloudsLayers_" data-uid="KSP.VolumeCloud.VolumeCloudConfiguration.BindCloudsLayers*"></a>
+  <h4 id="KSP_VolumeCloud_VolumeCloudConfiguration_BindCloudsLayers_UnityEngine_Material_UnityEngine_ComputeBuffer_" data-uid="KSP.VolumeCloud.VolumeCloudConfiguration.BindCloudsLayers(UnityEngine.Material,UnityEngine.ComputeBuffer)">BindCloudsLayers(Material, ComputeBuffer)</h4>
+  <div class="markdown level1 summary"><p>Binds a cloud layers buffer to the CloudsLayers constant buffer of a cloud material, or unbinds it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void BindCloudsLayers(Material material, ComputeBuffer buffer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Material.html">Material</a></td>
+        <td><span class="parametername">material</span></td>
+        <td><p>The cloud material to bind the buffer on.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/ComputeBuffer.html">ComputeBuffer</a></td>
+        <td><span class="parametername">buffer</span></td>
+        <td><p>The layers buffer from <a class="xref" href="KSP.VolumeCloud.VolumeCloudConfiguration.html#KSP_VolumeCloud_VolumeCloudConfiguration_SetCloudsLayersData_KSP_VolumeCloud_VolumeCloudConfiguration_CloudsLayerStructuredBuffer____">SetCloudsLayersData(ref CloudsLayerStructuredBuffer[])</a>, or null to unbind.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_VolumeCloud_VolumeCloudConfiguration_EnableCloudsColor_" data-uid="KSP.VolumeCloud.VolumeCloudConfiguration.EnableCloudsColor*"></a>
   <h4 id="KSP_VolumeCloud_VolumeCloudConfiguration_EnableCloudsColor_System_Boolean_" data-uid="KSP.VolumeCloud.VolumeCloudConfiguration.EnableCloudsColor(System.Boolean)">EnableCloudsColor(bool)</h4>
   <div class="markdown level1 summary"><p>Sets whether the horizontal color map is applied to cloud rendering.</p>
@@ -3077,7 +3137,7 @@ its caller. Generated maps are not saved with the configuration.</p>
 
   <a id="KSP_VolumeCloud_VolumeCloudConfiguration_RecreateCloudsLayersDataComputeBuffer_" data-uid="KSP.VolumeCloud.VolumeCloudConfiguration.RecreateCloudsLayersDataComputeBuffer*"></a>
   <h4 id="KSP_VolumeCloud_VolumeCloudConfiguration_RecreateCloudsLayersDataComputeBuffer_System_Int32_" data-uid="KSP.VolumeCloud.VolumeCloudConfiguration.RecreateCloudsLayersDataComputeBuffer(System.Int32)">RecreateCloudsLayersDataComputeBuffer(int)</h4>
-  <div class="markdown level1 summary"><p>Disposes the existing cloud layers compute buffer and creates a new one sized for the given layer count.</p>
+  <div class="markdown level1 summary"><p>Disposes the existing cloud layers compute buffer and, when there are layers, creates a new one.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -3102,6 +3162,10 @@ its caller. Generated maps are not saved with the configuration.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="KSP_VolumeCloud_VolumeCloudConfiguration_RecreateCloudsLayersDataComputeBuffer_System_Int32__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The buffer always holds <a class="xref" href="KSP.VolumeCloud.VolumeCloudConfiguration.html#KSP_VolumeCloud_VolumeCloudConfiguration_CLOUDS_LAYER_CAPACITY">CLOUDS_LAYER_CAPACITY</a> layers, so it covers the whole layer table
+the shaders declare. Entries past the uploaded layers are never read.</p>
+</div>
 
 
   <a id="KSP_VolumeCloud_VolumeCloudConfiguration_SetBoxCloudsLayerData_" data-uid="KSP.VolumeCloud.VolumeCloudConfiguration.SetBoxCloudsLayerData*"></a>
@@ -3341,10 +3405,10 @@ its caller. Generated maps are not saved with the configuration.</p>
     </tbody>
   </table>
   <h5 id="KSP_VolumeCloud_VolumeCloudConfiguration_SetCloudsLayersData_KSP_VolumeCloud_VolumeCloudConfiguration_CloudsLayerStructuredBuffer_____remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>The buffer is resized to match rather than trusted to already fit. VolumeCloudRenderer walks every
-cloud configuration each frame from a single shared layer list, while the buffer is only ever sized
-from the configuration whose own layer change last fired, so the two drift apart as soon as two
-bodies carry different layer counts.</p>
+  <div class="markdown level1 remarks"><p>The buffer is rebuilt when it cannot take the upload rather than trusted to already fit.
+VolumeCloudRenderer walks every cloud configuration each frame from a single shared layer list, while
+the buffer is only ever built by the configuration whose own layer change last fired. Layers past
+<a class="xref" href="KSP.VolumeCloud.VolumeCloudConfiguration.html#KSP_VolumeCloud_VolumeCloudConfiguration_CLOUDS_LAYER_CAPACITY">CLOUDS_LAYER_CAPACITY</a> are not uploaded.</p>
 </div>
 
 

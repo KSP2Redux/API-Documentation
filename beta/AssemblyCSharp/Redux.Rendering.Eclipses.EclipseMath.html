@@ -285,6 +285,88 @@ A point at the star centre has no viewing direction and returns zero coverage.</
 </div>
 
 
+  <a id="Redux_Rendering_Eclipses_EclipseMath_PenumbraReachesSphere_" data-uid="Redux.Rendering.Eclipses.EclipseMath.PenumbraReachesSphere*"></a>
+  <h4 id="Redux_Rendering_Eclipses_EclipseMath_PenumbraReachesSphere_Vector3d_System_Double_Vector3d_System_Double_Vector3d_System_Double_" data-uid="Redux.Rendering.Eclipses.EclipseMath.PenumbraReachesSphere(Vector3d,System.Double,Vector3d,System.Double,Vector3d,System.Double)">PenumbraReachesSphere(Vector3d, double, Vector3d, double, Vector3d, double)</h4>
+  <div class="markdown level1 summary"><p>Determine whether an occluder can hide any part of the star from any point of a sphere.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool PenumbraReachesSphere(Vector3d starCenter, double starRadius, Vector3d occluderCenter, double occluderRadius, Vector3d sphereCenter, double sphereRadius)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="GlobalKsp2Redux.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">starCenter</span></td>
+        <td><p>The star centre position.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">starRadius</span></td>
+        <td><p>The physical star radius.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalKsp2Redux.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">occluderCenter</span></td>
+        <td><p>The occluder centre position.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">occluderRadius</span></td>
+        <td><p>The physical occluder radius.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="GlobalKsp2Redux.Vector3d.html">Vector3d</a></td>
+        <td><span class="parametername">sphereCenter</span></td>
+        <td><p>The sphere centre position.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">sphereRadius</span></td>
+        <td><p>The sphere radius.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>Whether some point of the sphere may lie in the occluder's penumbra, false only where none can.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_Rendering_Eclipses_EclipseMath_PenumbraReachesSphere_Vector3d_System_Double_Vector3d_System_Double_Vector3d_System_Double__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>A point sees the discs overlap while their separation is under the sum of their angular radii, which bounds
+the penumbra by the cone of the tangents that cross between the star and the occluder. The test is
+conservative: the cone is widened by a hundredth of its angle and the sphere by a hundredth of its radius,
+and the part of the cone between its apex and the occluder, where nothing is hidden, still counts. A sphere
+that reaches the occluder or the star counts as reached.</p>
+</div>
+
+
   <a id="Redux_Rendering_Eclipses_EclipseMath_SmoothCoveredFraction_" data-uid="Redux.Rendering.Eclipses.EclipseMath.SmoothCoveredFraction*"></a>
   <h4 id="Redux_Rendering_Eclipses_EclipseMath_SmoothCoveredFraction_System_Double_System_Double_System_Double_" data-uid="Redux.Rendering.Eclipses.EclipseMath.SmoothCoveredFraction(System.Double,System.Double,System.Double)">SmoothCoveredFraction(double, double, double)</h4>
   <div class="markdown level1 summary"><p>Approximate star disc coverage with a capped smoothstep for per-pixel shading.</p>

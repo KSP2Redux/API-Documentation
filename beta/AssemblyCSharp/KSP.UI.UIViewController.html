@@ -111,9 +111,35 @@
 </h3>
 
 
+  <a id="KSP_UI_UIViewController_ContextView_" data-uid="KSP.UI.UIViewController.ContextView*"></a>
+  <h4 id="KSP_UI_UIViewController_ContextView" data-uid="KSP.UI.UIViewController.ContextView">ContextView</h4>
+  <div class="markdown level1 summary"><p>Gets the logical screen, retaining its context while F2 temporarily hides the UI.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UIView ContextView { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.UI.UIView.html">UIView</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="KSP_UI_UIViewController_CurrentView_" data-uid="KSP.UI.UIViewController.CurrentView*"></a>
   <h4 id="KSP_UI_UIViewController_CurrentView" data-uid="KSP.UI.UIViewController.CurrentView">CurrentView</h4>
-  <div class="markdown level1 summary"><p>Gets the currently active <a class="xref" href="KSP.UI.UIView.html">UIView</a>.</p>
+  <div class="markdown level1 summary"><p>Gets the presentation view, including the shared hidden view used by HUD visibility listeners.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -137,6 +163,46 @@
   </table>
   <h3 id="methods">Methods
 </h3>
+
+
+  <a id="KSP_UI_UIViewController_CloseWindowContextsForOwner_" data-uid="KSP.UI.UIViewController.CloseWindowContextsForOwner*"></a>
+  <h4 id="KSP_UI_UIViewController_CloseWindowContextsForOwner_System_Object_" data-uid="KSP.UI.UIViewController.CloseWindowContextsForOwner(System.Object)">CloseWindowContextsForOwner(object)</h4>
+  <div class="markdown level1 summary"><p>Closes open requests belonging to an object before it is removed or destroyed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CloseWindowContextsForOwner(object owner)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">object</span></td>
+        <td><span class="parametername">owner</span></td>
+        <td><p>The owner or stable identifier to match by equality. Null does not identify an owner.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="KSP_UI_UIViewController_EndWindowContexts_" data-uid="KSP.UI.UIViewController.EndWindowContexts*"></a>
+  <h4 id="KSP_UI_UIViewController_EndWindowContexts" data-uid="KSP.UI.UIViewController.EndWindowContexts">EndWindowContexts()</h4>
+  <div class="markdown level1 summary"><p>Closes contextual elements before their campaign owners are torn down.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void EndWindowContexts()</code></pre>
+  </div>
 
 
   <a id="KSP_UI_UIViewController_PushView_" data-uid="KSP.UI.UIViewController.PushView*"></a>
@@ -197,6 +263,17 @@
   </table>
 
 
+  <a id="KSP_UI_UIViewController_RefreshWindowContexts_" data-uid="KSP.UI.UIViewController.RefreshWindowContexts*"></a>
+  <h4 id="KSP_UI_UIViewController_RefreshWindowContexts" data-uid="KSP.UI.UIViewController.RefreshWindowContexts">RefreshWindowContexts()</h4>
+  <div class="markdown level1 summary"><p>Rechecks owner validity without reapplying the stock screen's element definitions.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RefreshWindowContexts()</code></pre>
+  </div>
+
+
   <a id="KSP_UI_UIViewController_RegisterElement_" data-uid="KSP.UI.UIViewController.RegisterElement*"></a>
   <h4 id="KSP_UI_UIViewController_RegisterElement_KSP_UI_IUIViewElement_" data-uid="KSP.UI.UIViewController.RegisterElement(KSP.UI.IUIViewElement)">RegisterElement(IUIViewElement)</h4>
   <div class="markdown level1 summary"><p>Registers a <a class="xref" href="KSP.UI.IUIViewElement.html">IUIViewElement</a> with this controller using its identifier.</p>
@@ -242,6 +319,67 @@
   </table>
 
 
+  <a id="KSP_UI_UIViewController_RegisterElement_" data-uid="KSP.UI.UIViewController.RegisterElement*"></a>
+  <h4 id="KSP_UI_UIViewController_RegisterElement_KSP_UI_IUIViewElement_System_Func_KSP_UI_UIView_KSP_UI_ViewState__System_Object_" data-uid="KSP.UI.UIViewController.RegisterElement(KSP.UI.IUIViewElement,System.Func{KSP.UI.UIView,KSP.UI.ViewState},System.Object)">RegisterElement(IUIViewElement, Func&lt;UIView, ViewState&gt;, object)</h4>
+  <div class="markdown level1 summary"><p>Registers a dynamic element whose state is resolved from the current UI context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool RegisterElement(IUIViewElement element, Func&lt;UIView, ViewState&gt; resolveState, object owner = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.UI.IUIViewElement.html">IUIViewElement</a></td>
+        <td><span class="parametername">element</span></td>
+        <td><p>The element to register.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Func</span>&lt;<a class="xref" href="KSP.UI.UIView.html">UIView</a>, <a class="xref" href="KSP.UI.ViewState.html">ViewState</a>&gt;</td>
+        <td><span class="parametername">resolveState</span></td>
+        <td><p>The state resolver, evaluated immediately and on subsequent view updates.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">object</span></td>
+        <td><span class="parametername">owner</span></td>
+        <td><p>An optional object whose teardown closes this element.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the identifier was available, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_UI_UIViewController_RegisterElement_KSP_UI_IUIViewElement_System_Func_KSP_UI_UIView_KSP_UI_ViewState__System_Object__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The resolver receives the logical screen while F2 temporarily hides the UI.
+Contextual elements are closed before campaign teardown through <a class="xref" href="KSP.UI.UIViewController.html#KSP_UI_UIViewController_EndWindowContexts">EndWindowContexts()</a>.</p>
+</div>
+
+
   <a id="KSP_UI_UIViewController_RestorePreviousView_" data-uid="KSP.UI.UIViewController.RestorePreviousView*"></a>
   <h4 id="KSP_UI_UIViewController_RestorePreviousView" data-uid="KSP.UI.UIViewController.RestorePreviousView">RestorePreviousView()</h4>
   <div class="markdown level1 summary"><p>Restores the previously active <a class="xref" href="KSP.UI.UIView.html">UIView</a>, swapping the current and previous view references.</p>
@@ -251,6 +389,35 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void RestorePreviousView()</code></pre>
   </div>
+
+
+  <a id="KSP_UI_UIViewController_SetUIHidden_" data-uid="KSP.UI.UIViewController.SetUIHidden*"></a>
+  <h4 id="KSP_UI_UIViewController_SetUIHidden_System_Boolean_" data-uid="KSP.UI.UIViewController.SetUIHidden(System.Boolean)">SetUIHidden(bool)</h4>
+  <div class="markdown level1 summary"><p>Temporarily hides or restores the current screen without ending its window contexts.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetUIHidden(bool hidden)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">hidden</span></td>
+        <td><p>True to hide the UI with F2, false to restore the logical screen.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <a id="KSP_UI_UIViewController_TryGetElementState_" data-uid="KSP.UI.UIViewController.TryGetElementState*"></a>

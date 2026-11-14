@@ -531,6 +531,47 @@
       </tr>
     </tbody>
   </table>
+
+
+  <a id="KSP_Map_MapCamera_UpdateNearClipPlane_" data-uid="KSP.Map.MapCamera.UpdateNearClipPlane*"></a>
+  <h4 id="KSP_Map_MapCamera_UpdateNearClipPlane_System_Single_System_Single_" data-uid="KSP.Map.MapCamera.UpdateNearClipPlane(System.Single,System.Single)">UpdateNearClipPlane(float, float)</h4>
+  <div class="markdown level1 summary"><p>Moves the near clip plane out as far as the farthest object drawn needs, without cutting the nearest surface.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UpdateNearClipPlane(float farthestDistance, float nearestSurfaceDistance)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">farthestDistance</span></td>
+        <td><p>The world distance from the camera to the farthest object that must be drawn.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">float</span></td>
+        <td><span class="parametername">nearestSurfaceDistance</span></td>
+        <td><p>The world distance from the camera to the nearest surface that must not be cut.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Map_MapCamera_UpdateNearClipPlane_System_Single_System_Single__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The depth buffer loses an object about two million near plane distances away, so with the near plane at its
+minimum a star a few million units off fell out of it and was not drawn when zoomed in on a craft far from it.
+The near plane follows the farthest distance, up to a cap, and stays within a share of the nearest surface
+distance, which wins over the far object.</p>
+</div>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="KSP.Sim.ICameraGimbalStateProvider.html">ICameraGimbalStateProvider</a>

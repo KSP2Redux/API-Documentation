@@ -3679,6 +3679,39 @@ residual speed, such as a gear bounce. A vessel that is driving or sailing is no
   </table>
 
 
+  <a id="KSP_Sim_impl_VesselComponent_IsCommandingEngineThrust_" data-uid="KSP.Sim.impl.VesselComponent.IsCommandingEngineThrust*"></a>
+  <h4 id="KSP_Sim_impl_VesselComponent_IsCommandingEngineThrust" data-uid="KSP.Sim.impl.VesselComponent.IsCommandingEngineThrust">IsCommandingEngineThrust()</h4>
+  <div class="markdown level1 summary"><p>Returns a value indicating whether any lit engine of the delta-V engine list has been told to burn.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsCommandingEngineThrust()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if a lit engine wants thrust, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="KSP_Sim_impl_VesselComponent_IsCommandingEngineThrust_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>An engine gives a force a physics step after its throttle goes up, so <a class="xref" href="KSP.Sim.impl.VesselComponent.html#KSP_Sim_impl_VesselComponent_IsUnderEngineThrust">IsUnderEngineThrust()</a> is
+false for that step. Time warp started in it put the vessel on rails with the throttle up and no warp burn,
+and the engine starved there (#102). Only the engines the warp burn is built from count, so a lit engine the
+delta-V simulation does not track, such as a Sepratron, does not keep an unrelated stage's burn going.</p>
+</div>
+
+
   <a id="KSP_Sim_impl_VesselComponent_IsDebris_" data-uid="KSP.Sim.impl.VesselComponent.IsDebris*"></a>
   <h4 id="KSP_Sim_impl_VesselComponent_IsDebris" data-uid="KSP.Sim.impl.VesselComponent.IsDebris">IsDebris()</h4>
   <div class="markdown level1 summary"><p>Returns <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the vessel is uncontrolled and has no pending promotion.</p>

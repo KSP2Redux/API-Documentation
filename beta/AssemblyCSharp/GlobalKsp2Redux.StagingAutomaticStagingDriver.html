@@ -158,6 +158,47 @@
 </h3>
 
 
+  <a id="GlobalKsp2Redux_StagingAutomaticStagingDriver_FindMisorderedParts_" data-uid="GlobalKsp2Redux.StagingAutomaticStagingDriver.FindMisorderedParts*"></a>
+  <h4 id="GlobalKsp2Redux_StagingAutomaticStagingDriver_FindMisorderedParts_System_Collections_Generic_List_KSP_OAB_IObjectAssemblyPart__System_Collections_Generic_List_KSP_OAB_IObjectAssemblyPart__" data-uid="GlobalKsp2Redux.StagingAutomaticStagingDriver.FindMisorderedParts(System.Collections.Generic.List{KSP.OAB.IObjectAssemblyPart},System.Collections.Generic.List{KSP.OAB.IObjectAssemblyPart})">FindMisorderedParts(List&lt;IObjectAssemblyPart&gt;, List&lt;IObjectAssemblyPart&gt;)</h4>
+  <div class="markdown level1 summary"><p>Finds staged engines and separators whose stage contradicts the part structure, among the pairs that involve a changed part.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void FindMisorderedParts(List&lt;IObjectAssemblyPart&gt; changedParts, List&lt;IObjectAssemblyPart&gt; misorderedParts)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="KSP.OAB.IObjectAssemblyPart.html">IObjectAssemblyPart</a>&gt;</td>
+        <td><span class="parametername">changedParts</span></td>
+        <td><p>The parts that were just placed, which limit the pairs that are checked.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="KSP.OAB.IObjectAssemblyPart.html">IObjectAssemblyPart</a>&gt;</td>
+        <td><span class="parametername">misorderedParts</span></td>
+        <td><p>Receives the parts that need a new stage.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="GlobalKsp2Redux_StagingAutomaticStagingDriver_FindMisorderedParts_System_Collections_Generic_List_KSP_OAB_IObjectAssemblyPart__System_Collections_Generic_List_KSP_OAB_IObjectAssemblyPart___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Two orders are wrong. An engine that fires before the separator below it ignites with that stack still attached. A
+separator that fires before a part it drops throws that part away before it fires. Parts that share a stage are
+left alone, and so is any pair that no changed part belongs to, so staging the player arranged survives. Of a wrong
+pair, the part that must fire later is reported.</p>
+</div>
+
+
   <a id="GlobalKsp2Redux_StagingAutomaticStagingDriver_GetNearestChild_" data-uid="GlobalKsp2Redux.StagingAutomaticStagingDriver.GetNearestChild*"></a>
   <h4 id="GlobalKsp2Redux_StagingAutomaticStagingDriver_GetNearestChild_KSP_OAB_IObjectAssemblyPart_System_Func_KSP_OAB_IObjectAssemblyPart_System_Boolean__System_Func_KSP_OAB_IObjectAssemblyPart_System_Boolean__" data-uid="GlobalKsp2Redux.StagingAutomaticStagingDriver.GetNearestChild(KSP.OAB.IObjectAssemblyPart,System.Func{KSP.OAB.IObjectAssemblyPart,System.Boolean},System.Func{KSP.OAB.IObjectAssemblyPart,System.Boolean})">GetNearestChild(IObjectAssemblyPart, Func&lt;IObjectAssemblyPart, bool&gt;, Func&lt;IObjectAssemblyPart, bool&gt;)</h4>
   <div class="markdown level1 summary"><p>Performs a breadth-first search through the children of the given part and returns the first descendant that satisfies the success filter.</p>
@@ -624,6 +665,77 @@
       </tr>
     </tbody>
   </table>
+
+
+  <a id="GlobalKsp2Redux_StagingAutomaticStagingDriver_TryGetStructuralStageIndex_" data-uid="GlobalKsp2Redux.StagingAutomaticStagingDriver.TryGetStructuralStageIndex*"></a>
+  <h4 id="GlobalKsp2Redux_StagingAutomaticStagingDriver_TryGetStructuralStageIndex_KSP_OAB_IObjectAssemblyPart_System_Int32__System_Boolean__" data-uid="GlobalKsp2Redux.StagingAutomaticStagingDriver.TryGetStructuralStageIndex(KSP.OAB.IObjectAssemblyPart,System.Int32@,System.Boolean@)">TryGetStructuralStageIndex(IObjectAssemblyPart, out int, out bool)</h4>
+  <div class="markdown level1 summary"><p>Chooses the stage of an engine or separator that is not staged yet from where it sits in the part structure.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryGetStructuralStageIndex(IObjectAssemblyPart part, out int stageIndex, out bool needsNewStage)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="KSP.OAB.IObjectAssemblyPart.html">IObjectAssemblyPart</a></td>
+        <td><span class="parametername">part</span></td>
+        <td><p>The part to place.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td><span class="parametername">stageIndex</span></td>
+        <td><p>When this method returns true, the stack index of the stage that takes the part.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">needsNewStage</span></td>
+        <td><p>When this method returns true, true if a new stage must be inserted at <code class="paramref">stageIndex</code> first.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the part structure decided a stage, false if the rules for other parts apply.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="GlobalKsp2Redux_StagingAutomaticStagingDriver_TryGetStructuralStageIndex_KSP_OAB_IObjectAssemblyPart_System_Int32__System_Boolean___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Every engine and separator gets a level that says how late it fires. The part tree is cut into segments at the
+staged separators. The engines of a segment, the ones on the side of a tank as well, wait for the stack separator
+that closes the segment below. Without one they have level 0, and with one their level is one above it. A
+separator fires after everything it drops, so its level is one above the highest level among those parts. An
+engine goes into the stage of the staged engines with the same level that fire after the separator the engine
+waits for, or with that separator. A separator, or an engine without such a
+stage, gets a new stage between the staged parts that must fire before it and the staged parts that must fire
+after it. Staged parts that are not engines or separators count as firing last, as parachutes do. A part in a tree
+that is upside down, as in a rocket built from the engine up, is left to the rules for other parts. So is a part
+next to a decoupler that keeps some of the parts under it when it fires, an engine in a segment that stack branches
+close with more than one separator, and an engine in a craft that has no staged separator, since the player lights
+those engines one after the other.</p>
+</div>
 
 
   <a id="GlobalKsp2Redux_StagingAutomaticStagingDriver_TryGetSuggestedStageIndex_" data-uid="GlobalKsp2Redux.StagingAutomaticStagingDriver.TryGetSuggestedStageIndex*"></a>
