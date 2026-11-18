@@ -450,7 +450,7 @@ public override Type Type { get; }</code></pre>
 
   <a id="KSP_Sim_impl_ManeuverPlanComponent_GetNodes_" data-uid="KSP.Sim.impl.ManeuverPlanComponent.GetNodes*"></a>
   <h4 id="KSP_Sim_impl_ManeuverPlanComponent_GetNodes" data-uid="KSP.Sim.impl.ManeuverPlanComponent.GetNodes">GetNodes()</h4>
-  <div class="markdown level1 summary"><p>Returns the ordered list of all scheduled <a class="xref" href="KSP.Sim.Maneuver.ManeuverNodeData.html">ManeuverNodeData</a> nodes in the plan.</p>
+  <div class="markdown level1 summary"><p>Returns the live nodes available to the trajectory solver and map.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -468,7 +468,7 @@ public override Type Type { get; }</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="KSP.Sim.Maneuver.ManeuverNodeData.html">ManeuverNodeData</a>&gt;</td>
-        <td><p>The live list of maneuver nodes.</p>
+        <td><p>The restored nodes in the plan. Use <a class="xref" href="KSP.Sim.impl.ManeuverPlanComponent.html#KSP_Sim_impl_ManeuverPlanComponent_GetState">GetState()</a> to include pending nodes.</p>
 </td>
       </tr>
     </tbody>
@@ -587,7 +587,7 @@ belongs in <a class="xref" href="KSP.Sim.impl.ObjectComponent.html#KSP_Sim_impl_
 
   <a id="KSP_Sim_impl_ManeuverPlanComponent_RebuildNodeData_" data-uid="KSP.Sim.impl.ManeuverPlanComponent.RebuildNodeData*"></a>
   <h4 id="KSP_Sim_impl_ManeuverPlanComponent_RebuildNodeData_System_Action_" data-uid="KSP.Sim.impl.ManeuverPlanComponent.RebuildNodeData(System.Action)">RebuildNodeData(Action)</h4>
-  <div class="markdown level1 summary"><p>Rebuilds all node data from the committed state, restarting any in-progress rebuild, and invokes the callback when complete.</p>
+  <div class="markdown level1 summary"><p>Rebuilds all node data, restarting any in-progress rebuild, and invokes the callback when complete.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>

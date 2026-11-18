@@ -137,7 +137,7 @@
 
 
   <h4 id="KSP_Sim_impl_ManeuverPlanSolver_MAX_PATCHEDNBODY_SOLVES" data-uid="KSP.Sim.impl.ManeuverPlanSolver.MAX_PATCHEDNBODY_SOLVES">MAX_PATCHEDNBODY_SOLVES</h4>
-  <div class="markdown level1 summary"><p>Maximum number of patched n-body trajectory solves permitted per update.</p>
+  <div class="markdown level1 summary"><p>Maximum number of SOI-separated integration patches permitted per burn sub-stage.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -165,7 +165,7 @@
 
   <a id="KSP_Sim_impl_ManeuverPlanSolver_HasActiveManeuver_" data-uid="KSP.Sim.impl.ManeuverPlanSolver.HasActiveManeuver*"></a>
   <h4 id="KSP_Sim_impl_ManeuverPlanSolver_HasActiveManeuver" data-uid="KSP.Sim.impl.ManeuverPlanSolver.HasActiveManeuver">HasActiveManeuver</h4>
-  <div class="markdown level1 summary"><p>Gets a value indicating whether the maneuver plan contains at least one active n-body patch.</p>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the plan has a solved burn or a restored post-burn target.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -483,11 +483,14 @@
     <tbody>
       <tr>
         <td><a class="xref" href="KSP.Sim.Vector.html">Vector</a></td>
-        <td><p>The orbital velocity in the coordinate system of the post-maneuver orbit, or a zero vector if no maneuver has been solved.</p>
+        <td><p>The post-burn orbital velocity components in Z-up coordinates, or zero if no maneuver is solved.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 id="KSP_Sim_impl_ManeuverPlanSolver_GetVelocityAfterFirstManeuver_System_Double___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Components retain the legacy Z-up convention. Cross-body comparisons require a common velocity frame.</p>
+</div>
 
 
   <a id="KSP_Sim_impl_ManeuverPlanSolver_HandleNodeAdded_" data-uid="KSP.Sim.impl.ManeuverPlanSolver.HandleNodeAdded*"></a>
@@ -632,7 +635,7 @@
 
   <a id="KSP_Sim_impl_ManeuverPlanSolver_OnStart_" data-uid="KSP.Sim.impl.ManeuverPlanSolver.OnStart*"></a>
   <h4 id="KSP_Sim_impl_ManeuverPlanSolver_OnStart" data-uid="KSP.Sim.impl.ManeuverPlanSolver.OnStart">OnStart()</h4>
-  <div class="markdown level1 summary"><p>Allocates and registers the initial set of patch objects for the maneuver trajectory.</p>
+  <div class="markdown level1 summary"><p>Allocates the patch pools and restores a started burn's saved target and axes.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>

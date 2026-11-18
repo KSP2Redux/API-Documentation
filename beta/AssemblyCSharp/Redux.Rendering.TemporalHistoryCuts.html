@@ -105,8 +105,41 @@ there would leave URP's previous view-projection on this frame while every movin
 transform, which gives the vessel large false motion vectors. Set from beginCameraRendering, before URP builds
 the camera's data, so the reset takes this frame.
 Zoom input moves along the viewing axis continuously. Keep its reprojectable history, including while paused,
-when a wheel step can move the camera farther than the cut threshold. A changed camera solution still cuts.</p>
+when a wheel step can move the camera farther than the cut threshold. A changed camera solution still cuts.
+Free flight also translates continuously, including across floating-origin snaps. Its teleports request cuts
+explicitly, since recentering the origin can leave the Unity camera at the same position after a teleport.</p>
 </div>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="Redux_Rendering_TemporalHistoryCuts_ResetHistory_" data-uid="Redux.Rendering.TemporalHistoryCuts.ResetHistory*"></a>
+  <h4 id="Redux_Rendering_TemporalHistoryCuts_ResetHistory_UnityEngine_Camera_" data-uid="Redux.Rendering.TemporalHistoryCuts.ResetHistory(UnityEngine.Camera)">ResetHistory(Camera)</h4>
+  <div class="markdown level1 summary"><p>Invalidates the camera's temporal image and motion histories after an explicit cut.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void ResetHistory(Camera camera)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.unity3d.com/Documentation/ScriptReference/Camera.html">Camera</a></td>
+        <td><span class="parametername">camera</span></td>
+        <td><p>The camera whose view changed discontinuously.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 
 </article>
           </div>

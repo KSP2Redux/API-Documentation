@@ -172,6 +172,115 @@ then report their full-light rate and let the network apply the shadow.</p>
   </div>
 
 
+  <a id="Redux_ResourceFlow_ResourceNetwork_ForecastDelivery_" data-uid="Redux.ResourceFlow.ResourceNetwork.ForecastDelivery*"></a>
+  <h4 id="Redux_ResourceFlow_ResourceNetwork_ForecastDelivery_System_Collections_Generic_IReadOnlyList_Unity_Entities_Entity__System_Collections_Generic_IReadOnlyList_System_Double__System_Double_System_Double_System_Double_System_Boolean__System_Double_" data-uid="Redux.ResourceFlow.ResourceNetwork.ForecastDelivery(System.Collections.Generic.IReadOnlyList{Unity.Entities.Entity},System.Collections.Generic.IReadOnlyList{System.Double},System.Double,System.Double,System.Double,System.Boolean@,System.Double)">ForecastDelivery(IReadOnlyList&lt;Entity&gt;, IReadOnlyList&lt;double&gt;, double, double, double, out bool, double)</h4>
+  <div class="markdown level1 summary"><p>Find the first change in the activity of watched requests using this network's ECS inputs.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double ForecastDelivery(IReadOnlyList&lt;Entity&gt; watchedRequests, IReadOnlyList&lt;double&gt; activity, double now, double duration, double tickDuration, out bool changed, double minimumTickDuration = Infinity)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IReadOnlyList</span>&lt;<span class="xref">Entity</span>&gt;</td>
+        <td><span class="parametername">watchedRequests</span></td>
+        <td><p>The request entities whose continuous activity matters.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">IReadOnlyList</span>&lt;<span class="xref">double</span>&gt;</td>
+        <td><span class="parametername">activity</span></td>
+        <td><p>The expected activity of each watched request.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">now</span></td>
+        <td><p>The universal time of the current storage snapshot.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>The requested prediction horizon in seconds.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">tickDuration</span></td>
+        <td><p>The proposed tick duration for requests expressed per tick.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><span class="parametername">changed</span></td>
+        <td><p>True if the returned boundary is a change in watched activity.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><span class="parametername">minimumTickDuration</span></td>
+        <td><p>The shortest per-tick retry. Infinity disables retries.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">double</span></td>
+        <td><p>The verified duration, which may be shorter than the requested horizon.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Redux_ResourceFlow_ResourceNetwork_ForecastDelivery_System_Collections_Generic_IReadOnlyList_Unity_Entities_Entity__System_Collections_Generic_IReadOnlyList_System_Double__System_Double_System_Double_System_Double_System_Boolean__System_Double__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Storage, responses and transfer targets are never committed by a forecast. All producers, consumers,
+routes and priorities participate, regardless of the resource or module that owns a watched request.
+An unchanged result can end at a work or environment checkpoint and does not promise indefinite supply.
+Activity is relative to each compiled recipe, so a solar producer can exceed one in strong sunlight.
+Inputs other than modelled sunlight are held at their current values and must be refreshed after changes.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ArgumentException</span></td>
+        <td><p>Thrown when request and activity counts differ.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">ArgumentOutOfRangeException</span></td>
+        <td><p>Thrown when the time or durations are invalid.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+
   <a id="Redux_ResourceFlow_ResourceNetwork_MarkTopologyDirty_" data-uid="Redux.ResourceFlow.ResourceNetwork.MarkTopologyDirty*"></a>
   <h4 id="Redux_ResourceFlow_ResourceNetwork_MarkTopologyDirty" data-uid="Redux.ResourceFlow.ResourceNetwork.MarkTopologyDirty">MarkTopologyDirty()</h4>
   <div class="markdown level1 summary"><p>Marks the storage topology for a rebuild, after parts, crossfeed, staging or tank settings changed.</p>
